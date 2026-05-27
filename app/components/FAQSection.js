@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 
-export default function FAQSection({faqData,title}) {
+export default function FAQSection({ faqData = [], title }) {
 
 
   const [openIndex, setOpenIndex] = useState(null);

@@ -6,7 +6,7 @@ import { Autoplay } from "swiper/modules";
 import { FaLongArrowAltDown } from "react-icons/fa";
 
 
-export default function WhyFutureITTouch({ platforms, title }) {
+export default function WhyFutureITTouch({ platforms = [], title }) {
   const [visibleCount, setVisibleCount] = useState(6);
 
   const handleLoadMore = () => {
