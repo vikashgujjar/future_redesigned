@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
-export default function CustomSlider({cards,title}) {
+export default function CustomSlider({ cards = [], title }) {
 
   const [open, setOpen] = useState(2); 
   const [isMobile, setIsMobile] = useState(false);
