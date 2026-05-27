@@ -9,13 +9,19 @@ import Forms from "./components/Forms";
 import Faq from "./components/Faq";
 import DigitalMarketingService from "./components/DigitalMarketingService";
 import Heromatterjs from "./components/Heromatterjs";
+import AboutSection from "./components/AboutNew";
+import HeroSectionNew from "./components/HeroSectionNew";
+import ServiceNew from "./components/ServiceNew";
 
 export default function page() {
   return (
     <div>
       <HeroSection />
+      {/* <HeroSectionNew/> */}
+      {/* <AboutSection /> */}
       <About />
       <Service />
+      {/* <ServiceNew/> */}
       <WhyChoose />
       <HelpingBusiness />
       <Heromatterjs />

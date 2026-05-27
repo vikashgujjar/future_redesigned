@@ -1,198 +1,292 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image";
+
+const faqData = [
+  {
+    id: "01",
+    question: "What is a digital platform?",
+    answer:
+      "A digital platform is an online space that enables users to connect, communicate, or conduct business effectively using various digital tools and resources.",
+    fi: "#2dd4bf", ti: "#06b6d4",
+  },
+  {
+    id: "02",
+    question: "How can a digital platform help your business grow?",
+    answer:
+      "Digital platforms expand your business reach, increase customer engagement, streamline operations, and provide valuable data insights to boost growth and efficiency.",
+    fi: "#6366f1", ti: "#8b5cf6",
+  },
+  {
+    id: "03",
+    question: "How do I book my slot to meet with your technical team?",
+    answer:
+      "You can schedule a meeting with our technical team by visiting our website, selecting your preferred time, and completing the booking form.",
+    fi: "#0ea5e9", ti: "#2dd4bf",
+  },
+  {
+    id: "04",
+    question: "How many projects have you completed so far?",
+    answer:
+      "We have successfully completed numerous projects, each tailored to our clients' unique requirements, ensuring quality and timely delivery across various industries.",
+    fi: "#a855f7", ti: "#6366f1",
+  },
+];
 
 export default function Faq() {
-  const [activeAccordion, setActiveAccordion] = useState(0);
-  const toggleAccordion = (index) => {
-    setActiveAccordion(activeAccordion === index ? null : index);
-  };
-  const faqData = [
-    {
-      id: "01",
-      question: "What is a digital platform?",
-      answer:
-        "A digital platform is an online space that enables users to connect, communicate, or conduct business effectively using various digital tools and resources.",
-    },
-    {
-      id: "02",
-      question: "How can a digital platform help your business grow?",
-      answer:
-        "Digital platforms expand your business reach, increase customer engagement, streamline operations, and provide valuable data insights to boost growth and efficiency.",
-    },
-    {
-      id: "03",
-      question: "How do I book my slot to meet with your technical team?",
-      answer:
-        "You can schedule a meeting with our technical team by visiting our website, selecting your preferred time, and completing the booking form.",
-    },
-    {
-      id: "04",
-      question: "How many projects have you completed so far?",
-      answer:
-        "We have successfully completed numerous projects, each tailored to our clients' unique requirements, ensuring quality and timely delivery across various industries.",
-    },
-  ];
-  return (
-    <>
-      <div className={`relative  ${activeAccordion?"xl:pb-12":"xl:pb-48"} `}>
-        <Image
-          src="/Assets/h2-faq-bg-right.webp"
-          className="absolute right-0"
-          width={400}
-          height={400}
-          alt="FAQ background right"
-        />
-        <div className="px-5 md:px-12 xl:px-28 mt-20 ">
-          <h3 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl mt-5 mb-3 font-bold">
-            <span
-              className=" text-4xl mb-5 bg-gradient-to-r from-teal-400 to-indigo-700 text-transparent bg-clip-text tracking-widest "
-              style={{ fontFamily: "'Bilbo Swash Caps', cursive" }}
-            >
-              FAQ <br />
-            </span>
-            Our Expert
-            <span className="bg-gradient-to-r from-teal-400 to-indigo-700 text-transparent leading-normal bg-clip-text ml-2">
-              Answers
-            </span>
-          </h3>
+  const [active, setActive] = useState(0);
+  const cur = faqData[active];
 
-          <p className="text-lg font-medium text-justify text-gray-500  md:w-full lg:w-1/2">
-            Our team continuously engages in professional development and
-            industry events to stay abreast of the latest IT trends and
-            technologies. This ensures we can provide innovative solutions that
-            keep you ahead of the competition.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-12 gap-4">
-            <div className="p-4 md:col-span-6   hidden sm:hidden md:hidden lg:block">
-              <div className="hero-images-four top-16 p-4  relative w-full animate-zoom-in-out h-full">
-                <Image
-                  className="image-one object-cover"
-                  src="/Assets/h2-about-img-right.webp"
-                  width={400}
-                  height={400}
-                  alt="About section right image"
-                />
-              </div>
-              <Image
-                className="absolute w-38  -z-10"
-                src="/Assets/h2-about-bg-2.webp"
-                width={200}
-                height={200}
-                alt="About background 2"
-              />
-              <div className="relative bottom-3/4">
-                <div
-                  className="hero-images-three2 mr-5 absolute w-full animate-zoom-in-out   top-0    left-64 xl:left-80 xl:ms-[-28px] mt-[60px] "
-                  // style={{ marginTop: "60px", marginLeft: "-28px" }}
-                >
-                  <Image
-                    className="shape-1  absolute -z-10 bottom-80 w-[174px]"
-                    src="/Assets/animated-img-3.webp"
-                    width={100}
-                    height={100}
-                    alt="Animated shape 3"
-                  />
-                  <Image
-                    className="shape-right  absolute -z-10 right-20 rounded-full w-[170px]  "
-                    src="/Assets/animated-img-2.webp"
-                    width={100}
-                    height={100}
-                    alt="Animated shape 2"
-                  />
-                  <Image
-                    className="image-three object-cover"
-                    src="/Assets/h2-animated-img-3.webp"
-                    width={100}
-                    height={100}
-                    alt="Animated image 3"
-                  />
-                </div>
-              </div>
+  return (
+    <section
+      className="relative overflow-hidden py-16 sm:py-20 lg:py-24 px-4 sm:px-6 md:px-10 xl:px-24"
+      style={{ background: "#ffffff" }}
+    >
+      <style>{`
+        .faq-section-dot {
+          background-image: radial-gradient(circle, rgba(99,102,241,.05) 1px, transparent 1px);
+          background-size: 28px 28px;
+        }
+        .faq-arena-dot {
+          background-image: radial-gradient(circle, rgba(255,255,255,.04) 1px, transparent 1px);
+          background-size: 24px 24px;
+        }
+        .faq-q-btn { transition: transform .20s ease, box-shadow .20s ease; }
+        .faq-q-btn:not(.faq-q-active):hover { transform: translateX(4px); }
+        .faq-q-active { transform: translateX(6px); }
+
+        @keyframes faqSlideIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .faq-content-in { animation: faqSlideIn .28s ease both; }
+
+        @keyframes faqDotPulse {
+          0%,100% { transform: scale(1); }
+          50%      { transform: scale(1.4); }
+        }
+      `}</style>
+
+      {/* section dot grid */}
+      <div className="faq-section-dot absolute inset-0 pointer-events-none" aria-hidden="true" />
+
+      {/* ambient glows */}
+      <div className="absolute -top-32 -right-32 w-[440px] h-[440px] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle,rgba(45,212,191,.07) 0%,transparent 65%)" }} />
+      <div className="absolute -bottom-32 -left-32 w-[440px] h-[440px] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle,rgba(99,102,241,.07) 0%,transparent 65%)" }} />
+
+      <div className="relative z-10 max-w-[1400px] mx-auto">
+
+        {/* ══════════════════════════════════
+            HEADING BAND  (2-col)
+        ══════════════════════════════════ */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-end mb-12">
+
+          {/* left */}
+          <div className="flex flex-col gap-4">
+            {/* badge */}
+            <div className="inline-flex items-center gap-2 self-start px-4 py-1.5 rounded-full"
+              style={{ background: "rgba(45,212,191,.10)", border: "1px solid rgba(45,212,191,.28)" }}>
+              <span className="w-2 h-2 rounded-full bg-gradient-to-r from-teal-400 to-cyan-400 animate-pulse flex-shrink-0" />
+              <span
+                className="text-[11px] font-bold uppercase tracking-widest bg-gradient-to-r from-teal-500 to-indigo-600 bg-clip-text text-transparent"
+                style={{ fontFamily: "'Inter',sans-serif" }}>
+                FAQ
+              </span>
             </div>
-            <div className="py-4 px-0 sm:px-0 md:px-0 lg:px-4 md:col-span-6 ml-0 sm:ml-0 lg:ml-10 ">
-              <div className="w-full max-w-2xl mx-auto">
-                <div className="accordion mt-5">
-                  {faqData.map((item, index) => (
-                    <div
-                      className="accordion-item "
-                      style={{
-                        border:
-                          activeAccordion === index ? "1px solid blue" : "",
-                        borderRadius:
-                          activeAccordion === index ? "20px 20px 0 20px" : "",
-                      }}
-                      key={index}
-                    >
-                      <h2
-                        onClick={() => toggleAccordion(index)}
-                        className={` accordion-header transform transition-transform ${
-                          activeAccordion === index
-                        }`}
-                      >
-                        <button
-                          className={`accordion-button flex gap-5 font-bold text-xl items-center py-6 px-6 w-full text-left focus:outline-none ${
-                            activeAccordion === index ? "active" : ""
-                          }`}
-                          type="button"
-                          style={{
-                            background:
-                              activeAccordion === index
-                                ? "linear-gradient(90deg, #20d9a1 0%, #5f39ff 100%)"
-                                : "none",
-                            color:
-                              activeAccordion === index ? "#ffffff" : "#000000",
-                            borderRadius:
-                              activeAccordion === index ? "20px 20px 0 0" : "",
-                          }}
-                        >
-                          <span className="mr-2 font-bold text-2xl">
-                            {item.id}
-                          </span>
-                          {item.question}
-                          <span
-                            className={`ml-2 transform transition-transform ${
-                              activeAccordion === index
-                                ? "rotate-180"
-                                : "rotate-0"
-                            }`}
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                              className="w-5 h-5"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M15.293 5.293a1 1 0 0 1 1.414 1.414l-5 5a1 1 0 0 1-1.414 0l-5-5a1 1 0 0 1 1.414-1.414L10 9.586l5.293-5.293z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          </span>
-                        </button>
-                      </h2>
-                      {activeAccordion === index && (
-                        <div
-                          className="accordion-collapse font-sans py-5 px-6 bg-gray-50"
-                          style={{
-                            borderRadius:
-                              activeAccordion === index ? "0 0 0 20px" : "",
-                          }}
-                        >
-                          <div className="text-lg font-semibold">
-                            {item.answer}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
+
+
+            {/* h2 */}
+            <h2
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight"
+              style={{ fontFamily: "'Poppins',sans-serif" }}>
+              Our Expert{" "}
+              <span className="bg-gradient-to-r from-teal-400 to-indigo-700 bg-clip-text text-transparent">
+                Answers
+              </span>
+            </h2>
+
+            {/* divider */}
+            <div className="w-14 h-1 rounded-full"
+              style={{ background: "linear-gradient(to right,#2dd4bf,#6366f1)" }} />
+          </div>
+
+          {/* right — description */}
+          <p
+            className="text-sm sm:text-base leading-7 text-gray-500"
+            style={{ fontFamily: "'Inter',sans-serif" }}>
+            Our team continuously engages in professional development and industry
+            events to stay abreast of the latest IT trends and technologies. This
+            ensures we can provide innovative solutions that keep you ahead of the
+            competition.
+          </p>
+        </div>
+
+        {/* ══════════════════════════════════
+            INTERACTIVE  Q + A  AREA
+        ══════════════════════════════════ */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-5 items-stretch">
+
+          {/* ── LEFT: question selector — 2 / 5 cols ── */}
+          <div className="lg:col-span-2 flex flex-col gap-3">
+            {faqData.map((item, i) => (
+              <button
+                key={i}
+                onClick={() => setActive(i)}
+                className={`faq-q-btn ${active === i ? "faq-q-active" : ""} w-full flex items-center gap-4 px-5 py-4 rounded-2xl text-left`}
+                style={{
+                  background: active === i
+                    ? `linear-gradient(135deg,${item.fi},${item.ti})`
+                    : "#ffffff",
+                  border: active === i
+                    ? "1px solid transparent"
+                    : "1px solid rgba(99,102,241,.12)",
+                  boxShadow: active === i ? `0 8px 28px ${item.fi}45` : "none",
+                }}
+              >
+                {/* number */}
+                <span
+                  className="text-xl font-black flex-shrink-0 w-8 text-center"
+                  style={{
+                    fontFamily: "'Poppins',sans-serif",
+                    color: active === i ? "rgba(255,255,255,.65)" : item.fi,
+                  }}>
+                  {item.id}
+                </span>
+
+                {/* question */}
+                <span
+                  className="text-sm font-semibold flex-1 leading-snug"
+                  style={{
+                    fontFamily: "'Poppins',sans-serif",
+                    color: active === i ? "#ffffff" : "#374151",
+                  }}>
+                  {item.question}
+                </span>
+
+                {/* active chevron */}
+                <svg
+                  className="flex-shrink-0"
+                  width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke={active === i ? "rgba(255,255,255,.75)" : "transparent"}
+                  strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </button>
+            ))}
+          </div>
+
+          {/* ── RIGHT: answer display — 3 / 5 cols ── */}
+          <div
+            className="lg:col-span-3 relative rounded-3xl overflow-hidden"
+            style={{
+              background: "linear-gradient(145deg,#070d1a 0%,#0c1330 100%)",
+              border: "1px solid rgba(255,255,255,.07)",
+              boxShadow: "0 24px 60px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.05)",
+              minHeight: 340,
+            }}
+          >
+            {/* arena dot grid */}
+            <div className="faq-arena-dot absolute inset-0 pointer-events-none" />
+
+            {/* top gradient accent bar */}
+            <div
+              className="absolute top-0 left-0 right-0 h-[3px] transition-all duration-300"
+              style={{ background: `linear-gradient(to right,${cur.fi},${cur.ti})` }}
+            />
+
+            {/* corner glow — top-left */}
+            <div
+              className="absolute -top-16 -left-16 w-48 h-48 rounded-full pointer-events-none transition-all duration-500"
+              style={{ background: `radial-gradient(circle,${cur.fi}25 0%,transparent 65%)` }}
+            />
+            {/* corner glow — bottom-right */}
+            <div
+              className="absolute -bottom-16 -right-16 w-48 h-48 rounded-full pointer-events-none transition-all duration-500"
+              style={{ background: `radial-gradient(circle,${cur.ti}20 0%,transparent 65%)` }}
+            />
+
+            {/* ghost number watermark */}
+            <span
+              className="absolute right-6 top-2 font-black select-none pointer-events-none"
+              style={{
+                fontSize: 110,
+                lineHeight: 1,
+                fontFamily: "'Poppins',sans-serif",
+                color: cur.fi,
+                opacity: 0.07,
+              }}>
+              {cur.id}
+            </span>
+
+            {/* ── animated content ── */}
+            <div
+              key={active}
+              className="faq-content-in relative z-10 p-8 sm:p-10 flex flex-col gap-5 h-full"
+            >
+              {/* "Question X" chip */}
+              <div
+                className="inline-flex items-center gap-2 self-start px-3 py-1 rounded-full"
+                style={{
+                  background: cur.fi + "22",
+                  border: `1px solid ${cur.fi}44`,
+                }}>
+                <span
+                  className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                  style={{
+                    background: cur.fi,
+                    animation: "faqDotPulse 2s ease-in-out infinite",
+                  }} />
+                <span
+                  className="text-[11px] font-bold uppercase tracking-widest"
+                  style={{ fontFamily: "'Inter',sans-serif", color: cur.fi }}>
+                  Question {cur.id}
+                </span>
+              </div>
+
+              {/* question text */}
+              <h3
+                className="text-xl sm:text-2xl font-bold text-white leading-snug"
+                style={{ fontFamily: "'Poppins',sans-serif" }}>
+                {cur.question}
+              </h3>
+
+              {/* divider */}
+              <div
+                className="w-12 h-[2px] rounded-full"
+                style={{ background: `linear-gradient(to right,${cur.fi},${cur.ti})` }}
+              />
+
+              {/* answer */}
+              <p
+                className="text-sm sm:text-base leading-relaxed flex-1"
+                style={{ fontFamily: "'Inter',sans-serif", color: "rgba(255,255,255,.58)" }}>
+                {cur.answer}
+              </p>
+
+              {/* progress pills */}
+              <div className="flex items-center gap-2">
+                {faqData.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActive(i)}
+                    aria-label={`Go to question ${i + 1}`}
+                    className="rounded-full transition-all duration-300"
+                    style={{
+                      width:  active === i ? 22 : 6,
+                      height: 6,
+                      background: active === i
+                        ? `linear-gradient(to right,${cur.fi},${cur.ti})`
+                        : "rgba(255,255,255,.18)",
+                    }}
+                  />
+                ))}
               </div>
             </div>
           </div>
+
         </div>
       </div>
-    </>
+    </section>
   );
 }

@@ -1,46 +1,82 @@
-// React Component
-import React from 'react';
-import { FaChevronRight } from 'react-icons/fa';
+"use client";
+import { FaChevronRight } from "react-icons/fa";
 
 export default function GetNewInsight() {
   return (
-    <div className="GetNewInsightnew py-10 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-28 relative z-10">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center relative z-10">
-        
-        {/* Left Content */}
-        <div className="lg:col-span-6 text-center lg:text-left">
-          <h1 className="text-gray-900 text-2xl md:text-3xl font-bold">
-            Get New Insights Weekly
-          </h1>
-          <p className="mt-4 text-gray-700 text-sm sm:text-base lg:text-lg">
-            Your personal data is secure as per our policy. We don’t share your
-            personal information. <br className="hidden sm:block" /> Freely Subscribe!
+    <section
+      className="relative overflow-hidden py-14 sm:py-16 px-4 sm:px-8 xl:px-24"
+      style={{ background: "linear-gradient(135deg,#0d9488 0%,#4338ca 55%,#4f46e5 100%)" }}
+    >
+      {/* ── Decorative circles (same pattern as mega-menu promo card) ── */}
+      <div className="absolute -top-12 -right-12 w-60 h-60 rounded-full pointer-events-none"
+        style={{ background:"rgba(255,255,255,.10)" }} />
+      <div className="absolute -bottom-14 -left-14 w-52 h-52 rounded-full pointer-events-none"
+        style={{ background:"rgba(255,255,255,.08)" }} />
+      <div className="absolute top-1/2 -translate-y-1/2 right-[28%] w-14 h-14 rounded-full pointer-events-none"
+        style={{ background:"rgba(255,255,255,.06)" }} />
+      <div className="absolute top-4 left-[40%] w-8 h-8 rounded-full pointer-events-none"
+        style={{ background:"rgba(255,255,255,.07)" }} />
+      <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-24 rounded-full pointer-events-none"
+        style={{ background:"rgba(255,255,255,.05)" }} />
+
+      {/* content */}
+      <div className="relative z-10 max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+
+        {/* left — text */}
+        <div>
+          <h2
+            className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-snug"
+            style={{ fontFamily:"'Poppins',sans-serif" }}>
+            Get New Insights{" "}
+            <span style={{ color:"#7dd3fa" }}>Weekly</span>
+          </h2>
+          <p
+            className="mt-3 text-sm sm:text-base leading-relaxed"
+            style={{ fontFamily:"'Inter',sans-serif", color:"rgba(255,255,255,.72)" }}>
+            Your personal data is secure as per our policy. We don&apos;t share your
+            personal information.{" "}
+            <span style={{ color:"rgba(255,255,255,.90)", fontWeight:600 }}>
+              Freely Subscribe!
+            </span>
           </p>
         </div>
 
-        {/* Right Form */}
-        <div className="lg:col-span-6 flex justify-center md:justify-end">
-          <form className="relative flex items-center bg-white border border-gray-300 rounded-full shadow-md w-full max-w-xl focus-within:ring-2 focus-within:ring-indigo-500">
+        {/* right — form */}
+        <div>
+          <form
+            className="flex items-center rounded-full overflow-hidden shadow-xl"
+            style={{
+              background: "rgba(255,255,255,.12)",
+              border: "1.5px solid rgba(255,255,255,.22)",
+              backdropFilter: "blur(10px)",
+            }}
+            onSubmit={(e) => e.preventDefault()}
+          >
             <input
               type="email"
-              placeholder="Email your address"
+              placeholder="Enter your email address"
               name="emails"
-              className="flex-1 h-12 sm:h-14 lg:h-16 px-4 lg:px-6 text-sm sm:text-base text-gray-700 placeholder-gray-400 bg-transparent focus:outline-none"
+              className="flex-1 bg-transparent outline-none text-white placeholder-white/50 text-sm px-5 sm:px-6 h-14"
+              style={{ fontFamily:"'Inter',sans-serif" }}
             />
             <button
               type="submit"
               name="submit"
-              className="flex items-center gap-2 h-10 sm:h-12 px-4 sm:px-6 mr-2 text-sm sm:text-base font-medium text-white bg-gradient-to-r from-[#ffbd84] to-[#ff1f8e] rounded-full shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="flex items-center gap-2 font-semibold text-sm px-5 sm:px-7 h-10 sm:h-11 m-1.5 rounded-full
+                hover:-translate-y-px hover:shadow-lg transition-all duration-200"
               style={{
-                borderRadius: "28px 100px 100px 28px",
-                lineHeight: "normal",
+                fontFamily:"'Poppins',sans-serif",
+                background: "white",
+                color: "#4338ca",
+                flexShrink: 0,
               }}
             >
-              Subscribe <FaChevronRight />
+              Subscribe
+              <FaChevronRight className="text-xs" />
             </button>
           </form>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

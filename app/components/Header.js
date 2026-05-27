@@ -1,1702 +1,732 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { IoMdAdd } from "react-icons/io";
+import React, { useState } from "react";
 import { usePathname } from "next/navigation";
-import { BiMenuAltRight } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
-import { FaEnvelope, FaPhoneAlt, FaSkype } from "react-icons/fa";
-
+import { FaEnvelope, FaPhoneAlt, FaSkype, FaChevronDown, FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
 import Login from "./Login";
+
+/* ─── Mega menu data ─────────────────────────────── */
+const serviceColumns = [
+  {
+    heading: "Website Design",
+    icon: "/Assets/web-development.webp",
+    href: "/website-design",
+    items: [
+      { label: "eCommerce Website", href: "/ecommerce-website-development" },
+      { label: "Web Application Development", href: "/web-app-development" },
+      { label: "CMS Web Development", href: "/cms-development" },
+      { label: "Small Business Website", href: "/business-developement" },
+      { label: "Corporate Website", href: "/web-app-developemnt-corporate" },
+    ],
+  },
+  {
+    heading: "Mobile App Development",
+    icon: "/Assets/mobile-PPC-Management.webp",
+    href: "/application-developement",
+    items: [
+      { label: "Android App Development", href: "/android-application-development" },
+      { label: "IOS App Development", href: "/ios-application-development" },
+      { label: "Hybrid App Development", href: "/hybrid-application-development" },
+      { label: "Mobile App Testing", href: "/mobile-application-testing" },
+      { label: "Quality Assurance", href: "/quality-assurance" },
+    ],
+  },
+  {
+    heading: "Digital Marketing Service",
+    icon: "/Assets/social-media-marketing.webp",
+    href: "/digital-marketing-service",
+    items: [
+      { label: "Seo Services", href: "/search-engine-optimization" },
+      { label: "PPC Management", href: "/pay-per-click-service" },
+      { label: "Social Media Marketing", href: "/social-media-marketing-service" },
+      { label: "Local Seo Services", href: "/local-search-engine-optimization" },
+      { label: "Content Marketing Services", href: "/content-marketing-service" },
+    ],
+  },
+  {
+    heading: "Design & Branding",
+    icon: "/Assets/cms_1.webp",
+    href: "/graphic-design-services",
+    items: [
+      { label: "Logo Design", href: "/logo-design-services" },
+      { label: "Corporate Identity Design", href: "/corporate-stationery-design" },
+      { label: "Brochure Design", href: "/brochure-design-service" },
+      { label: "Animated Videos", href: "/animated-services" },
+      { label: "Creative Agency", href: "/creative-services" },
+    ],
+  },
+];
+
+const techColumns = [
+  {
+    heading: "Web Technology",
+    icon: "/Assets/web-development.webp",
+    href: "#",
+    items: [
+      { label: "PHP-Laravel, Codeigniter", href: "/php-laravel-codeigniter-services" },
+      { label: "React js, Vue js, Node js", href: "/reactjs-vuejs-nodejs-development-services" },
+      { label: "Asp .net", href: "/asp-dot-net-service" },
+      { label: "Python-Django, flask", href: "/python-and-django-service" },
+      { label: "Angular", href: "/angularjs-development-service" },
+      { label: "WP, Shopify, Joomla, Magento", href: "/wordpress-and-shopify-development" },
+    ],
+  },
+  {
+    heading: "Mobile Application",
+    icon: "/Assets/mobile-PPC-Management.webp",
+    href: "#",
+    items: [
+      { label: "Swift", href: "/swift-app-development" },
+      { label: "React native", href: "/react-native-application-development" },
+      { label: "Flutter", href: "/flutter-application-development" },
+      { label: "Ionic", href: "/ionic-application-development" },
+      { label: "Java", href: "/java-application-development" },
+      { label: "UNITY - 2D, 3D", href: "/unity-game-development" },
+    ],
+  },
+  {
+    heading: "AI / ML",
+    icon: "/Assets/ai-ml.webp",
+    href: "#",
+    items: [
+      { label: "Python-NumPy, Pandas", href: "/python-numpy-development" },
+      { label: "Ruby, Pybrain", href: "/ruby-and-pybrain-development" },
+      { label: "Java", href: "/java-application-development" },
+      { label: "Julia", href: "/julia-developement-service" },
+      { label: "Lisp", href: "/lisp-online-store-development" },
+      { label: "Haskell", href: "/haskell-ai-and-ml-development" },
+    ],
+  },
+  {
+    heading: "Blockchain",
+    icon: "/Assets/blockchain.webp",
+    href: "#",
+    items: [
+      { label: "C++", href: "/c-plus-plus-blockchain-development" },
+      { label: "Java", href: "/java-application-development" },
+      { label: "Customer Polls", href: "/customer-polls-blockchain" },
+      { label: "Solidity", href: "/solidity-blockchain-development" },
+      { label: "PHP", href: "/php-laravel-codeigniter-services" },
+      { label: "Python", href: "/python-blockchain-development" },
+    ],
+  },
+];
+
+const aboutDropdown = [
+  { label: "Why Us", href: "/why-us" },
+  { label: "Our Team", href: "/our-team" },
+  { label: "Mission & Vision", href: "/mission" },
+  { label: "Our Portfolio", href: "/our-portfolio" },
+  { label: "Our Pricing Package", href: "/price" },
+];
+
+/* ─── Mega Menu Column ──────────────────────────── */
+function MegaColumn({ col }) {
+  return (
+    <div>
+      <Link href={col.href} className="flex items-center gap-2.5 pb-3 mb-3 border-b border-gray-100 group">
+        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-teal-50 to-indigo-50 flex items-center justify-center flex-shrink-0 group-hover:from-teal-100 group-hover:to-indigo-100 transition-colors shadow-sm">
+          <img src={col.icon} alt={col.heading} className="w-4 h-4 object-contain" />
+        </div>
+        <span
+          className="text-sm font-bold text-gray-800 group-hover:text-indigo-600 transition-colors"
+          style={{ fontFamily: "'Poppins', sans-serif" }}
+        >
+          {col.heading}
+        </span>
+      </Link>
+      <ul className="space-y-0.5">
+        {col.items.map((item) => (
+          <li key={item.label}>
+            <Link
+              href={item.href}
+              className="flex items-center gap-2 py-1.5 px-2 rounded-lg text-sm text-gray-500 hover:text-indigo-600 hover:bg-indigo-50/80 transition-all duration-150 group"
+              style={{ fontFamily: "'Inter', sans-serif" }}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-gray-200 group-hover:bg-indigo-400 flex-shrink-0 transition-colors" />
+              {item.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/* ─── Mega Menu Promo Panel ─────────────────────── */
+function PromoPanel({ tag, title, desc, href, linkLabel, reverse = false }) {
+  return (
+    <div className="w-52 flex-shrink-0">
+      <div
+        className={`relative rounded-2xl overflow-hidden p-5 h-full min-h-[220px] flex flex-col justify-between ${
+          reverse
+            ? "bg-gradient-to-br from-indigo-600 to-teal-400"
+            : "bg-gradient-to-br from-teal-400 to-indigo-700"
+        }`}
+      >
+        {/* Decorative circles */}
+        <div className="absolute -top-6 -right-6 w-28 h-28 rounded-full bg-white/10" />
+        <div className="absolute -bottom-6 -left-6 w-20 h-20 rounded-full bg-white/10" />
+        <div className="absolute top-1/2 right-4 w-10 h-10 rounded-full bg-white/5" />
+
+        {/* Content */}
+        <div className="relative z-10">
+          <span
+            className="inline-block text-[10px] font-bold text-white uppercase tracking-widest bg-white/20 px-2.5 py-1 rounded-full mb-3"
+            style={{ fontFamily: "'Poppins', sans-serif" }}
+          >
+            {tag}
+          </span>
+          <h3
+            className="text-white font-bold text-sm leading-snug mb-2"
+            style={{ fontFamily: "'Poppins', sans-serif" }}
+          >
+            {title}
+          </h3>
+          <p
+            className="text-white/75 text-xs leading-relaxed"
+            style={{ fontFamily: "'Inter', sans-serif" }}
+          >
+            {desc}
+          </p>
+        </div>
+
+        {/* CTA */}
+        <Link
+          href={href}
+          className="relative z-10 mt-4 self-start inline-flex items-center gap-1.5 bg-white text-indigo-700 font-semibold text-xs px-4 py-2 rounded-full hover:bg-white/90 hover:shadow-lg transition-all duration-200"
+          style={{ fontFamily: "'Poppins', sans-serif" }}
+        >
+          {linkLabel}
+          <FaArrowRight className="w-2.5 h-2.5" />
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Main Header ───────────────────────────────── */
 export default function Header() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const handleClosePopup = () => {
-    setIsPopupOpen(false);
-  };
-
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [isDropdownOpen9, setDropdownOpen9] = useState(false);
-  const [isDropdownOpen3, setDropdownOpen3] = useState(false);
-  const [isInnerDropdownOpen, setInnerDropdownOpen] = useState(false); // New state for inner dropdown
-  const [isInnerDropdownOpen2, setInnerDropdownOpen2] = useState(false); // New state for inner dropdown
-  const [isInnerDropdownOpen3, setInnerDropdownOpen3] = useState(false); // New state for inner dropdown
-  const [isInnerDropdownOpen4, setInnerDropdownOpen4] = useState(false); // New state for inner dropdown
-  const [isInnerDropdownOpen5, setInnerDropdownOpen5] = useState(false); // New state for inner dropdown
-  const [isInnerDropdownOpen6, setInnerDropdownOpen6] = useState(false); // New state for inner dropdown
-  const [isInnerDropdownOpen7, setInnerDropdownOpen7] = useState(false); // New state for inner dropdown
-  const [isInnerDropdownOpen8, setInnerDropdownOpen8] = useState(false); // New state for inner dropdown
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-    console.log(isMobileMenuOpen);
-    setDropdownOpen(false);
-    setDropdownOpen9(false);
-    setInnerDropdownOpen2(false);
-    setInnerDropdownOpen(false);
-    setInnerDropdownOpen3(false);
-    setInnerDropdownOpen4(false);
-    setInnerDropdownOpen5(false);
-    setInnerDropdownOpen6(false);
-    setInnerDropdownOpen7(false);
-    setInnerDropdownOpen8(false);
-  };
-
-  const handleButtonClick = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-    setIsPopupOpen(true);
-  };
-
-  const toggleDropdown = () => {
-    setDropdownOpen(!isDropdownOpen);
-  };
-
-  const toggleDropdownSecond = () => {
-    setDropdownOpen9(!isDropdownOpen9);
-  };
-  const toggleDropdownThird = () => {
-    setDropdownOpen3(!isDropdownOpen3);
-  };
-
-  const [fixed, setFixed] = useState("");
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  useEffect(() => {
-    const scrollHanlder = () => {
-      if (window.scrollY > 0) {
-        setFixed(true);
-      } else {
-        setFixed(false);
-      }
-    };
-    window.addEventListener("scroll", scrollHanlder);
-
-    return () => window.removeEventListener("scroll", scrollHanlder);
-  }, []);
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  const [isSecond, setIsSecond] = useState(false);
-  const [isThird, setIsThird] = useState(false);
-
-  const handleMouseLeaveSecond = () => {
-    setIsSecond(false);
-  };
-
-  const handleMouseLeaveThird = () => {
-    setIsThird(false);
-  };
-
-  const handleMouseEnter = () => {
-    setIsOpen(true);
-    setIsSecond(false);
-    setIsThird(false);
-  };
-
-  const handleMouseSecond = () => {
-    setIsSecond(true);
-    setIsOpen(false);
-    setIsThird(false);
-  };
-
-  const handleMouseThird = () => {
-    setIsSecond(false);
-    setIsOpen(false);
-    setIsThird(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsOpen(false);
-  };
+  const [openMenu, setOpenMenu] = useState(null);
+  const [mobileOpen, setMobileOpen] = useState(null);
+  const [mobileServiceOpen, setMobileServiceOpen] = useState(null);
+  const [mobileTechOpen, setMobileTechOpen] = useState(null);
 
   const pathname = usePathname();
-
-  const isActive = (path) => {
-    return pathname === path
+  const isActive = (path) =>
+    pathname === path
       ? "bg-gradient-to-r from-teal-400 to-indigo-700 text-transparent bg-clip-text"
       : "";
-  };
+
+  const toggleMobile = (key) =>
+    setMobileOpen(mobileOpen === key ? null : key);
 
   return (
-    <div
-      className={`${
-        fixed ? "bg-white top-0 shadow-md z-50" : "sm:pt-2 md:pt-4"
-      } px-5 md:px-8 xl:px-20 fixed z-10 w-full `}
-    >
+    <>
+      {/* ── Keyframe animations ── */}
+      <style>{`
+        @keyframes hdrArcSpin1 {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
+        }
+        @keyframes hdrArcSpin2 {
+          from { transform: rotate(360deg); }
+          to   { transform: rotate(0deg); }
+        }
+        @keyframes hdrDotFloat {
+          0%, 100% { transform: translateY(0px); opacity: 0.28; }
+          50%       { transform: translateY(-5px); opacity: 0.55; }
+        }
+        @keyframes hdrWaveDrift {
+          0%, 100% { transform: translateX(0px) scaleX(1); }
+          50%       { transform: translateX(10px) scaleX(1.04); }
+        }
+      `}</style>
+
+      {/* ══════════════════════════════════════════
+          DESKTOP HEADER — fixed below TopBar (top-9)
+      ══════════════════════════════════════════ */}
       <div
-        className={`hidden  bg-white lg:flex items-center justify-between py-1 ${
-          fixed ? "px-0" : "px-5"
-        }  md:px-12 lg:px-5 xl:px-12 rounded-sm relative`}
+        className="hidden lg:block fixed top-9 left-0 w-full z-40 bg-white shadow-md border-b border-gray-100"
+        style={{ fontFamily: "'Poppins', sans-serif" }}
       >
-        <div>
+        {/* ── Animated SVG vector decorations ── */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+
+          {/* ▸ RIGHT-TOP — concentric arcs radiating from corner */}
+          <div className="absolute -top-1 -right-1 w-[170px] h-[170px]">
+            <svg width="170" height="170" viewBox="0 0 170 170" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="hdrRT1" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#2dd4bf" stopOpacity="0.55"/>
+                  <stop offset="100%" stopColor="#6366f1" stopOpacity="0.04"/>
+                </linearGradient>
+                <linearGradient id="hdrRT2" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#2dd4bf" stopOpacity="0.35"/>
+                  <stop offset="100%" stopColor="#6366f1" stopOpacity="0.06"/>
+                </linearGradient>
+                <linearGradient id="hdrRT3" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#818cf8" stopOpacity="0.4"/>
+                  <stop offset="100%" stopColor="#2dd4bf" stopOpacity="0.04"/>
+                </linearGradient>
+              </defs>
+              {/* Outer arc — slow spin */}
+              <g style={{ transformOrigin: "170px 0px", animation: "hdrArcSpin1 30s linear infinite" }}>
+                <circle cx="170" cy="0" r="100" stroke="url(#hdrRT1)" strokeWidth="1" fill="none"
+                  strokeDasharray="110 160" strokeLinecap="round"/>
+              </g>
+              {/* Mid arc — reverse spin */}
+              <g style={{ transformOrigin: "170px 0px", animation: "hdrArcSpin2 22s linear infinite" }}>
+                <circle cx="170" cy="0" r="72" stroke="url(#hdrRT2)" strokeWidth="1.5" fill="none"
+                  strokeDasharray="75 115" strokeLinecap="round"/>
+              </g>
+              {/* Inner arc — slow reverse */}
+              <g style={{ transformOrigin: "170px 0px", animation: "hdrArcSpin1 38s linear infinite reverse" }}>
+                <circle cx="170" cy="0" r="46" stroke="url(#hdrRT3)" strokeWidth="1" fill="none"
+                  strokeDasharray="50 75" strokeLinecap="round"/>
+              </g>
+              {/* Floating dots */}
+              <circle cx="58" cy="55" r="2.5" fill="#2dd4bf" opacity="0.28"
+                style={{ animation: "hdrDotFloat 4.2s ease-in-out infinite" }}/>
+              <circle cx="88" cy="82" r="1.5" fill="#6366f1" opacity="0.22"
+                style={{ animation: "hdrDotFloat 5.8s ease-in-out infinite 0.8s" }}/>
+              <circle cx="28" cy="28" r="1.5" fill="#2dd4bf" opacity="0.3"
+                style={{ animation: "hdrDotFloat 3.6s ease-in-out infinite 1.6s" }}/>
+            </svg>
+          </div>
+
+          {/* ▸ LEFT-BOTTOM — concentric arcs from corner */}
+          <div className="absolute -bottom-1 -left-1 w-[140px] h-[140px]">
+            <svg width="140" height="140" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="hdrLB1" x1="100%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#6366f1" stopOpacity="0.5"/>
+                  <stop offset="100%" stopColor="#2dd4bf" stopOpacity="0.04"/>
+                </linearGradient>
+                <linearGradient id="hdrLB2" x1="100%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#818cf8" stopOpacity="0.35"/>
+                  <stop offset="100%" stopColor="#2dd4bf" stopOpacity="0.05"/>
+                </linearGradient>
+              </defs>
+              {/* Outer arc */}
+              <g style={{ transformOrigin: "0px 140px", animation: "hdrArcSpin2 26s linear infinite" }}>
+                <circle cx="0" cy="140" r="88" stroke="url(#hdrLB1)" strokeWidth="1" fill="none"
+                  strokeDasharray="90 140" strokeLinecap="round"/>
+              </g>
+              {/* Mid arc */}
+              <g style={{ transformOrigin: "0px 140px", animation: "hdrArcSpin1 19s linear infinite reverse" }}>
+                <circle cx="0" cy="140" r="60" stroke="url(#hdrLB1)" strokeWidth="1.5" fill="none"
+                  strokeDasharray="62 95" strokeLinecap="round"/>
+              </g>
+              {/* Inner arc */}
+              <g style={{ transformOrigin: "0px 140px", animation: "hdrArcSpin2 32s linear infinite" }}>
+                <circle cx="0" cy="140" r="35" stroke="url(#hdrLB2)" strokeWidth="1" fill="none"
+                  strokeDasharray="38 58" strokeLinecap="round"/>
+              </g>
+              {/* Dot */}
+              <circle cx="75" cy="68" r="1.8" fill="#6366f1" opacity="0.22"
+                style={{ animation: "hdrDotFloat 5s ease-in-out infinite 2.2s" }}/>
+            </svg>
+          </div>
+
+          {/* ▸ CENTER — subtle wave line connecting both sides */}
+          <div className="absolute top-1/2 -translate-y-1/2 left-0 w-full h-[70px] opacity-[0.35]"
+            style={{ animation: "hdrWaveDrift 8s ease-in-out infinite" }}>
+            <svg width="100%" height="70" viewBox="0 0 1400 70" preserveAspectRatio="none" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="hdrWave" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#2dd4bf" stopOpacity="0"/>
+                  <stop offset="20%" stopColor="#2dd4bf" stopOpacity="0.25"/>
+                  <stop offset="50%" stopColor="#6366f1" stopOpacity="0.18"/>
+                  <stop offset="80%" stopColor="#2dd4bf" stopOpacity="0.25"/>
+                  <stop offset="100%" stopColor="#6366f1" stopOpacity="0"/>
+                </linearGradient>
+              </defs>
+              <path d="M0 35 Q175 18 350 35 Q525 52 700 35 Q875 18 1050 35 Q1225 52 1400 35"
+                stroke="url(#hdrWave)" strokeWidth="1" fill="none" strokeLinecap="round"/>
+              <path d="M0 35 Q175 24 350 35 Q525 46 700 35 Q875 24 1050 35 Q1225 46 1400 35"
+                stroke="url(#hdrWave)" strokeWidth="0.5" fill="none" strokeLinecap="round" opacity="0.5"/>
+            </svg>
+          </div>
+
+        </div>
+
+        {/* ── Nav content ── */}
+        <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-6 xl:px-20">
+          <div className="flex items-center justify-between h-[70px]">
+
+            {/* Logo */}
+            <Link href="/" className="flex-shrink-0">
+              <img
+                src="/images/Header/secondary-logo.webp"
+                alt="Future IT Touch logo"
+                className="h-10 xl:h-12 w-auto"
+              />
+            </Link>
+
+            {/* Nav Links */}
+            <ul className="flex items-center gap-1 xl:gap-2">
+
+              {/* Home */}
+              <li>
+                <Link
+                  href="/"
+                  className={`px-3 py-2 text-sm font-semibold rounded-lg text-gray-700 hover:text-indigo-600 transition-all duration-200 ${isActive("/")}`}
+                >
+                  Home
+                </Link>
+              </li>
+
+              {/* About */}
+              <li
+                className="relative"
+                onMouseEnter={() => setOpenMenu("about")}
+                onMouseLeave={() => setOpenMenu(null)}
+              >
+                <Link
+                  href="/about"
+                  className={`flex items-center gap-1 px-3 py-2 text-sm font-semibold rounded-lg text-gray-700 hover:text-indigo-600 transition-all duration-200 ${isActive("/about")}`}
+                >
+                  About
+                  <FaChevronDown
+                    className={`w-3 h-3 text-indigo-500 transition-transform duration-200 ${openMenu === "about" ? "rotate-180" : ""}`}
+                  />
+                </Link>
+
+                {openMenu === "about" && (
+                  <div className="absolute top-full left-0 mt-0 w-52 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50">
+                    {/* Top accent */}
+                    <div className="h-0.5 bg-gradient-to-r from-teal-400 to-indigo-700 -mt-0 mb-1" />
+                    {aboutDropdown.map((item) => (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:text-indigo-600 hover:bg-indigo-50/70 transition-all duration-150 group"
+                        style={{ fontFamily: "'Inter', sans-serif" }}
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-gray-200 group-hover:bg-indigo-400 flex-shrink-0 transition-colors" />
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+
+              {/* Service */}
+              <li
+                className="relative"
+                onMouseEnter={() => setOpenMenu("service")}
+                onMouseLeave={() => setOpenMenu(null)}
+              >
+                <Link
+                  href="/service"
+                  className={`flex items-center gap-1 px-3 py-2 text-sm font-semibold rounded-lg text-gray-700 hover:text-indigo-600 transition-all duration-200 ${isActive("/service")}`}
+                >
+                  Service
+                  <FaChevronDown
+                    className={`w-3 h-3 text-indigo-500 transition-transform duration-200 ${openMenu === "service" ? "rotate-180" : ""}`}
+                  />
+                </Link>
+
+                {openMenu === "service" && (
+                  <div className="fixed left-0 right-0 top-[95px] bg-white shadow-2xl border-t-2 border-teal-400 z-50">
+                    <div className="max-w-[1400px] mx-auto px-8 xl:px-20 py-7">
+                      <div className="flex gap-8 items-start">
+                        {/* 4 link columns */}
+                        <div className="flex-1 grid grid-cols-4 gap-8">
+                          {serviceColumns.map((col) => (
+                            <MegaColumn key={col.heading} col={col} />
+                          ))}
+                        </div>
+                        {/* Promo panel */}
+                        <PromoPanel
+                          tag="Our Services"
+                          title="End-to-End Digital Solutions for Every Business"
+                          desc="From web to mobile apps, we build products that scale."
+                          href="/service"
+                          linkLabel="View All Services"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )} 
+              </li>
+
+              {/* Technologies */}
+              <li
+                className="relative"
+                onMouseEnter={() => setOpenMenu("tech")}
+                onMouseLeave={() => setOpenMenu(null)}
+              >
+                <Link
+                  href="/trending-technology"
+                  className={`flex items-center gap-1 px-3 py-2 text-sm font-semibold rounded-lg text-gray-700 hover:text-indigo-600 transition-all duration-200 ${isActive("/trending-technology")}`}
+                >
+                  Technologies
+                  <FaChevronDown
+                    className={`w-3 h-3 text-indigo-500 transition-transform duration-200 ${openMenu === "tech" ? "rotate-180" : ""}`}
+                  />
+                </Link>
+
+                {openMenu === "tech" && (
+                  <div className="fixed left-0 right-0 top-[95px] bg-white shadow-2xl border-t-2 border-teal-400 z-50">
+                    <div className="max-w-[1400px] mx-auto px-8 xl:px-20 py-7">
+                      <div className="flex gap-8 items-start">
+                        {/* 4 link columns */}
+                        <div className="flex-1 grid grid-cols-4 gap-8">
+                          {techColumns.map((col) => (
+                            <MegaColumn key={col.heading} col={col} />
+                          ))}
+                        </div>
+                        {/* Promo panel */}
+                        <PromoPanel
+                          tag="Technologies"
+                          title="Cutting-Edge Tech Stack We Master"
+                          desc="Web, Mobile, AI/ML & Blockchain solutions built to last."
+                          href="/trending-technology"
+                          linkLabel="Explore Tech"
+                          reverse
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </li>
+
+              {/* Blogs */}
+              <li>
+                <Link
+                  href="/blog"
+                  className={`px-3 py-2 text-sm font-semibold rounded-lg text-gray-700 hover:text-indigo-600 transition-all duration-200 ${isActive("/blog")}`}
+                >
+                  Blogs
+                </Link>
+              </li>
+
+              {/* Contact */}
+              <li>
+                <Link
+                  href="/contact"
+                  className={`px-3 py-2 text-sm font-semibold rounded-lg text-gray-700 hover:text-indigo-600 transition-all duration-200 ${isActive("/contact")}`}
+                >
+                  Contact
+                </Link>
+              </li>
+            </ul>
+
+            {/* CTA */}
+            <button
+              onClick={() => setIsPopupOpen(true)}
+              className="flex-shrink-0 relative overflow-hidden bg-gradient-to-r from-teal-400 to-indigo-700 text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-md hover:shadow-lg hover:shadow-indigo-200 hover:-translate-y-px transition-all duration-200 focus:outline-none group"
+              style={{ fontFamily: "'Poppins', sans-serif" }}
+            >
+              <span className="relative z-10">Request A Quote</span>
+              {/* Shimmer effect */}
+              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* ══════════════════════════════════════════
+          MOBILE HEADER
+      ══════════════════════════════════════════ */}
+      <div
+        className="lg:hidden fixed top-9 left-0 w-full z-40 bg-white shadow-md border-b border-gray-100"
+        style={{ fontFamily: "'Poppins', sans-serif" }}
+      >
+        <div className="flex items-center justify-between px-4 h-[60px]">
           <Link href="/">
             <img
               src="/images/Header/secondary-logo.webp"
-              width={400}
-              height={400}
-              alt="header logo"
-              className="w-[180px]  xl:w-[280px]"
+              alt="Future IT Touch logo"
+              className="h-9 w-auto"
             />
           </Link>
+
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors focus:outline-none"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+          >
+            {isMobileMenuOpen ? (
+              <RxCross2 className="w-6 h-6" />
+            ) : (
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+              </svg>
+            )}
+          </button>
         </div>
-        <ul className="hidden lg:flex items-center lg:gap-x-3 xl:gap-x-5">
-          <li className="group block py-2 px-3 font-semibold md:hover:bg-transparent md:border-0 md:p-0 dark:text-black transition duration-300">
-            <Link href="/">
-              <span className="group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-indigo-700 group-hover:text-transparent group-hover:bg-clip-text">
-                Home
-              </span>
-            </Link>
-          </li>
-
-          <li onMouseEnter={handleMouseEnter} className="relative">
-            <Link
-              href="/about"
-              className={`font-semibold flex gap-2 items-center py-2 px-3 icon-change md:hover:bg-transparent md:border-0 hover:bg-gradient-to-r hover:from-teal-400 hover:to-indigo-700 hover:text-transparent hover:bg-clip-text md:p-0 dark:text-black ${isActive(
-                "/about"
-              )}`}
-            >
-              <span className="group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-indigo-700 group-hover:text-transparent group-hover:bg-clip-text transition duration-300">
-                About
-              </span>
-              <span className="inline-block bg-gradient-to-r from-teal-400 group-hover:to-indigo-700  bg-clip-text transition duration-300">
-                <IoMdAdd className=" text-indigo-700 group-hover:text-indigo-700" />
-              </span>
-
-              {isOpen && (
-                <ul
-                  onMouseLeave={handleMouseLeave}
-                  className="absolute top-8 left-0 mt-2 w-48 bg-white border-t-2 border-teal-400 to-indigo-700 shadow-lg "
-                >
-                  <li>
-                    <Link
-                      href="/why-us"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100  "
-                    >
-                      Why Us
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/our-team"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                    >
-                      Our Team
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/mission"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                    >
-                      Mission & Vision
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/our-portfolio"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                    >
-                      Our Portfolio
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/price"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                    >
-                      Our Pricing Package
-                    </Link>
-                  </li>
-                </ul>
-              )}
-            </Link>
-          </li>
-
-          <li className="group block py-2 px-3 font-semibold md:hover:bg-transparent md:border-0 md:p-0 dark:text-black transition duration-300">
-            <Link
-              href="/service"
-              onMouseEnter={handleMouseSecond}
-              className="flex gap-x-2 items-center"
-            >
-              <span className="group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-indigo-700 group-hover:text-transparent group-hover:bg-clip-text transition duration-300">
-                Service
-              </span>
-              <span className="inline-block group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-indigo-700 group-hover:text-transparent group-hover:bg-clip-text transition duration-300">
-                <IoMdAdd className="text-indigo-700 group-hover:text-indigo-700" />
-              </span>
-            </Link>
-          </li>
-
-          <li className="group block py-2 px-3 font-semibold md:hover:bg-transparent md:border-0 md:p-0 dark:text-black transition duration-300">
-            <Link
-              href="/trending-technology"
-              onMouseEnter={handleMouseThird}
-              className="flex gap-x-2 items-center"
-            >
-              <span className="group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-indigo-700 group-hover:text-transparent group-hover:bg-clip-text transition duration-300">
-                Technologies
-              </span>
-              <span className="">
-                <IoMdAdd className="text-indigo-700 group-hover:text-indigo-700" />{" "}
-              </span>
-            </Link>
-          </li>
-
-          <li className="group block py-2 px-3 font-semibold md:hover:bg-transparent md:border-0 md:p-0 dark:text-black transition duration-300">
-            <Link href="/blog" className="flex gap-x-2 items-center">
-              <span className="group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-indigo-700 group-hover:text-transparent group-hover:bg-clip-text transition duration-300">
-                Blogs
-              </span>
-            </Link>
-          </li>
-
-          <li className="group block py-2 px-3 font-semibold md:hover:bg-transparent md:border-0 md:p-0 dark:text-black transition duration-300">
-            <Link href="/contact" className="flex gap-x-2 items-center">
-              <span className="group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-indigo-700 group-hover:text-transparent group-hover:bg-clip-text transition duration-300">
-                Contact
-              </span>
-            </Link>
-          </li>
-        </ul>
-        <button
-          className="lg:hidden flex items-center justify-center p-2 rounded-md focus:outline-none"
-          onClick={() => setSidebarOpen(true)}
-        >
-          {sidebarOpen ? <RxCross2 /> : <BiMenuAltRight />}
-        </button>
-        <button
-          onClick={() => setIsPopupOpen(true)}
-          className="hidden lg:flex w-fit items-center bg-dark-200 justify-center text-white py-[15px] sm:py-[12px] px-4 sm:px-8 font-heading transition duration-400 ease-in-out rounded-full text-xs sm:text-xs md:text-sm text-nowrap xl:text-base focus:outline-none hover:bg-gray-300 bg-gradient-to-r from-teal-400 to-indigo-700"
-        >
-          Request A Quote
-        </button>
-
-        {/* Dropdowns  */}
-
-        {isSecond && (
-          <>
-            <div
-              className="hidden lg:flex gap-3 justify-around font-semibold border-t border-teal-400 to-indigo-700 px-5 pb-5 bg-white absolute top-[75px] left-0 w-full"
-              onMouseLeave={handleMouseLeaveSecond}
-            >
-              <ul className="  mt-2  bg-white w-84 ">
-                <li className="border-b">
-                  <Link
-                    href="/website-design"
-                    className="flex gap-3 px-4 py-4 font-semibold text-gray-800 hover:bg-gray-100 "
-                  >
-                    Website Design{" "}
-                    <img
-                      src="/Assets/web-development.webp"
-                      className="w-7 "
-                      width={400}
-                      height={400}
-                      alt=""
-                    />
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/ecommerce-website-development"
-                    className="block px-4 py-3 text-gray-800 hover:bg-gray-100 "
-                  >
-                    eCommerce Website
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/web-app-development"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Web Application Development
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/cms-development"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    CMS Web Development
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/business-developement"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Small Business Website
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/web-app-developemnt-corporate"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Corporate Website
-                  </Link>
-                </li>
-              </ul>
-              <ul className="  mt-2  bg-white w-84 ">
-                <li className="border-b">
-                  <Link
-                    href="/application-developement"
-                    className="flex gap-3 py-[15px] px-[10px] font-semibold text-gray-800 hover:bg-gray-100 "
-                  >
-                    Mobile App Development{" "}
-                    <img
-                      src="/Assets/mobile-PPC-Management.webp"
-                      className="w-7 "
-                      width={400}
-                      height={400}
-                      alt=""
-                    />
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/android-application-development"
-                    className="block px-4 py-3 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Android App Development
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/ios-application-development"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    IOS App Development
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/hybrid-application-development"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Hybrid App Development
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/mobile-application-testing"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Mobile App Testing
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/quality-assurance"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Quality Assurance
-                  </Link>
-                </li>
-              </ul>
-
-              <ul className="  mt-2  bg-white w-84 ">
-                <li className="border-b">
-                  <Link
-                    href="/digital-marketing-service"
-                    className="flex gap-3 py-[15px] px-[10px]  font-semibold text-gray-800 hover:bg-gray-100 "
-                  >
-                    Digital Marketing Service{" "}
-                    <img
-                      src="/Assets/social-media-marketing.webp"
-                      className="w-7 "
-                      width={400}
-                      height={400}
-                      alt=""
-                    />
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/search-engine-optimization"
-                    className="block px-4 py-3 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Seo Services
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/pay-per-click-service"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    PPC Management
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/social-media-marketing-service"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Social Media Marketing
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/local-search-engine-optimization"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Local Seo Services
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/content-marketing-service"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Content Marketing Services
-                  </Link>
-                </li>
-              </ul>
-              <ul className=" top-8 left-0 mt-2 w-84 bg-white font-semibold  ">
-                <li className="border-b">
-                  <Link
-                    href="/graphic-design-services"
-                    className="flex gap-3 px-4 py-4 font-semibold text-gray-800 hover:bg-gray-100 "
-                  >
-                    Design & Branding
-                    <img
-                      src="/Assets/cms_1.webp"
-                      className="w-7"
-                      width={400}
-                      height={400}
-                      alt=""
-                    />
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/logo-design-services"
-                    className="block px-4 py-3 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Logo Design
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/corporate-stationery-design"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Corporate Identity Design
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/brochure-design-service"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Brochure Design
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/animated-services"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Animated Videos
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/creative-services"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Creative Agency
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </>
-        )}
-
-        {isThird && (
-          <>
-            <div
-              className="hidden lg:flex max-sm:block gap-3 justify-around font-semibold border-t border-teal-400 to-indigo-700 px-5 pb-5 bg-white absolute top-[75px] left-0 w-full"
-              onMouseLeave={handleMouseLeaveThird}
-            >
-              <ul className="  mt-2  bg-white w-84 ">
-                <li className="border-b">
-                  <Link
-                    href="#"
-                    className="flex gap-3 px-4 py-4  text-gray-800 font-semibold hover:bg-gray-100 "
-                  >
-                    Web Technology
-                    <img
-                      src="/Assets/web-development.webp"
-                      className="w-7 "
-                      width={400}
-                      height={400}
-                      alt=""
-                    />
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/php-laravel-codeigniter-services"
-                    className="block px-4 py-3 text-gray-800 hover:bg-gray-100 "
-                  >
-                    PHP-Laravel, Codeigniter
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/reactjs-vuejs-nodejs-development-services"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    React js, Vue js, Node js
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/asp-dot-net-service"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Asp .net
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/python-and-django-service"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Python-Django, flask
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/angularjs-development-service"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Angular
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/wordpress-and-shopify-development"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    WP, Shopify, Joomla, Magento
-                  </Link>
-                </li>
-              </ul>
-              <ul className="  mt-2  bg-white w-84 ">
-                <li className="border-b">
-                  <Link
-                    href="#"
-                    className="flex gap-2 px-4 py-4 text-gray-800 font-semibold hover:bg-gray-100 "
-                  >
-                    Mobile Application{" "}
-                    <img
-                      src="/Assets/mobile-PPC-Management.webp"
-                      className="w-7 "
-                      width={400}
-                      height={400}
-                      alt=""
-                    />
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/swift-app-development"
-                    className="block px-4 py-3 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Swift
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/react-native-application-development"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    React native
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/flutter-application-development"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Flutter
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/ionic-application-development"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Ionic
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/java-application-development"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Java
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/unity-game-development"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    UNITY - 2D, 3D
-                  </Link>
-                </li>
-              </ul>
-
-              <ul className="  mt-2  bg-white w-84 ">
-                <li className="border-b">
-                  <Link
-                    href="#"
-                    className="flex gap-3 px-4 py-4 font-semibold  text-gray-800 hover:bg-gray-100 "
-                  >
-                    AI / ML{" "}
-                    <img
-                      src="/Assets/ai-ml.webp"
-                      className="w-7 "
-                      width={400}
-                      height={400}
-                      alt=""
-                    />
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/python-numpy-development"
-                    className="block px-4 py-3 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Python-NumPy, Pandas
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/ruby-and-pybrain-development"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Ruby, Pybrain
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/java-application-development"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Java
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/julia-developement-service"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Julia
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/lisp-online-store-development"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Lisp
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/haskell-ai-and-ml-development"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Haskell
-                  </Link>
-                </li>
-              </ul>
-              <ul className=" top-8 left-0 mt-2 w-84 bg-white   ">
-                <li className="border-b">
-                  <Link
-                    href="#"
-                    className="flex gap-3 px-4 py-4 font-semibold text-gray-800 hover:bg-gray-100 "
-                  >
-                    Blockchain
-                    <img
-                      src="/Assets/blockchain.webp"
-                      className="w-7"
-                      width={400}
-                      height={400}
-                      alt=""
-                    />
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/c-plus-plus-blockchain-development"
-                    className="block px-4 py-3 text-gray-800 hover:bg-gray-100 "
-                  >
-                    C++
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/java-application-development"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Java
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/customer-polls-blockchain"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Customer Polls
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/solidity-blockchain-development"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Solidity
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/php-laravel-codeigniter-services"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    PHP
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/python-blockchain-development"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 "
-                  >
-                    Python
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </>
-        )}
       </div>
 
-      {isPopupOpen && (
-        <Login handleClosePopup={handleClosePopup} isPopupOpen={isPopupOpen} />
-      )}
-
-      {/* side bar  for phone */}
+      {/* ── Mobile Slide-out Sidebar ── */}
       {isMobileMenuOpen && (
-        <>
+        <div className="lg:hidden fixed inset-0 z-50 flex">
           <div
+            className="flex-1 bg-black/50 backdrop-blur-sm"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="fixed inset-0 bg-black/50"
           />
-        </>
-      )}
 
-      {/*  sideBar for phone  */}
-
-      <nav
-        className={` lg:hidden bg-white inset-x-0 border-gray-200 nav-width rounded absolute z-4 mx-4 sm:mx-8 md:mx-12 lg:mx-20 mt-1 ${
-          fixed ? "sticky-nav  coustom_margin" : ""
-        }  `}
-      >
-        <div className=" mx-auto flex justify-between items-center p-[0.2rem] px-1">
-          <Link
-            href="/"
-            className="flex items-center space-x-3 rtl:space-x-reverse"
+          <div
+            className="w-80 bg-gray-900 h-full overflow-y-auto flex flex-col shadow-2xl"
+            style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            <img
-              src="/images/Header/secondary-logo.webp"
-              className="h-auto w-40 nav-logo"
-              width={400}
-              height={400}
-              alt="Flowbite Logo"
-            />
-          </Link>
-
-          <div className=" ">
-            <button
-              onClick={toggleMobileMenu}
-              className="text-black focus:outline-none"
-              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-            >
-              <svg
-                className={`w-8 h-6 mt-[8px] ${
-                  isMobileMenuOpen ? "cross-animation" : ""
-                }`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{ transition: "transform 0.3s ease" }} // Add transition property here
-              >
-                {isMobileMenuOpen ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  ></path>
-                ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16m-7 6h7"
-                  ></path>
-                )}
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <div
-          className={`fixed z-50 top-0 left-0 h-full bg-gray-800 transition-transform transform ${
-            isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-          }  w-84`}
-        >
-          <div className=" flex bg-white p-2  justify-between items-center">
-            <Link href="/">
-              {" "}
-              <img
-                src="/images/Header/secondary-logo.webp"
-                width={400}
-                height={400}
-                alt=""
-                className="w-40"
-              />
-            </Link>
-            <button
-              onClick={toggleMobileMenu}
-              className="text-black   focus:outline-none"
-            >
-              <svg
-                className="w-8 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                ></path>
-              </svg>
-            </button>
-          </div>
-
-          <ul className="mobile-border mt-4 relative">
-            <li>
-              <Link
-                href="/"
-                onClick={toggleMobileMenu}
-                className="text-gray-300  hover:text-white block"
-              >
-                Home
+            {/* Sidebar header */}
+            <div className="flex items-center justify-between px-5 py-4 bg-white border-b border-gray-100">
+              <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
+                <img src="/images/Header/secondary-logo.webp" alt="logo" className="h-9 w-auto" />
               </Link>
-            </li>
-            <li className="relative">
-              <div className="text-gray-300 flex items-center hover:text-white relative">
-                <Link href="/about" onClick={toggleMobileMenu}>
-                  About
-                </Link>
-                <span className="absolute right-0 top-1/2 transform -translate-y-1/2">
-                  <svg
-                    className={`w-8 h-8 fill-current transition-transform ${
-                      isDropdownOpen3 ? "rotate-180" : ""
-                    }`}
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    onClick={() => toggleDropdownThird(!isDropdownOpen3)}
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 12l4-4-1.41-1.41L10 9.17 7.41 6.59 6 8l4 4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </span>
-              </div>
-
-              <div
-                className={`transition-all duration-300 ${
-                  isDropdownOpen3 ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-                }  ease-in-out overflow-scroll mobile-bor`}
-              >
-                {/* Dropdown content */}
-
-                <Link
-                  href="why-us"
-                  onClick={toggleMobileMenu}
-                  className="text-gray-300 hover:text-white block py-2 px-2   "
-                >
-                  Why Us
-                </Link>
-                <Link
-                  href="our-team"
-                  onClick={toggleMobileMenu}
-                  className="text-gray-300 hover:text-white block py-2 px-2  "
-                >
-                  Our Team
-                </Link>
-                <Link
-                  href="mission"
-                  onClick={toggleMobileMenu}
-                  className="text-gray-300 hover:text-white block py-2 px-2   "
-                >
-                  Mission & Vision
-                </Link>
-                <Link
-                  href="our-portfolio"
-                  onClick={toggleMobileMenu}
-                  className="text-gray-300 hover:text-white block py-2 px-2   "
-                >
-                  Our Portfolio
-                </Link>
-                <Link
-                  href="price"
-                  className="text-gray-300 hover:text-white block py-2 px-2   "
-                >
-                  Our Pricing Package
-                </Link>
-              </div>
-            </li>
-
-            <li className="relative">
-              <Link
-                href="service"
-                onClick={toggleMobileMenu}
-                className="text-gray-300 flex items-center hover:text-white relative"
-              >
-                Services
-                <span className="absolute right-0 top-1/2 transform -translate-y-1/2">
-                  <svg
-                    className={`w-8 h-8 fill-current transition-transform ${
-                      isDropdownOpen ? "rotate-180" : ""
-                    }`}
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      toggleDropdown(!isDropdownOpen);
-                    }}
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 12l4-4-1.41-1.41L10 9.17 7.41 6.59 6 8l4 4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </span>
-              </Link>
-
-              <div
-                className={`transition-all duration-300 ${
-                  isDropdownOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-                } ease-in-out overflow-scroll`}
-              >
-                {/* Dropdown content */}
-                <div className="relative">
-                  <Link
-                    onClick={toggleMobileMenu}
-                    href="/website-design"
-                    className="text-gray-300 flex p-2 items-center hover:text-white relative"
-                  >
-                    Website Design
-                    <span className="absolute right-0 top-1/2 transform -translate-y-1/2">
-                      <svg
-                        className={`w-8 h-8 fill-current  transition-transform ${
-                          isInnerDropdownOpen ? "rotate-180" : ""
-                        }`}
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          setInnerDropdownOpen(!isInnerDropdownOpen);
-                        }}
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 12l4-4-1.41-1.41L10 9.17 7.41 6.59 6 8l4 4z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </span>
-                  </Link>
-
-                  <div
-                    className={`transition-all duration-300 ${
-                      isInnerDropdownOpen ? "opacity-100 " : "max-h-0 opacity-0"
-                    } ease-in-out overflow-scroll mobile-bor top-full left-0 w-full bg-gray-800`}
-                  >
-                    <Link
-                      href="/ecommerce-website-development"
-                      onClick={toggleMobileMenu}
-                      className="text-gray-300 hover:text-white block py-2 px-2"
-                    >
-                      eCommerce Website
-                    </Link>
-                    <Link
-                      href="web-app-development"
-                      className="text-gray-300 hover:text-white block py-2 px-2"
-                    >
-                      Web Application Development
-                    </Link>
-                    <Link
-                      href="/cms-development"
-                      onClick={toggleMobileMenu}
-                      className="text-gray-300 hover:text-white block py-2 px-2"
-                    >
-                      CMS Web Development
-                    </Link>
-                    <Link
-                      href="/business-developement"
-                      onClick={toggleMobileMenu}
-                      className="text-gray-300 hover:text-white block py-2 px-2"
-                    >
-                      Small Business Website
-                    </Link>
-                    <Link
-                      href="/corporate-stationery-design"
-                      className="text-gray-300 hover:text-white block py-2 px-2"
-                    >
-                      Corporate Website
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="relative">
-                  <Link
-                    href="/mobile-application-testing"
-                    onClick={toggleMobileMenu}
-                    className="text-gray-300 flex p-2 items-center hover:text-white relative"
-                  >
-                    Mobile App Development
-                    <span className="absolute right-0 top-1/2 transform -translate-y-1/2">
-                      <svg
-                        className={`w-8 h-8 fill-current  transition-transform ${
-                          isInnerDropdownOpen2 ? "rotate-180" : ""
-                        }`}
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          setInnerDropdownOpen2(!isInnerDropdownOpen2);
-                        }}
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 12l4-4-1.41-1.41L10 9.17 7.41 6.59 6 8l4 4z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </span>
-                  </Link>
-
-                  <div
-                    className={`transition-all duration-300 ${
-                      isInnerDropdownOpen2
-                        ? "opacity-100 "
-                        : "max-h-0 opacity-0"
-                    } mobile-bor ease-in-out overflow-scroll top-full left-0 w-full bg-gray-800`}
-                  >
-                    <Link
-                      href="/android-application-development"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2"
-                    >
-                      Android App Development
-                    </Link>
-                    <Link
-                      href="/ios-application-development"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2"
-                    >
-                      IOS App Development
-                    </Link>
-                    <Link
-                      href="/hybrid-application-development"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2"
-                    >
-                      Hybrid App Development
-                    </Link>
-                    <Link
-                      href="/application-developement"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2"
-                    >
-                      Mobile-App-Testing
-                    </Link>
-                    <Link
-                      href="/quality-assurance"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2"
-                    >
-                      Quality -Assurance
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="relative">
-                  <Link
-                    href="/digital-marketing-service"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-gray-300 flex p-2 items-center hover:text-white relative"
-                  >
-                    Digital Marketing Service
-                    <span className="absolute right-0 top-1/2 transform -translate-y-1/2">
-                      <svg
-                        className={`w-8 h-8 fill-current  transition-transform ${
-                          isInnerDropdownOpen3 ? "rotate-180" : ""
-                        }`}
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          setInnerDropdownOpen3(!isInnerDropdownOpen3);
-                        }}
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 12l4-4-1.41-1.41L10 9.17 7.41 6.59 6 8l4 4z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </span>
-                  </Link>
-
-                  <div
-                    className={`transition-all duration-300  ${
-                      isInnerDropdownOpen3
-                        ? "opacity-100 "
-                        : "max-h-0 opacity-0"
-                    } mobile-bor ease-in-out overflow-scroll top-full left-0 w-full bg-gray-800`}
-                  >
-                    <Link
-                      href="/search-engine-optimization"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2"
-                    >
-                      Seo Services
-                    </Link>
-                    <Link
-                      href="/pay-per-click-service"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2"
-                    >
-                      PPC Management
-                    </Link>
-                    <Link
-                      href="/social-media-marketing-service"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2"
-                    >
-                      Social Media Marketing
-                    </Link>
-                    <Link
-                      href="/local-search-engine-optimization"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2"
-                    >
-                      Local Seo Services
-                    </Link>
-                    <Link
-                      href="/content-marketing-service"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2"
-                    >
-                      Content Marketing Services
-                    </Link>
-                  </div>
-                </div>
-                <div className="relative">
-                  <Link
-                    href="/graphic-design-services"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-gray-300 flex p-2 items-center hover:text-white relative"
-                  >
-                    Design & Branding
-                    <span className="absolute right-0 top-1/2 transform -translate-y-1/2">
-                      <svg
-                        className={`w-8 h-8 fill-current  transition-transform ${
-                          isInnerDropdownOpen4 ? "rotate-180" : ""
-                        }`}
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          setInnerDropdownOpen4(!isInnerDropdownOpen4);
-                        }}
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 12l4-4-1.41-1.41L10 9.17 7.41 6.59 6 8l4 4z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </span>
-                  </Link>
-
-                  <div
-                    className={`transition-all duration-300 ${
-                      isInnerDropdownOpen4
-                        ? "opacity-100 "
-                        : "max-h-0 opacity-0"
-                    } mobile-bor ease-in-out overflow-scroll top-full left-0 w-full bg-gray-800`}
-                  >
-                    <Link
-                      href="/logo-design-services"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2"
-                    >
-                      Logo Design
-                    </Link>
-                    <Link
-                      href="/corporate-stationery-design"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2"
-                    >
-                      Corporate Identity Design
-                    </Link>
-                    <Link
-                      href="/brochure-design-service"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2"
-                    >
-                      Brochure Design
-                    </Link>
-                    <Link
-                      href="/animated-services"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2"
-                    >
-                      Animated Videos
-                    </Link>
-                    <Link
-                      href="/creative-services"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2"
-                    >
-                      Creative Agency
-                    </Link>
-                  </div>
-                </div>
-
-                {/* End of Dropdown content */}
-              </div>
-            </li>
-
-            <li className="relative">
-              <Link
-                href="trending-technology"
-                onClick={toggleMobileMenu}
-                className="text-gray-300 flex items-center hover:text-white relative"
-              >
-                Technology
-                <span className="absolute right-0 top-1/2 transform -translate-y-1/2">
-                  <svg
-                    className={`w-8 h-8 fill-current transition-transform ${
-                      isDropdownOpen9 ? "rotate-180" : ""
-                    }`}
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      toggleDropdownSecond(!isDropdownOpen9);
-                    }}
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 12l4-4-1.41-1.41L10 9.17 7.41 6.59 6 8l4 4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </span>
-              </Link>
-
-              <div
-                className={`transition-all duration-300 ${
-                  isDropdownOpen9 ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-                } rounded ease-in-out overflow-scroll`}
-              >
-                {/* Dropdown content */}
-                <div className="relative">
-                  <Link
-                    href="#"
-                    className="text-gray-300 flex p-2 items-center hover:text-white relative"
-                  >
-                    Web Technology
-                    <span className="absolute right-0 top-1/2 transform -translate-y-1/2">
-                      <svg
-                        className={`w-8 h-8 fill-current  transition-transform ${
-                          isInnerDropdownOpen5 ? "rotate-180" : ""
-                        }`}
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setInnerDropdownOpen5(!isInnerDropdownOpen5);
-                        }}
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 12l4-4-1.41-1.41L10 9.17 7.41 6.59 6 8l4 4z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </span>
-                  </Link>
-
-                  <div
-                    className={`transition-all duration-300 ${
-                      isInnerDropdownOpen5
-                        ? "opacity-100 "
-                        : "max-h-0 opacity-0"
-                    } mobile-bor ease-in-out overflow-scroll  top-full left-0 w-full bg-gray-800`}
-                  >
-                    <Link
-                      href="/php-laravel-codeigniter-services"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2   "
-                    >
-                      PHP-Laravel, Codeigniter
-                    </Link>
-                    <Link
-                      href="/reactjs-vuejs-nodejs-development-services"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2  "
-                    >
-                      React js, Vue js, Node js
-                    </Link>
-                    <Link
-                      href="/asp-dot-net-service"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2   "
-                    >
-                      Asp .net
-                    </Link>
-                    <Link
-                      href="/python-and-django-service"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2   "
-                    >
-                      Python-Django, flask
-                    </Link>
-                    <Link
-                      href="/angularjs-development-service"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2   "
-                    >
-                      Angular
-                    </Link>
-                    <Link
-                      href="/wordpress-and-shopify-development"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2   "
-                    >
-                      WP, Shopify, Joomla, Magento
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="relative">
-                  <Link
-                    href="/mobile-application-testing"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-gray-300 flex p-2 items-center hover:text-white relative"
-                  >
-                    Mobile Application
-                    <span className="absolute right-0 top-1/2 transform -translate-y-1/2">
-                      <svg
-                        className={`w-8 h-8 fill-current  transition-transform ${
-                          isInnerDropdownOpen6 ? "rotate-180" : ""
-                        }`}
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setInnerDropdownOpen6(!isInnerDropdownOpen6);
-                        }}
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 12l4-4-1.41-1.41L10 9.17 7.41 6.59 6 8l4 4z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </span>
-                  </Link>
-
-                  <div
-                    className={`transition-all duration-300 ${
-                      isInnerDropdownOpen6
-                        ? "opacity-100 "
-                        : "max-h-0 opacity-0"
-                    } mobile-bor ease-in-out overflow-scroll  top-full left-0 w-full bg-gray-800`}
-                  >
-                    <Link
-                      href="/swift-app-development"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2   "
-                    >
-                      Swift
-                    </Link>
-                    <Link
-                      href="/react-native-application-development"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2  "
-                    >
-                      React native
-                    </Link>
-                    <Link
-                      href="/flutter-application-development"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2   "
-                    >
-                      Flutter
-                    </Link>
-                    <Link
-                      href="/ionic-application-development"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2   "
-                    >
-                      Ionic
-                    </Link>
-                    <Link
-                      href="/java-application-development"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2   "
-                    >
-                      Java
-                    </Link>
-                    <Link
-                      href="/unity-game-development"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2   "
-                    >
-                      UNITY - 2D, 3D
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="relative">
-                  <Link
-                    href="#"
-                    className="text-gray-300 flex p-2 items-center hover:text-white relative"
-                  >
-                    AI / ML
-                    <span className="absolute right-0 top-1/2 transform -translate-y-1/2">
-                      <svg
-                        className={`w-8 h-8 fill-current  transition-transform ${
-                          isInnerDropdownOpen7 ? "rotate-180" : ""
-                        }`}
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setInnerDropdownOpen7(!isInnerDropdownOpen7);
-                        }}
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 12l4-4-1.41-1.41L10 9.17 7.41 6.59 6 8l4 4z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </span>
-                  </Link>
-
-                  <div
-                    className={`transition-all duration-300 ${
-                      isInnerDropdownOpen7
-                        ? "opacity-100 "
-                        : "max-h-0 opacity-0"
-                    } mobile-bor ease-in-out overflow-scroll  top-full left-0 w-full bg-gray-800`}
-                  >
-                    <Link
-                      href="/python-numpy-development"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2   "
-                    >
-                      Python-NumPy, Pandas
-                    </Link>
-                    <Link
-                      href="/ruby-and-pybrain-development"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2  "
-                    >
-                      Ruby, Pybrain
-                    </Link>
-                    <Link
-                      href="/java-application-development"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2   "
-                    >
-                      Java
-                    </Link>
-                    <Link
-                      href="/julia-developement-service"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2   "
-                    >
-                      Julia
-                    </Link>
-                    <Link
-                      href="/lisp-online-store-development"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2   "
-                    >
-                      Lisp
-                    </Link>
-                    <Link
-                      href="/haskell-ai-and-ml-development"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2   "
-                    >
-                      Haskell
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="relative">
-                  <Link
-                    href="#"
-                    className="text-gray-300 flex p-2 items-center hover:text-white relative"
-                  >
-                    Blockchain
-                    <span className="absolute right-0 top-1/2 transform -translate-y-1/2">
-                      <svg
-                        className={`w-8 h-8 fill-current  transition-transform ${
-                          isInnerDropdownOpen8 ? "rotate-180" : ""
-                        }`}
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setInnerDropdownOpen8(!isInnerDropdownOpen8);
-                        }}
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 12l4-4-1.41-1.41L10 9.17 7.41 6.59 6 8l4 4z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </span>
-                  </Link>
-
-                  <div
-                    className={`transition-all duration-300 ${
-                      isInnerDropdownOpen8
-                        ? "opacity-100 "
-                        : "max-h-0 opacity-0"
-                    } mobile-bor ease-in-out overflow-scroll  top-full left-0 w-full bg-gray-800`}
-                  >
-                    <Link
-                      href="/c-plus-plus-blockchain-development"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2   "
-                    >
-                      C++
-                    </Link>
-                    <Link
-                      href="/java-application-development"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2  "
-                    >
-                      Java
-                    </Link>
-                    <Link
-                      href="/customer-polls-blockchain"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2   "
-                    >
-                      Customer Polls
-                    </Link>
-                    <Link
-                      href="/solidity-blockchain-development"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2   "
-                    >
-                      Solidity
-                    </Link>
-                    <Link
-                      href="/php-laravel-codeigniter-services"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2   "
-                    >
-                      PHP
-                    </Link>
-                    <Link
-                      href="/python-blockchain-development"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-300 hover:text-white block py-2 px-2   "
-                    >
-                      Python
-                    </Link>
-                  </div>
-                </div>
-
-                {/* End of Dropdown content */}
-              </div>
-            </li>
-
-            <li>
-              <Link
-                href="blog"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-gray-300 hover:text-white block"
-              >
-                Blog
-              </Link>
-            </li>
-
-            <li>
-              <Link
-                href="contact"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-gray-300 hover:text-white block"
-              >
-                Contact
-              </Link>
-            </li>
-            <div className="w-full px-4">
               <button
-                className="flex items-center bg-dark-200 mt-5 w-full justify-center text-white py-[15px] sm:py-[12px] px-4 sm:px-8 font-heading transition duration-400 ease-in-out rounded-full text-xs sm:text-xs md:text-sm lg:text-base focus:outline-none hover:bg-gray-300 bg-gradient-to-r from-teal-400 to-indigo-700"
-                onClick={handleButtonClick}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors"
               >
-                Request A Quote
+                <RxCross2 className="w-5 h-5" />
               </button>
             </div>
-          </ul>
 
-          <div className="absolute bottom-5 flex justify-evenly w-full  text-white">
-            <Link href="tel:+91-7056937000">
-              <FaPhoneAlt className="text-2xl" />
-            </Link>
-            <Link href="mailto:info@futuretouch.in">
-              <FaEnvelope className="text-2xl" />
-            </Link>
-            <Link href="skype:futuretouch">
-              <FaSkype className="text-2xl" />
-            </Link>
+            {/* Nav items */}
+            <ul className="flex-1 px-3 py-4 space-y-1">
+
+              <li>
+                <Link href="/" onClick={() => setIsMobileMenuOpen(false)}
+                  className="block px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white font-medium transition-all">
+                  Home
+                </Link>
+              </li>
+
+              {/* About accordion */}
+              <li>
+                <div className="flex items-center justify-between px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 cursor-pointer transition-all"
+                  onClick={() => toggleMobile("about")}>
+                  <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="font-medium hover:text-white">About</Link>
+                  <FaChevronDown className={`w-3 h-3 text-teal-400 transition-transform duration-200 ${mobileOpen === "about" ? "rotate-180" : ""}`} />
+                </div>
+                {mobileOpen === "about" && (
+                  <div className="mt-1 ml-4 space-y-0.5 border-l-2 border-teal-400/30 pl-4">
+                    {aboutDropdown.map((item) => (
+                      <Link key={item.label} href={item.href} onClick={() => setIsMobileMenuOpen(false)}
+                        className="block py-2 text-sm text-gray-400 hover:text-teal-400 transition-colors">
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+
+              {/* Services accordion */}
+              <li>
+                <div className="flex items-center justify-between px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 cursor-pointer transition-all"
+                  onClick={() => toggleMobile("service")}>
+                  <Link href="/service" onClick={() => setIsMobileMenuOpen(false)} className="font-medium hover:text-white">Services</Link>
+                  <FaChevronDown className={`w-3 h-3 text-teal-400 transition-transform duration-200 ${mobileOpen === "service" ? "rotate-180" : ""}`} />
+                </div>
+                {mobileOpen === "service" && (
+                  <div className="mt-1 ml-4 space-y-1 border-l-2 border-teal-400/30 pl-4">
+                    {serviceColumns.map((col) => (
+                      <div key={col.heading}>
+                        <div className="flex items-center justify-between py-2 cursor-pointer"
+                          onClick={() => setMobileServiceOpen(mobileServiceOpen === col.heading ? null : col.heading)}>
+                          <span className="text-sm font-semibold text-teal-300">{col.heading}</span>
+                          <FaChevronDown className={`w-3 h-3 text-teal-400 transition-transform ${mobileServiceOpen === col.heading ? "rotate-180" : ""}`} />
+                        </div>
+                        {mobileServiceOpen === col.heading && (
+                          <div className="ml-3 space-y-0.5 border-l border-white/10 pl-3">
+                            {col.items.map((item) => (
+                              <Link key={item.label} href={item.href} onClick={() => setIsMobileMenuOpen(false)}
+                                className="block py-1.5 text-sm text-gray-400 hover:text-teal-400 transition-colors">
+                                {item.label}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </li>
+
+              {/* Technology accordion */}
+              <li>
+                <div className="flex items-center justify-between px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 cursor-pointer transition-all"
+                  onClick={() => toggleMobile("tech")}>
+                  <Link href="/trending-technology" onClick={() => setIsMobileMenuOpen(false)} className="font-medium hover:text-white">Technology</Link>
+                  <FaChevronDown className={`w-3 h-3 text-teal-400 transition-transform duration-200 ${mobileOpen === "tech" ? "rotate-180" : ""}`} />
+                </div>
+                {mobileOpen === "tech" && (
+                  <div className="mt-1 ml-4 space-y-1 border-l-2 border-teal-400/30 pl-4">
+                    {techColumns.map((col) => (
+                      <div key={col.heading}>
+                        <div className="flex items-center justify-between py-2 cursor-pointer"
+                          onClick={() => setMobileTechOpen(mobileTechOpen === col.heading ? null : col.heading)}>
+                          <span className="text-sm font-semibold text-teal-300">{col.heading}</span>
+                          <FaChevronDown className={`w-3 h-3 text-teal-400 transition-transform ${mobileTechOpen === col.heading ? "rotate-180" : ""}`} />
+                        </div>
+                        {mobileTechOpen === col.heading && (
+                          <div className="ml-3 space-y-0.5 border-l border-white/10 pl-3">
+                            {col.items.map((item) => (
+                              <Link key={item.label} href={item.href} onClick={() => setIsMobileMenuOpen(false)}
+                                className="block py-1.5 text-sm text-gray-400 hover:text-teal-400 transition-colors">
+                                {item.label}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </li>
+
+              <li>
+                <Link href="/blog" onClick={() => setIsMobileMenuOpen(false)}
+                  className="block px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white font-medium transition-all">
+                  Blog
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}
+                  className="block px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white font-medium transition-all">
+                  Contact
+                </Link>
+              </li>
+
+              <li className="pt-2">
+                <button
+                  onClick={() => { setIsMobileMenuOpen(false); setIsPopupOpen(true); }}
+                  className="w-full bg-gradient-to-r from-teal-400 to-indigo-700 text-white font-semibold py-3 rounded-xl shadow-md hover:shadow-lg transition-all"
+                  style={{ fontFamily: "'Poppins', sans-serif" }}
+                >
+                  Request A Quote
+                </button>
+              </li>
+            </ul>
+
+            {/* Bottom icons */}
+            <div className="flex justify-center gap-6 px-5 py-5 border-t border-white/10">
+              <Link href="tel:+91-7056937000" className="text-gray-400 hover:text-teal-400 transition-colors">
+                <FaPhoneAlt className="w-5 h-5" />
+              </Link>
+              <Link href="mailto:info@futuretouch.in" className="text-gray-400 hover:text-teal-400 transition-colors">
+                <FaEnvelope className="w-5 h-5" />
+              </Link>
+              <Link href="skype:futuretouch" className="text-gray-400 hover:text-teal-400 transition-colors">
+                <FaSkype className="w-5 h-5" />
+              </Link>
+            </div>
           </div>
         </div>
-      </nav>
-    </div>
+      )}
+
+      {/* Login Popup */}
+      {isPopupOpen && (
+        <Login handleClosePopup={() => setIsPopupOpen(false)} isPopupOpen={isPopupOpen} />
+      )}
+    </>
   );
 }

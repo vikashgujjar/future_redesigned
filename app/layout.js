@@ -4,6 +4,7 @@ import "./globals.css";
 import TopBar from "./components/TopBar";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import LocationSection from "./components/LocationSection";
 
 
 
@@ -59,7 +60,10 @@ export default function RootLayout({ children }) {
       >
       <TopBar/>
       <Header/>
+      {/* Spacer: TopBar (h-9 = 36px) + Header mobile (60px) / desktop (70px) */}
+      <div className="h-[96px] lg:h-[106px]" />
         {children}
+       <LocationSection/>
        <Footer/>
       </body>
     </html>

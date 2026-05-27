@@ -1,343 +1,324 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Mail, MapPin, Phone, Heart, ChevronRight } from "lucide-react";
 import {
-  FaChevronRight,
-  FaEnvelope,
-  FaHeart,
-  FaMapPin,
-  FaInstagram,
-  FaPhoneAlt,
   FaFacebookF,
   FaTwitter,
   FaLinkedinIn,
+  FaInstagram,
   FaYoutube,
   FaGithub,
 } from "react-icons/fa";
 
-const Footer = () => {
+const ourLinks = [
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  { label: "Why Us", href: "/why-us" },
+  { label: "Services", href: "/service" },
+  { label: "Our Teams", href: "/our-team" },
+  { label: "Contact Us", href: "/contact" },
+];
+
+const companyLinks = [
+  { label: "Get A Quote", href: "/contact" },
+  { label: "Our Pricing Package", href: "/price" },
+  { label: "Customer's FAQ", href: "/faq" },
+  { label: "Refund Policy", href: "/refund" },
+  { label: "Privacy Policy", href: "/Privacy-Policy" },
+  { label: "Terms & Conditions", href: "/Terms-Conditions" },
+];
+
+const socials = [
+  { Icon: FaFacebookF, href: "https://www.facebook.com/Futureittouch", label: "Facebook" },
+  { Icon: FaTwitter, href: "https://x.com/futureittouch", label: "Twitter" },
+  { Icon: FaLinkedinIn, href: "https://in.linkedin.com/company/future-it-touch", label: "LinkedIn" },
+  { Icon: FaInstagram, href: "https://www.instagram.com/future_it_touch/", label: "Instagram" },
+  { Icon: FaYoutube, href: "https://www.youtube.com/channel/UCirWettrTWfsFRzdGRIc6BQ/about", label: "YouTube" },
+  { Icon: FaGithub, href: "https://github.com/Future-IT-Touch-Private-Limited", label: "GitHub" },
+];
+
+const badges = [
+  "/Assets/badges-a.webp",
+  "/Assets/badges-b.webp",
+  "/Assets/badges-c.webp",
+  "/Assets/badges-d.webp",
+];
+
+export default function Footer() {
   return (
-    <>
-      <div className="bg-white py-10 sm:py-12">
-        <div className="px-4 sm:px-6 md:px-12  xl:px-28">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:flex lg:justify-between gap-10">
-            {/* Logo & Intro */}
-            <div className="lg:w-[35%]">
-              <Link href="/" className="block mb-6">
+    <footer
+      className="relative overflow-hidden"
+      style={{ background: "linear-gradient(145deg,#060b18 0%,#0c1330 100%)" }}
+    >
+      <style>{`
+        .ft-dot {
+          background-image: radial-gradient(circle, rgba(255,255,255,.028) 1px, transparent 1px);
+          background-size: 28px 28px;
+        }
+        .ft-link {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 13px;
+          font-family: 'Inter', sans-serif;
+          color: rgba(255,255,255,.42);
+          transition: color .20s ease, padding-left .20s ease;
+        }
+        .ft-link:hover { color: #2dd4bf; padding-left: 4px; }
+
+        .ft-social {
+          width: 36px; height: 36px;
+          display: flex; align-items: center; justify-content: center;
+          border-radius: 10px;
+          background: rgba(255,255,255,.06);
+          border: 1px solid rgba(255,255,255,.09);
+          color: rgba(255,255,255,.52);
+          transition: background .22s ease, color .22s ease, border-color .22s ease, transform .22s ease;
+          text-decoration: none;
+        }
+        .ft-social:hover {
+          background: linear-gradient(135deg,#2dd4bf,#6366f1);
+          border-color: transparent;
+          color: #ffffff;
+          transform: translateY(-3px);
+        }
+
+        .ft-col-title {
+          font-size: 11px;
+          font-family: 'Poppins', sans-serif;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: .15em;
+          margin-bottom: 20px;
+        }
+
+        .ft-bottom-link {
+          font-size: 12px;
+          font-family: 'Inter', sans-serif;
+          color: rgba(255,255,255,.30);
+          transition: color .18s ease;
+        }
+        .ft-bottom-link:hover { color: #2dd4bf; }
+      `}</style>
+
+      {/* dot grid */}
+      <div className="ft-dot absolute inset-0 pointer-events-none" aria-hidden="true" />
+
+      {/* ambient glow — top-left */}
+      <div className="absolute -top-48 -left-48 w-[600px] h-[600px] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle,rgba(45,212,191,.055) 0%,transparent 65%)" }} />
+      {/* ambient glow — bottom-right */}
+      <div className="absolute -bottom-48 -right-48 w-[600px] h-[600px] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle,rgba(99,102,241,.055) 0%,transparent 65%)" }} />
+
+      {/* top accent bar */}
+      <div className="absolute top-0 left-0 right-0 h-[3px]"
+        style={{ background: "linear-gradient(to right,#2dd4bf,#6366f1)" }} />
+
+      {/* ══ MAIN GRID ════════════════════════════════ */}
+      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 md:px-10 xl:px-24 pt-14 pb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1.1fr_1.8fr] gap-10 lg:gap-8">
+
+          {/* ── Col 1: Logo + About ────────────── */}
+          <div className="flex flex-col gap-5 sm:col-span-2 lg:col-span-1">
+            <Link href="/">
+              <Image
+                src="/Assets/secondary-logo.webp"
+                width={200}
+                height={50}
+                alt="Future IT Touch Logo"
+                className="w-44 sm:w-52"
+              />
+            </Link>
+
+            <p
+              className="text-sm leading-7"
+              style={{ fontFamily: "'Inter',sans-serif", color: "rgba(255,255,255,.42)" }}>
+              Future IT Touch Pvt. Ltd. is an innovative one-stop Web Solution Company in Chandigarh,
+              delivering solutions with customized &amp; quality services to businesses globally.
+            </p>
+
+            <Link
+              href="/contact"
+              className="self-start flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-white"
+              style={{
+                background: "linear-gradient(135deg,#2dd4bf,#6366f1)",
+                boxShadow: "0 4px 20px rgba(45,212,191,.28)",
+                fontFamily: "'Poppins',sans-serif",
+              }}
+            >
+              Become Partner <ChevronRight size={14} />
+            </Link>
+          </div>
+
+          {/* ── Col 2: Our Links ───────────────── */}
+          <div>
+            <h5 className="ft-col-title bg-gradient-to-r from-teal-400 to-indigo-500 bg-clip-text text-transparent">
+              Our Links
+            </h5>
+            <ul className="flex flex-col gap-2.5">
+              {ourLinks.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="ft-link">
+                    <ChevronRight size={11} className="flex-shrink-0 opacity-50" />
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* ── Col 3: Company ─────────────────── */}
+          <div>
+            <h5 className="ft-col-title bg-gradient-to-r from-teal-400 to-indigo-500 bg-clip-text text-transparent">
+              Company
+            </h5>
+            <ul className="flex flex-col gap-2.5">
+              {companyLinks.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="ft-link">
+                    <ChevronRight size={11} className="flex-shrink-0 opacity-50" />
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* ── Col 4: Contact ─────────────────── */}
+          <div>
+            <h5 className="ft-col-title bg-gradient-to-r from-teal-400 to-indigo-500 bg-clip-text text-transparent">
+              Contact Us
+            </h5>
+            <ul className="flex flex-col gap-4">
+
+              {/* Address */}
+              <li className="flex items-start gap-3">
+                <div
+                  className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
+                  style={{ background: "rgba(45,212,191,.12)", border: "1px solid rgba(45,212,191,.25)" }}>
+                  <MapPin size={13} style={{ color: "#2dd4bf" }} />
+                </div>
+                <p
+                  className="text-[13px] leading-[1.65]"
+                  style={{ fontFamily: "'Inter',sans-serif", color: "rgba(255,255,255,.42)" }}>
+                  SCO 54-55, 2nd Floor, Near Mukat Hospital,<br />
+                  34A Sector, Chandigarh, 1600022
+                </p>
+              </li>
+
+              {/* Email */}
+              <li className="flex items-center gap-3">
+                <div
+                  className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{ background: "rgba(99,102,241,.12)", border: "1px solid rgba(99,102,241,.25)" }}>
+                  <Mail size={13} style={{ color: "#6366f1" }} />
+                </div>
+                <a
+                  href="mailto:info@futuretouch.in"
+                  className="text-[13px] transition-colors hover:text-teal-400"
+                  style={{ fontFamily: "'Inter',sans-serif", color: "rgba(255,255,255,.42)" }}>
+                  info@futuretouch.in
+                </a>
+              </li>
+
+              {/* Phone */}
+              <li className="flex items-center gap-3">
+                <div
+                  className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{ background: "rgba(14,165,233,.12)", border: "1px solid rgba(14,165,233,.25)" }}>
+                  <Phone size={13} style={{ color: "#0ea5e9" }} />
+                </div>
+                <a
+                  href="tel:+91-7056937000"
+                  className="text-[13px] transition-colors hover:text-teal-400"
+                  style={{ fontFamily: "'Inter',sans-serif", color: "rgba(255,255,255,.42)" }}>
+                  +91-7056937000
+                </a>
+              </li>
+
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      {/* ══ DIVIDER ══════════════════════════════════ */}
+      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 md:px-10 xl:px-24">
+        <div className="h-px" style={{ background: "rgba(255,255,255,.07)" }} />
+      </div>
+
+      {/* ══ SOCIAL + BADGES ══════════════════════════ */}
+      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 md:px-10 xl:px-24 py-8">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+
+          {/* Social icons */}
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <p
+              className="text-sm font-bold bg-gradient-to-r from-teal-400 to-indigo-500 bg-clip-text text-transparent"
+              style={{ fontFamily: "'Poppins',sans-serif" }}>
+              Follow Us :
+            </p>
+            <div className="flex items-center gap-2">
+              {socials.map(({ Icon, href, label }) => (
+                <Link key={label} href={href} target="_blank" aria-label={label} className="ft-social">
+                  <Icon size={14} />
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Award badges */}
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            {badges.map((src, i) => (
+              <Link key={i} href="#">
                 <Image
-                  src="/Assets/secondary-logo.webp"
-                  width={240}
-                  height={60}
-                  alt="Logo"
-                  className="w-48 sm:w-60"
+                  src={src}
+                  width={120}
+                  height={40}
+                  alt={`Award badge ${i + 1}`}
+                  className="w-24 sm:w-28 opacity-75 hover:opacity-100 transition-opacity duration-200"
                 />
               </Link>
-              <p className="mb-6 text-sm sm:text-base text-justify pr-0 sm:pr-5 font-medium text-[#727272]">
-                Future IT Touch Pvt. Ltd. is an innovative one-stop Web Solution
-                Company in Chandigarh, delivering solutions with customized
-                &amp; quality services to businesses globally.
-              </p>
-              <Link
-                href="/contact"
-                className="w-full sm:w-auto justify-center btn-main bg-gradient-to-r from-[#673ab7] to-[#2196f3] text-white py-2 px-5 inline-flex items-center rounded-full"
-              >
-                Become Partner <FaChevronRight className="ml-2" />
-              </Link>
-            </div>
-
-            {/* Our Links */}
-            <div className="hidden md:block lg:w-[15%]">
-              <h5 className="mb-4 text-lg sm:text-xl font-bold text-[#3a3a3a]">
-                Our Links
-              </h5>
-              <ul className="space-y-2 text-sm sm:text-base font-medium text-[#727272]">
-                <li>
-                  <Link href="/">Home</Link>
-                </li>
-                <li>
-                  <Link href="/about">About Us</Link>
-                </li>
-                <li>
-                  <Link href="/why-us">Why Us</Link>
-                </li>
-                <li>
-                  <Link href="/service">Services</Link>
-                </li>
-                <li>
-                  <Link href="/our-team">Our Teams</Link>
-                </li>
-                <li>
-                  <Link href="/contact">Contact Us</Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Company */}
-            <div className="hidden md:block lg:w-[15%]">
-              <h5 className="mb-4 text-lg sm:text-xl font-bold text-[#3a3a3a]">
-                Company
-              </h5>
-              <ul className="space-y-2 text-sm sm:text-base font-medium text-[#727272]">
-                <li>
-                  <Link href="/contact">Get A Quote</Link>
-                </li>
-                <li>
-                  <Link href="/price">Our Pricing Package</Link>
-                </li>
-                <li>
-                  <Link href="/faq">Customer's FAQ</Link>
-                </li>
-                <li>
-                  <Link href="/refund">Refund Policy</Link>
-                </li>
-                <li>
-                  <Link href="/Privacy-Policy">Privacy Policy</Link>
-                </li>
-                <li>
-                  <Link href="/Terms-Conditions">Terms &amp; Conditions</Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* for mobile  */}
-            <div className="grid grid-cols-2 md:hidden">
-              {/* Our Links */}
-              <div>
-                <h5 className="mb-4 text-lg sm:text-xl font-bold text-[#3a3a3a]">
-                  Our Links
-                </h5>
-                <ul className="space-y-2 text-sm sm:text-base font-medium text-[#727272]">
-                  <li>
-                    <Link href="/">Home</Link>
-                  </li>
-                  <li>
-                    <Link href="/about">About Us</Link>
-                  </li>
-                  <li>
-                    <Link href="/why-us">Why Us</Link>
-                  </li>
-                  <li>
-                    <Link href="/service">Services</Link>
-                  </li>
-                  <li>
-                    <Link href="/our-team">Our Teams</Link>
-                  </li>
-                  <li>
-                    <Link href="/contact">Contact Us</Link>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Company */}
-              <div>
-                <h5 className="mb-4 text-lg sm:text-xl font-bold text-[#3a3a3a]">
-                  Company
-                </h5>
-                <ul className="space-y-2 text-sm sm:text-base font-medium text-[#727272]">
-                  <li>
-                    <Link href="/contact">Get A Quote</Link>
-                  </li>
-                  <li>
-                    <Link href="/price">Our Pricing Package</Link>
-                  </li>
-                  <li>
-                    <Link href="/faq">Customer's FAQ</Link>
-                  </li>
-                  <li>
-                    <Link href="/refund">Refund Policy</Link>
-                  </li>
-                  <li>
-                    <Link href="/Privacy-Policy">Privacy Policy</Link>
-                  </li>
-                  <li>
-                    <Link href="/Terms-Conditions">Terms &amp; Conditions</Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Contact Us */}
-            <div className="lg:w-[35%]">
-              <h5 className="mb-4 text-lg sm:text-xl font-bold text-[#3a3a3a]">
-                Contact Us
-              </h5>
-              <ul className="space-y-4 text-sm sm:text-base font-medium text-[#727272]">
-                <li className="flex gap-3">
-                  <FaMapPin className="mt-1 shrink-0" />
-                  <p>
-                    <span className="font-bold">Address:</span> SCO 54-55, 2nd
-                    Floor, Near Mukat Hospital, 34A Sector, Chandigarh, 1600022
-                  </p>
-                </li>
-                <li className="flex gap-3 items-center">
-                  <FaEnvelope className="shrink-0" />
-                  <p>
-                    <span className="font-bold">Email:</span>{" "}
-                    <a
-                      href="mailto:info@futuretouch.in"
-                      className="hover:underline"
-                    >
-                      info@futuretouch.in
-                    </a>
-                  </p>
-                </li>
-                <li className="flex gap-3 items-center">
-                  <FaPhoneAlt className="shrink-0" />
-                  <p>
-                    <span className="font-bold">Phone:</span>{" "}
-                    <a href="tel:+91-7056937000" className="hover:underline">
-                      +91-7056937000
-                    </a>
-                  </p>
-                </li>
-              </ul>
-            </div>
+            ))}
           </div>
+
         </div>
       </div>
 
-      <div className="bg-[#f8f9fa] py-7">
-        <div className="px-4 sm:px-6 md:px-12  xl:px-28">
-          {/* Top Section */}
-          <div className="flex flex-col lg:flex-row justify-between gap-8">
-            {/* Left Content */}
-            <div className="lg:w-1/2 text-center lg:text-start">
-              <h5 className="mb-4 text-xl font-bold text-[#3a3a3a]">
-                Top App Development Companies
-              </h5>
-              <p className="mb-7 font-medium text-[#727272] md:pr-5 lg:pr-40">
-                We design and develop custom mobile applications{" "}
-                <br className="hidden md:block" />
-                for IOS, Android & Hybrid platforms.
-              </p>
+      {/* ══ BOTTOM BAR ═══════════════════════════════ */}
+      <div
+        className="relative z-10"
+        style={{ background: "rgba(0,0,0,.28)", borderTop: "1px solid rgba(255,255,255,.06)" }}
+      >
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-10 xl:px-24 py-5">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
 
-              {/* Social Links */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3">
-                <p className="font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text text-lg">
-                  Follow Us :
-                </p>
-                <Link
-                  href="https://www.facebook.com/Futureittouch"
-                  target="_blank"
-                >
-                  <FaFacebookF className="h-7 w-7 rounded bg-[#4243c9] text-white p-1" />
-                </Link>
-                <Link href="https://x.com/futureittouch" target="_blank">
-                  <FaTwitter className="w-7 h-7 rounded bg-[#4243c9] text-white p-1" />
-                </Link>
-                <Link
-                  href="https://in.linkedin.com/company/future-it-touch"
-                  target="_blank"
-                >
-                  <FaLinkedinIn className="w-7 h-7 rounded bg-[#4243c9] text-white p-1" />
-                </Link>
-                <Link
-                  href="https://www.instagram.com/future_it_touch/"
-                  target="_blank"
-                >
-                  <FaInstagram className="w-7 h-7 rounded bg-[#4243c9] text-white p-1" />
-                </Link>
-                <Link
-                  href="https://www.youtube.com/channel/UCirWettrTWfsFRzdGRIc6BQ/about"
-                  target="_blank"
-                >
-                  <FaYoutube className="w-7 h-7 rounded bg-[#4243c9] text-white p-1" />
-                </Link>
-                <Link
-                  href="https://github.com/Future-IT-Touch-Private-Limited"
-                  target="_blank"
-                >
-                  <FaGithub className="w-7 h-7 rounded bg-[#4243c9] text-white p-1" />
-                </Link>
-              </div>
-            </div>
-
-            {/* Right Badges */}
-            <div className="lg:w-1/2">
-              <ul className="grid grid-cols-2 sm:grid-cols-4 gap-4 justify-items-center">
-                <li>
-                  <Link href="#">
-                    <Image
-                      src="/Assets/badges-a.webp"
-                      width={120}
-                      height={40}
-                      alt="badges"
-                      className="w-28 sm:w-32"
-                    />
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#">
-                    <Image
-                      src="/Assets/badges-b.webp"
-                      width={120}
-                      height={40}
-                      alt="badges"
-                      className="w-28 sm:w-32"
-                    />
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#">
-                    <Image
-                      src="/Assets/badges-c.webp"
-                      width={120}
-                      height={40}
-                      alt="badges"
-                      className="w-28 sm:w-32"
-                    />
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#">
-                    <Image
-                      src="/Assets/badges-d.webp"
-                      width={120}
-                      height={40}
-                      alt="badges"
-                      className="w-28 sm:w-32"
-                    />
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Bottom Section */}
-          <div className="mt-8 flex flex-col lg:flex-row items-center lg:items-start justify-between gap-4 text-center lg:text-start">
             {/* Copyright */}
-            <div className="w-full lg:w-2/5">
-              <p className="font-medium text-[#727272]">
-                Copyright © 2017 Future IT Touch Pvt. Ltd.
-              </p>
+            <p
+              className="text-[12px]"
+              style={{ fontFamily: "'Inter',sans-serif", color: "rgba(255,255,255,.28)" }}>
+              Copyright © 2017 Future IT Touch Pvt. Ltd. All rights reserved.
+            </p>
+
+            {/* Made with love */}
+            <p
+              className="flex items-center gap-1.5 text-[12px]"
+              style={{ fontFamily: "'Inter',sans-serif", color: "rgba(255,255,255,.28)" }}>
+              Made with <Heart size={11} fill="#ef4444" color="#ef4444" /> in Chandigarh
+            </p>
+
+            {/* Policy links */}
+            <div className="flex items-center gap-5">
+              <Link href="/Privacy-Policy" className="ft-bottom-link">Privacy Policy</Link>
+              <Link href="/faq" className="ft-bottom-link">FAQ</Link>
+              <Link href="/Terms-Conditions" className="ft-bottom-link">Terms</Link>
             </div>
 
-            {/* Location */}
-            <div className="w-full lg:w-1/4">
-              <p className="flex justify-center lg:justify-start items-center font-medium text-[#727272]">
-                Made with <FaHeart className="mx-2 text-red-600" /> in
-                Chandigarh
-              </p>
-            </div>
-
-            {/* Links */}
-            <div className="w-full lg:w-1/4">
-              <ul className="flex flex-wrap gap-5 justify-center lg:justify-end font-medium text-[#727272]">
-                <li>
-                  <Link href="/Privacy-Policy">Privacy Policy</Link>
-                </li>
-                <li>
-                  <Link href="/faq">FAQ</Link>
-                </li>
-                <li>
-                  <Link href="/Terms-Conditions">Terms</Link>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
       </div>
-    </>
-  );
-};
 
-export default Footer;
+    </footer>
+  );
+}

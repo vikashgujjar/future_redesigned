@@ -21,7 +21,15 @@ ul.navbar-main li  .icon-change::after {
     color: transparent;
 }
 
+/* Hide scrollbar */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
 
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
 .hero-images {
   max-width: 335px;
   height: 490px;
