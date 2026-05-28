@@ -1,6 +1,162 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+
+const COUNTRY_CODES = [
+  { flag: "🇦🇫", name: "Afghanistan",            shortName: "AF", dialCode: "+93"   },
+  { flag: "🇦🇱", name: "Albania",                 shortName: "AL", dialCode: "+355"  },
+  { flag: "🇩🇿", name: "Algeria",                 shortName: "DZ", dialCode: "+213"  },
+  { flag: "🇦🇩", name: "Andorra",                 shortName: "AD", dialCode: "+376"  },
+  { flag: "🇦🇴", name: "Angola",                  shortName: "AO", dialCode: "+244"  },
+  { flag: "🇦🇷", name: "Argentina",               shortName: "AR", dialCode: "+54"   },
+  { flag: "🇦🇲", name: "Armenia",                 shortName: "AM", dialCode: "+374"  },
+  { flag: "🇦🇺", name: "Australia",               shortName: "AU", dialCode: "+61"   },
+  { flag: "🇦🇹", name: "Austria",                 shortName: "AT", dialCode: "+43"   },
+  { flag: "🇦🇿", name: "Azerbaijan",              shortName: "AZ", dialCode: "+994"  },
+  { flag: "🇧🇭", name: "Bahrain",                 shortName: "BH", dialCode: "+973"  },
+  { flag: "🇧🇩", name: "Bangladesh",              shortName: "BD", dialCode: "+880"  },
+  { flag: "🇧🇾", name: "Belarus",                 shortName: "BY", dialCode: "+375"  },
+  { flag: "🇧🇪", name: "Belgium",                 shortName: "BE", dialCode: "+32"   },
+  { flag: "🇧🇿", name: "Belize",                  shortName: "BZ", dialCode: "+501"  },
+  { flag: "🇧🇯", name: "Benin",                   shortName: "BJ", dialCode: "+229"  },
+  { flag: "🇧🇹", name: "Bhutan",                  shortName: "BT", dialCode: "+975"  },
+  { flag: "🇧🇴", name: "Bolivia",                 shortName: "BO", dialCode: "+591"  },
+  { flag: "🇧🇦", name: "Bosnia & Herzegovina",    shortName: "BA", dialCode: "+387"  },
+  { flag: "🇧🇼", name: "Botswana",                shortName: "BW", dialCode: "+267"  },
+  { flag: "🇧🇷", name: "Brazil",                  shortName: "BR", dialCode: "+55"   },
+  { flag: "🇧🇳", name: "Brunei",                  shortName: "BN", dialCode: "+673"  },
+  { flag: "🇧🇬", name: "Bulgaria",                shortName: "BG", dialCode: "+359"  },
+  { flag: "🇧🇫", name: "Burkina Faso",            shortName: "BF", dialCode: "+226"  },
+  { flag: "🇰🇭", name: "Cambodia",                shortName: "KH", dialCode: "+855"  },
+  { flag: "🇨🇲", name: "Cameroon",                shortName: "CM", dialCode: "+237"  },
+  { flag: "🇨🇦", name: "Canada",                  shortName: "CA", dialCode: "+1"    },
+  { flag: "🇨🇻", name: "Cape Verde",              shortName: "CV", dialCode: "+238"  },
+  { flag: "🇹🇩", name: "Chad",                    shortName: "TD", dialCode: "+235"  },
+  { flag: "🇨🇱", name: "Chile",                   shortName: "CL", dialCode: "+56"   },
+  { flag: "🇨🇳", name: "China",                   shortName: "CN", dialCode: "+86"   },
+  { flag: "🇨🇴", name: "Colombia",                shortName: "CO", dialCode: "+57"   },
+  { flag: "🇰🇲", name: "Comoros",                 shortName: "KM", dialCode: "+269"  },
+  { flag: "🇨🇬", name: "Congo",                   shortName: "CG", dialCode: "+242"  },
+  { flag: "🇨🇷", name: "Costa Rica",              shortName: "CR", dialCode: "+506"  },
+  { flag: "🇭🇷", name: "Croatia",                 shortName: "HR", dialCode: "+385"  },
+  { flag: "🇨🇺", name: "Cuba",                    shortName: "CU", dialCode: "+53"   },
+  { flag: "🇨🇾", name: "Cyprus",                  shortName: "CY", dialCode: "+357"  },
+  { flag: "🇨🇿", name: "Czech Republic",          shortName: "CZ", dialCode: "+420"  },
+  { flag: "🇩🇰", name: "Denmark",                 shortName: "DK", dialCode: "+45"   },
+  { flag: "🇩🇴", name: "Dominican Republic",      shortName: "DO", dialCode: "+1809" },
+  { flag: "🇪🇨", name: "Ecuador",                 shortName: "EC", dialCode: "+593"  },
+  { flag: "🇪🇬", name: "Egypt",                   shortName: "EG", dialCode: "+20"   },
+  { flag: "🇸🇻", name: "El Salvador",             shortName: "SV", dialCode: "+503"  },
+  { flag: "🇪🇪", name: "Estonia",                 shortName: "EE", dialCode: "+372"  },
+  { flag: "🇸🇿", name: "Eswatini",                shortName: "SZ", dialCode: "+268"  },
+  { flag: "🇪🇹", name: "Ethiopia",                shortName: "ET", dialCode: "+251"  },
+  { flag: "🇫🇮", name: "Finland",                 shortName: "FI", dialCode: "+358"  },
+  { flag: "🇫🇷", name: "France",                  shortName: "FR", dialCode: "+33"   },
+  { flag: "🇬🇦", name: "Gabon",                   shortName: "GA", dialCode: "+241"  },
+  { flag: "🇬🇲", name: "Gambia",                  shortName: "GM", dialCode: "+220"  },
+  { flag: "🇬🇪", name: "Georgia",                 shortName: "GE", dialCode: "+995"  },
+  { flag: "🇩🇪", name: "Germany",                 shortName: "DE", dialCode: "+49"   },
+  { flag: "🇬🇭", name: "Ghana",                   shortName: "GH", dialCode: "+233"  },
+  { flag: "🇬🇷", name: "Greece",                  shortName: "GR", dialCode: "+30"   },
+  { flag: "🇬🇹", name: "Guatemala",               shortName: "GT", dialCode: "+502"  },
+  { flag: "🇬🇳", name: "Guinea",                  shortName: "GN", dialCode: "+224"  },
+  { flag: "🇭🇳", name: "Honduras",                shortName: "HN", dialCode: "+504"  },
+  { flag: "🇭🇰", name: "Hong Kong",               shortName: "HK", dialCode: "+852"  },
+  { flag: "🇭🇺", name: "Hungary",                 shortName: "HU", dialCode: "+36"   },
+  { flag: "🇮🇸", name: "Iceland",                 shortName: "IS", dialCode: "+354"  },
+  { flag: "🇮🇳", name: "India",                   shortName: "IN", dialCode: "+91"   },
+  { flag: "🇮🇩", name: "Indonesia",               shortName: "ID", dialCode: "+62"   },
+  { flag: "🇮🇷", name: "Iran",                    shortName: "IR", dialCode: "+98"   },
+  { flag: "🇮🇶", name: "Iraq",                    shortName: "IQ", dialCode: "+964"  },
+  { flag: "🇮🇪", name: "Ireland",                 shortName: "IE", dialCode: "+353"  },
+  { flag: "🇮🇱", name: "Israel",                  shortName: "IL", dialCode: "+972"  },
+  { flag: "🇮🇹", name: "Italy",                   shortName: "IT", dialCode: "+39"   },
+  { flag: "🇯🇲", name: "Jamaica",                 shortName: "JM", dialCode: "+1876" },
+  { flag: "🇯🇵", name: "Japan",                   shortName: "JP", dialCode: "+81"   },
+  { flag: "🇯🇴", name: "Jordan",                  shortName: "JO", dialCode: "+962"  },
+  { flag: "🇰🇿", name: "Kazakhstan",              shortName: "KZ", dialCode: "+7"    },
+  { flag: "🇰🇪", name: "Kenya",                   shortName: "KE", dialCode: "+254"  },
+  { flag: "🇰🇼", name: "Kuwait",                  shortName: "KW", dialCode: "+965"  },
+  { flag: "🇰🇬", name: "Kyrgyzstan",              shortName: "KG", dialCode: "+996"  },
+  { flag: "🇱🇦", name: "Laos",                    shortName: "LA", dialCode: "+856"  },
+  { flag: "🇱🇻", name: "Latvia",                  shortName: "LV", dialCode: "+371"  },
+  { flag: "🇱🇧", name: "Lebanon",                 shortName: "LB", dialCode: "+961"  },
+  { flag: "🇱🇾", name: "Libya",                   shortName: "LY", dialCode: "+218"  },
+  { flag: "🇱🇹", name: "Lithuania",               shortName: "LT", dialCode: "+370"  },
+  { flag: "🇱🇺", name: "Luxembourg",              shortName: "LU", dialCode: "+352"  },
+  { flag: "🇲🇾", name: "Malaysia",                shortName: "MY", dialCode: "+60"   },
+  { flag: "🇲🇻", name: "Maldives",                shortName: "MV", dialCode: "+960"  },
+  { flag: "🇲🇱", name: "Mali",                    shortName: "ML", dialCode: "+223"  },
+  { flag: "🇲🇹", name: "Malta",                   shortName: "MT", dialCode: "+356"  },
+  { flag: "🇲🇷", name: "Mauritania",              shortName: "MR", dialCode: "+222"  },
+  { flag: "🇲🇺", name: "Mauritius",               shortName: "MU", dialCode: "+230"  },
+  { flag: "🇲🇽", name: "Mexico",                  shortName: "MX", dialCode: "+52"   },
+  { flag: "🇲🇩", name: "Moldova",                 shortName: "MD", dialCode: "+373"  },
+  { flag: "🇲🇳", name: "Mongolia",                shortName: "MN", dialCode: "+976"  },
+  { flag: "🇲🇦", name: "Morocco",                 shortName: "MA", dialCode: "+212"  },
+  { flag: "🇲🇿", name: "Mozambique",              shortName: "MZ", dialCode: "+258"  },
+  { flag: "🇲🇲", name: "Myanmar",                 shortName: "MM", dialCode: "+95"   },
+  { flag: "🇳🇦", name: "Namibia",                 shortName: "NA", dialCode: "+264"  },
+  { flag: "🇳🇵", name: "Nepal",                   shortName: "NP", dialCode: "+977"  },
+  { flag: "🇳🇱", name: "Netherlands",             shortName: "NL", dialCode: "+31"   },
+  { flag: "🇳🇿", name: "New Zealand",             shortName: "NZ", dialCode: "+64"   },
+  { flag: "🇳🇮", name: "Nicaragua",               shortName: "NI", dialCode: "+505"  },
+  { flag: "🇳🇬", name: "Nigeria",                 shortName: "NG", dialCode: "+234"  },
+  { flag: "🇰🇵", name: "North Korea",             shortName: "KP", dialCode: "+850"  },
+  { flag: "🇲🇰", name: "North Macedonia",         shortName: "MK", dialCode: "+389"  },
+  { flag: "🇳🇴", name: "Norway",                  shortName: "NO", dialCode: "+47"   },
+  { flag: "🇴🇲", name: "Oman",                    shortName: "OM", dialCode: "+968"  },
+  { flag: "🇵🇰", name: "Pakistan",                shortName: "PK", dialCode: "+92"   },
+  { flag: "🇵🇦", name: "Panama",                  shortName: "PA", dialCode: "+507"  },
+  { flag: "🇵🇬", name: "Papua New Guinea",        shortName: "PG", dialCode: "+675"  },
+  { flag: "🇵🇾", name: "Paraguay",                shortName: "PY", dialCode: "+595"  },
+  { flag: "🇵🇪", name: "Peru",                    shortName: "PE", dialCode: "+51"   },
+  { flag: "🇵🇭", name: "Philippines",             shortName: "PH", dialCode: "+63"   },
+  { flag: "🇵🇱", name: "Poland",                  shortName: "PL", dialCode: "+48"   },
+  { flag: "🇵🇹", name: "Portugal",                shortName: "PT", dialCode: "+351"  },
+  { flag: "🇵🇷", name: "Puerto Rico",             shortName: "PR", dialCode: "+1787" },
+  { flag: "🇶🇦", name: "Qatar",                   shortName: "QA", dialCode: "+974"  },
+  { flag: "🇷🇴", name: "Romania",                 shortName: "RO", dialCode: "+40"   },
+  { flag: "🇷🇺", name: "Russia",                  shortName: "RU", dialCode: "+7"    },
+  { flag: "🇷🇼", name: "Rwanda",                  shortName: "RW", dialCode: "+250"  },
+  { flag: "🇸🇦", name: "Saudi Arabia",            shortName: "SA", dialCode: "+966"  },
+  { flag: "🇸🇳", name: "Senegal",                 shortName: "SN", dialCode: "+221"  },
+  { flag: "🇷🇸", name: "Serbia",                  shortName: "RS", dialCode: "+381"  },
+  { flag: "🇸🇱", name: "Sierra Leone",            shortName: "SL", dialCode: "+232"  },
+  { flag: "🇸🇬", name: "Singapore",               shortName: "SG", dialCode: "+65"   },
+  { flag: "🇸🇰", name: "Slovakia",                shortName: "SK", dialCode: "+421"  },
+  { flag: "🇸🇮", name: "Slovenia",                shortName: "SI", dialCode: "+386"  },
+  { flag: "🇸🇴", name: "Somalia",                 shortName: "SO", dialCode: "+252"  },
+  { flag: "🇿🇦", name: "South Africa",            shortName: "ZA", dialCode: "+27"   },
+  { flag: "🇰🇷", name: "South Korea",             shortName: "KR", dialCode: "+82"   },
+  { flag: "🇸🇸", name: "South Sudan",             shortName: "SS", dialCode: "+211"  },
+  { flag: "🇪🇸", name: "Spain",                   shortName: "ES", dialCode: "+34"   },
+  { flag: "🇱🇰", name: "Sri Lanka",               shortName: "LK", dialCode: "+94"   },
+  { flag: "🇸🇩", name: "Sudan",                   shortName: "SD", dialCode: "+249"  },
+  { flag: "🇸🇪", name: "Sweden",                  shortName: "SE", dialCode: "+46"   },
+  { flag: "🇨🇭", name: "Switzerland",             shortName: "CH", dialCode: "+41"   },
+  { flag: "🇸🇾", name: "Syria",                   shortName: "SY", dialCode: "+963"  },
+  { flag: "🇹🇼", name: "Taiwan",                  shortName: "TW", dialCode: "+886"  },
+  { flag: "🇹🇯", name: "Tajikistan",              shortName: "TJ", dialCode: "+992"  },
+  { flag: "🇹🇿", name: "Tanzania",                shortName: "TZ", dialCode: "+255"  },
+  { flag: "🇹🇭", name: "Thailand",                shortName: "TH", dialCode: "+66"   },
+  { flag: "🇹🇬", name: "Togo",                    shortName: "TG", dialCode: "+228"  },
+  { flag: "🇹🇳", name: "Tunisia",                 shortName: "TN", dialCode: "+216"  },
+  { flag: "🇹🇷", name: "Turkey",                  shortName: "TR", dialCode: "+90"   },
+  { flag: "🇹🇲", name: "Turkmenistan",            shortName: "TM", dialCode: "+993"  },
+  { flag: "🇺🇬", name: "Uganda",                  shortName: "UG", dialCode: "+256"  },
+  { flag: "🇺🇦", name: "Ukraine",                 shortName: "UA", dialCode: "+380"  },
+  { flag: "🇦🇪", name: "United Arab Emirates",    shortName: "AE", dialCode: "+971"  },
+  { flag: "🇬🇧", name: "United Kingdom",          shortName: "GB", dialCode: "+44"   },
+  { flag: "🇺🇸", name: "United States",           shortName: "US", dialCode: "+1"    },
+  { flag: "🇺🇾", name: "Uruguay",                 shortName: "UY", dialCode: "+598"  },
+  { flag: "🇺🇿", name: "Uzbekistan",              shortName: "UZ", dialCode: "+998"  },
+  { flag: "🇻🇪", name: "Venezuela",               shortName: "VE", dialCode: "+58"   },
+  { flag: "🇻🇳", name: "Vietnam",                 shortName: "VN", dialCode: "+84"   },
+  { flag: "🇾🇪", name: "Yemen",                   shortName: "YE", dialCode: "+967"  },
+  { flag: "🇿🇲", name: "Zambia",                  shortName: "ZM", dialCode: "+260"  },
+  { flag: "🇿🇼", name: "Zimbabwe",                shortName: "ZW", dialCode: "+263"  },
+];
 import Swal from "sweetalert2";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -14,7 +170,7 @@ import { auth } from "../firebase.config";
 const Forms = () => {
   const router = useRouter();
   const [showOTP, setShowOTP] = useState(false);
-  const [countryCodes, setCountryCodes] = useState([]);
+  const countryCodes = COUNTRY_CODES;
   const [otp, setOTP] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -28,20 +184,6 @@ const Forms = () => {
     message: "",
   });
 
-  useEffect(() => {
-    fetch("https://restcountries.com/v3.1/all")
-      .then(r => r.json())
-      .then(data => {
-        const codes = data
-          .map(c => ({
-            shortName: c.cca2,
-            dialCode: c.idd.root + (c.idd.suffixes ? c.idd.suffixes[0] : ""),
-          }))
-          .filter(c => c.dialCode);
-        setCountryCodes(codes);
-      })
-      .catch(err => console.error("Error fetching country codes:", err));
-  }, []);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -395,12 +537,12 @@ const Forms = () => {
                     onChange={handleChange}
                     name="cr_code"
                     value={formData.cr_code}
-                    className="frm-input frm-select absolute left-0 top-0 h-full w-[76px] rounded-r-none border-r border-white/[.07] text-[11px] text-center px-1"
+                    className="frm-input frm-select absolute left-0 top-0 h-full w-[76px] max-w-[76px] rounded-r-none border-r bg-transparent! border-white/[.07] text-[11px] text-center px-1"
                     style={{ borderRadius: "9px 0 0 9px" }}
                   >
                     {countryCodes.map((c, i) => (
                       <option key={i} value={c.dialCode}>
-                        {c.shortName} ({c.dialCode})
+                        {c.flag} {c.name} ({c.dialCode})
                       </option>
                     ))}
                   </select>
@@ -408,7 +550,7 @@ const Forms = () => {
                     type="text" name="S_phone" placeholder="98765 43210"
                     value={formData.S_phone} onChange={handleChange}
                     className="frm-input"
-                    style={{ paddingLeft: 88, borderRadius: "0 9px 9px 0" }}
+                    style={{ paddingLeft: 80, borderRadius: "9px" }}
                   />
                 </div>
               </div>
@@ -431,16 +573,16 @@ const Forms = () => {
               <button
                 type="button"
                 onClick={onSignup}
-                className="frm-submit-btn w-full py-3.5 rounded-[9px] font-extrabold text-[11px] tracking-[.14em] uppercase text-black flex items-center justify-center gap-2"
+                className="frm-submit-btn w-full py-3.5 rounded-[9px] font-extrabold text-[11px] tracking-[.14em] uppercase text-white flex items-center justify-center gap-2"
                 style={{ fontFamily: "'Inter',sans-serif" }}
               >
                 {loading ? (
-                  <div className="w-5 h-5 border-t-2 border-b-2 border-black rounded-full animate-spin" />
+                  <div className="w-5 h-5 border-t-2 border-b-2 border-white rounded-full animate-spin" />
                 ) : (
                   <>
                     Submit Now
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                      <path d="M2 6h8M6.5 2.5l3.5 3.5-3.5 3.5" stroke="#000" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M2 6h8M6.5 2.5l3.5 3.5-3.5 3.5" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </>
                 )}
