@@ -189,7 +189,7 @@ export default function TopBar() {
                 <div
                   onMouseEnter={() => setIsOpen(true)}
                   onMouseLeave={() => setIsOpen(false)}
-                  className="tb-drop absolute right-0 top-full mt-2 w-72 rounded-2xl overflow-hidden z-[999]"
+                  className="tb-drop absolute -right-[50px] max-w-[220px] top-full mt-2 w-72 rounded-2xl overflow-hidden z-[999]"
                 >
                   {/* header */}
                   <div

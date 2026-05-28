@@ -111,7 +111,7 @@ export default function DigitalMarketingService() {
 
           {/* ── illustration — bottom-right, absolutely placed ── */}
           <div
-            className="absolute bottom-0 right-0 w-[60%] pointer-events-none"
+            className="absolute bottom-0 right-0 w-full md:w-[60%] pointer-events-none"
             aria-hidden="true"
           >
             <Image

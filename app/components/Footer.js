@@ -269,7 +269,7 @@ export default function Footer() {
           </div>
 
           {/* Award badges */}
-          <div className="flex flex-wrap items-center justify-center gap-4">
+          <div className="flex flex-nowrap items-center justify-center gap-4">
             {badges.map((src, i) => (
               <Link key={i} href="#">
                 <Image

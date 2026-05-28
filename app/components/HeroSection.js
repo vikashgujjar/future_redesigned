@@ -634,9 +634,11 @@ export default function HeroSection() {
           transition: background 1s;
         }
         .hs-outlined-text {
-          -webkit-text-stroke: 1.5px var(--hc);
-          color: transparent;
-          transition: -webkit-text-stroke-color 1s;
+          -webkit-text-stroke: 1px var(--hc);
+          color: color-mix(in srgb, var(--hc) 28%, transparent);
+          letter-spacing: 0.1em !important;
+          transition: -webkit-text-stroke-color 1s, color 1s;
+          font-family: 'Playfair Display', serif !important;
         }
         .hs-stat-val {
           background: linear-gradient(90deg, var(--hc), var(--hcb));
@@ -920,12 +922,12 @@ export default function HeroSection() {
 
           {/* Sub headline */}
           <div className={`hs-e4${ex} flex flex-col gap-0.5 mb-4`}>
-            <span className="text-[13px] text-white/30 font-normal tracking-[.01em]">{slide.sub}</span>
+            <span className="text-[13px] text-white/70 font-normal tracking-[.01em]">{slide.sub}</span>
             <span className="hs-subBold hs-outlined-text">{slide.subBold}</span>
           </div>
 
           {/* Description */}
-          <p className={`hs-e5${ex} text-[13.5px] text-white/45 leading-[1.82] max-w-[430px] mb-7 font-normal`}>
+          <p className={`hs-e5${ex} text-[13.5px] text-white/75 leading-[1.82] max-w-[430px] mb-7 font-normal`}>
             {slide.description}
           </p>
 
@@ -933,11 +935,11 @@ export default function HeroSection() {
           <div className={`hs-e6${ex} flex flex-wrap items-center gap-3 mb-8`}>
             <a
               href="#scroll-down"
-              className="hs-btn-grad hs-sbtn inline-flex items-center gap-2 font-bold text-[11px] tracking-[.12em] uppercase px-6 py-3 rounded-lg text-black no-underline"
+              className="hs-btn-grad hs-sbtn inline-flex items-center gap-2 font-bold text-[11px] tracking-[.12em] uppercase px-6 py-3 rounded-lg text-white no-underline"
             >
               Get Started
               <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
-                <path d="M1.5 5.5h8M5.5 1.5l4 4-4 4" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M1.5 5.5h8M5.5 1.5l4 4-4 4" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </a>
             <Link
@@ -1045,7 +1047,7 @@ export default function HeroSection() {
                     <label className="block text-[9.5px] text-white/30 tracking-[.12em] uppercase mb-1.5">Phone Number</label>
                     <div className="relative">
                       <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[12px] text-white/30 font-medium pr-2 border-r border-white/10">+91</span>
-                      <input className="hs-input pl-[46px]" type="tel" placeholder="98765 43210"
+                      <input className="hs-input pl-[46px]!" type="tel" placeholder="98765 43210"
                         value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})} />
                     </div>
                   </div>
@@ -1068,10 +1070,10 @@ export default function HeroSection() {
 
                   <div className="h-px bg-white/[.06] my-0.5" />
 
-                  <button type="submit" className="hs-submit-btn hs-sbtn w-full py-3.5 rounded-[9px] font-extrabold text-[11px] tracking-[.14em] uppercase border-none cursor-pointer flex items-center justify-center gap-2 text-black" style={{fontFamily:"inherit"}}>
+                  <button type="submit" className="hs-submit-btn hs-sbtn w-full py-3.5 rounded-[9px] font-extrabold text-[11px] tracking-[.14em] uppercase border-none cursor-pointer flex items-center justify-center gap-2 text-white" style={{fontFamily:"inherit"}}>
                     Submit Now
                     <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-                      <path d="M2 6.5h9M7 2.5l4 4-4 4" stroke="#000" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M2 6.5h9M7 2.5l4 4-4 4" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </button>
 

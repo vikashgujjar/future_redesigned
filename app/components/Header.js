@@ -567,78 +567,166 @@ export default function Header() {
       {/* ── Mobile Slide-out Sidebar ── */}
       {isMobileMenuOpen && (
         <div className="lg:hidden fixed inset-0 z-50 flex">
+          {/* overlay */}
           <div
-            className="flex-1 bg-black/50 backdrop-blur-sm"
+            className="flex-1 bg-black/65 backdrop-blur-sm"
             onClick={() => setIsMobileMenuOpen(false)}
           />
 
+          {/* panel */}
           <div
-            className="w-80 bg-gray-900 h-full overflow-y-auto flex flex-col shadow-2xl"
-            style={{ fontFamily: "'Inter', sans-serif" }}
+            className="mob-sb w-[310px] h-full overflow-y-auto flex flex-col"
+            style={{
+              background: "linear-gradient(145deg,#070d1a 0%,#0c1330 100%)",
+              boxShadow: "-8px 0 40px rgba(0,0,0,.60), -1px 0 0 rgba(255,255,255,.06)",
+              fontFamily: "'Inter',sans-serif",
+            }}
           >
-            {/* Sidebar header */}
-            <div className="flex items-center justify-between px-5 py-4 bg-white border-b border-gray-100">
+            <style>{`
+              @keyframes mobSbIn {
+                from { transform: translateX(100%); }
+                to   { transform: translateX(0); }
+              }
+              .mob-sb { animation: mobSbIn .28s cubic-bezier(.22,.87,.48,1) both; }
+
+              @keyframes mobShimmer {
+                from { background-position: 0% 0; }
+                to   { background-position: 300% 0; }
+              }
+              .mob-shimmer {
+                height: 3px;
+                background: linear-gradient(90deg,#2dd4bf,#6366f1,#0ea5e9,#8b5cf6,#2dd4bf);
+                background-size: 300% 100%;
+                animation: mobShimmer 4s linear infinite;
+              }
+
+              .mob-link {
+                display: flex; align-items: center; gap: 10px;
+                padding: 10px 14px; border-radius: 12px;
+                font-size: 14px; font-weight: 500;
+                color: rgba(255,255,255,.58);
+                transition: background .18s, color .18s;
+                cursor: pointer;
+              }
+              .mob-link:hover { background: rgba(255,255,255,.07); color: #fff; }
+
+              .mob-acc-head {
+                display: flex; align-items: center; justify-content: space-between;
+                padding: 10px 14px; border-radius: 12px;
+                font-size: 14px; font-weight: 500;
+                color: rgba(255,255,255,.58);
+                transition: background .18s, color .18s;
+                cursor: pointer;
+              }
+              .mob-acc-head:hover { background: rgba(255,255,255,.07); color: #fff; }
+              .mob-acc-head.open { background: rgba(45,212,191,.08); color: #2dd4bf; }
+
+              .mob-sub-link {
+                display: block; padding: 7px 10px; border-radius: 8px;
+                font-size: 12.5px; color: rgba(255,255,255,.40);
+                transition: color .16s, background .16s;
+              }
+              .mob-sub-link:hover { color: #2dd4bf; background: rgba(45,212,191,.06); }
+
+              .mob-sub2-head {
+                display: flex; align-items: center; justify-content: space-between;
+                padding: 7px 10px; border-radius: 8px; cursor: pointer;
+                font-size: 12px; font-weight: 600;
+                color: rgba(45,212,191,.80);
+                transition: background .16s;
+              }
+              .mob-sub2-head:hover { background: rgba(45,212,191,.06); }
+
+              .mob-sub3-link {
+                display: block; padding: 5px 10px; border-radius: 6px;
+                font-size: 12px; color: rgba(255,255,255,.35);
+                transition: color .16s, background .16s;
+              }
+              .mob-sub3-link:hover { color: #2dd4bf; background: rgba(45,212,191,.05); }
+            `}</style>
+
+            {/* ── shimmer top bar ── */}
+            <div className="mob-shimmer flex-shrink-0" />
+
+            {/* ── header: logo + close ── */}
+            <div
+              className="flex items-center justify-between px-4 py-4 flex-shrink-0"
+              style={{ borderBottom: "1px solid rgba(255,255,255,.07)" }}
+            >
               <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
-                <img src="/images/Header/secondary-logo.webp" alt="logo" className="h-9 w-auto" />
+                <img src="/images/Header/secondary-logo.webp" alt="logo"
+                  className="h-8 w-auto brightness-200" />
               </Link>
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors"
+                className="w-8 h-8 rounded-xl flex items-center justify-center transition-all"
+                style={{ background: "rgba(255,255,255,.07)", color: "rgba(255,255,255,.55)" }}
               >
-                <RxCross2 className="w-5 h-5" />
+                <RxCross2 className="w-4 h-4" />
               </button>
             </div>
 
-            {/* Nav items */}
-            <ul className="flex-1 px-3 py-4 space-y-1">
+            {/* ── nav items ── */}
+            <nav className="flex-1 px-3 py-3 space-y-0.5 overflow-y-auto">
 
-              <li>
-                <Link href="/" onClick={() => setIsMobileMenuOpen(false)}
-                  className="block px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white font-medium transition-all">
-                  Home
-                </Link>
-              </li>
+              {/* Home */}
+              <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="mob-link">
+                Home
+              </Link>
 
-              {/* About accordion */}
-              <li>
-                <div className="flex items-center justify-between px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 cursor-pointer transition-all"
+              {/* ── About accordion ── */}
+              <div>
+                <div className={`mob-acc-head ${mobileOpen === "about" ? "open" : ""}`}
                   onClick={() => toggleMobile("about")}>
-                  <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="font-medium hover:text-white">About</Link>
-                  <FaChevronDown className={`w-3 h-3 text-teal-400 transition-transform duration-200 ${mobileOpen === "about" ? "rotate-180" : ""}`} />
+                  <Link href="/about"
+                    onClick={e => { e.stopPropagation(); setIsMobileMenuOpen(false); }}
+                    className="flex-1">
+                    About
+                  </Link>
+                  <FaChevronDown className={`w-3 h-3 flex-shrink-0 transition-transform duration-200 ${mobileOpen === "about" ? "rotate-180 text-teal-400" : "text-white/30"}`} />
                 </div>
                 {mobileOpen === "about" && (
-                  <div className="mt-1 ml-4 space-y-0.5 border-l-2 border-teal-400/30 pl-4">
+                  <div className="mt-1 ml-3 pl-3 space-y-0.5"
+                    style={{ borderLeft: "2px solid rgba(45,212,191,.22)" }}>
                     {aboutDropdown.map((item) => (
-                      <Link key={item.label} href={item.href} onClick={() => setIsMobileMenuOpen(false)}
-                        className="block py-2 text-sm text-gray-400 hover:text-teal-400 transition-colors">
+                      <Link key={item.label} href={item.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="mob-sub-link">
                         {item.label}
                       </Link>
                     ))}
                   </div>
                 )}
-              </li>
+              </div>
 
-              {/* Services accordion */}
-              <li>
-                <div className="flex items-center justify-between px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 cursor-pointer transition-all"
+              {/* ── Services accordion ── */}
+              <div>
+                <div className={`mob-acc-head ${mobileOpen === "service" ? "open" : ""}`}
                   onClick={() => toggleMobile("service")}>
-                  <Link href="/service" onClick={() => setIsMobileMenuOpen(false)} className="font-medium hover:text-white">Services</Link>
-                  <FaChevronDown className={`w-3 h-3 text-teal-400 transition-transform duration-200 ${mobileOpen === "service" ? "rotate-180" : ""}`} />
+                  <Link href="/service"
+                    onClick={e => { e.stopPropagation(); setIsMobileMenuOpen(false); }}
+                    className="flex-1">
+                    Services
+                  </Link>
+                  <FaChevronDown className={`w-3 h-3 flex-shrink-0 transition-transform duration-200 ${mobileOpen === "service" ? "rotate-180 text-teal-400" : "text-white/30"}`} />
                 </div>
                 {mobileOpen === "service" && (
-                  <div className="mt-1 ml-4 space-y-1 border-l-2 border-teal-400/30 pl-4">
+                  <div className="mt-1 ml-3 pl-3 space-y-1"
+                    style={{ borderLeft: "2px solid rgba(45,212,191,.22)" }}>
                     {serviceColumns.map((col) => (
                       <div key={col.heading}>
-                        <div className="flex items-center justify-between py-2 cursor-pointer"
+                        <div className="mob-sub2-head"
                           onClick={() => setMobileServiceOpen(mobileServiceOpen === col.heading ? null : col.heading)}>
-                          <span className="text-sm font-semibold text-teal-300">{col.heading}</span>
-                          <FaChevronDown className={`w-3 h-3 text-teal-400 transition-transform ${mobileServiceOpen === col.heading ? "rotate-180" : ""}`} />
+                          <span>{col.heading}</span>
+                          <FaChevronDown className={`w-3 h-3 flex-shrink-0 transition-transform ${mobileServiceOpen === col.heading ? "rotate-180" : ""}`} />
                         </div>
                         {mobileServiceOpen === col.heading && (
-                          <div className="ml-3 space-y-0.5 border-l border-white/10 pl-3">
+                          <div className="ml-2 pl-3 space-y-0.5"
+                            style={{ borderLeft: "1px solid rgba(255,255,255,.08)" }}>
                             {col.items.map((item) => (
-                              <Link key={item.label} href={item.href} onClick={() => setIsMobileMenuOpen(false)}
-                                className="block py-1.5 text-sm text-gray-400 hover:text-teal-400 transition-colors">
+                              <Link key={item.label} href={item.href}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="mob-sub3-link">
                                 {item.label}
                               </Link>
                             ))}
@@ -648,29 +736,36 @@ export default function Header() {
                     ))}
                   </div>
                 )}
-              </li>
+              </div>
 
-              {/* Technology accordion */}
-              <li>
-                <div className="flex items-center justify-between px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 cursor-pointer transition-all"
+              {/* ── Technology accordion ── */}
+              <div>
+                <div className={`mob-acc-head ${mobileOpen === "tech" ? "open" : ""}`}
                   onClick={() => toggleMobile("tech")}>
-                  <Link href="/trending-technology" onClick={() => setIsMobileMenuOpen(false)} className="font-medium hover:text-white">Technology</Link>
-                  <FaChevronDown className={`w-3 h-3 text-teal-400 transition-transform duration-200 ${mobileOpen === "tech" ? "rotate-180" : ""}`} />
+                  <Link href="/trending-technology"
+                    onClick={e => { e.stopPropagation(); setIsMobileMenuOpen(false); }}
+                    className="flex-1">
+                    Technology
+                  </Link>
+                  <FaChevronDown className={`w-3 h-3 flex-shrink-0 transition-transform duration-200 ${mobileOpen === "tech" ? "rotate-180 text-teal-400" : "text-white/30"}`} />
                 </div>
                 {mobileOpen === "tech" && (
-                  <div className="mt-1 ml-4 space-y-1 border-l-2 border-teal-400/30 pl-4">
+                  <div className="mt-1 ml-3 pl-3 space-y-1"
+                    style={{ borderLeft: "2px solid rgba(45,212,191,.22)" }}>
                     {techColumns.map((col) => (
                       <div key={col.heading}>
-                        <div className="flex items-center justify-between py-2 cursor-pointer"
+                        <div className="mob-sub2-head"
                           onClick={() => setMobileTechOpen(mobileTechOpen === col.heading ? null : col.heading)}>
-                          <span className="text-sm font-semibold text-teal-300">{col.heading}</span>
-                          <FaChevronDown className={`w-3 h-3 text-teal-400 transition-transform ${mobileTechOpen === col.heading ? "rotate-180" : ""}`} />
+                          <span>{col.heading}</span>
+                          <FaChevronDown className={`w-3 h-3 flex-shrink-0 transition-transform ${mobileTechOpen === col.heading ? "rotate-180" : ""}`} />
                         </div>
                         {mobileTechOpen === col.heading && (
-                          <div className="ml-3 space-y-0.5 border-l border-white/10 pl-3">
+                          <div className="ml-2 pl-3 space-y-0.5"
+                            style={{ borderLeft: "1px solid rgba(255,255,255,.08)" }}>
                             {col.items.map((item) => (
-                              <Link key={item.label} href={item.href} onClick={() => setIsMobileMenuOpen(false)}
-                                className="block py-1.5 text-sm text-gray-400 hover:text-teal-400 transition-colors">
+                              <Link key={item.label} href={item.href}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="mob-sub3-link">
                                 {item.label}
                               </Link>
                             ))}
@@ -680,44 +775,71 @@ export default function Header() {
                     ))}
                   </div>
                 )}
-              </li>
+              </div>
 
-              <li>
-                <Link href="/blog" onClick={() => setIsMobileMenuOpen(false)}
-                  className="block px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white font-medium transition-all">
-                  Blog
-                </Link>
-              </li>
+              {/* Blog */}
+              <Link href="/blog" onClick={() => setIsMobileMenuOpen(false)} className="mob-link">
+                Blog
+              </Link>
 
-              <li>
-                <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}
-                  className="block px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white font-medium transition-all">
-                  Contact
-                </Link>
-              </li>
+              {/* Contact */}
+              <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="mob-link">
+                Contact
+              </Link>
 
-              <li className="pt-2">
+              {/* CTA */}
+              <div className="pt-3 pb-1">
                 <button
                   onClick={() => { setIsMobileMenuOpen(false); setIsPopupOpen(true); }}
-                  className="w-full bg-gradient-to-r from-teal-400 to-indigo-700 text-white font-semibold py-3 rounded-xl shadow-md hover:shadow-lg transition-all"
-                  style={{ fontFamily: "'Poppins', sans-serif" }}
+                  className="w-full py-3 rounded-xl text-sm font-semibold text-white transition-all hover:-translate-y-0.5"
+                  style={{
+                    background: "linear-gradient(135deg,#2dd4bf,#6366f1)",
+                    boxShadow: "0 6px 20px rgba(45,212,191,.25)",
+                    fontFamily: "'Poppins',sans-serif",
+                  }}
                 >
                   Request A Quote
                 </button>
-              </li>
-            </ul>
+              </div>
+            </nav>
 
-            {/* Bottom icons */}
-            <div className="flex justify-center gap-6 px-5 py-5 border-t border-white/10">
-              <Link href="tel:+91-7056937000" className="text-gray-400 hover:text-teal-400 transition-colors">
-                <FaPhoneAlt className="w-5 h-5" />
-              </Link>
-              <Link href="mailto:info@futuretouch.in" className="text-gray-400 hover:text-teal-400 transition-colors">
-                <FaEnvelope className="w-5 h-5" />
-              </Link>
-              <Link href="skype:futuretouch" className="text-gray-400 hover:text-teal-400 transition-colors">
-                <FaSkype className="w-5 h-5" />
-              </Link>
+            {/* ── bottom contact strip ── */}
+            <div
+              className="flex-shrink-0 px-4 py-5 space-y-3"
+              style={{ borderTop: "1px solid rgba(255,255,255,.07)" }}
+            >
+              <a href="tel:+91-7056937000"
+                className="flex items-center gap-3 text-[13px] transition-colors hover:text-teal-400"
+                style={{ color: "rgba(255,255,255,.50)" }}>
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{ background: "rgba(45,212,191,.12)", border: "1px solid rgba(45,212,191,.25)" }}>
+                  <FaPhoneAlt className="w-3 h-3 text-teal-400" />
+                </div>
+                +91-7056937000
+              </a>
+              <a href="mailto:info@futuretouch.in"
+                className="flex items-center gap-3 text-[13px] transition-colors hover:text-indigo-400"
+                style={{ color: "rgba(255,255,255,.50)" }}>
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{ background: "rgba(99,102,241,.12)", border: "1px solid rgba(99,102,241,.25)" }}>
+                  <FaEnvelope className="w-3 h-3 text-indigo-400" />
+                </div>
+                info@futuretouch.in
+              </a>
+              <a href="skype:live:.cid.313b26920df66baf"
+                className="flex items-center gap-3 text-[13px] transition-colors hover:text-sky-400"
+                style={{ color: "rgba(255,255,255,.50)" }}>
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{ background: "rgba(14,165,233,.12)", border: "1px solid rgba(14,165,233,.25)" }}>
+                  <FaSkype className="w-3 h-3 text-sky-400" />
+                </div>
+                futuretouch
+              </a>
+
+              <p className="text-center text-[10px] pt-1"
+                style={{ color: "rgba(255,255,255,.16)", fontFamily: "'Inter',sans-serif" }}>
+                © 2024 Future IT Touch Pvt. Ltd.
+              </p>
             </div>
           </div>
         </div>

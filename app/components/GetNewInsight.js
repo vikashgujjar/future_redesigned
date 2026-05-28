@@ -56,13 +56,13 @@ export default function GetNewInsight() {
               type="email"
               placeholder="Enter your email address"
               name="emails"
-              className="flex-1 bg-transparent outline-none text-white placeholder-white/50 text-sm px-5 sm:px-6 h-14"
+              className="bg-transparent outline-none text-white placeholder-white/50 text-sm px-5 sm:px-6 w-full flex-auto h-14"
               style={{ fontFamily:"'Inter',sans-serif" }}
             />
             <button
               type="submit"
               name="submit"
-              className="flex items-center gap-2 font-semibold text-sm px-5 sm:px-7 h-10 sm:h-11 m-1.5 rounded-full
+              className="flex items-center gap-2 font-semibold min-w-fit text-sm px-5 sm:px-7 h-10 sm:h-11 m-1.5 rounded-full flex-1
                 hover:-translate-y-px hover:shadow-lg transition-all duration-200"
               style={{
                 fontFamily:"'Poppins',sans-serif",
