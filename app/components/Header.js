@@ -544,7 +544,7 @@ export default function Header() {
             <img
               src="/images/Header/secondary-logo.webp"
               alt="Future IT Touch logo"
-              className="h-9 w-auto"
+              className="h-12 w-auto"
             />
           </Link>
 
@@ -678,11 +678,7 @@ export default function Header() {
               <div>
                 <div className={`mob-acc-head ${mobileOpen === "about" ? "open" : ""}`}
                   onClick={() => toggleMobile("about")}>
-                  <Link href="/about"
-                    onClick={e => { e.stopPropagation(); setIsMobileMenuOpen(false); }}
-                    className="flex-1">
-                    About
-                  </Link>
+                  <span className="flex-1">About</span>
                   <FaChevronDown className={`w-3 h-3 flex-shrink-0 transition-transform duration-200 ${mobileOpen === "about" ? "rotate-180 text-teal-400" : "text-white/30"}`} />
                 </div>
                 {mobileOpen === "about" && (
@@ -703,11 +699,7 @@ export default function Header() {
               <div>
                 <div className={`mob-acc-head ${mobileOpen === "service" ? "open" : ""}`}
                   onClick={() => toggleMobile("service")}>
-                  <Link href="/service"
-                    onClick={e => { e.stopPropagation(); setIsMobileMenuOpen(false); }}
-                    className="flex-1">
-                    Services
-                  </Link>
+                  <span className="flex-1">Services</span>
                   <FaChevronDown className={`w-3 h-3 flex-shrink-0 transition-transform duration-200 ${mobileOpen === "service" ? "rotate-180 text-teal-400" : "text-white/30"}`} />
                 </div>
                 {mobileOpen === "service" && (
@@ -742,11 +734,7 @@ export default function Header() {
               <div>
                 <div className={`mob-acc-head ${mobileOpen === "tech" ? "open" : ""}`}
                   onClick={() => toggleMobile("tech")}>
-                  <Link href="/trending-technology"
-                    onClick={e => { e.stopPropagation(); setIsMobileMenuOpen(false); }}
-                    className="flex-1">
-                    Technology
-                  </Link>
+                  <span className="flex-1">Technology</span>
                   <FaChevronDown className={`w-3 h-3 flex-shrink-0 transition-transform duration-200 ${mobileOpen === "tech" ? "rotate-180 text-teal-400" : "text-white/30"}`} />
                 </div>
                 {mobileOpen === "tech" && (

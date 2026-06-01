@@ -388,6 +388,7 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
+import { COUNTRY_CODES } from "./countryData";
 
 const slides = [
   {
@@ -442,6 +443,7 @@ export default function HeroSection() {
   const [form, setForm]         = useState({ first:"", last:"", email:"", phone:"", service:"" });
   const [submitted, setSubmitted] = useState(false);
   const [mouse, setMouse]       = useState({ x:0, y:0 });
+  const [phoneCC, setPhoneCC]   = useState(COUNTRY_CODES.find(c => c.shortName === "IN"));
   const timerRef   = useRef(null);
   const sectionRef = useRef(null);
 
@@ -468,6 +470,17 @@ export default function HeroSection() {
     };
     window.addEventListener("mousemove", fn, { passive: true });
     return () => window.removeEventListener("mousemove", fn);
+  }, []);
+
+  /* auto-detect country from IP */
+  useEffect(() => {
+    fetch("https://ipapi.co/json/")
+      .then(r => r.json())
+      .then(d => {
+        const match = COUNTRY_CODES.find(c => c.shortName === d.country_code);
+        if (match) setPhoneCC(match);
+      })
+      .catch(() => {});
   }, []);
 
   const imgScale = 1 + Math.min(scrollY * 0.00035, 0.14);
@@ -1046,9 +1059,13 @@ export default function HeroSection() {
                   <div>
                     <label className="block text-[9.5px] text-white/30 tracking-[.12em] uppercase mb-1.5">Phone Number</label>
                     <div className="relative">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[12px] text-white/30 font-medium pr-2 border-r border-white/10">+91</span>
-                      <input className="hs-input pl-[46px]!" type="tel" placeholder="98765 43210"
-                        value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})} />
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-1 pr-2 border-r border-white/10 pointer-events-none"
+                        style={{ color: "rgba(255,255,255,.45)", fontSize: 12, fontWeight: 500 }}>
+                        <span style={{ fontSize: 14 }}>{phoneCC.flag}</span>
+                        <span>{phoneCC.dialCode}</span>
+                      </span>
+                      <input className="hs-input" style={{ paddingLeft: 72 }} type="tel" placeholder="98765 43210"
+                        value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} />
                     </div>
                   </div>
 

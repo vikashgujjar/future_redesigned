@@ -1,162 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-
-const COUNTRY_CODES = [
-  { flag: "🇦🇫", name: "Afghanistan",            shortName: "AF", dialCode: "+93"   },
-  { flag: "🇦🇱", name: "Albania",                 shortName: "AL", dialCode: "+355"  },
-  { flag: "🇩🇿", name: "Algeria",                 shortName: "DZ", dialCode: "+213"  },
-  { flag: "🇦🇩", name: "Andorra",                 shortName: "AD", dialCode: "+376"  },
-  { flag: "🇦🇴", name: "Angola",                  shortName: "AO", dialCode: "+244"  },
-  { flag: "🇦🇷", name: "Argentina",               shortName: "AR", dialCode: "+54"   },
-  { flag: "🇦🇲", name: "Armenia",                 shortName: "AM", dialCode: "+374"  },
-  { flag: "🇦🇺", name: "Australia",               shortName: "AU", dialCode: "+61"   },
-  { flag: "🇦🇹", name: "Austria",                 shortName: "AT", dialCode: "+43"   },
-  { flag: "🇦🇿", name: "Azerbaijan",              shortName: "AZ", dialCode: "+994"  },
-  { flag: "🇧🇭", name: "Bahrain",                 shortName: "BH", dialCode: "+973"  },
-  { flag: "🇧🇩", name: "Bangladesh",              shortName: "BD", dialCode: "+880"  },
-  { flag: "🇧🇾", name: "Belarus",                 shortName: "BY", dialCode: "+375"  },
-  { flag: "🇧🇪", name: "Belgium",                 shortName: "BE", dialCode: "+32"   },
-  { flag: "🇧🇿", name: "Belize",                  shortName: "BZ", dialCode: "+501"  },
-  { flag: "🇧🇯", name: "Benin",                   shortName: "BJ", dialCode: "+229"  },
-  { flag: "🇧🇹", name: "Bhutan",                  shortName: "BT", dialCode: "+975"  },
-  { flag: "🇧🇴", name: "Bolivia",                 shortName: "BO", dialCode: "+591"  },
-  { flag: "🇧🇦", name: "Bosnia & Herzegovina",    shortName: "BA", dialCode: "+387"  },
-  { flag: "🇧🇼", name: "Botswana",                shortName: "BW", dialCode: "+267"  },
-  { flag: "🇧🇷", name: "Brazil",                  shortName: "BR", dialCode: "+55"   },
-  { flag: "🇧🇳", name: "Brunei",                  shortName: "BN", dialCode: "+673"  },
-  { flag: "🇧🇬", name: "Bulgaria",                shortName: "BG", dialCode: "+359"  },
-  { flag: "🇧🇫", name: "Burkina Faso",            shortName: "BF", dialCode: "+226"  },
-  { flag: "🇰🇭", name: "Cambodia",                shortName: "KH", dialCode: "+855"  },
-  { flag: "🇨🇲", name: "Cameroon",                shortName: "CM", dialCode: "+237"  },
-  { flag: "🇨🇦", name: "Canada",                  shortName: "CA", dialCode: "+1"    },
-  { flag: "🇨🇻", name: "Cape Verde",              shortName: "CV", dialCode: "+238"  },
-  { flag: "🇹🇩", name: "Chad",                    shortName: "TD", dialCode: "+235"  },
-  { flag: "🇨🇱", name: "Chile",                   shortName: "CL", dialCode: "+56"   },
-  { flag: "🇨🇳", name: "China",                   shortName: "CN", dialCode: "+86"   },
-  { flag: "🇨🇴", name: "Colombia",                shortName: "CO", dialCode: "+57"   },
-  { flag: "🇰🇲", name: "Comoros",                 shortName: "KM", dialCode: "+269"  },
-  { flag: "🇨🇬", name: "Congo",                   shortName: "CG", dialCode: "+242"  },
-  { flag: "🇨🇷", name: "Costa Rica",              shortName: "CR", dialCode: "+506"  },
-  { flag: "🇭🇷", name: "Croatia",                 shortName: "HR", dialCode: "+385"  },
-  { flag: "🇨🇺", name: "Cuba",                    shortName: "CU", dialCode: "+53"   },
-  { flag: "🇨🇾", name: "Cyprus",                  shortName: "CY", dialCode: "+357"  },
-  { flag: "🇨🇿", name: "Czech Republic",          shortName: "CZ", dialCode: "+420"  },
-  { flag: "🇩🇰", name: "Denmark",                 shortName: "DK", dialCode: "+45"   },
-  { flag: "🇩🇴", name: "Dominican Republic",      shortName: "DO", dialCode: "+1809" },
-  { flag: "🇪🇨", name: "Ecuador",                 shortName: "EC", dialCode: "+593"  },
-  { flag: "🇪🇬", name: "Egypt",                   shortName: "EG", dialCode: "+20"   },
-  { flag: "🇸🇻", name: "El Salvador",             shortName: "SV", dialCode: "+503"  },
-  { flag: "🇪🇪", name: "Estonia",                 shortName: "EE", dialCode: "+372"  },
-  { flag: "🇸🇿", name: "Eswatini",                shortName: "SZ", dialCode: "+268"  },
-  { flag: "🇪🇹", name: "Ethiopia",                shortName: "ET", dialCode: "+251"  },
-  { flag: "🇫🇮", name: "Finland",                 shortName: "FI", dialCode: "+358"  },
-  { flag: "🇫🇷", name: "France",                  shortName: "FR", dialCode: "+33"   },
-  { flag: "🇬🇦", name: "Gabon",                   shortName: "GA", dialCode: "+241"  },
-  { flag: "🇬🇲", name: "Gambia",                  shortName: "GM", dialCode: "+220"  },
-  { flag: "🇬🇪", name: "Georgia",                 shortName: "GE", dialCode: "+995"  },
-  { flag: "🇩🇪", name: "Germany",                 shortName: "DE", dialCode: "+49"   },
-  { flag: "🇬🇭", name: "Ghana",                   shortName: "GH", dialCode: "+233"  },
-  { flag: "🇬🇷", name: "Greece",                  shortName: "GR", dialCode: "+30"   },
-  { flag: "🇬🇹", name: "Guatemala",               shortName: "GT", dialCode: "+502"  },
-  { flag: "🇬🇳", name: "Guinea",                  shortName: "GN", dialCode: "+224"  },
-  { flag: "🇭🇳", name: "Honduras",                shortName: "HN", dialCode: "+504"  },
-  { flag: "🇭🇰", name: "Hong Kong",               shortName: "HK", dialCode: "+852"  },
-  { flag: "🇭🇺", name: "Hungary",                 shortName: "HU", dialCode: "+36"   },
-  { flag: "🇮🇸", name: "Iceland",                 shortName: "IS", dialCode: "+354"  },
-  { flag: "🇮🇳", name: "India",                   shortName: "IN", dialCode: "+91"   },
-  { flag: "🇮🇩", name: "Indonesia",               shortName: "ID", dialCode: "+62"   },
-  { flag: "🇮🇷", name: "Iran",                    shortName: "IR", dialCode: "+98"   },
-  { flag: "🇮🇶", name: "Iraq",                    shortName: "IQ", dialCode: "+964"  },
-  { flag: "🇮🇪", name: "Ireland",                 shortName: "IE", dialCode: "+353"  },
-  { flag: "🇮🇱", name: "Israel",                  shortName: "IL", dialCode: "+972"  },
-  { flag: "🇮🇹", name: "Italy",                   shortName: "IT", dialCode: "+39"   },
-  { flag: "🇯🇲", name: "Jamaica",                 shortName: "JM", dialCode: "+1876" },
-  { flag: "🇯🇵", name: "Japan",                   shortName: "JP", dialCode: "+81"   },
-  { flag: "🇯🇴", name: "Jordan",                  shortName: "JO", dialCode: "+962"  },
-  { flag: "🇰🇿", name: "Kazakhstan",              shortName: "KZ", dialCode: "+7"    },
-  { flag: "🇰🇪", name: "Kenya",                   shortName: "KE", dialCode: "+254"  },
-  { flag: "🇰🇼", name: "Kuwait",                  shortName: "KW", dialCode: "+965"  },
-  { flag: "🇰🇬", name: "Kyrgyzstan",              shortName: "KG", dialCode: "+996"  },
-  { flag: "🇱🇦", name: "Laos",                    shortName: "LA", dialCode: "+856"  },
-  { flag: "🇱🇻", name: "Latvia",                  shortName: "LV", dialCode: "+371"  },
-  { flag: "🇱🇧", name: "Lebanon",                 shortName: "LB", dialCode: "+961"  },
-  { flag: "🇱🇾", name: "Libya",                   shortName: "LY", dialCode: "+218"  },
-  { flag: "🇱🇹", name: "Lithuania",               shortName: "LT", dialCode: "+370"  },
-  { flag: "🇱🇺", name: "Luxembourg",              shortName: "LU", dialCode: "+352"  },
-  { flag: "🇲🇾", name: "Malaysia",                shortName: "MY", dialCode: "+60"   },
-  { flag: "🇲🇻", name: "Maldives",                shortName: "MV", dialCode: "+960"  },
-  { flag: "🇲🇱", name: "Mali",                    shortName: "ML", dialCode: "+223"  },
-  { flag: "🇲🇹", name: "Malta",                   shortName: "MT", dialCode: "+356"  },
-  { flag: "🇲🇷", name: "Mauritania",              shortName: "MR", dialCode: "+222"  },
-  { flag: "🇲🇺", name: "Mauritius",               shortName: "MU", dialCode: "+230"  },
-  { flag: "🇲🇽", name: "Mexico",                  shortName: "MX", dialCode: "+52"   },
-  { flag: "🇲🇩", name: "Moldova",                 shortName: "MD", dialCode: "+373"  },
-  { flag: "🇲🇳", name: "Mongolia",                shortName: "MN", dialCode: "+976"  },
-  { flag: "🇲🇦", name: "Morocco",                 shortName: "MA", dialCode: "+212"  },
-  { flag: "🇲🇿", name: "Mozambique",              shortName: "MZ", dialCode: "+258"  },
-  { flag: "🇲🇲", name: "Myanmar",                 shortName: "MM", dialCode: "+95"   },
-  { flag: "🇳🇦", name: "Namibia",                 shortName: "NA", dialCode: "+264"  },
-  { flag: "🇳🇵", name: "Nepal",                   shortName: "NP", dialCode: "+977"  },
-  { flag: "🇳🇱", name: "Netherlands",             shortName: "NL", dialCode: "+31"   },
-  { flag: "🇳🇿", name: "New Zealand",             shortName: "NZ", dialCode: "+64"   },
-  { flag: "🇳🇮", name: "Nicaragua",               shortName: "NI", dialCode: "+505"  },
-  { flag: "🇳🇬", name: "Nigeria",                 shortName: "NG", dialCode: "+234"  },
-  { flag: "🇰🇵", name: "North Korea",             shortName: "KP", dialCode: "+850"  },
-  { flag: "🇲🇰", name: "North Macedonia",         shortName: "MK", dialCode: "+389"  },
-  { flag: "🇳🇴", name: "Norway",                  shortName: "NO", dialCode: "+47"   },
-  { flag: "🇴🇲", name: "Oman",                    shortName: "OM", dialCode: "+968"  },
-  { flag: "🇵🇰", name: "Pakistan",                shortName: "PK", dialCode: "+92"   },
-  { flag: "🇵🇦", name: "Panama",                  shortName: "PA", dialCode: "+507"  },
-  { flag: "🇵🇬", name: "Papua New Guinea",        shortName: "PG", dialCode: "+675"  },
-  { flag: "🇵🇾", name: "Paraguay",                shortName: "PY", dialCode: "+595"  },
-  { flag: "🇵🇪", name: "Peru",                    shortName: "PE", dialCode: "+51"   },
-  { flag: "🇵🇭", name: "Philippines",             shortName: "PH", dialCode: "+63"   },
-  { flag: "🇵🇱", name: "Poland",                  shortName: "PL", dialCode: "+48"   },
-  { flag: "🇵🇹", name: "Portugal",                shortName: "PT", dialCode: "+351"  },
-  { flag: "🇵🇷", name: "Puerto Rico",             shortName: "PR", dialCode: "+1787" },
-  { flag: "🇶🇦", name: "Qatar",                   shortName: "QA", dialCode: "+974"  },
-  { flag: "🇷🇴", name: "Romania",                 shortName: "RO", dialCode: "+40"   },
-  { flag: "🇷🇺", name: "Russia",                  shortName: "RU", dialCode: "+7"    },
-  { flag: "🇷🇼", name: "Rwanda",                  shortName: "RW", dialCode: "+250"  },
-  { flag: "🇸🇦", name: "Saudi Arabia",            shortName: "SA", dialCode: "+966"  },
-  { flag: "🇸🇳", name: "Senegal",                 shortName: "SN", dialCode: "+221"  },
-  { flag: "🇷🇸", name: "Serbia",                  shortName: "RS", dialCode: "+381"  },
-  { flag: "🇸🇱", name: "Sierra Leone",            shortName: "SL", dialCode: "+232"  },
-  { flag: "🇸🇬", name: "Singapore",               shortName: "SG", dialCode: "+65"   },
-  { flag: "🇸🇰", name: "Slovakia",                shortName: "SK", dialCode: "+421"  },
-  { flag: "🇸🇮", name: "Slovenia",                shortName: "SI", dialCode: "+386"  },
-  { flag: "🇸🇴", name: "Somalia",                 shortName: "SO", dialCode: "+252"  },
-  { flag: "🇿🇦", name: "South Africa",            shortName: "ZA", dialCode: "+27"   },
-  { flag: "🇰🇷", name: "South Korea",             shortName: "KR", dialCode: "+82"   },
-  { flag: "🇸🇸", name: "South Sudan",             shortName: "SS", dialCode: "+211"  },
-  { flag: "🇪🇸", name: "Spain",                   shortName: "ES", dialCode: "+34"   },
-  { flag: "🇱🇰", name: "Sri Lanka",               shortName: "LK", dialCode: "+94"   },
-  { flag: "🇸🇩", name: "Sudan",                   shortName: "SD", dialCode: "+249"  },
-  { flag: "🇸🇪", name: "Sweden",                  shortName: "SE", dialCode: "+46"   },
-  { flag: "🇨🇭", name: "Switzerland",             shortName: "CH", dialCode: "+41"   },
-  { flag: "🇸🇾", name: "Syria",                   shortName: "SY", dialCode: "+963"  },
-  { flag: "🇹🇼", name: "Taiwan",                  shortName: "TW", dialCode: "+886"  },
-  { flag: "🇹🇯", name: "Tajikistan",              shortName: "TJ", dialCode: "+992"  },
-  { flag: "🇹🇿", name: "Tanzania",                shortName: "TZ", dialCode: "+255"  },
-  { flag: "🇹🇭", name: "Thailand",                shortName: "TH", dialCode: "+66"   },
-  { flag: "🇹🇬", name: "Togo",                    shortName: "TG", dialCode: "+228"  },
-  { flag: "🇹🇳", name: "Tunisia",                 shortName: "TN", dialCode: "+216"  },
-  { flag: "🇹🇷", name: "Turkey",                  shortName: "TR", dialCode: "+90"   },
-  { flag: "🇹🇲", name: "Turkmenistan",            shortName: "TM", dialCode: "+993"  },
-  { flag: "🇺🇬", name: "Uganda",                  shortName: "UG", dialCode: "+256"  },
-  { flag: "🇺🇦", name: "Ukraine",                 shortName: "UA", dialCode: "+380"  },
-  { flag: "🇦🇪", name: "United Arab Emirates",    shortName: "AE", dialCode: "+971"  },
-  { flag: "🇬🇧", name: "United Kingdom",          shortName: "GB", dialCode: "+44"   },
-  { flag: "🇺🇸", name: "United States",           shortName: "US", dialCode: "+1"    },
-  { flag: "🇺🇾", name: "Uruguay",                 shortName: "UY", dialCode: "+598"  },
-  { flag: "🇺🇿", name: "Uzbekistan",              shortName: "UZ", dialCode: "+998"  },
-  { flag: "🇻🇪", name: "Venezuela",               shortName: "VE", dialCode: "+58"   },
-  { flag: "🇻🇳", name: "Vietnam",                 shortName: "VN", dialCode: "+84"   },
-  { flag: "🇾🇪", name: "Yemen",                   shortName: "YE", dialCode: "+967"  },
-  { flag: "🇿🇲", name: "Zambia",                  shortName: "ZM", dialCode: "+260"  },
-  { flag: "🇿🇼", name: "Zimbabwe",                shortName: "ZW", dialCode: "+263"  },
-];
+import React, { useState, useEffect } from "react";
+import { COUNTRY_CODES } from "./countryData";
 import Swal from "sweetalert2";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -167,67 +12,76 @@ import Link from "next/link";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from "../firebase.config";
 
+const SERVICES = [
+  "Website Development",
+  "Digital Marketing",
+  "Mobile App Development",
+  "UI/UX Design",
+  "E-Commerce Solutions",
+  "SEO & Content Strategy",
+];
+
 const Forms = () => {
   const router = useRouter();
   const [showOTP, setShowOTP] = useState(false);
-  const countryCodes = COUNTRY_CODES;
   const [otp, setOTP] = useState("");
   const [loading, setLoading] = useState(false);
+  const [fileDrag, setFileDrag] = useState(false);
 
   const [formData, setFormData] = useState({
-    S_name: "",
-    S_email: "",
-    S_phone: "",
-    S_subject: "",
+    first: "",
+    last: "",
+    email: "",
+    phone: "",
+    service: "",
     cr_code: "+91",
-    userEmailsir: "Info@digitalyaatra.com",
-    message: "",
+    file: null,
   });
 
+  useEffect(() => {
+    fetch("https://ipapi.co/json/")
+      .then(r => r.json())
+      .then(d => {
+        const match = COUNTRY_CODES.find(c => c.shortName === d.country_code);
+        if (match) setFormData(prev => ({ ...prev, cr_code: match.dialCode }));
+      })
+      .catch(() => {});
+  }, []);
 
-  const handleChange = e => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const buildPayload = () => {
+    const p = new URLSearchParams();
+    p.append("S_name", `${formData.first} ${formData.last}`.trim());
+    p.append("S_email", formData.email);
+    p.append("S_phone", formData.phone);
+    p.append("S_subject", formData.service);
+    p.append("cr_code", formData.cr_code);
+    p.append("userEmailsir", "Info@digitalyaatra.com");
+    return p;
   };
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-    setLoading(true);
-    const urlEncoded = new URLSearchParams();
-    for (const [k, v] of Object.entries(formData)) urlEncoded.append(k, v);
-    try {
-      await axios.post("https://futuretouchmail.onrender.com/send-email", urlEncoded);
-      setLoading(false);
-      setFormData({ S_name: "", S_email: "", S_phone: "", S_subject: "", message: "" });
-      Swal.fire({ icon: "success", title: "Success!", text: "Your query has been submitted." })
-        .then(r => { if (r.isConfirmed) window.location.href = "/"; });
-    } catch {
-      setLoading(false);
-      Swal.fire({ icon: "error", title: "Oops...", text: "Something went wrong!" });
-    }
-  };
+  const resetForm = () =>
+    setFormData(prev => ({ first:"", last:"", email:"", phone:"", service:"", cr_code: prev.cr_code, file: null }));
 
   function onCaptchVerify() {
     if (typeof window !== "undefined" && !window.recaptchaVerifier) {
       window.recaptchaVerifier = new RecaptchaVerifier(
         "recaptcha-container",
-        { size: "invisible", callback: () => onSignup(), "expired-callback": () => { } },
+        { size: "invisible", callback: () => onSignup(), "expired-callback": () => {} },
         auth
       );
     }
   }
 
   function onSignup() {
-    const { S_name, S_email, S_phone, message } = formData;
-    if (!S_name || !S_email || !S_phone || !message) {
+    const { first, last, email, phone } = formData;
+    if (!first || !last || !email || !phone) {
       Swal.fire({ icon: "warning", title: "Missing Information", text: "Please fill out all the mandatory fields." });
       return;
     }
     setShowOTP(true);
     onCaptchVerify();
     const appVerifier = window.recaptchaVerifier;
-    const formatPh = formData.cr_code + formData.S_phone;
-    signInWithPhoneNumber(auth, formatPh, appVerifier)
+    signInWithPhoneNumber(auth, formData.cr_code + formData.phone, appVerifier)
       .then(result => { window.confirmationResult = result; setLoading(false); setShowOTP(true); })
       .catch(err => { console.log(err); setLoading(false); });
   }
@@ -236,15 +90,12 @@ const Forms = () => {
     setLoading(true);
     window.confirmationResult.confirm(otp)
       .then(async () => {
-        const urlEncoded = new URLSearchParams();
-        for (const [k, v] of Object.entries(formData)) urlEncoded.append(k, v);
         try {
-          const res = await axios.post("https://futuretouchmail.onrender.com/send-email", urlEncoded);
+          await axios.post("https://futuretouchmail.onrender.com/send-email", buildPayload());
           setLoading(false);
-          console.log(res);
-          setFormData({ S_name: "", S_email: "", S_phone: "", S_subject: "", message: "" });
+          resetForm();
           Swal.fire({ icon: "success", title: "Success!", text: "Your query has been submitted." })
-            .then(r => { if (r.isConfirmed) { setLoading(false); setOTP(""); router.push("/"); } });
+            .then(r => { if (r.isConfirmed) { setOTP(""); router.push("/"); } });
         } catch {
           setLoading(false);
           Swal.fire({ icon: "error", title: "Oops...", text: "Something went wrong!" });
@@ -346,6 +197,23 @@ const Forms = () => {
         .frm-submit-btn:hover {
           transform: translateY(-2px) scale(1.01);
           box-shadow: 0 10px 32px rgba(45,212,191,.45);
+        }
+
+        /* ── File upload zone ── */
+        .frm-file-zone {
+          display: flex; flex-direction: column; align-items: center; justify-content: center;
+          gap: 7px; padding: 20px 16px; border-radius: 9px; cursor: pointer;
+          border: 1.5px dashed rgba(255,255,255,.12);
+          background: rgba(255,255,255,.03);
+          transition: border-color .2s, background .2s;
+        }
+        .frm-file-zone:hover {
+          border-color: rgba(45,212,191,.45);
+          background: rgba(45,212,191,.04);
+        }
+        .frm-file-zone.drag-over {
+          border-color: rgba(45,212,191,.70);
+          background: rgba(45,212,191,.07);
         }
 
         /* ── Spinning ring for call-agent image ── */
@@ -495,79 +363,124 @@ const Forms = () => {
               Get in Touch
             </h3>
 
-            <div className="flex flex-col gap-4">
-              {/* Name + Email */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="frm-label">Name</label>
-                  <input
-                    type="text" name="S_name" placeholder="Your Name"
-                    className="frm-input" value={formData.S_name} onChange={handleChange} />
-                </div>
-                <div>
-                  <label className="frm-label">Email Address</label>
-                  <input
-                    type="email" name="S_email" placeholder="you@example.com"
-                    className="frm-input" value={formData.S_email} onChange={handleChange} />
-                </div>
+            <div className="flex flex-col gap-2.5">
+              {/* First + Last Name */}
+              <div className="grid grid-cols-2 gap-2.5">
+                {[{ k:"first", ph:"First Name" }, { k:"last", ph:"Last Name" }].map(f => (
+                  <div key={f.k}>
+                    <label className="frm-label">{f.ph}</label>
+                    <input className="frm-input" placeholder={f.ph}
+                      value={formData[f.k]}
+                      onChange={e => setFormData({ ...formData, [f.k]: e.target.value })} />
+                  </div>
+                ))}
               </div>
 
-              {/* File + Skype */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="frm-label">Attachment</label>
-                  <input
-                    type="file" name="photo" accept="image/*"
-                    className="frm-input file:mr-3 file:rounded-md file:border-0 file:bg-white/10 file:text-white/60 file:text-[11px] file:font-semibold file:py-1 file:px-2.5 file:cursor-pointer cursor-pointer pt-[9px]"
-                  />
-                </div>
-                <div>
-                  <label className="frm-label">Skype ID</label>
-                  <input
-                    type="text" name="skype_id" placeholder="live:yourskype"
-                    className="frm-input" value={formData.skype_id || ""} onChange={handleChange} />
-                </div>
+              {/* Email */}
+              <div>
+                <label className="frm-label">Email Address</label>
+                <input className="frm-input" type="email" placeholder="john@example.com"
+                  value={formData.email}
+                  onChange={e => setFormData({ ...formData, email: e.target.value })} />
               </div>
 
-              {/* Phone with country code */}
+              {/* Phone */}
               <div>
                 <label className="frm-label">Phone Number</label>
                 <div className="relative">
-                  <select
-                    onChange={handleChange}
-                    name="cr_code"
-                    value={formData.cr_code}
-                    className="frm-input frm-select absolute left-0 top-0 h-full w-[76px] max-w-[76px] rounded-r-none border-r bg-transparent! border-white/[.07] text-[11px] text-center px-1"
-                    style={{ borderRadius: "9px 0 0 9px" }}
+                  <span
+                    className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-1 pr-2 border-r border-white/10 pointer-events-none"
+                    style={{ color: "rgba(255,255,255,.45)", fontSize: 12, fontWeight: 500 }}
                   >
-                    {countryCodes.map((c, i) => (
-                      <option key={i} value={c.dialCode}>
-                        {c.flag} {c.name} ({c.dialCode})
-                      </option>
-                    ))}
-                  </select>
-                  <input
-                    type="text" name="S_phone" placeholder="98765 43210"
-                    value={formData.S_phone} onChange={handleChange}
-                    className="frm-input"
-                    style={{ paddingLeft: 80, borderRadius: "9px" }}
-                  />
+                    <span style={{ fontSize: 14 }}>
+                      {COUNTRY_CODES.find(c => c.dialCode === formData.cr_code)?.flag ?? "🌐"}
+                    </span>
+                    <span>{formData.cr_code}</span>
+                  </span>
+                  <input className="frm-input" type="tel" placeholder="98765 43210"
+                    style={{ paddingLeft: 72 }}
+                    value={formData.phone}
+                    onChange={e => setFormData({ ...formData, phone: e.target.value })} />
                 </div>
               </div>
 
-              {/* Message */}
+              {/* Service */}
               <div>
-                <label className="frm-label">Your Message</label>
-                <textarea
-                  name="message" rows={5} placeholder="Tell us about your project..."
-                  className="frm-input"
-                  style={{ resize: "none", borderRadius: 9 }}
-                  value={formData.message} onChange={handleChange}
+                <label className="frm-label">Select Service</label>
+                <div className="relative">
+                  <select className="frm-input frm-select"
+                    value={formData.service}
+                    onChange={e => setFormData({ ...formData, service: e.target.value })}>
+                    <option value="" disabled>Choose your service</option>
+                    {SERVICES.map(s => <option key={s} value={s}>{s}</option>)}
+                  </select>
+                  <svg className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
+                    width="10" height="10" viewBox="0 0 10 10" fill="none">
+                    <path d="M2 3.5l3 3 3-3" stroke="rgba(255,255,255,.3)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+
+              {/* File Upload */}
+              <div>
+                <label className="frm-label">Attach File</label>
+                <label
+                  htmlFor="frm-file-input"
+                  className={`frm-file-zone${fileDrag ? " drag-over" : ""}`}
+                  onDragOver={e => { e.preventDefault(); setFileDrag(true); }}
+                  onDragLeave={() => setFileDrag(false)}
+                  onDrop={e => {
+                    e.preventDefault();
+                    setFileDrag(false);
+                    const f = e.dataTransfer.files[0];
+                    if (f) setFormData(prev => ({ ...prev, file: f }));
+                  }}
+                >
+                  {formData.file ? (
+                    <>
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        stroke="#2dd4bf" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <polyline points="9 15 12 18 15 15"/>
+                        <line x1="12" y1="12" x2="12" y2="18"/>
+                      </svg>
+                      <span style={{ fontSize: 12, color: "#2dd4bf", fontWeight: 600 }}>
+                        {formData.file.name}
+                      </span>
+                      <span style={{ fontSize: 10, color: "rgba(255,255,255,.25)" }}>
+                        {(formData.file.size / 1024).toFixed(0)} KB · Click to change
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="rgba(255,255,255,.35)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="16 16 12 12 8 16"/>
+                        <line x1="12" y1="12" x2="12" y2="21"/>
+                        <path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/>
+                      </svg>
+                      <span style={{ fontSize: 12, color: "rgba(255,255,255,.45)", fontWeight: 500 }}>
+                        Drag & drop or{" "}
+                        <span style={{ color: "#2dd4bf" }}>click to upload</span>
+                      </span>
+                      <span style={{ fontSize: 10, color: "rgba(255,255,255,.20)" }}>
+                        PNG, JPG, PDF, DOC · up to 10 MB
+                      </span>
+                    </>
+                  )}
+                </label>
+                <input
+                  id="frm-file-input"
+                  type="file"
+                  accept="image/*,.pdf,.doc,.docx"
+                  style={{ display: "none" }}
+                  onChange={e => setFormData(prev => ({ ...prev, file: e.target.files[0] || null }))}
                 />
               </div>
 
               {/* divider */}
-              <div className="h-px bg-white/[.06]" />
+              <div className="h-px bg-white/[.06] my-0.5" />
 
               {/* Submit */}
               <button
@@ -664,7 +577,7 @@ const Forms = () => {
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d27444.62041181375!2d76.683024!3d30.702160000000003!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a838963fb5049%3A0x4188b8c6dd4c764a!2sFuture%20IT%20Touch%20Private%20Limited%20%7C%20Website%20Design%20and%20Development%20Company!5e0!3m2!1sen!2sin!4v1716290401199!5m2!1sen!2sin"
                 width="100%"
-                height="190"
+                height="230"
                 style={{ border: 0, display: "block", filter: "grayscale(20%) contrast(1.05)" }}
                 allowFullScreen
                 loading="lazy"

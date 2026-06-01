@@ -1,8 +1,7 @@
 "use client";
 import { useEffect, useState, useRef, useCallback } from "react";
-import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { motion, useMotionValue, animate } from "framer-motion";
 
-/* ── Skills data ── */
 const skills = [
   { label: "Mobile App Development",  fi: "#2dd4bf", ti: "#06b6d4" },
   { label: "Web Development",         fi: "#6366f1", ti: "#8b5cf6" },
@@ -20,34 +19,32 @@ const skills = [
   { label: "E-commerce Development",  fi: "#6366f1", ti: "#2dd4bf" },
 ];
 
-const PILL_W = 210;
-const PILL_H = 46;
-const PADDING = 8;
+const PILL_W  = 220;
+const PILL_H  = 50;
+const PADDING = 10;
 
-/* ── Scatter pills into arena with no initial overlap ── */
 function scatter(arenaW, arenaH) {
-  const cols = Math.floor(arenaW / (PILL_W + PADDING));
-  return skills.map((_, i) => {
-    const col = i % cols;
-    const row = Math.floor(i / cols);
-    const jx  = (Math.random() - 0.5) * 18;
-    const jy  = (Math.random() - 0.5) * 14;
+  const bottomZone = arenaH * 0.55; // use bottom 55% of the arena
+  return skills.map(() => {
+    const x = PADDING + Math.random() * Math.max(0, arenaW - PILL_W - PADDING * 2);
+    const y = (arenaH - bottomZone) + Math.random() * (bottomZone - PILL_H - PADDING);
+    const rotate = (Math.random() - 0.5) * 34; // -17° to +17°
     return {
-      x: Math.min(col * (PILL_W + PADDING) + PADDING + jx, arenaW - PILL_W - PADDING),
-      y: Math.min(row * (PILL_H + PADDING * 2) + PADDING + 44 + jy, arenaH - PILL_H - PADDING),
+      x: Math.max(0, Math.min(x, arenaW - PILL_W)),
+      y: Math.max(48, Math.min(y, arenaH - PILL_H)),
+      rotate,
     };
   });
 }
 
-/* ── Resolve overlaps after drag ── */
 function resolveCollisions(positions, dragIdx) {
   const next = positions.map(p => ({ ...p }));
   skills.forEach((_, i) => {
     if (i === dragIdx) return;
     const dx = next[dragIdx].x - next[i].x;
     const dy = next[dragIdx].y - next[i].y;
-    const overlapX = PILL_W  - Math.abs(dx);
-    const overlapY = PILL_H  - Math.abs(dy);
+    const overlapX = PILL_W - Math.abs(dx);
+    const overlapY = PILL_H - Math.abs(dy);
     if (overlapX > 0 && overlapY > 0) {
       const push = Math.min(overlapX, overlapY) * 0.55 + 4;
       if (Math.abs(dx) < Math.abs(dy)) {
@@ -60,75 +57,63 @@ function resolveCollisions(positions, dragIdx) {
   return next;
 }
 
-/* ── Single draggable pill ── */
 function Pill({ skill, pos, arenaW, arenaH, onDragEnd, zIdx, onDragStart }) {
-  const x = useMotionValue(pos.x);
-  const y = useMotionValue(pos.y);
+  const x      = useMotionValue(pos.x);
+  const y      = useMotionValue(pos.y);
+  const rotate = useMotionValue(pos.rotate ?? 0);
 
-  /* sync when pos changes from collision resolution */
   useEffect(() => {
-    animate(x, pos.x, { duration: 0.22, ease: "easeOut" });
-    animate(y, pos.y, { duration: 0.22, ease: "easeOut" });
-  }, [pos.x, pos.y]);
+    animate(x,      pos.x,           { duration: 0.22, ease: "easeOut" });
+    animate(y,      pos.y,           { duration: 0.22, ease: "easeOut" });
+    animate(rotate, pos.rotate ?? 0, { duration: 0.28, ease: "easeOut" });
+  }, [pos.x, pos.y, pos.rotate]);
 
   return (
     <motion.div
       className="absolute cursor-grab active:cursor-grabbing select-none"
-      style={{ width: PILL_W, height: PILL_H, x, y, zIndex: zIdx, top: 0, left: 0 }}
+      style={{ width: PILL_W, height: PILL_H, x, y, rotate, zIndex: zIdx, top: 0, left: 0 }}
       drag
       dragMomentum={false}
       dragElastic={0}
-      /* Constrain drag within arena */
-      dragConstraints={{
-        left:   0,
-        top:    44,           /* below status bar */
-        right:  arenaW - PILL_W,
-        bottom: arenaH - PILL_H,
-      }}
-      whileTap={{ scale: 1.08 }}
-      whileHover={{ scale: 1.04 }}
+      dragConstraints={{ left: 0, top: 48, right: arenaW - PILL_W, bottom: arenaH - PILL_H }}
+      whileTap={{ scale: 1.10 }}
+      whileHover={{ scale: 1.05 }}
       onDragStart={onDragStart}
-      onDragEnd={() => {
-        /* read final positions directly from motion values */
-        onDragEnd(x.get(), y.get());
-      }}
+      onDragEnd={() => onDragEnd(x.get(), y.get())}
     >
-      {/* gradient border */}
+      {/* gradient border shell */}
       <div style={{
         background: `linear-gradient(135deg,${skill.fi},${skill.ti})`,
         borderRadius: 9999,
-        padding: "1.5px",
+        padding: "2px",
         width: "100%",
         height: "100%",
-        boxShadow: `0 0 16px ${skill.fi}44, 0 4px 20px rgba(0,0,0,.45)`,
+        boxShadow: `0 0 24px ${skill.fi}55, 0 6px 26px rgba(0,0,0,.52)`,
       }}>
         {/* dark glass inner */}
         <div style={{
-          background: "rgba(7,12,24,.84)",
+          background: "linear-gradient(135deg,rgba(8,12,28,.93),rgba(12,18,42,.91))",
           borderRadius: 9999,
           width: "100%",
-          height: "calc(100% - 0px)",
+          height: "100%",
           display: "flex",
           alignItems: "center",
-          gap: 9,
-          padding: "0 16px",
-          backdropFilter: "blur(10px)",
+          gap: 10,
+          padding: "0 18px",
+          backdropFilter: "blur(12px)",
         }}>
-          {/* glow dot */}
           <span className="sk-dot" style={{
-            width: 7, height: 7,
-            borderRadius: "50%",
-            flexShrink: 0,
+            width: 8, height: 8, borderRadius: "50%", flexShrink: 0,
             background: `linear-gradient(135deg,${skill.fi},${skill.ti})`,
-            boxShadow: `0 0 7px ${skill.fi}, 0 0 14px ${skill.fi}55`,
+            boxShadow: `0 0 8px ${skill.fi}, 0 0 20px ${skill.fi}66`,
           }} />
           <span style={{
             fontFamily: "'Poppins',sans-serif",
             fontSize: 11.5,
             fontWeight: 600,
             whiteSpace: "nowrap",
-            color: "rgba(255,255,255,.88)",
-            letterSpacing: "0.01em",
+            color: "rgba(255,255,255,.92)",
+            letterSpacing: "0.015em",
           }}>
             {skill.label}
           </span>
@@ -138,14 +123,19 @@ function Pill({ skill, pos, arenaW, arenaH, onDragEnd, zIdx, onDragStart }) {
   );
 }
 
-/* ── Main section ── */
+const STATS = [
+  { v: "14+",  l: "Technologies",     from: "#2dd4bf", to: "#06b6d4" },
+  { v: "7+",   l: "Years Experience", from: "#6366f1", to: "#8b5cf6" },
+  { v: "500+", l: "Projects Done",    from: "#0ea5e9", to: "#2dd4bf" },
+  { v: "98%",  l: "Client Retention", from: "#a855f7", to: "#6366f1" },
+];
+
 export default function SkillsSection() {
   const arenaRef      = useRef(null);
-  const [arena, setArena]       = useState({ w: 0, h: 0 });
+  const [arena, setArena]         = useState({ w: 0, h: 0 });
   const [positions, setPositions] = useState([]);
   const [topIdx, setTopIdx]       = useState(0);
 
-  /* measure arena */
   useEffect(() => {
     if (!arenaRef.current) return;
     const measure = () => {
@@ -164,156 +154,166 @@ export default function SkillsSection() {
       const next = prev.map(p => ({ ...p }));
       next[i] = {
         x: Math.max(0, Math.min(nx, arena.w - PILL_W)),
-        y: Math.max(44, Math.min(ny, arena.h - PILL_H)),
+        y: Math.max(48, Math.min(ny, arena.h - PILL_H)),
+        rotate: 0, // straighten after being picked up and placed
       };
       return resolveCollisions(next, i);
     });
   }, [arena]);
 
   return (
-    <section className="sk-root max-md:hidden relative overflow-hidden bg-white py-16 lg:py-24">
+    <section className="sk-root max-md:hidden relative overflow-hidden py-20 lg:py-28"
+      style={{ background: "#f8faff" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap');
-
         .sk-root { font-family:'Inter',sans-serif }
 
-        /* bg mesh */
         .sk-dotgrid {
-          background-image:radial-gradient(circle,rgba(99,102,241,.07) 1px,transparent 1px);
-          background-size:28px 28px;
+          background-image: radial-gradient(circle,rgba(99,102,241,.055) 1px,transparent 1px);
+          background-size: 28px 28px;
         }
 
-        /* keyframes */
-        @keyframes skCW  { to{transform:rotate(360deg)}  }
-        @keyframes skCCW { to{transform:rotate(-360deg)} }
-        @keyframes skFloat { 0%,100%{transform:translateY(0);opacity:.55} 50%{transform:translateY(-8px);opacity:1} }
-        @keyframes skGlow  { 0%,100%{opacity:.55} 50%{opacity:1} }
+        @keyframes skCW    { to{transform:rotate(360deg)} }
+        @keyframes skCCW   { to{transform:rotate(-360deg)} }
+        @keyframes skFloat {
+          0%,100%{transform:translateY(0);opacity:.55}
+          50%{transform:translateY(-8px);opacity:1}
+        }
+        @keyframes skGlow  { 0%,100%{opacity:.6} 50%{opacity:1} }
         @keyframes skBarIn { from{transform:scaleX(0)} to{transform:scaleX(1)} }
-        @keyframes skUp    { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes skUp    { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
         @keyframes skMorph {
           0%,100%{border-radius:60% 40% 55% 45%/50% 55% 45% 50%}
-          33%{border-radius:40% 60% 45% 55%/55% 45% 55% 45%}
-          66%{border-radius:55% 45% 60% 40%/45% 55% 45% 55%}
+          33%    {border-radius:40% 60% 45% 55%/55% 45% 55% 45%}
+          66%    {border-radius:55% 45% 60% 40%/45% 55% 45% 55%}
         }
         @keyframes skPing  { 75%,100%{transform:scale(2.1);opacity:0} }
         @keyframes skScan  {
-          0%   { top:44px; opacity:.55 }
-          48%  { opacity:.80 }
-          50%  { top:calc(100% - 50px); opacity:.55 }
-          100% { top:44px; opacity:.55 }
+          0%  { top:48px; opacity:.40 }
+          48% { opacity:.72 }
+          50% { top:calc(100% - 54px); opacity:.40 }
+          100%{ top:48px; opacity:.40 }
+        }
+        @keyframes skStatIn {
+          from{opacity:0;transform:translateY(14px) scale(.97)}
+          to  {opacity:1;transform:translateY(0) scale(1)}
         }
 
         .sk-bar    { animation:skBarIn .8s cubic-bezier(.22,1,.36,1) .25s both; transform-origin:left }
         .sk-up     { animation:skUp .6s cubic-bezier(.22,1,.36,1) both }
         .sk-up-1   { animation-delay:.05s }
-        .sk-up-2   { animation-delay:.10s }
+        .sk-up-2   { animation-delay:.12s }
+        .sk-up-3   { animation-delay:.19s }
         .sk-morph  { animation:skMorph 14s ease-in-out infinite }
         .sk-dot    { animation:skGlow 2.8s ease-in-out infinite }
 
-        /* arena scan line */
         .sk-scan {
-          position:absolute; left:0; right:0; height:1px; pointer-events:none; z-index:3;
-          background:linear-gradient(90deg,transparent,rgba(45,212,191,.5),rgba(99,102,241,.5),transparent);
-          animation:skScan 5s ease-in-out infinite;
+          position:absolute; left:0; right:0; height:1.5px; pointer-events:none; z-index:3;
+          background:linear-gradient(90deg,transparent 0%,rgba(45,212,191,.58) 30%,rgba(99,102,241,.52) 70%,transparent 100%);
+          animation:skScan 5.5s ease-in-out infinite;
         }
 
-        /* gradient text */
         .sk-grad {
           background:linear-gradient(135deg,#2dd4bf,#6366f1);
           -webkit-background-clip:text; -webkit-text-fill-color:transparent;
           background-clip:text; color:transparent;
         }
 
-        /* stat card */
-        .sk-stat {
-          transition:transform .25s, box-shadow .25s;
-        }
-        .sk-stat:hover { transform:translateY(-4px); box-shadow:0 16px 36px rgba(99,102,241,.14) }
+        .sk-stat { transition:transform .25s cubic-bezier(.22,1,.36,1), box-shadow .25s; }
+        .sk-stat:hover { transform:translateY(-5px); box-shadow:0 22px 50px rgba(99,102,241,.18) !important }
 
-        /* ping */
         .sk-ping { position:relative }
         .sk-ping::after {
           content:''; position:absolute; inset:0; border-radius:50%;
           background:inherit; animation:skPing 2s ease-out infinite;
         }
 
-        /* arena dot grid */
         .sk-arena-dots {
-          background-image:radial-gradient(circle,rgba(255,255,255,.035) 1px,transparent 1px);
-          background-size:28px 28px;
+          background-image:radial-gradient(circle,rgba(255,255,255,.026) 1px,transparent 1px);
+          background-size:26px 26px;
         }
 
-        /* hint card */
-        .sk-hint {
-          transition:transform .25s;
-        }
-        .sk-hint:hover { transform:translateY(-3px) }
+        .sk-hint { transition:transform .25s cubic-bezier(.22,1,.36,1), box-shadow .25s; }
+        .sk-hint:hover { transform:translateY(-4px); box-shadow:0 14px 36px rgba(99,102,241,.14) !important; }
+
+        .sk-stat-card { animation:skStatIn .5s cubic-bezier(.22,1,.36,1) both; }
+        .sk-stat-card:nth-child(1){ animation-delay:.20s }
+        .sk-stat-card:nth-child(2){ animation-delay:.27s }
+        .sk-stat-card:nth-child(3){ animation-delay:.34s }
+        .sk-stat-card:nth-child(4){ animation-delay:.41s }
       `}</style>
 
-      {/* ── Section backgrounds ── */}
+      {/* ── Backgrounds ── */}
       <div className="sk-dotgrid absolute inset-0 pointer-events-none" />
-      <div className="sk-morph absolute -top-24 -left-24 w-[400px] h-[400px] pointer-events-none opacity-[.07]"
+      <div className="sk-morph absolute -top-32 -left-32 w-[520px] h-[520px] pointer-events-none opacity-[.055]"
         style={{ background:"linear-gradient(135deg,#2dd4bf,#6366f1)" }} />
-      <div className="sk-morph absolute -bottom-24 -right-24 w-[360px] h-[360px] pointer-events-none opacity-[.06]"
-        style={{ background:"linear-gradient(135deg,#0ea5e9,#8b5cf6)", animationDelay:"6s" }} />
+      <div className="sk-morph absolute -bottom-32 -right-32 w-[440px] h-[440px] pointer-events-none opacity-[.048]"
+        style={{ background:"linear-gradient(135deg,#0ea5e9,#8b5cf6)", animationDelay:"7s" }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[640px] h-[320px] pointer-events-none rounded-full opacity-[.038]"
+        style={{ background:"radial-gradient(ellipse,#6366f1,transparent 70%)" }} />
 
-      {/* SVG — top-left arcs */}
-      <svg className="absolute top-0 left-0 pointer-events-none" width="260" height="260"
-        viewBox="0 0 260 260" fill="none" aria-hidden="true">
+      {/* SVG top-left */}
+      <svg className="absolute top-0 left-0 pointer-events-none" width="300" height="300"
+        viewBox="0 0 300 300" fill="none" aria-hidden="true">
         <defs>
           <linearGradient id="skTL" x1="100%" y1="100%" x2="0%" y2="0%">
-            <stop offset="0%" stopColor="#2dd4bf" stopOpacity=".32"/>
-            <stop offset="100%" stopColor="#6366f1" stopOpacity=".03"/>
+            <stop offset="0%" stopColor="#2dd4bf" stopOpacity=".28"/>
+            <stop offset="100%" stopColor="#6366f1" stopOpacity=".02"/>
           </linearGradient>
         </defs>
-        <g style={{transformOrigin:"0 0",animation:"skCW 36s linear infinite"}}>
-          <circle cx="0" cy="0" r="180" stroke="url(#skTL)" strokeWidth="1.4" strokeDasharray="60 100" strokeLinecap="round" fill="none"/>
+        <g style={{transformOrigin:"0 0",animation:"skCW 40s linear infinite"}}>
+          <circle cx="0" cy="0" r="220" stroke="url(#skTL)" strokeWidth="1.2"
+            strokeDasharray="65 110" strokeLinecap="round" fill="none"/>
         </g>
-        <g style={{transformOrigin:"0 0",animation:"skCCW 24s linear infinite"}}>
-          <circle cx="0" cy="0" r="124" stroke="rgba(34,211,238,.20)" strokeWidth="1.4" strokeDasharray="42 70" strokeLinecap="round" fill="none"/>
+        <g style={{transformOrigin:"0 0",animation:"skCCW 28s linear infinite"}}>
+          <circle cx="0" cy="0" r="148" stroke="rgba(34,211,238,.17)" strokeWidth="1.2"
+            strokeDasharray="48 80" strokeLinecap="round" fill="none"/>
         </g>
-        <g style={{transformOrigin:"0 0",animation:"skCW 15s linear infinite"}}>
-          <circle cx="0" cy="0" r="76" stroke="rgba(45,212,191,.26)" strokeWidth="1.8" strokeDasharray="26 44" strokeLinecap="round" fill="none"/>
+        <g style={{transformOrigin:"0 0",animation:"skCW 18s linear infinite"}}>
+          <circle cx="0" cy="0" r="86" stroke="rgba(45,212,191,.22)" strokeWidth="1.6"
+            strokeDasharray="28 48" strokeLinecap="round" fill="none"/>
         </g>
-        <g transform="translate(52,52)" style={{animation:"skFloat 4.5s ease-in-out infinite"}}>
-          <line x1="-5" y1="0" x2="5" y2="0" stroke="rgba(45,212,191,.7)" strokeWidth="2.2" strokeLinecap="round"/>
-          <line x1="0" y1="-5" x2="0" y2="5" stroke="rgba(45,212,191,.7)" strokeWidth="2.2" strokeLinecap="round"/>
+        <g transform="translate(62,62)" style={{animation:"skFloat 4.5s ease-in-out infinite"}}>
+          <line x1="-7" y1="0" x2="7" y2="0" stroke="rgba(45,212,191,.62)" strokeWidth="2.4" strokeLinecap="round"/>
+          <line x1="0" y1="-7" x2="0" y2="7" stroke="rgba(45,212,191,.62)" strokeWidth="2.4" strokeLinecap="round"/>
         </g>
       </svg>
 
-      {/* SVG — bottom-right arcs */}
-      <svg className="absolute bottom-0 right-0 pointer-events-none" width="240" height="240"
-        viewBox="0 0 240 240" fill="none" aria-hidden="true">
+      {/* SVG bottom-right */}
+      <svg className="absolute bottom-0 right-0 pointer-events-none" width="280" height="280"
+        viewBox="0 0 280 280" fill="none" aria-hidden="true">
         <defs>
           <linearGradient id="skBR" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#6366f1" stopOpacity=".28"/>
-            <stop offset="100%" stopColor="#2dd4bf" stopOpacity=".03"/>
+            <stop offset="0%" stopColor="#6366f1" stopOpacity=".24"/>
+            <stop offset="100%" stopColor="#2dd4bf" stopOpacity=".02"/>
           </linearGradient>
         </defs>
-        <g style={{transformOrigin:"240px 240px",animation:"skCCW 30s linear infinite"}}>
-          <circle cx="240" cy="240" r="165" stroke="url(#skBR)" strokeWidth="1.4" strokeDasharray="55 90" strokeLinecap="round" fill="none"/>
+        <g style={{transformOrigin:"280px 280px",animation:"skCCW 34s linear infinite"}}>
+          <circle cx="280" cy="280" r="198" stroke="url(#skBR)" strokeWidth="1.2"
+            strokeDasharray="62 104" strokeLinecap="round" fill="none"/>
         </g>
-        <g style={{transformOrigin:"240px 240px",animation:"skCW 20s linear infinite"}}>
-          <circle cx="240" cy="240" r="112" stroke="rgba(139,92,246,.22)" strokeWidth="1.5" strokeDasharray="38 62" strokeLinecap="round" fill="none"/>
+        <g style={{transformOrigin:"280px 280px",animation:"skCW 22s linear infinite"}}>
+          <circle cx="280" cy="280" r="130" stroke="rgba(139,92,246,.19)" strokeWidth="1.4"
+            strokeDasharray="42 70" strokeLinecap="round" fill="none"/>
         </g>
-        <g transform="translate(196,196)" style={{animation:"skFloat 5.5s ease-in-out infinite 1.2s"}}>
-          <line x1="-4" y1="-4" x2="4" y2="4" stroke="rgba(99,102,241,.65)" strokeWidth="1.8" strokeLinecap="round"/>
-          <line x1="4" y1="-4" x2="-4" y2="4" stroke="rgba(99,102,241,.65)" strokeWidth="1.8" strokeLinecap="round"/>
+        <g transform="translate(234,234)" style={{animation:"skFloat 5.5s ease-in-out infinite 1.2s"}}>
+          <line x1="-5" y1="-5" x2="5" y2="5" stroke="rgba(99,102,241,.58)" strokeWidth="2" strokeLinecap="round"/>
+          <line x1="5" y1="-5" x2="-5" y2="5" stroke="rgba(99,102,241,.58)" strokeWidth="2" strokeLinecap="round"/>
         </g>
       </svg>
 
       <div className="relative z-10 max-w-[1380px] mx-auto px-5 sm:px-8 md:px-12 xl:px-16">
-        <div className="grid lg:grid-cols-[420px_1fr] xl:grid-cols-[460px_1fr] gap-10 xl:gap-14 items-start">
+        <div className="grid lg:grid-cols-[440px_1fr] xl:grid-cols-[480px_1fr] gap-12 xl:gap-16 items-start">
 
           {/* ════ LEFT PANEL ════ */}
           <div className="flex flex-col gap-5 lg:sticky lg:top-24">
 
-            {/* Tag */}
-            <div className="sk-up sk-up-1 inline-flex items-center gap-2 self-start rounded-full px-4 py-1.5"
-              style={{ background:"rgba(45,212,191,.10)", border:"1px solid rgba(45,212,191,.28)" }}>
+            {/* Badge */}
+            <div className="sk-up sk-up-1 inline-flex items-center gap-2.5 self-start rounded-full px-4 py-2"
+              style={{ background:"rgba(45,212,191,.09)", border:"1px solid rgba(45,212,191,.24)" }}>
               <span className="sk-ping w-2 h-2 rounded-full flex-shrink-0"
-                style={{ background:"linear-gradient(135deg,#2dd4bf,#06b6d4)" }}/>
-              <span className="sk-grad text-[10.5px] font-bold uppercase tracking-[.22em]"
+                style={{ background:"linear-gradient(135deg,#2dd4bf,#06b6d4)" }} />
+              <span className="sk-grad text-[10px] font-bold uppercase tracking-[.24em]"
                 style={{ fontFamily:"'Poppins',sans-serif" }}>
                 Skills &amp; Technologies
               </span>
@@ -321,72 +321,80 @@ export default function SkillsSection() {
 
             {/* Heading */}
             <div className="sk-up sk-up-1">
-              <p className="text-[15px] text-gray-400 font-light italic mb-1">Grow Your Business</p>
-              <h2 className="font-bold leading-tight text-gray-900 m-0"
-                style={{ fontFamily:"'Poppins',sans-serif", fontSize:"clamp(2rem,3.8vw,3.2rem)" }}>
+              <p className="text-[14px] text-gray-400 font-light italic mb-1.5 tracking-[.02em]">
+                Grow Your Business
+              </p>
+              <h2 className="font-extrabold leading-[1.06] text-gray-900 m-0"
+                style={{ fontFamily:"'Poppins',sans-serif", fontSize:"clamp(2.1rem,3.8vw,3.4rem)" }}>
                 With Our{" "}
-                <span style={{ background:"linear-gradient(135deg,#2dd4bf,#6366f1)",
-                  WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
+                <span style={{
+                  background:"linear-gradient(135deg,#2dd4bf,#6366f1)",
+                  WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text"
+                }}>
                   Expertise
                 </span>
               </h2>
             </div>
 
-            {/* Divider */}
-            <div className="sk-bar w-14 h-[3px] rounded-full"
-              style={{ background:"linear-gradient(90deg,#2dd4bf,#6366f1)" }}/>
+            {/* Accent bar */}
+            <div className="sk-bar h-[3px] rounded-full w-16"
+              style={{ background:"linear-gradient(90deg,#2dd4bf,#6366f1)" }} />
 
             {/* Description */}
-            <p className="sk-up sk-up-2 text-[14px] text-gray-500 leading-[1.85] max-w-[400px]">
+            <p className="sk-up sk-up-2 text-[13.5px] text-gray-500 leading-[1.88] max-w-[400px]">
               Our team masters a wide spectrum of modern technologies — from blazing-fast frontend
-              frameworks to robust backend architectures. Drag the skill chips to explore what we offer.
+              frameworks to robust backend architectures.{" "}
+              <span className="font-medium" style={{ color:"#6366f1" }}>Drag the skill chips</span>{" "}
+              to explore what we build.
             </p>
 
-            {/* Interactive hint card */}
-            <div className="sk-hint sk-up sk-up-2 flex items-start gap-4 p-5 rounded-2xl"
-              style={{ background:"linear-gradient(135deg,rgba(99,102,241,.06),rgba(45,212,191,.04))",
-                border:"1px solid rgba(99,102,241,.14)" }}>
-              <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ background:"linear-gradient(135deg,#2dd4bf,#6366f1)",
-                  boxShadow:"0 4px 16px rgba(99,102,241,.30)" }}>
-                {/* drag icon */}
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white"
-                  strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            {/* Hint card */}
+            <div className="sk-hint sk-up sk-up-2 flex items-center gap-4 p-4 rounded-2xl"
+              style={{
+                background:"linear-gradient(135deg,rgba(99,102,241,.07),rgba(45,212,191,.04))",
+                border:"1px solid rgba(99,102,241,.12)",
+                boxShadow:"0 4px 20px rgba(99,102,241,.06)",
+              }}>
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                style={{ background:"linear-gradient(135deg,#2dd4bf,#6366f1)", boxShadow:"0 4px 14px rgba(99,102,241,.35)" }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white"
+                  strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20"/>
                 </svg>
               </div>
               <div>
-                <p className="text-[13px] font-bold text-gray-800 mb-1"
+                <p className="text-[12.5px] font-bold text-gray-800 mb-0.5"
                   style={{ fontFamily:"'Poppins',sans-serif" }}>
                   Interactive Skill Arena
                 </p>
-                <p className="text-[12px] text-gray-500 leading-relaxed">
-                  Drag any skill chip around. They respond to collisions and push each other — try it!
+                <p className="text-[11.5px] text-gray-500 leading-relaxed m-0">
+                  Drag any chip — they collide and push each other. Try it!
                 </p>
               </div>
             </div>
 
-            {/* Stat cards */}
+            {/* 4 stat cards */}
             <div className="grid grid-cols-2 gap-3 mt-1">
-              {[
-                { v:"14+", l:"Technologies",     from:"#2dd4bf", to:"#6366f1" },
-                { v:"7+",  l:"Years Experience", from:"#6366f1", to:"#8b5cf6" },
-                // { v:"500+",l:"Projects Done",    from:"#0ea5e9", to:"#2dd4bf" },
-                // { v:"98%", l:"Client Retention", from:"#8b5cf6", to:"#6366f1" },
-              ].map((st,i) => (
-                <div key={i} className="sk-stat bg-white rounded-2xl p-4 flex flex-col gap-1"
-                  style={{ border:"1px solid rgba(99,102,241,.09)",
-                    boxShadow:"0 4px 16px rgba(99,102,241,.06)" }}>
-                  <div className="font-extrabold leading-none"
-                    style={{ fontFamily:"'Poppins',sans-serif",
-                      fontSize:"clamp(1.4rem,2.2vw,1.8rem)",
+              {STATS.map((st, i) => (
+                <div key={i} className="sk-stat sk-stat-card bg-white rounded-2xl p-4"
+                  style={{
+                    border:"1px solid rgba(99,102,241,.09)",
+                    boxShadow:"0 4px 18px rgba(99,102,241,.07)",
+                  }}>
+                  <div className="font-extrabold leading-none mb-1"
+                    style={{
+                      fontFamily:"'Poppins',sans-serif",
+                      fontSize:"clamp(1.45rem,2.2vw,1.85rem)",
                       background:`linear-gradient(135deg,${st.from},${st.to})`,
-                      WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
+                      WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text"
+                    }}>
                     {st.v}
                   </div>
-                  <div className="text-[10.5px] text-gray-400 font-medium tracking-[.06em]">{st.l}</div>
-                  <div className="w-6 h-[2px] rounded-full mt-0.5"
-                    style={{ background:`linear-gradient(90deg,${st.from},${st.to})` }}/>
+                  <div className="text-[10px] text-gray-400 font-medium tracking-[.07em] uppercase mb-1.5">
+                    {st.l}
+                  </div>
+                  <div className="w-7 h-[2.5px] rounded-full"
+                    style={{ background:`linear-gradient(90deg,${st.from},${st.to})` }} />
                 </div>
               ))}
             </div>
@@ -395,48 +403,59 @@ export default function SkillsSection() {
           {/* ════ RIGHT — Arena ════ */}
           <div className="relative">
             {/* Outer glow halo */}
-            <div className="absolute -inset-3 rounded-[30px] pointer-events-none"
-              style={{ background:"linear-gradient(135deg,rgba(45,212,191,.16),rgba(99,102,241,.18))",
-                filter:"blur(18px)", opacity:.75 }}/>
+            <div className="absolute -inset-4 rounded-[34px] pointer-events-none"
+              style={{
+                background:"linear-gradient(135deg,rgba(45,212,191,.20),rgba(99,102,241,.24),rgba(139,92,246,.16))",
+                filter:"blur(22px)", opacity:.68
+              }} />
 
             {/* Arena box */}
             <div
               ref={arenaRef}
-              className="sk-arena-dots relative w-full rounded-3xl overflow-hidden"
+              className="sk-arena-dots relative w-full rounded-[28px] overflow-hidden"
               style={{
-                height: 560,
-                background:"linear-gradient(148deg,#070d1a 0%,#0c1332 100%)",
+                height: 600,
+                background:"linear-gradient(148deg,#060b18 0%,#0a1128 48%,#0d1540 100%)",
                 border:"1px solid rgba(255,255,255,.07)",
-                boxShadow:"0 28px 70px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.06)",
+                boxShadow:"0 32px 80px rgba(0,0,0,.52), inset 0 1px 0 rgba(255,255,255,.07)",
               }}
             >
-              {/* corner glows */}
-              <div className="absolute -top-16 -left-16 w-56 h-56 rounded-full pointer-events-none"
-                style={{ background:"radial-gradient(circle,rgba(45,212,191,.20) 0%,transparent 65%)" }}/>
-              <div className="absolute -bottom-16 -right-16 w-56 h-56 rounded-full pointer-events-none"
-                style={{ background:"radial-gradient(circle,rgba(99,102,241,.22) 0%,transparent 65%)" }}/>
+              {/* Corner ambient glows */}
+              <div className="absolute -top-20 -left-20 w-64 h-64 rounded-full pointer-events-none"
+                style={{ background:"radial-gradient(circle,rgba(45,212,191,.24) 0%,transparent 65%)" }} />
+              <div className="absolute -bottom-20 -right-20 w-64 h-64 rounded-full pointer-events-none"
+                style={{ background:"radial-gradient(circle,rgba(99,102,241,.28) 0%,transparent 65%)" }} />
+              <div className="absolute top-1/2 -translate-y-1/2 right-0 w-52 h-52 rounded-full pointer-events-none"
+                style={{ background:"radial-gradient(circle,rgba(139,92,246,.09) 0%,transparent 65%)" }} />
+
+              {/* Top gradient strip */}
+              <div className="absolute top-0 left-0 right-0 h-[3px] pointer-events-none rounded-t-[28px]"
+                style={{ background:"linear-gradient(90deg,transparent,#2dd4bf,#6366f1,transparent)", opacity:.65 }} />
 
               {/* Status bar */}
-              <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-5 py-2.5"
-                style={{ borderBottom:"1px solid rgba(255,255,255,.05)",
-                  background:"rgba(255,255,255,.03)", backdropFilter:"blur(8px)" }}>
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full animate-pulse"
-                    style={{ background:"#2dd4bf" }}/>
-                  <span className="text-[10px] uppercase tracking-[.20em] font-semibold"
-                    style={{ color:"rgba(45,212,191,.8)", fontFamily:"'Inter',sans-serif" }}>
+              <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-5 h-12"
+                style={{
+                  borderBottom:"1px solid rgba(255,255,255,.055)",
+                  background:"rgba(255,255,255,.025)",
+                  backdropFilter:"blur(10px)",
+                }}>
+                <div className="flex items-center gap-2.5">
+                  <span className="sk-ping w-2 h-2 rounded-full flex-shrink-0"
+                    style={{ background:"linear-gradient(135deg,#2dd4bf,#06b6d4)" }} />
+                  <span className="text-[10px] uppercase tracking-[.22em] font-semibold"
+                    style={{ color:"rgba(45,212,191,.85)", fontFamily:"'Inter',sans-serif" }}>
                     Drag to Explore · {skills.length} Skills
                   </span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  {["rgba(255,255,255,.18)","rgba(255,255,255,.11)","rgba(255,255,255,.07)"].map((bg,i) => (
-                    <span key={i} className="w-2.5 h-2.5 rounded-full" style={{ background:bg }}/>
+                  {["rgba(255,107,107,.55)","rgba(255,189,68,.48)","rgba(45,212,191,.44)"].map((bg, i) => (
+                    <span key={i} className="w-[11px] h-[11px] rounded-full" style={{ background:bg }} />
                   ))}
                 </div>
               </div>
 
               {/* Scan line */}
-              <div className="sk-scan"/>
+              <div className="sk-scan" />
 
               {/* Pills */}
               {positions.length > 0 && skills.map((skill, i) => (
@@ -453,26 +472,26 @@ export default function SkillsSection() {
               ))}
 
               {/* Bottom fade */}
-              <div className="absolute bottom-0 left-0 right-0 h-10 pointer-events-none"
-                style={{ background:"linear-gradient(to top,rgba(7,13,26,.65),transparent)" }}/>
+              <div className="absolute bottom-0 left-0 right-0 h-12 pointer-events-none"
+                style={{ background:"linear-gradient(to top,rgba(6,11,24,.78),transparent)" }} />
 
-              {/* Grid cross-hair decorations — 4 corners of arena */}
+              {/* Corner crosshairs */}
               {[
-                { top:52,left:8 },
-                { top:52,right:8 },
-                { bottom:8,left:8 },
-                { bottom:8,right:8 },
-              ].map((pos,i) => (
+                { top:56, left:10 },
+                { top:56, right:10 },
+                { bottom:10, left:10 },
+                { bottom:10, right:10 },
+              ].map((pos, i) => (
                 <svg key={i} className="absolute pointer-events-none" width="14" height="14"
-                  viewBox="0 0 14 14" fill="none" style={{ ...pos, opacity:.3 }}>
+                  viewBox="0 0 14 14" fill="none" style={{ ...pos, opacity:.28 }}>
                   <line x1="7" y1="0" x2="7" y2="14" stroke="#2dd4bf" strokeWidth="1"/>
                   <line x1="0" y1="7" x2="14" y2="7" stroke="#2dd4bf" strokeWidth="1"/>
                 </svg>
               ))}
             </div>
 
-            {/* below arena label */}
-            <p className="text-center text-[11px] text-gray-400 mt-3 tracking-[.12em] uppercase font-medium">
+            {/* Below arena label */}
+            <p className="text-center text-[11px] text-gray-400 mt-3.5 tracking-[.14em] uppercase font-medium m-0">
               ✦ Drag &amp; drop to interact ✦
             </p>
           </div>
