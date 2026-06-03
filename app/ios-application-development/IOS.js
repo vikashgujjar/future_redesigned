@@ -7,7 +7,6 @@ import ec from "../Assets/iii.gif";
 
 import TechMarquee from "../components/TechMarquee";
 import CustomSlider from "../components/CustomSlider";
-import BuinessIdea from "../components/BuinessIdea";
 import FAQSection from "../components/FAQSection";
 import WhyFutureITTouch from "../components/WhyFutureITTouch";
 import CommonBannerService from "../components/CommonBannerService";
@@ -869,7 +868,6 @@ const IOS = () => {
       />
 
       <GetNewInsight />
-      <BuinessIdea />
     </>
   );
 };

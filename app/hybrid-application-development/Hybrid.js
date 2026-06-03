@@ -7,7 +7,6 @@ import app from "../Assets/hhh.gif";
 
 import TechMarquee from "../components/TechMarquee";
 import CustomSlider from "../components/CustomSlider";
-import BuinessIdea from "../components/BuinessIdea";
 import FAQSection from "../components/FAQSection";
 import WhyFutureITTouch from "../components/WhyFutureITTouch";
 import CommonBannerService from "../components/CommonBannerService";
@@ -598,7 +597,6 @@ const Hybrid = () => {
 
       {/* ── 7. GetNewInsight + BuinessIdea ── */}
       <GetNewInsight />
-      <BuinessIdea />
     </>
   );
 };

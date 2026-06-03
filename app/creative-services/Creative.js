@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 import Image from "next/image";
@@ -5,7 +6,6 @@ import cwd from "../Assets/cwd.webp";
 
 import TechMarquee from "../components/TechMarquee";
 import CustomSlider from "../components/CustomSlider";
-import BuinessIdea from "../components/BuinessIdea";
 import FAQSection from "../components/FAQSection";
 import devops from "../Assets/app-intro.webp";
 
@@ -15,8 +15,8 @@ import image1 from "../Assets/SIT.webp";
 import { FaShoppingCart, FaPaintBrush, FaClock, FaUsers} from "react-icons/fa";
 import {  FaPencilRuler, FaDesktop, FaCode, FaSearch } from "react-icons/fa";
 import { FaChartLine } from "react-icons/fa";
-
-
+import GetNewInsight from "../components/GetNewInsight";
+import OverviewSection from "../components/OverviewSection";
 
 import {
   FaPalette,
@@ -39,13 +39,13 @@ const features = [
   {
     title: "Creative Visual Identity",
     description:
-      "From logos to color palettes and typography, we create a cohesive and memorable visual identity that reflects your brand’s personality and builds instant recognition across platforms.",
+      "From logos to color palettes and typography, we create a cohesive and memorable visual identity that reflects your brand's personality and builds instant recognition across platforms.",
     icon: <FaPalette />,
   },
   {
     title: "Consistent Brand Messaging",
     description:
-      "We craft compelling taglines, tone, and storytelling that communicate your brand’s message consistently across all touchpoints — from websites and packaging to social media and campaigns.",
+      "We craft compelling taglines, tone, and storytelling that communicate your brand's message consistently across all touchpoints — from websites and packaging to social media and campaigns.",
     icon: <FaCommentDots />,
   },
   {
@@ -84,7 +84,7 @@ const features = [
   {
     icons: <FaPalette className="text-white w-8 h-8" />,
     title: "Creative Visual Identity",
-    desc: "Our creative designers craft unique logos, color palettes, and typography that reflect your brand’s personality and ensure consistent recognition everywhere.",
+    desc: "Our creative designers craft unique logos, color palettes, and typography that reflect your brand's personality and ensure consistent recognition everywhere.",
   },
   {
     icons: <FaHandshake className="text-white w-8 h-8" />,
@@ -96,7 +96,7 @@ const features = [
   {
     count: "250+",
     title: "Brands Transformed",
-    desc: "We’ve helped over 250 businesses build strong brand identities that capture attention and connect emotionally with their audiences. From startups to enterprises, our creative solutions turn visions into recognizable brands.",
+    desc: "We've helped over 250 businesses build strong brand identities that capture attention and connect emotionally with their audiences. From startups to enterprises, our creative solutions turn visions into recognizable brands.",
     image: "/Assets/seerviceSlider/slide1.webp",
   },
   {
@@ -108,7 +108,7 @@ const features = [
   {
     count: "500+",
     title: "Global Clients Empowered",
-    desc: "Trusted by over 500 clients worldwide, we deliver impactful brand identity solutions tailored to each business’s personality, ensuring consistent visibility and recognition across industries and audiences.",
+    desc: "Trusted by over 500 clients worldwide, we deliver impactful brand identity solutions tailored to each business's personality, ensuring consistent visibility and recognition across industries and audiences.",
     image: "/Assets/seerviceSlider/slide3.webp",
   },
   {
@@ -120,22 +120,22 @@ const features = [
   {
     count: "24/7",
     title: "Creative Support",
-    desc: "Our team provides continuous brand support, ensuring consistency across all touchpoints — from visual assets to digital presence. We’re here to help your brand evolve, stay relevant, and grow stronger every day.",
+    desc: "Our team provides continuous brand support, ensuring consistency across all touchpoints — from visual assets to digital presence. We're here to help your brand evolve, stay relevant, and grow stronger every day.",
     image: "/Assets/seerviceSlider/slide5.webp",
   },
 ];
-1
+
 
 const platforms = [
   {
     icon: <FaPalette className="text-white w-6 h-6" />,
     title: "Visual Identity Design",
-    desc: "We craft unique logos, color schemes, and typography systems that capture your brand’s personality and create a consistent, memorable visual identity across all platforms.",
+    desc: "We craft unique logos, color schemes, and typography systems that capture your brand's personality and create a consistent, memorable visual identity across all platforms.",
   },
   {
     icon: <FaPencilRuler className="text-white w-6 h-6" />,
     title: "Brand Strategy & Guidelines",
-    desc: "Our team develops comprehensive brand strategies and guidelines to ensure every communication reflects your brand’s vision, values, and voice consistently across channels.",
+    desc: "Our team develops comprehensive brand strategies and guidelines to ensure every communication reflects your brand's vision, values, and voice consistently across channels.",
   },
   {
     icon: <FaDesktop className="text-white w-6 h-6" />,
@@ -150,7 +150,7 @@ const platforms = [
   {
     icon: <FaChartLine className="text-white w-6 h-6" />,
     title: "Back-End Development",
-    desc: "We implement scalable and secure back-end systems to support your brand’s online presence, including content management, integrations, and database management.",
+    desc: "We implement scalable and secure back-end systems to support your brand's online presence, including content management, integrations, and database management.",
   },
   {
     icon: <FaSearch className="text-white w-6 h-6" />,
@@ -192,11 +192,8 @@ const faqData = [
   },
 ];
 
-
   return (
     <>
-      <div className="h-24 max-sm:h-[57px] max-md:h-20 max-lg:h-24 bg-white"></div>
-
       <CommonBannerService
         imgSrc={cwd}
         title="Creative Agency Branding"
@@ -205,157 +202,260 @@ const faqData = [
 
       <TechMarquee />
 
-<div className="relative px-5 md:px-12 xl:px-28 py-8 md:py-10 lg:py-12 bg-gradient-to-r from-indigo-50 via-white to-indigo-50">
-  <div className="max-w-4xl mx-auto text-center space-y-6">
-    <span className="inline-block px-3 py-1 text-xs font-medium text-indigo-600 bg-indigo-100 rounded-full">
-      Trusted Brand Identity & Strategy Development
-    </span>
+      <OverviewSection
+        image={devops}
+        imageAlt="Brand Identity & Strategy Services"
+        badgeText="Trusted Brand Identity & Strategy Development"
+        heading="Crafting Brands That Speak,"
+        headingHighlight="Connect, and Grow"
+        paragraphs={[
+          "At Future IT Touch Pvt. Ltd. we help businesses establish strong, consistent brand identities through strategy, creativity, and design excellence.",
+          "A strong brand identity is more than just a logo — it's the essence of how your business is perceived. Our branding services focus on creating meaningful brand experiences that connect emotionally and visually.",
+          { boldPrefix: "For Businesses:", text: "We define your brand voice, messaging, and visual style to ensure consistency across every platform. From color palettes and typography to marketing assets, everything reflects your unique story." },
+          { boldPrefix: "For Audiences:", text: "We design engaging visuals, creative storytelling, and user-centered brand experiences that build trust and loyalty." },
+          "With over 15 years of creative expertise, we craft distinctive brand identities that leave lasting impressions. Choose our Brand Identity & Strategy Solutions to make your business stand out.",
+        ]}
+        ctaText="Build Your Brand Identity"
+      />
 
-    <h4 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-snug text-gray-900">
-      Crafting Brands That Speak, Connect, and Grow
-    </h4>
+      {/* Features section */}
+      <section className="relative py-16 sm:py-20 lg:py-24"
+        style={{ background: "#f8faff", fontFamily: "'Inter',sans-serif" }}>
 
-    <p className="text-base md:text-lg text-gray-600">
-      At{" "}
-      <span className="font-semibold text-indigo-600">
-        Future IT Touch Pvt. Ltd.
-      </span>{" "}
-      we help businesses establish strong, consistent brand identities through
-      strategy, creativity, and design excellence.
-    </p>
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute inset-0"
+            style={{ backgroundImage: "radial-gradient(circle,rgba(99,102,241,.055) 1px,transparent 1px)", backgroundSize: "28px 28px" }} />
+          <div className="absolute -top-32 -left-32 w-[480px] h-[480px] rounded-full"
+            style={{ background: "radial-gradient(circle,rgba(45,212,191,.07),transparent 65%)" }} />
+          <div className="absolute -bottom-32 -right-32 w-[440px] h-[440px] rounded-full"
+            style={{ background: "radial-gradient(circle,rgba(99,102,241,.06),transparent 65%)" }} />
+        </div>
 
-    <p className="text-sm md:text-base text-gray-700 leading-relaxed">
-      A strong brand identity is more than just a logo — it’s the essence of how
-      your business is perceived. Our branding services focus on creating
-      meaningful brand experiences that connect emotionally and visually.
-      <br /> <br />
-      <span className="font-semibold text-gray-900">For Businesses:</span> We
-      define your brand voice, messaging, and visual style to ensure consistency
-      across every platform. From color palettes and typography to marketing
-      assets, everything reflects your unique story. <br />
-      <br />
-      <span className="font-semibold text-gray-900">For Audiences:</span> We
-      design engaging visuals, creative storytelling, and user-centered brand
-      experiences that build trust and loyalty. <br />
-      <br />
-      With over 15 years of creative expertise, we craft distinctive brand
-      identities that leave lasting impressions. Choose our{" "}
-      <span className="font-semibold text-indigo-600">
-        Brand Identity & Strategy Solutions
-      </span>{" "}
-      to make your business stand out with purpose and personality.
-    </p>
+        <div className="relative z-10 px-5 md:px-12 xl:px-28">
 
-    <div className="pt-4">
-      <a
-        href="tel:+917056937000"
-        className="px-6 py-3 rounded-xl bg-indigo-600 text-white font-medium shadow-lg hover:bg-indigo-700 transition"
-      >
-        Build Your Brand Identity
-      </a>
-    </div>
-  </div>
-</div>
-
-
-
-      {/* high performance  */}
-
-      <div className="px-5 md:px-12 xl:px-28 py-8 md:py-10 lg:py-12 bg-gradient-to-r from-indigo-50 via-white to-indigo-50">
-<div className="text-3xl lg:text-4xl text-center space-y-2 md:space-y-4 mb-12">
-  <h5 className="font-bold text-[#7C4DDA]">
-    Creative Agency Branding Solutions
-  </h5>
-  <h4 className="font-bold text-gray-900">
-    Building Powerful Brand Identities That Inspire & Connect
-  </h4>
-</div>
-
-
-
-        <div className="grid grid-cols-1 lg:grid-cols-5 items-start gap-8 mt-20">
-          <div className="hidden lg:flex lg:col-span-2 justify-center items-start sticky top-0  ">
-            <Image
-              src={devops}
-              alt="eCommerce Development"
-              className="w-full rounded-xl shadow-lg h-full object-cover hover:scale-105 md:min-h-[70vh] transition-transform duration-500"
-            />
+          <div className="text-center mb-14 space-y-3">
+            <div className="inline-flex items-center gap-2.5 rounded-full px-4 py-1.5"
+              style={{ background: "rgba(45,212,191,.09)", border: "1px solid rgba(45,212,191,.26)" }}>
+              <span className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                style={{ background: "linear-gradient(135deg,#2dd4bf,#06b6d4)" }} />
+              <span className="text-[10px] font-bold uppercase tracking-[.22em]"
+                style={{
+                  background: "linear-gradient(135deg,#2dd4bf,#6366f1)",
+                  WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
+                  fontFamily: "'Poppins',sans-serif",
+                }}>
+                Creative Agency Branding Solutions
+              </span>
+            </div>
+            <h4 className="font-bold text-gray-900"
+              style={{ fontFamily: "'Poppins',sans-serif", fontSize: "clamp(1.5rem,3vw,2.4rem)" }}>
+              Building Powerful Brand Identities That{" "}
+              <span style={{
+                background: "linear-gradient(120deg,#2dd4bf,#6366f1)",
+                WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
+              }}>
+                Inspire & Connect
+              </span>
+            </h4>
+            <div className="mx-auto h-[3px] w-14 rounded-full"
+              style={{ background: "linear-gradient(90deg,#2dd4bf,#6366f1)" }} />
           </div>
 
-          <div className="lg:col-span-3 grid grid-cols-1 gap-12 lg:gap-16">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-start gap-4 p-6 border border-gray-200 rounded-xl bg-white shadow-md hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300"
-              >
-                <div className="flex -mt-14 text-[#7C4DDA] text-3xl bg-white justify-center items-center p-4 rounded w-20 h-20 border border-gray-400">
-                  {feature.icon}
-                </div>
-                <h4 className="text-lg font-semibold text-gray-900">
-                  {feature.title}
-                </h4>
-                <p className="text-sm lg:text-base text-gray-700 text-justify">
-                  {feature.description}
-                </p>
+          <div className="grid grid-cols-1 lg:grid-cols-5 items-start gap-8">
+
+            {/* Sticky image */}
+            <div className="hidden lg:flex lg:col-span-2 justify-center items-start sticky top-28">
+              <div className="relative rounded-2xl overflow-hidden w-full"
+                style={{
+                  border: "1px solid rgba(99,102,241,.12)",
+                  boxShadow: "0 20px 60px rgba(99,102,241,.12), 0 4px 16px rgba(0,0,0,.06)",
+                }}>
+                <div className="absolute top-0 left-0 right-0 h-[3px] z-10"
+                  style={{ background: "linear-gradient(90deg,#2dd4bf,#6366f1,#a855f7)" }} />
+                <Image
+                  src={devops}
+                  alt="Creative Agency Branding"
+                  className="w-full object-cover hover:scale-105 md:h-[70vh] transition-transform duration-500"
+                />
               </div>
-            ))}
+            </div>
+
+            {/* Feature cards */}
+            <div className="lg:col-span-3 grid grid-cols-1 gap-10 lg:gap-12">
+              {features.map((feature, index) => {
+                const gradients = [
+                  { from: "#2dd4bf", to: "#6366f1" },
+                  { from: "#6366f1", to: "#8b5cf6" },
+                  { from: "#0ea5e9", to: "#2dd4bf" },
+                  { from: "#a855f7", to: "#6366f1" },
+                  { from: "#2dd4bf", to: "#0ea5e9" },
+                  { from: "#8b5cf6", to: "#a855f7" },
+                  { from: "#6366f1", to: "#2dd4bf" },
+                ];
+                const g = gradients[index % gradients.length];
+                return (
+                  <div key={index}
+                    className="group relative flex flex-col items-start gap-4 p-6 rounded-xl bg-white transition-all duration-300 hover:-translate-y-1"
+                    style={{
+                      border: `1px solid ${g.from}22`,
+                      boxShadow: "0 4px 24px rgba(99,102,241,.08), 0 1px 4px rgba(0,0,0,.05)",
+                    }}>
+                    <div className="absolute top-0 left-6 right-6 h-[2px] rounded-full"
+                      style={{ background: `linear-gradient(90deg,${g.from},${g.to})` }} />
+
+                    <div className="flex -mt-14 justify-center items-center w-20 h-20 rounded-xl text-3xl"
+                      style={{
+                        background: `linear-gradient(135deg,${g.from},${g.to})`,
+                        boxShadow: `0 6px 20px ${g.from}44`,
+                      }}>
+                      <span className="text-white">{feature.icon}</span>
+                    </div>
+
+                    <h4 className="text-lg font-semibold text-gray-900"
+                      style={{ fontFamily: "'Poppins',sans-serif" }}>
+                      {feature.title}
+                    </h4>
+                    <p className="text-sm lg:text-base text-gray-600 text-justify">
+                      {feature.description}
+                    </p>
+
+                    <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                      style={{ background: `radial-gradient(ellipse at 10% 0%,${g.from}08,transparent 60%)` }} />
+                  </div>
+                );
+              })}
+            </div>
+
           </div>
         </div>
-      </div>
+      </section>
 
       {/* TurnYourBusiness */}
+      <section className="relative py-16 sm:py-20 lg:py-24"
+        style={{ background: "linear-gradient(140deg,#060b1a 0%,#09112a 48%,#0d1540 100%)", fontFamily: "'Inter',sans-serif" }}>
 
-      <div className="business-idea mx-5 py-8 md:py-12 xl:py-16 my-8 lg:my-16 px-5 md:px-12 xl:px-28 bg-gradient-to-r rounded-3xl">
-     <div className="text-center">
-  <h5 className="text-3xl md:text-4xl font-semibold text-white drop-shadow-md">
-    Leading Brand Identity & Creative Agency in India
-  </h5>
-  <h4 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-white mt-2">
-    Crafting Unique Identities that Inspire & Connect
-  </h4>
-</div>
-
-
-        <div className="mt-10 grid gap-8 md:gap-12 lg:gap-16 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {businessData.map((elm) => (
-            <div
-              className="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-transform transform hover:scale-105 flex flex-col items-start text-start"
-              key={elm.title}
-            >
-              <div className="bg-indigo-500 rounded-full w-16 h-16 flex items-center justify-center mb-4">
-                {elm.icons}
-              </div>
-              <h5 className="text-xl md:text-2xl font-bold mb-2">
-                {elm.title}
-              </h5>
-              <p className="text-gray-700 text-sm md:text-base">{elm.desc}</p>
-            </div>
-          ))}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute inset-0"
+            style={{ backgroundImage: "radial-gradient(rgba(255,255,255,.022) 1px,transparent 1px)", backgroundSize: "28px 28px" }} />
+          <div className="absolute top-0 right-0 w-[420px] h-[420px] rounded-full"
+            style={{ background: "radial-gradient(circle,rgba(99,102,241,.16),transparent 65%)" }} />
+          <div className="absolute bottom-0 left-0 w-[380px] h-[380px] rounded-full"
+            style={{ background: "radial-gradient(circle,rgba(45,212,191,.12),transparent 65%)" }} />
         </div>
-      </div>
+
+        <div className="relative z-10 px-5 md:px-12 xl:px-28">
+
+          <div className="text-center mb-14 space-y-3">
+            <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5"
+              style={{ background: "rgba(45,212,191,.10)", border: "1px solid rgba(45,212,191,.28)" }}>
+              <span className="w-2 h-2 rounded-full flex-shrink-0"
+                style={{ background: "linear-gradient(135deg,#2dd4bf,#06b6d4)" }} />
+              <span className="text-[10px] font-bold uppercase tracking-[.22em]"
+                style={{
+                  background: "linear-gradient(135deg,#2dd4bf,#6366f1)",
+                  WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
+                  fontFamily: "'Poppins',sans-serif",
+                }}>
+                Leading Brand Identity & Creative Agency in India
+              </span>
+            </div>
+
+            <h4 className="font-extrabold text-white"
+              style={{ fontFamily: "'Poppins',sans-serif", fontSize: "clamp(1.5rem,3vw,2.4rem)" }}>
+              Crafting Unique Identities that{" "}
+              <span style={{
+                background: "linear-gradient(120deg,#2dd4bf,#6366f1)",
+                WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
+              }}>
+                Inspire & Connect
+              </span>
+            </h4>
+
+            <div className="mx-auto h-[3px] w-14 rounded-full"
+              style={{ background: "linear-gradient(90deg,#2dd4bf,#6366f1)" }} />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+            {businessData.map((elm, i) => {
+              const gradients = [
+                { from: "#2dd4bf", to: "#6366f1" },
+                { from: "#6366f1", to: "#8b5cf6" },
+                { from: "#0ea5e9", to: "#2dd4bf" },
+              ];
+              const g = gradients[i % gradients.length];
+              return (
+                <div key={elm.title}
+                  className="group relative rounded-[20px] overflow-hidden flex flex-col transition-transform duration-300 hover:-translate-y-1"
+                  style={{
+                    border: "1px solid rgba(255,255,255,.08)",
+                    boxShadow: "0 12px 48px rgba(0,0,0,.40)",
+                  }}>
+
+                  <div className="relative flex items-center justify-center py-10 overflow-hidden"
+                    style={{ background: `linear-gradient(135deg,${g.from},${g.to})` }}>
+                    <div className="absolute inset-0 opacity-[.18]"
+                      style={{ backgroundImage: "radial-gradient(rgba(255,255,255,.65) 1px,transparent 1px)", backgroundSize: "18px 18px" }} />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130px] h-[130px] rounded-full pointer-events-none"
+                      style={{ border: "1.5px solid rgba(255,255,255,.18)" }} />
+                    <div className="absolute top-1 right-3 select-none pointer-events-none font-extrabold leading-none"
+                      style={{ fontFamily: "'Poppins',sans-serif", fontSize: "5rem", color: "rgba(255,255,255,.12)" }}>
+                      {String(i + 1).padStart(2, "0")}
+                    </div>
+                    <div className="relative z-10 w-[64px] h-[64px] rounded-2xl flex items-center justify-center"
+                      style={{
+                        background: "rgba(255,255,255,.20)",
+                        backdropFilter: "blur(12px)",
+                        border: "1.5px solid rgba(255,255,255,.38)",
+                        boxShadow: "0 8px 28px rgba(0,0,0,.22)",
+                      }}>
+                      {elm.icons}
+                    </div>
+                  </div>
+
+                  <div className="flex-1 flex flex-col p-7"
+                    style={{ background: "rgba(255,255,255,.04)", backdropFilter: "blur(16px)" }}>
+                    <div className="w-10 h-[3px] rounded-full mb-4"
+                      style={{ background: `linear-gradient(90deg,${g.from},${g.to})` }} />
+                    <h5 className="font-bold text-white mb-3 leading-snug"
+                      style={{ fontFamily: "'Poppins',sans-serif", fontSize: "1.1rem" }}>
+                      {elm.title}
+                    </h5>
+                    <p className="text-[13.5px] leading-[1.84] flex-1"
+                      style={{ color: "rgba(255,255,255,.50)" }}>
+                      {elm.desc}
+                    </p>
+                    <div className="mt-6 h-[1px] rounded-full"
+                      style={{ background: `linear-gradient(90deg,transparent,${g.from}55,${g.to}44,transparent)` }} />
+                  </div>
+
+                  <div className="absolute inset-0 rounded-[20px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    style={{ background: `radial-gradient(ellipse at 50% 0%,${g.from}14,transparent 55%)` }} />
+                </div>
+              );
+            })}
+          </div>
+
+        </div>
+      </section>
 
       <CustomSlider
         cards={cards}
-  title="Crafting Memorable Brand Identities with Creativity & Strategy"
+        title="Crafting Memorable Brand Identities with Creativity & Strategy"
       />
 
       <WhyFutureITTouch
         platforms={platforms}
-          title="Brand Identity & Creative Solutions We Deliver"
+        title="Brand Identity & Creative Solutions We Deliver"
       />
 
       <FAQSection
         faqData={faqData}
-  title="About Brand Identity & Creative Solutions"
+        title="About Brand Identity & Creative Solutions"
       />
 
-      {/* <GetNewInsight /> */}
-      <BuinessIdea />
+      <GetNewInsight />
     </>
   );
 };
 
 export default Ecommerce;
-
-
-

@@ -13,6 +13,7 @@ import Link from "next/link";
 import ChooseFuture from "../components/ChooseFuture";
 import Counter from "../components/Counter";
 import GetNewInsight from "../components/GetNewInsight";
+import OverviewSection from "../components/OverviewSection";
 
 const Branding = () => {
   return (
@@ -61,44 +62,20 @@ const Branding = () => {
 
       <Counter />
 
-      <div className="bg-gradient-to-b from-[#fff6f3] to-[#fffefb] py-20 px-5 md:px-12 xl:px-28">
-        <div className="grid grid-cols-1 lg:grid-cols-12 ">
-          <div className="px-4 md:col-span-4">
-            <div className="relative single-image bg-shape-dez max-sm:mb-5">
-              <Image
-                className="relative rounded w-full sm:w-full h-80 md:w-full lg:w-11/12   object-cover"
-                src={devops}
-                width={400}
-                height={400}
-                alt="Graphic Design"
-              />
-            </div>
-          </div>
-
-          <div className=" common-heading md:col-span-8">
-            <span className="text-lg text-[#e60072] uppercase max-sm:p-5  max-lg:hidden">
-              Overview
-            </span>
-            <h3
-              className=" text-2xl sm:text-3xl lg:text-4xl  text-[#050748] text-center lg:text-start font-bold mt-5 
-"
-            >
-              Custom Graphic Design Services We Offer
-            </h3>
-            <p className="text-xl   text-[#6a6a8e] text-justify pt-5 ">
-              Are you at the moment looking for the best graphic design company
-              in Chandigarh? If yes, then you have landed at the right place.
-              Future IT Touch Pvt. Ltd. being one of the leading graphic design
-              agencies in Chandigarh an gives your business a distinct
-              expression and shows it to the world on a branded platter of your
-              own. We have been ranked amongst top graphic design companies in
-              Chandigarh, that invests its creativity, innovative minds, and
-              technology at the helm of its graphic designers that are aimed
-              towards attaining clients’ graphic design outsourcing requisites.
-            </p>
-          </div>
-        </div>
-      </div>
+      <OverviewSection
+        image={devops}
+        imageAlt="Graphic Design Services"
+        badgeText="Custom Graphic Design Services"
+        heading="Custom Graphic Design"
+        headingHighlight="Services We Offer"
+        paragraphs={[
+          "Are you looking for the best graphic design company in Chandigarh? Future IT Touch Pvt. Ltd. is one of the leading graphic design agencies that gives your business a distinct expression and shows it to the world on a branded platter of your own.",
+          "We have been ranked amongst the top graphic design companies in Chandigarh. We invest creativity, innovative minds, and technology at the helm of our graphic designers, aimed towards attaining clients’ graphic design outsourcing requisites.",
+          "Our team of expert designers crafts visuals that communicate your brand message effectively — from brochures and logos to social media assets and marketing collateral, all tailored to your business needs.",
+        ]}
+        ctaText="Request A Quote"
+        ctaHref="/contact"
+      />
 
       <div className="grid grid-cols-7 max-lg:block  gap-20  px-5 md:px-12 xl:px-28 pb-14">
         <div className="col-span-4">

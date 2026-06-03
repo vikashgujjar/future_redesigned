@@ -7,7 +7,6 @@ import d1 from "../Assets/cr.webp";
 
 import TechMarquee from "../components/TechMarquee";
 import CustomSlider from "../components/CustomSlider";
-import BuinessIdea from "../components/BuinessIdea";
 import FAQSection from "../components/FAQSection";
 import WhyFutureITTouch from "../components/WhyFutureITTouch";
 import CommonBannerService from "../components/CommonBannerService";
@@ -470,48 +469,62 @@ const Quality = () => {
               style={{ background: "linear-gradient(90deg,#2dd4bf,#6366f1)", transformOrigin: "center" }} />
           </div>
 
-          {/* 5-col grid: sticky image (2 col) + feature cards (3 col) */}
-          <div className="grid grid-cols-1 lg:grid-cols-5 items-start gap-8 mt-8">
+          {/* 3-column bento grid of feature cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 mt-8">
+            {features.map((feature, index) => {
+              const gradients = [
+                { from: "#2dd4bf", to: "#6366f1" },
+                { from: "#6366f1", to: "#8b5cf6" },
+                { from: "#0ea5e9", to: "#2dd4bf" },
+                { from: "#a855f7", to: "#6366f1" },
+                { from: "#2dd4bf", to: "#0ea5e9" },
+                { from: "#8b5cf6", to: "#a855f7" },
+              ];
+              const g = gradients[index % gradients.length];
+              return (
+                <div key={index} className="qa-feat-card group relative rounded-2xl overflow-hidden flex flex-col"
+                  style={{
+                    background: "#fff",
+                    boxShadow: "0 4px 24px rgba(99,102,241,.09), 0 1px 4px rgba(0,0,0,.05)",
+                    border: `1px solid ${g.from}22`,
+                  }}>
 
-            {/* Sticky image — 2 col */}
-            <div className="hidden lg:flex lg:col-span-2 justify-center items-start sticky top-28">
-              <div className="relative w-full rounded-2xl overflow-hidden"
-                style={{ border: "1px solid rgba(99,102,241,.14)", boxShadow: "0 24px 60px rgba(99,102,241,.13)" }}>
-                <div className="absolute top-0 left-0 right-0 h-[3px] z-10"
-                  style={{ background: "linear-gradient(90deg,#2dd4bf,#6366f1,#a855f7)" }} />
-                <Image src={d1} alt="Quality Assurance Services"
-                  width={100} height={100}
-                  className="w-full rounded-xl shadow-lg h-full object-cover transition-transform duration-500 hover:scale-105" />
-              </div>
-            </div>
-
-            {/* Feature cards — 3 col */}
-            <div className="lg:col-span-3 grid grid-cols-1 gap-12 lg:gap-16">
-              {features.map((feature, index) => (
-                <div key={index} className="qa-feat-card relative flex flex-col items-start gap-4 p-6 rounded-xl bg-white"
-                  style={{ boxShadow: "0 8px 32px rgba(99,102,241,.09)", border: "1px solid rgba(99,102,241,.08)" }}>
-
-                  {/* Gradient top line */}
-                  <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-xl"
-                    style={{ background: "linear-gradient(90deg,#2dd4bf,#6366f1,#a855f7)" }} />
-
-                  {/* Gradient floating icon */}
-                  <div className="flex -mt-14 text-white text-3xl justify-center items-center p-4 rounded-xl w-20 h-20"
-                    style={{ background: "linear-gradient(135deg,#2dd4bf,#6366f1)", boxShadow: "0 8px 24px rgba(45,212,191,.30)" }}>
-                    {feature.icon}
+                  {/* Gradient banner top */}
+                  <div className="relative flex items-center justify-between px-6 py-5"
+                    style={{ background: `linear-gradient(135deg,${g.from}14,${g.to}0a)` }}>
+                    {/* Icon */}
+                    <div className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl text-white flex-shrink-0"
+                      style={{ background: `linear-gradient(135deg,${g.from},${g.to})`, boxShadow: `0 6px 18px ${g.from}50` }}>
+                      {feature.icon}
+                    </div>
+                    {/* Ghost number */}
+                    <span className="select-none font-extrabold leading-none"
+                      style={{ fontSize: "4rem", color: `${g.from}18`, fontFamily: "'Poppins',sans-serif", lineHeight: 1 }}>
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
                   </div>
 
-                  <h4 className="text-lg font-bold text-gray-900"
-                    style={{ fontFamily: "'Poppins',sans-serif" }}>
-                    {feature.title}
-                  </h4>
-                  <p className="text-[14px] text-gray-500 leading-[1.85] text-justify">
-                    {feature.description}
-                  </p>
-                </div>
-              ))}
-            </div>
+                  {/* Top gradient line */}
+                  <div className="h-[2px] w-full"
+                    style={{ background: `linear-gradient(90deg,${g.from},${g.to})` }} />
 
+                  {/* Content */}
+                  <div className="flex flex-col flex-1 p-6 gap-3">
+                    <h4 className="text-[1rem] font-bold text-gray-900 leading-snug"
+                      style={{ fontFamily: "'Poppins',sans-serif" }}>
+                      {feature.title}
+                    </h4>
+                    <p className="text-[13.5px] text-gray-500 leading-[1.82]">
+                      {feature.description}
+                    </p>
+                  </div>
+
+                  {/* Hover glow */}
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    style={{ background: `radial-gradient(ellipse at 50% 0%,${g.from}10,transparent 60%)` }} />
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -649,7 +662,6 @@ const Quality = () => {
 
       {/* ── 7. GetNewInsight + BuinessIdea ── */}
       <GetNewInsight />
-      <BuinessIdea />
     </>
   );
 };

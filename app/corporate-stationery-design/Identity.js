@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 import Image from "next/image";
@@ -5,7 +6,6 @@ import gm from "../Assets/cro.webp";
 
 import TechMarquee from "../components/TechMarquee";
 import CustomSlider from "../components/CustomSlider";
-import BuinessIdea from "../components/BuinessIdea";
 import FAQSection from "../components/FAQSection";
 import devops from "../Assets/app-intro.webp";
 
@@ -14,7 +14,8 @@ import CommonBannerService from "../components/CommonBannerService";
 import { FaPencilRuler, FaDesktop, FaCode, FaSearch } from "react-icons/fa";
 import { FaChartLine } from "react-icons/fa";
 import d1 from "../Assets/logo-gif.webp";
-
+import GetNewInsight from "../components/GetNewInsight";
+import OverviewSection from "../components/OverviewSection";
 
 import {
   FaPalette,
@@ -22,15 +23,16 @@ import {
 } from "react-icons/fa";
 
 import { FaLightbulb, FaHandshake } from "react-icons/fa";
-import { 
-  FaIdCard, 
-  FaEnvelopeOpenText, 
-  FaFolderOpen, 
-  FaPenFancy, 
-  FaFileInvoice, 
-  FaBullhorn, 
-  FaTools 
+import {
+  FaIdCard,
+  FaEnvelopeOpenText,
+  FaFolderOpen,
+  FaPenFancy,
+  FaFileInvoice,
+  FaBullhorn,
+  FaTools
 } from "react-icons/fa";
+
 const Brochure = () => {
 const features = [
   {
@@ -101,7 +103,7 @@ const cards = [
   {
     count: "250+",
     title: "Brochures Successfully Delivered",
-    desc: "We’ve designed over 250 professional brochures that clearly communicate brand messages and create strong impressions. From startups to enterprises, our brochures drive engagement and brand recognition.",
+    desc: "We've designed over 250 professional brochures that clearly communicate brand messages and create strong impressions. From startups to enterprises, our brochures drive engagement and brand recognition.",
     image: "/Assets/seerviceSlider/slide1.webp",
   },
   {
@@ -134,7 +136,7 @@ const platforms = [
   {
     icon: <FaPalette className="text-white w-6 h-6" />,
     title: "Creative Concepts & Branding",
-    desc: "We develop unique stationery and brochure concepts that capture your brand’s personality and communicate your message clearly to your target audience.",
+    desc: "We develop unique stationery and brochure concepts that capture your brand's personality and communicate your message clearly to your target audience.",
   },
   {
     icon: <FaPencilRuler className="text-white w-6 h-6" />,
@@ -198,8 +200,6 @@ const faqData = [
 
   return (
     <>
-      <div className="h-24 max-sm:h-[57px] max-md:h-20 max-lg:h-24 bg-white"></div>
-
       <CommonBannerService
         imgSrc={gm}
         title="The first impression is the best one"
@@ -207,141 +207,256 @@ const faqData = [
       />
 
       <TechMarquee />
-  <div className="relative px-5 md:px-12 xl:px-28 py-8 md:py-10 lg:py-12 bg-gradient-to-r from-indigo-50 via-white to-indigo-50">
-  <div className="max-w-4xl mx-auto text-center space-y-6">
-    <span className="inline-block px-3 py-1 text-xs font-medium text-indigo-600 bg-indigo-100 rounded-full">
-      Professional & Cohesive Corporate Stationery Design Services
-    </span>
 
-    <h4 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-snug text-gray-900">
-      Designing Corporate Stationery That Strengthens Your Brand Identity
-    </h4>
+      <OverviewSection
+        image={gm}
+        imageAlt="Corporate Stationery Design Services"
+        badgeText="Professional & Cohesive Corporate Stationery Design Services"
+        heading="Designing Corporate Stationery That"
+        headingHighlight="Strengthens Your Brand Identity"
+        paragraphs={[
+          "At Future IT Touch Pvt. Ltd. we create professional corporate stationery designs that convey consistency, professionalism, and brand personality across all office and business communication materials.",
+          "Corporate stationery is more than just letterheads and business cards — it reflects your company's professionalism and attention to detail. Our team crafts designs that align with your brand identity and communicate credibility.",
+          { boldPrefix: "For Businesses:", text: "We design letterheads, business cards, envelopes, and office templates that enhance brand recognition, maintain consistency, and reinforce a professional image." },
+          { boldPrefix: "For Audiences:", text: "Our designs leave a lasting impression on clients, partners, and stakeholders by combining clarity, creativity, and functional design that reflects your brand values." },
+        ]}
+        ctaText="Design Your Corporate Stationery Today"
+      />
 
-    <p className="text-base md:text-lg text-gray-600">
-      At{" "}
-      <span className="font-semibold text-indigo-600">
-        Future IT Touch Pvt. Ltd.
-      </span>{" "}
-      we create professional corporate stationery designs that convey consistency, professionalism, and brand personality across all office and business communication materials.
-    </p>
+      {/* Features section */}
+      <section className="relative py-16 sm:py-20 lg:py-24"
+        style={{ background: "#f8faff", fontFamily: "'Inter',sans-serif" }}>
 
-    <p className="text-sm md:text-base text-gray-700 leading-relaxed">
-      Corporate stationery is more than just letterheads and business cards — it reflects your company’s professionalism and attention to detail. Our team crafts designs that align with your brand identity and communicate credibility.
-      <br /> <br />
-      <span className="font-semibold text-gray-900">For Businesses:</span>{" "}
-      We design letterheads, business cards, envelopes, and office templates that enhance brand recognition, maintain consistency, and reinforce a professional image.
-      <br /> <br />
-      <span className="font-semibold text-gray-900">For Audiences:</span>{" "}
-      Our designs leave a lasting impression on clients, partners, and stakeholders by combining clarity, creativity, and functional design that reflects your brand values.
-      <br /> <br />
-      With over 15 years of design expertise, our{" "}
-      <span className="font-semibold text-indigo-600">
-        Corporate Stationery Design Services
-      </span>{" "}
-      help businesses establish a consistent, professional, and trustworthy brand presence.
-    </p>
-
-    <div className="pt-4">
-      <a
-        href="tel:+917056937000"
-        className="px-6 py-3 rounded-xl bg-indigo-600 text-white font-medium shadow-lg hover:bg-indigo-700 transition"
-      >
-        Design Your Corporate Stationery Today
-      </a>
-    </div>
-  </div>
-</div>
-
-
-      {/* high performance  */}
-
-      <div className="px-5 md:px-12 xl:px-28 py-8 md:py-10 lg:py-12 bg-gradient-to-r from-indigo-50 via-white to-indigo-50">
-        <div className="text-3xl lg:text-4xl text-center space-y-2 md:space-y-4 mb-12">
-          <h5 className="font-bold text-[#7C4DDA]">
-    Professional Corporate Stationery Design
-          </h5>
-          <h4 className="font-bold text-gray-900">
-    Crafting Consistent & Impactful Brand Identity Across All Office Collateral
-          </h4>
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute inset-0"
+            style={{ backgroundImage: "radial-gradient(circle,rgba(99,102,241,.055) 1px,transparent 1px)", backgroundSize: "28px 28px" }} />
+          <div className="absolute -top-32 -left-32 w-[480px] h-[480px] rounded-full"
+            style={{ background: "radial-gradient(circle,rgba(45,212,191,.07),transparent 65%)" }} />
+          <div className="absolute -bottom-32 -right-32 w-[440px] h-[440px] rounded-full"
+            style={{ background: "radial-gradient(circle,rgba(99,102,241,.06),transparent 65%)" }} />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 items-start gap-8 mt-20">
-          <div className="hidden lg:flex lg:col-span-2 justify-center items-start sticky top-0  ">
-            <Image
-              src={d1}
-              alt="eCommerce Development"
-              className="w-full rounded-xl shadow-lg h-full object-cover hover:scale-105 md:min-h-[70vh] transition-transform duration-500"
-            />
+        <div className="relative z-10 px-5 md:px-12 xl:px-28">
+
+          <div className="text-center mb-14 space-y-3">
+            <div className="inline-flex items-center gap-2.5 rounded-full px-4 py-1.5"
+              style={{ background: "rgba(45,212,191,.09)", border: "1px solid rgba(45,212,191,.26)" }}>
+              <span className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                style={{ background: "linear-gradient(135deg,#2dd4bf,#06b6d4)" }} />
+              <span className="text-[10px] font-bold uppercase tracking-[.22em]"
+                style={{
+                  background: "linear-gradient(135deg,#2dd4bf,#6366f1)",
+                  WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
+                  fontFamily: "'Poppins',sans-serif",
+                }}>
+                Professional Corporate Stationery Design
+              </span>
+            </div>
+            <h4 className="font-bold text-gray-900"
+              style={{ fontFamily: "'Poppins',sans-serif", fontSize: "clamp(1.5rem,3vw,2.4rem)" }}>
+              Crafting Consistent & Impactful Brand Identity{" "}
+              <span style={{
+                background: "linear-gradient(120deg,#2dd4bf,#6366f1)",
+                WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
+              }}>
+                Across All Office Collateral
+              </span>
+            </h4>
+            <div className="mx-auto h-[3px] w-14 rounded-full"
+              style={{ background: "linear-gradient(90deg,#2dd4bf,#6366f1)" }} />
           </div>
 
-          <div className="lg:col-span-3 grid grid-cols-1 gap-12 lg:gap-16">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-start gap-4 p-6 border border-gray-200 rounded-xl bg-white shadow-md hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300"
-              >
-                <div className="flex -mt-14 text-[#7C4DDA] text-3xl bg-white justify-center items-center p-4 rounded w-20 h-20 border border-gray-400">
-                  {feature.icon}
-                </div>
-                <h4 className="text-lg font-semibold text-gray-900">
-                  {feature.title}
-                </h4>
-                <p className="text-sm lg:text-base text-gray-700 text-justify">
-                  {feature.description}
-                </p>
+          <div className="grid grid-cols-1 lg:grid-cols-5 items-start gap-8">
+
+            <div className="hidden lg:flex lg:col-span-2 justify-center items-start sticky top-28">
+              <div className="relative rounded-2xl overflow-hidden w-full"
+                style={{
+                  border: "1px solid rgba(99,102,241,.12)",
+                  boxShadow: "0 20px 60px rgba(99,102,241,.12), 0 4px 16px rgba(0,0,0,.06)",
+                }}>
+                <div className="absolute top-0 left-0 right-0 h-[3px] z-10"
+                  style={{ background: "linear-gradient(90deg,#2dd4bf,#6366f1,#a855f7)" }} />
+                <Image
+                  src={d1}
+                  alt="Corporate Stationery Design"
+                  className="w-full object-cover hover:scale-105 md:h-[70vh] transition-transform duration-500"
+                />
               </div>
-            ))}
+            </div>
+
+            <div className="lg:col-span-3 grid grid-cols-1 gap-10 lg:gap-12">
+              {features.map((feature, index) => {
+                const gradients = [
+                  { from: "#2dd4bf", to: "#6366f1" },
+                  { from: "#6366f1", to: "#8b5cf6" },
+                  { from: "#0ea5e9", to: "#2dd4bf" },
+                  { from: "#a855f7", to: "#6366f1" },
+                  { from: "#2dd4bf", to: "#0ea5e9" },
+                  { from: "#8b5cf6", to: "#a855f7" },
+                  { from: "#6366f1", to: "#2dd4bf" },
+                ];
+                const g = gradients[index % gradients.length];
+                return (
+                  <div key={index}
+                    className="group relative flex flex-col items-start gap-4 p-6 rounded-xl bg-white transition-all duration-300 hover:-translate-y-1"
+                    style={{
+                      border: `1px solid ${g.from}22`,
+                      boxShadow: "0 4px 24px rgba(99,102,241,.08), 0 1px 4px rgba(0,0,0,.05)",
+                    }}>
+                    <div className="absolute top-0 left-6 right-6 h-[2px] rounded-full"
+                      style={{ background: `linear-gradient(90deg,${g.from},${g.to})` }} />
+
+                    <div className="flex -mt-14 justify-center items-center w-20 h-20 rounded-xl text-3xl"
+                      style={{
+                        background: `linear-gradient(135deg,${g.from},${g.to})`,
+                        boxShadow: `0 6px 20px ${g.from}44`,
+                      }}>
+                      <span className="text-white">{feature.icon}</span>
+                    </div>
+
+                    <h4 className="text-lg font-semibold text-gray-900"
+                      style={{ fontFamily: "'Poppins',sans-serif" }}>
+                      {feature.title}
+                    </h4>
+                    <p className="text-sm lg:text-base text-gray-600 text-justify">
+                      {feature.description}
+                    </p>
+
+                    <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                      style={{ background: `radial-gradient(ellipse at 10% 0%,${g.from}08,transparent 60%)` }} />
+                  </div>
+                );
+              })}
+            </div>
+
           </div>
         </div>
-      </div>
+      </section>
 
       {/* TurnYourBusiness */}
+      <section className="relative py-16 sm:py-20 lg:py-24"
+        style={{ background: "linear-gradient(140deg,#060b1a 0%,#09112a 48%,#0d1540 100%)", fontFamily: "'Inter',sans-serif" }}>
 
-      <div className="business-idea mx-5 py-8 md:py-12 xl:py-16 my-8 lg:my-16 px-5 md:px-12 xl:px-28 bg-gradient-to-r rounded-3xl">
-        <div className="text-center">
-          <h5 className="text-3xl md:text-4xl font-semibold text-white drop-shadow-md">
-      Professional Corporate Stationery Design Company in India
-          </h5>
-          <h4 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-white mt-2">
-      Crafting Stationery That Strengthens Your Brand Identity
-          </h4>
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute inset-0"
+            style={{ backgroundImage: "radial-gradient(rgba(255,255,255,.022) 1px,transparent 1px)", backgroundSize: "28px 28px" }} />
+          <div className="absolute top-0 right-0 w-[420px] h-[420px] rounded-full"
+            style={{ background: "radial-gradient(circle,rgba(99,102,241,.16),transparent 65%)" }} />
+          <div className="absolute bottom-0 left-0 w-[380px] h-[380px] rounded-full"
+            style={{ background: "radial-gradient(circle,rgba(45,212,191,.12),transparent 65%)" }} />
         </div>
 
-        <div className="mt-10 grid gap-8 md:gap-12 lg:gap-16 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {businessData.map((elm) => (
-            <div
-              className="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-transform transform hover:scale-105 flex flex-col items-start text-start"
-              key={elm.title}
-            >
-              <div className="bg-indigo-500 rounded-full w-16 h-16 flex items-center justify-center mb-4">
-                {elm.icons}
-              </div>
-              <h5 className="text-xl md:text-2xl font-bold mb-2">
-                {elm.title}
-              </h5>
-              <p className="text-gray-700 text-sm md:text-base">{elm.desc}</p>
+        <div className="relative z-10 px-5 md:px-12 xl:px-28">
+
+          <div className="text-center mb-14 space-y-3">
+            <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5"
+              style={{ background: "rgba(45,212,191,.10)", border: "1px solid rgba(45,212,191,.28)" }}>
+              <span className="w-2 h-2 rounded-full flex-shrink-0"
+                style={{ background: "linear-gradient(135deg,#2dd4bf,#06b6d4)" }} />
+              <span className="text-[10px] font-bold uppercase tracking-[.22em]"
+                style={{
+                  background: "linear-gradient(135deg,#2dd4bf,#6366f1)",
+                  WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
+                  fontFamily: "'Poppins',sans-serif",
+                }}>
+                Professional Corporate Stationery Design Company in India
+              </span>
             </div>
-          ))}
+
+            <h4 className="font-extrabold text-white"
+              style={{ fontFamily: "'Poppins',sans-serif", fontSize: "clamp(1.5rem,3vw,2.4rem)" }}>
+              Crafting Stationery That{" "}
+              <span style={{
+                background: "linear-gradient(120deg,#2dd4bf,#6366f1)",
+                WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
+              }}>
+                Strengthens Your Brand Identity
+              </span>
+            </h4>
+
+            <div className="mx-auto h-[3px] w-14 rounded-full"
+              style={{ background: "linear-gradient(90deg,#2dd4bf,#6366f1)" }} />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+            {businessData.map((elm, i) => {
+              const gradients = [
+                { from: "#2dd4bf", to: "#6366f1" },
+                { from: "#6366f1", to: "#8b5cf6" },
+                { from: "#0ea5e9", to: "#2dd4bf" },
+              ];
+              const g = gradients[i % gradients.length];
+              return (
+                <div key={elm.title}
+                  className="group relative rounded-[20px] overflow-hidden flex flex-col transition-transform duration-300 hover:-translate-y-1"
+                  style={{
+                    border: "1px solid rgba(255,255,255,.08)",
+                    boxShadow: "0 12px 48px rgba(0,0,0,.40)",
+                  }}>
+
+                  <div className="relative flex items-center justify-center py-10 overflow-hidden"
+                    style={{ background: `linear-gradient(135deg,${g.from},${g.to})` }}>
+                    <div className="absolute inset-0 opacity-[.18]"
+                      style={{ backgroundImage: "radial-gradient(rgba(255,255,255,.65) 1px,transparent 1px)", backgroundSize: "18px 18px" }} />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130px] h-[130px] rounded-full pointer-events-none"
+                      style={{ border: "1.5px solid rgba(255,255,255,.18)" }} />
+                    <div className="absolute top-1 right-3 select-none pointer-events-none font-extrabold leading-none"
+                      style={{ fontFamily: "'Poppins',sans-serif", fontSize: "5rem", color: "rgba(255,255,255,.12)" }}>
+                      {String(i + 1).padStart(2, "0")}
+                    </div>
+                    <div className="relative z-10 w-[64px] h-[64px] rounded-2xl flex items-center justify-center"
+                      style={{
+                        background: "rgba(255,255,255,.20)",
+                        backdropFilter: "blur(12px)",
+                        border: "1.5px solid rgba(255,255,255,.38)",
+                        boxShadow: "0 8px 28px rgba(0,0,0,.22)",
+                      }}>
+                      {elm.icons}
+                    </div>
+                  </div>
+
+                  <div className="flex-1 flex flex-col p-7"
+                    style={{ background: "rgba(255,255,255,.04)", backdropFilter: "blur(16px)" }}>
+                    <div className="w-10 h-[3px] rounded-full mb-4"
+                      style={{ background: `linear-gradient(90deg,${g.from},${g.to})` }} />
+                    <h5 className="font-bold text-white mb-3 leading-snug"
+                      style={{ fontFamily: "'Poppins',sans-serif", fontSize: "1.1rem" }}>
+                      {elm.title}
+                    </h5>
+                    <p className="text-[13.5px] leading-[1.84] flex-1"
+                      style={{ color: "rgba(255,255,255,.50)" }}>
+                      {elm.desc}
+                    </p>
+                    <div className="mt-6 h-[1px] rounded-full"
+                      style={{ background: `linear-gradient(90deg,transparent,${g.from}55,${g.to}44,transparent)` }} />
+                  </div>
+
+                  <div className="absolute inset-0 rounded-[20px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    style={{ background: `radial-gradient(ellipse at 50% 0%,${g.from}14,transparent 55%)` }} />
+                </div>
+              );
+            })}
+          </div>
+
         </div>
-      </div>
-<CustomSlider
-  cards={cards}
-  title="Creating Professional Corporate Stationery That Strengthens Your Brand"
-/>
+      </section>
 
-<WhyFutureITTouch
-  platforms={platforms}
-  title="Corporate Stationery Solutions We Deliver"
-/>
+      <CustomSlider
+        cards={cards}
+        title="Creating Professional Corporate Stationery That Strengthens Your Brand"
+      />
 
-<FAQSection
-  faqData={faqData}
-  title="About Our Corporate Stationery Design Services"
-/>
+      <WhyFutureITTouch
+        platforms={platforms}
+        title="Corporate Stationery Solutions We Deliver"
+      />
 
+      <FAQSection
+        faqData={faqData}
+        title="About Our Corporate Stationery Design Services"
+      />
 
-      {/* <GetNewInsight /> */}
-      <BuinessIdea />
+      <GetNewInsight />
     </>
   );
 };

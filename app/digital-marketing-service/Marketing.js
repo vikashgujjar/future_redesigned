@@ -11,6 +11,7 @@ import Image from "next/image";
 import { FaAngleRight, FaChevronRight, FaDotCircle } from "react-icons/fa";
 import Counter from "../components/Counter";
 import GetNewInsight from "../components/GetNewInsight";
+import OverviewSection from "../components/OverviewSection";
 
 const Marketing = () => {
   return (
@@ -55,41 +56,20 @@ const Marketing = () => {
 
       <Counter />
 
-   <div className="bg-gradient-to-b from-[#fff6f3] to-[#fffefb] py-14 sm:py-20 px-5 md:px-12 xl:px-28">
-  <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-    <div className="lg:col-span-4 flex justify-center">
-      <Image
-        src={devops}
-        className="w-72 sm:w-80 lg:w-96 rounded-lg"
-        width={400}
-        height={400}
-        alt="Digital marketing illustration"
+      <OverviewSection
+        image={devops}
+        imageAlt="Digital Marketing Services"
+        badgeText="Digital Marketing Services"
+        heading="Digital Marketing Services for"
+        headingHighlight="Growing Your Company"
+        paragraphs={[
+          "Digital Marketing Agency is a lot like fishing — you need to wait patiently for the catch, only if there are fish in the first place. With the advent of internet, a new avenue for advertising and selling has opened up for marketers and advertisers.",
+          "Although marketing and advertising on the internet is inexpensive, it is challenging. There is a whole lot of information available on the internet that your brand may get lost in the noise and clutter. Mere presence on social media cannot give you visibility in the virtual world.",
+          "Future IT Touch Pvt. Ltd. provides result-driven digital marketing services that help businesses increase visibility, generate qualified leads, and build lasting brand awareness across all digital channels.",
+        ]}
+        ctaText="Request A Quote"
+        ctaHref="/contact"
       />
-    </div>
-
-    <div className="lg:col-span-8">
-      <span className="text-base sm:text-lg text-[#e60072] uppercase block sm:pl-0">
-        Overview
-      </span>
-      <h3 className="text-2xl sm:text-3xl lg:text-4xl text-[#050748] font-bold mt-4 sm:mt-5 leading-snug sm:px-0">
-        Digital Marketing Services for Growing Your Company
-      </h3>
-      <p className="text-base sm:text-lg lg:text-xl text-[#6a6a8e] text-justify mt-4 sm:mt-5 leading-relaxed">
-        Digital Marketing Agency is a lot like fishing…you need to wait
-        patiently for the catch…only if there are fishes …in the first
-        place. With the advent of internet, a new avenue for advertising
-        and even selling has opened up for marketers and advertisers.
-        Although marketing and advertising on the internet is inexpensive,
-        it is challenging. This is because there is a whole lot of
-        information that is available on the internet for users and
-        consumers to absorb that there are chances that your brand may get
-        lost in the noise and clutter. Mere presence on social media and
-        posting of a few images here and there cannot give you visibility
-        in the virtual world.
-      </p>
-    </div>
-  </div>
-</div>
 
 
      <div className="grid grid-cols-1 lg:grid-cols-7 gap-12 px-5 md:px-12 xl:px-28 pb-14">
