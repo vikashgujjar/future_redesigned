@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import devops from "../Assets/app-develops.webp";
 import bannerImg from "../Assets/hhh.gif";

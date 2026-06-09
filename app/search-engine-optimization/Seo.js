@@ -1,42 +1,10 @@
 "use client";
-import React from "react";
-
-import Image from "next/image";
-import ec from "../Assets/or.gif";
-import featureImage from "../Assets//seo-new.webp";
 import cwd from "../Assets/seotwo.webp";
-import TechMarquee from "../components/TechMarquee";
-import CustomSlider from "../components/CustomSlider";
-import FAQSection from "../components/FAQSection";
-import WhyFutureITTouch from "../components/WhyFutureITTouch";
-import CommonBannerService from "../components/CommonBannerService";
-import GetNewInsight from "../components/GetNewInsight";
-
+import featureImage from "../Assets/seo-new.webp";
+import CommonServicePage from "../components/CommonServicePage";
 import {
-  FaMagento,
-  FaWordpress,
-  FaShopify,
-  FaOpencart,
-  FaCogs,
-  FaServer,
-} from "react-icons/fa";
-
-import { FaProjectDiagram, FaRobot, FaBars } from "react-icons/fa";
-
-import { FaSearch, FaLaptopCode } from "react-icons/fa";
-import {
-  FaBullhorn,
-  FaEnvelopeOpenText,
-  FaUsers,
-  FaChartLine,
-} from "react-icons/fa";
-
-import {
-  FaGlobe,
-  FaUserTie,
-  FaFileAlt,
-  FaListUl,
-  FaBuilding,
+  FaGlobe, FaSearch, FaUserTie, FaFileAlt, FaListUl, FaBuilding,
+  FaBullhorn, FaLaptopCode,
 } from "react-icons/fa";
 
 const Seo = () => {
@@ -147,17 +115,17 @@ const Seo = () => {
       desc: "We design and optimize PPC landing pages to increase engagement and conversion rates, ensuring your investment generates measurable results.",
     },
     {
-      icon: <FaUsers className="text-white w-6 h-6" />,
+      icon: <FaFileAlt className="text-white w-6 h-6" />,
       title: "Paid Social Advertising",
       desc: "We run highly targeted social media PPC campaigns on Facebook, Instagram, LinkedIn, and X (Twitter), using precise audience targeting and engaging ad creatives.",
     },
     {
-      icon: <FaChartLine className="text-white w-6 h-6" />,
+      icon: <FaListUl className="text-white w-6 h-6" />,
       title: "Performance Analytics & Reporting",
       desc: "Detailed reports and continuous monitoring allow us to measure campaign success, optimize strategies, and deliver data-driven decisions for maximum impact.",
     },
     {
-      icon: <FaEnvelopeOpenText className="text-white w-6 h-6" />,
+      icon: <FaGlobe className="text-white w-6 h-6" />,
       title: "Retargeting & Lead Nurturing",
       desc: "We implement retargeting strategies to re-engage visitors who didn't convert initially, improving overall campaign efficiency and lead generation.",
     },
@@ -197,388 +165,39 @@ const Seo = () => {
   ];
 
   return (
-    <>
-      <style>{`
-        @keyframes seoFloat {
-          0%, 100% { transform: translateY(0px) scale(1); }
-          50% { transform: translateY(-18px) scale(1.04); }
-        }
-      `}</style>
-
-      <CommonBannerService
-        imgSrc={cwd}
-        title="SEO SERVICES"
-        desc="Digital revolution has contributed to a crowded Search Engine Result Page (SERP) and studies reveal 75% of people never scroll past the first page. Businesses across industries are trying to outrank each other and achieve a top rank in the leading search engines.In such a competitive landscape, you cannot ace the ranking race without having a proper SEO strategy in place. And this is where we come in. Our niche-specific, data-driven, strategic SEO services can enhance your rank on the SERP. As a reliable SEO agency in India, we appoint the best minds in the industry to collaborate and fuel your business growth. Get a chance to focus on your business while we take."
-      />
-
-      <TechMarquee />
-
-      {/* About Section */}
-      <section style={{ background: "#f8faff" }} className="px-5 md:px-12 xl:px-28 py-14 md:py-20 relative">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle,rgba(99,102,241,.055) 1px,transparent 1px)",
-            backgroundSize: "28px 28px",
-          }}
-        />
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div
-            className="absolute -top-24 -left-24 w-80 h-80 rounded-full opacity-20 blur-3xl"
-            style={{ background: "radial-gradient(circle,#2dd4bf,transparent 70%)" }}
-          />
-          <div
-            className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full opacity-20 blur-3xl"
-            style={{ background: "radial-gradient(circle,#6366f1,transparent 70%)" }}
-          />
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="rounded-[28px] overflow-hidden shadow-2xl bg-white">
-            {/* Top gradient strip */}
-            <div
-              className="h-1.5 w-full"
-              style={{ background: "linear-gradient(90deg,#2dd4bf,#6366f1,#a855f7)" }}
-            />
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-              {/* Image left */}
-              <div className="relative min-h-[340px] lg:min-h-[520px] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#0d1540] to-[#09112a]">
-                <Image
-                  src={cwd}
-                  alt="SEO Services"
-                  fill
-                  className="object-cover opacity-60"
-                />
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background:
-                      "linear-gradient(135deg,rgba(45,212,191,.35) 0%,rgba(99,102,241,.35) 100%)",
-                  }}
-                />
-                {/* Corner brackets */}
-                <span className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-[#2dd4bf] rounded-tl-lg" />
-                <span className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-[#a855f7] rounded-tr-lg" />
-                <span className="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-[#a855f7] rounded-bl-lg" />
-                <span className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-[#2dd4bf] rounded-br-lg" />
-                {/* Sparkles */}
-                <span
-                  className="absolute top-10 right-10 w-3 h-3 rounded-full opacity-80"
-                  style={{ background: "#2dd4bf", animation: "seoFloat 3s ease-in-out infinite" }}
-                />
-                <span
-                  className="absolute bottom-16 left-12 w-2 h-2 rounded-full opacity-70"
-                  style={{ background: "#a855f7", animation: "seoFloat 4s ease-in-out infinite 1s" }}
-                />
-                {/* Badge */}
-                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
-                  <span
-                    className="px-4 py-2 rounded-full text-white text-xs font-bold shadow-lg"
-                    style={{ background: "rgba(99,102,241,.85)" }}
-                  >
-                    Since 2005
-                  </span>
-                  <span
-                    className="px-4 py-2 rounded-full text-white text-xs font-bold shadow-lg"
-                    style={{ background: "rgba(45,212,191,.85)" }}
-                  >
-                    Trusted by 500+ Clients
-                  </span>
-                </div>
-              </div>
-
-              {/* Content right */}
-              <div className="p-8 md:p-12 flex flex-col justify-center bg-white">
-                <span
-                  className="inline-block self-start px-4 py-1.5 rounded-full text-xs font-semibold mb-5"
-                  style={{
-                    background: "linear-gradient(90deg,rgba(45,212,191,.15),rgba(99,102,241,.15))",
-                    color: "#6366f1",
-                    border: "1px solid rgba(99,102,241,.25)",
-                  }}
-                >
-                  Result-Driven SEO Services
-                </span>
-
-                <h4 className="text-3xl md:text-4xl font-extrabold leading-tight text-gray-900 mb-4">
-                  Boost Organic Traffic &amp; Rankings with{" "}
-                  <span
-                    style={{
-                      background: "linear-gradient(90deg,#2dd4bf,#6366f1)",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                    }}
-                  >
-                    Proven SEO Strategies
-                  </span>
-                </h4>
-
-                <div
-                  className="w-16 h-1 rounded-full mb-6"
-                  style={{ background: "linear-gradient(90deg,#2dd4bf,#6366f1)" }}
-                />
-
-                <p className="text-base text-gray-600 mb-4">
-                  At{" "}
-                  <span className="font-semibold text-indigo-600">
-                    Future IT Touch Pvt. Ltd.
-                  </span>
-                  , we offer comprehensive Search Engine Optimization (SEO) services
-                  that help your business achieve higher visibility, better search
-                  rankings, and consistent organic traffic. Our SEO experts specialize
-                  in on-page, off-page, and technical SEO to deliver sustainable
-                  growth for your brand.
-                </p>
-
-                <p className="text-sm text-gray-700 leading-relaxed mb-4">
-                  Our SEO strategies are data-driven and tailored to your business
-                  goals — ensuring long-term success in competitive markets.
-                  <br /> <br />
-                  <span className="font-semibold text-gray-900">For Businesses:</span>
-                  {" "}Keyword research, content optimization, backlink building, and local
-                  SEO techniques designed to attract high-intent visitors and improve
-                  conversions.
-                  <br /> <br />
-                  <span className="font-semibold text-gray-900">
-                    For Marketing Teams:
-                  </span>
-                  {" "}Detailed performance analytics, competitor insights, and monthly
-                  reports to measure keyword rankings, traffic growth, and ROI
-                  effectively.
-                  <br /> <br />
-                  With over 10 years of SEO expertise, we've helped brands across
-                  industries achieve top rankings and drive organic leads. Partner
-                  with{" "}
-                  <span className="font-semibold text-indigo-600">
-                    Future IT Touch Pvt. Ltd.
-                  </span>{" "}
-                  to dominate search results and grow your online presence
-                  organically.
-                </p>
-
-                <div className="pt-2">
-                  <a
-                    href="tel:+917056937000"
-                    className="inline-block px-6 py-3 rounded-xl text-white font-medium shadow-lg transition"
-                    style={{
-                      background: "linear-gradient(90deg,#2dd4bf,#6366f1)",
-                    }}
-                  >
-                    Start Your SEO Campaign Today
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section style={{ background: "#f8faff" }} className="px-5 md:px-12 xl:px-28 py-14 md:py-20 relative">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle,rgba(99,102,241,.055) 1px,transparent 1px)",
-            backgroundSize: "28px 28px",
-          }}
-        />
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div
-            className="absolute top-0 right-0 w-72 h-72 rounded-full opacity-15 blur-3xl"
-            style={{ background: "radial-gradient(circle,#a855f7,transparent 70%)" }}
-          />
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <span
-              className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold mb-4"
-              style={{
-                background: "linear-gradient(90deg,rgba(45,212,191,.15),rgba(99,102,241,.15))",
-                color: "#6366f1",
-                border: "1px solid rgba(99,102,241,.25)",
-              }}
-            >
-              Result-Oriented SEO Services
-            </span>
-            <h4 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
-              Drive Quality Traffic, Boost Rankings &amp;{" "}
-              <span
-                style={{
-                  background: "linear-gradient(90deg,#2dd4bf,#6366f1)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                Grow Your Business Organically
-              </span>
-            </h4>
-            <div
-              className="w-16 h-1 rounded-full mx-auto"
-              style={{ background: "linear-gradient(90deg,#2dd4bf,#6366f1)" }}
-            />
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-5 items-start gap-8 mt-20">
-            {/* Sticky image */}
-            <div className="hidden lg:flex lg:col-span-2 justify-center items-start">
-              <div className="sticky top-28 w-full rounded-[20px] overflow-hidden shadow-2xl border border-gray-100">
-                <div
-                  className="h-1.5 w-full"
-                  style={{ background: "linear-gradient(90deg,#2dd4bf,#6366f1,#a855f7)" }}
-                />
-                <Image
-                  src={featureImage}
-                  alt="SEO Services"
-                  width={600}
-                  height={700}
-                  className="w-full object-cover"
-                />
-              </div>
-            </div>
-
-            {/* Feature cards */}
-            <div className="lg:col-span-3 grid grid-cols-1 gap-12 lg:gap-16">
-              {features.map((feature, index) => (
-                <div
-                  key={index}
-                  className="flex flex-col items-start gap-4 p-6 border border-gray-100 rounded-xl bg-white shadow-md hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 relative"
-                >
-                  <div
-                    className="absolute top-0 left-0 right-0 h-0.5 rounded-t-xl"
-                    style={{ background: "linear-gradient(90deg,#2dd4bf,#6366f1)" }}
-                  />
-                  <div
-                    className="flex -mt-14 text-3xl justify-center items-center p-4 rounded-xl w-20 h-20 shadow-lg"
-                    style={{
-                      background: "linear-gradient(135deg,#2dd4bf,#6366f1)",
-                      color: "#fff",
-                    }}
-                  >
-                    {feature.icon}
-                  </div>
-                  <h4 className="text-lg font-semibold text-gray-900">
-                    {feature.title}
-                  </h4>
-                  <p className="text-sm lg:text-base text-gray-600 text-justify">
-                    {feature.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* TurnYourBusiness Section */}
-      <section
-        className="mx-5 my-8 lg:my-16 px-5 md:px-12 xl:px-28 py-14 md:py-20 rounded-3xl relative"
-        style={{
-          background: "linear-gradient(140deg,#060b1a 0%,#09112a 48%,#0d1540 100%)",
-        }}
-      >
-        <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-3xl">
-          <div
-            className="absolute -top-32 -left-32 w-96 h-96 rounded-full opacity-20 blur-3xl"
-            style={{ background: "radial-gradient(circle,#2dd4bf,transparent 70%)" }}
-          />
-          <div
-            className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full opacity-20 blur-3xl"
-            style={{ background: "radial-gradient(circle,#6366f1,transparent 70%)" }}
-          />
-          <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full opacity-10 blur-3xl"
-            style={{ background: "radial-gradient(circle,#a855f7,transparent 70%)" }}
-          />
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <span
-              className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold mb-4"
-              style={{
-                background: "rgba(45,212,191,.15)",
-                color: "#2dd4bf",
-                border: "1px solid rgba(45,212,191,.3)",
-              }}
-            >
-              Leading SEO Company in India
-            </span>
-            <h4 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mt-2">
-              Drive Organic Growth &amp;{" "}
-              <span
-                style={{
-                  background: "linear-gradient(90deg,#2dd4bf,#a855f7)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                Boost Your Rankings with Expert SEO Strategies
-              </span>
-            </h4>
-            <div
-              className="w-16 h-1 rounded-full mx-auto mt-4"
-              style={{ background: "linear-gradient(90deg,#2dd4bf,#6366f1)" }}
-            />
-          </div>
-
-          <div className="grid gap-8 md:gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {businessData.map((elm, idx) => (
-              <div
-                key={elm.title}
-                className="relative rounded-2xl p-6 flex flex-col items-start text-start overflow-hidden"
-                style={{
-                  background: "linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.03))",
-                  border: "1px solid rgba(255,255,255,.12)",
-                  backdropFilter: "blur(10px)",
-                }}
-              >
-                {/* Gradient top line */}
-                <div
-                  className="absolute top-0 left-0 right-0 h-0.5"
-                  style={{ background: "linear-gradient(90deg,#2dd4bf,#6366f1,#a855f7)" }}
-                />
-                {/* Ghost number */}
-                <span
-                  className="absolute top-3 right-4 text-6xl font-black select-none pointer-events-none"
-                  style={{ color: "rgba(255,255,255,.04)" }}
-                >
-                  {String(idx + 1).padStart(2, "0")}
-                </span>
-                {/* Glass icon */}
-                <div
-                  className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 shadow-lg"
-                  style={{
-                    background: "linear-gradient(135deg,rgba(45,212,191,.25),rgba(99,102,241,.25))",
-                    border: "1px solid rgba(45,212,191,.3)",
-                  }}
-                >
-                  {elm.icons}
-                </div>
-                <h5 className="text-lg font-bold text-white mb-2">{elm.title}</h5>
-                <p className="text-sm text-gray-300 leading-relaxed">{elm.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <CustomSlider
-        cards={cards}
-        title="Maximize Conversions with Expert PPC Management Solutions "
-      />
-
-      <WhyFutureITTouch
-        platforms={platforms}
-        title="Comprehensive PPC Management Services – Target, Engage & Convert Your Audience Effectively"
-      />
-
-      <FAQSection faqData={faqData} title=" About PPC Management Services" />
-
-      <GetNewInsight />
-    </>
+    <CommonServicePage
+      bannerImg={cwd}
+      bannerTitle="SEO SERVICES"
+      bannerDesc="Digital revolution has contributed to a crowded Search Engine Result Page (SERP) and studies reveal 75% of people never scroll past the first page. Businesses across industries are trying to outrank each other and achieve a top rank in the leading search engines.In such a competitive landscape, you cannot ace the ranking race without having a proper SEO strategy in place. And this is where we come in. Our niche-specific, data-driven, strategic SEO services can enhance your rank on the SERP. As a reliable SEO agency in India, we appoint the best minds in the industry to collaborate and fuel your business growth. Get a chance to focus on your business while we take."
+      overviewImage={cwd}
+      overviewImageAlt="SEO Services"
+      overviewBadge="Result-Driven SEO Services"
+      overviewHeading="Boost Organic Traffic & Rankings with"
+      overviewHighlight="Proven SEO Strategies"
+      overviewParagraphs={[
+        "At Future IT Touch Pvt. Ltd., we offer comprehensive Search Engine Optimization (SEO) services that help your business achieve higher visibility, better search rankings, and consistent organic traffic. Our SEO experts specialize in on-page, off-page, and technical SEO to deliver sustainable growth for your brand.",
+        "Our SEO strategies are data-driven and tailored to your business goals — ensuring long-term success in competitive markets.",
+        { boldPrefix: "For Businesses:", text: "Keyword research, content optimization, backlink building, and local SEO techniques designed to attract high-intent visitors and improve conversions." },
+        { boldPrefix: "For Marketing Teams:", text: "Detailed performance analytics, competitor insights, and monthly reports to measure keyword rankings, traffic growth, and ROI effectively." },
+        "With over 10 years of SEO expertise, we've helped brands across industries achieve top rankings and drive organic leads. Partner with Future IT Touch Pvt. Ltd. to dominate search results and grow your online presence organically.",
+      ]}
+      overviewCtaText="Start Your SEO Campaign Today"
+      featuresBadge="Result-Oriented SEO Services"
+      featuresTitle="Drive Quality Traffic, Boost Rankings &"
+      featuresTitleHighlight="Grow Your Business Organically"
+      featuresStickyImg={featureImage}
+      features={features}
+      bizBadge="Leading SEO Company in India"
+      bizHeading="Drive Organic Growth &"
+      bizHighlight="Boost Your Rankings with Expert SEO Strategies"
+      bizCards={businessData}
+      sliderTitle="Maximize Conversions with Expert PPC Management Solutions "
+      sliderCards={cards}
+      platformsTitle="Comprehensive PPC Management Services – Target, Engage & Convert Your Audience Effectively"
+      platforms={platforms}
+      faqTitle=" About PPC Management Services"
+      faqData={faqData}
+    />
   );
 };
 

@@ -1,209 +1,249 @@
 "use client";
 import React, { useState } from "react";
 
-const GRADIENTS = [
-  { from: "#2dd4bf", to: "#6366f1" },
-  { from: "#6366f1", to: "#8b5cf6" },
-  { from: "#0ea5e9", to: "#2dd4bf" },
-  { from: "#a855f7", to: "#6366f1" },
-  { from: "#2dd4bf", to: "#0ea5e9" },
-  { from: "#8b5cf6", to: "#2dd4bf" },
+const PALETTES = [
+  { from:"#06b6d4", to:"#0284c7", light:"rgba(6,182,212,.08)",  border:"rgba(6,182,212,.35)"  },
+  { from:"#6366f1", to:"#4f46e5", light:"rgba(99,102,241,.08)", border:"rgba(99,102,241,.35)"  },
+  { from:"#10b981", to:"#059669", light:"rgba(16,185,129,.08)", border:"rgba(16,185,129,.35)"  },
+  { from:"#f59e0b", to:"#d97706", light:"rgba(245,158,11,.08)", border:"rgba(245,158,11,.35)"  },
+  { from:"#ec4899", to:"#db2777", light:"rgba(236,72,153,.08)", border:"rgba(236,72,153,.35)"  },
+  { from:"#8b5cf6", to:"#7c3aed", light:"rgba(139,92,246,.08)", border:"rgba(139,92,246,.35)"  },
 ];
 
 export default function WhyFutureITTouch({ platforms = [], title }) {
   const [visibleCount, setVisibleCount] = useState(6);
-  const visiblePlatforms = platforms.slice(0, visibleCount);
+  const visible = platforms.slice(0, visibleCount);
 
   return (
-    <section
-      className="relative overflow-hidden py-16 sm:py-20 lg:py-24"
-      style={{
-        background: "linear-gradient(140deg,#060b1a 0%,#09112a 48%,#0d1540 100%)",
-        fontFamily: "'Inter',sans-serif",
-      }}
-    >
-      <style>{`
-        @keyframes wftCW  { to { transform: rotate(360deg)  } }
-        @keyframes wftCCW { to { transform: rotate(-360deg) } }
-        @keyframes wftBarIn { from { transform: scaleX(0) } to { transform: scaleX(1) } }
-        @keyframes wftPing  { 75%,100% { transform: scale(2.1); opacity: 0 } }
+    <section className="relative overflow-hidden py-16 sm:py-20 lg:py-24"
+      style={{ background:"linear-gradient(155deg,#f4f8ff 0%,#ffffff 50%,#f0f4ff 100%)", fontFamily:"'Inter',sans-serif" }}>
 
-        .wft-bar  { animation: wftBarIn .7s cubic-bezier(.22,1,.36,1) .2s both; transform-origin: left }
-        .wft-ping { position: relative }
-        .wft-ping::after {
-          content: ''; position: absolute; inset: 0; border-radius: 50%;
-          background: inherit; animation: wftPing 2s ease-out infinite;
+      <style>{`
+        @keyframes wftBarIn  { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+        @keyframes wftGrad   { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+        @keyframes wftPulse  { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.45;transform:scale(.72)} }
+        @keyframes wftFloat  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+        @keyframes wftIn     { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+        .wft-bar   { animation:wftBarIn .75s cubic-bezier(.22,1,.36,1) .2s both; transform-origin:center }
+        .wft-pulse { animation:wftPulse 2.4s ease-in-out infinite }
+        .wft-hl {
+          background:linear-gradient(125deg,#06b6d4,#6366f1,#a855f7);
+          background-size:200% 200%;
+          -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+          animation:wftGrad 5s ease-in-out infinite;
         }
-        .wft-dotgrid {
-          background-image: radial-gradient(rgba(255,255,255,.028) 1px, transparent 1px);
-          background-size: 28px 28px;
-        }
+
+        /* Card */
         .wft-card {
-          transition: transform .28s cubic-bezier(.22,1,.36,1), box-shadow .28s, border-color .28s;
+          background:#ffffff;
+          border-radius:22px; overflow:hidden;
+          border:1px solid rgba(0,0,0,.06);
+          box-shadow:0 2px 12px rgba(99,102,241,.06),0 1px 3px rgba(0,0,0,.04);
+          display:flex; flex-direction:column;
+          transition:transform .28s cubic-bezier(.22,1,.36,1),
+                      box-shadow .28s ease,
+                      border-color .28s ease;
+          position:relative;
         }
         .wft-card:hover {
-          transform: translateY(-6px);
-          box-shadow: 0 24px 56px rgba(0,0,0,.45) !important;
+          transform:translateY(-8px);
+          box-shadow:0 20px 48px rgba(99,102,241,.13),0 4px 12px rgba(0,0,0,.07);
         }
-        .wft-card-glow {
-          opacity: 0;
-          transition: opacity .3s ease;
+
+        /* Top coloured panel */
+        .wft-panel {
+          position:relative; overflow:hidden;
+          height:148px; flex-shrink:0;
+          display:flex; align-items:center; justify-content:center;
+          transition:filter .28s ease;
         }
-        .wft-card:hover .wft-card-glow { opacity: 1 }
-        .wft-icon-ring {
-          transition: box-shadow .28s ease;
+        .wft-card:hover .wft-panel { filter:brightness(1.06); }
+
+        /* Dot mesh inside panel */
+        .wft-mesh {
+          position:absolute; inset:0;
+          background-image:radial-gradient(rgba(255,255,255,.28) 1px,transparent 1px);
+          background-size:18px 18px;
         }
-        .wft-card:hover .wft-icon-ring {
-          box-shadow: 0 0 0 6px rgba(45,212,191,.12), 0 6px 22px rgba(45,212,191,.30) !important;
+
+        /* Watermark number */
+        .wft-watermark {
+          position:absolute; right:-8px; bottom:-14px;
+          font-family:'Poppins',sans-serif; font-weight:900; line-height:1;
+          font-size:6.5rem; color:rgba(255,255,255,.12);
+          user-select:none; pointer-events:none;
         }
+
+        /* Icon ring */
+        .wft-icon {
+          position:relative; z-index:2;
+          width:62px; height:62px; border-radius:18px;
+          display:flex; align-items:center; justify-content:center;
+          background:rgba(255,255,255,.20);
+          border:1.5px solid rgba(255,255,255,.38);
+          backdrop-filter:blur(10px);
+          box-shadow:0 8px 28px rgba(0,0,0,.18),0 0 20px rgba(255,255,255,.14);
+          font-size:26px; color:#fff;
+          transition:transform .28s, box-shadow .28s;
+        }
+        .wft-card:hover .wft-icon {
+          transform:scale(1.10) translateY(-2px);
+          box-shadow:0 12px 36px rgba(0,0,0,.22),0 0 30px rgba(255,255,255,.20);
+        }
+
+        /* Floating sparkle star */
+        .wft-star {
+          position:absolute; top:14px; left:14px; opacity:.5;
+          animation:wftFloat 4s ease-in-out infinite;
+        }
+
+        /* Content area */
+        .wft-body { flex:1; padding:20px 22px 22px; display:flex; flex-direction:column; }
+
+        /* Top bar accent that reveals on hover */
+        .wft-accent-bar {
+          height:2px; width:28px; border-radius:2px;
+          margin-bottom:12px;
+          transition:width .3s cubic-bezier(.22,1,.36,1);
+        }
+        .wft-card:hover .wft-accent-bar { width:44px; }
+
+        /* Hover bloom overlay */
+        .wft-bloom {
+          position:absolute; inset:0; border-radius:22px;
+          opacity:0; pointer-events:none;
+          transition:opacity .35s ease;
+        }
+        .wft-card:hover .wft-bloom { opacity:1; }
+
+        /* Bottom row */
+        .wft-foot {
+          display:flex; align-items:center; gap:8px; margin-top:auto; padding-top:14px;
+        }
+        .wft-foot-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+        .wft-foot-line { flex:1; height:1px; border-radius:1px; }
+
+        /* Load more btn */
+        .wft-btn {
+          display:inline-flex; align-items:center; gap:8px;
+          font-family:'Poppins',sans-serif; font-weight:700;
+          font-size:11.5px; letter-spacing:.12em; text-transform:uppercase;
+          color:#fff; padding:12px 28px; border-radius:999px; border:none; cursor:pointer;
+          background:linear-gradient(135deg,#06b6d4,#6366f1,#a855f7);
+          background-size:250% 250%; animation:wftGrad 4s ease-in-out infinite;
+          box-shadow:0 6px 28px rgba(99,102,241,.28);
+          transition:transform .22s, box-shadow .22s;
+        }
+        .wft-btn:hover { transform:translateY(-2px); box-shadow:0 10px 36px rgba(99,102,241,.36); }
       `}</style>
 
-      {/* ── Background layers ── */}
-      <div className="wft-dotgrid absolute inset-0 pointer-events-none" />
-      <div className="absolute -top-48 -left-48 w-[560px] h-[560px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle,rgba(45,212,191,.13) 0%,transparent 65%)" }} />
-      <div className="absolute -bottom-48 -right-48 w-[500px] h-[500px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle,rgba(99,102,241,.13) 0%,transparent 65%)" }} />
+      {/* Bg soft blobs */}
+      <div className="absolute -top-40 -right-40 w-[480px] h-[480px] rounded-full pointer-events-none"
+        style={{ background:"radial-gradient(circle,rgba(99,102,241,.07),transparent 65%)" }} />
+      <div className="absolute -bottom-40 -left-40 w-[440px] h-[440px] rounded-full pointer-events-none"
+        style={{ background:"radial-gradient(circle,rgba(6,182,212,.07),transparent 65%)" }} />
+      <div className="absolute inset-0 pointer-events-none"
+        style={{ backgroundImage:"radial-gradient(rgba(99,102,241,.035) 1px,transparent 1px)", backgroundSize:"30px 30px" }} />
 
-      {/* SVG arcs — top-left */}
-      <svg className="absolute top-0 left-0 pointer-events-none" width="320" height="320"
-        viewBox="0 0 320 320" fill="none" aria-hidden="true">
-        <g style={{ transformOrigin: "0 0", animation: "wftCW 48s linear infinite" }}>
-          <circle cx="0" cy="0" r="230" stroke="rgba(45,212,191,.07)" strokeWidth="1.2"
-            strokeDasharray="70 115" strokeLinecap="round" fill="none" />
-        </g>
-        <g style={{ transformOrigin: "0 0", animation: "wftCCW 32s linear infinite" }}>
-          <circle cx="0" cy="0" r="148" stroke="rgba(99,102,241,.07)" strokeWidth="1"
-            strokeDasharray="48 80" strokeLinecap="round" fill="none" />
-        </g>
-      </svg>
+      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-8 md:px-12 xl:px-28">
 
-      {/* SVG arcs — bottom-right */}
-      <svg className="absolute bottom-0 right-0 pointer-events-none" width="280" height="280"
-        viewBox="0 0 280 280" fill="none" aria-hidden="true">
-        <g style={{ transformOrigin: "280px 280px", animation: "wftCCW 38s linear infinite" }}>
-          <circle cx="280" cy="280" r="195" stroke="rgba(139,92,246,.07)" strokeWidth="1.2"
-            strokeDasharray="60 100" strokeLinecap="round" fill="none" />
-        </g>
-      </svg>
-
-      <div className="relative z-10 max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 xl:px-28">
-
-        {/* ── Section header ── */}
-        <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-5"
-            style={{ background: "rgba(45,212,191,.09)", border: "1px solid rgba(45,212,191,.24)" }}>
-            <span className="wft-ping w-2 h-2 rounded-full flex-shrink-0"
-              style={{ background: "linear-gradient(135deg,#2dd4bf,#06b6d4)" }} />
+        {/* Header */}
+        <div className="text-center mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-2.5 rounded-full px-4 py-1.5 mb-5"
+            style={{ background:"rgba(6,182,212,.08)", border:"1px solid rgba(6,182,212,.22)" }}>
+            <span className="wft-pulse w-1.5 h-1.5 rounded-full flex-shrink-0"
+              style={{ background:"linear-gradient(135deg,#06b6d4,#0ea5e9)" }} />
             <span className="text-[10px] font-bold uppercase tracking-[.22em]"
-              style={{
-                background: "linear-gradient(135deg,#2dd4bf,#6366f1)",
-                WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
-                fontFamily: "'Poppins',sans-serif",
-              }}>
+              style={{ color:"#0891b2", fontFamily:"'Poppins',sans-serif" }}>
               Platforms &amp; Technologies
             </span>
           </div>
 
-          <h2 className="font-extrabold text-white mb-4"
-            style={{ fontFamily: "'Poppins',sans-serif", fontSize: "clamp(1.6rem,3.5vw,2.6rem)", lineHeight: 1.12 }}>
+          <h2 className="font-extrabold leading-[1.12] mb-3"
+            style={{ color:"#060b1e", fontFamily:"'Poppins',sans-serif", fontSize:"clamp(1.55rem,3.2vw,2.6rem)" }}>
             {title}
           </h2>
 
-          <p className="text-[13.5px] max-w-[520px] mx-auto mb-5"
-            style={{ color: "rgba(255,255,255,.42)", lineHeight: 1.8 }}>
+          <p className="text-[13.5px] max-w-[480px] mx-auto mb-5 leading-[1.82]"
+            style={{ color:"#64748b" }}>
             We master the tools that power modern digital products — from storefronts to enterprise platforms.
           </p>
 
-          <div className="wft-bar h-[3px] w-14 rounded-full mx-auto"
-            style={{ background: "linear-gradient(90deg,#2dd4bf,#6366f1)", transformOrigin: "center" }} />
+          <div className="wft-bar mx-auto h-[3px] w-14 rounded-full"
+            style={{ background:"linear-gradient(90deg,#06b6d4,#6366f1,#a855f7)" }} />
         </div>
 
-        {/* ── Cards grid ── */}
+        {/* Cards grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xl:gap-6">
-          {visiblePlatforms.map((elm, index) => {
-            const grad = GRADIENTS[index % GRADIENTS.length];
+          {visible.map((elm, i) => {
+            const p = PALETTES[i % PALETTES.length];
             return (
-              <div
-                key={index}
-                className="wft-card relative group rounded-2xl overflow-hidden"
-                style={{
-                  background: "rgba(7,9,22,.84)",
-                  border: "1px solid rgba(255,255,255,.07)",
-                  boxShadow: "0 4px 28px rgba(0,0,0,.32)",
-                }}
-              >
-                {/* Gradient top strip */}
-                <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl"
-                  style={{ background: `linear-gradient(90deg,${grad.from},${grad.to})`, opacity: .65 }} />
+              <div key={i} className="wft-card">
 
-                {/* Hover border glow */}
-                <div className="wft-card-glow absolute inset-0 rounded-2xl pointer-events-none"
-                  style={{ boxShadow: `inset 0 0 0 1px ${grad.from}44` }} />
+                {/* Hover bloom */}
+                <div className="wft-bloom" style={{ background:`radial-gradient(ellipse at 50% 0%,${p.light},transparent 65%)` }} />
 
-                <div className="p-6 sm:p-7">
+                {/* Colored top panel */}
+                <div className="wft-panel"
+                  style={{ background:`linear-gradient(135deg,${p.from},${p.to})` }}>
+                  <div className="wft-mesh" />
+                  <span className="wft-watermark">{String(i + 1).padStart(2,"0")}</span>
+
+                  {/* Floating sparkle */}
+                  <svg className="wft-star" width="14" height="14" viewBox="0 0 36 36" fill="none">
+                    <path d="M18 0 L20.2 15.8 L36 18 L20.2 20.2 L18 36 L15.8 20.2 L0 18 L15.8 15.8 Z" fill="rgba(255,255,255,.7)"/>
+                  </svg>
+
+                  {/* Second sparkle */}
+                  <svg className="absolute bottom-4 right-10 opacity-30 pointer-events-none" width="9" height="9"
+                    viewBox="0 0 36 36" fill="none" style={{ animation:"wftFloat 6s ease-in-out infinite .8s" }}>
+                    <path d="M18 0 L20.2 15.8 L36 18 L20.2 20.2 L18 36 L15.8 20.2 L0 18 L15.8 15.8 Z" fill="white"/>
+                  </svg>
 
                   {/* Icon */}
-                  <div
-                    className="wft-icon-ring w-13 h-13 rounded-xl flex items-center justify-center mb-5 flex-shrink-0"
-                    style={{
-                      width: 52, height: 52,
-                      background: `linear-gradient(135deg,${grad.from},${grad.to})`,
-                      boxShadow: `0 4px 18px ${grad.from}44`,
-                    }}
-                  >
-                    <span style={{ color: "#fff", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      {elm.icon}
-                    </span>
-                  </div>
+                  <div className="wft-icon">{elm.icon}</div>
+                </div>
 
-                  {/* Title */}
-                  <h5 className="font-bold text-white mb-3 leading-snug"
-                    style={{ fontFamily: "'Poppins',sans-serif", fontSize: "clamp(.95rem,1.8vw,1.05rem)" }}>
+                {/* Content */}
+                <div className="wft-body">
+                  <div className="wft-accent-bar"
+                    style={{ background:`linear-gradient(90deg,${p.from},${p.to})` }} />
+
+                  <h5 className="font-bold leading-snug mb-2.5"
+                    style={{ color:"#0f172a", fontFamily:"'Poppins',sans-serif", fontSize:"clamp(.93rem,1.5vw,1.03rem)" }}>
                     {elm.title}
                   </h5>
 
-                  {/* Accent divider */}
-                  <div className="h-px mb-3 rounded-full"
-                    style={{ background: `linear-gradient(90deg,${grad.from}55,transparent)` }} />
-
-                  {/* Description */}
-                  <p className="text-[13px] leading-[1.82]"
-                    style={{ color: "rgba(255,255,255,.48)" }}>
+                  <p className="text-[13px] leading-[1.84] flex-1" style={{ color:"#64748b" }}>
                     {elm.desc}
                   </p>
 
-                  {/* Bottom subtle corner indicator */}
-                  <div className="flex items-center gap-1.5 mt-5">
-                    <div className="w-1.5 h-1.5 rounded-full"
-                      style={{ background: `linear-gradient(135deg,${grad.from},${grad.to})` }} />
-                    <div className="h-px flex-1 rounded-full"
-                      style={{ background: `linear-gradient(90deg,${grad.from}33,transparent)` }} />
+                  <div className="wft-foot">
+                    <div className="wft-foot-dot"
+                      style={{ background:`linear-gradient(135deg,${p.from},${p.to})` }} />
+                    <div className="wft-foot-line"
+                      style={{ background:`linear-gradient(90deg,${p.from}33,transparent)` }} />
                   </div>
                 </div>
+
               </div>
             );
           })}
         </div>
 
-        {/* ── Load More ── */}
+        {/* Load more */}
         {visibleCount < platforms.length && (
           <div className="flex justify-center mt-12">
-            <button
-              onClick={() => setVisibleCount(prev => prev + 6)}
-              className="inline-flex items-center gap-2.5 font-bold text-[11px] tracking-[.14em] uppercase px-7 py-3.5 rounded-full text-white transition-all hover:-translate-y-0.5 border-none cursor-pointer"
-              style={{
-                background: "linear-gradient(135deg,#2dd4bf,#6366f1)",
-                boxShadow: "0 4px 24px rgba(45,212,191,.35)",
-              }}
-            >
+            <button className="wft-btn" onClick={() => setVisibleCount(v => v + 6)}>
               Load More
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M6 1v10M2 7l4 4 4-4" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              <svg width="13" height="13" viewBox="0 0 12 12" fill="none">
+                <path d="M6 1v10M2 7l4 4 4-4" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </button>
           </div>
         )}
+
       </div>
     </section>
   );

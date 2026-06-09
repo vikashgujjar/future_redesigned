@@ -12,47 +12,16 @@ import { FaAngleRight, FaChevronRight, FaDotCircle } from "react-icons/fa";
 import Counter from "../components/Counter";
 import GetNewInsight from "../components/GetNewInsight";
 import OverviewSection from "../components/OverviewSection";
+import CommonBannerService from "../components/CommonBannerService";
 
 const Marketing = () => {
   return (
     <>
-      <div className="h-24 max-sm:h-[57px] max-md:h-20 max-lg:h-24 bg-white"></div>
-      <div className="relative overflow-hidden bg-[#442a79] h-96 max-lg:h-auto">
-        <div className="flex items-center max-sm:block max-lg:block  px-5 md:px-12 xl:px-28   max-sm:py-7 gap-10  pt-12 max-pt-1   max-xl:py-5">
-          <div className="  ">
-            <h1 className="text-white font-bold text-4xl  max-lg:text-2xl">
-              Professional Digital Marketing Services
-            </h1>
-
-            <div className="text-[#dcd7f8]  mt-3 text-lg text-justify max-lg:text-base">
-              <p>
-                Digital marketing needs have changed over the years with today’s
-                dynamic industry. It is always worthwhile to calibrate your
-                digital strategy. As a towering Digital Marketing Agency in
-                Chandigarh that has led to many successful digital campaigns, we
-                ensure that our clients move from mere digital tactics to a
-                well-crafted digital strategy. The trust levels are a direct
-                result of unwavering commitment to innovative ideas, quality
-                work, and time-bound deadlines. Our clients have realized
-                through experience that our digital agency in Chandigarh is
-                capable of unbiased judgment when it is time to create and
-                launch an all-encompassing digital marketing campaign.
-              </p>
-            </div>
-            <div className="flex gap-3 mt-5">
-              <a
-                href="/contact"
-                className="flex items-center bg-[#dc3545] justify-center bg-red text-white py-2 px-4 sm:px-8 font-heading transition duration-400 ease-in-out rounded-md text-base font-base focus:outline-none hover:bg-gray-300 hover:bg-gradient-to-r from-teal-400 to-indigo-700"
-              >
-                Quick Enquiry
-              </a>
-              <button className="flex items-center bg-dark-200 justify-center border text-white py-2 px-2  sm:px-8 font-heading ">
-                <a href="tel:+917056937000">Call us - 7056937000</a>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <CommonBannerService
+        imgSrc={devops}
+        title="Professional Digital Marketing Services"
+        desc="Digital marketing needs have changed over the years with today's dynamic industry. It is always worthwhile to calibrate your digital strategy. As a towering Digital Marketing Agency in Chandigarh that has led to many successful digital campaigns, we ensure that our clients move from mere digital tactics to a well-crafted digital strategy. The trust levels are a direct result of unwavering commitment to innovative ideas, quality work, and time-bound deadlines. Our clients have realized through experience that our digital agency in Chandigarh is capable of unbiased judgment when it is time to create and launch an all-encompassing digital marketing campaign."
+      />
 
       <Counter />
 
@@ -138,7 +107,7 @@ const Marketing = () => {
       </li>
       <li className="flex gap-3 items-center">
         <FaDotCircle className="text-[#f92c8b]" />
-        Earn People’s Trust and Build Brand Reputation
+        Earn People's Trust and Build Brand Reputation
       </li>
       <li className="flex gap-3 items-center">
         <FaDotCircle className="text-[#f92c8b]" />
@@ -163,7 +132,7 @@ const Marketing = () => {
             </div>
           </div>
         </div>
-        <div class="grid grid-cols-1  gap-8 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2  px-5 md:px-12 xl:px-28 my-10">
+        <div className="grid grid-cols-1  gap-8 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2  px-5 md:px-12 xl:px-28 my-10">
           <div className=" w-full  mb-8 lg:mb-0">
             <div className="flex max-lg:block   bg-[#e9ddff] rounded-lg shadow-lg py-7 px-5 gap-3">
               <div className="w-full">

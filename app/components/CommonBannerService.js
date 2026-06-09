@@ -1,129 +1,233 @@
-import React from 'react';
 import Image from 'next/image';
 
 export default function CommonBannerService({ imgSrc, title, desc }) {
   return (
     <>
       <style>{`
-        @keyframes cbsBlob  { 0%,100%{transform:translate(0,0)} 33%{transform:translate(30px,-20px)} 66%{transform:translate(-16px,18px)} }
-        @keyframes cbsCW    { to { transform: rotate(360deg) } }
-        @keyframes cbsCCW   { to { transform: rotate(-360deg) } }
-        @keyframes cbsBarIn { from { transform: scaleX(0) } to { transform: scaleX(1) } }
-        @keyframes cbsFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-        .cbs-bar { animation: cbsBarIn .7s cubic-bezier(.22,1,.36,1) .2s both; transform-origin: left }
-        .cbs-dotgrid {
-          background-image: radial-gradient(circle, rgba(99,102,241,.055) 1px, transparent 1px);
-          background-size: 28px 28px;
+        @keyframes cbsOrb1   { 0%,100%{transform:translate(0,0)scale(1)} 40%{transform:translate(30px,-20px)scale(1.07)} 70%{transform:translate(-16px,24px)scale(.95)} }
+        @keyframes cbsOrb2   { 0%,100%{transform:translate(0,0)scale(1)} 35%{transform:translate(-24px,18px)scale(1.05)} 70%{transform:translate(20px,-28px)scale(.97)} }
+        @keyframes cbsGrad   { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+        @keyframes cbsPulse  { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.78)} }
+        @keyframes cbsSpin   { to{transform:rotate(360deg)} }
+        @keyframes cbsSpinR  { to{transform:rotate(-360deg)} }
+        @keyframes cbsGridFd { 0%,100%{opacity:.04} 50%{opacity:.09} }
+        @keyframes cbsShimmer{ 0%{transform:translateX(-120%)} 100%{transform:translateX(220%)} }
+        @keyframes cbsFadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes cbsBarIn  { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+        @keyframes cbsFloat  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+        .cbs-orb1  { animation:cbsOrb1 18s ease-in-out infinite }
+        .cbs-orb2  { animation:cbsOrb2 23s ease-in-out infinite }
+        .cbs-pulse { animation:cbsPulse 2.4s ease-in-out infinite }
+        .cbs-float { animation:cbsFloat 4.5s ease-in-out infinite }
+        .cbs-spin  { animation:cbsSpin  12s linear infinite; transform-origin:190px 190px }
+        .cbs-spinr { animation:cbsSpinR 17s linear infinite; transform-origin:190px 190px }
+        .cbs-grid  { animation:cbsGridFd 8s ease-in-out infinite }
+        .cbs-fadein{ animation:cbsFadeUp .9s cubic-bezier(.22,1,.36,1) both }
+        .cbs-bar   { animation:cbsBarIn .85s cubic-bezier(.22,1,.36,1) .3s both; transform-origin:center }
+
+        .cbs-title {
+          background: linear-gradient(125deg,#ffffff 0%,#7dd3fc 28%,#c084fc 58%,#f9a8d4 80%,#ffffff 100%);
+          background-size: 280% 280%;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          animation: cbsGrad 7s ease-in-out infinite;
+          word-break: break-word;
+        }
+
+        .cbs-btn-primary {
+          position: relative;
+          overflow: hidden;
+          background: linear-gradient(135deg,#06b6d4,#7c3aed,#db2777);
+          background-size: 250% 250%;
+          animation: cbsGrad 4s ease-in-out infinite;
+          box-shadow: 0 8px 28px rgba(6,182,212,.30),0 2px 8px rgba(0,0,0,.25);
+          transition: transform .2s, box-shadow .2s;
+        }
+        .cbs-btn-primary::before {
+          content:'';
+          position:absolute;
+          top:0; left:-100%; width:55%; height:100%;
+          background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+          animation:cbsShimmer 2.8s ease-in-out infinite 1.2s;
+        }
+        .cbs-btn-primary:hover { transform:translateY(-2px); box-shadow:0 14px 40px rgba(6,182,212,.40),0 4px 16px rgba(124,58,237,.28); }
+
+        .cbs-btn-ghost {
+          background: rgba(255,255,255,.06);
+          border: 1px solid rgba(255,255,255,.18);
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+          color: #e2e8f0;
+          transition: transform .2s,background .2s,border-color .2s;
+        }
+        .cbs-btn-ghost:hover { transform:translateY(-2px); background:rgba(255,255,255,.10); border-color:rgba(6,182,212,.45); }
+
+        .cbs-badge {
+          background: rgba(6,182,212,.08);
+          border: 1px solid rgba(6,182,212,.24);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+        }
+
+        .cbs-desc {
+          color: rgba(185,210,240,.78);
+          line-height: 1.85;
+          display: -webkit-box;
+          -webkit-line-clamp: 4;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        .cbs-scroll-hint {
+          width: 24px; height: 38px;
+          border: 1.5px solid rgba(255,255,255,.18);
+          border-radius: 12px;
+          position: relative;
+          display: flex;
+          align-items: flex-start;
+          justify-content: center;
+          padding-top: 5px;
+        }
+        .cbs-scroll-hint::after {
+          content:'';
+          width:4px; height:7px;
+          border-radius:2px;
+          background:rgba(6,182,212,.7);
+          animation:cbsFloat 1.5s ease-in-out infinite;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 480px) {
+          .cbs-desc { -webkit-line-clamp: 3; font-size:13.5px !important; }
+          .cbs-badge-text { letter-spacing:.12em !important; font-size:9px !important; }
+          .cbs-scroll-hint { display:none; }
+        }
+        @media (max-width: 640px) {
+          .cbs-orb1,.cbs-orb2 { opacity:.6 }
         }
       `}</style>
 
-      <section className="relative overflow-hidden flex items-center"
+      <section
+        className="relative overflow-hidden flex flex-col"
         style={{
-          background: "linear-gradient(140deg,#060b1a 0%,#09112a 48%,#0d1540 100%)",
+          minHeight: 'clamp(480px,72vh,700px)',
           fontFamily: "'Inter',sans-serif",
-          minHeight: "clamp(480px,75vh,700px)",
-        }}>
-
-        {/* Grain */}
-        <div className="absolute inset-0 pointer-events-none z-[1] opacity-[.036]"
-          style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")" }} />
-        <div className="cbs-dotgrid absolute inset-0 pointer-events-none z-[1]" />
-
-        {/* Blobs */}
-        <div className="absolute -top-48 -left-48 w-[580px] h-[580px] rounded-full pointer-events-none z-[2]"
-          style={{ background: "radial-gradient(circle,rgba(45,212,191,.16) 0%,transparent 65%)", animation: "cbsBlob 16s ease-in-out infinite" }} />
-        <div className="absolute -bottom-48 right-0 w-[520px] h-[520px] rounded-full pointer-events-none z-[2]"
-          style={{ background: "radial-gradient(circle,rgba(99,102,241,.18) 0%,transparent 65%)", animation: "cbsBlob 20s ease-in-out infinite reverse" }} />
-
-        {/* SVG arcs */}
-        <svg className="absolute top-0 left-0 pointer-events-none z-[2]" width="380" height="380"
-          viewBox="0 0 380 380" fill="none" aria-hidden="true">
-          <defs>
-            <linearGradient id="cbsTL" x1="100%" y1="100%" x2="0%" y2="0%">
-              <stop offset="0%" stopColor="#2dd4bf" stopOpacity=".28" />
-              <stop offset="100%" stopColor="#6366f1" stopOpacity=".03" />
-            </linearGradient>
-          </defs>
-          <g style={{ transformOrigin: "0 0", animation: "cbsCW 45s linear infinite" }}>
-            <circle cx="0" cy="0" r="290" stroke="url(#cbsTL)" strokeWidth="1.2" strokeDasharray="75 125" strokeLinecap="round" fill="none" />
-          </g>
-          <g style={{ transformOrigin: "0 0", animation: "cbsCCW 30s linear infinite" }}>
-            <circle cx="0" cy="0" r="190" stroke="rgba(45,212,191,.09)" strokeWidth="1" strokeDasharray="50 85" strokeLinecap="round" fill="none" />
-          </g>
-        </svg>
-
-        {/* Horizontal accent line */}
-        <div className="absolute top-1/2 left-0 right-0 h-px pointer-events-none z-[2]"
-          style={{ background: "linear-gradient(90deg,transparent,rgba(45,212,191,.12),rgba(99,102,241,.10),transparent)" }} />
-
-        {/* Content */}
-        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 xl:px-28 py-20">
-          <div className="grid lg:grid-cols-[1fr_400px] xl:grid-cols-[1fr_440px] gap-12 xl:gap-16 items-center">
-
-            {/* Left: text */}
-            <div>
-              <h1 className="font-extrabold leading-[1.08] mb-5"
-                style={{
-                  fontFamily: "'Poppins',sans-serif",
-                  fontSize: "clamp(1.5rem,4vw,3rem)",
-                  background: "linear-gradient(120deg,#ffffff 40%,#2dd4bf 70%,#6366f1 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}>
-                {title}
-              </h1>
-
-              <div className="cbs-bar h-[3px] w-16 rounded-full mb-6"
-                style={{ background: "linear-gradient(90deg,#2dd4bf,#6366f1)" }} />
-
-              <p className="text-[14.5px] leading-[1.90] mb-8 max-w-[580px] text-justify"
-                style={{ color: "rgba(255,255,255,.58)" }}>
-                {desc}
-              </p>
-
-              <div className="flex flex-wrap gap-3">
-                <a href="/contact"
-                  className="inline-flex items-center gap-2 text-white font-semibold text-sm px-7 py-3 rounded-full transition-all duration-200 hover:-translate-y-0.5 no-underline"
-                  style={{ background: "linear-gradient(135deg,#2dd4bf,#6366f1)", boxShadow: "0 4px 24px rgba(45,212,191,.38)", fontFamily: "'Poppins',sans-serif" }}>
-                  Quick Enquiry
-                </a>
-                <a href="tel:+917056937000"
-                  className="inline-flex items-center gap-2 font-semibold text-sm px-7 py-3 rounded-full transition-all duration-200 no-underline"
-                  style={{ background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.14)", color: "rgba(255,255,255,.78)", fontFamily: "'Poppins',sans-serif" }}>
-                  Call us - 7056937000
-                </a>
-              </div>
-            </div>
-
-            {/* Right: image */}
-            <div className="hidden lg:block relative">
-              <div className="absolute -inset-5 rounded-[28px] pointer-events-none"
-                style={{ background: "linear-gradient(135deg,rgba(45,212,191,.20),rgba(99,102,241,.22))", filter: "blur(24px)", opacity: .60 }} />
-              <div className="relative rounded-2xl overflow-hidden flex items-center justify-center p-6"
-                style={{ border: "1px solid rgba(255,255,255,.10)", boxShadow: "0 32px 80px rgba(0,0,0,.55)", background: "rgba(255,255,255,.04)", minHeight: 280 }}>
-                <div className="absolute top-0 left-0 right-0 h-[3px] z-10"
-                  style={{ background: "linear-gradient(90deg,#2dd4bf,#6366f1,#a855f7)" }} />
-                <Image
-                  src={imgSrc}
-                  width={400}
-                  height={380}
-                  alt="Service illustration"
-                  className="w-full h-auto object-contain relative z-10"
-                />
-              </div>
-              <div className="absolute -top-4 -right-4 w-12 h-12 rounded-xl pointer-events-none"
-                style={{ background: "linear-gradient(135deg,#2dd4bf,#6366f1)", opacity: .70, animation: "cbsFloat 5s ease-in-out infinite", boxShadow: "0 6px 20px rgba(45,212,191,.38)" }} />
-              <div className="absolute -bottom-3 -left-3 w-9 h-9 rounded-lg pointer-events-none"
-                style={{ background: "linear-gradient(135deg,#6366f1,#a855f7)", opacity: .62, animation: "cbsFloat 7s ease-in-out infinite 1.5s" }} />
-            </div>
-
-          </div>
+        }}
+      >
+        {/* ── Background: service image ── */}
+        <div className="absolute inset-0 z-[0]" style={{ transform:'scale(1.08)' }}>
+          <Image
+            src={imgSrc}
+            fill
+            alt=""
+            className="object-cover object-center"
+            style={{ opacity:.65 }}
+            priority
+          />
         </div>
 
-        {/* Bottom fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none z-[3]"
-          style={{ background: "linear-gradient(to bottom,transparent,rgba(6,11,26,.40))" }} />
+        {/* ── Blur layer ── */}
+        <div className="absolute inset-0 z-[1]"
+          style={{ backdropFilter:'blur(18px)', WebkitBackdropFilter:'blur(18px)' }} />
+
+        {/* ── Transparent gradient overlay ── */}
+        <div className="absolute inset-0 z-[2]"
+          style={{ background:'linear-gradient(160deg,rgba(3,7,18,.55) 0%,rgba(8,14,40,.48) 38%,rgba(16,8,44,.52) 68%,rgba(3,7,18,.60) 100%)' }} />
+
+        {/* ── Dot grid ── */}
+        <div className="cbs-grid absolute inset-0 z-[3] pointer-events-none"
+          style={{
+            backgroundImage:'radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px)',
+            backgroundSize:'32px 32px',
+          }} />
+
+        {/* ── Orbs ── */}
+        <div className="cbs-orb1 absolute pointer-events-none z-[3]"
+          style={{ top:'-18%',left:'-10%',width:'55vw',height:'55vw',maxWidth:'540px',maxHeight:'540px',borderRadius:'50%',background:'radial-gradient(circle,rgba(6,182,212,.18) 0%,rgba(6,182,212,.06) 40%,transparent 70%)' }} />
+        <div className="cbs-orb2 absolute pointer-events-none z-[3]"
+          style={{ bottom:'-20%',right:'-8%',width:'56vw',height:'56vw',maxWidth:'560px',maxHeight:'560px',borderRadius:'50%',background:'radial-gradient(circle,rgba(168,85,247,.22) 0%,rgba(168,85,247,.06) 42%,transparent 70%)' }} />
+        <div className="absolute pointer-events-none z-[3]"
+          style={{ top:'35%',left:'50%',transform:'translateX(-50%)',width:'360px',height:'360px',borderRadius:'50%',background:'radial-gradient(circle,rgba(244,114,182,.08) 0%,transparent 70%)' }} />
+
+        {/* ── Spinning arcs — top-right ── */}
+        <svg className="absolute -top-6 -right-6 pointer-events-none z-[3] hidden sm:block" width="300" height="300" viewBox="0 0 380 380" fill="none" aria-hidden="true">
+          <circle className="cbs-spinr" cx="190" cy="190" r="170" stroke="rgba(6,182,212,.07)"   strokeWidth="1"   strokeDasharray="52 84" fill="none" />
+          <circle className="cbs-spin"  cx="190" cy="190" r="124" stroke="rgba(168,85,247,.06)"  strokeWidth=".8"  strokeDasharray="34 58" fill="none" />
+          <circle className="cbs-spinr" cx="190" cy="190" r="80"  stroke="rgba(244,114,182,.05)" strokeWidth=".7"  strokeDasharray="20 38" fill="none" />
+        </svg>
+
+        {/* ── Spinning arcs — bottom-left ── */}
+        <svg className="absolute -bottom-6 -left-6 pointer-events-none z-[3] hidden sm:block" width="220" height="220" viewBox="0 0 260 260" fill="none" aria-hidden="true">
+          <circle className="cbs-spin"  cx="0" cy="260" r="190" stroke="rgba(6,182,212,.05)"  strokeWidth=".8" strokeDasharray="44 72" fill="none" />
+          <circle className="cbs-spinr" cx="0" cy="260" r="130" stroke="rgba(168,85,247,.05)" strokeWidth=".7" strokeDasharray="28 50" fill="none" />
+        </svg>
+
+        {/* ── Centered content ── */}
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-center w-full max-w-[860px] mx-auto px-4 sm:px-6 md:px-8 pt-20 sm:pt-24 pb-8 sm:pb-10 text-center">
+
+          {/* Badge */}
+          <div className="cbs-badge cbs-fadein inline-flex items-center gap-2 sm:gap-2.5 rounded-full px-3.5 sm:px-5 py-1.5 sm:py-2 mb-4 sm:mb-5 md:mb-7"
+            style={{ animationDelay:'.05s' }}>
+            <span className="cbs-pulse w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full flex-shrink-0"
+              style={{ background:'linear-gradient(135deg,#06b6d4,#0ea5e9)' }} />
+            <span className="cbs-badge-text font-bold uppercase"
+              style={{ color:'#67e8f9',fontFamily:"'Poppins',sans-serif",fontSize:'10px',letterSpacing:'.20em' }}>
+              Future IT Touch &nbsp;·&nbsp; Professional Services
+            </span>
+          </div>
+
+          {/* Headline */}
+          <h1 className="cbs-title cbs-fadein font-extrabold leading-[1.12] mb-4 sm:mb-5 w-full"
+            style={{ fontFamily:"'Poppins',sans-serif",fontSize:'clamp(1.5rem,4.5vw,3.6rem)',animationDelay:'.15s' }}>
+            {title}
+          </h1>
+
+          {/* Accent bar */}
+          <div className="cbs-bar h-[3px] w-16 sm:w-20 rounded-full mb-4 sm:mb-5 md:mb-7 mx-auto"
+            style={{ background:'linear-gradient(90deg,#06b6d4,#a855f7,#f472b6)' }} />
+
+          {/* Description */}
+          <p className="cbs-desc cbs-fadein text-[13.5px] sm:text-[14.5px] md:text-[15.5px] max-w-[90%] sm:max-w-[600px] md:max-w-[680px] mx-auto mb-6 sm:mb-8 md:mb-9 text-white!"
+            style={{ animationDelay:'.25s' }}>
+            {desc}
+          </p>
+
+          {/* CTAs */}
+          <div className="cbs-fadein flex flex-col md:flex-row flex-wrap md:flex-nowrap justify-center gap-3 sm:gap-4 mb-6 sm:mb-8 md:mb-10 w-full sm:w-auto"
+            style={{ animationDelay:'.35s' }}>
+            <a href="/contact"
+              className="cbs-btn-primary inline-flex items-center justify-center gap-2 text-white font-semibold px-6 sm:px-8 py-3 sm:py-3.5 rounded-full no-underline"
+              style={{ fontFamily:"'Poppins',sans-serif",fontSize:'clamp(.8rem,2vw,.9rem)' }}>
+              Quick Enquiry
+              <svg width="13" height="13" viewBox="0 0 12 12" fill="none">
+                <path d="M1.5 6h9M6.5 1.5l4 4.5-4 4.5" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+            <a href="tel:+917056937000"
+              className="cbs-btn-ghost inline-flex items-center justify-center gap-2 font-semibold px-6 sm:px-8 py-3 sm:py-3.5 rounded-full no-underline"
+              style={{ fontFamily:"'Poppins',sans-serif",fontSize:'clamp(.8rem,2vw,.9rem)' }}>
+              {/* Briefcase icon */}
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+                <line x1="12" y1="12" x2="12.01" y2="12"/>
+              </svg>
+              Hire Us
+            </a>
+          </div>
+
+          {/* Scroll hint — hidden on mobile */}
+          <div className="cbs-fadein hidden sm:block" style={{ animationDelay:'.5s' }}>
+            <div className="cbs-scroll-hint mx-auto" />
+          </div>
+
+        </div>
+
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-16 sm:h-20 pointer-events-none z-[4]"
+          style={{ background:'linear-gradient(to bottom,transparent,rgba(3,7,18,.65))' }} />
       </section>
     </>
   );

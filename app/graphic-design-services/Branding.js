@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 import devops from "../Assets/graphic-design.webp";
@@ -14,51 +15,16 @@ import ChooseFuture from "../components/ChooseFuture";
 import Counter from "../components/Counter";
 import GetNewInsight from "../components/GetNewInsight";
 import OverviewSection from "../components/OverviewSection";
+import CommonBannerService from "../components/CommonBannerService";
 
 const Branding = () => {
   return (
     <>
-      <div className="h-24 max-sm:h-[57px] max-md:h-20 max-lg:h-24 bg-white"></div>
-      <div className=" relative overflow-hidden bg-[#442a79] xl:min-h-96 max-lg:h-auto">
-        <div className="flex items-center max-sm:block max-lg:block  px-5 md:px-12 xl:px-28   max-sm:py-7 gap-10  pt-12 max-pt-1   max-xl:py-5">
-          <div className="  ">
-            <h1 className="text-white font-bold text-4xl  max-lg:text-2xl">
-              Graphic Design Services
-            </h1>
-
-            <div className="text-[#dcd7f8]  mt-3 text-lg text-justify ">
-              <p>
-                Simplicity, creativity, a dash of humor and good typography are
-                essential elements of graphic designs at
-                <span className="font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-transparent bg-clip-text animate-hue">
-                  Future IT Touch Pvt. Ltd.
-                </span>
-                . Effective Design plays a vital role in distinguishing your
-                business from the rest to give you, The Design Edge. With right
-                aesthetics prompting visual perception, your business is bound
-                to be valued more. It is our passion to infuse fun and colors
-                into our designs that ensures every single design is packed with
-                a message. As a leading Graphic Designing Company in Chandigarh,
-                our team is always more than ready to jump with brilliant ideas
-                and thoughts to convey a story through design.
-              </p>
-            </div>
-            <div className="flex gap-3 mt-5">
-              <Link
-                href="/contact"
-                className="flex items-center bg-[#dc3545] justify-center bg-red text-white py-2 px-4 sm:px-8 font-heading transition duration-400 ease-in-out rounded-md text-base font-base focus:outline-none hover:bg-gray-300 hover:bg-gradient-to-r from-teal-400 to-indigo-700"
-              >
-                Quick Enquiry
-              </Link>
-              <Link href="tel:+917056937000" legacyBehavior>
-                <a className="flex items-center bg-dark-200 justify-center border text-white py-2 px-2  sm:px-8 font-heading ">
-                  Call us - 7056937000
-                </a>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
+      <CommonBannerService
+        imgSrc={devops}
+        title="Graphic Design Services"
+        desc="Simplicity, creativity, a dash of humor and good typography are essential elements of graphic designs at Future IT Touch Pvt. Ltd.. Effective Design plays a vital role in distinguishing your business from the rest to give you, The Design Edge. With right aesthetics prompting visual perception, your business is bound to be valued more. It is our passion to infuse fun and colors into our designs that ensures every single design is packed with a message. As a leading Graphic Designing Company in Chandigarh, our team is always more than ready to jump with brilliant ideas and thoughts to convey a story through design."
+      />
 
       <Counter />
 
@@ -70,7 +36,7 @@ const Branding = () => {
         headingHighlight="Services We Offer"
         paragraphs={[
           "Are you looking for the best graphic design company in Chandigarh? Future IT Touch Pvt. Ltd. is one of the leading graphic design agencies that gives your business a distinct expression and shows it to the world on a branded platter of your own.",
-          "We have been ranked amongst the top graphic design companies in Chandigarh. We invest creativity, innovative minds, and technology at the helm of our graphic designers, aimed towards attaining clients’ graphic design outsourcing requisites.",
+          "We have been ranked amongst the top graphic design companies in Chandigarh. We invest creativity, innovative minds, and technology at the helm of our graphic designers, aimed towards attaining clients' graphic design outsourcing requisites.",
           "Our team of expert designers crafts visuals that communicate your brand message effectively — from brochures and logos to social media assets and marketing collateral, all tailored to your business needs.",
         ]}
         ctaText="Request A Quote"
@@ -151,7 +117,7 @@ const Branding = () => {
                 Logo Designing
               </h4>
               <p className="text-sm sm:text-base leading-relaxed">
-                A logo is considered to be a brand’s silent ambassador. As an
+                A logo is considered to be a brand's silent ambassador. As an
                 experienced Graphic Designing company in Chandigarh, our logos
                 have created an enviable market appeal while delivering messages
                 spontaneously.
