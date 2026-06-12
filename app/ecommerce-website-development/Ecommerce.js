@@ -137,6 +137,33 @@ const Ecommerce = () => {
     },
   ];
 
+  const techCategories = [
+    {
+      title: "eCommerce Platforms",
+      techs: ["Shopify", "WooCommerce", "Magento", "OpenCart", "PrestaShop", "BigCommerce"],
+    },
+    {
+      title: "Front End",
+      techs: ["React.js", "Next.js", "Vue.js", "Angular", "TypeScript", "Tailwind CSS", "HTML/CSS"],
+    },
+    {
+      title: "Back End",
+      techs: ["Node.js", "PHP", "Laravel", "Python", "Ruby on Rails", "Express.js", ".NET"],
+    },
+    {
+      title: "Database & Storage",
+      techs: ["MySQL", "PostgreSQL", "MongoDB", "Redis", "Elasticsearch"],
+    },
+    {
+      title: "Payments & APIs",
+      techs: ["Stripe", "PayPal", "Razorpay", "REST APIs", "GraphQL", "Webhooks"],
+    },
+    {
+      title: "DevOps & Cloud",
+      techs: ["AWS", "Google Cloud", "Docker", "Kubernetes", "GitHub Actions", "Nginx"],
+    },
+  ];
+
   const faqData = [
     {
       title: "Which eCommerce platforms do you specialize in?",
@@ -205,6 +232,11 @@ const Ecommerce = () => {
       platforms={platforms}
       faqTitle="About eCommerce Website Developmen"
       faqData={faqData}
+      techBadge="eCommerce Tech Stack"
+      techHeading="Technologies"
+      techHeadingHighlight="We Build With"
+      techDescription="From storefronts to payment gateways, we use the right combination of modern technologies to deliver fast, secure, and scalable eCommerce experiences."
+      techCategories={techCategories}
     />
   );
 };

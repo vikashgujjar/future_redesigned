@@ -2,233 +2,151 @@ import Image from 'next/image';
 
 export default function CommonBannerService({ imgSrc, title, desc }) {
   return (
-    <>
-      <style>{`
-        @keyframes cbsOrb1   { 0%,100%{transform:translate(0,0)scale(1)} 40%{transform:translate(30px,-20px)scale(1.07)} 70%{transform:translate(-16px,24px)scale(.95)} }
-        @keyframes cbsOrb2   { 0%,100%{transform:translate(0,0)scale(1)} 35%{transform:translate(-24px,18px)scale(1.05)} 70%{transform:translate(20px,-28px)scale(.97)} }
-        @keyframes cbsGrad   { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
-        @keyframes cbsPulse  { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.78)} }
-        @keyframes cbsSpin   { to{transform:rotate(360deg)} }
-        @keyframes cbsSpinR  { to{transform:rotate(-360deg)} }
-        @keyframes cbsGridFd { 0%,100%{opacity:.04} 50%{opacity:.09} }
-        @keyframes cbsShimmer{ 0%{transform:translateX(-120%)} 100%{transform:translateX(220%)} }
-        @keyframes cbsFadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
-        @keyframes cbsBarIn  { from{transform:scaleX(0)} to{transform:scaleX(1)} }
-        @keyframes cbsFloat  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    <section className="relative overflow-hidden bg-[#3a2b80] font-[Inter,sans-serif]">
 
-        .cbs-orb1  { animation:cbsOrb1 18s ease-in-out infinite }
-        .cbs-orb2  { animation:cbsOrb2 23s ease-in-out infinite }
-        .cbs-pulse { animation:cbsPulse 2.4s ease-in-out infinite }
-        .cbs-float { animation:cbsFloat 4.5s ease-in-out infinite }
-        .cbs-spin  { animation:cbsSpin  12s linear infinite; transform-origin:190px 190px }
-        .cbs-spinr { animation:cbsSpinR 17s linear infinite; transform-origin:190px 190px }
-        .cbs-grid  { animation:cbsGridFd 8s ease-in-out infinite }
-        .cbs-fadein{ animation:cbsFadeUp .9s cubic-bezier(.22,1,.36,1) both }
-        .cbs-bar   { animation:cbsBarIn .85s cubic-bezier(.22,1,.36,1) .3s both; transform-origin:center }
+      {/* ── Background layers ── */}
+      {/* Deep purple gradient wash */}
+      <div className="absolute inset-0 bg-[linear-gradient(135deg,#2c1f66_0%,#3a2b80_40%,#46309c_70%,#2c1f66_100%)]" />
 
-        .cbs-title {
-          background: linear-gradient(125deg,#ffffff 0%,#7dd3fc 28%,#c084fc 58%,#f9a8d4 80%,#ffffff 100%);
-          background-size: 280% 280%;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          animation: cbsGrad 7s ease-in-out infinite;
-          word-break: break-word;
-        }
+      {/* Dot grid */}
+      <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.07)_1px,transparent_1px)] bg-[size:30px_30px] opacity-60" />
 
-        .cbs-btn-primary {
-          position: relative;
-          overflow: hidden;
-          background: linear-gradient(135deg,#06b6d4,#7c3aed,#db2777);
-          background-size: 250% 250%;
-          animation: cbsGrad 4s ease-in-out infinite;
-          box-shadow: 0 8px 28px rgba(6,182,212,.30),0 2px 8px rgba(0,0,0,.25);
-          transition: transform .2s, box-shadow .2s;
-        }
-        .cbs-btn-primary::before {
-          content:'';
-          position:absolute;
-          top:0; left:-100%; width:55%; height:100%;
-          background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
-          animation:cbsShimmer 2.8s ease-in-out infinite 1.2s;
-        }
-        .cbs-btn-primary:hover { transform:translateY(-2px); box-shadow:0 14px 40px rgba(6,182,212,.40),0 4px 16px rgba(124,58,237,.28); }
+      {/* Glow orbs — same palette as the old site (purple / orange / red) */}
+      <div className="absolute -top-32 -left-32 h-[480px] w-[480px] rounded-full bg-[radial-gradient(circle,rgba(255,138,61,0.22)_0%,rgba(255,138,61,0.05)_45%,transparent_70%)] animate-[pulse_7s_ease-in-out_infinite]" />
+      <div className="absolute -bottom-40 -right-24 h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(226,58,58,0.20)_0%,rgba(226,58,58,0.05)_45%,transparent_70%)] animate-[pulse_9s_ease-in-out_infinite]" />
+      <div className="absolute top-1/3 left-1/2 h-[340px] w-[340px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(168,85,247,0.18)_0%,transparent_70%)]" />
 
-        .cbs-btn-ghost {
-          background: rgba(255,255,255,.06);
-          border: 1px solid rgba(255,255,255,.18);
-          backdrop-filter: blur(14px);
-          -webkit-backdrop-filter: blur(14px);
-          color: #e2e8f0;
-          transition: transform .2s,background .2s,border-color .2s;
-        }
-        .cbs-btn-ghost:hover { transform:translateY(-2px); background:rgba(255,255,255,.10); border-color:rgba(6,182,212,.45); }
-
-        .cbs-badge {
-          background: rgba(6,182,212,.08);
-          border: 1px solid rgba(6,182,212,.24);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-        }
-
-        .cbs-desc {
-          color: rgba(185,210,240,.78);
-          line-height: 1.85;
-          display: -webkit-box;
-          -webkit-line-clamp: 4;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-
-        .cbs-scroll-hint {
-          width: 24px; height: 38px;
-          border: 1.5px solid rgba(255,255,255,.18);
-          border-radius: 12px;
-          position: relative;
-          display: flex;
-          align-items: flex-start;
-          justify-content: center;
-          padding-top: 5px;
-        }
-        .cbs-scroll-hint::after {
-          content:'';
-          width:4px; height:7px;
-          border-radius:2px;
-          background:rgba(6,182,212,.7);
-          animation:cbsFloat 1.5s ease-in-out infinite;
-        }
-
-        /* ── Responsive ── */
-        @media (max-width: 480px) {
-          .cbs-desc { -webkit-line-clamp: 3; font-size:13.5px !important; }
-          .cbs-badge-text { letter-spacing:.12em !important; font-size:9px !important; }
-          .cbs-scroll-hint { display:none; }
-        }
-        @media (max-width: 640px) {
-          .cbs-orb1,.cbs-orb2 { opacity:.6 }
-        }
-      `}</style>
-
-      <section
-        className="relative overflow-hidden flex flex-col"
-        style={{
-          minHeight: 'clamp(480px,72vh,700px)',
-          fontFamily: "'Inter',sans-serif",
-        }}
+      {/* Spinning dashed rings — top right */}
+      <svg
+        className="pointer-events-none absolute -top-10 -right-10 hidden sm:block"
+        width="300" height="300" viewBox="0 0 380 380" fill="none" aria-hidden="true"
       >
-        {/* ── Background: service image ── */}
-        <div className="absolute inset-0 z-[0]" style={{ transform:'scale(1.08)' }}>
-          <Image
-            src={imgSrc}
-            fill
-            alt=""
-            className="object-cover object-center"
-            style={{ opacity:.65 }}
-            priority
-          />
-        </div>
+        <circle cx="190" cy="190" r="170" stroke="rgba(255,138,61,0.12)" strokeWidth="1" strokeDasharray="50 80" className="origin-center animate-[spin_22s_linear_infinite]" />
+        <circle cx="190" cy="190" r="120" stroke="rgba(255,255,255,0.08)" strokeWidth="1" strokeDasharray="30 56" className="origin-center animate-[spin_16s_linear_infinite_reverse]" />
+        <circle cx="190" cy="190" r="76" stroke="rgba(226,58,58,0.12)" strokeWidth="1" strokeDasharray="18 36" className="origin-center animate-[spin_12s_linear_infinite]" />
+      </svg>
 
-        {/* ── Blur layer ── */}
-        <div className="absolute inset-0 z-[1]"
-          style={{ backdropFilter:'blur(18px)', WebkitBackdropFilter:'blur(18px)' }} />
+      {/* ── Content grid ── */}
+      <div className="relative z-10 mx-auto grid w-full max-w-[1280px] grid-cols-1 items-center gap-10 px-5 pb-14 pt-24 sm:px-8 sm:pt-28 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14 lg:pb-20 lg:pt-32">
 
-        {/* ── Transparent gradient overlay ── */}
-        <div className="absolute inset-0 z-[2]"
-          style={{ background:'linear-gradient(160deg,rgba(3,7,18,.55) 0%,rgba(8,14,40,.48) 38%,rgba(16,8,44,.52) 68%,rgba(3,7,18,.60) 100%)' }} />
-
-        {/* ── Dot grid ── */}
-        <div className="cbs-grid absolute inset-0 z-[3] pointer-events-none"
-          style={{
-            backgroundImage:'radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px)',
-            backgroundSize:'32px 32px',
-          }} />
-
-        {/* ── Orbs ── */}
-        <div className="cbs-orb1 absolute pointer-events-none z-[3]"
-          style={{ top:'-18%',left:'-10%',width:'55vw',height:'55vw',maxWidth:'540px',maxHeight:'540px',borderRadius:'50%',background:'radial-gradient(circle,rgba(6,182,212,.18) 0%,rgba(6,182,212,.06) 40%,transparent 70%)' }} />
-        <div className="cbs-orb2 absolute pointer-events-none z-[3]"
-          style={{ bottom:'-20%',right:'-8%',width:'56vw',height:'56vw',maxWidth:'560px',maxHeight:'560px',borderRadius:'50%',background:'radial-gradient(circle,rgba(168,85,247,.22) 0%,rgba(168,85,247,.06) 42%,transparent 70%)' }} />
-        <div className="absolute pointer-events-none z-[3]"
-          style={{ top:'35%',left:'50%',transform:'translateX(-50%)',width:'360px',height:'360px',borderRadius:'50%',background:'radial-gradient(circle,rgba(244,114,182,.08) 0%,transparent 70%)' }} />
-
-        {/* ── Spinning arcs — top-right ── */}
-        <svg className="absolute -top-6 -right-6 pointer-events-none z-[3] hidden sm:block" width="300" height="300" viewBox="0 0 380 380" fill="none" aria-hidden="true">
-          <circle className="cbs-spinr" cx="190" cy="190" r="170" stroke="rgba(6,182,212,.07)"   strokeWidth="1"   strokeDasharray="52 84" fill="none" />
-          <circle className="cbs-spin"  cx="190" cy="190" r="124" stroke="rgba(168,85,247,.06)"  strokeWidth=".8"  strokeDasharray="34 58" fill="none" />
-          <circle className="cbs-spinr" cx="190" cy="190" r="80"  stroke="rgba(244,114,182,.05)" strokeWidth=".7"  strokeDasharray="20 38" fill="none" />
-        </svg>
-
-        {/* ── Spinning arcs — bottom-left ── */}
-        <svg className="absolute -bottom-6 -left-6 pointer-events-none z-[3] hidden sm:block" width="220" height="220" viewBox="0 0 260 260" fill="none" aria-hidden="true">
-          <circle className="cbs-spin"  cx="0" cy="260" r="190" stroke="rgba(6,182,212,.05)"  strokeWidth=".8" strokeDasharray="44 72" fill="none" />
-          <circle className="cbs-spinr" cx="0" cy="260" r="130" stroke="rgba(168,85,247,.05)" strokeWidth=".7" strokeDasharray="28 50" fill="none" />
-        </svg>
-
-        {/* ── Centered content ── */}
-        <div className="relative z-10 flex-1 flex flex-col items-center justify-center w-full max-w-[860px] mx-auto px-4 sm:px-6 md:px-8 pt-20 sm:pt-24 pb-8 sm:pb-10 text-center">
+        {/* ════════ LEFT — Copy ════════ */}
+        <div className="text-center lg:text-left">
 
           {/* Badge */}
-          <div className="cbs-badge cbs-fadein inline-flex items-center gap-2 sm:gap-2.5 rounded-full px-3.5 sm:px-5 py-1.5 sm:py-2 mb-4 sm:mb-5 md:mb-7"
-            style={{ animationDelay:'.05s' }}>
-            <span className="cbs-pulse w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full flex-shrink-0"
-              style={{ background:'linear-gradient(135deg,#06b6d4,#0ea5e9)' }} />
-            <span className="cbs-badge-text font-bold uppercase"
-              style={{ color:'#67e8f9',fontFamily:"'Poppins',sans-serif",fontSize:'10px',letterSpacing:'.20em' }}>
-              Future IT Touch &nbsp;·&nbsp; Professional Services
+          <div className="mb-5 inline-flex items-center gap-2.5 rounded-full border border-orange-400/30 bg-orange-400/10 px-4 py-1.5 backdrop-blur-md sm:px-5 sm:py-2">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-70" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-gradient-to-br from-orange-400 to-red-500" />
+            </span>
+            <span className="font-[Poppins,sans-serif] text-[10px] font-bold uppercase tracking-[0.22em] text-orange-300">
+              Future IT Touch · Professional Services
             </span>
           </div>
 
-          {/* Headline */}
-          <h1 className="cbs-title cbs-fadein font-extrabold leading-[1.12] mb-4 sm:mb-5 w-full"
-            style={{ fontFamily:"'Poppins',sans-serif",fontSize:'clamp(1.5rem,4.5vw,3.6rem)',animationDelay:'.15s' }}>
+          {/* Headline — white → lavender → orange gradient */}
+          <h1 className="mb-5 break-words bg-gradient-to-r from-white via-[#d8ccff] to-[#ffb27d] bg-clip-text font-[Poppins,sans-serif] text-[clamp(1.6rem,4.5vw,3.4rem)] font-extrabold leading-[1.12] text-transparent">
             {title}
           </h1>
 
           {/* Accent bar */}
-          <div className="cbs-bar h-[3px] w-16 sm:w-20 rounded-full mb-4 sm:mb-5 md:mb-7 mx-auto"
-            style={{ background:'linear-gradient(90deg,#06b6d4,#a855f7,#f472b6)' }} />
+          <div className="mx-auto mb-6 h-[3px] w-20 rounded-full bg-gradient-to-r from-[#e23a3a] via-[#ff8a3d] to-[#a855f7] lg:mx-0" />
 
           {/* Description */}
-          <p className="cbs-desc cbs-fadein text-[13.5px] sm:text-[14.5px] md:text-[15.5px] max-w-[90%] sm:max-w-[600px] md:max-w-[680px] mx-auto mb-6 sm:mb-8 md:mb-9 text-white!"
-            style={{ animationDelay:'.25s' }}>
+          <p className="mx-auto mb-8 line-clamp-4 max-w-[640px] text-[13.5px] leading-[1.85] text-[#cfc6f2] sm:text-[14.5px] md:text-[15.5px] lg:mx-0">
             {desc}
           </p>
 
           {/* CTAs */}
-          <div className="cbs-fadein flex flex-col md:flex-row flex-wrap md:flex-nowrap justify-center gap-3 sm:gap-4 mb-6 sm:mb-8 md:mb-10 w-full sm:w-auto"
-            style={{ animationDelay:'.35s' }}>
-            <a href="/contact"
-              className="cbs-btn-primary inline-flex items-center justify-center gap-2 text-white font-semibold px-6 sm:px-8 py-3 sm:py-3.5 rounded-full no-underline"
-              style={{ fontFamily:"'Poppins',sans-serif",fontSize:'clamp(.8rem,2vw,.9rem)' }}>
+          <div className="mb-9 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4 lg:justify-start">
+            <a
+              href="/contact"
+              className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-teal-400 to-indigo-700 px-8 py-3.5 font-[Poppins,sans-serif] text-sm font-semibold text-white no-underline shadow-[0_10px_30px_teal-400] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_42px_teal-400] sm:w-auto"
+            >
               Quick Enquiry
-              <svg width="13" height="13" viewBox="0 0 12 12" fill="none">
-                <path d="M1.5 6h9M6.5 1.5l4 4.5-4 4.5" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+              <svg width="13" height="13" viewBox="0 0 12 12" fill="none" className="transition-transform duration-200 group-hover:translate-x-1">
+                <path d="M1.5 6h9M6.5 1.5l4 4.5-4 4.5" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </a>
-            <a href="tel:+917056937000"
-              className="cbs-btn-ghost inline-flex items-center justify-center gap-2 font-semibold px-6 sm:px-8 py-3 sm:py-3.5 rounded-full no-underline"
-              style={{ fontFamily:"'Poppins',sans-serif",fontSize:'clamp(.8rem,2vw,.9rem)' }}>
-              {/* Briefcase icon */}
+
+            <a
+              href="https://www.upwork.com/freelancers/vinodk97" target="_blank" rel="noopener noreferrer"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-3.5 font-[Poppins,sans-serif] text-sm font-semibold text-purple-100 no-underline backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:border-orange-400/50 hover:bg-white/10 sm:w-auto"
+            >
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
-                <line x1="12" y1="12" x2="12.01" y2="12"/>
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
+                <line x1="12" y1="12" x2="12.01" y2="12" />
               </svg>
-              Hire Us
+              Hire Now
             </a>
           </div>
 
-          {/* Scroll hint — hidden on mobile */}
-          <div className="cbs-fadein hidden sm:block" style={{ animationDelay:'.5s' }}>
-            <div className="cbs-scroll-hint mx-auto" />
+          {/* Micro stats */}
+          <div className="flex items-center justify-center gap-6 sm:gap-10 lg:justify-start">
+            {[['500+', 'Clients'], ['15+', 'Yrs Exp'], ['98%', 'Satisfaction']].map(([val, label]) => (
+              <div key={label} className="flex flex-col items-center gap-1 lg:items-start">
+                <span className="bg-gradient-to-br from-white to-[#ffb27d] bg-clip-text font-[Poppins,sans-serif] text-xl font-extrabold leading-none text-transparent sm:text-2xl">
+                  {val}
+                </span>
+                <span className="font-[Poppins,sans-serif] text-[9.5px] font-semibold uppercase tracking-[0.16em] text-white/40">
+                  {label}
+                </span>
+              </div>
+            ))}
           </div>
-
         </div>
 
-        {/* Bottom gradient fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 sm:h-20 pointer-events-none z-[4]"
-          style={{ background:'linear-gradient(to bottom,transparent,rgba(3,7,18,.65))' }} />
-      </section>
-    </>
+        {/* ════════ RIGHT — Image showcase ════════ */}
+        <div className="relative mx-auto hidden w-full max-w-[440px] lg:block">
+
+          {/* Glow behind the card */}
+          <div className="absolute -inset-6 rounded-[2.5rem] bg-gradient-to-br from-[#ff8a3d]/25 via-[#e23a3a]/20 to-[#a855f7]/25 blur-2xl" />
+
+          {/* Gradient ring frame */}
+          <div className="group relative rotate-2 rounded-[2rem] bg-gradient-to-br from-[#ff8a3d] via-[#e23a3a]/60 to-[#a855f7] p-[2px] shadow-[0_24px_60px_rgba(0,0,0,0.45)] transition-transform duration-500 hover:rotate-0">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[calc(2rem-2px)] bg-[#2c1f66]">
+              <Image
+                src={imgSrc}
+                alt=""
+                fill
+                priority
+                className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+              />
+              {/* Soft purple tint so any image blends with the brand */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#2c1f66]/70 via-transparent to-[#2c1f66]/20" />
+            </div>
+          </div>
+
+          {/* Floating chip — top left */}
+          <div className="absolute -left-8 top-8 flex items-center gap-2.5 rounded-2xl border border-white/15 bg-white/10 px-4 py-3 shadow-[0_12px_32px_rgba(0,0,0,0.35)] backdrop-blur-xl animate-[bounce_5s_ease-in-out_infinite]">
+            <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff8a3d] to-[#e23a3a]">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 6L9 17l-5-5" />
+              </svg>
+            </span>
+            <div className="leading-tight">
+              <p className="font-[Poppins,sans-serif] text-[11px] font-bold text-white">Trusted Delivery</p>
+              <p className="text-[9px] font-medium uppercase tracking-wider text-white/50">On-time, every time</p>
+            </div>
+          </div>
+
+          {/* Floating chip — bottom right */}
+          <div className="absolute -bottom-6 -right-4 flex items-center gap-2.5 rounded-2xl border border-white/15 bg-white/10 px-4 py-3 shadow-[0_12px_32px_rgba(0,0,0,0.35)] backdrop-blur-xl animate-[bounce_6s_ease-in-out_infinite_0.8s]">
+            <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-[#a855f7] to-[#6d28d9]">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
+            </span>
+            <div className="leading-tight">
+              <p className="font-[Poppins,sans-serif] text-[11px] font-bold text-white">4.9 Rating</p>
+              <p className="text-[9px] font-medium uppercase tracking-wider text-white/50">Client reviews</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom fade */}
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-[5] h-16 bg-gradient-to-b from-transparent to-[#241a55]/80 sm:h-20" />
+    </section>
   );
 }

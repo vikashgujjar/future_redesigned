@@ -1,296 +1,223 @@
 "use client";
 import Image from "next/image";
 
-const IconCheck  = () => <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>;
-const IconZap    = () => <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>;
-const IconShield = () => <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>;
-const IconStar   = () => <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>;
-const IconLayers = () => <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>;
-const IconGlobe  = () => <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>;
-const IconUsers  = () => <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>;
+const IconCheck  = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>;
+const IconZap    = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>;
+const IconShield = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>;
+const IconStar   = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>;
+const IconLayers = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>;
+const IconGlobe  = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>;
 
-const FEAT_ICONS   = [<IconCheck/>,<IconZap/>,<IconShield/>,<IconStar/>,<IconLayers/>,<IconGlobe/>];
-const FEAT_COLORS  = [
-  { icon:"#2dd4bf", bg:"rgba(45,212,191,.10)",  border:"rgba(45,212,191,.22)"  },
-  { icon:"#6366f1", bg:"rgba(99,102,241,.10)",   border:"rgba(99,102,241,.22)"  },
-  { icon:"#a855f7", bg:"rgba(168,85,247,.10)",   border:"rgba(168,85,247,.22)"  },
-  { icon:"#06b6d4", bg:"rgba(6,182,212,.10)",    border:"rgba(6,182,212,.22)"   },
-  { icon:"#8b5cf6", bg:"rgba(139,92,246,.10)",   border:"rgba(139,92,246,.22)"  },
-  { icon:"#2dd4bf", bg:"rgba(45,212,191,.10)",   border:"rgba(45,212,191,.22)"  },
+const FEAT_ICONS = [<IconCheck/>, <IconZap/>, <IconShield/>, <IconStar/>, <IconLayers/>, <IconGlobe/>];
+
+const FEAT_TILE = [
+  "border-teal-200 bg-teal-50 text-teal-600",
+  "border-indigo-200 bg-indigo-50 text-indigo-700",
+  "border-cyan-200 bg-cyan-50 text-cyan-600",
+  "border-violet-200 bg-violet-50 text-violet-700",
+  "border-emerald-200 bg-emerald-50 text-emerald-600",
+  "border-blue-200 bg-blue-50 text-blue-700",
 ];
 
-export default function OverviewSectionStacked({
+export default function OverviewSectionSplit({
   image,
-  imageAlt        = "Service illustration",
-  badgeText       = "Who We Are",
-  heading         = "Building Digital",
-  headingHighlight= "Excellence",
-  headingAfter    = "For Modern Brands",
-  paragraphs      = [],
-  ctaText         = "Get In Touch",
-  ctaHref         = "tel:+917056937000",
-  since           = "Since 2017",
-  trustedLabel    = "Trusted by 500+ Clients",
+  imageAlt         = "Service illustration",
+  badgeText        = "Who We Are",
+  heading          = "Building Digital",
+  headingHighlight = "Excellence",
+  headingAfter     = "For Modern Brands",
+  paragraphs       = [],
+  ctaText          = "Get In Touch",
+  ctaHref          = "tel:+917056937000",
+  since            = "Since 2017",
+  trustedLabel     = "Trusted by 500+ Clients",
 }) {
   const textParas    = paragraphs.filter(p => typeof p === "string");
   const featureCards = paragraphs.filter(p => typeof p === "object" && p.boldPrefix);
 
+  const introPara = textParas[0];
+  const bodyParas = textParas.slice(1);
+
+  const tags = ["Web Development","Mobile Apps","UI/UX Design","Shopify Experts","Next.js & React","Flutter Apps","Laravel Backend","eCommerce Solutions"];
+
   return (
-    <section className="ovS-root relative overflow-hidden"
-      style={{ background:"linear-gradient(155deg,#f4f8ff 0%,#ffffff 45%,#f2eeff 100%)", fontFamily:"'Inter',sans-serif" }}>
-      <style>{`
-        @keyframes ovS-glow   { 0%,100%{opacity:.55} 50%{opacity:1} }
-        @keyframes ovS-bar    { from{transform:scaleX(0)} to{transform:scaleX(1)} }
-        @keyframes ovS-fadeU  { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-        @keyframes ovS-float  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-        @keyframes ovS-ping   { 75%,100%{transform:scale(2.2);opacity:0} }
-        @keyframes ovS-shimmer{ 0%{background-position:200% center} 100%{background-position:-200% center} }
-        @keyframes ovS-scroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+    <section className="relative overflow-x-clip bg-[linear-gradient(160deg,#f0fbfa_0%,#ffffff_45%,#f1f1fd_100%)] font-[Inter,sans-serif]">
 
-        .ovS-dotgrid {
-          background-image: radial-gradient(rgba(99,102,241,.04) 1px,transparent 1px);
-          background-size: 30px 30px;
-        }
-        .ovS-bar    { animation:ovS-bar .75s cubic-bezier(.22,1,.36,1) .2s both; transform-origin:left }
-        .ovS-ping::after { content:''; position:absolute; inset:0; border-radius:50%; background:inherit; animation:ovS-ping 2.2s ease-out infinite; }
-        .ovS-hl {
-          background:linear-gradient(90deg,#2dd4bf,#6366f1,#a855f7,#2dd4bf);
-          background-size:300% auto;
-          -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-          animation:ovS-shimmer 4s linear infinite;
-        }
+      {/* ── Background details ── */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(67,56,202,0.05)_1px,transparent_1px)] bg-[size:30px_30px]" />
+      <div className="pointer-events-none absolute -top-48 -left-32 h-[480px] w-[480px] rounded-full bg-[radial-gradient(circle,rgba(45,212,191,0.10),transparent_65%)]" />
+      <div className="pointer-events-none absolute -bottom-48 -right-32 h-[480px] w-[480px] rounded-full bg-[radial-gradient(circle,rgba(67,56,202,0.09),transparent_65%)]" />
+      <div className="pointer-events-none absolute left-0 right-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-teal-400 to-transparent opacity-70" />
 
-        /* ── Stacked image panel ── */
-        .ovS-img-wrap {
-          position:relative;
-          border-radius:24px;
-          overflow:hidden;
-          box-shadow: 0 0 0 1.5px rgba(45,212,191,.20), 0 28px 72px rgba(6,11,30,.16), 0 0 80px rgba(45,212,191,.08);
-        }
-        .ovS-img-overlay {
-          position:absolute; inset:0;
-          background:linear-gradient(180deg,transparent 40%,rgba(6,11,30,.55) 100%);
-        }
+      <div className="relative z-10 mx-auto grid max-w-[1200px] grid-cols-1 gap-12 px-4 pb-16 pt-16 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16 lg:pb-24 lg:pt-24">
 
-        /* ── Scrolling tag strip ── */
-        .ovS-strip { overflow:hidden; white-space:nowrap; }
-        .ovS-strip-track { display:inline-flex; animation:ovS-scroll 22s linear infinite; }
-        .ovS-strip-track:hover { animation-play-state:paused; }
-        .ovS-tag {
-          display:inline-flex; align-items:center; gap:7px;
-          margin: 0 6px;
-          background:rgba(255,255,255,.82); backdrop-filter:blur(10px);
-          border:1px solid rgba(99,102,241,.14);
-          border-radius:50px; padding:7px 16px;
-          font-size:12px; font-weight:600; color:#334155;
-          font-family:'Poppins',sans-serif;
-          white-space:nowrap;
-          box-shadow:0 2px 10px rgba(99,102,241,.08);
-        }
-        .ovS-tag-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+        {/* ════════ LEFT — sticky intro panel (pins until the section ends) ════════ */}
+        <div className="h-fit self-start text-center lg:sticky lg:top-24 lg:text-left">
 
-        /* ── Feature pill cards ── */
-        .ovS-pill {
-          display:flex; align-items:flex-start; gap:12px;
-          background:rgba(255,255,255,.80); backdrop-filter:blur(14px);
-          border:1px solid rgba(255,255,255,.90);
-          border-radius:16px; padding:16px 18px;
-          box-shadow:0 4px 20px rgba(6,11,30,.07);
-          transition:transform .22s, box-shadow .22s;
-          position:relative; overflow:hidden;
-        }
-        .ovS-pill::before {
-          content:''; position:absolute; left:0; top:0; bottom:0; width:3px;
-          background:linear-gradient(180deg,#2dd4bf,#6366f1);
-          transform:scaleY(0); transform-origin:top;
-          transition:transform .3s cubic-bezier(.22,1,.36,1);
-        }
-        .ovS-pill:hover { transform:translateY(-3px); box-shadow:0 12px 32px rgba(6,11,30,.11); }
-        .ovS-pill:hover::before { transform:scaleY(1); }
-
-        /* ── CTA ── */
-        .ovS-cta {
-          background:linear-gradient(135deg,#2dd4bf,#6366f1);
-          border-radius:50px; color:#fff !important; text-decoration:none !important;
-          box-shadow:0 6px 28px rgba(45,212,191,.30);
-          transition:transform .22s, box-shadow .22s;
-          position:relative; overflow:hidden;
-        }
-        .ovS-cta:hover { transform:translateY(-2px); box-shadow:0 14px 40px rgba(45,212,191,.40); }
-
-        /* ── Stat chip ── */
-        .ovS-stat {
-          background:rgba(255,255,255,.88); backdrop-filter:blur(10px);
-          border:1px solid rgba(255,255,255,.85);
-          border-radius:50px;
-          box-shadow:0 3px 14px rgba(6,11,30,.08);
-          transition:transform .2s, box-shadow .2s;
-        }
-        .ovS-stat:hover { transform:translateY(-1px); box-shadow:0 6px 20px rgba(99,102,241,.14); }
-
-        /* ── Floating badge ── */
-        .ovS-badge {
-          background:rgba(255,255,255,.90); backdrop-filter:blur(14px);
-          border:1px solid rgba(255,255,255,.85);
-          border-radius:16px;
-          box-shadow:0 8px 28px rgba(6,11,30,.12);
-          animation:ovS-float 5s ease-in-out infinite;
-        }
-
-        @media(prefers-reduced-motion:reduce){ * { animation:none !important; transition:none !important; } }
-      `}</style>
-
-      {/* Background */}
-      <div className="ovS-dotgrid absolute inset-0 pointer-events-none"/>
-      <div className="absolute -top-60 left-1/3 w-[500px] h-[500px] rounded-full pointer-events-none"
-        style={{ background:"radial-gradient(circle,rgba(45,212,191,.06),transparent 65%)" }}/>
-      <div className="absolute -bottom-60 right-1/4 w-[480px] h-[480px] rounded-full pointer-events-none"
-        style={{ background:"radial-gradient(circle,rgba(99,102,241,.06),transparent 65%)" }}/>
-      <div className="absolute top-0 left-0 right-0 h-[3px] pointer-events-none"
-        style={{ background:"linear-gradient(90deg,transparent,#2dd4bf 30%,#6366f1 70%,transparent)", animation:"ovS-glow 3s ease-in-out infinite" }}/>
-
-      <div className="relative z-10 max-w-[1100px] mx-auto px-4 sm:px-8 xl:px-12 pt-16 pb-0">
-
-        {/* ── TOP: Badge + Heading + Stats ─────────────────── */}
-        <div className="flex flex-col items-center text-center mb-10">
-
-          <div className="inline-flex items-center gap-2.5 rounded-full px-4 py-1.5 mb-5"
-            style={{ background:"rgba(45,212,191,.08)", border:"1px solid rgba(45,212,191,.24)" }}>
-            <span className="relative ovS-ping w-1.5 h-1.5 rounded-full flex-shrink-0"
-              style={{ background:"linear-gradient(135deg,#2dd4bf,#06b6d4)" }}/>
-            <span className="text-[10px] font-bold uppercase tracking-[.22em]"
-              style={{ background:"linear-gradient(135deg,#2dd4bf,#6366f1)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text", fontFamily:"'Poppins',sans-serif" }}>
+          {/* Badge */}
+          <div className="mb-5 inline-flex items-center gap-2.5 rounded-full border border-teal-200 bg-white/80 px-4 py-1.5 shadow-[0_2px_12px_rgba(45,212,191,0.12)] backdrop-blur-md">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal-400 opacity-60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-gradient-to-br from-teal-400 to-indigo-700" />
+            </span>
+            <span className="bg-gradient-to-r from-teal-500 to-indigo-700 bg-clip-text font-[Poppins,sans-serif] text-[10px] font-bold uppercase tracking-[0.22em] text-transparent">
               {badgeText}
             </span>
           </div>
 
-          <h2 className="font-bold leading-[1.13] mb-3"
-            style={{ color:"#060b1e", fontFamily:"'Poppins',sans-serif", fontSize:"clamp(1.9rem,4vw,3.1rem)" }}>
+          {/* Heading */}
+          <h2 className="mb-4 font-[Poppins,sans-serif] text-[clamp(1.9rem,3.6vw,2.9rem)] font-bold leading-[1.14] text-[#0c1230]">
             {heading}{" "}
-            {headingHighlight && <span className="ovS-hl">{headingHighlight}</span>}
+            {headingHighlight && (
+              <span className="bg-gradient-to-r from-teal-400 via-indigo-500 to-indigo-700 bg-clip-text text-transparent">
+                {headingHighlight}
+              </span>
+            )}
             {headingAfter && <> {headingAfter}</>}
           </h2>
 
-          <div className="ovS-bar h-[3px] w-16 rounded-full mx-auto mb-6"
-            style={{ background:"linear-gradient(90deg,#2dd4bf,#6366f1)" }}/>
+          {/* Accent bar */}
+          <div className="mx-auto mb-6 h-[3px] w-16 rounded-full bg-gradient-to-r from-teal-400 to-indigo-700 lg:mx-0" />
 
-          {textParas.length > 0 && (
-            <p className="text-[14.5px] leading-[1.9] max-w-[640px] mb-6" style={{ color:"#4a5070" }}>
-              {textParas[0]}
+          {/* Intro paragraph */}
+          {introPara && (
+            <p className="mx-auto mb-8 max-w-[520px] text-[14.5px] leading-[1.9] text-[#4a5070] lg:mx-0">
+              {introPara}
             </p>
           )}
 
-          {/* Stats */}
-          <div className="flex items-center gap-3 flex-wrap justify-center mb-10">
-            <div className="ovS-stat inline-flex items-center gap-2 px-4 py-2">
-              <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
-                style={{ background:"linear-gradient(135deg,#2dd4bf,#06b6d4)", color:"#fff" }}>
-                <IconStar/>
-              </div>
-              <span className="text-[12px] font-semibold" style={{ color:"#334155", fontFamily:"'Poppins',sans-serif" }}>{since}</span>
-            </div>
-            <div className="w-px h-4" style={{ background:"rgba(99,102,241,.2)" }}/>
-            <div className="ovS-stat inline-flex items-center gap-2 px-4 py-2">
-              <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
-                style={{ background:"linear-gradient(135deg,#6366f1,#8b5cf6)", color:"#fff" }}>
-                <IconUsers/>
-              </div>
-              <span className="text-[12px] font-semibold" style={{ color:"#334155", fontFamily:"'Poppins',sans-serif" }}>{trustedLabel}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* ── STACKED IMAGE — full width ────────────────────── */}
-        <div className="ovS-img-wrap w-full" style={{ height:"clamp(320px,48vw,580px)" }}>
-          <Image src={image} alt={imageAlt} fill sizes="100vw" className="object-cover object-center"/>
-          <div className="ovS-img-overlay"/>
-
-          {/* Floating badge bottom-left */}
-          <div className="ovS-badge absolute bottom-5 left-5 z-20 flex items-center gap-3 px-4 py-3">
-            <div className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0"
-              style={{ background:"linear-gradient(135deg,#2dd4bf,#06b6d4)", color:"#fff" }}>
-              <IconStar/>
-            </div>
-            <div>
-              <p className="font-extrabold text-[13px] leading-none" style={{ color:"#060b1e", fontFamily:"'Poppins',sans-serif" }}>{since}</p>
-              <p className="text-[9.5px] tracking-[.07em] uppercase font-semibold mt-0.5" style={{ color:"#6b7280" }}>{trustedLabel}</p>
-            </div>
-          </div>
-
-          {/* Verified chip top-right */}
-          <div className="absolute top-5 right-5 z-20 flex items-center gap-1.5 rounded-full px-3 py-2"
-            style={{ background:"rgba(255,255,255,.90)", backdropFilter:"blur(12px)", border:"1px solid rgba(99,102,241,.20)", boxShadow:"0 4px 18px rgba(99,102,241,.14)", animation:"ovS-float 6s ease-in-out infinite 1s" }}>
-            <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
-              style={{ background:"linear-gradient(135deg,#6366f1,#8b5cf6)", color:"#fff" }}>
-              <svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            </div>
-            <span className="text-[9.5px] font-bold uppercase tracking-[.12em]"
-              style={{ color:"#6366f1", fontFamily:"'Poppins',sans-serif" }}>Verified Agency</span>
-          </div>
-
-          {/* Sparkles */}
-          <svg className="absolute top-[18%] left-[8%] pointer-events-none" width="16" height="16" viewBox="0 0 36 36" fill="none" style={{ opacity:.5, animation:"ovS-float 5s ease-in-out infinite" }}>
-            <path d="M18 0 L20.2 15.8 L36 18 L20.2 20.2 L18 36 L15.8 20.2 L0 18 L15.8 15.8 Z" fill="#2dd4bf"/>
-          </svg>
-          <svg className="absolute bottom-[22%] right-[10%] pointer-events-none" width="10" height="10" viewBox="0 0 36 36" fill="none" style={{ opacity:.4, animation:"ovS-float 7s ease-in-out infinite 1.5s" }}>
-            <path d="M18 0 L20.2 15.8 L36 18 L20.2 20.2 L18 36 L15.8 20.2 L0 18 L15.8 15.8 Z" fill="#a855f7"/>
-          </svg>
-        </div>
-
-        {/* ── SCROLLING TAGS STRIP ──────────────────────────── */}
-        <div className="ovS-strip py-5 -mx-4 sm:-mx-8 xl:-mx-12 my-8"
-          style={{ borderTop:"1px solid rgba(99,102,241,.08)", borderBottom:"1px solid rgba(99,102,241,.08)", background:"rgba(255,255,255,.50)" }}>
-          <div className="ovS-strip-track">
-            {[...Array(2)].map((_, gi) =>
-              ["Web Development","Mobile Apps","UI/UX Design","Shopify Experts","Next.js & React","Flutter Apps","Laravel Backend","eCommerce Solutions"].map((t,i) => (
-                <span key={`${gi}-${i}`} className="ovS-tag">
-                  <span className="ovS-tag-dot" style={{ background: i%3===0?"#2dd4bf":i%3===1?"#6366f1":"#a855f7" }}/>
-                  {t}
+          {/* Stats strip */}
+          <div className="mb-8 flex items-center justify-center gap-6 lg:justify-start">
+            {[["500+","Clients"],["15+","Yrs Exp"],["98%","Happy"]].map(([val,label], i) => (
+              <div key={label} className={`flex flex-col items-center gap-1 lg:items-start ${i > 0 ? "border-l border-indigo-100 pl-6" : ""}`}>
+                <span className="bg-gradient-to-r from-teal-500 to-indigo-700 bg-clip-text font-[Poppins,sans-serif] text-2xl font-extrabold leading-none text-transparent">
+                  {val}
                 </span>
-              ))
-            )}
+                <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-[#8b8fa8]">{label}</span>
+              </div>
+            ))}
           </div>
-        </div>
 
-        {/* ── FEATURE PILLS GRID ────────────────────────────── */}
-        {featureCards.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
-            {featureCards.map((p,i) => {
-              const c = FEAT_COLORS[i % FEAT_COLORS.length];
-              return (
-                <div key={i} className="ovS-pill">
-                  <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ background:c.bg, border:`1px solid ${c.border}`, color:c.icon }}>
-                    {FEAT_ICONS[i % FEAT_ICONS.length]}
-                  </div>
-                  <div>
-                    <p className="text-[13px] font-bold mb-1 leading-tight" style={{ color:"#1e2a4a", fontFamily:"'Poppins',sans-serif" }}>{p.boldPrefix}</p>
-                    {p.text && <p className="text-[12px] leading-[1.75]" style={{ color:"#6b7280" }}>{p.text}</p>}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
-
-        {/* ── BOTTOM: para + CTA ───────────────────────────── */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-14 pt-2">
-          {textParas[1] && (
-            <p className="text-[14px] leading-[1.9] max-w-[560px]" style={{ color:"#4a5070" }}>{textParas[1]}</p>
-          )}
-          <a href={ctaHref}
-            className="ovS-cta inline-flex items-center gap-2.5 px-8 py-3.5 font-semibold text-[13.5px] flex-shrink-0"
-            style={{ fontFamily:"'Poppins',sans-serif" }}>
+          {/* CTA */}
+          <a
+            href={ctaHref}
+            className="group/cta inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-teal-400 to-indigo-700 px-8 py-3.5 font-[Poppins,sans-serif] text-[13.5px] font-semibold text-white no-underline shadow-[0_8px_28px_rgba(45,212,191,0.32)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_14px_40px_rgba(67,56,202,0.35)]"
+          >
             {ctaText}
-            <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" className="transition-transform duration-200 group-hover/cta:translate-x-1">
               <path d="M1.5 6h9M6.5 1.5l4 4.5-4 4.5" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </a>
+
+          {/* Tags — small wrap under CTA */}
+          <div className="mt-9 hidden flex-wrap gap-2 lg:flex">
+            {tags.slice(0, 6).map((t, i) => (
+              <span
+                key={t}
+                className="inline-flex items-center gap-1.5 rounded-full border border-indigo-100 bg-white/85 px-3 py-1 font-[Poppins,sans-serif] text-[11px] font-semibold text-[#334155] shadow-[0_2px_8px_rgba(67,56,202,0.06)]"
+              >
+                <span className={`h-1.5 w-1.5 flex-shrink-0 rounded-full ${i % 2 === 0 ? "bg-teal-400" : "bg-indigo-600"}`} />
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* ════════ RIGHT — flowing content column ════════ */}
+        <div>
+
+          {/* Image card */}
+          <div className="group relative mb-9 overflow-hidden rounded-3xl border border-white shadow-[0_24px_60px_rgba(12,18,48,0.12)]">
+            <div className="relative h-[280px] w-full sm:h-[360px]">
+              <Image
+                src={image}
+                alt={imageAlt}
+                fill
+                sizes="(max-width:1024px) 100vw, 58vw"
+                className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0c1230]/60 via-transparent to-transparent" />
+
+              {/* Verified chip */}
+              <div className="absolute right-5 top-5 flex items-center gap-1.5 rounded-full border border-white/60 bg-white/90 px-3 py-2 shadow-[0_4px_18px_rgba(12,18,48,0.18)] backdrop-blur-md">
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-br from-teal-400 to-indigo-700">
+                  <svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </span>
+                <span className="font-[Poppins,sans-serif] text-[9.5px] font-bold uppercase tracking-[0.12em] text-indigo-700">
+                  Verified Agency
+                </span>
+              </div>
+
+              {/* Since badge */}
+              <div className="absolute bottom-5 left-5 flex items-center gap-3 rounded-2xl border border-white/20 bg-white/15 px-4 py-3 backdrop-blur-xl">
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-teal-400 to-indigo-700 text-white">
+                  <IconStar/>
+                </span>
+                <div className="leading-tight">
+                  <p className="font-[Poppins,sans-serif] text-[13px] font-extrabold text-white">{since}</p>
+                  <p className="mt-0.5 text-[9.5px] font-semibold uppercase tracking-[0.08em] text-white/70">{trustedLabel}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bulk paragraphs — first one gets a drop cap */}
+          {bodyParas.length > 0 && (
+            <div className="mb-10 space-y-5">
+              {bodyParas.map((para, i) => (
+                <p
+                  key={i}
+                  className={`text-[14px] leading-[1.95] text-[#4a5070] ${
+                    i === 0
+                      ? "first-letter:float-left first-letter:mr-2.5 first-letter:bg-gradient-to-br first-letter:from-teal-400 first-letter:to-indigo-700 first-letter:bg-clip-text first-letter:font-[Poppins,sans-serif] first-letter:text-[44px] first-letter:font-extrabold first-letter:leading-[0.85] first-letter:text-transparent"
+                      : ""
+                  }`}
+                >
+                  {para}
+                </p>
+              ))}
+            </div>
+          )}
+
+          {/* Feature timeline — vertical rows with connector line */}
+          {featureCards.length > 0 && (
+            <div className="relative mb-10 space-y-4 pl-2">
+              {/* Connector line */}
+              <span className="absolute bottom-5 left-[26px] top-5 w-px bg-gradient-to-b from-teal-300 via-indigo-300 to-indigo-200" />
+              {featureCards.map((p, i) => (
+                <div
+                  key={i}
+                  className="group/row relative flex items-start gap-4 rounded-2xl border border-white bg-white/80 px-5 py-4 shadow-[0_4px_20px_rgba(12,18,48,0.06)] backdrop-blur-md transition-all duration-200 hover:translate-x-1 hover:shadow-[0_12px_30px_rgba(12,18,48,0.11)]"
+                >
+                  <span className={`relative z-10 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border ${FEAT_TILE[i % FEAT_TILE.length]}`}>
+                    {FEAT_ICONS[i % FEAT_ICONS.length]}
+                  </span>
+                  <div>
+                    <p className="mb-1 font-[Poppins,sans-serif] text-[13.5px] font-bold leading-tight text-[#1e2a4a]">{p.boldPrefix}</p>
+                    {p.text && <p className="text-[12.5px] leading-[1.8] text-[#6b7280]">{p.text}</p>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Tags on mobile (left column hides them) */}
+          <div className="flex flex-wrap justify-center gap-2 lg:hidden">
+            {tags.map((t, i) => (
+              <span
+                key={t}
+                className="inline-flex items-center gap-1.5 rounded-full border border-indigo-100 bg-white/85 px-3 py-1 font-[Poppins,sans-serif] text-[11px] font-semibold text-[#334155] shadow-[0_2px_8px_rgba(67,56,202,0.06)]"
+              >
+                <span className={`h-1.5 w-1.5 flex-shrink-0 rounded-full ${i % 2 === 0 ? "bg-teal-400" : "bg-indigo-600"}`} />
+                {t}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-[2px] pointer-events-none"
-        style={{ background:"linear-gradient(90deg,transparent,#6366f1 30%,#2dd4bf 70%,transparent)", opacity:.5 }}/>
+      {/* Bottom brand hairline */}
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-indigo-700 to-transparent opacity-50" />
     </section>
   );
 }
