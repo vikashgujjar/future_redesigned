@@ -68,6 +68,16 @@ export default function CommonServicePage({
         ctaText={overviewCtaText}
       />
 
+      {/* ── 7b. Technologies Stack ── */}
+      {techCategories.length > 0 && (
+        <TechnologiesSection
+          badgeText={techBadge}
+          heading={techHeading}
+          headingHighlight={techHeadingHighlight}
+          description={techDescription}
+          categories={techCategories}
+        />
+      )}
       {/* ════════════════════════════════════════
           4. FEATURES — Interactive Tab Explorer
       ════════════════════════════════════════ */}
@@ -573,22 +583,12 @@ export default function CommonServicePage({
       {/* ── 7. Platforms / Tech ── */}
       {platforms.length > 0 && <WhyFutureITTouch platforms={platforms} title={platformsTitle} />}
 
-      {/* ── 7b. Technologies Stack ── */}
-      {techCategories.length > 0 && (
-        <TechnologiesSection
-          badgeText={techBadge}
-          heading={techHeading}
-          headingHighlight={techHeadingHighlight}
-          description={techDescription}
-          categories={techCategories}
-        />
-      )}
+      {/* ── 9. Blog insights ── */}
+      <GetNewInsight />
 
       {/* ── 8. FAQ ── */}
       {faqData.length > 0 && <FAQSection faqData={faqData} title={faqTitle} />}
 
-      {/* ── 9. Blog insights ── */}
-      <GetNewInsight />
     </>
   );
 }
