@@ -166,9 +166,11 @@ export default function CommonServicePage({
               background:linear-gradient(160deg,rgba(4,7,26,.18) 0%,rgba(4,7,26,.82) 100%);
             }
             .fex-panel-content {
-              position:relative; z-index:2; padding:36px 38px;
+              position:relative; z-index:2; padding:22px 20px;
               animation:fexContentIn .4s cubic-bezier(.22,1,.36,1);
             }
+            @media (min-width:480px) { .fex-panel-content { padding:28px 30px; } }
+            @media (min-width:640px) { .fex-panel-content { padding:36px 38px; } }
             .fex-panel-icon {
               width:68px; height:68px; border-radius:20px;
               display:flex; align-items:center; justify-content:center; font-size:28px;
@@ -516,7 +518,7 @@ export default function CommonServicePage({
             </div>
 
             {/* Card grid */}
-            <div className={`grid grid-cols-1 sm:grid-cols-2 ${bizCards.length >= 3 ? "lg:grid-cols-3" : ""} gap-6`}>
+            <div className={`grid grid-cols-1 sm:grid-cols-2 ${bizCards.length === 4 ? "lg:grid-cols-2" : bizCards.length >= 3 ? "lg:grid-cols-3" : ""} gap-6`}>
               {bizCards.map((card, i) => {
                 const bc = BIZ_COLORS[i % BIZ_COLORS.length];
                 return (

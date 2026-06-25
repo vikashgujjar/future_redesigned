@@ -1,255 +1,217 @@
 "use client";
-import React from "react";
-
 import devops from "../Assets/digitalmarketing.webp";
-import ChooseFuture from "../components/ChooseFuture";
-import service1 from "../Assets/seoOne.webp";
-import service2 from "../Assets/smo.webp";
-import service3 from "../Assets/ppcOne.webp";
-import service4 from "../Assets/cont.webp";
-import Image from "next/image";
-import { FaAngleRight, FaChevronRight, FaDotCircle } from "react-icons/fa";
-import Counter from "../components/Counter";
-import GetNewInsight from "../components/GetNewInsight";
-import OverviewSection from "../components/OverviewSection";
-import CommonBannerService from "../components/CommonBannerService";
+import CommonServicePage from "../components/CommonServicePage";
+import {
+  FaBullhorn, FaSearch, FaChartLine, FaEnvelope, FaShareAlt, FaGoogle, FaMousePointer,
+} from "react-icons/fa";
+
+const features = [
+  {
+    title: "Search Engine Optimization",
+    description:
+      "We craft data-driven SEO strategies that increase your organic search rankings, drive qualified traffic, and deliver measurable ROI. From technical audits to on-page optimization and high-authority link building, every action is aimed at boosting your long-term visibility on Google and Bing.",
+    icon: <FaSearch />,
+  },
+  {
+    title: "Pay-Per-Click Advertising",
+    description:
+      "Our certified Google Ads specialists design high-converting PPC campaigns that target the right audience at the right time. We manage budgets efficiently, run A/B tests, and continuously optimize bids and creatives to ensure you get maximum return on your ad spend.",
+    icon: <FaGoogle />,
+  },
+  {
+    title: "Social Media Marketing",
+    description:
+      "We build and manage your brand presence across all major social media platforms — Facebook, Instagram, LinkedIn, and Twitter. Our team crafts compelling content calendars, engages your audience, and runs targeted ad campaigns that turn followers into loyal customers.",
+    icon: <FaShareAlt />,
+  },
+  {
+    title: "Email Marketing",
+    description:
+      "Leverage the power of personalized email campaigns to nurture leads, re-engage existing customers, and drive repeat purchases. We design beautifully crafted emails with strong CTAs, automated sequences, and detailed analytics to maximize open rates and conversions.",
+    icon: <FaEnvelope />,
+  },
+  {
+    title: "Content Marketing",
+    description:
+      "Our content marketing experts create high-quality blogs, infographics, videos, and whitepapers that educate your audience and position your brand as an industry authority. Every piece of content is strategically crafted to attract, engage, and convert your target audience.",
+    icon: <FaBullhorn />,
+  },
+  {
+    title: "Conversion Rate Optimization",
+    description:
+      "Getting traffic is only half the battle. We analyze user behavior, conduct A/B testing, and optimize landing pages to ensure visitors convert into leads and customers. Our CRO strategies help you extract more value from your existing traffic without increasing ad spend.",
+    icon: <FaMousePointer />,
+  },
+  {
+    title: "Analytics & Performance Reporting",
+    description:
+      "We provide detailed, transparent reports covering all key performance metrics — traffic, conversions, ROI, and channel performance. Our data-driven approach ensures every marketing decision is backed by real insights, helping you understand what's working and where to invest more.",
+    icon: <FaChartLine />,
+  },
+];
+
+const bizCards = [
+  {
+    title: "Proven ROI-Driven Strategies",
+    desc: "Every campaign we run is tied to measurable outcomes. We set clear KPIs from the start and optimize relentlessly to deliver the highest possible return on your marketing investment.",
+    icons: <FaChartLine className="text-white w-8 h-8" />,
+  },
+  {
+    title: "Full-Funnel Marketing Coverage",
+    desc: "From awareness to conversion, we cover every stage of the customer journey — ensuring no lead is left behind and every touchpoint reinforces your brand message.",
+    icons: <FaBullhorn className="text-white w-8 h-8" />,
+  },
+  {
+    title: "Data-First Decision Making",
+    desc: "Our strategies are powered by real-time analytics, customer insights, and market research. We let the data tell us where to invest for maximum impact and growth.",
+    icons: <FaGoogle className="text-white w-8 h-8" />,
+  },
+  {
+    title: "Dedicated Marketing Team",
+    desc: "You get a team of specialists — SEO experts, PPC managers, content writers, and social media strategists — all working in sync to grow your digital presence.",
+    icons: <FaSearch className="text-white w-8 h-8" />,
+  },
+];
+
+const sliderCards = [
+  {
+    count: "3x",
+    title: "SEO Ranking Boost",
+    desc: "Achieved top-3 Google rankings for competitive keywords within 4 months through technical SEO and content optimization.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+  },
+  {
+    count: "40%",
+    title: "PPC Campaign Success",
+    desc: "Reduced cost-per-click by 40% while tripling lead volume for a B2B SaaS client through targeted audience segmentation.",
+    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80",
+  },
+  {
+    count: "250%",
+    title: "Social Media Growth",
+    desc: "Grew a client's Instagram following by 250% in 6 months with engaging content and strategic influencer partnerships.",
+    image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&q=80",
+  },
+  {
+    count: "38%",
+    title: "Email Campaign Results",
+    desc: "Delivered a 38% open rate and 12% click-through rate for an e-commerce email re-engagement campaign.",
+    image: "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=800&q=80",
+  },
+];
+
+const platforms = [
+  { icon: <FaGoogle className="text-white w-6 h-6" />, title: "Google Analytics & Ads", desc: "We leverage Google's ecosystem for targeted advertising, conversion tracking, and campaign optimization to maximize your ROI." },
+  { icon: <FaSearch className="text-white w-6 h-6" />, title: "SEO Tools (Ahrefs, Semrush)", desc: "Industry-leading platforms for keyword research, rank tracking, backlink analysis, and in-depth competitor intelligence." },
+  { icon: <FaShareAlt className="text-white w-6 h-6" />, title: "Social Media Advertising", desc: "High-performing paid campaigns across Facebook, Instagram, LinkedIn, and Twitter — reaching your exact audience at scale." },
+  { icon: <FaEnvelope className="text-white w-6 h-6" />, title: "Email Marketing (HubSpot, Mailchimp)", desc: "Automated, high-converting email sequences to nurture leads, retain customers, and drive repeat purchases." },
+  { icon: <FaChartLine className="text-white w-6 h-6" />, title: "Analytics & Reporting", desc: "Comprehensive dashboards covering traffic, conversions, and channel ROI — every decision backed by real-time data." },
+  { icon: <FaMousePointer className="text-white w-6 h-6" />, title: "CRO & Landing Pages", desc: "A/B testing and behavioral analysis to optimize your funnels and turn more visitors into paying customers." },
+];
+
+const faqData = [
+  {
+    title: "What digital marketing services do you offer?",
+    description:
+      "We offer a comprehensive suite of digital marketing services including SEO, PPC advertising, social media marketing, content marketing, email marketing, and conversion rate optimization — all tailored to your business goals.",
+  },
+  {
+    title: "How long does it take to see results from digital marketing?",
+    description:
+      "SEO typically shows meaningful results within 3–6 months, while PPC and social ads can generate leads within days of launching. We set clear timelines and milestones for every campaign.",
+  },
+  {
+    title: "Do you provide monthly performance reports?",
+    description:
+      "Yes. We provide detailed monthly reports covering traffic, rankings, conversions, ad performance, and ROI. We also schedule regular review calls to walk you through the data.",
+  },
+  {
+    title: "Can you handle both B2B and B2C digital marketing?",
+    description:
+      "Absolutely. We have extensive experience running successful campaigns for both B2B and B2C businesses across industries including retail, healthcare, education, finance, and technology.",
+  },
+  {
+    title: "What is the minimum budget required for PPC campaigns?",
+    description:
+      "There is no fixed minimum, but we generally recommend a starting ad budget of at least ₹15,000/month for meaningful results. We work within your budget to maximize impact and efficiency.",
+  },
+];
+
+const techCategories = [
+  {
+    title: "Analytics & SEO",
+    techs: [
+      { name: "Google Analytics", icon: "https://cdn.simpleicons.org/googleanalytics" },
+      { name: "Google Search Console", icon: "https://cdn.simpleicons.org/googlesearchconsole" },
+      { name: "Ahrefs", icon: "https://cdn.simpleicons.org/ahrefs" },
+      { name: "Semrush", icon: "https://cdn.simpleicons.org/semrush" },
+    ],
+  },
+  {
+    title: "Advertising",
+    techs: [
+      { name: "Google Ads", icon: "https://cdn.simpleicons.org/googleads" },
+      { name: "Meta Ads", icon: "https://cdn.simpleicons.org/meta" },
+      { name: "LinkedIn Ads", icon: "https://cdn.simpleicons.org/linkedin" },
+    ],
+  },
+  {
+    title: "Social & Email",
+    techs: [
+      { name: "HubSpot", icon: "https://cdn.simpleicons.org/hubspot" },
+      { name: "Mailchimp", icon: "https://cdn.simpleicons.org/mailchimp" },
+      { name: "Buffer", icon: "https://cdn.simpleicons.org/buffer" },
+      { name: "Hootsuite", icon: "https://cdn.simpleicons.org/hootsuite" },
+    ],
+  },
+  {
+    title: "Content & CMS",
+    techs: [
+      { name: "WordPress", icon: "https://cdn.simpleicons.org/wordpress" },
+      { name: "Webflow", icon: "https://cdn.simpleicons.org/webflow" },
+      { name: "Canva", icon: "https://cdn.simpleicons.org/canva" },
+    ],
+  },
+];
 
 const Marketing = () => {
   return (
-    <>
-      <CommonBannerService
-        imgSrc={devops}
-        title="Professional Digital Marketing Services"
-        desc="Digital marketing needs have changed over the years with today's dynamic industry. It is always worthwhile to calibrate your digital strategy. As a towering Digital Marketing Agency in Chandigarh that has led to many successful digital campaigns, we ensure that our clients move from mere digital tactics to a well-crafted digital strategy. The trust levels are a direct result of unwavering commitment to innovative ideas, quality work, and time-bound deadlines. Our clients have realized through experience that our digital agency in Chandigarh is capable of unbiased judgment when it is time to create and launch an all-encompassing digital marketing campaign."
-      />
-
-      <Counter />
-
-      <OverviewSection
-        image={devops}
-        imageAlt="Digital Marketing Services"
-        badgeText="Digital Marketing Services"
-        heading="Digital Marketing Services for"
-        headingHighlight="Growing Your Company"
-        paragraphs={[
-          "Digital Marketing Agency is a lot like fishing — you need to wait patiently for the catch, only if there are fish in the first place. With the advent of internet, a new avenue for advertising and selling has opened up for marketers and advertisers.",
-          "Although marketing and advertising on the internet is inexpensive, it is challenging. There is a whole lot of information available on the internet that your brand may get lost in the noise and clutter. Mere presence on social media cannot give you visibility in the virtual world.",
-          "Future IT Touch Pvt. Ltd. provides result-driven digital marketing services that help businesses increase visibility, generate qualified leads, and build lasting brand awareness across all digital channels.",
-        ]}
-        ctaText="Request A Quote"
-        ctaHref="/contact"
-      />
-
-
-     <div className="grid grid-cols-1 lg:grid-cols-7 gap-12 px-5 md:px-12 xl:px-28 pb-14">
-  <div className="lg:col-span-4">
-    <h4 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-4 text-[#050748] leading-snug">
-      Online Marketing Services Proven to Increase Leads, Sales, & Revenue
-    </h4>
-
-    <div className="text-[15px] md:text-[16px] lg:text-[17px] text-justify text-[#6a6a8e] mt-5 space-y-4">
-      <p>
-        More leads. More sales. More revenue. That's digital marketing services from Future IT Touch Pvt. Ltd. With a custom strategy, plus data-driven insights from IBM Watson and Google AI, we'll help your business impact the metrics that matter most, from traffic to revenue. Are you ready to see what our digital marketing services can do for your business? Chat with us by contacting us online or calling 705-693-7000!
-      </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6">
-        <ul className="font-semibold space-y-2">
-          <li># 800+ Mobile Delivered</li>
-          <li># 200+ Team Strength</li>
-          <li># User-Friendly Interface</li>
-        </ul>
-        <ul className="font-semibold space-y-2">
-          <li># 400 Happy Clients</li>
-          <li># 95% Repeat Business</li>
-          <li># Quality Service UX</li>
-        </ul>
-      </div>
-    </div>
-
-    <a href="/contact">
-      <button className="bg-gradient-to-r from-[#f92c8b] to-[#b02cd6] flex items-center mt-7 text-white px-6 py-3 md:py-4 text-sm md:text-base font-semibold rounded-full shadow-md hover:opacity-90 transition">
-        Request A Quote <FaAngleRight className="ml-2 text-lg" />
-      </button>
-    </a>
-  </div>
-
-  <div className="lg:col-span-3">
-    <p className="mb-6 text-[#050748] text-xl md:text-2xl font-bold">
-      Advantages of Digital Marketing
-    </p>
-    <ul className="space-y-3 text-[15px] md:text-[16px] lg:text-xl text-[#6a6a8e]">
-      <li className="flex gap-3 items-center">
-        <FaDotCircle className="text-[#f92c8b]" />
-        Strategize with The Valuable Data and Analytics
-      </li>
-      <li className="flex gap-3 items-center">
-        <FaDotCircle className="text-[#f92c8b]" />
-        Content Performance and Lead Generation
-      </li>
-      <li className="flex gap-3 items-center">
-        <FaDotCircle className="text-[#f92c8b]" />
-        Reduction in Cost and Raises Standards
-      </li>
-      <li className="flex gap-3 items-center">
-        <FaDotCircle className="text-[#f92c8b]" />
-        Improved Conversion Rates
-      </li>
-      <li className="flex gap-3 items-center">
-        <FaDotCircle className="text-[#f92c8b]" />
-        More Cost Effective Than Traditional Marketing
-      </li>
-      <li className="flex gap-3 items-center">
-        <FaDotCircle className="text-[#f92c8b]" />
-        Higher Revenues
-      </li>
-      <li className="flex gap-3 items-center">
-        <FaDotCircle className="text-[#f92c8b]" />
-        Higher ROI from Your Campaigns
-      </li>
-      <li className="flex gap-3 items-center">
-        <FaDotCircle className="text-[#f92c8b]" />
-        Earn People's Trust and Build Brand Reputation
-      </li>
-      <li className="flex gap-3 items-center">
-        <FaDotCircle className="text-[#f92c8b]" />
-        Know All About Your Competitors
-      </li>
-    </ul>
-  </div>
-</div>
-
-
-      <section className="service-section service-2 py-20">
-        <div className="flex justify-center px-3">
-          <div className="w-full lg:w-8/12">
-            <div className="text-center">
-              <span className="text-3xl lg:text-5xl font-bold text-[#e60072] uppercase">
-                Our Services
-              </span>
-              <h2 className="text-lg  mt-4 mb-8">
-                We think big and have hands in all leading technology platforms
-                to provide you wide array of services.
-              </h2>
-            </div>
-          </div>
-        </div>
-        <div className="grid grid-cols-1  gap-8 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2  px-5 md:px-12 xl:px-28 my-10">
-          <div className=" w-full  mb-8 lg:mb-0">
-            <div className="flex max-lg:block   bg-[#e9ddff] rounded-lg shadow-lg py-7 px-5 gap-3">
-              <div className="w-full">
-                <Image
-                  src={service1}
-                  width={400}
-                  height={400}
-                  alt="SEO service illustration"
-                  className="max-sm:mb-5"
-                />
-              </div>
-              <div className="text-[#6a6a8e]">
-                <h4 className="text-2xl font-bold mb-3 text-[#050748]">
-                  Search Engine Optimization
-                </h4>
-                <span className="text-lg">
-                  If you are looking to grow your business nationwide, our
-                  advanced skillset can deliver you just that. With high-end
-                  tools and proven process, our experts can help you generate a
-                  strong market position & drive more conversions.
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className=" w-full  mb-8 lg:mb-0">
-            <div className="flex max-lg:block   bg-[#ffdadb] rounded-lg shadow-lg py-7 px-5 gap-3">
-              <div className="w-full">
-                <Image
-                  src={service2}
-                  width={400}
-                  height={400}
-                  alt="Social media marketing illustration"
-                  className="max-sm:mb-5"
-                />
-              </div>
-              <div className="text-[#6a6a8e]">
-                <h4 className="text-2xl font-bold mb-3 text-[#050748]">
-                  Social Media Marketing
-                </h4>
-                <span className="text-lg">
-                  The Social Media is a powerful platform to reach your
-                  prospective customers . More than 70% of people are daily
-                  active on the leading social media platforms like Facebook,
-                  Twitter, LinkedIn.
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className=" w-full  mb-8 lg:mb-0">
-            <div className="flex bg-[#d6edff] max-lg:block   rounded-lg shadow-lg py-7 px-5 gap-3">
-              <div className="w-full">
-                <Image
-                  src={service3}
-                  width={400}
-                  height={400}
-                  alt="Pay per click marketing illustration"
-                  className="max-sm:mb-5"
-                />
-              </div>
-              <div className="text-[#6a6a8e]">
-                <h4 className="text-2xl font-bold mb-3 text-[#050748]">
-                  Pay per Click
-                </h4>
-                <span className="text-lg">
-                  Cost-effective and measurable PPC marketing is a powerful way
-                  to instantly improve your online visibility. Our result-driven
-                  PPC service in India ensures that you get the highest returns
-                  out of your campaigns.
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className=" w-full  mb-8 lg:mb-0">
-            <div className="flex bg-[#ffede1] max-lg:block rounded-lg shadow-lg py-7 px-5 gap-3">
-              <div className="w-full">
-                <Image
-                  src={service4}
-                  width={400}
-                  height={400}
-                  alt="Content marketing illustration"
-                  className="max-sm:mb-5"
-                />
-              </div>
-              <div className="text-[#6a6a8e]">
-                <h4 className="text-2xl font-bold mb-3 text-[#050748]">
-                  Content Marketing
-                </h4>
-                <span className="text-lg">
-                  Our creative content marketing services are SEO-centric,
-                  ROI-focussed and customer-driven. We create a well-defined,
-                  goal-oriented strategy before plunging into full-fledged
-                  content development and marketing.
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="cta-card mt-20 flex max-sm:block max-md:block justify-center items-center gap-5 px-5">
-          <h3 className=" text-2xl sm:text-2xl md:text-3xl lg:text-4xl  ">
-            Hire a {""}
-            <span className="font-bold">Dedicated Developer</span>
-          </h3>
-
-          <a
-            href="#"
-            className="btn-outline float-right flex items-center border-2 border-black text-black px-8 py-2 font-poppins text-base bg-white shadow-md rounded-full  ml-2 hover:bg-gradient-to-r from-teal-400 to-indigo-700 hover:text-white hover:border-current "
-          >
-            Hire Now <FaAngleRight className="relative left-2" />
-          </a>
-        </div>
-      </section>
-
-      <ChooseFuture />
-
-    <GetNewInsight/>
-    </>
+    <CommonServicePage
+      bannerImg={devops}
+      bannerTitle="Professional Digital Marketing Services"
+      bannerDesc="Digital marketing needs have changed over the years with today's dynamic industry. As a towering Digital Marketing Agency in Chandigarh that has led many successful digital campaigns, we ensure that our clients move from mere digital tactics to a well-crafted digital strategy. Our unwavering commitment to innovative ideas, quality work, and time-bound deadlines has built lasting trust with our clients."
+      overviewImage="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+      overviewImageAlt="Digital Marketing Services"
+      overviewBadge="Digital Marketing Services"
+      overviewHeading="Digital Marketing Services for"
+      overviewHighlight="Growing Your Company"
+      overviewParagraphs={[
+        "Digital marketing is like fishing — you need the right tools, the right location, and a proven strategy. With the rise of the internet, a vast new avenue for advertising and selling has opened up for businesses of every size.",
+        "Despite being cost-effective, digital marketing is highly competitive. Your brand can easily get lost in the noise. Mere presence on social media is not enough — you need a strategic, data-driven approach.",
+        "Future IT Touch Pvt. Ltd. provides result-driven digital marketing services that help businesses increase visibility, generate qualified leads, and build lasting brand awareness across all digital channels.",
+      ]}
+      overviewCtaText="Request A Quote"
+      featuresBadge="Our Digital Marketing Services"
+      featuresTitle="Data-Driven Strategies That"
+      featuresTitleHighlight="Deliver Real Results"
+      featuresStickyImg="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&q=80"
+      features={features}
+      bizBadge="Our Advantages"
+      bizHeading="Why Choose Us for"
+      bizHighlight="Digital Marketing"
+      bizCards={bizCards}
+      sliderTitle="Delivering Impactful Digital Marketing Campaigns"
+      sliderCards={sliderCards}
+      platformsTitle="Marketing Platforms We Use"
+      platforms={platforms}
+      techBadge="Our Marketing Tech Stack"
+      techHeading="Technologies"
+      techHeadingHighlight="We Market With"
+      techDescription="We leverage the most powerful marketing tools and platforms to plan, execute, and measure campaigns that drive measurable business growth."
+      techCategories={techCategories}
+      faqTitle="Frequently Asked Questions — Digital Marketing"
+      faqData={faqData}
+    />
   );
 };
 

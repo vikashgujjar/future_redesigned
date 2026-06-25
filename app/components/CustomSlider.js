@@ -49,8 +49,10 @@ export default function CustomSlider({ cards = [], title }) {
         }
         .sl-img-content {
           position:absolute; bottom:0; left:0; right:0;
-          padding:32px 36px; z-index:2;
+          padding:20px 18px; z-index:2;
         }
+        @media (min-width:480px) { .sl-img-content { padding:26px 28px; } }
+        @media (min-width:640px) { .sl-img-content { padding:32px 36px; } }
 
         /* Stat row tabs */
         .sl-tab {

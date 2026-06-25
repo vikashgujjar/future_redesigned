@@ -82,6 +82,33 @@ const IOS = () => (
       { title: "Will my iOS app work on all Apple devices?",                 description: "Yes, we build responsive iOS apps compatible across iPhone, iPad, and Apple Watch with consistent design." },
       { title: "Do you provide post-launch support?",                        description: "Yes, we offer continuous maintenance, updates, and support to keep your iOS app up-to-date with the latest iOS versions." },
     ]}
+    techCategories={[
+      { title:"Mobile Frameworks", techs:[
+        {name:"Flutter",icon:"https://cdn.simpleicons.org/flutter"},
+        {name:"React Native",icon:"https://cdn.simpleicons.org/react"},
+        {name:"Android",icon:"https://cdn.simpleicons.org/android"},
+        {name:"iOS / Swift",icon:"https://cdn.simpleicons.org/swift"},
+        {name:"Kotlin",icon:"https://cdn.simpleicons.org/kotlin"},
+      ]},
+      { title:"Backend & APIs", techs:[
+        {name:"Node.js",icon:"https://cdn.simpleicons.org/nodedotjs"},
+        {name:"Firebase",icon:"https://cdn.simpleicons.org/firebase"},
+        {name:"REST APIs",icon:"https://cdn.simpleicons.org/fastapi"},
+        {name:"GraphQL",icon:"https://cdn.simpleicons.org/graphql"},
+      ]},
+      { title:"Database & Storage", techs:[
+        {name:"SQLite",icon:"https://cdn.simpleicons.org/sqlite"},
+        {name:"Firebase",icon:"https://cdn.simpleicons.org/firebase"},
+        {name:"MongoDB",icon:"https://cdn.simpleicons.org/mongodb"},
+        {name:"MySQL",icon:"https://cdn.simpleicons.org/mysql"},
+      ]},
+      { title:"Testing & DevOps", techs:[
+        {name:"Appium",icon:"https://cdn.simpleicons.org/appium"},
+        {name:"Jest",icon:"https://cdn.simpleicons.org/jest"},
+        {name:"GitHub Actions",icon:"https://cdn.simpleicons.org/githubactions"},
+        {name:"Docker",icon:"https://cdn.simpleicons.org/docker"},
+      ]},
+    ]}
   />
 );
 

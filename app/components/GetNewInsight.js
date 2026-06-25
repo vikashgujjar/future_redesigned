@@ -65,7 +65,7 @@ export default function GetNewInsight() {
         .gni-input::placeholder { color:rgba(255,255,255,.38); }
 
         .gni-submit {
-          flex-shrink:0; display:flex; align-items:center; gap:8px;
+          flex-shrink:1; display:flex; align-items:center; gap:8px;
           font-family:'Poppins',sans-serif; font-weight:700; font-size:12px;
           letter-spacing:.08em; text-transform:uppercase;
           color:#fff; border:none; cursor:pointer;

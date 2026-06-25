@@ -202,6 +202,37 @@ const Ecommerce = () => {
       platforms={platforms}
       faqTitle="About eCommerce Website Development"
       faqData={faqData}
+      techCategories={[
+        { title:"Frontend", techs:[
+          {name:"React.js",icon:"https://cdn.simpleicons.org/react"},
+          {name:"Next.js",icon:"https://cdn.simpleicons.org/nextdotjs/white"},
+          {name:"Angular",icon:"https://cdn.simpleicons.org/angular"},
+          {name:"Vue.js",icon:"https://cdn.simpleicons.org/vuedotjs"},
+          {name:"TypeScript",icon:"https://cdn.simpleicons.org/typescript"},
+          {name:"HTML/CSS",icon:"https://cdn.simpleicons.org/html5"},
+        ]},
+        { title:"Backend", techs:[
+          {name:"Node.js",icon:"https://cdn.simpleicons.org/nodedotjs"},
+          {name:"PHP",icon:"https://cdn.simpleicons.org/php"},
+          {name:"Laravel",icon:"https://cdn.simpleicons.org/laravel"},
+          {name:"Python",icon:"https://cdn.simpleicons.org/python"},
+          {name:"Express.js",icon:"https://cdn.simpleicons.org/express/white"},
+          {name:".NET",icon:"https://cdn.simpleicons.org/dotnet"},
+        ]},
+        { title:"Database", techs:[
+          {name:"MySQL",icon:"https://cdn.simpleicons.org/mysql"},
+          {name:"PostgreSQL",icon:"https://cdn.simpleicons.org/postgresql"},
+          {name:"MongoDB",icon:"https://cdn.simpleicons.org/mongodb"},
+          {name:"Redis",icon:"https://cdn.simpleicons.org/redis"},
+        ]},
+        { title:"DevOps & Cloud", techs:[
+          {name:"Docker",icon:"https://cdn.simpleicons.org/docker"},
+          {name:"AWS",icon:"https://cdn.simpleicons.org/amazonaws"},
+          {name:"GitHub Actions",icon:"https://cdn.simpleicons.org/githubactions"},
+          {name:"Nginx",icon:"https://cdn.simpleicons.org/nginx"},
+          {name:"Vercel",icon:"https://cdn.simpleicons.org/vercel/white"},
+        ]},
+      ]}
     />
   );
 };

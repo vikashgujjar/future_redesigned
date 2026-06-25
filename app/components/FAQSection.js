@@ -66,10 +66,12 @@ export default function FAQSection({ faqData = [], title }) {
 
         /* Toggle button */
         .faq-trigger {
-          width:100%; display:flex; align-items:center; gap:16px;
-          padding:18px 20px 18px 22px;
+          width:100%; display:flex; align-items:center; gap:10px;
+          padding:14px 14px 14px 16px;
           background:transparent; border:none; cursor:pointer; text-align:left;
         }
+        @media (min-width:480px) { .faq-trigger { gap:14px; padding:16px 18px 16px 20px; } }
+        @media (min-width:640px) { .faq-trigger { gap:16px; padding:18px 20px 18px 22px; } }
 
         /* Number chip */
         .faq-num {
@@ -106,11 +108,13 @@ export default function FAQSection({ faqData = [], title }) {
 
         /* Watermark number */
         .faq-wm {
+          display:none;
           position:absolute; right:16px; top:50%; transform:translateY(-50%);
           font-family:'Poppins',sans-serif; font-weight:900; line-height:1;
           font-size:clamp(3rem,5vw,4.5rem); pointer-events:none; user-select:none;
           transition:color .25s;
         }
+        @media (min-width:640px) { .faq-wm { display:block; } }
 
         /* Left panel CTA card */
         .faq-cta { position:relative; overflow:hidden; border-radius:20px; padding:26px; }
@@ -200,7 +204,7 @@ export default function FAQSection({ faqData = [], title }) {
             </p>
 
             {/* Stats row */}
-            <div className="flex gap-3">
+            <div className="hidden lg:flex gap-3">
               {[
                 { val:`${faqData.length}+`, label:"FAQs Listed", from:"#06b6d4", to:"#0284c7" },
                 { val:"24/7", label:"Support",    from:"#6366f1", to:"#4f46e5" },
@@ -224,7 +228,7 @@ export default function FAQSection({ faqData = [], title }) {
             </div>
 
             {/* CTA card */}
-            <div className="faq-cta faq-cta-shine"
+            <div className="hidden lg:block faq-cta faq-cta-shine"
               style={{ background:"linear-gradient(135deg,#06b6d4 0%,#6366f1 55%,#a855f7 100%)" }}>
               <div className="absolute -top-6 -right-6 w-20 h-20 rounded-full bg-white/10 pointer-events-none" />
               <div className="absolute -bottom-5 -left-5 w-16 h-16 rounded-full bg-white/10 pointer-events-none" />
@@ -300,7 +304,7 @@ export default function FAQSection({ faqData = [], title }) {
                   {/* Body */}
                   <div className={`faq-body ${isOpen ? "open" : "closed"}`}>
                     <div style={{ overflow:"hidden" }}>
-                      <div className="px-6 pb-5 pl-[4.5rem]">
+                      <div className="px-4 pb-5 sm:px-6 sm:pl-[4.5rem]">
                         <div className="h-px mb-3.5 rounded-full"
                           style={{ background:`linear-gradient(90deg,${c.from}40,${c.to}25,transparent)` }} />
                         <p className="text-[13.5px] leading-[1.88] m-0" style={{ color:"#64748b" }}>

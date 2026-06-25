@@ -202,6 +202,25 @@ const Logo = () => {
       platforms={platforms}
       faqTitle="About Our Logo Design Services"
       faqData={faqData}
+      techCategories={[
+        { title:"Design Tools", techs:[
+          {name:"Figma",icon:"https://cdn.simpleicons.org/figma"},
+          {name:"Adobe XD",icon:"https://cdn.simpleicons.org/adobexd"},
+          {name:"Photoshop",icon:"https://cdn.simpleicons.org/adobephotoshop"},
+          {name:"Illustrator",icon:"https://cdn.simpleicons.org/adobeillustrator"},
+          {name:"InDesign",icon:"https://cdn.simpleicons.org/adobeindesign"},
+        ]},
+        { title:"Animation & Video", techs:[
+          {name:"After Effects",icon:"https://cdn.simpleicons.org/adobeaftereffects"},
+          {name:"Premiere Pro",icon:"https://cdn.simpleicons.org/adobepremierepro"},
+          {name:"Blender",icon:"https://cdn.simpleicons.org/blender"},
+        ]},
+        { title:"Prototyping", techs:[
+          {name:"Figma Prototype",icon:"https://cdn.simpleicons.org/figma"},
+          {name:"Canva",icon:"https://cdn.simpleicons.org/canva"},
+          {name:"Sketch",icon:"https://cdn.simpleicons.org/sketch"},
+        ]},
+      ]}
     />
   );
 };

@@ -1,14 +1,14 @@
 "use client";
 import Image from "next/image";
 
-const IconCheck  = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>;
-const IconZap    = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>;
-const IconShield = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>;
-const IconStar   = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>;
-const IconLayers = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>;
-const IconGlobe  = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>;
+const IconCheck = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>;
+const IconZap = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>;
+const IconShield = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>;
+const IconStar = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>;
+const IconLayers = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2" /><polyline points="2 17 12 22 22 17" /><polyline points="2 12 12 17 22 12" /></svg>;
+const IconGlobe = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" /><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" /></svg>;
 
-const FEAT_ICONS = [<IconCheck/>, <IconZap/>, <IconShield/>, <IconStar/>, <IconLayers/>, <IconGlobe/>];
+const FEAT_ICONS = [<IconCheck />, <IconZap />, <IconShield />, <IconStar />, <IconLayers />, <IconGlobe />];
 
 const FEAT_TILE = [
   "border-teal-200 bg-teal-50 text-teal-600",
@@ -21,24 +21,24 @@ const FEAT_TILE = [
 
 export default function OverviewSectionSplit({
   image,
-  imageAlt         = "Service illustration",
-  badgeText        = "Who We Are",
-  heading          = "Building Digital",
+  imageAlt = "Service illustration",
+  badgeText = "Who We Are",
+  heading = "Building Digital",
   headingHighlight = "Excellence",
-  headingAfter     = "For Modern Brands",
-  paragraphs       = [],
-  ctaText          = "Get In Touch",
-  ctaHref          = "tel:+917056937000",
-  since            = "Since 2017",
-  trustedLabel     = "Trusted by 500+ Clients",
+  headingAfter = "For Modern Brands",
+  paragraphs = [],
+  ctaText = "Get In Touch",
+  ctaHref = "tel:+917056937000",
+  since = "Since 2017",
+  trustedLabel = "Trusted by 500+ Clients",
 }) {
-  const textParas    = paragraphs.filter(p => typeof p === "string");
+  const textParas = paragraphs.filter(p => typeof p === "string");
   const featureCards = paragraphs.filter(p => typeof p === "object" && p.boldPrefix);
 
   const introPara = textParas[0];
   const bodyParas = textParas.slice(1);
 
-  const tags = ["Web Development","Mobile Apps","UI/UX Design","Shopify Experts","Next.js & React","Flutter Apps","Laravel Backend","eCommerce Solutions"];
+  const tags = ["Web Development", "Mobile Apps", "UI/UX Design", "Shopify Experts", "Next.js & React", "Flutter Apps", "Laravel Backend", "eCommerce Solutions"];
 
   return (
     <section className="relative overflow-x-clip bg-[linear-gradient(160deg,#f0fbfa_0%,#ffffff_45%,#f1f1fd_100%)] font-[Inter,sans-serif]">
@@ -88,7 +88,7 @@ export default function OverviewSectionSplit({
 
           {/* Stats strip */}
           <div className="mb-8 flex items-center justify-center gap-6 lg:justify-start">
-            {[["500+","Clients"],["15+","Yrs Exp"],["98%","Happy"]].map(([val,label], i) => (
+            {[["500+", "Clients"], ["15+", "Yrs Exp"], ["98%", "Happy"]].map(([val, label], i) => (
               <div key={label} className={`flex flex-col items-center gap-1 lg:items-start ${i > 0 ? "border-l border-indigo-100 pl-6" : ""}`}>
                 <span className="bg-gradient-to-r from-teal-500 to-indigo-700 bg-clip-text font-[Poppins,sans-serif] text-2xl font-extrabold leading-none text-transparent">
                   {val}
@@ -105,7 +105,7 @@ export default function OverviewSectionSplit({
           >
             {ctaText}
             <svg width="11" height="11" viewBox="0 0 12 12" fill="none" className="transition-transform duration-200 group-hover/cta:translate-x-1">
-              <path d="M1.5 6h9M6.5 1.5l4 4.5-4 4.5" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M1.5 6h9M6.5 1.5l4 4.5-4 4.5" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </a>
 
@@ -141,7 +141,7 @@ export default function OverviewSectionSplit({
               {/* Verified chip */}
               <div className="absolute right-5 top-5 flex items-center gap-1.5 rounded-full border border-white/60 bg-white/90 px-3 py-2 shadow-[0_4px_18px_rgba(12,18,48,0.18)] backdrop-blur-md">
                 <span className="flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-br from-teal-400 to-indigo-700">
-                  <svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  <svg width="9" height="9" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </span>
                 <span className="font-[Poppins,sans-serif] text-[9.5px] font-bold uppercase tracking-[0.12em] text-indigo-700">
                   Verified Agency
@@ -151,7 +151,7 @@ export default function OverviewSectionSplit({
               {/* Since badge */}
               <div className="absolute bottom-5 left-5 flex items-center gap-3 rounded-2xl border border-white/20 bg-white/15 px-4 py-3 backdrop-blur-xl">
                 <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-teal-400 to-indigo-700 text-white">
-                  <IconStar/>
+                  <IconStar />
                 </span>
                 <div className="leading-tight">
                   <p className="font-[Poppins,sans-serif] text-[13px] font-extrabold text-white">{since}</p>
@@ -167,11 +167,10 @@ export default function OverviewSectionSplit({
               {bodyParas.map((para, i) => (
                 <p
                   key={i}
-                  className={`text-[14px] leading-[1.95] text-[#4a5070] ${
-                    i === 0
+                  className={`text-[14px] leading-[1.95] text-[#4a5070] ${i === 0
                       ? "first-letter:float-left first-letter:mr-2.5 first-letter:bg-gradient-to-br first-letter:from-teal-400 first-letter:to-indigo-700 first-letter:bg-clip-text first-letter:font-[Poppins,sans-serif] first-letter:text-[44px] first-letter:font-extrabold first-letter:leading-[0.85] first-letter:text-transparent"
                       : ""
-                  }`}
+                    }`}
                 >
                   {para}
                 </p>

@@ -1,219 +1,209 @@
 "use client";
-import React from "react";
-
 import devops from "../Assets/graphic-design.webp";
-import brand from "../Assets/branding-.webp";
-import service1 from "../Assets/logo-design.webp";
-import service2 from "../Assets/packaging-design.webp";
-import service3 from "../Assets/brochure-.webp";
-import service4 from "../Assets/flyer-.webp";
-import Image from "next/image";
-import { FaAngleRight, FaChevronRight } from "react-icons/fa";
-import Link from "next/link";
+import CommonServicePage from "../components/CommonServicePage";
+import {
+  FaPaintBrush, FaLayerGroup, FaPalette, FaRegIdBadge, FaImage, FaVectorSquare, FaFilePdf,
+} from "react-icons/fa";
 
-import ChooseFuture from "../components/ChooseFuture";
-import Counter from "../components/Counter";
-import GetNewInsight from "../components/GetNewInsight";
-import OverviewSection from "../components/OverviewSection";
-import CommonBannerService from "../components/CommonBannerService";
+const features = [
+  {
+    title: "Logo & Brand Identity Design",
+    description:
+      "Your logo is the face of your brand. Our designers create custom, memorable logos that capture your business personality, values, and target audience. Every element — from color psychology to typography and iconography — is thoughtfully crafted to ensure your brand stands out in the marketplace and creates a lasting impression.",
+    icon: <FaPaintBrush />,
+  },
+  {
+    title: "Brochure & Print Design",
+    description:
+      "Our compelling brochure designs transform your marketing materials into powerful sales tools. We craft multi-fold brochures, flyers, and catalogs with clean layouts, engaging copy, and professional visuals that communicate your message effectively and drive customer action.",
+    icon: <FaFilePdf />,
+  },
+  {
+    title: "Social Media Graphics",
+    description:
+      "Stand out in crowded social feeds with striking, on-brand graphics designed specifically for each platform. We create scroll-stopping posts, stories, banners, and ad creatives for Facebook, Instagram, LinkedIn, and Twitter that boost engagement and reinforce your brand identity.",
+    icon: <FaImage />,
+  },
+  {
+    title: "Business Stationery Design",
+    description:
+      "Professional stationery creates a cohesive brand experience at every touchpoint. We design business cards, letterheads, envelopes, email signatures, and office supplies that reflect your brand standards and leave a polished, professional impression with every interaction.",
+    icon: <FaRegIdBadge />,
+  },
+  {
+    title: "UI/UX & Web Graphics",
+    description:
+      "We bridge the gap between design and digital with custom web graphics, icon sets, infographics, and UI elements that enhance your website's visual appeal and user experience. Every pixel is purposeful, ensuring your digital presence is as impressive as your offline brand.",
+    icon: <FaLayerGroup />,
+  },
+  {
+    title: "Vector & Illustration Design",
+    description:
+      "Custom vector illustrations give your brand a unique visual voice. From editorial illustrations and product mockups to infographic visuals and character design, our illustrators create scalable, high-resolution artwork that works seamlessly across print and digital media.",
+    icon: <FaVectorSquare />,
+  },
+  {
+    title: "Packaging & Product Design",
+    description:
+      "Great packaging sells products before customers even open them. We design product packaging that is visually compelling, shelf-ready, and aligned with your brand story. Our packaging designs balance aesthetics, functionality, and compliance to help your products stand out at retail.",
+    icon: <FaPalette />,
+  },
+];
+
+const bizCards = [
+  {
+    title: "Creative Excellence",
+    desc: "Our team of experienced designers brings fresh creativity and strategic thinking to every project, ensuring your brand always looks its absolute best across all media.",
+    icons: <FaPaintBrush className="text-white w-8 h-8" />,
+  },
+  {
+    title: "Brand Consistency",
+    desc: "We develop comprehensive brand guidelines that ensure visual consistency across every touchpoint — from print materials to digital assets — building a cohesive, recognizable brand identity.",
+    icons: <FaPalette className="text-white w-8 h-8" />,
+  },
+  {
+    title: "Fast Turnaround Times",
+    desc: "We understand that time is money. Our structured design process and agile workflows ensure timely delivery without ever compromising on quality or creative standards.",
+    icons: <FaLayerGroup className="text-white w-8 h-8" />,
+  },
+  {
+    title: "Unlimited Revisions",
+    desc: "Your satisfaction is our priority. We offer multiple revision rounds and work closely with you through every iteration until the final design perfectly captures your vision.",
+    icons: <FaRegIdBadge className="text-white w-8 h-8" />,
+  },
+];
+
+const sliderCards = [
+  {
+    count: "40%",
+    title: "Brand Identity Overhaul",
+    desc: "Redesigned a complete brand identity for a fintech startup — logo, typography, color palette, and stationery — resulting in 40% improved brand recognition.",
+    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80",
+  },
+  {
+    count: "25%",
+    title: "Product Packaging Design",
+    desc: "Created eye-catching packaging for a cosmetics brand that increased shelf visibility and contributed to a 25% sales uplift in the first quarter after launch.",
+    image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=800&q=80",
+  },
+  {
+    count: "3x",
+    title: "Social Media Campaign Graphics",
+    desc: "Produced a 3-month social media visual campaign for a hospitality brand, achieving 3x engagement increase across all platforms.",
+    image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80",
+  },
+  {
+    count: "500+",
+    title: "Corporate Brochure Suite",
+    desc: "Designed a full corporate brochure suite including company profile, product catalog, and investor deck for a manufacturing client.",
+    image: "https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&q=80",
+  },
+];
+
+const platforms = [
+  { icon: <FaPaintBrush className="text-white w-6 h-6" />, title: "Figma & Adobe XD", desc: "Modern UI/UX design and interactive prototyping — enabling fast design iterations and seamless developer handoff." },
+  { icon: <FaPalette className="text-white w-6 h-6" />, title: "Adobe Illustrator", desc: "Scalable vector artwork, logos, and brand icons that look sharp at any size — from business cards to billboards." },
+  { icon: <FaImage className="text-white w-6 h-6" />, title: "Adobe Photoshop", desc: "Professional photo retouching, digital compositing, and raster graphics for marketing visuals and product imagery." },
+  { icon: <FaFilePdf className="text-white w-6 h-6" />, title: "Adobe InDesign", desc: "Professional print and digital publications — brochures, annual reports, and catalogs with precise layout and typography." },
+  { icon: <FaLayerGroup className="text-white w-6 h-6" />, title: "After Effects & Premiere Pro", desc: "Engaging motion graphics, brand animations, and video content for digital campaigns and broadcast media." },
+  { icon: <FaVectorSquare className="text-white w-6 h-6" />, title: "Canva & Sketch", desc: "Rapid design iteration and team collaboration tools for producing polished assets quickly while maintaining brand consistency." },
+];
+
+const faqData = [
+  {
+    title: "What graphic design services do you offer?",
+    description:
+      "We offer a comprehensive range of graphic design services including logo design, brand identity, brochure and print design, social media graphics, business stationery, UI/UX design, packaging design, and vector illustrations.",
+  },
+  {
+    title: "How many revisions are included in your design packages?",
+    description:
+      "We offer multiple rounds of revisions to ensure you are completely satisfied with the final design. The exact number of revisions depends on the package you choose, and we always work until you are happy with the outcome.",
+  },
+  {
+    title: "What file formats will I receive for my designs?",
+    description:
+      "You will receive all final designs in high-resolution formats suitable for both print and digital use, including AI, EPS, PDF, PNG, and JPG. Vector files are included for logos to ensure scalability at any size.",
+  },
+  {
+    title: "Can you work with our existing brand guidelines?",
+    description:
+      "Absolutely. We are experienced in working within established brand guidelines and can extend your existing visual identity consistently across new materials and platforms.",
+  },
+  {
+    title: "How long does a logo design project take?",
+    description:
+      "A standard logo design project takes 5–10 business days from brief to final delivery. Complex brand identity packages including full guidelines documentation may take 2–4 weeks.",
+  },
+];
+
+const techCategories = [
+  {
+    title: "Design Tools",
+    techs: [
+      { name: "Figma", icon: "https://cdn.simpleicons.org/figma" },
+      { name: "Adobe XD", icon: "https://cdn.simpleicons.org/adobexd" },
+      { name: "Photoshop", icon: "https://cdn.simpleicons.org/adobephotoshop" },
+      { name: "Illustrator", icon: "https://cdn.simpleicons.org/adobeillustrator" },
+      { name: "InDesign", icon: "https://cdn.simpleicons.org/adobeindesign" },
+    ],
+  },
+  {
+    title: "Animation & Video",
+    techs: [
+      { name: "After Effects", icon: "https://cdn.simpleicons.org/adobeaftereffects" },
+      { name: "Premiere Pro", icon: "https://cdn.simpleicons.org/adobepremierepro" },
+      { name: "Blender", icon: "https://cdn.simpleicons.org/blender" },
+    ],
+  },
+  {
+    title: "Prototyping",
+    techs: [
+      { name: "Figma Prototype", icon: "https://cdn.simpleicons.org/figma" },
+      { name: "Canva", icon: "https://cdn.simpleicons.org/canva" },
+      { name: "Sketch", icon: "https://cdn.simpleicons.org/sketch" },
+    ],
+  },
+];
 
 const Branding = () => {
   return (
-    <>
-      <CommonBannerService
-        imgSrc={devops}
-        title="Graphic Design Services"
-        desc="Simplicity, creativity, a dash of humor and good typography are essential elements of graphic designs at Future IT Touch Pvt. Ltd.. Effective Design plays a vital role in distinguishing your business from the rest to give you, The Design Edge. With right aesthetics prompting visual perception, your business is bound to be valued more. It is our passion to infuse fun and colors into our designs that ensures every single design is packed with a message. As a leading Graphic Designing Company in Chandigarh, our team is always more than ready to jump with brilliant ideas and thoughts to convey a story through design."
-      />
-
-      <Counter />
-
-      <OverviewSection
-        image={devops}
-        imageAlt="Graphic Design Services"
-        badgeText="Custom Graphic Design Services"
-        heading="Custom Graphic Design"
-        headingHighlight="Services We Offer"
-        paragraphs={[
-          "Are you looking for the best graphic design company in Chandigarh? Future IT Touch Pvt. Ltd. is one of the leading graphic design agencies that gives your business a distinct expression and shows it to the world on a branded platter of your own.",
-          "We have been ranked amongst the top graphic design companies in Chandigarh. We invest creativity, innovative minds, and technology at the helm of our graphic designers, aimed towards attaining clients' graphic design outsourcing requisites.",
-          "Our team of expert designers crafts visuals that communicate your brand message effectively — from brochures and logos to social media assets and marketing collateral, all tailored to your business needs.",
-        ]}
-        ctaText="Request A Quote"
-        ctaHref="/contact"
-      />
-
-      <div className="grid grid-cols-7 max-lg:block  gap-20  px-5 md:px-12 xl:px-28 pb-14">
-        <div className="col-span-4">
-          <h4 className="text-2xl sm:text-3xl lg:text-4xl  text-center lg:text-start font-bold mb-3 text-[#050748]">
-            We use advanced graphic designing tools to create impressive ideas
-            for you
-          </h4>
-
-          <div className="Website text-[17px] text-justify text-[#6a6a8e] mt-5 ">
-            <p>
-              Vibrant, high-resolution pictures, engaging videos and explanatory
-              graphics can assist potential customers to better understand your
-              products and services, and aid them see—accurately—the advantages
-              they offer. We never compromise on the quality of our graphic
-              design services. That makes our services finest as the best
-              graphic design company in Chandigarh of all time
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 pt-10">
-              <ul className="font-semibold list-none">
-                <li># 800+ Mobile Delivered</li>
-                <li># 200+ Team Strength</li>
-                <li># User-Friendly Interface</li>
-              </ul>
-              <ul className="font-semibold list-none">
-                <li># 400 Happy Clients</li>
-                <li># 95% Repeat business</li>
-                <li># Quality Service UX</li>
-              </ul>
-            </div>
-          </div>
-
-          <Link href="/contact" className="inline-block">
-            <button className="bg-gradient-to-r from-[#f92c8b] to-[#b02cd6]   flex justify-center items-center mt-7 text-white px-6 py-4 text-base font-semibold  rounded-full">
-              Request A Quote <FaAngleRight className="ml-2" />
-              <span className="circle dkpr"></span>
-            </button>
-          </Link>
-        </div>
-
-        <div className="mt-10 lg:mt-0 flex justify-center lg:col-span-3 max-sm:mt-10">
-          <Image src={brand} width={400} height={400} alt="Branding" className="w-full h-auto" />
-        </div>
-      </div>
-
-      <section className="service-section py-16 px-4 sm:px-6 lg:px-16 xl:px-28">
-        {/* Heading */}
-        <div className="text-center max-w-3xl mx-auto">
-          <p className="mb-2 text-base sm:text-lg text-[#ff1f8e]">Service</p>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#050748] uppercase">
-            Graphic Design Services We Offer
-          </h2>
-          <p className="text-sm sm:text-base mt-4 mb-8 text-[#6a6a8e]">
-            We think big and have hands in all leading technology platforms to
-            provide you a wide array of services.
-          </p>
-        </div>
-
-        {/* Service Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-          {/* Service Card 1 */}
-          <div className="flex flex-col lg:flex-row bg-[#e9ddff] rounded-xl shadow-lg p-6 gap-6">
-            <div className="flex-shrink-0 w-full lg:w-1/3 mx-auto sm:mx-0">
-              <Image
-                src={service1}
-                width={400}
-                height={400}
-                alt="Logo Design"
-                className="w-full"
-              />
-            </div>
-            <div className="text-[#6a6a8e] flex-1 text-center sm:text-left">
-              <h4 className="text-xl sm:text-2xl font-bold mb-3 text-[#050748]">
-                Logo Designing
-              </h4>
-              <p className="text-sm sm:text-base leading-relaxed">
-                A logo is considered to be a brand's silent ambassador. As an
-                experienced Graphic Designing company in Chandigarh, our logos
-                have created an enviable market appeal while delivering messages
-                spontaneously.
-              </p>
-            </div>
-          </div>
-
-          {/* Service Card 2 */}
-          <div className="flex flex-col lg:flex-row bg-[#ffdadb] rounded-xl shadow-lg p-6 gap-6">
-            <div className="flex-shrink-0 w-full lg:w-1/3 mx-auto sm:mx-0">
-              <Image
-                src={service2}
-                width={400}
-                height={400}
-                alt="Packaging Design"
-                className="w-full"
-              />
-            </div>
-            <div className="text-[#6a6a8e] flex-1 text-center sm:text-left">
-              <h4 className="text-xl sm:text-2xl font-bold mb-3 text-[#050748]">
-                Business Stationery Design
-              </h4>
-              <p className="text-sm sm:text-base leading-relaxed">
-                The right design on corporate stationery creates a professional
-                impression. Our expertise as a leading graphic design company in
-                Chandigarh has elevated many brands with creative stationery
-                designs.
-              </p>
-            </div>
-          </div>
-
-          {/* Service Card 3 */}
-          <div className="flex flex-col lg:flex-row bg-[#d6edff] rounded-xl shadow-lg p-6 gap-6">
-            <div className="flex-shrink-0 w-full lg:w-1/3 mx-auto sm:mx-0">
-              <Image
-                src={service3}
-                width={400}
-                height={400}
-                alt="Brochure Design"
-                className="w-full"
-              />
-            </div>
-            <div className="text-[#6a6a8e] flex-1 text-center sm:text-left">
-              <h4 className="text-xl sm:text-2xl font-bold mb-3 text-[#050748]">
-                Brochure Design
-              </h4>
-              <p className="text-sm sm:text-base leading-relaxed">
-                Our compelling brochure designs capture attention, ensure
-                visibility, and create excellent brand recall with clean
-                layouts, great images, and innovative ideas.
-              </p>
-            </div>
-          </div>
-
-          {/* Service Card 4 */}
-          <div className="flex flex-col lg:flex-row bg-[#ffede1] rounded-xl shadow-lg p-6 gap-6">
-            <div className="flex-shrink-0 w-full lg:w-1/3 mx-auto sm:mx-0">
-              <Image
-                src={service4}
-                width={400}
-                height={400}
-                alt="Flyer Design"
-                className="w-full"
-              />
-            </div>
-            <div className="text-[#6a6a8e] flex-1 text-center sm:text-left">
-              <h4 className="text-xl sm:text-2xl font-bold mb-3 text-[#050748]">
-                Social Media Post
-              </h4>
-              <p className="text-sm sm:text-base leading-relaxed">
-                Our visually-arresting social media posts boost engagement and
-                brand recall. We design impactful, witty, and topical posts that
-                stand out in crowded feeds.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Call to Action */}
-        <div className="cta-card mt-16 flex flex-col sm:flex-row items-center justify-center gap-5 text-center sm:text-left">
-          <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl">
-            Hire a <span className="font-bold">Dedicated Developer</span>
-          </h3>
-          <Link
-            href="#"
-            className="btn-outline flex items-center border-2 border-black text-black px-6 py-2 rounded-full bg-white shadow-md hover:bg-gradient-to-r from-teal-400 to-indigo-700 hover:text-white hover:border-current transition-all"
-          >
-            Hire Now <FaAngleRight className="ml-2" />
-          </Link>
-        </div>
-      </section>
-
-      <ChooseFuture />
-
-      <GetNewInsight />
-    </>
+    <CommonServicePage
+      bannerImg={devops}
+      bannerTitle="Graphic Design Services"
+      bannerDesc="Simplicity, creativity, a dash of humor, and good typography are the essential elements of graphic design at Future IT Touch Pvt. Ltd. Effective design plays a vital role in distinguishing your business from the rest — giving you The Design Edge. With right aesthetics prompting visual perception, your business is bound to be valued more. Our team is always ready to jump with brilliant ideas to convey a story through design."
+      overviewImage="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80"
+      overviewImageAlt="Graphic Design Services"
+      overviewBadge="Custom Graphic Design Services"
+      overviewHeading="Custom Graphic Design"
+      overviewHighlight="Services We Offer"
+      overviewParagraphs={[
+        "Future IT Touch Pvt. Ltd. is one of the leading graphic design agencies that gives your business a distinct expression and shows it to the world on a branded platter of your own.",
+        "We invest creativity, innovative minds, and technology at the helm of our graphic designers, aimed towards attaining clients' graphic design requirements — from logos and brochures to digital assets and packaging.",
+        "Our team of expert designers crafts visuals that communicate your brand message effectively, tailored to your specific business needs and target audience.",
+      ]}
+      overviewCtaText="Request A Quote"
+      featuresBadge="Our Design Services"
+      featuresTitle="Creative Designs That"
+      featuresTitleHighlight="Build Memorable Brands"
+      featuresStickyImg="https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=800&q=80"
+      features={features}
+      bizBadge="Our Advantages"
+      bizHeading="Why Choose Us for"
+      bizHighlight="Design & Branding"
+      bizCards={bizCards}
+      sliderTitle="Delivering Creative Design Solutions That Drive Business Growth"
+      sliderCards={sliderCards}
+      platformsTitle="Design Tools & Platforms We Use"
+      platforms={platforms}
+      techBadge="Our Design Tech Stack"
+      techHeading="Tools"
+      techHeadingHighlight="We Design With"
+      techDescription="We use the industry's most powerful design tools to create stunning visuals, from initial concepts to final production-ready assets."
+      techCategories={techCategories}
+      faqTitle="Frequently Asked Questions — Graphic Design"
+      faqData={faqData}
+    />
   );
 };
 

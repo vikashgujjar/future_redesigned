@@ -27,7 +27,7 @@ export default function CommonBannerService({ imgSrc, title, desc }) {
       </svg>
 
       {/* ── Content grid ── */}
-      <div className="relative z-10 mx-auto grid w-full max-w-[1280px] grid-cols-1 items-center gap-10 px-5 pb-14 pt-24 sm:px-8 sm:pt-28 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14 lg:pb-20 lg:pt-32">
+      <div className="relative z-10 mx-auto grid w-full max-w-[1280px] grid-cols-1 items-center gap-10 px-5 pb-14 pt-24 sm:px-8 sm:pt-28 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14 lg:pb-8 lg:pt-12">
 
         {/* ════════ LEFT — Copy ════════ */}
         <div className="text-center lg:text-left">

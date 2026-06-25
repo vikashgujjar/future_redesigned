@@ -202,6 +202,30 @@ const Local = () => {
       platforms={platforms}
       faqTitle="About Our Local SEO Services"
       faqData={faqData}
+      techCategories={[
+        { title:"Analytics & SEO", techs:[
+          {name:"Google Analytics",icon:"https://cdn.simpleicons.org/googleanalytics"},
+          {name:"Google Search Console",icon:"https://cdn.simpleicons.org/googlesearchconsole"},
+          {name:"Ahrefs",icon:"https://cdn.simpleicons.org/ahrefs"},
+          {name:"Semrush",icon:"https://cdn.simpleicons.org/semrush"},
+        ]},
+        { title:"Advertising", techs:[
+          {name:"Google Ads",icon:"https://cdn.simpleicons.org/googleads"},
+          {name:"Meta Ads",icon:"https://cdn.simpleicons.org/meta"},
+          {name:"LinkedIn Ads",icon:"https://cdn.simpleicons.org/linkedin"},
+        ]},
+        { title:"Social & Email", techs:[
+          {name:"HubSpot",icon:"https://cdn.simpleicons.org/hubspot"},
+          {name:"Mailchimp",icon:"https://cdn.simpleicons.org/mailchimp"},
+          {name:"Buffer",icon:"https://cdn.simpleicons.org/buffer"},
+          {name:"Hootsuite",icon:"https://cdn.simpleicons.org/hootsuite"},
+        ]},
+        { title:"Content & CMS", techs:[
+          {name:"WordPress",icon:"https://cdn.simpleicons.org/wordpress"},
+          {name:"Webflow",icon:"https://cdn.simpleicons.org/webflow"},
+          {name:"Canva",icon:"https://cdn.simpleicons.org/canva"},
+        ]},
+      ]}
     />
   );
 };

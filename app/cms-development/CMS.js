@@ -196,6 +196,32 @@ const Ecommerce = () => {
       platforms={platforms}
       faqTitle="About CMS & eCommerce Website Development"
       faqData={faqData}
+      techCategories={[
+        { title:"eCommerce Platforms", techs:[
+          {name:"Shopify",icon:"https://cdn.simpleicons.org/shopify"},
+          {name:"WooCommerce",icon:"https://cdn.simpleicons.org/woocommerce"},
+          {name:"Magento",icon:"https://cdn.simpleicons.org/magento"},
+          {name:"OpenCart",icon:"https://cdn.simpleicons.org/opencart"},
+        ]},
+        { title:"CMS", techs:[
+          {name:"WordPress",icon:"https://cdn.simpleicons.org/wordpress"},
+          {name:"Strapi",icon:"https://cdn.simpleicons.org/strapi"},
+          {name:"Sanity",icon:"https://cdn.simpleicons.org/sanity"},
+          {name:"Contentful",icon:"https://cdn.simpleicons.org/contentful"},
+        ]},
+        { title:"Frontend", techs:[
+          {name:"React.js",icon:"https://cdn.simpleicons.org/react"},
+          {name:"Next.js",icon:"https://cdn.simpleicons.org/nextdotjs/white"},
+          {name:"TypeScript",icon:"https://cdn.simpleicons.org/typescript"},
+          {name:"Tailwind CSS",icon:"https://cdn.simpleicons.org/tailwindcss"},
+        ]},
+        { title:"Backend & Database", techs:[
+          {name:"Node.js",icon:"https://cdn.simpleicons.org/nodedotjs"},
+          {name:"PHP/Laravel",icon:"https://cdn.simpleicons.org/laravel"},
+          {name:"MySQL",icon:"https://cdn.simpleicons.org/mysql"},
+          {name:"PostgreSQL",icon:"https://cdn.simpleicons.org/postgresql"},
+        ]},
+      ]}
     />
   );
 };

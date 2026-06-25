@@ -229,6 +229,25 @@ const Quality = () => {
       platforms={platforms}
       faqTitle="About QA & Software Testing"
       faqData={faqData}
+      techCategories={[
+        { title:"Testing Frameworks", techs:[
+          {name:"Selenium",icon:"https://cdn.simpleicons.org/selenium"},
+          {name:"Cypress",icon:"https://cdn.simpleicons.org/cypress"},
+          {name:"Jest",icon:"https://cdn.simpleicons.org/jest"},
+          {name:"Appium",icon:"https://cdn.simpleicons.org/appium"},
+          {name:"Postman",icon:"https://cdn.simpleicons.org/postman"},
+        ]},
+        { title:"Project Management", techs:[
+          {name:"Jira",icon:"https://cdn.simpleicons.org/jira"},
+          {name:"Confluence",icon:"https://cdn.simpleicons.org/confluence"},
+          {name:"GitHub",icon:"https://cdn.simpleicons.org/github/white"},
+        ]},
+        { title:"CI/CD", techs:[
+          {name:"GitHub Actions",icon:"https://cdn.simpleicons.org/githubactions"},
+          {name:"Jenkins",icon:"https://cdn.simpleicons.org/jenkins"},
+          {name:"Docker",icon:"https://cdn.simpleicons.org/docker"},
+        ]},
+      ]}
     />
   );
 };
