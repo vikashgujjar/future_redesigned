@@ -26,6 +26,7 @@
     "react-phone-input-2": "^2.15.1",
     "react-slick": "^0.30.3",
     "react-toastify": "^11.0.5",
+    "sass": "^1.101.0",
     "slick-carousel": "^1.8.1",
     "sweetalert2": "^11.22.4",
     "swiper": "^11.2.10"

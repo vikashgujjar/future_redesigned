@@ -1083,3 +1083,32 @@ input.border-custom-second {
   80%  { top: 40%; left: 10%; transform: translate(0, 0); }
   100% { top: 5%; left: 5%; transform: translate(0, 0); }
 }
+
+/* ── Tech Page Animations ─────────────────────────────── */
+@keyframes tcpGrad {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+@keyframes tcpBeam {
+  0%        { opacity: 0; transform: translateX(-100%); }
+  40%, 60%  { opacity: 1; }
+  100%      { opacity: 0; transform: translateX(200%); }
+}
+@keyframes tcpSlide {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes tcpSpin  { to { transform: rotate(360deg); } }
+@keyframes tcpSpinR { to { transform: rotate(-360deg); } }
+@keyframes tcpFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-9px); }
+}
+@keyframes tcpBar {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes sliderProgress {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}

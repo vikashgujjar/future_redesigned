@@ -1,464 +1,179 @@
 import React from "react";
-
-import app from "../Assets/gam2d3d.webp";
-
-import { FaCheck } from "react-icons/fa6";
-
-import BusinessIdea from "../components/BuinessIdea";
-import CommonBanner from "../components/techcommomcomponents/CommonBanner";
-import CommonSlider from "../components/techcommomcomponents/CommonSlider";
-import CommonFaqs from "../components/techcommomcomponents/CommonFaqs";
-import gm from "../Assets/java.webp";
 import {
-  FaJava,
-  FaBug,
-  FaBuilding,
-  FaCloud,
-  FaRocket,
-  FaTools,
-  FaServer,
-  FaCogs,
-  FaDatabase,
-  FaLock,
+  FaBug, FaCloud, FaRocket, FaTools, FaServer, FaCogs,
+  FaDatabase, FaLock, FaCheckCircle, FaLayerGroup,
+  FaStar, FaHeadset, FaCode, FaSyncAlt, FaPaintBrush, FaGamepad,
 } from "react-icons/fa";
 import { SiUnity } from "react-icons/si";
+import unityImg from "../Assets/gam2d3d.webp";
+import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
 
+const Unity = () => (
+  <CommonTechPage
+    banner={{
+      bgImage: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=1600&q=85",
+      image: unityImg,
+      category: "Game Development",
+      breadcrumb: "Unity · AR/VR · Multiplayer",
+      title: "Unity · AR/VR · Multiplayer",
+      tagline:
+        "Build immersive, cross-platform 2D, 3D, AR, and VR games using Unity — the world's most versatile game engine trusted by studios worldwide for stunning visuals, real-time performance, and multi-platform reach.",
+    }}
 
+    intro={{
+      badge: "Future IT Touch · Unity Game Experts",
+      heading: "Create Stunning, Cross-Platform Games with",
+      highlight: "Unity Game Development",
+      paras: [
+        "At Future IT Touch, we craft high-performance, visually immersive games using Unity — the industry-leading engine trusted by developers worldwide for building next-generation 2D, 3D, AR, and VR experiences across every major platform.",
+        "Our Unity developers combine cutting-edge graphics, optimized gameplay mechanics, and engaging storytelling to deliver exceptional player experiences on mobile, desktop, console, and VR devices — from casual games to complex enterprise simulations.",
+        "From creative concept and prototyping through full-scale development, multiplayer integration, and long-term post-launch support, we handle every stage of your Unity game journey — ensuring creativity, performance, and innovation at every step.",
+      ],
+      highlights: [
+        "2D, 3D, AR & VR game development across mobile, console, desktop & WebGL",
+        "Real-time multiplayer with Photon, Mirror, and cloud-based matchmaking systems",
+        "ARKit, ARCore & mixed reality integration for next-generation immersive experiences",
+        "Full-cycle deployment on iOS, Android, Steam, PlayStation, Xbox & Oculus platforms",
+      ],
+      stats: [
+        { num: "150+", label: "Unity Games Delivered",           desc: "Action, simulation, AR/VR, and casual games launched across genres worldwide.",  icon: <SiUnity /> },
+        { num: "9+",   label: "Years Game Dev Expertise",        desc: "Nine-plus years building high-performing and visually immersive Unity experiences.", icon: <FaLayerGroup /> },
+        { num: "300+", label: "Global Gaming Clients",           desc: "300+ studios and brands trust us for interactive Unity games across audiences.",    icon: <FaStar /> },
+        { num: "24/7", label: "Technical & Creative Support",    desc: "Round-the-clock support keeping your game updated, optimized, and engaging.",       icon: <FaHeadset /> },
+      ],
+    }}
 
+    services={[
+      {
+        icon: <SiUnity />,
+        title: "Custom Unity Game Development",
+        desc: "High-quality 2D and 3D games tailored to your creative vision — built for cross-platform performance across mobile, PC, console, and AR/VR with stunning visuals and optimized mechanics.",
+        points: [
+          "2D & 3D cross-platform Unity games",
+          "Immersive gameplay & physics systems",
+          "End-to-end concept-to-launch delivery",
+          "Mobile, PC, console & VR support",
+        ],
+      },
+      {
+        icon: <FaGamepad />,
+        title: "AR/VR Game Development",
+        desc: "Next-generation AR and VR experiences powered by Unity — virtual reality simulations, training environments, ARKit & ARCore integrations, and mixed reality for enterprise and entertainment.",
+        points: [
+          "ARKit & ARCore integration",
+          "VR simulations & training apps",
+          "Mixed reality (MR) experiences",
+          "Oculus, HTC Vive & HoloLens support",
+        ],
+      },
+      {
+        icon: <FaCloud />,
+        title: "Multiplayer & Networked Games",
+        desc: "Real-time multiplayer games with secure backend, matchmaking, cloud game servers, in-game chats, leaderboards, and live events — built for scalability and minimal latency.",
+        points: [
+          "Real-time multiplayer & matchmaking",
+          "Cloud game servers & low latency",
+          "In-game chat & leaderboards",
+          "Photon & Mirror networking",
+        ],
+      },
+      {
+        icon: <FaBug />,
+        title: "Game Testing & Quality Assurance",
+        desc: "Rigorous gameplay, graphics, and performance testing across mobile, console, and desktop — cross-platform compatibility and continuous integration workflows for stable, bug-free builds.",
+        points: [
+          "Gameplay & graphics QA testing",
+          "Cross-platform compatibility checks",
+          "Device & resolution testing",
+          "CI/CD automated build pipelines",
+        ],
+      },
+      {
+        icon: <FaRocket />,
+        title: "Game Deployment & Optimization",
+        desc: "Deploying Unity games across iOS, Android, Steam, PlayStation, and Xbox — with rendering pipeline optimization, asset tuning, GPU performance improvements, and player analytics setup.",
+        points: [
+          "iOS, Android, Steam & console deploy",
+          "Rendering pipeline optimization",
+          "GPU & frame-rate performance tuning",
+          "Player engagement analytics",
+        ],
+      },
+      {
+        icon: <FaTools />,
+        title: "Post-Launch Maintenance & Updates",
+        desc: "Continuous updates, new features, patches, and balance improvements after release — with version management, player feedback monitoring, and 24/7 support for long-term game success.",
+        points: [
+          "24/7 post-launch support",
+          "New content & feature rollouts",
+          "Unity version upgrade management",
+          "Gameplay balance & performance fixes",
+        ],
+      },
+    ]}
 
+    process={[
+      { icon: <FaCheckCircle />, title: "Concept & Game Design",              desc: "Analyzing your game idea, defining core mechanics, and creating a compelling gameplay strategy — laying a strong creative and technical foundation in Unity." },
+      { icon: <FaPaintBrush />,  title: "Art & Asset Production",             desc: "Designing stunning 2D/3D assets, environments, character rigs, and animations tailored precisely to your game's visual style and target audience." },
+      { icon: <FaCode />,        title: "Unity Game Development",             desc: "Implementing game mechanics, physics, AI, and gameplay logic with clean, performant C# code — bringing your creative vision to life in the Unity engine." },
+      { icon: <FaCloud />,       title: "Backend & Multiplayer Integration",  desc: "Building secure backend systems, integrating real-time multiplayer features, and enabling cloud connectivity for live events and player data management." },
+      { icon: <FaBug />,         title: "Testing & Quality Assurance",        desc: "Comprehensive testing ensuring flawless gameplay, optimized performance, and full compatibility across devices, resolutions, and target platforms." },
+      { icon: <FaRocket />,      title: "Deployment & Launch",                desc: "Handling deployment across app stores and gaming platforms — ensuring smooth publishing, store compliance, and performance from day one of launch." },
+      { icon: <FaSyncAlt />,     title: "Post-Launch Support & Optimization", desc: "Continuously monitoring, optimizing, and updating your game post-release to keep players engaged, fix emerging issues, and drive long-term growth." },
+    ]}
 
+    features={[
+      { icon: <FaServer />,   title: "Cross-Platform Game Development",  desc: "Unity games that run flawlessly across mobile, console, desktop, and WebGL — delivering a consistent and engaging experience on every platform your players use." },
+      { icon: <FaCogs />,     title: "Real-Time Multiplayer Support",     desc: "Real-time networking, matchmaking, and dedicated server management for interactive, low-latency multiplayer gaming experiences at any scale." },
+      { icon: <FaDatabase />, title: "Cloud Integration & Analytics",     desc: "Cloud databases, player analytics, and backend services providing real-time performance insights and data-driven decisions for continuous game improvement." },
+      { icon: <FaLock />,     title: "Game Security & Data Protection",   desc: "Secure user authentication, in-game purchase protection, and data integrity safeguards to protect players and prevent exploitation across all platforms." },
+      { icon: <FaRocket />,   title: "Performance Optimization",          desc: "Advanced Unity optimization techniques — LOD systems, occlusion culling, GPU instancing, and asset compression — reducing lag and load times dramatically." },
+      { icon: <FaTools />,    title: "Ongoing Maintenance & Updates",     desc: "Continuous game updates, bug fixes, and new content releases to maintain player engagement, resolve issues, and extend the life of your game." },
+    ]}
 
+    stack={[
+      { name: "Unity 2022 LTS" },
+      { name: "C# Scripting" },
+      { name: "Unity HDRP / URP" },
+      { name: "Photon PUN 2" },
+      { name: "Mirror Networking" },
+      { name: "ARKit / ARCore" },
+      { name: "Oculus SDK" },
+      { name: "Blender / Maya" },
+      { name: "Firebase" },
+      { name: "PlayFab" },
+      { name: "Nakama" },
+      { name: "Unity Ads / IronSource" },
+      { name: "GitHub Actions" },
+      { name: "Unity Cloud Build" },
+      { name: "Plastic SCM / Git" },
+      { name: "Fastlane CI/CD" },
+    ]}
 
+    slider={[
+      { count: "150+", title: "Unity Games Delivered",           desc: "150+ Unity-powered games launched across action, simulation, AR/VR, and casual genres — built for engaging gameplay and memorable player experiences.",              image: "/Assets/seerviceSlider/slide1.webp" },
+      { count: "9+",   title: "Years of Game Dev Expertise",     desc: "Nine-plus years in Unity game development — mastering 2D, 3D, AR/VR, multiplayer systems, and optimization for high-performing cross-platform titles.",           image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: "300+", title: "Global Gaming Clients",           desc: "300+ studios and brands worldwide trust us to build interactive, polished Unity games for diverse audiences across mobile, console, and desktop platforms.",         image: "/Assets/seerviceSlider/slide3.webp" },
+      { count: "98%",  title: "Client Satisfaction Rate",        desc: "98% satisfaction rate driven by our commitment to creativity, technical excellence, on-time delivery, and long-term support on every gaming project.",             image: "/Assets/seerviceSlider/slide4.webp" },
+      { count: "24/7", title: "Technical & Creative Support",    desc: "Round-the-clock support ensuring your Unity game stays updated, optimized, and engaging for players — from launch through every future content update.",           image: "/Assets/seerviceSlider/slide5.webp" },
+    ]}
 
-const Unity = () => {
-const technolgyData = [
-  {
-    title: "Custom Unity Game Development",
-    icon: <FaJava className="text-[#00B2FF] text-4xl" />, // keep same color & icon format
-    list: [
-      "Developing high-quality 2D and 3D games using the Unity engine tailored to your creative vision.",
-      "Building cross-platform games that run seamlessly on mobile, PC, consoles, and AR/VR devices.",
-      "Designing immersive gameplay experiences with optimized performance and stunning visuals.",
-      "Delivering complete end-to-end Unity game solutions — from concept to launch.",
-    ],
-  },
-  {
-    title: "AR/VR Game Development",
-    icon: <FaBuilding className="text-[#00B2FF] text-4xl" />,
-    list: [
-      "Creating next-generation AR and VR experiences powered by Unity for immersive storytelling.",
-      "Developing virtual reality simulations and training environments for education and enterprise.",
-      "Integrating ARKit, ARCore, and mixed reality technologies for realistic user engagement.",
-      "Optimizing graphics and performance for smooth experiences on all AR/VR platforms.",
-    ],
-  },
-  {
-    title: "Multiplayer & Networked Games",
-    icon: <FaCloud className="text-[#00B2FF] text-4xl" />,
-    list: [
-      "Building real-time multiplayer games with secure backend and matchmaking systems.",
-      "Implementing cloud-based game servers for stable performance and minimal latency.",
-      "Integrating in-game chats, leaderboards, and live events to boost engagement.",
-      "Ensuring smooth synchronization and scalability for online multiplayer environments.",
-    ],
-  },
-  {
-    title: "Game Testing & Quality Assurance",
-    icon: <FaBug className="text-[#00B2FF] text-4xl" />,
-    list: [
-      "Performing rigorous testing for gameplay, graphics, and performance optimization.",
-      "Ensuring smooth cross-platform compatibility and bug-free experiences.",
-      "Conducting device testing for mobile, console, and desktop platforms.",
-      "Delivering stable, high-performance builds through continuous integration workflows.",
-    ],
-  },
-  {
-    title: "Game Deployment & Optimization",
-    icon: <FaRocket className="text-[#00B2FF] text-4xl" />,
-    list: [
-      "Deploying Unity games across platforms like iOS, Android, Steam, PlayStation, and Xbox.",
-      "Optimizing rendering pipelines and assets for smooth frame rates and reduced load times.",
-      "Improving player experience through advanced performance tuning and GPU optimization.",
-      "Implementing analytics and tracking to measure player engagement post-launch.",
-    ],
-  },
-  {
-    title: "Post-Launch Maintenance & Updates",
-    icon: <FaTools className="text-[#00B2FF] text-4xl" />,
-    list: [
-      "Providing continuous updates, new features, and patches after game release.",
-      "Monitoring player feedback and optimizing gameplay balance and performance.",
-      "Managing version upgrades to keep your game compatible with the latest Unity releases.",
-      "Offering 24/7 support and maintenance to ensure long-term game success.",
-    ],
-  },
-];
-
-const steps = [
-  {
-    title: "Concept & Game Design",
-    description:
-      "We start by analyzing your game idea, defining core mechanics, and creating an engaging gameplay strategy using Unity.",
-    icon: "/images/HighPerformance/keyword-research.svg",
-  },
-  {
-    title: "Art & Asset Production",
-    description:
-      "Our creative artists design stunning 2D/3D assets, environments, and animations tailored to your game’s style.",
-    icon: "/images/HighPerformance/lead-focused.svg",
-  },
-  {
-    title: "Unity Game Development",
-    description:
-      "Our skilled Unity developers bring your vision to life, implementing game mechanics, physics, and logic with precision.",
-    icon: "/images/HighPerformance/on-page.svg",
-  },
-  {
-    title: "Backend & Multiplayer Integration",
-    description:
-      "We build secure backend systems, integrate multiplayer features, and enable real-time cloud connectivity.",
-    icon: "/images/HighPerformance/quality SEO.svg",
-  },
-  {
-    title: "Testing & QA",
-    description:
-      "Comprehensive testing ensures flawless gameplay, optimized performance, and compatibility across devices.",
-    icon: "/images/HighPerformance/reporting.svg",
-  },
-  {
-    title: "Deployment & Launch",
-    description:
-      "We handle deployment across app stores and gaming platforms, ensuring smooth publishing and performance.",
-    icon: "/images/HighPerformance/technical-SEO.svg",
-  },
-  {
-    title: "Post-Launch Support & Optimization",
-    description:
-      "We continuously monitor, optimize, and update your game to keep players engaged and ensure long-term growth.",
-    icon: "/images/HighPerformance/technical-SEO.svg",
-  },
-];
-
-const upScale = [
-  {
-    icon: <FaServer className="text-[#306998]" />,
-    title: "Cross-Platform Game Development",
-    desc: "We create Unity games that run flawlessly across mobile, console, desktop, and web platforms.",
-  },
-  {
-    icon: <FaCogs className="text-[#306998]" />,
-    title: "Real-Time Multiplayer Support",
-    desc: "We implement real-time networking, matchmaking, and server management for interactive multiplayer experiences.",
-  },
-  {
-    icon: <FaDatabase className="text-[#306998]" />,
-    title: "Cloud Integration & Analytics",
-    desc: "We connect games with cloud databases, player analytics, and backend services for performance tracking.",
-  },
-  {
-    icon: <FaLock className="text-[#306998]" />,
-    title: "Game Security & Data Protection",
-    desc: "We ensure secure user authentication, in-game purchase safety, and data integrity for players.",
-  },
-  {
-    icon: <FaRocket className="text-[#306998]" />,
-    title: "Performance Optimization",
-    desc: "We enhance game performance with advanced Unity optimization techniques, reducing lag and load times.",
-  },
-  {
-    icon: <FaTools className="text-[#306998]" />,
-    title: "Ongoing Maintenance & Updates",
-    desc: "We provide continuous game updates, bug fixes, and new content to maintain player engagement.",
-  },
-];
-
-const cards = [
-  {
-    count: "150+",
-    title: "Unity Games Delivered",
-    desc: "We’ve developed and launched over 150 Unity-powered games across genres like action, simulation, AR/VR, and casual gaming.",
-    image: "/Assets/seerviceSlider/slide1.webp",
-  },
-  {
-    count: "9+",
-    title: "Years of Game Development Expertise",
-    desc: "With over nine years in Unity development, our team excels at building high-performing and visually immersive gaming experiences.",
-    image: "/Assets/seerviceSlider/slide2.webp",
-  },
-  {
-    count: "300+",
-    title: "Global Gaming Clients",
-    desc: "We’ve partnered with 300+ studios and brands worldwide to build interactive Unity games for diverse audiences.",
-    image: "/Assets/seerviceSlider/slide3.webp",
-  },
-  {
-    count: "98%",
-    title: "Client Satisfaction Rate",
-    desc: "Our focus on creativity, technology, and smooth delivery has earned us a 98% satisfaction rate from our gaming partners.",
-    image: "/Assets/seerviceSlider/slide4.webp",
-  },
-  {
-    count: "24/7",
-    title: "Technical & Creative Support",
-    desc: "We provide round-the-clock support, ensuring your game stays updated, optimized, and engaging for players.",
-    image: "/Assets/seerviceSlider/slide5.webp",
-  },
-];
-
-const faqData = [
-  {
-    title: "Why choose Unity for game development?",
-    description:
-      "Unity offers powerful tools, cross-platform support, and stunning graphics capabilities, making it ideal for modern game development.",
-  },
-  {
-    title: "Do you develop both 2D and 3D games?",
-    description:
-      "Yes, we specialize in building engaging 2D, 3D, AR, and VR games tailored to your creative and technical requirements.",
-  },
-  {
-    title: "Can you build multiplayer games with Unity?",
-    description:
-      "Absolutely. We develop real-time multiplayer games using cloud servers and frameworks like Photon and Mirror.",
-  },
-  {
-    title: "Which platforms do you support?",
-    description:
-      "We develop Unity games for iOS, Android, PC, WebGL, PlayStation, Xbox, and VR platforms like Oculus and HTC Vive.",
-  },
-  {
-    title: "Do you offer game design and art services?",
-    description:
-      "Yes, we provide complete game art, animation, and UI/UX design services alongside full Unity development.",
-  },
-  {
-    title: "How do you ensure smooth performance?",
-    description:
-      "We optimize code, assets, and physics to ensure your Unity game runs smoothly across devices and resolutions.",
-  },
-  {
-    title: "Can you help with game monetization?",
-    description:
-      "Yes, we integrate in-app purchases, ads, and other monetization models to maximize your game’s revenue potential.",
-  },
-  {
-    title: "Do you provide ongoing support after launch?",
-    description:
-      "We offer long-term maintenance, updates, and performance monitoring to ensure your game’s success post-launch.",
-  },
-  {
-    title: "Can you migrate an existing game to Unity?",
-    description:
-      "Yes, we provide migration and remastering services to bring your existing projects into the Unity engine environment.",
-  },
-  {
-    title: "Do you offer AR/VR game development?",
-    description:
-      "Yes, we build immersive AR/VR experiences using Unity for industries like entertainment, training, and simulation.",
-  },
-];
-
-
-
-
-
-  return (
-    <>
-      <CommonBanner
-        img={app}
-        title="2D & 3D Game Development Services"
-        desc="Unity 2D/3D games development is taking the gaming world by storm through technological advances and innovation. We have an exclusive and highly skilled team dedicated to unity 2D/3D game development for last 7 years in this sphere. We are the only company providing Unity 2D/3D game development in New York – Canada. Team of Future IT Touch Pvt. Ltd. support for high end gaming solution with standard parameters of the gaming world reached a commendable height driven by the demands of a quality conscious user. Unity 3D games have had a revolutionary breakthrough in the domain of mobile game development frameworks. Unity lets you work on various platforms such as iOS, android, windows, Linux, Xbox etc."
-      />
-
-<div className="px-5 md:px-12 xl:px-28 py-10 md:py-14 lg:py-16 bg-gradient-to-r from-indigo-50 via-white to-indigo-50 relative overflow-hidden">
-  <div className="max-w-4xl mx-auto text-center space-y-6 relative">
-    <div className="absolute tryAppAnime bg-blue-400 -top-10 left-1/2 -translate-x-1/2 w-96 h-96 object-cover rounded-full opacity-10 blur-2xl" />
-
-    <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-gray-900">
-      Build Immersive, Engaging & Cross-Platform Games with{" "}
-      <span className="text-indigo-600">Unity Game Development</span> ⚡
-    </h2>
-
-    <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-      Ready to bring your game ideas to life? At{" "}
-      <span className="font-semibold text-indigo-600">Future IT Touch</span>, 
-      we craft stunning, high-performance, and interactive games using{" "}
-      <span className="font-semibold text-indigo-600">Unity</span> — 
-      the industry-leading engine trusted by developers worldwide for creating 
-      next-generation 2D, 3D, AR, and VR experiences.
-    </p>
-
-    <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-      Our Unity experts specialize in building visually captivating, responsive, and scalable games 
-      for mobile, desktop, console, and VR platforms. We combine cutting-edge graphics, optimized performance, 
-      and engaging gameplay mechanics to deliver exceptional player experiences across every device.
-    </p>
-
-    <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-      From concept design and prototyping to full-scale development and post-launch support, 
-      we handle every stage of your Unity game development journey — ensuring creativity, performance, 
-      and innovation at every step.
-    </p>
-
-    <div className="pt-4">
-      <a
-        href="tel:+917056937000"
-        className="px-6 py-3 text-white font-medium bg-indigo-600 rounded-xl shadow-md hover:bg-indigo-700 transition-transform transform hover:scale-105"
-      >
-        Let’s Discuss Your Project
-      </a>
-    </div>
-  </div>
-</div>
-
-
-
-
-   
-  
-      {/* High-Performance  */}
-
-      <div className="px-5 md:px-12 xl:px-28 py-8 md:py-10 xl:py-12">
-<div className="text-center space-y-5">
-  <h4 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
-    Future IT Touch’s High-Performance Unity Game Development Services
-  </h4>
-  <p className="text-gray-600 text-base md:text-lg lg:text-xl leading-relaxed max-w-3xl mx-auto">
-    Elevate your gaming vision with immersive, cross-platform experiences powered by Unity. 
-    Our skilled Unity developers design and build interactive, high-performance 2D, 3D, AR, and VR games 
-    that captivate players across mobile, desktop, and console platforms — blending creativity, technology, 
-    and storytelling for maximum engagement and impact.
-  </p>
-</div>
-
-
-
-
-
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
-          {technolgyData.map((elm, index) => (
-            <div
-              key={index}
-              className="p-6 bg-white rounded-2xl border border-gray-300"
-            >
-              <div className="flex items-center justify-between border-b border-gray-200 pb-4">
-                <h4 className="text-xl md:text-2xl font-semibold text-gray-900">
-                  {elm.title}
-                </h4>
-                <div>{elm.icon}</div>
-              </div>
-
-              <div className="mt-5 space-y-3 grid grid-cols-2 gap-y-3">
-                {elm.list.map((item, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <FaCheck className="text-blue-500 mt-1.5 min-w-[20px]" />
-                    <p className="text-gray-700 font-semibold underline text-sm md:text-base">
-                      {item}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="flex justify-center items-center">
-          <a
-            href="+917056937000"
-            className="mt-10   px-6 py-3 rounded-xl bg-blue-500 text-white font-medium shadow-lg hover:bg-indigo-700 transition"
-          >
-            i want speak with expert
-          </a>
-        </div>
-      </div>
-
-      {/* Approach We Follow */}
-
-     <div className="px-5 md:px-12 xl:px-28 py-10 md:py-14 lg:py-16 flex flex-col lg:flex-row items-start gap-10 lg:gap-14">
-           <div className="relative w-full lg:w-[55%] lg:sticky lg:top-24 self-start">
-             <div className="rounded-2xl overflow-hidden shadow-2xl  ">
-               <img
-                 src="/images/appdevelopment/appbg.webp"
-                 alt="High Performance"
-                 className="w-full h-full absolute inset-0  rounded-2xl object-cover hover:scale-105 transition-transform duration-700"
-               />
-   
-<div className="relative z-10 h-full bg-gradient-to-t rounded-2xl from-black/70 via-black/40 to-transparent flex flex-col justify-start p-8">
-<div className="text-left capitalize leading-tight text-white space-y-4 font-bold">
-  <h6 className="text-6xl lg:text-7xl">
-    <SiUnity /> 
-  </h6>
-  <h2 className="text-3xl sm:text-4xl lg:text-5xl leading-tight">
-    Unity 3D & <br />
-    Game App <br />
-    <span className="">Development Approach</span>
-  </h2>
-  <p className="text-3xl lg:text-5xl leading-tight text-gray-200 max-w-md">
-    To create immersive{" "}
-    <span className="text-[#00ffe4]">
-      - cross-platform gaming experiences with stunning visuals ⚡
-    </span>
-  </p>
-</div>
-
-</div>
-
-
-
-   
-             </div>
-           </div>
-   
-           <div className="w-full lg:w-[65%] grid grid-cols-1 gap-6">
-             {steps.map((feature, index) => (
-               <div
-                 key={index}
-                 className="flex flex-col items-start gap-2 p-6 rounded-2xl border border-gray-200 shadow-md group hover:bg-[#0E395E] hover:shadow-2xl transition-all duration-300"
-               >
-                 <h4 className="text-lg md:text-xl font-bold text-gray-900 group-hover:text-white transition-colors">
-                   {feature.title}
-                 </h4>
-                 <p className="text-sm md:text-base font-semibold text-gray-800 group-hover:text-gray-100 leading-relaxed text-justify transition-colors">
-                   {feature.description}
-                 </p>
-               </div>
-             ))}
-           </div>
-         </div>
-
-      {/* <CustomSlider/> */}
-      <CommonSlider cards={cards} />
-
-      {/* upscale your buiness  */}
-
-      <div className="px-5 md:px-12 xl:px-28 bg-[#0a2548] py-10 md:py-14 lg:py-16 m-6 md:m-10 rounded-2xl">
-        <h4 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center text-white font-extrabold w-full lg:w-[85%] mx-auto leading-snug">
-Empower Your Business With Custom Unity Game Development Services
-
-        </h4>
-
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {upScale.map((elm, index) => (
-            <div key={index} className="flex flex-col gap-y-4 text-white">
-              <span className="text-4xl text-indigo-400">{elm.icon}</span>
-              <h5 className="text-xl md:text-2xl font-bold">{elm.title}</h5>
-              <p className="text-sm md:text-base text-gray-100 leading-relaxed">
-                {elm.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* faq  */}
-
-      <CommonFaqs
-        faqData={faqData}
-title="On Unity Game Development Services"
-      />
-      <BusinessIdea />
-    </>
-  );
-};
+    faq={{
+      title: "Unity Game Development Services",
+      items: [
+        { title: "Why choose Unity for game development?",       description: "Unity offers powerful tools, cross-platform support, and stunning graphics capabilities — making it the ideal engine for modern 2D, 3D, AR, and VR game development." },
+        { title: "Do you develop both 2D and 3D games?",         description: "Yes, we specialize in building engaging 2D, 3D, AR, and VR games in Unity — tailored to your creative vision, target audience, and technical requirements." },
+        { title: "Can you build multiplayer games with Unity?",  description: "Absolutely. We develop real-time multiplayer games using cloud servers and frameworks like Photon and Mirror for scalable, low-latency online experiences." },
+        { title: "Which platforms do you support?",              description: "We develop Unity games for iOS, Android, PC, WebGL, PlayStation, Xbox, and VR platforms like Oculus Quest, HTC Vive, and Microsoft HoloLens." },
+        { title: "Do you offer game design and art services?",   description: "Yes, we provide complete game art, character animation, environment design, and UI/UX services alongside full Unity game development." },
+        { title: "How do you ensure smooth performance?",        description: "We optimize code, assets, physics, and rendering pipelines to ensure your Unity game runs smoothly across all target devices and resolutions." },
+        { title: "Can you help with game monetization?",         description: "Yes, we integrate in-app purchases, ad networks, subscriptions, and other monetization models to maximize your game's revenue potential." },
+        { title: "Do you provide ongoing support after launch?", description: "We offer long-term maintenance, new content releases, performance monitoring, and updates to ensure your game's success long after initial launch." },
+        { title: "Can you migrate an existing game to Unity?",   description: "Yes, we provide migration and remastering services to bring your existing game projects into the Unity engine with improved performance and visuals." },
+        { title: "Do you offer AR/VR game development?",         description: "Yes, we build immersive AR/VR experiences using Unity for entertainment, enterprise training, simulation, and educational applications." },
+      ],
+    }}
+  />
+);
 
 export default Unity;

@@ -1,464 +1,181 @@
 import React from "react";
+import {
+  FaLock, FaRocket, FaCode, FaServer,
+  FaDatabase, FaCogs, FaShieldAlt, FaTools,
+  FaCheckCircle, FaLayerGroup, FaStar, FaHeadset, FaSyncAlt, FaBug, FaCloud, FaShoppingCart,
+} from "react-icons/fa";
+import lispImg from "../Assets/lisp.webp";
+import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
 
+const Lisp = () => (
+  <CommonTechPage
+    banner={{
+      bgImage: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&q=85",
+      image: lispImg,
+      category: "E-Commerce Development",
+      breadcrumb: "Lisp · E-Commerce · Online Stores",
+      title: "Lisp · E-Commerce · Online Stores",
+      tagline:
+        "Build high-performance, scalable, and intelligent online store platforms using Lisp — one of the most powerful and flexible programming languages for custom e-commerce, inventory management, and payment systems.",
+    }}
 
-import { FaGem } from "react-icons/fa";
-import gm from "../Assets/lisp.webp";
+    intro={{
+      badge: "Future IT Touch · Lisp & E-Commerce Experts",
+      heading: "Build Powerful Online Stores with",
+      highlight: "Lisp Development",
+      paras: [
+        "At Future IT Touch, we specialize in building high-performance, feature-rich online stores using Lisp — a powerful, flexible programming language that provides the speed, scalability, and customization needed for complex e-commerce platforms.",
+        "From product catalog management and shopping cart systems to secure payment processing and order automation, our developers craft Lisp-based e-commerce solutions designed for reliability, performance, and seamless user experiences.",
+        "Whether you need a custom storefront, enterprise inventory system, or real-time sales analytics integration, our team ensures clean code, efficient algorithms, and seamless platform integration that empowers your business to grow online.",
+      ],
+      highlights: [
+        "Custom Lisp e-commerce backends handling inventory, orders, and payment processing at scale",
+        "Secure payment gateway integration with encrypted transaction validation and fraud prevention",
+        "RESTful APIs for product, order, and customer management with real-time analytics dashboards",
+        "Full-cycle deployment with continuous monitoring, performance optimization, and 24/7 support",
+      ],
+      stats: [
+        { num: "150+", label: "Lisp Stores Delivered",     desc: "High-performance, scalable Lisp-powered online stores built worldwide.",         icon: <FaShoppingCart /> },
+        { num: "8+",   label: "Years Lisp Expertise",      desc: "Eight-plus years building robust Lisp e-commerce and backend solutions.",          icon: <FaLayerGroup /> },
+        { num: "200+", label: "Clients Empowered",         desc: "200+ organizations powered by custom Lisp online store solutions globally.",       icon: <FaStar /> },
+        { num: "24/7", label: "Support & Monitoring",      desc: "Round-the-clock support keeping Lisp stores stable, secure, and optimized.",       icon: <FaHeadset /> },
+      ],
+    }}
 
+    services={[
+      {
+        icon: <FaCode />,
+        title: "Custom Lisp Development",
+        desc: "Efficient, high-performance online store applications using Lisp — with modular, scalable backend architectures for e-commerce inventory, order, and payment management.",
+        points: [
+          "Scalable Lisp e-commerce applications",
+          "Inventory & order management",
+          "Payment processing integration",
+          "Clean, maintainable Lisp code",
+        ],
+      },
+      {
+        icon: <FaServer />,
+        title: "E-Commerce Solutions Powered by Lisp",
+        desc: "Advanced e-commerce features including product catalogs, shopping carts, checkout systems, and intelligent recommendation and inventory management systems built in Lisp.",
+        points: [
+          "Product catalog & shopping cart",
+          "Secure checkout & payment gateway",
+          "High-traffic performance optimization",
+          "Recommendation engine integration",
+        ],
+      },
+      {
+        icon: <FaCogs />,
+        title: "Online Store Integration",
+        desc: "Lisp-based e-commerce apps connected with frontend platforms and third-party services — efficient data pipelines for product analytics, user behavior tracking, and inventory sync.",
+        points: [
+          "Frontend & third-party integration",
+          "Product analytics data pipelines",
+          "User behavior tracking systems",
+          "Optimized large product databases",
+        ],
+      },
+      {
+        icon: <FaDatabase />,
+        title: "API & Payment Gateway Development",
+        desc: "RESTful APIs for product, order, and user management — with secure payment processing, transaction validation, and sales dashboards for inventory and customer insights.",
+        points: [
+          "REST APIs for orders & products",
+          "Payment & transaction validation",
+          "Sales & inventory dashboards",
+          "Scalable e-commerce API design",
+        ],
+      },
+      {
+        icon: <FaShieldAlt />,
+        title: "Security & Maintenance",
+        desc: "Robust security, encryption, and fraud prevention for online stores — protecting customer data and payment information with efficient resource management and patch management.",
+        points: [
+          "Fraud prevention & encryption",
+          "Customer data & payment security",
+          "Resource efficiency optimization",
+          "Performance tuning & patching",
+        ],
+      },
+      {
+        icon: <FaTools />,
+        title: "Continuous Support & Optimization",
+        desc: "Long-term maintenance for Lisp online store projects — dependency upgrades, backend optimization, system uptime monitoring, and scalability and feature enhancement consulting.",
+        points: [
+          "Long-term store maintenance",
+          "Backend optimization & upgrades",
+          "Uptime & traffic monitoring",
+          "Scalability & feature consulting",
+        ],
+      },
+    ]}
 
-import { FaCheck } from "react-icons/fa6";
+    process={[
+      { icon: <FaCheckCircle />, title: "Requirement Analysis",              desc: "Understanding your e-commerce goals, product catalog, and UX needs — identifying technical challenges and designing a roadmap for your Lisp online store." },
+      { icon: <FaServer />,      title: "System Architecture Planning",      desc: "Designing scalable architectures for high-traffic online stores — smooth transaction handling, secure payments, and real-time inventory updates using Lisp." },
+      { icon: <FaCogs />,        title: "Feature Design & Optimization",     desc: "Crafting efficient algorithms for product search, recommendations, checkout, and payment processing — ensuring smooth customer experiences throughout." },
+      { icon: <FaCloud />,       title: "Backend & API Development",         desc: "Building robust Lisp backends and APIs for order processing, inventory management, user authentication, and real-time analytics." },
+      { icon: <FaDatabase />,    title: "Data Management & Analysis",        desc: "Managing and analyzing product, user, and sales data to optimize inventory, pricing, and customer engagement strategies for growth." },
+      { icon: <FaRocket />,      title: "Integration & Deployment",          desc: "Integrating Lisp-based modules with frontend platforms, payment gateways, and third-party services — ensuring seamless deployment and operations." },
+      { icon: <FaShieldAlt />,   title: "Performance & Security Optimization",desc: "Optimizing backend performance, implementing caching, and ensuring secure, scalable, and reliable online store operations under all traffic conditions." },
+      { icon: <FaBug />,         title: "Testing & Quality Assurance",       desc: "Rigorous testing of every component for functionality, security, and speed — delivering a bug-free, high-performance Lisp online store." },
+      { icon: <FaCode />,        title: "Deployment & Monitoring",           desc: "Handling production deployment, server configuration, and real-time monitoring to ensure your Lisp store runs flawlessly under all conditions." },
+      { icon: <FaSyncAlt />,     title: "Maintenance & Long-Term Support",   desc: "Continuous maintenance, updates, and performance audits post-launch — ensuring your Lisp online store remains secure, fast, and future-ready." },
+    ]}
 
-import BusinessIdea from "../components/BuinessIdea";
-import CommonBanner from "../components/techcommomcomponents/CommonBanner";
-import CommonSlider from "../components/techcommomcomponents/CommonSlider";
-import CommonFaqs from "../components/techcommomcomponents/CommonFaqs";
-import {   FaLock, FaRocket } from "react-icons/fa";
+    features={[
+      { icon: <FaCode />,         title: "Custom Lisp Development",          desc: "Lisp-based online store applications that are fast, scalable, and fully customizable — ensuring reliability, security, and flexibility for e-commerce." },
+      { icon: <FaCogs />,         title: "High-Performance Store Management", desc: "Inventory, order, and customer management with optimized Lisp backend logic — delivering minimal latency and maximum operational efficiency." },
+      { icon: <FaServer />,       title: "E-Commerce Integration",           desc: "Payment gateways, APIs, and analytics platforms integrated to create a seamless, end-to-end shopping experience for every customer." },
+      { icon: <FaLock />,         title: "Data Security & Compliance",       desc: "All customer and transactional data secured, encrypted, and compliant with industry standards for complete trust and regulatory adherence." },
+      { icon: <FaRocket />,       title: "Performance Optimization",         desc: "Lisp operations fine-tuned to achieve fast loading times, efficient transactions, and low server overhead under high-traffic conditions." },
+      { icon: <FaTools />,        title: "Ongoing Support & Optimization",   desc: "Continuous monitoring, maintenance, and optimization for feature enhancements and high uptime of your Lisp-powered online store." },
+    ]}
 
+    stack={[
+      { name: "Common Lisp" },
+      { name: "SBCL / CCL" },
+      { name: "Hunchentoot" },
+      { name: "Quicklisp" },
+      { name: "Clack Web Framework" },
+      { name: "PostgreSQL" },
+      { name: "MySQL" },
+      { name: "Redis" },
+      { name: "REST APIs" },
+      { name: "Stripe / PayPal" },
+      { name: "Docker" },
+      { name: "Nginx" },
+      { name: "AWS / GCP" },
+      { name: "Git / CI" },
+      { name: "Elasticsearch" },
+      { name: "RabbitMQ" },
+    ]}
 
-import { FaCode, FaServer, FaDatabase, FaCogs, FaShieldAlt, FaTools } from "react-icons/fa";
+    slider={[
+      { count: "150+", title: "Lisp Stores Delivered",            desc: "150+ Lisp-powered online stores built — delivering high-performance, scalable, and reliable e-commerce solutions with seamless user experiences worldwide.",   image: "/Assets/seerviceSlider/slide1.webp" },
+      { count: "8+",   title: "Years of Lisp Expertise",          desc: "Eight-plus years crafting robust Lisp online store solutions — optimizing performance, transaction handling, and user experience for demanding stores.",         image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: "200+", title: "Clients Empowered Globally",       desc: "200+ organizations trust us for Lisp-based e-commerce solutions that enhance sales, automation, and superior online shopping experiences worldwide.",           image: "/Assets/seerviceSlider/slide3.webp" },
+      { count: "99%",  title: "Optimization Success Rate",        desc: "Up to 99% efficiency in backend computations and transaction processing — ensuring fast, reliable store operations even under heavy traffic and complex loads.",  image: "/Assets/seerviceSlider/slide4.webp" },
+      { count: "24/7", title: "Technical Support & Monitoring",   desc: "24/7 monitoring, updates, and optimization keeping your Lisp online store stable, secure, and performing at peak efficiency at all times.",                   image: "/Assets/seerviceSlider/slide5.webp" },
+    ]}
 
-
-const Lisp = () => {
-const technolgyData = [
-  {
-    title: "Custom Lisp Development",
-    icon: <FaCode className="text-[#00B2FF] text-4xl" />,
-    list: [
-      "Building efficient and high-performance online store applications using Lisp.",
-      "Developing modular, scalable, and robust backend architectures for e-commerce.",
-      "Creating enterprise-grade Lisp solutions for inventory, order, and payment management.",
-      "Ensuring clean, reusable, and maintainable Lisp code with best practices.",
-    ],
-  },
-  {
-    title: "E-Commerce Solutions Powered by Lisp",
-    icon: <FaServer className="text-[#00B2FF] text-4xl" />,
-    list: [
-      "Developing advanced e-commerce features such as product catalogs, shopping carts, and checkout systems.",
-      "Integrating payment gateways and secure transaction processing.",
-      "Optimizing performance for high-traffic online stores.",
-      "Building intelligent recommendation and inventory management systems using Lisp.",
-    ],
-  },
-  {
-    title: "Online Store Integration",
-    icon: <FaCogs className="text-[#00B2FF] text-4xl" />,
-    list: [
-      "Connecting Lisp-based e-commerce apps with front-end platforms and third-party services.",
-      "Developing APIs for seamless order, customer, and inventory management.",
-      "Creating efficient data pipelines for product analytics and user behavior tracking.",
-      "Enhancing performance with optimized Lisp algorithms for large product databases.",
-    ],
-  },
-  {
-    title: "API & Payment Gateway Development",
-    icon: <FaDatabase className="text-[#00B2FF] text-4xl" />,
-    list: [
-      "Creating RESTful APIs for product, order, and user management.",
-      "Integrating secure payment processing and transaction validation.",
-      "Developing dashboards for sales, inventory, and customer insights.",
-      "Delivering scalable APIs with Lisp frameworks for e-commerce.",
-    ],
-  },
-  {
-    title: "Security & Maintenance",
-    icon: <FaShieldAlt className="text-[#00B2FF] text-4xl" />,
-    list: [
-      "Implementing robust security, encryption, and fraud prevention measures.",
-      "Protecting customer data and payment information.",
-      "Ensuring efficient resource management in high-traffic stores.",
-      "Providing regular performance tuning, code updates, and patch management.",
-    ],
-  },
-  {
-    title: "Continuous Support & Optimization",
-    icon: <FaTools className="text-[#00B2FF] text-4xl" />,
-    list: [
-      "Offering long-term maintenance for Lisp online store projects.",
-      "Upgrading dependencies and optimizing backend performance.",
-      "Monitoring system uptime, traffic, and server performance.",
-      "Providing consultation for scalability, feature enhancements, and optimization.",
-    ],
-  },
-];
-
-const steps = [
-  {
-    title: "Requirement Analysis",
-    description:
-      "We start by understanding your e-commerce goals, product catalog, and user experience needs. Our team identifies technical challenges and designs a roadmap for your Lisp online store.",
-    icon: "/images/HighPerformance/keyword-research.svg",
-  },
-  {
-    title: "System Architecture Planning",
-    description:
-      "We design scalable architectures for online stores, ensuring smooth handling of high-traffic, secure transactions, and real-time inventory updates using Lisp.",
-    icon: "/images/HighPerformance/lead-focused.svg",
-  },
-  {
-    title: "Feature Design & Optimization",
-    description:
-      "Our engineers craft efficient algorithms for product search, recommendations, checkout, and payment processing to ensure smooth customer experiences.",
-    icon: "/images/HighPerformance/on-page.svg",
-  },
-  {
-    title: "Backend & API Development",
-    description:
-      "We build robust Lisp backends and APIs for order processing, inventory management, user authentication, and analytics.",
-    icon: "/images/HighPerformance/quality SEO.svg",
-  },
-  {
-    title: "Data Management & Analysis",
-    description:
-      "We manage and analyze product, user, and sales data to optimize inventory, pricing, and customer engagement strategies.",
-    icon: "/images/HighPerformance/reporting.svg",
-  },
-  {
-    title: "Integration & Deployment",
-    description:
-      "We integrate Lisp-based modules with front-end platforms, payment gateways, and third-party services, ensuring seamless deployment.",
-    icon: "/images/HighPerformance/technical-SEO.svg",
-  },
-  {
-    title: "Performance & Security Optimization",
-    description:
-      "We optimize backend performance, implement caching, and ensure secure, scalable, and reliable online store operations.",
-    icon: "/images/HighPerformance/technical-SEO.svg",
-  },
-  {
-    title: "Testing & Quality Assurance",
-    description:
-      "Every component undergoes rigorous testing for functionality, security, and speed to deliver a bug-free, high-performance online store.",
-    icon: "/images/HighPerformance/technical-SEO.svg",
-  },
-  {
-    title: "Deployment & Monitoring",
-    description:
-      "We handle production deployment, server configuration, and real-time monitoring to ensure your Lisp store runs flawlessly under all traffic conditions.",
-    icon: "/images/HighPerformance/technical-SEO.svg",
-  },
-  {
-    title: "Maintenance & Long-Term Support",
-    description:
-      "Post-launch, we provide continuous maintenance, updates, and performance audits — ensuring your Lisp online store remains secure, fast, and future-ready.",
-    icon: "/images/HighPerformance/technical-SEO.svg",
-  },
-];
-
-const upScale = [
-  {
-    icon: <FaCode />,
-    title: "Custom Lisp Development",
-    desc: "We develop Lisp-based online store applications that are fast, scalable, and fully customizable — ensuring reliability, security, and flexibility for e-commerce businesses.",
-  },
-  {
-    icon: <FaCogs />,
-    title: "High-Performance Store Management",
-    desc: "Harness Lisp for inventory, order, and customer management with optimized backend logic and minimal latency.",
-  },
-  {
-    icon: <FaServer />,
-    title: "E-Commerce Integration",
-    desc: "Integrate payment gateways, APIs, and analytics platforms to create a seamless shopping experience for your customers.",
-  },
-  {
-    icon: <FaLock />,
-    title: "Data Security & Compliance",
-    desc: "We ensure that all customer and transactional data are secure, encrypted, and compliant with industry standards.",
-  },
-  {
-    icon: <FaRocket />,
-    title: "Performance Optimization",
-    desc: "Our developers fine-tune Lisp operations to achieve fast loading times, efficient transactions, and low server overhead.",
-  },
-  {
-    icon: <FaTools />,
-    title: "Ongoing Support & Optimization",
-    desc: "We provide continuous monitoring, maintenance, and optimization for feature enhancements and high uptime of your Lisp store.",
-  },
-];
-
-const cards = [
-  {
-    count: "150+",
-    title: "Lisp Stores Delivered",
-    desc: "We’ve successfully built over 150 Lisp-powered online stores — delivering high-performance, scalable, and reliable e-commerce solutions for businesses worldwide. Each store is crafted with attention to seamless user experience, optimized product catalogs, fast checkout processes, and smooth backend operations, ensuring your customers enjoy a robust and engaging shopping journey.",
-    image: "/Assets/seerviceSlider/slide1.webp",
-  },
-  {
-    count: "8+",
-    title: "Years of Lisp Expertise",
-    desc: "With 8+ years of experience, our developers craft robust Lisp online store solutions that optimize performance, transaction handling, and user experience. Our expertise ensures stores can handle large product inventories, high traffic volumes, and complex integrations while maintaining reliability, security, and lightning-fast responsiveness.",
-    image: "/Assets/seerviceSlider/slide2.webp",
-  },
-  {
-    count: "200+",
-    title: "Clients Empowered Globally",
-    desc: "We’ve partnered with 200+ organizations, delivering Lisp-based e-commerce solutions that enhance sales, automation, and user engagement worldwide. From custom storefront designs to advanced inventory management and automated payment workflows, our solutions help businesses scale efficiently and provide superior online shopping experiences for customers across the globe.",
-    image: "/Assets/seerviceSlider/slide3.webp",
-  },
-  {
-    count: "99%",
-    title: "Optimization Success Rate",
-    desc: "Our optimization strategies achieve up to 99% efficiency in backend computations and transaction processing, ensuring fast and reliable store operations. By fine-tuning database queries, implementing caching mechanisms, and optimizing server-side logic, we make sure your Lisp online store runs flawlessly even under heavy traffic and complex e-commerce operations.",
-    image: "/Assets/seerviceSlider/slide4.webp",
-  },
-  {
-    count: "24/7",
-    title: "Technical Support & Monitoring",
-    desc: "We offer 24/7 monitoring, updates, and optimization to keep your Lisp online store stable, secure, and performing at peak efficiency at all times. Our proactive support includes troubleshooting issues, updating dependencies, monitoring server health, and implementing performance improvements to ensure your store delivers uninterrupted service and excellent customer experiences.",
-    image: "/Assets/seerviceSlider/slide5.webp",
-  },
-];
-
-
-const faqData = [
-  {
-    title: "What is Lisp?",
-    description:
-      "Lisp is a high-performance programming language suitable for building complex, dynamic applications, including online store platforms.",
-  },
-  {
-    title: "Why use Lisp for online stores?",
-    description:
-      "Lisp provides flexibility, scalability, and high performance — ideal for building secure, feature-rich, and customizable e-commerce solutions.",
-  },
-  {
-    title: "Can Lisp handle large product catalogs?",
-    description:
-      "Yes, Lisp is optimized for managing large datasets, inventory, and transaction processing efficiently.",
-  },
-  {
-    title: "Is Lisp suitable for payment and transaction processing?",
-    description:
-      "Absolutely. Lisp can integrate with payment gateways and ensure secure, fast, and reliable transactions for online stores.",
-  },
-  {
-    title: "Do you integrate Lisp into existing platforms?",
-    description:
-      "Yes, we can integrate Lisp modules into your current e-commerce systems or cloud infrastructure for enhanced performance and features.",
-  },
-  {
-    title: "How secure are Lisp online stores?",
-    description:
-      "We implement encryption, secure API practices, and compliance measures to ensure your store and customer data remain protected.",
-  },
-  {
-    title: "Can you optimize existing Lisp store code?",
-    description:
-      "Definitely. We enhance performance, scalability, and security of your existing Lisp e-commerce applications.",
-  },
-  {
-    title: "Do you provide long-term support for Lisp stores?",
-    description:
-      "Yes, we offer ongoing maintenance, performance audits, and feature updates to keep your Lisp store running efficiently.",
-  },
-  {
-    title: "Which industries benefit from Lisp online stores?",
-    description:
-      "Retail, wholesale, subscription services, and niche e-commerce businesses leverage Lisp for high-performance, customized online stores.",
-  },
-  {
-    title: "Can Lisp be integrated with analytics and reporting tools?",
-    description:
-      "Yes, Lisp online stores can connect with analytics, reporting, and marketing tools to optimize sales and business insights.",
-  },
-];
-
-
-
-
-  return (
-    <>
-      <CommonBanner
-        img={gm}
-        title="lisp Online Store Development"
-        desc="JLISP or List Processor language remains the principal language for AI work in the United States. LISP was invented at the Massachusetts Institute of Technology (MIT) by John McCarthy, who coined the term “artificial intelligence”. Lisp is the second-oldest high-level programming language in use today, and has become the programming language of choice for AI applications after its publication in 1960. LISP operates on Read–Eval–Print Loop (REPL), also known as an interactive top level or language shell, in an interactive computer programming environment that codes, compiles, and runs the code in 30+ programming languages including JavaScript and Python."
-      />
-<div className="px-5 md:px-12 xl:px-28 py-10 md:py-14 lg:py-16 bg-gradient-to-r from-indigo-50 via-white to-indigo-50 relative overflow-hidden">
-  <div className="max-w-4xl mx-auto text-center space-y-6 relative">
-    <div className="absolute tryAppAnime bg-blue-400 -top-10 left-1/2 -translate-x-1/2 w-96 h-96 object-cover rounded-full opacity-10 blur-2xl" />
-
-    <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-gray-900">
-      Build High-Performance, Scalable & Intelligent Systems with{" "}
-      <span className="text-indigo-600">
-        Julia Development Services
-      </span>{" "}
-      ⚡
-    </h2>
-
-    <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-      Looking to develop fast, reliable, and data-intensive applications using{" "}
-      <span className="font-semibold text-indigo-600">Julia</span>? At{" "}
-      <span className="font-semibold text-indigo-600">Future IT Touch</span>, we
-      specialize in creating high-performance software solutions that leverage Julia’s
-      speed, numerical computing capabilities, and elegant syntax for scientific and
-      data-driven projects.
-    </p>
-
-    <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-      From scientific simulations and numerical modeling to AI workflows and optimization
-      tasks, our developers craft Julia-based solutions designed for performance,
-      accuracy, and scalability.
-    </p>
-
-    <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-      Whether you need real-time computations, large-scale data processing, or custom
-      scientific applications, our team ensures clean code, efficient algorithms, and
-      seamless system integration to empower your business with actionable insights.
-    </p>
-
-    <div className="pt-4">
-      <a
-        href="tel:+917056937000"
-        className="px-6 py-3 text-white font-medium bg-indigo-600 rounded-xl shadow-md hover:bg-indigo-700 transition-transform transform hover:scale-105"
-      >
-        Let’s Discuss Your Project
-      </a>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-      {/* High-Performance  */}
-
-      <div className="px-5 md:px-12 xl:px-28 py-8 md:py-10 xl:py-12">
-<div className="text-center space-y-5">
-  <h4 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
-    Future IT Touch’s High-Performance Lisp Online Store Development Services
-  </h4>
-  <p className="text-gray-600 text-base md:text-lg lg:text-xl leading-relaxed max-w-3xl mx-auto">
-    Empowering businesses with high-performance, scalable, and feature-rich online stores using Lisp — delivering optimized, reliable, and intelligent e-commerce solutions for seamless shopping experiences, fast checkout workflows, and large-scale product management.
-  </p>
-</div>
-
-
-
-
-      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
-  {technolgyData.map((elm, index) => (
-    <div
-      key={index}
-      className="p-6 bg-white rounded-2xl border border-gray-300"
-    >
-      <div className="flex items-center justify-between border-b border-gray-200 pb-4">
-        <h4 className="text-xl md:text-2xl font-semibold text-gray-900">
-          {elm.title}
-        </h4>
-        <div>{elm.icon}</div>
-      </div>
-
-      <div className="mt-5 space-y-3 grid grid-cols-2 gap-y-3">
-        {elm.list.map((item, i) => (
-          <div key={i} className="flex items-start gap-3">
-            <FaCheck className="text-blue-500 mt-1.5 min-w-[20px]" />
-            <p className="text-gray-700 font-semibold underline text-sm md:text-base">
-              {item}
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
-  ))}
-</div>
-
-        <div className="flex justify-center items-center">
-          <a
-            href="+917056937000"
-            className="mt-10   px-6 py-3 rounded-xl bg-blue-500 text-white font-medium shadow-lg hover:bg-indigo-700 transition"
-          >
-            i want speak with expert
-          </a>
-        </div>
-      </div>
-
-      {/* Approach We Follow */}
-
-      <div className="px-5 md:px-12 xl:px-28 py-10 md:py-14 lg:py-16 flex flex-col lg:flex-row items-start gap-10 lg:gap-14">
-        <div className="relative w-full lg:w-[55%] lg:sticky lg:top-24 self-start">
-          <div className="rounded-2xl overflow-hidden shadow-2xl  ">
-            <img
-              src="/images/appdevelopment/appbg.webp"
-              alt="High Performance"
-              className="w-full h-full absolute inset-0  rounded-2xl object-cover hover:scale-105 transition-transform duration-700"
-            />
-
-   <div className="relative z-10 h-full bg-gradient-to-t rounded-2xl from-black/70 via-black/40 to-transparent flex flex-col justify-start p-8">
-<div className="text-left capitalize leading-tight text-white space-y-4 font-bold">
-  <h6 className="text-6xl lg:text-7xl">
-    <FaGem /> {/* Recommended Icon for Lisp Online Store Development */}
-  </h6>
-  <h2 className="text-3xl sm:text-4xl lg:text-5xl leading-tight">
-    Lisp <br />
-    Online Store <br />
-    <span className="">Development Solutions That Boost E-Commerce</span>
-  </h2>
-  <p className="text-3xl lg:text-5xl leading-tight text-gray-200 max-w-md">
-    Build intelligent{" "}
-    <span className="text-[#00ffe4]">
-      - scalable, feature-rich online stores ⚡
-    </span>
-  </p>
-</div>
-
-
-
-</div>
-
-
-          </div>
-        </div>
-
-        <div className="w-full lg:w-[65%] grid grid-cols-1 gap-6">
-          {steps.map((feature, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-start gap-2 p-6 rounded-2xl border border-gray-200 shadow-md group hover:bg-[#0E395E] hover:shadow-2xl transition-all duration-300"
-            >
-              <h4 className="text-lg md:text-xl font-bold text-gray-900 group-hover:text-white transition-colors">
-                {feature.title}
-              </h4>
-              <p className="text-sm md:text-base font-semibold text-gray-800 group-hover:text-gray-100 leading-relaxed text-justify transition-colors">
-                {feature.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* <CustomSlider/> */}
-      <CommonSlider cards={cards}/>
-
-
-<div className="px-5 md:px-12 xl:px-28 bg-[#0a2548] py-10 md:py-14 lg:py-16 m-6 md:m-10 rounded-2xl">
-  <h4 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center text-white font-extrabold w-full lg:w-[85%] mx-auto leading-snug">
-    Accelerate Your Business With Custom Lisp Online Store Development Services
-  </h4>
-
-  <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-    {upScale.map((elm, index) => (
-      <div key={index} className="flex flex-col gap-y-4 text-white">
-        <span className="text-4xl text-indigo-400">{elm.icon}</span>
-        <h5 className="text-xl md:text-2xl font-bold">{elm.title}</h5>
-        <p className="text-sm md:text-base text-gray-100 leading-relaxed">
-          {elm.desc}
-        </p>
-      </div>
-    ))}
-  </div>
-</div>
-
-<CommonFaqs faqData={faqData} title="On Lisp Online Store Development" />
-
-
-            <BusinessIdea />
-      
-
-     
-    </>
-  );
-};
+    faq={{
+      title: "Lisp Online Store Development Services",
+      items: [
+        { title: "What is Lisp?",                                    description: "Lisp is a high-performance, flexible programming language suitable for building complex, dynamic applications including customized online store platforms." },
+        { title: "Why use Lisp for online stores?",                  description: "Lisp provides flexibility, scalability, and high performance — ideal for building secure, feature-rich, and customizable e-commerce solutions." },
+        { title: "Can Lisp handle large product catalogs?",          description: "Yes, Lisp is optimized for managing large datasets, product inventories, and transaction processing efficiently at scale." },
+        { title: "Is Lisp suitable for payment processing?",         description: "Absolutely. Lisp can integrate with payment gateways to ensure secure, fast, and reliable transactions for high-volume online stores." },
+        { title: "Do you integrate Lisp into existing platforms?",   description: "Yes, we can integrate Lisp modules into your current e-commerce systems or cloud infrastructure for enhanced performance and features." },
+        { title: "How secure are Lisp online stores?",               description: "We implement encryption, secure API practices, and compliance measures to ensure your store and customer data remain fully protected." },
+        { title: "Can you optimize existing Lisp store code?",       description: "Definitely. We enhance performance, scalability, and security of existing Lisp e-commerce applications for better user experience." },
+        { title: "Do you provide long-term support for Lisp stores?",description: "Yes, we offer ongoing maintenance, performance audits, and feature updates to keep your Lisp store running efficiently and securely." },
+        { title: "Which industries benefit from Lisp online stores?",description: "Retail, wholesale, subscription services, and niche e-commerce businesses leverage Lisp for high-performance, customized online stores." },
+        { title: "Can Lisp integrate with analytics and reporting?", description: "Yes, Lisp online stores connect with analytics, reporting, and marketing tools to optimize sales strategies and business insights." },
+      ],
+    }}
+  />
+);
 
 export default Lisp;

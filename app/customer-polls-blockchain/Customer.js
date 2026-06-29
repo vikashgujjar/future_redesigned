@@ -1,471 +1,181 @@
 import React from "react";
+import {
+  FaPoll, FaLock, FaRocket, FaCode, FaServer,
+  FaDatabase, FaCogs, FaShieldAlt, FaTools,
+  FaCheckCircle, FaLayerGroup, FaStar, FaHeadset, FaSyncAlt, FaBug, FaCloud,
+} from "react-icons/fa";
+import customerImg from "../Assets/solidity.webp";
+import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
 
+const Customer = () => (
+  <CommonTechPage
+    banner={{
+      bgImage: "https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=1600&q=85",
+      image: customerImg,
+      category: "Blockchain Voting & Polls",
+      breadcrumb: "Blockchain · Customer Polls · Voting",
+      title: "Blockchain · Customer Polls · Voting",
+      tagline:
+        "Build secure, transparent, and tamper-proof customer polling and voting systems on blockchain — delivering verifiable, decentralized results for enterprise surveys, elections, and customer feedback platforms.",
+    }}
 
-import gm from "../Assets/solidity.webp";
-import { FaPoll } from "react-icons/fa"; // Voting / Poll icon
+    intro={{
+      badge: "Future IT Touch · Blockchain Poll Experts",
+      heading: "Build Transparent Voting Systems with",
+      highlight: "Customer Polls Blockchain",
+      paras: [
+        "At Future IT Touch, we specialize in creating high-performance blockchain polling solutions that leverage immutability, decentralized architecture, and cryptographic security — delivering trustworthy voting and survey applications for enterprises and institutions.",
+        "From enterprise surveys and customer feedback polls to online elections and decentralized voting platforms, our developers craft blockchain polling systems optimized for transparency, scalability, and long-term reliability.",
+        "Whether you need secure customer polls, election platforms, or real-time voting analytics, our team ensures tamper-proof, auditable systems with optimized performance and seamless integration — empowering your business with transparent and reliable decentralized polling.",
+      ],
+      highlights: [
+        "Blockchain-based voting with cryptographic vote integrity and tamper-proof immutable records",
+        "Smart contract-powered poll automation for vote submission, counting, and result verification",
+        "RESTful APIs for voter management, real-time results, and multi-platform DApp integration",
+        "Full-cycle development with security auditing, compliance, and 24/7 monitoring support",
+      ],
+      stats: [
+        { num: "100+", label: "Blockchain Polls Delivered",  desc: "Transparent, tamper-proof blockchain polling systems built for enterprises worldwide.",  icon: <FaPoll /> },
+        { num: "7+",   label: "Years Blockchain Expertise",  desc: "Seven-plus years delivering secure and transparent blockchain-based voting solutions.",    icon: <FaLayerGroup /> },
+        { num: "150+", label: "Clients Served Globally",     desc: "150+ organizations trust us for reliable and verifiable blockchain polling platforms.",   icon: <FaStar /> },
+        { num: "24/7", label: "Support & Monitoring",        desc: "Round-the-clock monitoring ensuring stable and secure blockchain polling operations.",     icon: <FaHeadset /> },
+      ],
+    }}
 
+    services={[
+      {
+        icon: <FaPoll />,
+        title: "Custom Blockchain Polling Development",
+        desc: "Secure, high-performance blockchain-based polling and voting applications — with modular, transparent backend architectures for vote tracking, tamper-proof results, and consensus management.",
+        points: [
+          "Blockchain vote tracking systems",
+          "Tamper-proof result management",
+          "Consensus protocol integration",
+          "Clean, auditable polling code",
+        ],
+      },
+      {
+        icon: <FaServer />,
+        title: "Decentralized Poll & Voting Solutions",
+        desc: "Blockchain-based polling with transparency, immutability, and verifiable results — for customer surveys, elections, enterprise decisions, and DApp-integrated real-time vote collection.",
+        points: [
+          "Immutable & verifiable polls",
+          "High-concurrency voting networks",
+          "Enterprise & election systems",
+          "DApp vote collection integration",
+        ],
+      },
+      {
+        icon: <FaCogs />,
+        title: "Smart Contract & DApp Integration",
+        desc: "Blockchain polling systems connected with smart contracts and DApps — APIs for vote submission, result verification, user authentication, and efficient vote counting pipelines.",
+        points: [
+          "Vote submission API development",
+          "Result verification smart contracts",
+          "Vote counting & auditing pipelines",
+          "DApp & platform connectivity",
+        ],
+      },
+      {
+        icon: <FaDatabase />,
+        title: "API & Node Development",
+        desc: "RESTful APIs for poll submission, results, and user management — blockchain node integration with analytics dashboards for vote reporting and real-time monitoring.",
+        points: [
+          "Poll & voter management APIs",
+          "Blockchain node integration",
+          "Real-time vote analytics dashboards",
+          "Scalable polling API services",
+        ],
+      },
+      {
+        icon: <FaShieldAlt />,
+        title: "Security & Maintenance",
+        desc: "Secure coding, encryption, and tamper-proof vote storage — protecting voter data, private keys, and blockchain records with regular security audits and compliance measures.",
+        points: [
+          "Vote data encryption & security",
+          "Voter privacy & data protection",
+          "Regular security audits",
+          "Compliance & access controls",
+        ],
+      },
+      {
+        icon: <FaTools />,
+        title: "Continuous Support & Optimization",
+        desc: "Long-term support for blockchain polling platforms — consensus mechanism optimization, smart contract monitoring, system uptime tracking, and expert scalability consultation.",
+        points: [
+          "Long-term polling platform support",
+          "Consensus mechanism optimization",
+          "System uptime monitoring",
+          "Scalability & upgrade consulting",
+        ],
+      },
+    ]}
 
-import { SiCplusplus } from "react-icons/si";
+    process={[
+      { icon: <FaCheckCircle />, title: "Requirement Analysis",              desc: "Understanding your polling needs, voter base, and security requirements — designing a roadmap for high-performance blockchain polling solutions." },
+      { icon: <FaServer />,      title: "System Architecture Planning",      desc: "Designing scalable and secure architectures for decentralized polls, voting nodes, and distributed ledger systems." },
+      { icon: <FaCogs />,        title: "Consensus & Algorithm Design",      desc: "Developing consensus protocols, vote validation algorithms, and cryptographic operations to ensure transparent and tamper-proof results." },
+      { icon: <FaCloud />,       title: "Backend & Node Development",        desc: "Implementing blockchain nodes, APIs, and smart contract support for secure vote submission, counting, and result distribution." },
+      { icon: <FaDatabase />,    title: "Data Management & Security",        desc: "Securely managing voter data, ballots, and results — ensuring integrity, privacy, and transparency across the entire polling system." },
+      { icon: <FaRocket />,      title: "Integration & Deployment",          desc: "Integrating blockchain polling modules with DApps, websites, and mobile apps for seamless participation and real-time result delivery." },
+      { icon: <FaShieldAlt />,   title: "Performance & Security Optimization",desc: "Optimizing nodes, vote processing, and smart contracts for high-performance, low-latency, and secure polling operations." },
+      { icon: <FaBug />,         title: "Testing & Quality Assurance",       desc: "Rigorous testing of every polling component to ensure accuracy, security, and complete reliability of results." },
+      { icon: <FaCode />,        title: "Deployment & Monitoring",           desc: "Handling network deployment, node configuration, and real-time monitoring for smooth polling operations and secure result delivery." },
+      { icon: <FaSyncAlt />,     title: "Maintenance & Long-Term Support",   desc: "Ongoing updates, audits, and feature enhancements to maintain secure, transparent, and efficient blockchain polling systems." },
+    ]}
 
-import { FaCheck } from "react-icons/fa6";
+    features={[
+      { icon: <FaPoll />,      title: "Custom Blockchain Poll Development",desc: "Blockchain polling solutions that are secure, transparent, and scalable — ensuring reliable vote collection, tamper-proof results, and efficient participation." },
+      { icon: <FaCogs />,      title: "High-Performance Polling Nodes",    desc: "Blockchain technology powering robust nodes for vote validation, ledger management, and reliable decentralized polling at any scale." },
+      { icon: <FaServer />,    title: "Integration with DApps & Platforms",desc: "Blockchain polls integrated with websites, mobile apps, and decentralized platforms for real-time voting and analytics." },
+      { icon: <FaLock />,      title: "Data Security & Privacy",           desc: "All ballots, voter data, and results secured with encryption and compliant with privacy regulations for complete trust and integrity." },
+      { icon: <FaRocket />,    title: "Performance Optimization",          desc: "Blockchain nodes, smart contracts, and vote processing optimized for fast, efficient, and reliable polling under high voter loads." },
+      { icon: <FaTools />,     title: "Ongoing Support & Optimization",    desc: "Continuous monitoring, maintenance, and improvements ensuring high availability, security, and reliability of blockchain polling systems." },
+    ]}
 
-import BusinessIdea from "../components/BuinessIdea";
-import CommonBanner from "../components/techcommomcomponents/CommonBanner";
-import CommonSlider from "../components/techcommomcomponents/CommonSlider";
-import CommonFaqs from "../components/techcommomcomponents/CommonFaqs";
-import {   FaLock, FaRocket } from "react-icons/fa";
+    stack={[
+      { name: "Solidity 0.8.x" },
+      { name: "Ethereum / Polygon" },
+      { name: "Hardhat / Truffle" },
+      { name: "OpenZeppelin" },
+      { name: "Ethers.js / Web3.js" },
+      { name: "IPFS" },
+      { name: "The Graph" },
+      { name: "Node.js / TypeScript" },
+      { name: "React (Voting DApp)" },
+      { name: "PostgreSQL" },
+      { name: "Redis" },
+      { name: "Docker" },
+      { name: "AWS / GCP" },
+      { name: "Chainlink (Randomness)" },
+      { name: "Alchemy / Infura" },
+      { name: "GitHub Actions" },
+    ]}
 
+    slider={[
+      { count: "100+", title: "Blockchain Polls Delivered",       desc: "100+ blockchain-based polling systems implemented — delivering transparent, secure, and tamper-proof voting for elections, surveys, and customer feedback.",     image: "/Assets/seerviceSlider/slide1.webp" },
+      { count: "7+",   title: "Years of Blockchain Expertise",    desc: "Seven-plus years crafting robust blockchain polling solutions — optimizing transaction integrity, voting accuracy, and scalability for demanding use cases.", image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: "150+", title: "Clients Served Globally",          desc: "150+ organizations trust us for secure and transparent blockchain voting solutions — spanning enterprises, government bodies, and research institutions.",     image: "/Assets/seerviceSlider/slide3.webp" },
+      { count: "99%",  title: "Voting Integrity Success Rate",    desc: "99% reliability and tamper-proof accuracy in blockchain polling systems — ensuring completely trustworthy, verifiable results for all stakeholders.",          image: "/Assets/seerviceSlider/slide4.webp" },
+      { count: "24/7", title: "Support & Monitoring",             desc: "Continuous monitoring, updates, and optimization maintaining stable, secure, and high-performance blockchain polling platforms at all times.",                image: "/Assets/seerviceSlider/slide5.webp" },
+    ]}
 
-import { FaCode, FaServer, FaDatabase, FaCogs, FaShieldAlt, FaTools } from "react-icons/fa";
-
-
-const Customer = () => {
-const technolgyData = [
-  {
-    title: "Custom Blockchain Polling Development",
-    icon: <FaCode className="text-[#00B2FF] text-4xl" />,
-    list: [
-      "Building secure, high-performance blockchain-based polling and voting applications.",
-      "Developing modular, scalable, and transparent backend architectures for decentralized polls.",
-      "Creating enterprise-grade solutions for secure vote tracking, tamper-proof results, and consensus management.",
-      "Ensuring clean, reusable, and maintainable code following best practices for blockchain polling projects.",
-    ],
-  },
-  {
-    title: "Decentralized Poll & Voting Solutions",
-    icon: <FaServer className="text-[#00B2FF] text-4xl" />,
-    list: [
-      "Developing blockchain-based polling features with transparency, immutability, and verifiable results.",
-      "Optimizing performance for high-concurrency voting networks.",
-      "Building C++/Blockchain-powered solutions for customer surveys, elections, and decentralized decision-making.",
-      "Integrating with DApps for secure, real-time vote collection and results verification.",
-    ],
-  },
-  {
-    title: "Smart Contract & DApp Integration",
-    icon: <FaCogs className="text-[#00B2FF] text-4xl" />,
-    list: [
-      "Connecting blockchain polling systems with smart contracts and decentralized apps.",
-      "Developing APIs for vote submission, result verification, and user authentication.",
-      "Creating efficient pipelines for vote counting, validation, and auditing.",
-      "Enhancing performance using optimized algorithms for secure and transparent voting.",
-    ],
-  },
-  {
-    title: "API & Node Development",
-    icon: <FaDatabase className="text-[#00B2FF] text-4xl" />,
-    list: [
-      "Creating RESTful APIs for poll submission, results, and user management.",
-      "Integrating blockchain nodes into polling platforms for decentralized data integrity.",
-      "Developing dashboards for vote analytics, reporting, and real-time monitoring.",
-      "Delivering scalable APIs and node services for high-performance polling applications.",
-    ],
-  },
-  {
-    title: "Security & Maintenance",
-    icon: <FaShieldAlt className="text-[#00B2FF] text-4xl" />,
-    list: [
-      "Implementing secure coding, encryption, and tamper-proof vote storage.",
-      "Protecting voter data, private keys, and blockchain records.",
-      "Ensuring reliability and efficiency in high-volume polling networks.",
-      "Providing regular updates, auditing, and maintenance for blockchain-based polls.",
-    ],
-  },
-  {
-    title: "Continuous Support & Optimization",
-    icon: <FaTools className="text-[#00B2FF] text-4xl" />,
-    list: [
-      "Offering long-term support for blockchain polling platforms.",
-      "Optimizing consensus mechanisms, smart contracts, and node performance.",
-      "Monitoring systems for uptime, security, and transparent vote tracking.",
-      "Providing expert consultation for scalability, polling improvements, and blockchain upgrades.",
-    ],
-  },
-];
-
-const steps = [
-  {
-    title: "Requirement Analysis",
-    description:
-      "We start by understanding your polling needs, voter base, and security requirements. Our team designs a roadmap to build high-performance blockchain polling solutions.",
-    icon: "/images/HighPerformance/keyword-research.svg",
-  },
-  {
-    title: "System Architecture Planning",
-    description:
-      "We design scalable and secure architectures for decentralized polls, voting nodes, and distributed ledger systems.",
-    icon: "/images/HighPerformance/lead-focused.svg",
-  },
-  {
-    title: "Consensus & Algorithm Design",
-    description:
-      "We develop consensus protocols, vote validation algorithms, and cryptographic operations to ensure transparent and tamper-proof results.",
-    icon: "/images/HighPerformance/on-page.svg",
-  },
-  {
-    title: "Backend & Node Development",
-    description:
-      "We implement blockchain nodes, APIs, and smart contract support for secure vote submission, counting, and result distribution.",
-    icon: "/images/HighPerformance/quality SEO.svg",
-  },
-  {
-    title: "Data Management & Security",
-    description:
-      "We securely manage voter data, ballots, and results, ensuring integrity, privacy, and transparency across the system.",
-    icon: "/images/HighPerformance/reporting.svg",
-  },
-  {
-    title: "Integration & Deployment",
-    description:
-      "We integrate blockchain polling modules with DApps, websites, and mobile apps for seamless participation and real-time results.",
-    icon: "/images/HighPerformance/technical-SEO.svg",
-  },
-  {
-    title: "Performance & Security Optimization",
-    description:
-      "We optimize nodes, vote processing, and smart contracts for high-performance, low-latency, and secure polling operations.",
-    icon: "/images/HighPerformance/technical-SEO.svg",
-  },
-  {
-    title: "Testing & Quality Assurance",
-    description:
-      "Every blockchain polling component undergoes rigorous testing to ensure accuracy, security, and reliability of results.",
-    icon: "/images/HighPerformance/technical-SEO.svg",
-  },
-  {
-    title: "Deployment & Monitoring",
-    description:
-      "We handle network deployment, node configuration, and real-time monitoring to ensure smooth polling operations and secure results.",
-    icon: "/images/HighPerformance/technical-SEO.svg",
-  },
-  {
-    title: "Maintenance & Long-Term Support",
-    description:
-      "Post-deployment, we provide updates, audits, and feature enhancements to maintain secure, transparent, and efficient blockchain polling systems.",
-    icon: "/images/HighPerformance/technical-SEO.svg",
-  },
-];
-
-const upScale = [
-  {
-    icon: <FaCode />,
-    title: "Custom Blockchain Poll Development",
-    desc: "We develop blockchain polling solutions that are secure, transparent, and scalable — ensuring reliable vote collection, tamper-proof results, and efficient participation.",
-  },
-  {
-    icon: <FaCogs />,
-    title: "High-Performance Polling Nodes",
-    desc: "Harness blockchain technology to build robust nodes for vote validation, ledger management, and decentralized polling.",
-  },
-  {
-    icon: <FaServer />,
-    title: "Integration with DApps & Platforms",
-    desc: "Integrate blockchain polls with websites, mobile apps, and decentralized platforms for real-time voting and analytics.",
-  },
-  {
-    icon: <FaLock />,
-    title: "Data Security & Privacy",
-    desc: "Ensure all ballots, voter data, and results are secure, encrypted, and compliant with privacy regulations.",
-  },
-  {
-    icon: <FaRocket />,
-    title: "Performance Optimization",
-    desc: "Optimize blockchain nodes, smart contracts, and vote processing for fast, efficient, and reliable polling.",
-  },
-  {
-    icon: <FaTools />,
-    title: "Ongoing Support & Optimization",
-    desc: "We provide continuous monitoring, maintenance, and improvements to ensure high availability, security, and reliability of blockchain polling systems.",
-  },
-];
-
-const cards = [
-  {
-    count: "100+",
-    title: "Blockchain Polls Delivered",
-    desc: "We’ve successfully implemented over 100 blockchain-based polling systems — delivering transparent, secure, and tamper-proof voting solutions for elections, surveys, and customer feedback platforms.",
-    image: "/Assets/seerviceSlider/slide1.webp",
-  },
-  {
-    count: "7+",
-    title: "Years of Blockchain Expertise",
-    desc: "With 7+ years of experience, our developers craft robust blockchain polling solutions that optimize transaction integrity, voting accuracy, and scalability.",
-    image: "/Assets/seerviceSlider/slide2.webp",
-  },
-  {
-    count: "150+",
-    title: "Clients Served Globally",
-    desc: "We’ve partnered with 150+ organizations, delivering secure and transparent blockchain voting solutions for enterprises, government bodies, and research institutions.",
-    image: "/Assets/seerviceSlider/slide3.webp",
-  },
-  {
-    count: "99%",
-    title: "Voting Integrity Success Rate",
-    desc: "Our solutions achieve up to 99% reliability and tamper-proof accuracy in blockchain polling and voting systems, ensuring trustworthy results.",
-    image: "/Assets/seerviceSlider/slide4.webp",
-  },
-  {
-    count: "24/7",
-    title: "Support & Monitoring",
-    desc: "We offer continuous monitoring, updates, and optimization to maintain stable, secure, and high-performance blockchain polling platforms at all times.",
-    image: "/Assets/seerviceSlider/slide5.webp",
-  },
-];
-
-const faqData = [
-  {
-    title: "What is Blockchain Polling?",
-    description:
-      "Blockchain Polling involves using blockchain technology to build secure, transparent, and tamper-proof voting or survey systems.",
-  },
-  {
-    title: "Why use blockchain for customer polls?",
-    description:
-      "Blockchain ensures security, transparency, and immutability of poll results, reducing fraud and enhancing trust in voting or survey systems.",
-  },
-  {
-    title: "Can blockchain handle large-scale polls?",
-    description:
-      "Yes, blockchain is highly scalable and capable of managing large numbers of voters and high-volume transactions efficiently.",
-  },
-  {
-    title: "Is blockchain suitable for customer surveys and elections?",
-    description:
-      "Absolutely. Blockchain provides verifiable and tamper-proof systems suitable for online surveys, elections, and enterprise polls.",
-  },
-  {
-    title: "Do you integrate blockchain polls into existing platforms?",
-    description:
-      "Yes, we integrate blockchain polling modules with websites, apps, and enterprise systems for seamless participation and analytics.",
-  },
-  {
-    title: "How secure are blockchain polls?",
-    description:
-      "We implement encryption, smart contracts, and secure coding practices to ensure votes, ballots, and results are safe and tamper-proof.",
-  },
-  {
-    title: "Can you optimize existing blockchain polling systems?",
-    description:
-      "Yes, we enhance performance, security, and scalability of existing blockchain polling applications.",
-  },
-  {
-    title: "Do you provide long-term support for blockchain polls?",
-    description:
-      "Yes, we offer continuous maintenance, monitoring, and updates to keep your polling systems secure and reliable.",
-  },
-  {
-    title: "Which industries benefit from blockchain polling?",
-    description:
-      "Enterprises, government bodies, research organizations, and market research companies leverage blockchain for secure and transparent polls.",
-  },
-  {
-    title: "Can blockchain polls integrate with analytics tools?",
-    description:
-      "Yes, blockchain polling solutions can be connected to reporting and analytics platforms for real-time monitoring and insights.",
-  },
-];
-
-
-
-
-
-  return (
-    <>
-      <CommonBanner
-        img={gm}
-        title="Customer Polls Blockchain Development"
-        desc="Future IT Touch Pvt. Ltd. provides blockchain dedicated teams to help our clients in getting top-notch and secure solutions tailored to their specific needs. We help business owners to translate their ideas into blockchain solutions, assist in polishing and reviewing existing blockchain applications.  Being a blockchain app development company, Future IT Touch Pvt. Ltd. makes sure that each solution delivered ensures significant reduction in attack vulnerability. Our team has deep expertise in strengthening critical network and hardware requirements, as well as fixing data tampering issues by developing robust blockchain solutions."
-      />
-<div className="px-5 md:px-12 xl:px-28 py-10 md:py-14 lg:py-16 bg-gradient-to-r from-indigo-50 via-white to-indigo-50 relative overflow-hidden">
-  <div className="max-w-4xl mx-auto text-center space-y-6 relative">
-    <div className="absolute tryAppAnime bg-blue-400 -top-10 left-1/2 -translate-x-1/2 w-96 h-96 object-cover rounded-full opacity-10 blur-2xl" />
-
-    <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-gray-900">
-      Build High-Performance, Secure & Transparent Voting Systems with{" "}
-      <span className="text-indigo-600">
-        Customer Polls Blockchain
-      </span>{" "}
-      ⚡
-    </h2>
-
-    <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-      Looking to develop secure, transparent, and tamper-proof polling systems using{" "}
-      <span className="font-semibold text-indigo-600">blockchain technology</span>? At{" "}
-      <span className="font-semibold text-indigo-600">Future IT Touch</span>, we
-      specialize in creating high-performance polling solutions that leverage
-      blockchain’s immutability, decentralized architecture, and cryptographic security
-      for trustworthy voting and survey applications.
-    </p>
-
-    <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-      From enterprise surveys and customer feedback polls to online elections and
-      decentralized voting platforms, our developers craft blockchain polling systems
-      optimized for transparency, scalability, and reliability.
-    </p>
-
-    <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-      Whether you need secure customer polls, election platforms, or real-time voting
-      analytics, our team ensures tamper-proof, auditable systems, optimized
-      performance, and seamless integration to empower your business with transparent
-      and reliable decentralized polling solutions.
-    </p>
-
-    <div className="pt-4">
-      <a
-        href="tel:+917056937000"
-        className="px-6 py-3 text-white font-medium bg-indigo-600 rounded-xl shadow-md hover:bg-indigo-700 transition-transform transform hover:scale-105"
-      >
-        Let’s Discuss Your Project
-      </a>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-      {/* High-Performance  */}
-
-      <div className="px-5 md:px-12 xl:px-28 py-8 md:py-10 xl:py-12">
-<div className="text-center space-y-5">
-  <h4 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
-    Future IT Touch’s High-Performance Customer Polls Blockchain Services
-  </h4>
-  <p className="text-gray-600 text-base md:text-lg lg:text-xl leading-relaxed max-w-3xl mx-auto">
-    Empowering organizations with secure, transparent, and scalable blockchain-based polling solutions — delivering tamper-proof, reliable, and efficient systems for customer feedback, surveys, voting platforms, and real-time analytics with full auditability and decentralized integrity.
-  </p>
-</div>
-
-
-
-
-
-      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
-  {technolgyData.map((elm, index) => (
-    <div
-      key={index}
-      className="p-6 bg-white rounded-2xl border border-gray-300"
-    >
-      <div className="flex items-center justify-between border-b border-gray-200 pb-4">
-        <h4 className="text-xl md:text-2xl font-semibold text-gray-900">
-          {elm.title}
-        </h4>
-        <div>{elm.icon}</div>
-      </div>
-
-      <div className="mt-5 space-y-3 grid grid-cols-2 gap-y-3">
-        {elm.list.map((item, i) => (
-          <div key={i} className="flex items-start gap-3">
-            <FaCheck className="text-blue-500 mt-1.5 min-w-[20px]" />
-            <p className="text-gray-700 font-semibold underline text-sm md:text-base">
-              {item}
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
-  ))}
-</div>
-
-        <div className="flex justify-center items-center">
-          <a
-            href="+917056937000"
-            className="mt-10   px-6 py-3 rounded-xl bg-blue-500 text-white font-medium shadow-lg hover:bg-indigo-700 transition"
-          >
-            i want speak with expert
-          </a>
-        </div>
-      </div>
-
-      {/* Approach We Follow */}
-
-      <div className="px-5 md:px-12 xl:px-28 py-10 md:py-14 lg:py-16 flex flex-col lg:flex-row items-start gap-10 lg:gap-14">
-        <div className="relative w-full lg:w-[55%] lg:sticky lg:top-24 self-start">
-          <div className="rounded-2xl overflow-hidden shadow-2xl  ">
-            <img
-              src="/images/appdevelopment/appbg.webp"
-              alt="High Performance"
-              className="w-full h-full absolute inset-0  rounded-2xl object-cover hover:scale-105 transition-transform duration-700"
-            />
-
-  <div className="relative z-10 h-full bg-gradient-to-t rounded-2xl from-black/70 via-black/40 to-transparent flex flex-col justify-start p-8">
-<div className="text-left capitalize leading-tight text-white space-y-4 font-bold">
-  <h6 className="text-6xl lg:text-7xl">
-    <FaPoll />
-  </h6>
-  <h2 className="text-3xl sm:text-4xl lg:text-5xl leading-tight">
-    Customer <br />
-    Blockchain Polls <br />
-    <span className="">
-      Secure, Transparent & Tamper-Proof Voting Solutions
-    </span>
-  </h2>
-  <p className="text-3xl lg:text-5xl leading-tight text-gray-200 max-w-md">
-    Collect reliable customer feedback with{" "}
-    <span className="text-[#00ffe4]">
-      blockchain-powered polls 🔒 – verifiable, secure, and fully transparent
-    </span>
-  </p>
-</div>
-</div>
-
-
-          </div>
-        </div>
-
-        <div className="w-full lg:w-[65%] grid grid-cols-1 gap-6">
-          {steps.map((feature, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-start gap-2 p-6 rounded-2xl border border-gray-200 shadow-md group hover:bg-[#0E395E] hover:shadow-2xl transition-all duration-300"
-            >
-              <h4 className="text-lg md:text-xl font-bold text-gray-900 group-hover:text-white transition-colors">
-                {feature.title}
-              </h4>
-              <p className="text-sm md:text-base font-semibold text-gray-800 group-hover:text-gray-100 leading-relaxed text-justify transition-colors">
-                {feature.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* <CustomSlider/> */}
-      <CommonSlider cards={cards}/>
-
-
-<div className="px-5 md:px-12 xl:px-28 bg-[#0a2548] py-10 md:py-14 lg:py-16 m-6 md:m-10 rounded-2xl">
-  <h4 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center text-white font-extrabold w-full lg:w-[85%] mx-auto leading-snug">
-    Empower Your Business With Secure Customer Polls on Blockchain
-  </h4>
-
-  <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-    {upScale.map((elm, index) => (
-      <div key={index} className="flex flex-col gap-y-4 text-white">
-        <span className="text-4xl text-indigo-400">{elm.icon}</span>
-        <h5 className="text-xl md:text-2xl font-bold">{elm.title}</h5>
-        <p className="text-sm md:text-base text-gray-100 leading-relaxed">
-          {elm.desc}
-        </p>
-      </div>
-    ))}
-  </div>
-</div>
-
-<CommonFaqs faqData={faqData} title="On Customer Polls Blockchain Solutions" />
-
-
-
-
-            <BusinessIdea />
-      
-
-     
-    </>
-  );
-};
+    faq={{
+      title: "Customer Polls Blockchain Services",
+      items: [
+        { title: "What is Blockchain Polling?",                       description: "Blockchain Polling involves using blockchain technology to build secure, transparent, and tamper-proof voting or survey systems with verifiable results." },
+        { title: "Why use blockchain for customer polls?",            description: "Blockchain ensures security, transparency, and immutability of poll results — reducing fraud and enhancing trust in voting or survey systems." },
+        { title: "Can blockchain handle large-scale polls?",          description: "Yes, blockchain is highly scalable and capable of managing large numbers of voters and high-volume transactions efficiently." },
+        { title: "Is blockchain suitable for elections and surveys?", description: "Absolutely. Blockchain provides verifiable and tamper-proof systems suitable for online surveys, elections, and enterprise polls." },
+        { title: "Do you integrate blockchain polls into platforms?", description: "Yes, we integrate blockchain polling modules with websites, apps, and enterprise systems for seamless participation and real-time analytics." },
+        { title: "How secure are blockchain polls?",                  description: "We implement encryption, smart contracts, and secure coding practices to ensure votes, ballots, and results are completely safe and tamper-proof." },
+        { title: "Can you optimize existing polling systems?",        description: "Yes, we enhance performance, security, and scalability of existing blockchain polling applications and voting platforms." },
+        { title: "Do you provide long-term support?",                 description: "Yes, we offer continuous maintenance, monitoring, and updates to keep your polling systems secure, reliable, and compliant." },
+        { title: "Which industries benefit from blockchain polling?", description: "Enterprises, government bodies, research organizations, and market research companies leverage blockchain for secure and transparent polls." },
+        { title: "Can blockchain polls integrate with analytics?",    description: "Yes, blockchain polling solutions connect to reporting and analytics platforms for real-time monitoring, vote tracking, and business insights." },
+      ],
+    }}
+  />
+);
 
 export default Customer;
