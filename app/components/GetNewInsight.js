@@ -57,7 +57,7 @@ export default function GetNewInsight() {
         }
 
         .gni-input {
-          flex:1; background:transparent; border:none; outline:none;
+          flex:auto; background:transparent; border:none; outline:none;
           color:#ffffff; font-family:'Inter',sans-serif; font-size:14.5px;
           padding:0 20px 0 24px;
           height:54px;
@@ -170,7 +170,7 @@ export default function GetNewInsight() {
             className="gni-input"
           />
           <button type="submit" className="gni-submit">
-            Subscribe
+            <span className="sm:inline hidden">Subscribe</span>
             <svg width="13" height="13" viewBox="0 0 12 12" fill="none">
               <path d="M1.5 6h9M6.5 2l4 4-4 4" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>

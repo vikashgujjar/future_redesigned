@@ -8,6 +8,7 @@ import {
   FaReact, FaWordpress, FaPhp, FaCode,
   FaAward, FaUsers, FaGlobe, FaThumbsUp,
   FaHeadset, FaLightbulb, FaShieldAlt, FaClock,
+  FaBug, FaLock, FaCloud, FaFileAlt, FaExclamationTriangle, FaNetworkWired,
 } from "react-icons/fa";
 import { SiAngular, SiShopify } from "react-icons/si";
 import Testimonial from "../components/Testimonial";
@@ -22,7 +23,8 @@ const CATEGORIES = [
   { key: "ecom",   label: "eCommerce" },
   { key: "tech",   label: "Trending Tech" },
   { key: "dm",     label: "Digital Marketing" },
-  { key: "design", label: "Design & Branding" },
+  { key: "design",   label: "Design & Branding" },
+  { key: "security", label: "Cyber Security" },
 ];
 
 const SERVICES = [
@@ -43,7 +45,13 @@ const SERVICES = [
   { cat:"dm",     icon:<FaGlobe />,        title:"Social Media Marketing",        desc:"Build brand authority and engaged communities across Instagram, Facebook, LinkedIn and X with consistent, creative content.",            tags:["SMM","Content","Influencer"],     from:"#8b5cf6",to:"#2dd4bf", href:"/social-media-marketing-service" },
   { cat:"design", icon:<FaPaintBrush />,   title:"Logo Design",                   desc:"Iconic brand identities crafted by senior designers that tell your story at a glance and stand the test of time.",                      tags:["Branding","Identity","Vectorial"], from:"#2dd4bf",to:"#6366f1", href:"/logo-design-services" },
   { cat:"design", icon:<FaCode />,         title:"Brochure & Print Design",       desc:"Eye-catching brochures, leaflets, and collateral that converts prospects into loyal clients across print and digital.",                  tags:["Print","Digital","Infographics"],  from:"#6366f1",to:"#a855f7", href:"/brochure-design-service" },
-  { cat:"design", icon:<FaPlay />,         title:"2D / 3D Animation",             desc:"Cinematic brand videos, explainer animations, and motion graphics that captivate viewers and convert at every touchpoint.",             tags:["2D","3D","Motion Graphics"],       from:"#0ea5e9",to:"#8b5cf6", href:"/animated-services" },
+  { cat:"design",   icon:<FaPlay />,                  title:"2D / 3D Animation",              desc:"Cinematic brand videos, explainer animations, and motion graphics that captivate viewers and convert at every touchpoint.",                                      tags:["2D","3D","Motion Graphics"],          from:"#0ea5e9",to:"#8b5cf6", href:"/animated-services" },
+  { cat:"security", icon:<FaBug />,                   title:"Vulnerability Assessment",        desc:"Comprehensive scanning and manual review of web apps, networks, APIs, and cloud environments — risk-ranked findings with step-by-step remediation guidance.",        tags:["VAPT","OWASP","CVSS"],               from:"#2dd4bf",to:"#06b6d4", href:"/vulnerability-assessment-service" },
+  { cat:"security", icon:<FaShieldAlt />,             title:"Penetration Testing",             desc:"OSCP-certified ethical hacking across web, mobile, API, network, and cloud targets — full attack chain documentation and post-fix verification.",                    tags:["Black-box","Grey-box","OSCP"],        from:"#6366f1",to:"#8b5cf6", href:"/penetration-testing-service" },
+  { cat:"security", icon:<FaNetworkWired />,          title:"Network Security",                desc:"Firewall hardening, IDS/IPS deployment, zero-trust architecture, network segmentation, and 24/7 traffic monitoring for Indian SMEs.",                               tags:["Firewall","IDS/IPS","Zero-Trust"],    from:"#0ea5e9",to:"#2dd4bf", href:"/network-security-service" },
+  { cat:"security", icon:<FaCloud />,                 title:"Cloud Security",                  desc:"Continuous cloud security posture management across AWS, Azure, and GCP — IAM reviews, container security, and Indian data residency compliance.",                    tags:["CSPM","IAM","AWS/Azure/GCP"],         from:"#a855f7",to:"#6366f1", href:"/cloud-security-service" },
+  { cat:"security", icon:<FaFileAlt />,               title:"Data Protection & Compliance",    desc:"DPDPA 2023, CERT-In controls, ISO 27001, and PCI-DSS compliance programmes delivered as a managed service — gap assessment to audit readiness.",                    tags:["DPDPA 2023","CERT-In","ISO 27001"],   from:"#10b981",to:"#2dd4bf", href:"/data-protection-compliance-service" },
+  { cat:"security", icon:<FaExclamationTriangle />,   title:"Incident Response",               desc:"24/7 incident response, digital forensics, ransomware recovery, and post-incident hardening — with 15-minute activation and DPDPA breach notification support.",     tags:["IR","Forensics","Ransomware"],        from:"#ef4444",to:"#f59e0b", href:"/incident-response-service" },
 ];
 
 const STATS = [
@@ -161,6 +169,7 @@ export default function Services() {
               { label:"Digital Marketing",   color:"#0ea5e9", icon:<FaBullhorn />,   delay:.6 },
               { label:"Design & Branding",   color:"#a855f7", icon:<FaPaintBrush />, delay:.9 },
               { label:"eCommerce Solutions", color:"#f59e0b", icon:<FaShoppingCart />,delay:1.2 },
+              { label:"Cyber Security",      color:"#a855f7", icon:<FaShieldAlt />,   delay:1.5 },
             ].map((p,i) => (
               <div key={i} className="flex items-center gap-3 rounded-2xl px-5 py-3.5 hover:-translate-y-1 transition-transform duration-300"
                 style={{

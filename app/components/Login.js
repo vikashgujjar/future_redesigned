@@ -1,19 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import email from "../Assets/email.webp";
-import name from "../Assets/name.webp";
-import phone from "../Assets/phone_1.webp";
-import skype from "../Assets/skype.webp";
-import site from "../Assets/website.webp";
-import building from "../Assets/company_1.webp";
-import country from "../Assets/map.webp";
-import state from "../Assets/state.webp";
-import calender from "../Assets/datetime.webp";
-import range from "../Assets/budget.webp";
-import project from "../Assets/project.webp";
-import { FileUploader } from "react-drag-drop-files";
 import Link from "next/link";
 import { auth } from "../firebase.config";
+import {
+  FaUser, FaEnvelope, FaPhone, FaCommentDots,
+  FaCalendarAlt, FaCode, FaDollarSign, FaFileAlt,
+  FaCloudUploadAlt, FaTimes, FaArrowRight, FaCheckCircle,
+} from "react-icons/fa";
 
 
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
@@ -24,7 +17,8 @@ const OtpInput = dynamic(() => import("otp-input-react"), { ssr: false });
 
 import Swal from "sweetalert2";
 import axios from "axios";
-const fileTypes = ["JPG", "PNG", "GIF", "Pdf"];
+const toFlag = (code = "") =>
+  [...code.toUpperCase()].map(c => String.fromCodePoint(c.charCodeAt(0) + 127397)).join("");
 
 // https://email.futuretouch.in/ 
 
@@ -271,268 +265,216 @@ function onCaptchVerify() {
     });
   };
 
+  const inputCls = "w-full h-11 pl-10 pr-4 text-[#050748] text-sm bg-white border border-gray-200 rounded-xl outline-none transition-all duration-200 placeholder:text-gray-400 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100";
+  const selectCls = "w-full h-11 pl-10 pr-4 text-sm bg-white border border-gray-200 rounded-xl outline-none transition-all duration-200 text-gray-500 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 appearance-none";
+
   return (
     <>
-      <div className="fixed inset-0 flex items-center justify-center bg-gray-700/50 z-50">
-        <div className="bg-white rounded-lg p-4 w-[90%] max-w-2xl relative">
-          <button
-            onClick={handleClosePopup}
-            className="!absolute   custom-close-button  z-[999] lg:top-[1%] right-2 text-gray-600 "
-          >
-            &times;
-          </button>
+      {/* ── Backdrop ── */}
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm px-4">
 
-          <h3
-            className="uppercase mt-0 my-5 font-sans text-2xl font-bold text-center text-[#050748]"
-            style={{ fontFamily: "system-ui" }}
-          >
-            Get Free Quote
-          </h3>
+        {/* ── Modal card ── */}
+        <div className="relative w-full max-w-2xl max-h-[92vh] flex flex-col rounded-3xl overflow-hidden shadow-[0_32px_80px_rgba(5,7,72,.28)] border border-white/10">
 
-          <div id="recaptcha-container"></div>
+          {/* ── Header band ── */}
+          <div className="relative flex-shrink-0 bg-[linear-gradient(135deg,#050b20,#0a0f2e)] px-7 py-5 flex items-center justify-between overflow-hidden">
+            <div className="absolute inset-0 [background-image:radial-gradient(rgba(255,255,255,.035)_1px,transparent_1px)] [background-size:22px_22px]" />
+            <div className="absolute -top-10 -left-10 w-40 h-40 rounded-full pointer-events-none bg-[radial-gradient(circle,rgba(45,212,191,.18),transparent_65%)]" />
+            <div className="absolute -bottom-10 -right-10 w-36 h-36 rounded-full pointer-events-none bg-[radial-gradient(circle,rgba(99,102,241,.18),transparent_65%)]" />
 
-          <input type="hidden" name="action" value="request_form" />
-          <div className="flex flex-wrap -mx-3 mb-6">
-            <div className="w-full md:w-1/2  px-3 mb-6 md:mb-0">
-              <input
-                type="text"
-                name="S_name"
-                placeholder="Full Name"
-                required
-                style={{ backgroundImage: `url(/Assets/name.webp)` }}
-                className={`w-full h-12 px-12  text-black border-2 rounded-md border-[#e6e6e6]  full-name`}
-                value={formData.S_name}
-                onChange={handleChange}
-              />
+            <div className="relative z-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#2dd4bf]/30 bg-[#2dd4bf]/10 mb-2 text-[9px] font-bold tracking-[.22em] uppercase text-[#2dd4bf] font-[Poppins,sans-serif]">
+                <span className="w-1.5 h-1.5 rounded-full animate-ping bg-[#2dd4bf]" />
+                Free Consultation
+              </div>
+              <h3 className="font-[Poppins,sans-serif] font-extrabold text-xl text-white leading-tight">
+                Get a{" "}
+                <span className="bg-[linear-gradient(125deg,#2dd4bf,#6366f1,#a855f7)] bg-[length:200%_200%] bg-clip-text text-transparent [animation:tcpGrad_5s_ease-in-out_infinite]">
+                  Free Quote
+                </span>
+              </h3>
             </div>
 
-            <div className="w-full md:w-1/2 px-3">
-              <input
-                type="text"
-                name="S_email"
-                placeholder="Email"
-                required
-                                style={{ backgroundImage: `url(/Assets/email.webp)` }}
-
-                className={`w-full h-12 px-12  text-black  border-2 rounded-md -full border-[#e6e6e6]  full-name`}
-                value={formData.S_email}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="flex flex-wrap max-sm:gap-6 -mx-3 mb-6">
-            <div className="w-full md:w-1/2 px-3 relative ">
-              <select
-                onChange={handleChange}
-                name="cr_code"
-                value={formData.cr_code}
-                className="absolute h-full w-20 text-sm border-l border-y-2 rounded-md shadow-custom-second"
-              >
-                {countryCodes.map((country, index) => (
-                  <option key={index} value={country.dialCode}>
-                    {country.shortName} ({country.dialCode})
-                  </option>
-                ))}
-              </select>
-              <input
-                type="text"
-                name="S_phone"
-                placeholder="Phone Number *"
-                value={formData.S_phone}
-                onChange={handleChange}
-                className={`w-full h-12 pl-[85px]   border-2 rounded-md  text-black -full border-[#e6e6e6]  full-name`}
-              />
-            </div>
-            <div className="w-full md:w-1/2 px-3 hidden lg:block">
-              <input
-                type="text"
-                placeholder="Skype ID"
-                     style={{ backgroundImage: `url(/Assets/skype.webp)` }}
-
-                className={`w-full h-12 px-12 border-2 rounded-md  text-black -full border-[#e6e6e6] bg-[url(${skype})] full-name `}
-                name="skype_id"
-                required
-                value={formData.skype_id}
-                onChange={handleChange}
-              />
-            </div>
+            <button
+              onClick={handleClosePopup}
+              className="relative z-10 w-9 h-9 flex items-center justify-center rounded-xl bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-all duration-200 border border-white/10"
+            >
+              <FaTimes className="text-sm" />
+            </button>
           </div>
 
-          <div className="flex max-md:block  -mx-3 mb-0 max-md:mb-6">
-            <div className="w-full md:w-1/2 px-3 mb-6 max-md:mb-6">
-              <select
-                name="start_time"
-                className={`w-full h-12 px-12 border-2 rounded-md text-black -full border-[#e6e6e6]  full-name`}
-                value={formData.start_time}
-                style={{ backgroundImage: `url(/Assets/datetime.webp)` }}
+          {/* ── Scrollable form body ── */}
+          <div className="bg-white overflow-y-auto flex-1 px-6 py-5">
+            <div id="recaptcha-container" />
+            <input type="hidden" name="action" value="request_form" />
 
-                onChange={handleChange}
-              >
-                <option value="">When would you like us to start?</option>
-                <option value="ASAP">ASAP</option>
-                <option value="In a week">In a week</option>
-                <option value="In a month">In a month</option>
-              </select>
-            </div>
-            <div className="w-full md:w-1/2 px-3 mb-6 max-md:mb-0">
-              <select
-                name="service_type"
-                className={`w-full h-12 px-12 border-2 rounded-md  text-black -full border-[#e6e6e6]  full-name`}
-                value={formData.service_type}
-               style={{ backgroundImage: `url(/Assets/website.webp)` }}
-
-                onChange={handleChange}
-              >
-                <option value="">Choose Our Services</option>
-                <option value="Web Designing">Web Designing</option>
-                <option value="Web Development">Web Development</option>
-                <option value="Digital Marketing">Digital Marketing</option>
-                <option value="Mobile App Development">
-                  Mobile App Development
-                </option>
-              </select>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap max-sm:gap-6  -mx-3 mb-6">
-            <div className="w-full md:w-[39%] px-3">
-              <input
-                type="text"
-                name="budget_range"
-                placeholder="Enter your budget range"
-                                     style={{ backgroundImage: `url(/Assets/budget.webp)` }}
-
-                className={`w-full h-12 border-2 rounded-md px-12  text-black -full border-[#e6e6e6] bg-[url(${range})] full-name`}
-                value={formData.budget_range}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="w-full md:w-[60%] px-3 hidden lg:block">
-              <div className="dropify-wrapper">
-                <FileUploader name="file" types={fileTypes} className="h-10" />
+            {/* Row 1 — Name + Email */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+              <div className="relative">
+                <FaUser className="absolute left-3.5 top-1/2 -translate-y-1/2 text-indigo-300 text-sm pointer-events-none" />
+                <input type="text" name="S_name" placeholder="Full Name *" required
+                  value={formData.S_name} onChange={handleChange} className={inputCls} />
+              </div>
+              <div className="relative">
+                <FaEnvelope className="absolute left-3.5 top-1/2 -translate-y-1/2 text-indigo-300 text-sm pointer-events-none" />
+                <input type="text" name="S_email" placeholder="Email Address *" required
+                  value={formData.S_email} onChange={handleChange} className={inputCls} />
               </div>
             </div>
-          </div>
 
-          <div className="w-full md:w-full    max-md:mb-0 hidden lg:block">
-            <textarea
-              name="message"
-              placeholder="Project Description"
-              className={`w-full h-[143px] max-sm:h-[90px] border-2 rounded-md px-12 py-2 text-black  border-[#e6e6e6] bg-[url(${project})] full-name`}
-            style={{ backgroundImage: `url(/Assets/project.webp)` }}
-
-              value={formData.message}
-              onChange={handleChange}
-            />
-          </div>
-
-          {/* terms and conditon  */}
-
-          <div className="flex   items-center flex-col">
-            <div className="flex w-full items-start mt-4">
-              <input
-                type="checkbox"
-                name="term_condition"
-                className="dotted-border-checkbox"
-                checked={formData.term_condition}
-                onChange={handleChange}
-              />
-
-              <p className="ml-2  text-gray-700 text-justify">
-                I accept{" "}
-                <Link
-                  href="/Terms-Conditions"
-                  target="blank"
-                  className="font-semibold"
+            {/* Row 2 — Phone + Skype */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+              <div className="relative flex">
+                <select
+                  onChange={handleChange} name="cr_code" value={formData.cr_code}
+                  className="h-11 w-[96px] flex-shrink-0 text-xs bg-gray-50 border border-gray-200 border-r-0 rounded-l-xl outline-none text-gray-600 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 px-2"
                 >
-                  {" "}
-                  terms & conditon
-                </Link>
-              </p>
+                  {countryCodes.length === 0
+                    ? <option value="+91">🇮🇳 +91</option>
+                    : countryCodes.map((c, i) => (
+                        <option key={i} value={c.dialCode}>
+                          {toFlag(c.shortName)} {c.dialCode}
+                        </option>
+                      ))
+                  }
+                </select>
+                <div className="relative flex-1">
+                  <FaPhone className="absolute left-3 top-1/2 -translate-y-1/2 text-indigo-300 text-sm pointer-events-none" />
+                  <input type="text" name="S_phone" placeholder="Phone Number *"
+                    value={formData.S_phone} onChange={handleChange}
+                    className="w-full h-11 pl-9 pr-3 text-sm text-[#050748] bg-white border border-gray-200 rounded-r-xl outline-none placeholder:text-gray-400 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100" />
+                </div>
+              </div>
+              <div className="relative">
+                <FaCommentDots className="absolute left-3.5 top-1/2 -translate-y-1/2 text-indigo-300 text-sm pointer-events-none" />
+                <input type="text" name="skype_id" placeholder="Skype ID"
+                  value={formData.skype_id} onChange={handleChange} className={inputCls} />
+              </div>
             </div>
-            <div className="flex justify-center w-1/2 mt-4 ">
-              <button
-                type="submit"
-                onClick={onSignup}
-                className="lnk px-8 py-0 w-full font-semibold  text-white text-2xl leading-[56px] bg-gradient-to-r from-[#ffbd84] to-[#ff1f8e] -full rounded-full shadow-[0_10px_15px_0_rgba(233,30,99,0.15)] outline-none border-none inline-block relative"
-              >
-                Submit <span className="circle dkpr"></span>
+
+            {/* Row 3 — Start time + Service */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+              <div className="relative">
+                <FaCalendarAlt className="absolute left-3.5 top-1/2 -translate-y-1/2 text-indigo-300 text-sm pointer-events-none z-10" />
+                <select name="start_time" value={formData.start_time} onChange={handleChange} className={selectCls}>
+                  <option value="">When to start?</option>
+                  <option value="ASAP">ASAP</option>
+                  <option value="In a week">In a week</option>
+                  <option value="In a month">In a month</option>
+                </select>
+              </div>
+              <div className="relative">
+                <FaCode className="absolute left-3.5 top-1/2 -translate-y-1/2 text-indigo-300 text-sm pointer-events-none z-10" />
+                <select name="service_type" value={formData.service_type} onChange={handleChange} className={selectCls}>
+                  <option value="">Choose a Service</option>
+                  <option value="Web Designing">Web Designing</option>
+                  <option value="Web Development">Web Development</option>
+                  <option value="Digital Marketing">Digital Marketing</option>
+                  <option value="Mobile App Development">Mobile App Development</option>
+                  <option value="Software development">Software development</option>
+                  <option value="saas model development">SAAS model development</option>
+                  <option value="Cyber Security Service">Cyber Security Service</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Row 4 — Budget + File Upload */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+              <div className="relative">
+                <FaDollarSign className="absolute left-3.5 top-1/2 -translate-y-1/2 text-indigo-300 text-sm pointer-events-none" />
+                <input type="text" name="budget_range" placeholder="Budget Range"
+                  value={formData.budget_range} onChange={handleChange} className={inputCls} />
+              </div>
+              <label className="relative flex items-center justify-center h-11 rounded-xl border-2 border-dashed border-indigo-300 bg-indigo-50/60 cursor-pointer hover:bg-indigo-100/60 transition-colors gap-2 group">
+                <FaCloudUploadAlt className="text-base text-indigo-400 group-hover:text-indigo-500 flex-shrink-0" />
+                <span className="text-xs font-semibold text-indigo-400 group-hover:text-indigo-500">Attach a File</span>
+                <span className="text-[10px] text-gray-400 hidden sm:inline">(JPG, PNG, PDF)</span>
+                <input type="file" name="file" accept=".jpg,.jpeg,.png,.gif,.pdf"
+                  className="absolute inset-0 opacity-0 cursor-pointer w-full h-full" />
+              </label>
+            </div>
+
+            {/* Row 5 — Project Description */}
+            <div className="relative mb-4">
+              <FaFileAlt className="absolute left-3.5 top-3.5 text-indigo-300 text-sm pointer-events-none" />
+              <textarea name="message" placeholder="Project Description"
+                value={formData.message} onChange={handleChange} rows={3}
+                className="w-full pl-10 pr-4 pt-2.5 pb-2.5 text-sm text-[#050748] bg-white border border-gray-200 rounded-xl outline-none placeholder:text-gray-400 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 resize-none transition-all duration-200" />
+            </div>
+
+            {/* Row 6 — Terms + Submit */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <label className="flex items-start gap-2.5 cursor-pointer select-none">
+                <input type="checkbox" name="term_condition"
+                  checked={formData.term_condition} onChange={handleChange}
+                  className="mt-0.5 w-4 h-4 accent-indigo-500 rounded cursor-pointer flex-shrink-0" />
+                <span className="text-sm text-gray-500 leading-snug">
+                  I accept the{" "}
+                  <Link href="/Terms-Conditions" target="_blank"
+                    className="font-semibold text-indigo-500 hover:text-indigo-700 underline underline-offset-2">
+                    Terms &amp; Conditions
+                  </Link>
+                </span>
+              </label>
+
+              <button type="submit" onClick={onSignup}
+                className="inline-flex items-center gap-2 px-8 py-2.5 rounded-full text-white font-[Poppins,sans-serif] text-sm font-bold tracking-[.06em] uppercase whitespace-nowrap hover:shadow-[0_8px_28px_rgba(45,212,191,.45)] hover:-translate-y-0.5 transition-all duration-200 bg-[linear-gradient(135deg,#2dd4bf,#6366f1)]">
+                Get Free Quote <FaArrowRight className="text-[10px]" />
               </button>
             </div>
           </div>
-
-          {showOTP2 && (
-            <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
-              <div className="bg-slate-100 flex flex-col justify-center items-center p-8 rounded-lg shadow-lg max-w-md w-full relative">
-                <button
-                  className="absolute top-2 right-2 text-gray-600 hover:text-gray-800 transition duration-200"
-                  onClick={() => setShowOTP2(false)}
-                >
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </button>
-
-                <h2 className="text-2xl mb-4 text-center text-gray-800 font-semibold">
-                  Phone Number Verification
-                </h2>
-                <p className="text-center text-gray-600 mb-6">
-                  Enter the OTP sent to your phone
-                </p>
-
-                <OtpInput
-                  value={otp}
-                  onChange={(otp) => {
-                    setOTP(otp);
-                  }}
-                  OTPLength={6}
-                  otpType="number"
-                  disabled={false}
-                  autoFocus
-                  className="opt-container"
-                />
-
-                <p className="text-center text-gray-600 mt-4">
-                  Please wait for 2-3 minutes for the OTP to be sent to your
-                  number.
-                </p>
-
-                <div className="flex w-full justify-around mt-10">
-                  <button
-                    className="px-4 py-2 border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded transition duration-200"
-                    onClick={handleResendOTP}
-                  >
-                    Resend OTP
-                  </button>
-                  <button
-                    disabled={loading}
-                    className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-200"
-                    onClick={onOTPVerify}
-                  >
-                    {loading ? (
-                      <div className="flex items-center justify-center">
-                        <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-gray-200"></div>
-                      </div>
-                    ) : (
-                      <span>Submit</span>
-                    )}
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </div>
+
+      {/* ── OTP Verification Modal ── */}
+      {showOTP2 && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
+          <div className="relative w-full max-w-sm rounded-3xl overflow-hidden shadow-[0_32px_80px_rgba(5,7,72,.35)] border border-white/10">
+
+            {/* OTP Header */}
+            <div className="relative bg-[linear-gradient(135deg,#050b20,#0a0f2e)] px-6 py-5 overflow-hidden">
+              <div className="absolute inset-0 [background-image:radial-gradient(rgba(255,255,255,.035)_1px,transparent_1px)] [background-size:22px_22px]" />
+              <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full pointer-events-none bg-[radial-gradient(circle,rgba(99,102,241,.20),transparent_65%)]" />
+              <button onClick={() => setShowOTP2(false)}
+                className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-xl bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-all duration-200">
+                <FaTimes className="text-xs" />
+              </button>
+              <div className="relative z-10 flex flex-col items-center text-center">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-3 bg-[linear-gradient(135deg,#2dd4bf,#6366f1)]">
+                  <FaPhone className="text-white text-lg" />
+                </div>
+                <h2 className="font-[Poppins,sans-serif] font-extrabold text-white text-lg">Verify Your Number</h2>
+                <p className="text-white/50 text-xs mt-1">Enter the 6-digit OTP sent to your phone</p>
+              </div>
+            </div>
+
+            {/* OTP Body */}
+            <div className="bg-white px-6 py-6 flex flex-col items-center">
+              <OtpInput value={otp} onChange={(v) => setOTP(v)}
+                OTPLength={6} otpType="number" disabled={false} autoFocus
+                className="opt-container" />
+
+              <p className="text-center text-gray-400 text-xs mt-4 mb-6 max-w-xs">
+                Please wait 2–3 minutes for the OTP to arrive. Check your SMS inbox.
+              </p>
+
+              <div className="flex w-full gap-3">
+                <button onClick={handleResendOTP}
+                  className="flex-1 h-11 rounded-xl border-2 border-indigo-400 text-indigo-500 text-sm font-bold font-[Poppins,sans-serif] hover:bg-indigo-50 transition-colors duration-200">
+                  Resend OTP
+                </button>
+                <button disabled={loading} onClick={onOTPVerify}
+                  className="flex-1 h-11 rounded-xl text-white text-sm font-bold font-[Poppins,sans-serif] bg-[linear-gradient(135deg,#2dd4bf,#6366f1)] hover:shadow-[0_6px_20px_rgba(45,212,191,.4)] hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+                  {loading
+                    ? <div className="w-5 h-5 rounded-full border-2 border-white/30 border-t-white animate-spin" />
+                    : <><FaCheckCircle className="text-base" /> Verify</>
+                  }
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

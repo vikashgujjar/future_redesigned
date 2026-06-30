@@ -223,7 +223,7 @@ const WhyChoose = () => {
           </div>
 
           {/* badge */}
-          <div className="absolute -bottom-4 left-5 flex items-center gap-2 px-4 py-2.5 rounded-xl shadow-xl"
+          <div className="absolute bottom-4 sm:-bottom-4 left-5 flex items-center gap-2 px-4 py-2.5 rounded-xl shadow-xl"
             style={{ background:"linear-gradient(135deg,#2dd4bf,#6366f1)", zIndex:2 }}>
             <FaCheckCircle className="text-white text-sm"/>
             <span className="text-white text-xs font-bold tracking-wide"

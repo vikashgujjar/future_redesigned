@@ -43,6 +43,8 @@ export default function DigitalMarketingService() {
           transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
         }
         .dms-svc:hover { transform: translateY(-4px); }
+        .dms-hero-card { min-height: 590px; }
+        @media (min-width: 1024px) { .dms-hero-card { min-height: 500px; } }
       `}</style>
 
       {/* bg dot grid */}
@@ -61,9 +63,8 @@ export default function DigitalMarketingService() {
 
         {/* ── HERO CARD ── 3 / 5 cols ──────────── */}
         <div
-          className="lg:col-span-3 relative rounded-3xl overflow-hidden flex flex-col p-8 sm:p-10 lg:p-12"
+          className="dms-hero-card lg:col-span-3 relative rounded-3xl overflow-hidden flex flex-col p-8 sm:p-10 lg:p-12"
           style={{
-            minHeight: 500,
             background: "linear-gradient(145deg,#0d9488 0%,#1e3a8a 50%,#4f46e5 100%)",
           }}
         >
@@ -115,7 +116,7 @@ export default function DigitalMarketingService() {
             aria-hidden="true"
           >
             <Image
-              src="/Assets/connect_img.webp"
+              src="/Assets/connect_img.png"
               width={460}
               height={380}
               alt="Digital Marketing Illustration"

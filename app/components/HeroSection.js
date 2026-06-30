@@ -428,6 +428,9 @@ const SERVICES = [
   "UI/UX Design",
   "E-Commerce Solutions",
   "SEO & Content Strategy",
+  "Software Development",
+  "SAAS Model Development",
+  "Cyber Security Service"
 ];
 
 const MARQUEE_ITEMS = [

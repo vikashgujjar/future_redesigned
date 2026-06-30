@@ -56,6 +56,19 @@ const serviceColumns = [
       { label: "Creative Agency", href: "/creative-services" },
     ],
   },
+  {
+    heading: "Cyber Security",
+    icon: "/Assets/Security.webp",
+    href: "/cyber-security-service",
+    items: [
+      { label: "Vulnerability Assessment", href: "/vulnerability-assessment-service" },
+      { label: "Penetration Testing", href: "/penetration-testing-service" },
+      { label: "Network Security", href: "/network-security-service" },
+      { label: "Cloud Security", href: "/cloud-security-service" },
+      { label: "Data Protection & Compliance", href: "/data-protection-compliance-service" },
+      { label: "Incident Response", href: "/incident-response-service" },
+    ],
+  },
 ];
 
 const techColumns = [
@@ -436,20 +449,20 @@ export default function Header() {
                   <div className="fixed left-0 right-0 top-[95px] bg-white shadow-2xl border-t-2 border-teal-400 z-50">
                     <div className="max-w-[1400px] mx-auto px-8 xl:px-20 py-7">
                       <div className="flex gap-8 items-start">
-                        {/* 4 link columns */}
-                        <div className="flex-1 grid grid-cols-4 gap-8">
+                        {/* 5 link columns */}
+                        <div className="flex-1 grid grid-cols-5 gap-6">
                           {serviceColumns.map((col) => (
                             <MegaColumn key={col.heading} col={col} />
                           ))}
                         </div>
                         {/* Promo panel */}
-                        <PromoPanel
+                        {/* <PromoPanel
                           tag="Our Services"
                           title="End-to-End Digital Solutions for Every Business"
                           desc="From web to mobile apps, we build products that scale."
                           href="/service"
                           linkLabel="View All Services"
-                        />
+                        /> */}
                       </div>
                     </div>
                   </div>

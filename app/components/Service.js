@@ -76,6 +76,21 @@ const servicesData = [
       { label: "SMM", href: "/social-media-marketing-service" },
     ],
   },
+  {
+    icon: "/Assets/Security.webp",
+    title: "Cyber Security",
+    number: "06",
+    headinglink: "/cyber-security-service",
+    description:
+      "Protect your business with enterprise-grade cyber security — DPDPA 2023 compliance, 24/7 SOC monitoring, penetration testing, cloud security, and incident response. Built for Indian SMEs at 40% lower cost than metro providers.",
+    tags: [
+      { label: "VAPT",        href: "/vulnerability-assessment-service" },
+      { label: "Pen Testing", href: "/penetration-testing-service" },
+      { label: "Network Sec", href: "/network-security-service" },
+      { label: "Cloud Sec",   href: "/cloud-security-service" },
+      { label: "DPDPA 2023",  href: "/data-protection-compliance-service" },
+    ],
+  },
 ];
 
 const palette = [
@@ -84,6 +99,7 @@ const palette = [
   { from: "#0ea5e9", to: "#2dd4bf" },
   { from: "#8b5cf6", to: "#6366f1" },
   { from: "#2dd4bf", to: "#6366f1" },
+  { from: "#a855f7", to: "#6366f1" },
 ];
 
 /* ─── main ─────────────────────────────────────────────── */

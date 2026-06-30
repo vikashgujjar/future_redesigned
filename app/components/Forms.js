@@ -19,6 +19,9 @@ const SERVICES = [
   "UI/UX Design",
   "E-Commerce Solutions",
   "SEO & Content Strategy",
+  "Software Development",
+  "SAAS Model Development",
+  "Cyber Security Service"
 ];
 
 const Forms = () => {
@@ -45,7 +48,7 @@ const Forms = () => {
         const match = COUNTRY_CODES.find(c => c.shortName === d.country_code);
         if (match) setFormData(prev => ({ ...prev, cr_code: match.dialCode }));
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   const buildPayload = () => {
@@ -60,13 +63,13 @@ const Forms = () => {
   };
 
   const resetForm = () =>
-    setFormData(prev => ({ first:"", last:"", email:"", phone:"", service:"", cr_code: prev.cr_code, file: null }));
+    setFormData(prev => ({ first: "", last: "", email: "", phone: "", service: "", cr_code: prev.cr_code, file: null }));
 
   function onCaptchVerify() {
     if (typeof window !== "undefined" && !window.recaptchaVerifier) {
       window.recaptchaVerifier = new RecaptchaVerifier(
         "recaptcha-container",
-        { size: "invisible", callback: () => onSignup(), "expired-callback": () => {} },
+        { size: "invisible", callback: () => onSignup(), "expired-callback": () => { } },
         auth
       );
     }
@@ -366,7 +369,7 @@ const Forms = () => {
             <div className="flex flex-col gap-2.5">
               {/* First + Last Name */}
               <div className="grid grid-cols-2 gap-2.5">
-                {[{ k:"first", ph:"First Name" }, { k:"last", ph:"Last Name" }].map(f => (
+                {[{ k: "first", ph: "First Name" }, { k: "last", ph: "Last Name" }].map(f => (
                   <div key={f.k}>
                     <label className="frm-label">{f.ph}</label>
                     <input className="frm-input" placeholder={f.ph}
@@ -416,7 +419,7 @@ const Forms = () => {
                   </select>
                   <svg className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
                     width="10" height="10" viewBox="0 0 10 10" fill="none">
-                    <path d="M2 3.5l3 3 3-3" stroke="rgba(255,255,255,.3)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M2 3.5l3 3 3-3" stroke="rgba(255,255,255,.3)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
               </div>
@@ -440,10 +443,10 @@ const Forms = () => {
                     <>
                       <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
                         stroke="#2dd4bf" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-                        <polyline points="14 2 14 8 20 8"/>
-                        <polyline points="9 15 12 18 15 15"/>
-                        <line x1="12" y1="12" x2="12" y2="18"/>
+                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                        <polyline points="9 15 12 18 15 15" />
+                        <line x1="12" y1="12" x2="12" y2="18" />
                       </svg>
                       <span style={{ fontSize: 12, color: "#2dd4bf", fontWeight: 600 }}>
                         {formData.file.name}
@@ -456,9 +459,9 @@ const Forms = () => {
                     <>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="rgba(255,255,255,.35)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="16 16 12 12 8 16"/>
-                        <line x1="12" y1="12" x2="12" y2="21"/>
-                        <path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/>
+                        <polyline points="16 16 12 12 8 16" />
+                        <line x1="12" y1="12" x2="12" y2="21" />
+                        <path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3" />
                       </svg>
                       <span style={{ fontSize: 12, color: "rgba(255,255,255,.45)", fontWeight: 500 }}>
                         Drag & drop or{" "}
