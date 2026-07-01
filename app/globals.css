@@ -1112,3 +1112,17 @@ input.border-custom-second {
   from { transform: scaleX(0); }
   to   { transform: scaleX(1); }
 }
+
+/* ── Keep dark-themed phone inputs readable when the browser autofills them ──
+   Chrome/Edge force a light background on autofilled inputs, which washes
+   out the light-on-dark flag/dial-code badge overlaid on top. */
+.phone-autofill-fix:-webkit-autofill,
+.phone-autofill-fix:-webkit-autofill:hover,
+.phone-autofill-fix:-webkit-autofill:focus,
+.phone-autofill-fix:-webkit-autofill:active {
+  -webkit-text-fill-color: #ffffff;
+  -webkit-box-shadow: 0 0 0 1000px #10152b inset;
+  box-shadow: 0 0 0 1000px #10152b inset;
+  caret-color: #ffffff;
+  transition: background-color 9999s ease-in-out 0s;
+}

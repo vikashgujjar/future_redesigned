@@ -4,7 +4,7 @@ import { FaLinkedinIn, FaTwitter, FaInstagram, FaEnvelope } from "react-icons/fa
 import GetNewInsight from "../components/GetNewInsight";
 import Link from "next/link";
 
-const DEPARTMENTS = ["All", "Leadership", "Business Development", "Design", "Development", "Marketing & HR"];
+const DEPARTMENTS = ["All", "Leadership", "Business Development", "Design", "Development", "Marketing", "HR"];
 
 const team = [
   /* ── Leadership ── */
@@ -12,20 +12,14 @@ const team = [
   { name: "Pooja", role: "Founder & CEO", dept: "Leadership", img: "/Assets/pooja.webp" },
   { name: "Rohtash Tanwar", role: "BDM — Chandigarh", dept: "Business Development", img: "/Assets/rotang.webp" },
   { name: "Dinesh", role: "BDM — Bangalore", dept: "Business Development", img: "/Assets/DInesh.webp" },
-  { name: "Bhawna Bakshi", role: "BDM — Chandigarh", dept: "Business Development", img: "/Assets/bhawna.webp" },
+  // { name: "Bhawna Bakshi", role: "BDM — Chandigarh", dept: "Business Development", img: "/Assets/bhawna.webp" },
   { name: "Rajan Sharma", role: "BDM — Texas, USA", dept: "Business Development", img: "/Assets/texassir.webp" },
-  { name: "Kajal", role: "HR Manager", dept: "Marketing & HR", img: "/Assets/kajalmam.webp" },
-  /* ── Design ── */
+  { name: "Kajal", role: "HR Manager", dept: "HR", img: "/Assets/kajalmam.webp" },
   { name: "Rohit Walia", role: "Website Designer", dept: "Design", img: "/Assets/rohitsir.webp" },
-  { name: "Rishav", role: "Graphic Designer", dept: "Design", img: "/Assets/rishav.webp" },
   /* ── Development ── */
   { name: "Ravinder Godara", role: ".NET Developer", dept: "Development", img: "/Assets/ravinder.webp" },
-  { name: "Vishal Thakur", role: "Web Developer", dept: "Development", img: "/Assets/vishal.webp" },
-  { name: "Shivam Lugwal", role: "React Developer", dept: "Development", img: "/Assets/shivam.webp" },
-  { name: "Shubham", role: "React Developer", dept: "Development", img: "/Assets/shubham.webp" },
-  { name: "Vivek Pundir", role: "Full Stack Developer", dept: "Development", img: "/Assets/vivek-r.webp" },
-  { name: "Abhishek", role: "MERN Stack Developer", dept: "Development", img: "/Assets/abhihek.webp" },
-  { name: "Gagan Kumar", role: "Web Developer", dept: "Development", img: "/Assets/gagan.webp" },
+  { name: "Dixit", role: "Full Stack Developer", dept: "Development", img: "/Assets/Dixit.webp" },
+  { name: "Chirag", role: "Digital Marketing", dept: "Marketing", img: "/Assets/Chirag.webp" },
 ];
 
 const DEPT_COLORS = {
@@ -33,7 +27,8 @@ const DEPT_COLORS = {
   "Business Development": { from: "#06b6d4", to: "#0284c7" },
   "Design": { from: "#ec4899", to: "#db2777" },
   "Development": { from: "#6366f1", to: "#4f46e5" },
-  "Marketing & HR": { from: "#10b981", to: "#059669" },
+  "Marketing": { from: "#10b981", to: "#059669" },
+  "HR": { from: "#f43f5e", to: "#e11d48" },
 };
 
 export default function OurTeam() {

@@ -1,9 +1,16 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CommonSlider from "./CommonSlider";
 import GetNewInsight from "../GetNewInsight";
+import { COUNTRY_CODES } from "../countryData";
+import { SERVICES } from "../../data/services";
+import Swal from "sweetalert2";
+import axios from "axios";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import { auth } from "../../firebase.config";
+import OtpVerifyModal from "../OtpVerifyModal";
 
 // Animated gradient text — static string so Tailwind v4 scans it at build time
 const HL = "bg-[linear-gradient(125deg,#2dd4bf,#6366f1,#a855f7)] bg-[length:200%_200%] bg-clip-text text-transparent [animation:tcpGrad_5s_ease-in-out_infinite]";
@@ -29,10 +36,99 @@ export default function CommonTechPage({
 }) {
   const [openFaq,  setOpenFaq]  = useState(null);
   const [formSent, setFormSent] = useState(false);
-  const [formData, setFormData] = useState({ name: "", email: "", phone: "", service: "", message: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", service: "", message: "", cr_code: "+91" });
+  const [showOTP, setShowOTP]   = useState(false);
+  const [otp, setOTP]           = useState("");
+  const [loading, setLoading]   = useState(false);
 
-  const handleField  = (e) => setFormData(p => ({ ...p, [e.target.name]: e.target.value }));
-  const handleSubmit = (e) => { e.preventDefault(); setFormSent(true); };
+  const handleField = (e) => setFormData(p => ({ ...p, [e.target.name]: e.target.value }));
+
+  // Auto-detect the visitor's country code from their IP
+  useEffect(() => {
+    fetch("https://ipapi.co/json/")
+      .then(r => r.json())
+      .then(d => {
+        const match = COUNTRY_CODES.find(c => c.shortName === d.country_code);
+        if (match) setFormData(prev => ({ ...prev, cr_code: match.dialCode }));
+      })
+      .catch(() => {});
+  }, []);
+
+  // This template mounts fresh on every technology/service page. Since the
+  // reCAPTCHA verifier is bound to a DOM node that unmounts on navigation,
+  // clear the stale singleton so the next page mount creates its own.
+  useEffect(() => {
+    return () => {
+      if (typeof window !== "undefined") window.recaptchaVerifierTech = null;
+    };
+  }, []);
+
+  function onCaptchVerify() {
+    if (typeof window !== "undefined" && !window.recaptchaVerifierTech) {
+      window.recaptchaVerifierTech = new RecaptchaVerifier(
+        auth,
+        "recaptcha-container-tech",
+        { size: "invisible", callback: () => onSignup(), "expired-callback": () => {} }
+      );
+    }
+  }
+
+  function onSignup() {
+    const { name, email, phone } = formData;
+    if (!name || !email || !phone) {
+      Swal.fire({ icon: "warning", title: "Missing Information", text: "Please fill out all the mandatory fields." });
+      return;
+    }
+    setShowOTP(true);
+    onCaptchVerify();
+    const appVerifier = window.recaptchaVerifierTech;
+    signInWithPhoneNumber(auth, formData.cr_code + formData.phone, appVerifier)
+      .then(result => { window.confirmationResultTech = result; setLoading(false); setShowOTP(true); })
+      .catch(err => { console.log(err); setLoading(false); });
+  }
+
+  const onOTPVerify = async () => {
+    setLoading(true);
+    window.confirmationResultTech.confirm(otp)
+      .then(async () => {
+        const payload = new URLSearchParams();
+        payload.append("S_name", formData.name);
+        payload.append("S_email", formData.email);
+        payload.append("S_phone", formData.phone);
+        payload.append("S_subject", formData.service);
+        payload.append("cr_code", formData.cr_code);
+        payload.append("message", formData.message);
+        payload.append("userEmailsir", "info@futuretouch.in");
+        try {
+          await axios.post("https://futuretouchmail.onrender.com/send-email", payload);
+          setLoading(false);
+          setShowOTP(false);
+          setOTP("");
+          setFormSent(true);
+        } catch {
+          setLoading(false);
+          Swal.fire({ icon: "error", title: "Oops...", text: "Something went wrong!" });
+        }
+      })
+      .catch(() => {
+        setLoading(false);
+        Swal.fire({ icon: "error", title: "Invalid OTP", text: "Please enter the correct OTP." });
+      });
+  };
+
+  function handleResendOTP() {
+    onCaptchVerify();
+    signInWithPhoneNumber(auth, formData.cr_code + formData.phone, window.recaptchaVerifierTech)
+      .then(result => {
+        window.confirmationResultTech = result;
+        Swal.fire({ icon: "success", title: "OTP Resent", text: "OTP has been successfully resent." });
+      })
+      .catch(() => {
+        Swal.fire({ icon: "error", title: "Error", text: "Failed to resend OTP. Please try again later." });
+      });
+  }
+
+  const handleSubmit = (e) => { e.preventDefault(); onSignup(); };
 
   const ac   = (i) => PALETTE[i % PALETTE.length];
   const grad = (a, dir = "135deg") => `linear-gradient(${dir},${a.from},${a.to})`;
@@ -202,7 +298,7 @@ export default function CommonTechPage({
                   <p className="text-white/55 text-sm leading-relaxed mb-6">
                     Thank you! Our team will get back to you within 24 hours.
                   </p>
-                  <button onClick={() => { setFormSent(false); setFormData({ name: "", email: "", phone: "", service: "", message: "" }); }}
+                  <button onClick={() => { setFormSent(false); setFormData(p => ({ name: "", email: "", phone: "", service: "", message: "", cr_code: p.cr_code })); }}
                     className="px-5 py-2 rounded-full border border-white/20 text-white/70 text-xs font-['Poppins',sans-serif] font-semibold hover:bg-white/[.08] transition-all duration-200">
                     Send Another
                   </button>
@@ -252,11 +348,21 @@ export default function CommonTechPage({
                       </div>
                       <div>
                         <label className="block text-white/45 font-['Poppins',sans-serif] font-semibold text-[9px] tracking-[.18em] uppercase mb-1.5">Phone</label>
-                        <input
-                          type="tel" name="phone"
-                          value={formData.phone} onChange={handleField}
-                          placeholder="+91 98765 43210"
-                          className="w-full bg-white/[.06] border border-white/[.10] rounded-xl px-3 py-2.5 text-white text-[11.5px] font-['Inter',sans-serif] placeholder-white/20 focus:outline-none focus:border-[#2dd4bf]/45 focus:bg-white/[.09] transition-all duration-200" />
+                        <div className="relative">
+                          <span className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-1 pr-2 border-r border-white/10 pointer-events-none"
+                            style={{ color: "rgba(255,255,255,.45)", fontSize: 11, fontWeight: 500 }}>
+                            <span style={{ fontSize: 13 }}>
+                              {COUNTRY_CODES.find(c => c.dialCode === formData.cr_code)?.flag ?? "🌐"}
+                            </span>
+                            <span>{formData.cr_code}</span>
+                          </span>
+                          <input
+                            type="tel" name="phone"
+                            value={formData.phone} onChange={handleField}
+                            placeholder="98765 43210"
+                            style={{ paddingLeft: 62 }}
+                            className="phone-autofill-fix w-full bg-white/[.06] border border-white/[.10] rounded-xl pr-3 py-2.5 text-white text-[11.5px] font-['Inter',sans-serif] placeholder-white/20 focus:outline-none focus:border-[#2dd4bf]/45 focus:bg-white/[.09] transition-all duration-200" />
+                        </div>
                       </div>
                     </div>
 
@@ -269,13 +375,9 @@ export default function CommonTechPage({
                           value={formData.service} onChange={handleField}
                           className="w-full appearance-none bg-white/[.06] border border-white/[.10] rounded-xl px-4 py-2.5 text-white/70 text-[12px] font-['Inter',sans-serif] focus:outline-none focus:border-[#2dd4bf]/45 focus:bg-white/[.09] transition-all duration-200 pr-9">
                           <option value="" className="bg-[#080e28] text-white/70">Select a service…</option>
-                          <option value="web" className="bg-[#080e28] text-white">Web Development</option>
-                          <option value="mobile" className="bg-[#080e28] text-white">Mobile App</option>
-                          <option value="api" className="bg-[#080e28] text-white">API / Backend</option>
-                          <option value="ecommerce" className="bg-[#080e28] text-white">E-Commerce</option>
-                          <option value="cms" className="bg-[#080e28] text-white">CMS / Portal</option>
-                          <option value="consulting" className="bg-[#080e28] text-white">Consulting</option>
-                          <option value="other" className="bg-[#080e28] text-white">Other</option>
+                          {SERVICES.map(s => (
+                            <option key={s} value={s} className="bg-[#080e28] text-white">{s}</option>
+                          ))}
                         </select>
                         <svg className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none w-3.5 h-3.5 text-white/35" fill="none" viewBox="0 0 14 14">
                           <path d="M3 5l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -294,13 +396,19 @@ export default function CommonTechPage({
                     </div>
 
                     {/* Submit */}
-                    <button type="submit"
-                      className="w-full py-3 rounded-xl text-white font-['Poppins',sans-serif] font-bold text-sm tracking-[.06em] uppercase hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(45,212,191,.30)] transition-all duration-200 flex items-center justify-center gap-2"
+                    <button type="submit" disabled={loading}
+                      className="w-full py-3 rounded-xl text-white font-['Poppins',sans-serif] font-bold text-sm tracking-[.06em] uppercase hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(45,212,191,.30)] transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-60"
                       style={{ background: "linear-gradient(135deg,#2dd4bf,#6366f1)" }}>
-                      Send Message
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <path d="M2 7h10M8 3l4 4-4 4" stroke="#fff" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
+                      {loading ? (
+                        <div className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
+                      ) : (
+                        <>
+                          Send Message
+                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <path d="M2 7h10M8 3l4 4-4 4" stroke="#fff" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </>
+                      )}
                     </button>
 
                     <p className="text-white/25 text-[10px] text-center font-['Inter',sans-serif]">
@@ -312,6 +420,18 @@ export default function CommonTechPage({
             </div>
           </div>
         </div>
+
+        <div id="recaptcha-container-tech" />
+
+        <OtpVerifyModal
+          show={showOTP}
+          onClose={() => setShowOTP(false)}
+          otp={otp}
+          setOtp={setOTP}
+          onVerify={onOTPVerify}
+          onResend={handleResendOTP}
+          loading={loading}
+        />
       </section>
 
       {/* ════════════════════════════════

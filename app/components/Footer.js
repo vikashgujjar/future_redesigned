@@ -16,6 +16,7 @@ const ourLinks = [
   { label: "Why Us", href: "/why-us" },
   { label: "Services", href: "/service" },
   { label: "Our Teams", href: "/our-team" },
+  { label: "Support", href: "/support" },
   { label: "Contact Us", href: "/contact" },
 ];
 

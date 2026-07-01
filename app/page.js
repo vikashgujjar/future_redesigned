@@ -8,6 +8,7 @@ import Testimonial from "./components/Testimonial";
 import Forms from "./components/Forms";
 import Faq from "./components/Faq";
 import DigitalMarketingService from "./components/DigitalMarketingService";
+import Portfolio from "./components/Portfolio";
 import Heromatterjs from "./components/Heromatterjs";
 import AboutSection from "./components/AboutNew";
 import HeroSectionNew from "./components/HeroSectionNew";
@@ -22,6 +23,7 @@ export default function page() {
       <About />
       <Service />
       {/* <ServiceNew/> */}
+      <Portfolio />
       <WhyChoose />
       <HelpingBusiness />
       <Heromatterjs />

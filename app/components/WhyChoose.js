@@ -178,6 +178,18 @@ const WhyChoose = () => {
             forefront of technology.
           </p>
 
+          {/* second description */}
+          <p className="text-gray-500 text-sm leading-7"
+            style={{ fontFamily:"'Inter',sans-serif" }}>
+            As a top web development company, we create robust, scalable websites for diverse
+            business objectives. Our skilled developers use the latest technologies to deliver
+            flawless, on-time, and budget-friendly projects, making us a trusted partner for
+            web development endeavors. From static sites to complex web apps, we hand over on
+            time and budget. We are your trusted partner in crafting visually stunning and
+            highly functional websites that leave a lasting impression. Elevate your online
+            presence with <strong className="text-gray-800 font-semibold">Future IT Touch.</strong>
+          </p>
+
           {/* mini stats row */}
           <div className="flex flex-wrap gap-6 pt-2 border-t border-gray-100 mt-1">
             {stats.map((s, i) => (

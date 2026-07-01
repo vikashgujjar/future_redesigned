@@ -5,30 +5,86 @@ import Link from "next/link";
 
 const policies = [
   {
-    question: "Refund and Cancellation Policy",
-    answer: "Our focus is complete customer satisfaction. In the event you are displeased with the services provided, we will refund back the money, provided the reasons are genuine and proved after investigation. A project can only be cancelled within 3 days after signing the project agreement. If there is a refund, the client will receive it within 10 days of the claim.",
-    points: [
-      "In case of dissatisfaction from our services, clients have the liberty to cancel their projects and request a refund.",
-      "Please read the fine prints of each deal before buying — it provides all the details about the services or product you purchase.",
-    ],
+    question: "General Policy",
+    answer: "As our services involve custom work, professional expertise, digital products, and significant time investment, all payments are generally non-refundable unless otherwise stated in a written agreement.",
+    points: [],
     accent: { from:"#2dd4bf", to:"#06b6d4" },
   },
   {
-    question: "Cancellation Policy",
-    answer: "For cancellations please contact us via the contact us page.",
+    question: "Website Design & Development",
+    answer: "An advance payment is required before work begins.",
     points: [
-      "Requests received later than 3 business days prior to the end of the current service period will be treated as cancellation of services for the next service period.",
+      "Once the project has started, the advance payment is non-refundable.",
+      "If the client cancels the project after work has commenced, no refund will be issued for completed work, project planning, design, development, or consultation hours.",
+      "Any outstanding balance for completed milestones remains payable.",
     ],
     accent: { from:"#6366f1", to:"#4f46e5" },
   },
   {
-    question: "Refund Policy",
-    answer: "We will try our best to create the suitable design concepts for our clients.",
+    question: "Software & Mobile Application Development",
+    answer: "Software and mobile application development services are customized according to client requirements.",
     points: [
-      "In case any client is not completely satisfied with our products, we can provide a refund.",
-      "If paid by credit card, refunds will be issued to the original credit card provided at the time of purchase. For payment gateway payments, refunds will be made to the same account.",
+      "Payments made for completed milestones are non-refundable.",
+      "If the project is terminated by the client, all completed work and associated charges up to the termination date shall be payable.",
+      "Refunds will not be provided for changes in business strategy, project cancellation, or delays caused by the client.",
     ],
     accent: { from:"#a855f7", to:"#7c3aed" },
+  },
+  {
+    question: "Digital Marketing, SEO & Advertising Services",
+    answer: "Due to the nature of digital marketing services:",
+    points: [
+      "Fees paid for SEO, social media marketing, PPC management, content marketing, and online advertising are non-refundable.",
+      "We do not guarantee specific rankings, traffic volumes, sales, or advertising results, as these depend on third-party platforms and market conditions.",
+    ],
+    accent: { from:"#0ea5e9", to:"#2dd4bf" },
+  },
+  {
+    question: "Domain Registration, Hosting & Third-Party Services",
+    answer: "Payments made for domain registrations, web hosting, SSL certificates, email hosting, cloud services, software licenses, API subscriptions, and third-party tools are non-refundable, as these services are purchased from external providers.",
+    points: [],
+    accent: { from:"#2dd4bf", to:"#6366f1" },
+  },
+  {
+    question: "Graphic Design & Branding",
+    answer: "Payments for logos, branding, UI/UX designs, brochures, banners, and other creative work are non-refundable once the initial concepts or deliverables have been shared.",
+    points: [],
+    accent: { from:"#8b5cf6", to:"#6366f1" },
+  },
+  {
+    question: "Change of Mind",
+    answer: "Refunds will not be issued if:",
+    points: [
+      "The client changes their mind after placing an order.",
+      "The client decides not to proceed with the project.",
+      "The client fails to provide required content, approvals, or feedback.",
+      "The project is delayed due to the client's actions or inaction.",
+    ],
+    accent: { from:"#06b6d4", to:"#2dd4bf" },
+  },
+  {
+    question: "Duplicate or Incorrect Payments",
+    answer: "If a duplicate payment or an accidental overpayment is made, the excess amount will be refunded after verification. Approved refunds will generally be processed within 7–14 business days using the original payment method.",
+    points: [],
+    accent: { from:"#6366f1", to:"#a855f7" },
+  },
+  {
+    question: "Exceptional Circumstances",
+    answer: "Refund requests may be considered only in exceptional circumstances and solely at the discretion of Future IT Touch Pvt. Ltd. Any approved refund may be subject to deductions for work completed, consultation time, third-party expenses, transaction fees, and administrative costs.",
+    points: [],
+    accent: { from:"#0ea5e9", to:"#6366f1" },
+  },
+  {
+    question: "Project Abandonment",
+    answer: "If the client remains unresponsive for more than 30 consecutive days, the project may be considered abandoned. Payments already made will not be refunded, and restarting the project may require additional charges.",
+    points: [],
+    accent: { from:"#a855f7", to:"#4f46e5" },
+  },
+  {
+    question: "Chargebacks",
+    answer: "Clients agree to contact us first to resolve any billing concerns before initiating a chargeback or payment dispute. Unjustified chargebacks may result in suspension or termination of services.",
+    points: [],
+    accent: { from:"#2dd4bf", to:"#0ea5e9" },
   },
 ];
 
@@ -76,8 +132,12 @@ export default function Refund() {
               WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>Cancellation</span>
           </h1>
           <p style={{ color:"rgba(255,255,255,.60)", fontFamily:"'Inter',sans-serif",
-            fontSize:"clamp(.9rem,1.8vw,1.05rem)", maxWidth:480, margin:"0 auto 18px" }}>
-            Your satisfaction is our priority. Here's how our refund policy works.
+            fontSize:"clamp(.9rem,1.8vw,1.05rem)", maxWidth:480, margin:"0 auto 10px" }}>
+            Your satisfaction is our priority. Here&apos;s how our refund policy works.
+          </p>
+          <p style={{ color:"rgba(255,255,255,.38)", fontFamily:"'Inter',sans-serif",
+            fontSize:"11px", letterSpacing:".12em", textTransform:"uppercase", marginBottom:18 }}>
+            Effective Date: June 30, 2026
           </p>
           <div className="mx-auto h-[3px] w-16 rounded-full"
             style={{ background:"linear-gradient(90deg,#2dd4bf,#6366f1,#a855f7)" }} />
@@ -157,7 +217,7 @@ export default function Refund() {
                       </svg>
                     </div>
                   </div>
-                  <div style={{ maxHeight:isOpen?500:0, overflow:"hidden",
+                  <div style={{ maxHeight:isOpen?800:0, overflow:"hidden",
                     transition:"max-height .5s cubic-bezier(.22,1,.36,1)" }}>
                     <div style={{ padding:"0 24px 22px 24px" }}>
                       <div style={{ height:1, background:`linear-gradient(90deg,${policy.accent.from}33,transparent)`, marginBottom:14 }} />

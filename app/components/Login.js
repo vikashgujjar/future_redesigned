@@ -5,20 +5,15 @@ import { auth } from "../firebase.config";
 import {
   FaUser, FaEnvelope, FaPhone, FaCommentDots,
   FaCalendarAlt, FaCode, FaDollarSign, FaFileAlt,
-  FaCloudUploadAlt, FaTimes, FaArrowRight, FaCheckCircle,
+  FaCloudUploadAlt, FaTimes, FaArrowRight,
 } from "react-icons/fa";
 
-
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import dynamic from "next/dynamic";   // ✅ ADD THIS
-
-// import OtpInput from "otp-input-react";
-const OtpInput = dynamic(() => import("otp-input-react"), { ssr: false });
-
 import Swal from "sweetalert2";
 import axios from "axios";
-const toFlag = (code = "") =>
-  [...code.toUpperCase()].map(c => String.fromCodePoint(c.charCodeAt(0) + 127397)).join("");
+import { COUNTRY_CODES } from "./countryData";
+import { SERVICES } from "../data/services";
+import OtpVerifyModal from "./OtpVerifyModal";
 
 // https://email.futuretouch.in/ 
 
@@ -90,47 +85,31 @@ const Login = ({ handleClosePopup ,isPopupOpen}) => {
     // Add form submission logic here
   };
 
-  const [countryCodes, setCountryCodes] = useState([]);
-  const [selectedCountryCode, setSelectedCountryCode] = useState("+91");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const countryCodes = COUNTRY_CODES;
 
+  // Auto-detect the visitor's country code from their IP on first load
   useEffect(() => {
-    fetch("https://restcountries.com/v3.1/all")
+    fetch("https://ipapi.co/json/")
       .then((response) => response.json())
       .then((data) => {
-        const codes = data
-          .map((country) => ({
-            shortName: country.cca2,
-            dialCode:
-              country.idd.root +
-              (country.idd.suffixes ? country.idd.suffixes[0] : ""),
-          }))
-          .filter((country) => country.dialCode);
-        setCountryCodes(codes);
+        const match = countryCodes.find((c) => c.shortName === data.country_code);
+        if (match) setFormData((prev) => ({ ...prev, cr_code: match.dialCode }));
       })
-      .catch((error) => console.error("Error fetching country codes:", error));
+      .catch((error) => console.error("Error detecting country code:", error));
   }, []);
 
-  const handleCountryCodeChange = (event) => {
-    setSelectedCountryCode(event.target.value);
-  };
-
-  const handlePhoneNumberChange = (event) => {
-    setPhoneNumber(event.target.value);
-  };
-
 function onCaptchVerify() {
-  if (typeof window !== "undefined" && !window.recaptchaVerifier) {
-    window.recaptchaVerifier = new RecaptchaVerifier(
-      "recaptcha-container",
+  if (typeof window !== "undefined" && !window.recaptchaVerifierLogin) {
+    window.recaptchaVerifierLogin = new RecaptchaVerifier(
+      auth,
+      "recaptcha-container-login",
       {
         size: "invisible",
         callback: () => {
           onSignup();
         },
         "expired-callback": () => {},
-      },
-      auth
+      }
     );
   }
 }
@@ -150,13 +129,13 @@ function onCaptchVerify() {
     setShowOTP2(true);
     onCaptchVerify();
 
-    const appVerifier = window.recaptchaVerifier;
+    const appVerifier = window.recaptchaVerifierLogin;
 
     const formatPh = formData.cr_code + formData.S_phone;
     console.log(formatPh);
     signInWithPhoneNumber(auth, formatPh, appVerifier)
       .then((confirmationResult) => {
-        window.confirmationResult = confirmationResult;
+        window.confirmationResultLogin = confirmationResult;
         setLoading(false);
         setShowOTP2(true);
       })
@@ -168,7 +147,7 @@ function onCaptchVerify() {
 
   const onOTPVerify = async () => {
     setLoading(true);
-    window.confirmationResult
+    window.confirmationResultLogin
       .confirm(otp)
       .then(async (res) => {
         console.log(res);
@@ -202,7 +181,7 @@ function onCaptchVerify() {
               setLoading(false);
               console.log("hello User");
 
-              setOTP(false);
+              setOTP("");
 
               window.location.href = "/";
             }
@@ -229,7 +208,7 @@ function onCaptchVerify() {
   };
 
   const handleResendOTP = () => {
-    const appVerifier = window.recaptchaVerifier;
+    const appVerifier = window.recaptchaVerifierLogin;
     const formatPh = formData.cr_code + formData.S_phone;
 
     Swal.fire({
@@ -244,7 +223,7 @@ function onCaptchVerify() {
         setLoading(true);
         signInWithPhoneNumber(auth, formatPh, appVerifier)
           .then((confirmationResult) => {
-            window.confirmationResult = confirmationResult;
+            window.confirmationResultLogin = confirmationResult;
             setLoading(false);
             setShowOTP2(true);
             Swal.fire({
@@ -305,7 +284,7 @@ function onCaptchVerify() {
 
           {/* ── Scrollable form body ── */}
           <div className="bg-white overflow-y-auto flex-1 px-6 py-5">
-            <div id="recaptcha-container" />
+            <div id="recaptcha-container-login" />
             <input type="hidden" name="action" value="request_form" />
 
             {/* Row 1 — Name + Email */}
@@ -327,16 +306,13 @@ function onCaptchVerify() {
               <div className="relative flex">
                 <select
                   onChange={handleChange} name="cr_code" value={formData.cr_code}
-                  className="h-11 w-[96px] flex-shrink-0 text-xs bg-gray-50 border border-gray-200 border-r-0 rounded-l-xl outline-none text-gray-600 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 px-2"
+                  className="h-11 w-[78px] flex-shrink-0 text-sm bg-gray-50 border border-gray-200 border-r-0 rounded-l-xl outline-none text-gray-600 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 px-2"
                 >
-                  {countryCodes.length === 0
-                    ? <option value="+91">🇮🇳 +91</option>
-                    : countryCodes.map((c, i) => (
-                        <option key={i} value={c.dialCode}>
-                          {toFlag(c.shortName)} {c.dialCode}
-                        </option>
-                      ))
-                  }
+                  {countryCodes.map((c, i) => (
+                    <option key={i} value={c.dialCode} title={c.name}>
+                      {c.flag} {c.dialCode}
+                    </option>
+                  ))}
                 </select>
                 <div className="relative flex-1">
                   <FaPhone className="absolute left-3 top-1/2 -translate-y-1/2 text-indigo-300 text-sm pointer-events-none" />
@@ -367,13 +343,9 @@ function onCaptchVerify() {
                 <FaCode className="absolute left-3.5 top-1/2 -translate-y-1/2 text-indigo-300 text-sm pointer-events-none z-10" />
                 <select name="service_type" value={formData.service_type} onChange={handleChange} className={selectCls}>
                   <option value="">Choose a Service</option>
-                  <option value="Web Designing">Web Designing</option>
-                  <option value="Web Development">Web Development</option>
-                  <option value="Digital Marketing">Digital Marketing</option>
-                  <option value="Mobile App Development">Mobile App Development</option>
-                  <option value="Software development">Software development</option>
-                  <option value="saas model development">SAAS model development</option>
-                  <option value="Cyber Security Service">Cyber Security Service</option>
+                  {SERVICES.map((s) => (
+                    <option key={s} value={s}>{s}</option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -426,55 +398,15 @@ function onCaptchVerify() {
         </div>
       </div>
 
-      {/* ── OTP Verification Modal ── */}
-      {showOTP2 && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
-          <div className="relative w-full max-w-sm rounded-3xl overflow-hidden shadow-[0_32px_80px_rgba(5,7,72,.35)] border border-white/10">
-
-            {/* OTP Header */}
-            <div className="relative bg-[linear-gradient(135deg,#050b20,#0a0f2e)] px-6 py-5 overflow-hidden">
-              <div className="absolute inset-0 [background-image:radial-gradient(rgba(255,255,255,.035)_1px,transparent_1px)] [background-size:22px_22px]" />
-              <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full pointer-events-none bg-[radial-gradient(circle,rgba(99,102,241,.20),transparent_65%)]" />
-              <button onClick={() => setShowOTP2(false)}
-                className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-xl bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-all duration-200">
-                <FaTimes className="text-xs" />
-              </button>
-              <div className="relative z-10 flex flex-col items-center text-center">
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-3 bg-[linear-gradient(135deg,#2dd4bf,#6366f1)]">
-                  <FaPhone className="text-white text-lg" />
-                </div>
-                <h2 className="font-[Poppins,sans-serif] font-extrabold text-white text-lg">Verify Your Number</h2>
-                <p className="text-white/50 text-xs mt-1">Enter the 6-digit OTP sent to your phone</p>
-              </div>
-            </div>
-
-            {/* OTP Body */}
-            <div className="bg-white px-6 py-6 flex flex-col items-center">
-              <OtpInput value={otp} onChange={(v) => setOTP(v)}
-                OTPLength={6} otpType="number" disabled={false} autoFocus
-                className="opt-container" />
-
-              <p className="text-center text-gray-400 text-xs mt-4 mb-6 max-w-xs">
-                Please wait 2–3 minutes for the OTP to arrive. Check your SMS inbox.
-              </p>
-
-              <div className="flex w-full gap-3">
-                <button onClick={handleResendOTP}
-                  className="flex-1 h-11 rounded-xl border-2 border-indigo-400 text-indigo-500 text-sm font-bold font-[Poppins,sans-serif] hover:bg-indigo-50 transition-colors duration-200">
-                  Resend OTP
-                </button>
-                <button disabled={loading} onClick={onOTPVerify}
-                  className="flex-1 h-11 rounded-xl text-white text-sm font-bold font-[Poppins,sans-serif] bg-[linear-gradient(135deg,#2dd4bf,#6366f1)] hover:shadow-[0_6px_20px_rgba(45,212,191,.4)] hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2">
-                  {loading
-                    ? <div className="w-5 h-5 rounded-full border-2 border-white/30 border-t-white animate-spin" />
-                    : <><FaCheckCircle className="text-base" /> Verify</>
-                  }
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <OtpVerifyModal
+        show={showOTP2}
+        onClose={() => setShowOTP2(false)}
+        otp={otp}
+        setOtp={setOTP}
+        onVerify={onOTPVerify}
+        onResend={handleResendOTP}
+        loading={loading}
+      />
     </>
   );
 };

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import { RxCross2 } from "react-icons/rx";
 import { FaEnvelope, FaPhoneAlt, FaSkype, FaChevronDown, FaArrowRight } from "react-icons/fa";
@@ -228,6 +228,24 @@ export default function Header() {
   const [mobileServiceOpen, setMobileServiceOpen] = useState(null);
   const [mobileTechOpen, setMobileTechOpen] = useState(null);
 
+  const closeTimerRef = useRef(null);
+
+  const openMenuNow = useCallback((key) => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+    setOpenMenu(key);
+  }, []);
+
+  const closeMenuDelayed = useCallback(() => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    closeTimerRef.current = setTimeout(() => {
+      setOpenMenu(null);
+      closeTimerRef.current = null;
+    }, 200);
+  }, []);
+
   const pathname = usePathname();
   const isActive = (path) =>
     pathname === path
@@ -397,8 +415,8 @@ export default function Header() {
               {/* About */}
               <li
                 className="relative"
-                onMouseEnter={() => setOpenMenu("about")}
-                onMouseLeave={() => setOpenMenu(null)}
+                onMouseEnter={() => openMenuNow("about")}
+                onMouseLeave={closeMenuDelayed}
               >
                 <Link
                   href="/about"
@@ -411,7 +429,11 @@ export default function Header() {
                 </Link>
 
                 {openMenu === "about" && (
-                  <div className="absolute top-full left-0 mt-0 w-52 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50">
+                  <div
+                    className="absolute top-full left-0 mt-0 w-52 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50"
+                    onMouseEnter={() => openMenuNow("about")}
+                    onMouseLeave={closeMenuDelayed}
+                  >
                     {/* Top accent */}
                     <div className="h-0.5 bg-gradient-to-r from-teal-400 to-indigo-700 -mt-0 mb-1" />
                     {aboutDropdown.map((item) => (
@@ -432,8 +454,8 @@ export default function Header() {
               {/* Service */}
               <li
                 className="relative"
-                onMouseEnter={() => setOpenMenu("service")}
-                onMouseLeave={() => setOpenMenu(null)}
+                onMouseEnter={() => openMenuNow("service")}
+                onMouseLeave={closeMenuDelayed}
               >
                 <Link
                   href="/service"
@@ -446,7 +468,11 @@ export default function Header() {
                 </Link>
 
                 {openMenu === "service" && (
-                  <div className="fixed left-0 right-0 top-[95px] bg-white shadow-2xl border-t-2 border-teal-400 z-50">
+                  <div
+                    className="fixed left-0 right-0 top-[95px] bg-white shadow-2xl border-t-2 border-teal-400 z-50"
+                    onMouseEnter={() => openMenuNow("service")}
+                    onMouseLeave={closeMenuDelayed}
+                  >
                     <div className="max-w-[1400px] mx-auto px-8 xl:px-20 py-7">
                       <div className="flex gap-8 items-start">
                         {/* 5 link columns */}
@@ -472,8 +498,8 @@ export default function Header() {
               {/* Technologies */}
               <li
                 className="relative"
-                onMouseEnter={() => setOpenMenu("tech")}
-                onMouseLeave={() => setOpenMenu(null)}
+                onMouseEnter={() => openMenuNow("tech")}
+                onMouseLeave={closeMenuDelayed}
               >
                 <Link
                   href="/trending-technology"
@@ -486,7 +512,11 @@ export default function Header() {
                 </Link>
 
                 {openMenu === "tech" && (
-                  <div className="fixed left-0 right-0 top-[95px] bg-white shadow-2xl border-t-2 border-teal-400 z-50">
+                  <div
+                    className="fixed left-0 right-0 top-[95px] bg-white shadow-2xl border-t-2 border-teal-400 z-50"
+                    onMouseEnter={() => openMenuNow("tech")}
+                    onMouseLeave={closeMenuDelayed}
+                  >
                     <div className="max-w-[1400px] mx-auto px-8 xl:px-20 py-7">
                       <div className="flex gap-8 items-start">
                         {/* 4 link columns */}

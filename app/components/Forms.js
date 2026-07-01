@@ -2,27 +2,15 @@
 
 import React, { useState, useEffect } from "react";
 import { COUNTRY_CODES } from "./countryData";
+import { SERVICES } from "../data/services";
 import Swal from "sweetalert2";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import dynamic from "next/dynamic";
-const OtpInput = dynamic(() => import("otp-input-react"), { ssr: false });
 import Link from "next/link";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from "../firebase.config";
-
-const SERVICES = [
-  "Website Development",
-  "Digital Marketing",
-  "Mobile App Development",
-  "UI/UX Design",
-  "E-Commerce Solutions",
-  "SEO & Content Strategy",
-  "Software Development",
-  "SAAS Model Development",
-  "Cyber Security Service"
-];
+import OtpVerifyModal from "./OtpVerifyModal";
 
 const Forms = () => {
   const router = useRouter();
@@ -66,11 +54,11 @@ const Forms = () => {
     setFormData(prev => ({ first: "", last: "", email: "", phone: "", service: "", cr_code: prev.cr_code, file: null }));
 
   function onCaptchVerify() {
-    if (typeof window !== "undefined" && !window.recaptchaVerifier) {
-      window.recaptchaVerifier = new RecaptchaVerifier(
-        "recaptcha-container",
-        { size: "invisible", callback: () => onSignup(), "expired-callback": () => { } },
-        auth
+    if (typeof window !== "undefined" && !window.recaptchaVerifierForms) {
+      window.recaptchaVerifierForms = new RecaptchaVerifier(
+        auth,
+        "recaptcha-container-forms",
+        { size: "invisible", callback: () => onSignup(), "expired-callback": () => { } }
       );
     }
   }
@@ -83,15 +71,15 @@ const Forms = () => {
     }
     setShowOTP(true);
     onCaptchVerify();
-    const appVerifier = window.recaptchaVerifier;
+    const appVerifier = window.recaptchaVerifierForms;
     signInWithPhoneNumber(auth, formData.cr_code + formData.phone, appVerifier)
-      .then(result => { window.confirmationResult = result; setLoading(false); setShowOTP(true); })
+      .then(result => { window.confirmationResultForms = result; setLoading(false); setShowOTP(true); })
       .catch(err => { console.log(err); setLoading(false); });
   }
 
   const onOTPVerify = async () => {
     setLoading(true);
-    window.confirmationResult.confirm(otp)
+    window.confirmationResultForms.confirm(otp)
       .then(async () => {
         try {
           await axios.post("https://futuretouchmail.onrender.com/send-email", buildPayload());
@@ -109,6 +97,19 @@ const Forms = () => {
         Swal.fire({ icon: "error", title: "Invalid OTP", text: "Please enter the correct OTP." });
       });
   };
+
+  function handleResendOTP() {
+    onCaptchVerify();
+    const appVerifier = window.recaptchaVerifierForms;
+    signInWithPhoneNumber(auth, formData.cr_code + formData.phone, appVerifier)
+      .then(result => {
+        window.confirmationResultForms = result;
+        Swal.fire({ icon: "success", title: "OTP Resent", text: "OTP has been successfully resent." });
+      })
+      .catch(() => {
+        Swal.fire({ icon: "error", title: "Error", text: "Failed to resend OTP. Please try again later." });
+      });
+  }
 
   return (
     <section
@@ -223,27 +224,9 @@ const Forms = () => {
         @keyframes frmSpin { from{transform:rotate(0)} to{transform:rotate(360deg)} }
         .frm-img-spin { animation: frmSpin 6s linear infinite; }
 
-        /* ── OTP input override ── */
-        .frm-otp-input input {
-          width: 44px !important;
-          height: 50px !important;
-          border-radius: 9px !important;
-          border: 1px solid rgba(255,255,255,.12) !important;
-          background: rgba(255,255,255,.05) !important;
-          color: #fff !important;
-          font-size: 18px !important;
-          font-weight: 700 !important;
-          text-align: center !important;
-          outline: none !important;
-          transition: border-color .2s, box-shadow .2s !important;
-        }
-        .frm-otp-input input:focus {
-          border-color: #2dd4bf !important;
-          box-shadow: 0 0 0 3px rgba(45,212,191,.18) !important;
-        }
       `}</style>
 
-      <div id="recaptcha-container" />
+      <div id="recaptcha-container-forms" />
 
       {/* dot grid */}
       <div className="frm-dotgrid absolute inset-0 pointer-events-none" aria-hidden="true" />
@@ -267,86 +250,15 @@ const Forms = () => {
         </svg>
       </div>
 
-      {/* ══════════════════════════════════════
-          OTP POPUP
-      ══════════════════════════════════════ */}
-      {showOTP && (
-        <div
-          className="fixed inset-0 flex items-center justify-center z-50"
-          style={{ background: "rgba(5,6,15,.85)", backdropFilter: "blur(8px)" }}
-        >
-          <div
-            className="relative flex flex-col items-center p-8 rounded-[22px] max-w-sm w-full mx-4"
-            style={{
-              background: "rgba(7,9,22,.92)",
-              border: "1px solid rgba(45,212,191,.25)",
-              backdropFilter: "blur(32px)",
-              boxShadow: "0 0 0 1px rgba(45,212,191,.10), 0 24px 60px rgba(0,0,0,.55)",
-            }}
-          >
-            {/* top bar */}
-            <div className="frm-top-bar" />
-
-            {/* close */}
-            <button
-              className="absolute top-4 right-4 w-7 h-7 flex items-center justify-center rounded-full text-white/40 hover:text-white/80 hover:bg-white/10 transition"
-              onClick={() => setShowOTP(false)}>
-              ✕
-            </button>
-
-            {/* icon */}
-            <div className="w-14 h-14 rounded-[14px] flex items-center justify-center mb-5 mt-2"
-              style={{ background: "linear-gradient(135deg,#2dd4bf,#6366f1)", boxShadow: "0 8px 28px rgba(45,212,191,.35)" }}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="5" y="2" width="14" height="20" rx="2" />
-                <path d="M12 18h.01" />
-              </svg>
-            </div>
-
-            <h2 className="text-[17px] font-bold text-white mb-1" style={{ fontFamily: "'Poppins',sans-serif" }}>
-              Phone Verification
-            </h2>
-            <p className="text-[12px] text-white/40 text-center mb-6" style={{ fontFamily: "'Inter',sans-serif" }}>
-              Enter the OTP sent to your phone
-            </p>
-
-            <OtpInput
-              value={otp}
-              onChange={v => setOTP(v)}
-              OTPLength={6}
-              otpType="number"
-              disabled={false}
-              autoFocus
-              className="frm-otp-input"
-            />
-
-            <p className="text-[11px] text-white/25 text-center mt-4 mb-6" style={{ fontFamily: "'Inter',sans-serif" }}>
-              Please wait 2–3 minutes for the OTP to arrive.
-            </p>
-
-            {/* divider */}
-            <div className="w-full h-px bg-white/[.06] mb-5" />
-
-            <div className="flex w-full gap-3">
-              <button
-                className="flex-1 py-3 rounded-[9px] text-[11px] font-bold tracking-[.10em] uppercase transition-all"
-                style={{ background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.10)", color: "rgba(255,255,255,.55)" }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(45,212,191,.4)"; e.currentTarget.style.color = "#2dd4bf"; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,.10)"; e.currentTarget.style.color = "rgba(255,255,255,.55)"; }}>
-                Resend OTP
-              </button>
-              <button
-                disabled={loading}
-                onClick={onOTPVerify}
-                className="frm-submit-btn flex-1 py-3 rounded-[9px] font-extrabold text-[11px] tracking-[.12em] uppercase text-black flex items-center justify-center gap-2">
-                {loading ? (
-                  <div className="w-5 h-5 border-t-2 border-b-2 border-black rounded-full animate-spin" />
-                ) : "Verify & Submit"}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <OtpVerifyModal
+        show={showOTP}
+        onClose={() => setShowOTP(false)}
+        otp={otp}
+        setOtp={setOTP}
+        onVerify={onOTPVerify}
+        onResend={handleResendOTP}
+        loading={loading}
+      />
 
       {/* ══════════════════════════════════════
           MAIN LAYOUT
@@ -400,7 +312,7 @@ const Forms = () => {
                     </span>
                     <span>{formData.cr_code}</span>
                   </span>
-                  <input className="frm-input" type="tel" placeholder="98765 43210"
+                  <input className="frm-input phone-autofill-fix" type="tel" placeholder="98765 43210"
                     style={{ paddingLeft: 72 }}
                     value={formData.phone}
                     onChange={e => setFormData({ ...formData, phone: e.target.value })} />

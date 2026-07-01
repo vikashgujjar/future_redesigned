@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Location from "../components/Location";
@@ -7,14 +7,15 @@ import {
   FaEnvelope, FaLock, FaPhoneAlt, FaSkype,
   FaMapMarkerAlt, FaArrowRight, FaCheckCircle,
 } from "react-icons/fa";
-import dynamic from "next/dynamic";
-const OtpInput = dynamic(() => import("otp-input-react"), { ssr: false });
 import Swal from "sweetalert2";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { auth } from "../firebase.config";
+import { COUNTRY_CODES } from "../components/countryData";
+import { SERVICES } from "../data/services";
+import OtpVerifyModal from "../components/OtpVerifyModal";
 
 const infoCards = [
   {
@@ -68,12 +69,23 @@ export default function Page() {
     message: "",
   });
 
+  // Auto-detect the visitor's country code from their IP
+  useEffect(() => {
+    fetch("https://ipapi.co/json/")
+      .then((r) => r.json())
+      .then((d) => {
+        const match = COUNTRY_CODES.find((c) => c.shortName === d.country_code);
+        if (match) setFormData((prev) => ({ ...prev, cr_code: match.dialCode }));
+      })
+      .catch(() => {});
+  }, []);
+
   function onCaptchVerify() {
-    if (!window.recaptchaVerifier) {
-      window.recaptchaVerifier = new RecaptchaVerifier(
-        "recaptcha-container",
-        { callback: () => { onSignup(); }, "expired-callback": () => {} },
-        auth
+    if (!window.recaptchaVerifierContact) {
+      window.recaptchaVerifierContact = new RecaptchaVerifier(
+        auth,
+        "recaptcha-container-contact",
+        { callback: () => { onSignup(); }, "expired-callback": () => {} }
       );
     }
   }
@@ -87,9 +99,9 @@ export default function Page() {
     setShowOTP(true);
     onCaptchVerify();
     toast.success("OTP sent successfully!");
-    const appVerifier = window.recaptchaVerifier;
+    const appVerifier = window.recaptchaVerifierContact;
     signInWithPhoneNumber(auth, formData.cr_code + formData.S_phone, appVerifier)
-      .then((res) => { window.confirmationResult = res; setLoading(false); setShowOTP(true); })
+      .then((res) => { window.confirmationResultContact = res; setLoading(false); setShowOTP(true); })
       .catch((err) => { console.log(err); setLoading(false); });
   }
 
@@ -100,23 +112,23 @@ export default function Page() {
       return;
     }
     onCaptchVerify();
-    signInWithPhoneNumber(auth, formData.cr_code + formData.S_phone, window.recaptchaVerifier)
-      .then((res) => { window.confirmationResult = res; setLoading(false); setShowOTP(true); })
+    signInWithPhoneNumber(auth, formData.cr_code + formData.S_phone, window.recaptchaVerifierContact)
+      .then((res) => { window.confirmationResultContact = res; setLoading(false); setShowOTP(true); })
       .catch((err) => { console.log(err); setLoading(false); });
   }
 
   const onOTPVerify = async () => {
     setLoading(true);
-    window.confirmationResult.confirm(otp)
+    window.confirmationResultContact.confirm(otp)
       .then(async () => {
         const urlEncodedData = new URLSearchParams();
         for (const [k, v] of Object.entries(formData)) urlEncodedData.append(k, v);
         try {
           await axios.post("https://futuretouchmail.onrender.com/send-email", urlEncodedData);
           setLoading(false);
-          setFormData({ S_name:"",S_email:"",S_phone:"",S_subject:"",message:"" });
+          setFormData((prev) => ({ ...prev, S_name:"",S_email:"",S_phone:"",S_subject:"",message:"",check_term:"" }));
           Swal.fire({ icon:"success",title:"Success!",text:"Your query has been submitted." })
-            .then(r => { if (r.isConfirmed) { setOTP(false); window.location.href = "/"; } });
+            .then(r => { if (r.isConfirmed) { setOTP(""); window.location.href = "/"; } });
         } catch {
           setLoading(false);
           Swal.fire({ icon:"error",title:"Oops...",text:"Something went wrong!" });
@@ -187,27 +199,6 @@ export default function Page() {
         .ct-submit:active { transform:translateY(0); }
 
         .ct-check { width:16px; height:16px; accent-color:#6366f1; cursor:pointer; margin-top:1px; }
-
-        .ct-otp-overlay {
-          position:fixed; inset:0; z-index:9999;
-          display:flex; align-items:center; justify-content:center;
-          background:rgba(4,5,24,.75); backdrop-filter:blur(6px);
-        }
-        .ct-otp-box {
-          background:#fff; border-radius:24px; padding:40px 36px;
-          max-width:420px; width:90%; position:relative;
-          box-shadow:0 40px 80px rgba(0,0,0,.22);
-        }
-        .ct-otp-close {
-          position:absolute; top:16px; right:16px;
-          background:none; border:none; cursor:pointer; color:#64748b;
-          padding:4px; border-radius:8px; transition:color .2s,background .2s;
-        }
-        .ct-otp-close:hover { color:#374151; background:rgba(0,0,0,.06); }
-        .ct-otp-btn {
-          padding:11px 24px; border-radius:10px; font-size:13px; font-weight:700;
-          font-family:'Poppins',sans-serif; cursor:pointer; transition:all .2s;
-        }
       `}</style>
 
       {/* ── Banner ── */}
@@ -406,13 +397,12 @@ export default function Page() {
                   <label className="ct-label">Phone Number *</label>
                   <div className="flex gap-2">
                     <select name="cr_code" value={formData.cr_code} onChange={handleChange}
-                      className="ct-field" style={{ width:80, flexShrink:0, paddingLeft:10 }}>
-                      <option value="+91">+91</option>
-                      <option value="+1">+1</option>
-                      <option value="+44">+44</option>
-                      <option value="+61">+61</option>
-                      <option value="+971">+971</option>
-                      <option value="+65">+65</option>
+                      className="ct-field" style={{ width:96, flexShrink:0, paddingLeft:10 }}>
+                      {COUNTRY_CODES.map((c) => (
+                        <option key={c.shortName} value={c.dialCode} title={c.name}>
+                          {c.flag} {c.dialCode}
+                        </option>
+                      ))}
                     </select>
                     <input type="text" name="S_phone" placeholder="7056937000"
                       value={formData.S_phone} onChange={handleChange}
@@ -424,10 +414,9 @@ export default function Page() {
                   <select name="S_subject" value={formData.S_subject} onChange={handleChange}
                     className="ct-field">
                     <option value="">Select a service</option>
-                    <option value="Graphic Design">Graphic Design</option>
-                    <option value="Web Design">Web Design</option>
-                    <option value="App Design">App Design</option>
-                    <option value="Other">Other</option>
+                    {SERVICES.map((s) => (
+                      <option key={s} value={s}>{s}</option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -475,74 +464,22 @@ export default function Page() {
                 We respect your privacy and never share your data.
               </p>
 
-              <div id="recaptcha-container" />
+              <div id="recaptcha-container-contact" />
             </div>
 
           </div>
         </div>
       </section>
 
-      {/* ── OTP Modal ── */}
-      {showOTP && (
-        <div className="ct-otp-overlay">
-          <div className="ct-otp-box">
-            <button className="ct-otp-close" onClick={() => setShowOTP(false)} aria-label="Close">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-              </svg>
-            </button>
-
-            <div className="text-center mb-7">
-              <div className="w-14 h-14 rounded-2xl mx-auto mb-4 flex items-center justify-center"
-                style={{ background:"linear-gradient(135deg,#2dd4bf,#6366f1)" }}>
-                <FaPhoneAlt size={22} color="#fff" />
-              </div>
-              <h2 style={{ fontFamily:"'Poppins',sans-serif", fontWeight:800, fontSize:"1.25rem",
-                color:"#0c1230", marginBottom:6 }}>
-                Verify Your Number
-              </h2>
-              <p style={{ fontSize:"13px", color:"#64748b" }}>
-                Enter the 6-digit OTP sent to your phone.
-              </p>
-            </div>
-
-            <div className="flex justify-center mb-4">
-              <OtpInput
-                value={otp}
-                onChange={setOTP}
-                OTPLength={6}
-                otpType="number"
-                disabled={false}
-                autoFocus
-                className="opt-container"
-              />
-            </div>
-
-            <p style={{ fontSize:"12px", color:"#94a3b8", textAlign:"center", marginBottom:24 }}>
-              Please wait 2–3 minutes for the OTP.
-            </p>
-
-            <div className="flex gap-3">
-              <button className="ct-otp-btn" onClick={reSend}
-                style={{ flex:1, background:"rgba(99,102,241,.08)", color:"#4f46e5",
-                  border:"1.5px solid rgba(99,102,241,.25)" }}>
-                Resend OTP
-              </button>
-              <button className="ct-otp-btn" onClick={onOTPVerify} disabled={loading}
-                style={{ flex:1, border:"none",
-                  background:"linear-gradient(135deg,#6366f1,#4f46e5)", color:"#fff",
-                  boxShadow:"0 6px 20px rgba(99,102,241,.30)" }}>
-                {loading ? (
-                  <div className="flex items-center justify-center gap-1.5">
-                    <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-white" />
-                    Verifying
-                  </div>
-                ) : "Verify & Submit"}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <OtpVerifyModal
+        show={showOTP}
+        onClose={() => setShowOTP(false)}
+        otp={otp}
+        setOtp={setOTP}
+        onVerify={onOTPVerify}
+        onResend={reSend}
+        loading={loading}
+      />
 
       {/* ── Map ── */}
       <Location />
