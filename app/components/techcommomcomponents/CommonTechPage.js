@@ -11,6 +11,8 @@ import axios from "axios";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from "../../firebase.config";
 import OtpVerifyModal from "../OtpVerifyModal";
+import ServiceSchema from "../schema/ServiceSchema";
+import FaqSchema from "../schema/FaqSchema";
 
 // Animated gradient text — static string so Tailwind v4 scans it at build time
 const HL = "bg-[linear-gradient(125deg,#2dd4bf,#6366f1,#a855f7)] bg-[length:200%_200%] bg-clip-text text-transparent [animation:tcpGrad_5s_ease-in-out_infinite]";
@@ -84,7 +86,7 @@ export default function CommonTechPage({
     const appVerifier = window.recaptchaVerifierTech;
     signInWithPhoneNumber(auth, formData.cr_code + formData.phone, appVerifier)
       .then(result => { window.confirmationResultTech = result; setLoading(false); setShowOTP(true); })
-      .catch(err => { console.log(err); setLoading(false); });
+      .catch(() => { setLoading(false); });
   }
 
   const onOTPVerify = async () => {
@@ -146,6 +148,11 @@ export default function CommonTechPage({
 
   return (
     <>
+      <ServiceSchema name={banner.breadcrumb || banner.title} description={banner.tagline} />
+      {faq.items && faq.items.length > 0 && (
+        <FaqSchema items={faq.items.map((item) => ({ question: item.title, answer: item.description }))} />
+      )}
+
       {/* ════════════════════════════════
           1. BANNER
       ════════════════════════════════ */}
@@ -326,11 +333,11 @@ export default function CommonTechPage({
 
                     {/* Full name */}
                     <div>
-                      <label className="block text-white/45 font-['Poppins',sans-serif] font-semibold text-[9px] tracking-[.18em] uppercase mb-1.5">
+                      <label htmlFor="tcp_name" className="block text-white/45 font-['Poppins',sans-serif] font-semibold text-[9px] tracking-[.18em] uppercase mb-1.5">
                         Full Name
                       </label>
                       <input
-                        type="text" name="name" required
+                        id="tcp_name" type="text" name="name" required
                         value={formData.name} onChange={handleField}
                         placeholder="John Smith"
                         className="w-full bg-white/[.06] border border-white/[.10] rounded-xl px-4 py-2.5 text-white text-[12.5px] font-['Inter',sans-serif] placeholder-white/20 focus:outline-none focus:border-[#2dd4bf]/45 focus:bg-white/[.09] transition-all duration-200" />
@@ -339,15 +346,15 @@ export default function CommonTechPage({
                     {/* Email + Phone */}
                     <div className="grid grid-cols-2 gap-2.5">
                       <div>
-                        <label className="block text-white/45 font-['Poppins',sans-serif] font-semibold text-[9px] tracking-[.18em] uppercase mb-1.5">Email</label>
+                        <label htmlFor="tcp_email" className="block text-white/45 font-['Poppins',sans-serif] font-semibold text-[9px] tracking-[.18em] uppercase mb-1.5">Email</label>
                         <input
-                          type="email" name="email" required
+                          id="tcp_email" type="email" name="email" required
                           value={formData.email} onChange={handleField}
                           placeholder="you@email.com"
                           className="w-full bg-white/[.06] border border-white/[.10] rounded-xl px-3 py-2.5 text-white text-[11.5px] font-['Inter',sans-serif] placeholder-white/20 focus:outline-none focus:border-[#2dd4bf]/45 focus:bg-white/[.09] transition-all duration-200" />
                       </div>
                       <div>
-                        <label className="block text-white/45 font-['Poppins',sans-serif] font-semibold text-[9px] tracking-[.18em] uppercase mb-1.5">Phone</label>
+                        <label htmlFor="tcp_phone" className="block text-white/45 font-['Poppins',sans-serif] font-semibold text-[9px] tracking-[.18em] uppercase mb-1.5">Phone</label>
                         <div className="relative">
                           <span className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-1 pr-2 border-r border-white/10 pointer-events-none"
                             style={{ color: "rgba(255,255,255,.45)", fontSize: 11, fontWeight: 500 }}>
@@ -357,7 +364,7 @@ export default function CommonTechPage({
                             <span>{formData.cr_code}</span>
                           </span>
                           <input
-                            type="tel" name="phone"
+                            id="tcp_phone" type="tel" name="phone"
                             value={formData.phone} onChange={handleField}
                             placeholder="98765 43210"
                             style={{ paddingLeft: 62 }}
@@ -368,10 +375,10 @@ export default function CommonTechPage({
 
                     {/* Service select */}
                     <div>
-                      <label className="block text-white/45 font-['Poppins',sans-serif] font-semibold text-[9px] tracking-[.18em] uppercase mb-1.5">Service Needed</label>
+                      <label htmlFor="tcp_service" className="block text-white/45 font-['Poppins',sans-serif] font-semibold text-[9px] tracking-[.18em] uppercase mb-1.5">Service Needed</label>
                       <div className="relative">
                         <select
-                          name="service"
+                          id="tcp_service" name="service"
                           value={formData.service} onChange={handleField}
                           className="w-full appearance-none bg-white/[.06] border border-white/[.10] rounded-xl px-4 py-2.5 text-white/70 text-[12px] font-['Inter',sans-serif] focus:outline-none focus:border-[#2dd4bf]/45 focus:bg-white/[.09] transition-all duration-200 pr-9">
                           <option value="" className="bg-[#080e28] text-white/70">Select a service…</option>
@@ -387,9 +394,9 @@ export default function CommonTechPage({
 
                     {/* Message */}
                     <div>
-                      <label className="block text-white/45 font-['Poppins',sans-serif] font-semibold text-[9px] tracking-[.18em] uppercase mb-1.5">Message</label>
+                      <label htmlFor="tcp_message" className="block text-white/45 font-['Poppins',sans-serif] font-semibold text-[9px] tracking-[.18em] uppercase mb-1.5">Message</label>
                       <textarea
-                        name="message" rows={2}
+                        id="tcp_message" name="message" rows={2}
                         value={formData.message} onChange={handleField}
                         placeholder="Briefly describe your project or requirements…"
                         className="w-full bg-white/[.06] border border-white/[.10] rounded-xl px-4 py-2.5 text-white text-[12px] font-['Inter',sans-serif] placeholder-white/20 focus:outline-none focus:border-[#2dd4bf]/45 focus:bg-white/[.09] transition-all duration-200 resize-none" />

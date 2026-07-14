@@ -3,7 +3,7 @@ import Contact from './Contact'
 
 export const metadata = {
   title: "Contact - Future IT Touch Private Limited",
-  description: "Future IT Touch Private Limited is a leading IT solutions provider.",
+  description: "Get in touch with Future IT Touch to discuss your project — reach our team by phone, email, or Skype, or send a message through our contact form for a prompt reply.",
   keywords: "IT, Technology, Solutions, Future IT Touch",
 };
 

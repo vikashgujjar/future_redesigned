@@ -3,7 +3,7 @@ import Swift from "./Swift";
 export const metadata = {
   title: "Swift App Development - Future IT Touch Private Limited",
   description:
-    "Future IT Touch Private Limited is a leading IT solutions provider.",
+    "Native iOS app development with Swift and SwiftUI, delivering secure, pixel-perfect experiences for iPhone, iPad, and Apple Watch built on Apple's latest frameworks.",
   keywords: "IT, Technology, Solutions, Future IT Touch",
 };
 

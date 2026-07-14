@@ -3,7 +3,7 @@ import PricePackage from './Price'
 
 export const metadata = {
   title: "Pricing Package - Future IT Touch Private Limited",
-  description: "Future IT Touch Private Limited is a leading IT solutions provider.",
+  description: "Transparent pricing packages for SEO and digital marketing services, with tiered plans covering keyword optimization, ranking reports, and dedicated account support.",
   keywords: "IT, Technology, Solutions, Future IT Touch",
 };
 

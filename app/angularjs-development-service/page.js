@@ -4,7 +4,7 @@ import Angular from './Angular'
 export const metadata = {
   title: "Angular - Future IT Touch Private Limited",
   description:
-    "Future IT Touch Private Limited is a leading IT solutions provider.",
+    "Custom AngularJS and MEAN stack development for dynamic, high-performance single-page applications, enterprise dashboards, and scalable web portals with secure API integration.",
   keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
 };
 

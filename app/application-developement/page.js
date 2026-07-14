@@ -2,7 +2,7 @@ import MobileApp from "./MobileApp";
 
 export const metadata = {
   title: "Mobile Application Development  - Future IT Touch Private Limited",
-  description: "Future IT Touch Private Limited is a leading IT solutions provider.",
+  description: "Full-stack mobile app development for iOS, Android, and cross-platform using Swift, Kotlin, React Native, and Flutter — from UX design through launch and ongoing support.",
   keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
 };
 

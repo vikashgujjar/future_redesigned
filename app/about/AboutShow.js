@@ -6,9 +6,18 @@ import CommonBanner from "../components/CommonBanner";
 
 import Forms from "../components/Forms";
 import Testimonial from "../components/Testimonial";
+import WebPageSchema from "../components/schema/WebPageSchema";
+import BreadcrumbSchema from "../components/schema/BreadcrumbSchema";
 export default function AboutShow() {
   return (
     <div>
+      <WebPageSchema
+        type="AboutPage"
+        name="About Future IT Touch Private Limited"
+        description="Future Touch is a Website Development and Digital Marketing Company founded by Vinod Tanwar."
+        path="/about"
+      />
+      <BreadcrumbSchema items={[{ name: "Home", path: "/" }, { name: "About Us", path: "/about" }]} />
       <CommonBanner title="About Us" breadcrumb="About Us" />
 
       <div className="hero-about block mt-10 sm:mt-10 md:mt-16 lg:mt-20 px-5  relative sm:px-5 md:px-10 lg:px-20  sm:block md:block lg:flex ">

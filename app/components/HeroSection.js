@@ -143,7 +143,7 @@ export default function HeroSection() {
     const appVerifier = window.recaptchaVerifierHero;
     signInWithPhoneNumber(auth, phoneCC.dialCode + phone, appVerifier)
       .then((result) => { window.confirmationResultHero = result; setLoading(false); setShowOTP(true); })
-      .catch((err) => { console.log(err); setLoading(false); });
+      .catch(() => { setLoading(false); });
   }
 
   const onOTPVerify = async () => {
@@ -707,8 +707,8 @@ export default function HeroSection() {
                   <div className="grid grid-cols-2 gap-2.5">
                     {[{k:"first",ph:"First Name"},{k:"last",ph:"Last Name"}].map(f=>(
                       <div key={f.k}>
-                        <label className="block text-[9.5px] text-white/30 tracking-[.12em] uppercase mb-1.5">{f.ph}</label>
-                        <input className="hs-input" placeholder={f.ph} value={form[f.k]}
+                        <label className="block text-[9.5px] text-white/30 tracking-[.12em] uppercase mb-1.5" htmlFor={`hs_${f.k}`}>{f.ph}</label>
+                        <input id={`hs_${f.k}`} className="hs-input" placeholder={f.ph} value={form[f.k]}
                           onChange={e=>setForm({...form,[f.k]:e.target.value})} required />
                       </div>
                     ))}
@@ -716,30 +716,30 @@ export default function HeroSection() {
 
                   {/* Email */}
                   <div>
-                    <label className="block text-[9.5px] text-white/30 tracking-[.12em] uppercase mb-1.5">Email Address</label>
-                    <input className="hs-input" type="email" placeholder="john@example.com"
+                    <label className="block text-[9.5px] text-white/30 tracking-[.12em] uppercase mb-1.5" htmlFor="hs_email">Email Address</label>
+                    <input id="hs_email" className="hs-input" type="email" placeholder="john@example.com"
                       value={form.email} onChange={e=>setForm({...form,email:e.target.value})} required />
                   </div>
 
                   {/* Phone */}
                   <div>
-                    <label className="block text-[9.5px] text-white/30 tracking-[.12em] uppercase mb-1.5">Phone Number</label>
+                    <label className="block text-[9.5px] text-white/30 tracking-[.12em] uppercase mb-1.5" htmlFor="hs_phone">Phone Number</label>
                     <div className="relative">
                       <span className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-1 pr-2 border-r border-white/10 pointer-events-none"
                         style={{ color: "rgba(255,255,255,.45)", fontSize: 12, fontWeight: 500 }}>
                         <span style={{ fontSize: 14 }}>{phoneCC.flag}</span>
                         <span>{phoneCC.dialCode}</span>
                       </span>
-                      <input className="hs-input phone-autofill-fix" style={{ paddingLeft: 72 }} type="tel" placeholder="98765 43210"
+                      <input id="hs_phone" className="hs-input phone-autofill-fix" style={{ paddingLeft: 72 }} type="tel" placeholder="98765 43210"
                         value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} />
                     </div>
                   </div>
 
                   {/* Service */}
                   <div>
-                    <label className="block text-[9.5px] text-white/30 tracking-[.12em] uppercase mb-1.5">Select Service</label>
+                    <label className="block text-[9.5px] text-white/30 tracking-[.12em] uppercase mb-1.5" htmlFor="hs_service">Select Service</label>
                     <div className="relative">
-                      <select className="hs-input hs-select" value={form.service}
+                      <select id="hs_service" className="hs-input hs-select" value={form.service}
                         onChange={e=>setForm({...form,service:e.target.value})} required>
                         <option value="" disabled>Choose your service</option>
                         {SERVICES.map(s=><option key={s} value={s}>{s}</option>)}

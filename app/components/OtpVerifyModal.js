@@ -49,6 +49,7 @@ export default function OtpVerifyModal({ show, onClose, otp, setOtp, onVerify, o
       `}</style>
 
       <div className="otp-pop relative w-full max-w-md rounded-[26px] overflow-hidden border border-white/10"
+        role="dialog" aria-modal="true" aria-labelledby="otp-modal-title"
         style={{
           background: "linear-gradient(160deg,#070b1e 0%,#0b1030 55%,#080b22 100%)",
           boxShadow: "0 40px 100px rgba(0,0,0,.6), 0 0 0 1px rgba(45,212,191,.08)",
@@ -65,6 +66,7 @@ export default function OtpVerifyModal({ show, onClose, otp, setOtp, onVerify, o
           style={{ background: "radial-gradient(circle,rgba(99,102,241,.20),transparent 65%)" }} />
 
         <button onClick={onClose}
+          aria-label="Close"
           style={{ position: "absolute", top: "16px", right: "16px" }}
           className="z-20 w-8 h-8 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 hover:bg-white/15 text-white/60 hover:text-white transition-all duration-200">
           <FaTimes className="text-xs" />
@@ -83,7 +85,7 @@ export default function OtpVerifyModal({ show, onClose, otp, setOtp, onVerify, o
             </div>
           </div>
 
-          <h2 className="font-[Poppins,sans-serif] font-extrabold text-white text-xl mb-1.5">Verify Your Number</h2>
+          <h2 id="otp-modal-title" className="font-[Poppins,sans-serif] font-extrabold text-white text-xl mb-1.5">Verify Your Number</h2>
           <p className="text-white/45 text-[13px] max-w-[240px] leading-relaxed">
             Enter the 6-digit code we just sent to your phone
           </p>

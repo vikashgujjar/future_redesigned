@@ -1,4 +1,0 @@
-User-agent: *
-allow: /
-
-SITEMAP: https://futuretouch.in/sitemap.xml

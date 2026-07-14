@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { RxCross2 } from "react-icons/rx";
 import { FaEnvelope, FaPhoneAlt, FaSkype, FaChevronDown, FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
+import Image from "next/image";
 import Login from "./Login";
 
 /* ─── Mega menu data ─────────────────────────────── */
@@ -140,7 +141,7 @@ function MegaColumn({ col }) {
     <div>
       <Link href={col.href} className="flex items-center gap-2.5 pb-3 mb-3 border-b border-gray-100 group">
         <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-teal-50 to-indigo-50 flex items-center justify-center flex-shrink-0 group-hover:from-teal-100 group-hover:to-indigo-100 transition-colors shadow-sm">
-          <img src={col.icon} alt={col.heading} className="w-4 h-4 object-contain" />
+          <Image src={col.icon} alt={col.heading} width={32} height={32} unoptimized className="w-4 h-4 object-contain" />
         </div>
         <span
           className="text-sm font-bold text-gray-800 group-hover:text-indigo-600 transition-colors"
@@ -392,9 +393,10 @@ export default function Header() {
 
             {/* Logo */}
             <Link href="/" className="flex-shrink-0">
-              <img
+              <Image
                 src="/images/Header/secondary-logo.webp"
                 alt="Future IT Touch logo"
+                width={1377} height={350} unoptimized priority
                 className="h-10 xl:h-12 w-auto"
               />
             </Link>
@@ -584,9 +586,10 @@ export default function Header() {
       >
         <div className="flex items-center justify-between px-4 h-[60px]">
           <Link href="/">
-            <img
+            <Image
               src="/images/Header/secondary-logo.webp"
               alt="Future IT Touch logo"
+              width={1377} height={350} unoptimized priority
               className="h-12 w-auto"
             />
           </Link>
@@ -697,7 +700,8 @@ export default function Header() {
               style={{ borderBottom: "1px solid rgba(255,255,255,.07)" }}
             >
               <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
-                <img src="/images/Header/secondary-logo.webp" alt="logo"
+                <Image src="/images/Header/secondary-logo.webp" alt="Future IT Touch logo"
+                  width={1377} height={350} unoptimized
                   className="h-8 w-auto brightness-200" />
               </Link>
               <button

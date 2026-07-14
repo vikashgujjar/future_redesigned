@@ -68,21 +68,12 @@ const Login = ({ handleClosePopup ,isPopupOpen}) => {
   });
 
   const handleChange = (e) => {
-    console.log();
     const { name, value } = e.target;
 
     setFormData({
       ...formData,
       [name]: value,
     });
-
-    console.log(formData);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form Data Submitted: ", formData);
-    // Add form submission logic here
   };
 
   const countryCodes = COUNTRY_CODES;
@@ -95,7 +86,7 @@ const Login = ({ handleClosePopup ,isPopupOpen}) => {
         const match = countryCodes.find((c) => c.shortName === data.country_code);
         if (match) setFormData((prev) => ({ ...prev, cr_code: match.dialCode }));
       })
-      .catch((error) => console.error("Error detecting country code:", error));
+      .catch(() => {});
   }, []);
 
 function onCaptchVerify() {
@@ -132,15 +123,13 @@ function onCaptchVerify() {
     const appVerifier = window.recaptchaVerifierLogin;
 
     const formatPh = formData.cr_code + formData.S_phone;
-    console.log(formatPh);
     signInWithPhoneNumber(auth, formatPh, appVerifier)
       .then((confirmationResult) => {
         window.confirmationResultLogin = confirmationResult;
         setLoading(false);
         setShowOTP2(true);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
         setLoading(false);
       });
   }
@@ -149,21 +138,18 @@ function onCaptchVerify() {
     setLoading(true);
     window.confirmationResultLogin
       .confirm(otp)
-      .then(async (res) => {
-        console.log(res);
-
+      .then(async () => {
         const urlEncodedData = new URLSearchParams();
         for (const [key, value] of Object.entries(formData)) {
           urlEncodedData.append(key, value);
         }
 
         try {
-          const response = await axios.post(
+          await axios.post(
             "https://futuretouchmail.onrender.com/send-email",
             urlEncodedData
           );
           setLoading(false);
-          console.log(response);
           setFormData({
             S_name: "",
             S_email: "",
@@ -179,16 +165,12 @@ function onCaptchVerify() {
           }).then((result) => {
             if (result.isConfirmed) {
               setLoading(false);
-              console.log("hello User");
-
               setOTP("");
-
               window.location.href = "/";
             }
           });
-        } catch (error) {
+        } catch {
           setLoading(false);
-          console.error(error);
           Swal.fire({
             icon: "error",
             title: "Oops...",
@@ -196,8 +178,7 @@ function onCaptchVerify() {
           });
         }
       })
-      .catch((err) => {
-        console.error(err);
+      .catch(() => {
         setLoading(false);
         Swal.fire({
           icon: "error",
@@ -276,6 +257,7 @@ function onCaptchVerify() {
 
             <button
               onClick={handleClosePopup}
+              aria-label="Close"
               className="relative z-10 w-9 h-9 flex items-center justify-center rounded-xl bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-all duration-200 border border-white/10"
             >
               <FaTimes className="text-sm" />
@@ -291,12 +273,12 @@ function onCaptchVerify() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <div className="relative">
                 <FaUser className="absolute left-3.5 top-1/2 -translate-y-1/2 text-indigo-300 text-sm pointer-events-none" />
-                <input type="text" name="S_name" placeholder="Full Name *" required
+                <input type="text" name="S_name" placeholder="Full Name *" aria-label="Full Name" required
                   value={formData.S_name} onChange={handleChange} className={inputCls} />
               </div>
               <div className="relative">
                 <FaEnvelope className="absolute left-3.5 top-1/2 -translate-y-1/2 text-indigo-300 text-sm pointer-events-none" />
-                <input type="text" name="S_email" placeholder="Email Address *" required
+                <input type="text" name="S_email" placeholder="Email Address *" aria-label="Email Address" required
                   value={formData.S_email} onChange={handleChange} className={inputCls} />
               </div>
             </div>
@@ -306,6 +288,7 @@ function onCaptchVerify() {
               <div className="relative flex">
                 <select
                   onChange={handleChange} name="cr_code" value={formData.cr_code}
+                  aria-label="Country code"
                   className="h-11 w-[78px] flex-shrink-0 text-sm bg-gray-50 border border-gray-200 border-r-0 rounded-l-xl outline-none text-gray-600 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 px-2"
                 >
                   {countryCodes.map((c, i) => (
@@ -316,14 +299,14 @@ function onCaptchVerify() {
                 </select>
                 <div className="relative flex-1">
                   <FaPhone className="absolute left-3 top-1/2 -translate-y-1/2 text-indigo-300 text-sm pointer-events-none" />
-                  <input type="text" name="S_phone" placeholder="Phone Number *"
+                  <input type="text" name="S_phone" placeholder="Phone Number *" aria-label="Phone Number"
                     value={formData.S_phone} onChange={handleChange}
                     className="w-full h-11 pl-9 pr-3 text-sm text-[#050748] bg-white border border-gray-200 rounded-r-xl outline-none placeholder:text-gray-400 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100" />
                 </div>
               </div>
               <div className="relative">
                 <FaCommentDots className="absolute left-3.5 top-1/2 -translate-y-1/2 text-indigo-300 text-sm pointer-events-none" />
-                <input type="text" name="skype_id" placeholder="Skype ID"
+                <input type="text" name="skype_id" placeholder="Skype ID" aria-label="Skype ID"
                   value={formData.skype_id} onChange={handleChange} className={inputCls} />
               </div>
             </div>
@@ -332,7 +315,7 @@ function onCaptchVerify() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <div className="relative">
                 <FaCalendarAlt className="absolute left-3.5 top-1/2 -translate-y-1/2 text-indigo-300 text-sm pointer-events-none z-10" />
-                <select name="start_time" value={formData.start_time} onChange={handleChange} className={selectCls}>
+                <select name="start_time" value={formData.start_time} onChange={handleChange} aria-label="When to start" className={selectCls}>
                   <option value="">When to start?</option>
                   <option value="ASAP">ASAP</option>
                   <option value="In a week">In a week</option>
@@ -341,7 +324,7 @@ function onCaptchVerify() {
               </div>
               <div className="relative">
                 <FaCode className="absolute left-3.5 top-1/2 -translate-y-1/2 text-indigo-300 text-sm pointer-events-none z-10" />
-                <select name="service_type" value={formData.service_type} onChange={handleChange} className={selectCls}>
+                <select name="service_type" value={formData.service_type} onChange={handleChange} aria-label="Choose a service" className={selectCls}>
                   <option value="">Choose a Service</option>
                   {SERVICES.map((s) => (
                     <option key={s} value={s}>{s}</option>
@@ -354,14 +337,14 @@ function onCaptchVerify() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <div className="relative">
                 <FaDollarSign className="absolute left-3.5 top-1/2 -translate-y-1/2 text-indigo-300 text-sm pointer-events-none" />
-                <input type="text" name="budget_range" placeholder="Budget Range"
+                <input type="text" name="budget_range" placeholder="Budget Range" aria-label="Budget Range"
                   value={formData.budget_range} onChange={handleChange} className={inputCls} />
               </div>
               <label className="relative flex items-center justify-center h-11 rounded-xl border-2 border-dashed border-indigo-300 bg-indigo-50/60 cursor-pointer hover:bg-indigo-100/60 transition-colors gap-2 group">
                 <FaCloudUploadAlt className="text-base text-indigo-400 group-hover:text-indigo-500 flex-shrink-0" />
                 <span className="text-xs font-semibold text-indigo-400 group-hover:text-indigo-500">Attach a File</span>
                 <span className="text-[10px] text-gray-400 hidden sm:inline">(JPG, PNG, PDF)</span>
-                <input type="file" name="file" accept=".jpg,.jpeg,.png,.gif,.pdf"
+                <input type="file" name="file" accept=".jpg,.jpeg,.png,.gif,.pdf" aria-label="Attach a file"
                   className="absolute inset-0 opacity-0 cursor-pointer w-full h-full" />
               </label>
             </div>
@@ -369,7 +352,7 @@ function onCaptchVerify() {
             {/* Row 5 — Project Description */}
             <div className="relative mb-4">
               <FaFileAlt className="absolute left-3.5 top-3.5 text-indigo-300 text-sm pointer-events-none" />
-              <textarea name="message" placeholder="Project Description"
+              <textarea name="message" placeholder="Project Description" aria-label="Project Description"
                 value={formData.message} onChange={handleChange} rows={3}
                 className="w-full pl-10 pr-4 pt-2.5 pb-2.5 text-sm text-[#050748] bg-white border border-gray-200 rounded-xl outline-none placeholder:text-gray-400 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 resize-none transition-all duration-200" />
             </div>

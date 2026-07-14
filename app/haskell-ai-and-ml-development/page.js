@@ -3,7 +3,7 @@ import Haskell from "./Haskell";
 export const metadata = {
   title: "Haskell AI/ML Development - Future IT Touch Private Limited",
   description:
-    "Future IT Touch Private Limited is a leading IT solutions provider.",
+    "Haskell-based AI and machine learning development leveraging functional programming, strong type safety, and parallel computation for reliable, high-performance systems.",
   keywords: "IT, Technology, Solutions, Future IT Touch",
 };
 

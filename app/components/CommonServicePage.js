@@ -9,6 +9,8 @@ import WhyFutureITTouch from "./WhyFutureITTouch";
 import TechnologiesSection from "./TechnologiesSection";
 import FAQSection from "./FAQSection";
 import GetNewInsight from "./GetNewInsight";
+import ServiceSchema from "./schema/ServiceSchema";
+import FaqSchema from "./schema/FaqSchema";
 
 const FEAT_COLORS = [
   { from:"#06b6d4", to:"#0284c7" },
@@ -54,6 +56,11 @@ export default function CommonServicePage({
 
   return (
     <>
+      <ServiceSchema name={bannerTitle} description={bannerDesc} />
+      {faqData.length > 0 && (
+        <FaqSchema items={faqData.map((f) => ({ question: f.title, answer: f.description }))} />
+      )}
+
       {/* ── 1. Banner ── */}
       <CommonBannerService imgSrc={bannerImg} title={bannerTitle} desc={bannerDesc} />
 

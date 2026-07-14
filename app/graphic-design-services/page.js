@@ -4,7 +4,7 @@ import Branding from './Branding'
 export const metadata = {
   title: "Design & Branding - Future IT Touch Private Limited",
   description:
-    "Future IT Touch Private Limited is a leading IT solutions provider.",
+    "Creative graphic design and branding services including logo design, brochures, social media graphics, business stationery, packaging, and UI/UX web graphics.",
   keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
 };
 

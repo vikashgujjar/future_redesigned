@@ -74,7 +74,7 @@ const Forms = () => {
     const appVerifier = window.recaptchaVerifierForms;
     signInWithPhoneNumber(auth, formData.cr_code + formData.phone, appVerifier)
       .then(result => { window.confirmationResultForms = result; setLoading(false); setShowOTP(true); })
-      .catch(err => { console.log(err); setLoading(false); });
+      .catch(() => { setLoading(false); });
   }
 
   const onOTPVerify = async () => {
@@ -283,8 +283,8 @@ const Forms = () => {
               <div className="grid grid-cols-2 gap-2.5">
                 {[{ k: "first", ph: "First Name" }, { k: "last", ph: "Last Name" }].map(f => (
                   <div key={f.k}>
-                    <label className="frm-label">{f.ph}</label>
-                    <input className="frm-input" placeholder={f.ph}
+                    <label className="frm-label" htmlFor={`frm_${f.k}`}>{f.ph}</label>
+                    <input id={`frm_${f.k}`} className="frm-input" placeholder={f.ph}
                       value={formData[f.k]}
                       onChange={e => setFormData({ ...formData, [f.k]: e.target.value })} />
                   </div>
@@ -293,15 +293,15 @@ const Forms = () => {
 
               {/* Email */}
               <div>
-                <label className="frm-label">Email Address</label>
-                <input className="frm-input" type="email" placeholder="john@example.com"
+                <label className="frm-label" htmlFor="frm_email">Email Address</label>
+                <input id="frm_email" className="frm-input" type="email" placeholder="john@example.com"
                   value={formData.email}
                   onChange={e => setFormData({ ...formData, email: e.target.value })} />
               </div>
 
               {/* Phone */}
               <div>
-                <label className="frm-label">Phone Number</label>
+                <label className="frm-label" htmlFor="frm_phone">Phone Number</label>
                 <div className="relative">
                   <span
                     className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-1 pr-2 border-r border-white/10 pointer-events-none"
@@ -312,7 +312,7 @@ const Forms = () => {
                     </span>
                     <span>{formData.cr_code}</span>
                   </span>
-                  <input className="frm-input phone-autofill-fix" type="tel" placeholder="98765 43210"
+                  <input id="frm_phone" className="frm-input phone-autofill-fix" type="tel" placeholder="98765 43210"
                     style={{ paddingLeft: 72 }}
                     value={formData.phone}
                     onChange={e => setFormData({ ...formData, phone: e.target.value })} />
@@ -321,9 +321,9 @@ const Forms = () => {
 
               {/* Service */}
               <div>
-                <label className="frm-label">Select Service</label>
+                <label className="frm-label" htmlFor="frm_service">Select Service</label>
                 <div className="relative">
-                  <select className="frm-input frm-select"
+                  <select id="frm_service" className="frm-input frm-select"
                     value={formData.service}
                     onChange={e => setFormData({ ...formData, service: e.target.value })}>
                     <option value="" disabled>Choose your service</option>
@@ -338,7 +338,7 @@ const Forms = () => {
 
               {/* File Upload */}
               <div>
-                <label className="frm-label">Attach File</label>
+                <label className="frm-label" htmlFor="frm-file-input">Attach File</label>
                 <label
                   htmlFor="frm-file-input"
                   className={`frm-file-zone${fileDrag ? " drag-over" : ""}`}

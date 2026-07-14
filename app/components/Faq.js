@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import FaqSchema from "./schema/FaqSchema";
 
 const faqData = [
   {
@@ -41,6 +42,7 @@ export default function Faq() {
       className="relative overflow-hidden py-16 sm:py-20 lg:py-24 px-4 sm:px-6 md:px-10 xl:px-24"
       style={{ background: "#ffffff" }}
     >
+      <FaqSchema items={faqData.map(({ question, answer }) => ({ question, answer }))} />
       <style>{`
         .faq-section-dot {
           background-image: radial-gradient(circle, rgba(99,102,241,.05) 1px, transparent 1px);

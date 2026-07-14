@@ -4,7 +4,7 @@ import Services from './Services'
 
 export const metadata = {
   title: "Service - Future IT Touch Private Limited",
-  description: "Future IT Touch Private Limited is a leading IT solutions provider.",
+  description: "Explore Future IT Touch's full range of services — app and web development, eCommerce, trending technologies, digital marketing, design, and cyber security.",
   keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
 };
 

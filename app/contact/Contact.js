@@ -16,6 +16,8 @@ import { auth } from "../firebase.config";
 import { COUNTRY_CODES } from "../components/countryData";
 import { SERVICES } from "../data/services";
 import OtpVerifyModal from "../components/OtpVerifyModal";
+import WebPageSchema from "../components/schema/WebPageSchema";
+import BreadcrumbSchema from "../components/schema/BreadcrumbSchema";
 
 const infoCards = [
   {
@@ -102,7 +104,7 @@ export default function Page() {
     const appVerifier = window.recaptchaVerifierContact;
     signInWithPhoneNumber(auth, formData.cr_code + formData.S_phone, appVerifier)
       .then((res) => { window.confirmationResultContact = res; setLoading(false); setShowOTP(true); })
-      .catch((err) => { console.log(err); setLoading(false); });
+      .catch(() => { setLoading(false); });
   }
 
   function reSend() {
@@ -114,7 +116,7 @@ export default function Page() {
     onCaptchVerify();
     signInWithPhoneNumber(auth, formData.cr_code + formData.S_phone, window.recaptchaVerifierContact)
       .then((res) => { window.confirmationResultContact = res; setLoading(false); setShowOTP(true); })
-      .catch((err) => { console.log(err); setLoading(false); });
+      .catch(() => { setLoading(false); });
   }
 
   const onOTPVerify = async () => {
@@ -147,6 +149,13 @@ export default function Page() {
 
   return (
     <>
+      <WebPageSchema
+        type="ContactPage"
+        name="Contact Future IT Touch Private Limited"
+        description="Get in touch with Future IT Touch to discuss your project — reach our team by phone, email, or Skype, or send a message through our contact form."
+        path="/contact"
+      />
+      <BreadcrumbSchema items={[{ name: "Home", path: "/" }, { name: "Contact Us", path: "/contact" }]} />
       <style>{`
         @keyframes ctGrad { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
         @keyframes ctPing  { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
@@ -379,14 +388,14 @@ export default function Page() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
                 <div>
-                  <label className="ct-label">Full Name *</label>
-                  <input type="text" name="S_name" placeholder="John Doe"
+                  <label className="ct-label" htmlFor="ct_S_name">Full Name *</label>
+                  <input id="ct_S_name" type="text" name="S_name" placeholder="John Doe"
                     value={formData.S_name} onChange={handleChange}
                     className="ct-field" />
                 </div>
                 <div>
-                  <label className="ct-label">Email Address *</label>
-                  <input type="email" name="S_email" placeholder="john@example.com"
+                  <label className="ct-label" htmlFor="ct_S_email">Email Address *</label>
+                  <input id="ct_S_email" type="email" name="S_email" placeholder="john@example.com"
                     value={formData.S_email} onChange={handleChange}
                     className="ct-field" />
                 </div>
@@ -394,9 +403,9 @@ export default function Page() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
                 <div>
-                  <label className="ct-label">Phone Number *</label>
+                  <label className="ct-label" htmlFor="ct_S_phone">Phone Number *</label>
                   <div className="flex gap-2">
-                    <select name="cr_code" value={formData.cr_code} onChange={handleChange}
+                    <select aria-label="Country code" name="cr_code" value={formData.cr_code} onChange={handleChange}
                       className="ct-field" style={{ width:96, flexShrink:0, paddingLeft:10 }}>
                       {COUNTRY_CODES.map((c) => (
                         <option key={c.shortName} value={c.dialCode} title={c.name}>
@@ -404,14 +413,14 @@ export default function Page() {
                         </option>
                       ))}
                     </select>
-                    <input type="text" name="S_phone" placeholder="7056937000"
+                    <input id="ct_S_phone" type="text" name="S_phone" placeholder="7056937000"
                       value={formData.S_phone} onChange={handleChange}
                       className="ct-field" style={{ flex:1 }} />
                   </div>
                 </div>
                 <div>
-                  <label className="ct-label">Service Required</label>
-                  <select name="S_subject" value={formData.S_subject} onChange={handleChange}
+                  <label className="ct-label" htmlFor="ct_S_subject">Service Required</label>
+                  <select id="ct_S_subject" name="S_subject" value={formData.S_subject} onChange={handleChange}
                     className="ct-field">
                     <option value="">Select a service</option>
                     {SERVICES.map((s) => (
@@ -422,8 +431,8 @@ export default function Page() {
               </div>
 
               <div className="mb-5">
-                <label className="ct-label">Your Message *</label>
-                <textarea name="message" placeholder="Tell us about your project…"
+                <label className="ct-label" htmlFor="ct_message">Your Message *</label>
+                <textarea id="ct_message" name="message" placeholder="Tell us about your project…"
                   rows={5} value={formData.message} onChange={handleChange}
                   className="ct-field" style={{ resize:"vertical", lineHeight:1.7 }} />
               </div>
@@ -483,7 +492,7 @@ export default function Page() {
 
       {/* ── Map ── */}
       <Location />
-      <div style={{ padding:"0 5vw 56px" }}>
+      <div style={{ padding:"0 0vw 0px" }}>
         <div style={{ borderRadius:20, overflow:"hidden",
           boxShadow:"0 8px 40px rgba(99,102,241,.10)", border:"1px solid rgba(99,102,241,.10)" }}>
           <iframe

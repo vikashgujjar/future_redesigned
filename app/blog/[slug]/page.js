@@ -19,7 +19,7 @@ import BlogView from "./BlogView";
 export const metadata = {
   title: "Blog - Future IT Touch Private Limited",
   description:
-    "Future IT Touch Private Limited is a leading IT solutions provider.",
+    "In-depth articles from Future IT Touch covering web development frameworks, mobile technologies, and software engineering best practices for developers and businesses.",
   keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
 };
 

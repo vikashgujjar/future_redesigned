@@ -4,7 +4,7 @@ import Reactjs from './Reactjs'
 export const metadata = {
   title: "Reactjs, Vuejs, Nodejs - Future IT Touch Private Limited",
   description:
-    "Future IT Touch Private Limited is a leading IT solutions provider.",
+    "Full-stack JavaScript development with React.js, Vue.js, and Node.js — building fast, scalable SPAs, real-time dashboards, and REST or GraphQL backends.",
   keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
 };
 

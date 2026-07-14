@@ -3,7 +3,7 @@ import PythonBlockchain from './PythonBlockchain'
 
 export const metadata = {
   title: "Python Django Flask Development  - Future IT Touch Private Limited",
-  description: "Future IT Touch Private Limited is a leading IT solutions provider.",
+  description: "Python-based blockchain and DApp development using Web3.py and Hyperledger Fabric for DeFi platforms, NFT marketplaces, and secure enterprise blockchain solutions.",
   keywords: "IT, Technology, Solutions, Future IT Touch"
 };
 

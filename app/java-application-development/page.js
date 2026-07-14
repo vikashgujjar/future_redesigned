@@ -3,7 +3,7 @@ import Java from './Java'
 
 export const metadata = {
   title: "Java - Future IT Touch Private Limited",
-  description: "Future IT Touch Private Limited is a leading IT solutions provider.",
+  description: "Enterprise Java and Spring Boot application development featuring microservices architecture, secure REST APIs, and cloud deployment for scalable business systems.",
   keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
 };
 

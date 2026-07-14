@@ -3,7 +3,7 @@ import Cblock from "./Cblock";
 export const metadata = {
   title: "C++ Blockchain Development  - Future IT Touch Private Limited",
   description:
-    "Future IT Touch Private Limited is a leading IT solutions provider.",
+    "High-performance C++ blockchain development — custom nodes, consensus engines, and low-latency distributed ledger systems built for enterprise-grade throughput and reliability.",
   keywords: "IT, Technology, Solutions, Future IT Touch",
 };
 

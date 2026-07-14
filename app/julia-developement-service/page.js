@@ -3,7 +3,7 @@ import Julia from "./Julia";
 export const metadata = {
   title: "Julia - Future IT Touch Private Limited",
   description:
-    "Future IT Touch Private Limited is a leading IT solutions provider.",
+    "High-performance Julia development for scientific computing, numerical modeling, and AI workflows — combining C-level execution speed with clean, productive code.",
   keywords: "IT, Technology, Solutions, Future IT Touch",
 };
 

@@ -227,7 +227,7 @@ export default function LocationSection() {
                 </div>
 
                 {/* city grid */}
-                <div className="grid grid-cols-2 max-h-[150px] overflow-auto gap-1.5 mt-0 scrollbar-hide">
+                <div className="grid grid-cols-2 max-h-[120px] overflow-auto gap-1.5 mt-0 scrollbar-hide">
                   {loc.cities.map((city, ci) => {
                     const isFeatured = city === loc.featuredCity;
                     return (

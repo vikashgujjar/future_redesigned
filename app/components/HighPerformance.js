@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 import {
   FaLightbulb,
   FaPaintBrush,
@@ -62,9 +63,10 @@ export default function HighPerformance() {
 
       <div className="grid grid-cols-1 lg:grid-cols-5 items-start gap-8 mt-20">
         <div className="hidden lg:flex lg:col-span-2  justify-center items-start sticky top-0">
-          <img
+          <Image
             src="/Assets/performance.jpg"
             alt="High Performance"
+            width={648} height={802} unoptimized
             className="w-full rounded-xl shadow-lg object-cover hover:scale-105 transition-transform duration-500"
           />
         </div>
@@ -77,7 +79,7 @@ export default function HighPerformance() {
               className="flex flex-col items-start gap-4 p-6 border border-gray-200 rounded-xl bg-white shadow-md hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300"
             >
               <div className="flex  -mt-14 bg-white justify-center items-center p-4 rounded w-20 h-20 bg-gradient-to-r border border-gray-400">
-                <img src={feature.icon} alt="" />
+                <Image src={feature.icon} alt="" width={512} height={512} unoptimized />
               </div>
               <h4 className="text-lg font-semibold text-gray-900">
                 {feature.title}
