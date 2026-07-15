@@ -278,7 +278,7 @@ export default function LocationSection() {
                 </div>
 
                 {/* city grid */}
-                <div className={`grid ${activeService ? "grid-cols-1" : "grid-cols-2"} max-h-[120px] overflow-auto gap-1.5 mt-0 scrollbar-hide`}>
+                <div className={`grid ${activeService ? "grid-cols-2" : "grid-cols-2"} max-h-[120px] overflow-auto gap-1.5 mt-0 scrollbar-hide`}>
                   {loc.cities.map((city, ci) => {
                     const isFeatured = city === loc.featuredCity;
                     return (
@@ -302,13 +302,13 @@ export default function LocationSection() {
                         />
                         <span
                           className="text-[11px] leading-tight"
-                          title={activeService ? `${activeService} ${city}` : city}
+                          title={activeService ? `${city}` : city}
                           style={{
                             fontFamily: "'Poppins',sans-serif",
                             color: isFeatured ? "#ffffff" : "rgba(255,255,255,.60)",
                             fontWeight: isFeatured ? 700 : 500,
                           }}>
-                          {activeService ? `${activeService} ${city}` : city}
+                          {activeService ? `${city}` : city}
                         </span>
                       </div>
                     );
