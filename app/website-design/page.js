@@ -2,10 +2,14 @@ import React from 'react'
 import WebDesign from './WebDesign'
 
 export const metadata = {
-  title: "Website Designing Agency | Web Design Service",
+  title: "Custom Web Design Company | Responsive Website Design Services",
   description:
-    "Future IT Touch is a professional Website design agency that creates Responsive, Fast, Mobile-Friendly, and SEO-friendly websites at very reasonable prices",
-  keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
+    "Professional web design company building custom, responsive, SEO-friendly websites for startups and enterprises worldwide. Affordable website design services with fast delivery and 15+ years of experience.",
+  keywords: [
+    "web design company", "website design services", "custom web design company",
+    "responsive web design company", "affordable web design services",
+    "business website design services", "website redesign services",
+  ],
 };
 
 export default function page() {

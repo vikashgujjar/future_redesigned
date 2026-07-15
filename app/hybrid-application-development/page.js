@@ -1,10 +1,14 @@
 import Hybrid from "./Hybrid";
 
 export const metadata = {
-  title: "Future IT Touch Hybrid App Development Services in India ",
+  title: "Hybrid App Development Company | Flutter & React Native Apps",
   description:
-    "Future IT Touch offers perfect hybrid app development services , combining best of both native and web applications to give powerful ,versatile mobile solutions.",
-  keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
+    "Hybrid app development services combining the best of native and web technologies — build once with Flutter or React Native and launch on iOS and Android simultaneously.",
+  keywords: [
+    "hybrid app development company", "Flutter app development company",
+    "React Native app development", "cross platform app development",
+    "cost-effective mobile app development",
+  ],
 };
 
 export default function Page() {

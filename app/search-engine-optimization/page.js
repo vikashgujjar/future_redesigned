@@ -2,9 +2,12 @@ import React from 'react'
 import Seo from './Seo'
 
 export const metadata = {
-  title: "Top SEO Services - Boost Your Online Visibility Today",
-  description: "Future IT Touch offers expert SEO services to enhance your online presence. Drive traffic, improve rankings, and grow your business with our SEO strategies.",
-  keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
+  title: "SEO Services Company | Search Engine Optimization Experts",
+  description: "Professional SEO services to improve search rankings, drive organic traffic, and grow your business — technical SEO, on-page optimization, link building, and content strategy.",
+  keywords: [
+    "SEO services company", "search engine optimization services",
+    "SEO agency", "technical SEO services", "organic traffic growth",
+  ],
 };
 export default function page() {
   return (

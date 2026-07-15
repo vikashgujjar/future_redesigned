@@ -1,10 +1,14 @@
 import Android from "./Android";
 
 export const metadata = {
-  title: "Top Android App Development Services in India | Future IT Touch",
+  title: "Android App Development Company | Custom Android Apps",
   description:
-    "Get exceptional Android app development services in India with Future IT Touch. Our expert team delivers innovative mobile solutions to boost your business.",
-  keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
+    "Android app development company building custom, scalable Android applications with Kotlin and Java — from UI/UX design to Play Store launch and ongoing maintenance.",
+  keywords: [
+    "Android app development company", "custom android app development",
+    "hire android developers", "android app developers near me",
+    "enterprise android app development",
+  ],
 };
 
 export default function Page() {

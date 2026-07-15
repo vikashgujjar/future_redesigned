@@ -2,10 +2,13 @@ import React from 'react'
 import Logo from './Logo'
 
 export const metadata = {
-  title: "Get Logo Design Services | Future ITtouch",
+  title: "Logo Design Services | Custom Brand Logo Design",
   description:
-    "Get unique and professional logo design services from Future ITtouch. Stand out with a custom logo that perfectly represents your brand.",
-  keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
+    "Custom logo design services that give your brand a unique, memorable identity — concept development, revisions, and full brand asset delivery for businesses of every size.",
+  keywords: [
+    "logo design services", "custom logo design company",
+    "professional logo designers", "brand logo design", "logo design for startups",
+  ],
 };
 
 

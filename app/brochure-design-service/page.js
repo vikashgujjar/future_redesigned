@@ -2,10 +2,13 @@ import React from 'react'
 import Brochure from './Brochure'
 
 export const metadata = {
-  title: "Professional Brochure Design Services | Future ITtouch",
+  title: "Brochure Design Services | Print & Digital Brochure Design",
   description:
-    "Enhance your brand with stunning brochure designs. Future ITtouch offers professional brochure design services  to your business needs.",
-  keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
+    "Professional brochure design services tailored to your brand and audience — print-ready and digital brochures that communicate your message clearly and convert prospects into customers.",
+  keywords: [
+    "brochure design services", "business brochure design company",
+    "print brochure design", "digital brochure design", "marketing collateral design",
+  ],
 };
 
 

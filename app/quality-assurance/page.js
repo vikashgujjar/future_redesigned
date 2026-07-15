@@ -1,10 +1,13 @@
 import Quality from "./Quality";
 
 export const metadata = {
-  title: "Top-Notch Quality Assurance & Testing Services |Future IT Touch",
+  title: "Software Quality Assurance & Testing Services",
   description:
-    "Ensure top-notch software quality with Future IT Touch expert Quality Assurance and Testing services  Reliable, efficient, and comprehensive testing solutions.",
-  keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
+    "Software QA and testing services covering manual and automated testing, regression testing, and performance testing — reliable, efficient quality assurance for web and mobile applications.",
+  keywords: [
+    "quality assurance services", "software testing company",
+    "QA testing services", "automated testing services", "regression testing company",
+  ],
 };
 
 export default function Page() {

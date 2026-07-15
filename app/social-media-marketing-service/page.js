@@ -2,9 +2,13 @@ import React from 'react'
 import Social from './Social'
 
 export const metadata = {
-  title: "Top-Notch Social Media Marketing Services by Future IT Touch | Elevate Your Brand Online",
-  description: "Boost your brand with Future IT Touch's expert social media marketing services. Engage your audience, grow your reach, and drive results with our strategies.",
-  keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
+  title: "Social Media Marketing Services | Grow Your Brand Online",
+  description: "Social media marketing services that build engaged audiences and measurable growth across Instagram, Facebook, LinkedIn, and more — content strategy, community management, and paid campaigns.",
+  keywords: [
+    "social media marketing services", "social media management company",
+    "Instagram marketing services", "social media advertising",
+    "brand growth on social media",
+  ],
 };
 
 export default function page() {

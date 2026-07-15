@@ -1,4 +1,41 @@
+"use client";
+import { usePathname } from "next/navigation";
 import { MapPin, Globe, Building2, Heart } from "lucide-react";
+
+// Maps each service page's route to its display name. Only these routes get
+// "{service} {city}" tags — every other page (Contact, general pages, etc.)
+// keeps the plain city grid. Framed as remote delivery, never a local-office
+// claim, since Future IT Touch has no physical presence outside India.
+const SERVICE_PAGE_MAP = {
+  "/website-design": "Website Design",
+  "/ecommerce-website-development": "eCommerce Website Development",
+  "/web-app-development": "Web Application Development",
+  "/cms-development": "CMS Web Development",
+  "/business-developement": "Small Business Website Design",
+  "/web-app-developemnt-corporate": "Corporate Website Design",
+  "/application-developement": "Mobile App Development",
+  "/android-application-development": "Android App Development",
+  "/ios-application-development": "iOS App Development",
+  "/hybrid-application-development": "Hybrid App Development",
+  "/mobile-application-testing": "Mobile App Testing",
+  "/quality-assurance": "Quality Assurance",
+  "/search-engine-optimization": "SEO Services",
+  "/pay-per-click-service": "PPC Management",
+  "/social-media-marketing-service": "Social Media Marketing",
+  "/local-search-engine-optimization": "Local SEO Services",
+  "/content-marketing-service": "Content Marketing",
+  "/logo-design-services": "Logo Design",
+  "/corporate-stationery-design": "Corporate Identity Design",
+  "/brochure-design-service": "Brochure Design",
+  "/animated-services": "Animated Video Production",
+  "/creative-services": "Creative Agency Services",
+  "/vulnerability-assessment-service": "Vulnerability Assessment",
+  "/penetration-testing-service": "Penetration Testing",
+  "/network-security-service": "Network Security",
+  "/cloud-security-service": "Cloud Security",
+  "/data-protection-compliance-service": "Data Protection & Compliance",
+  "/incident-response-service": "Incident Response",
+};
 
 const locations = [
   {
@@ -48,6 +85,9 @@ const locations = [
 ];
 
 export default function LocationSection() {
+  const pathname = usePathname();
+  const activeService = SERVICE_PAGE_MAP[pathname];
+
   return (
     <section
       className="relative overflow-hidden py-16 sm:py-20 px-4 sm:px-6 md:px-10 xl:px-24"
@@ -101,17 +141,28 @@ export default function LocationSection() {
             <span className="w-2 h-2 rounded-full bg-gradient-to-r from-teal-400 to-cyan-400 animate-pulse flex-shrink-0" />
             <span className="text-[11px] font-bold uppercase tracking-widest bg-gradient-to-r from-teal-500 to-indigo-600 bg-clip-text text-transparent"
               style={{ fontFamily: "'Inter',sans-serif" }}>
-              Our Global Presence
+              {activeService ? `${activeService} — Delivered Worldwide` : "Our Global Presence"}
             </span>
           </div>
 
           <h2
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 leading-tight"
             style={{ fontFamily: "'Poppins',sans-serif" }}>
-            Growing Businesses{" "}
-            <span className="bg-gradient-to-r from-teal-400 to-indigo-700 bg-clip-text text-transparent">
-              Since 2001
-            </span>
+            {activeService ? (
+              <>
+                {activeService}{" "}
+                <span className="bg-gradient-to-r from-teal-400 to-indigo-700 bg-clip-text text-transparent">
+                  for Clients Worldwide
+                </span>
+              </>
+            ) : (
+              <>
+                Growing Businesses{" "}
+                <span className="bg-gradient-to-r from-teal-400 to-indigo-700 bg-clip-text text-transparent">
+                  Since 2001
+                </span>
+              </>
+            )}
           </h2>
 
           <p className="flex items-center justify-center gap-2 text-sm text-gray-500"
@@ -227,7 +278,7 @@ export default function LocationSection() {
                 </div>
 
                 {/* city grid */}
-                <div className="grid grid-cols-2 max-h-[120px] overflow-auto gap-1.5 mt-0 scrollbar-hide">
+                <div className={`grid ${activeService ? "grid-cols-1" : "grid-cols-2"} max-h-[120px] overflow-auto gap-1.5 mt-0 scrollbar-hide`}>
                   {loc.cities.map((city, ci) => {
                     const isFeatured = city === loc.featuredCity;
                     return (
@@ -250,13 +301,14 @@ export default function LocationSection() {
                           style={{ color: isFeatured ? loc.fi : "rgba(255,255,255,.32)" }}
                         />
                         <span
-                          className="text-[11px] leading-tight truncate"
+                          className="text-[11px] leading-tight"
+                          title={activeService ? `${activeService} ${city}` : city}
                           style={{
                             fontFamily: "'Poppins',sans-serif",
                             color: isFeatured ? "#ffffff" : "rgba(255,255,255,.60)",
                             fontWeight: isFeatured ? 700 : 500,
                           }}>
-                          {city}
+                          {activeService ? `${activeService} ${city}` : city}
                         </span>
                       </div>
                     );

@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import CommonSlider from "./CommonSlider";
@@ -13,6 +14,7 @@ import { auth } from "../../firebase.config";
 import OtpVerifyModal from "../OtpVerifyModal";
 import ServiceSchema from "../schema/ServiceSchema";
 import FaqSchema from "../schema/FaqSchema";
+import BreadcrumbSchema from "../schema/BreadcrumbSchema";
 
 // Animated gradient text — static string so Tailwind v4 scans it at build time
 const HL = "bg-[linear-gradient(125deg,#2dd4bf,#6366f1,#a855f7)] bg-[length:200%_200%] bg-clip-text text-transparent [animation:tcpGrad_5s_ease-in-out_infinite]";
@@ -36,6 +38,7 @@ export default function CommonTechPage({
   slider   = [],
   faq      = {},
 }) {
+  const pathname = usePathname();
   const [openFaq,  setOpenFaq]  = useState(null);
   const [formSent, setFormSent] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", service: "", message: "", cr_code: "+91" });
@@ -149,6 +152,7 @@ export default function CommonTechPage({
   return (
     <>
       <ServiceSchema name={banner.breadcrumb || banner.title} description={banner.tagline} />
+      <BreadcrumbSchema items={[{ name: "Home", path: "/" }, { name: banner.breadcrumb || banner.title, path: pathname }]} />
       {faq.items && faq.items.length > 0 && (
         <FaqSchema items={faq.items.map((item) => ({ question: item.title, answer: item.description }))} />
       )}

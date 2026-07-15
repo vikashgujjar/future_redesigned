@@ -3,9 +3,12 @@ import PPC from './PPC'
 
 
 export const metadata = {
-  title: "Expert PPC Services | Boost Your ROI with Future IT Touch",
-  description: "Boost your online presence with Future IT Touch's expert PPC services. Achieve maximum ROI with targeted ad campaigns, and data-driven strategies.",
-  keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
+  title: "PPC Management Services | Google Ads & Paid Search Experts",
+  description: "PPC management services delivering targeted ad campaigns and data-driven bidding strategies across Google Ads and social platforms — built to maximize ROI, not just clicks.",
+  keywords: [
+    "PPC management services", "Google Ads management company",
+    "paid search advertising", "PPC agency", "pay per click marketing services",
+  ],
 };
 export default function page() {
   return (

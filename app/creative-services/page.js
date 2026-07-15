@@ -2,10 +2,13 @@ import React from 'react'
 import Creative from './Creative'
 
 export const metadata = {
-  title: "Creative Agency Branding by Future ITtouch",
+  title: "Creative Agency Services | Branding & Design Studio",
   description:
-    "Transform your brand with Future ITtouch's creative agency services. We specialize in unique branding solutions to elevate your business identity.",
-  keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
+    "Creative agency services covering branding, visual identity, and design strategy — we help businesses build a distinctive brand presence across every touchpoint.",
+  keywords: [
+    "creative agency services", "branding agency", "brand identity design",
+    "creative design studio", "full-service branding company",
+  ],
 };
 
 export default function page() {

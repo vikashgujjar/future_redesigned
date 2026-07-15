@@ -1,10 +1,13 @@
 import IOS from "./IOS.js";
 
 export const metadata = {
-  title: "Best IOS App Development Services in India | Future IT Touch",
+  title: "iOS App Development Company | iPhone & iPad App Development",
   description:
-    "Future IT Touch  provides end-to-end iOS app development services for iPhone, iPad, Apple Watch, Apple TV and other Apple mobile devices.",
-  keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
+    "iOS app development services for iPhone, iPad, Apple Watch, and Apple TV — built with Swift for performance, security, and a seamless Apple ecosystem experience.",
+  keywords: [
+    "iOS app development company", "iPhone app development company",
+    "custom iOS app development", "hire iOS developers", "Swift app development",
+  ],
 };
 
 export default function Page() {

@@ -1,10 +1,14 @@
 import Ecommerce from "./Ecommerce";
 
 export const metadata = {
-  title: "Ecommerce Website Development Company & Service ",
+  title: "eCommerce Website Development Company | Shopify & WordPress Stores",
   description:
-    "Future IT Touch offers the best E-commerce Website Development Service to create e-commerce Websites in Shopify, WordPress, Drupal, React Node JS, PHP.",
-  keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
+    "eCommerce web design company building secure, conversion-optimized online stores on Shopify, WordPress, and custom platforms — with payment gateways, inventory systems, and scalable checkout flows.",
+  keywords: [
+    "ecommerce web design company", "ecommerce website development",
+    "Shopify website design services", "WordPress ecommerce development",
+    "online store development company", "custom ecommerce website development company",
+  ],
 };
 
 export default function Page() {

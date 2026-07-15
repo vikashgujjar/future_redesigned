@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import CommonBannerService from "./CommonBannerService";
 import TechMarquee from "./TechMarquee";
@@ -11,6 +12,7 @@ import FAQSection from "./FAQSection";
 import GetNewInsight from "./GetNewInsight";
 import ServiceSchema from "./schema/ServiceSchema";
 import FaqSchema from "./schema/FaqSchema";
+import BreadcrumbSchema from "./schema/BreadcrumbSchema";
 
 const FEAT_COLORS = [
   { from:"#06b6d4", to:"#0284c7" },
@@ -45,6 +47,7 @@ export default function CommonServicePage({
   faqTitle = "Frequently Asked Questions", faqData = [],
 }) {
   const [activeFeature, setActiveFeature] = useState(0);
+  const pathname = usePathname();
 
   const cur = features[activeFeature] || features[0];
   const curColor = FEAT_COLORS[activeFeature % FEAT_COLORS.length];
@@ -57,6 +60,7 @@ export default function CommonServicePage({
   return (
     <>
       <ServiceSchema name={bannerTitle} description={bannerDesc} />
+      <BreadcrumbSchema items={[{ name: "Home", path: "/" }, { name: bannerTitle, path: pathname }]} />
       {faqData.length > 0 && (
         <FaqSchema items={faqData.map((f) => ({ question: f.title, answer: f.description }))} />
       )}

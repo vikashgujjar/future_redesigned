@@ -2,9 +2,12 @@ import Contentt from "./Content";
 
 
 export const metadata = {
-  title: "Grow Your Brand with Expert Content Marketing | Future ITtouch",
-  description: "Boost your online presence with Future ITtouch's top content marketing services. We create engaging content to drive traffic and grow your business.",
-  keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
+  title: "Content Marketing Services | Content Strategy & Creation",
+  description: "Content marketing services that build authority and drive organic traffic — blog content, SEO copywriting, content strategy, and distribution built around your audience's search intent.",
+  keywords: [
+    "content marketing services", "content strategy agency",
+    "SEO content writing", "blog content services", "content marketing company",
+  ],
 };
 
 export default function page() {

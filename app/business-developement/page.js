@@ -1,10 +1,14 @@
 import Business from "./Business";
 
 export const metadata = {
-  title: "Small Business Website - Future IT Touch Private Limited",
+  title: "Small Business Website Design | Affordable Web Design Services",
   description:
-    "Affordable, custom-designed small business websites with mobile-responsive layouts, SEO-ready structure, SSL security, and optional eCommerce integration launched fast.",
-  keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
+    "Affordable small business website design services — mobile-responsive, SEO-ready websites with SSL security and optional eCommerce, custom-built and launched fast for startups and growing businesses.",
+  keywords: [
+    "small business web design", "affordable web design services",
+    "website design for startups", "custom website designers",
+    "small business website design services", "SEO friendly web design",
+  ],
 };
 
 export default function Page() {
