@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import CommonBannerService from "./CommonBannerService";
 import TechMarquee from "./TechMarquee";
 import OverviewSection from "./OverviewSection";
@@ -45,6 +46,7 @@ export default function CommonServicePage({
   techBadge = "Our Tech Stack", techHeading = "Technologies", techHeadingHighlight = "We Use",
   techDescription, techCategories = [],
   faqTitle = "Frequently Asked Questions", faqData = [],
+  areaServed = "Worldwide", breadcrumbs,
 }) {
   const [activeFeature, setActiveFeature] = useState(0);
   const pathname = usePathname();
@@ -57,13 +59,33 @@ export default function CommonServicePage({
     ? (typeof featuresStickyImg === "string" ? featuresStickyImg : featuresStickyImg.src)
     : null;
 
+  const breadcrumbItems = breadcrumbs || [{ name: "Home", path: "/" }, { name: bannerTitle, path: pathname }];
+
   return (
     <>
-      <ServiceSchema name={bannerTitle} description={bannerDesc} />
-      <BreadcrumbSchema items={[{ name: "Home", path: "/" }, { name: bannerTitle, path: pathname }]} />
+      <ServiceSchema name={bannerTitle} description={bannerDesc} areaServed={areaServed} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       {faqData.length > 0 && (
         <FaqSchema items={faqData.map((f) => ({ question: f.title, answer: f.description }))} />
       )}
+
+      {/* ── Visible breadcrumb trail — opt-in via `breadcrumbs` prop, existing pages unaffected ── */}
+      {/* {breadcrumbs && (
+        <nav aria-label="Breadcrumb" className="bg-white border-b border-gray-100 px-4 sm:px-8 md:px-12 xl:px-28 py-3">
+          <ol className="flex flex-wrap items-center gap-1.5 max-w-[1400px] mx-auto text-[12.5px]" style={{ fontFamily: "'Inter',sans-serif" }}>
+            {breadcrumbItems.map((item, i) => (
+              <li key={i} className="flex items-center gap-1.5">
+                {i > 0 && <span className="text-gray-300">/</span>}
+                {item.path && i < breadcrumbItems.length - 1 ? (
+                  <Link href={item.path} className="text-gray-500 hover:text-indigo-600 transition-colors">{item.name}</Link>
+                ) : (
+                  <span className={i === breadcrumbItems.length - 1 ? "text-gray-800 font-semibold" : "text-gray-500"}>{item.name}</span>
+                )}
+              </li>
+            ))}
+          </ol>
+        </nav>
+      )} */}
 
       {/* ── 1. Banner ── */}
       <CommonBannerService imgSrc={bannerImg} title={bannerTitle} desc={bannerDesc} />

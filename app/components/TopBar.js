@@ -270,7 +270,7 @@ export default function TopBar() {
             <span className="hidden lg:block h-3 w-px bg-white/10" />
 
             {/* Login */}
-            <Link
+            <Link target="_blank"
               href="https://crm.futuretouch.in/authentication/login"
               className="hidden lg:block text-[11px] font-semibold text-white/50 hover:text-teal-400 transition-colors"
             >

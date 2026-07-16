@@ -1,92 +1,62 @@
 "use client";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MapPin, Globe, Building2, Heart } from "lucide-react";
+import { SERVICES } from "../data/location-seo/services";
+import { COUNTRIES, slugify } from "../data/location-seo/locations";
 
-// Maps each service page's route to its display name. Only these routes get
-// "{service} {city}" tags — every other page (Contact, general pages, etc.)
-// keeps the plain city grid. Framed as remote delivery, never a local-office
-// claim, since Future IT Touch has no physical presence outside India.
-const SERVICE_PAGE_MAP = {
-  "/website-design": "Website Design",
-  "/ecommerce-website-development": "eCommerce Website Development",
-  "/web-app-development": "Web Application Development",
-  "/cms-development": "CMS Web Development",
-  "/business-developement": "Small Business Website Design",
-  "/web-app-developemnt-corporate": "Corporate Website Design",
-  "/application-developement": "Mobile App Development",
-  "/android-application-development": "Android App Development",
-  "/ios-application-development": "iOS App Development",
-  "/hybrid-application-development": "Hybrid App Development",
-  "/mobile-application-testing": "Mobile App Testing",
-  "/quality-assurance": "Quality Assurance",
-  "/search-engine-optimization": "SEO Services",
-  "/pay-per-click-service": "PPC Management",
-  "/social-media-marketing-service": "Social Media Marketing",
-  "/local-search-engine-optimization": "Local SEO Services",
-  "/content-marketing-service": "Content Marketing",
-  "/logo-design-services": "Logo Design",
-  "/corporate-stationery-design": "Corporate Identity Design",
-  "/brochure-design-service": "Brochure Design",
-  "/animated-services": "Animated Video Production",
-  "/creative-services": "Creative Agency Services",
-  "/vulnerability-assessment-service": "Vulnerability Assessment",
-  "/penetration-testing-service": "Penetration Testing",
-  "/network-security-service": "Network Security",
-  "/cloud-security-service": "Cloud Security",
-  "/data-protection-compliance-service": "Data Protection & Compliance",
-  "/incident-response-service": "Incident Response",
+// Canonical service pages (unchanged, existing routes) → their matching
+// entry in the shared services taxonomy, so the SAME slug is used whether a
+// visitor is on the original service page or a new location page.
+const CANONICAL_SERVICE_LOOKUP = new Map(SERVICES.map((s) => [s.canonicalPath, s]));
+
+const SERVICE_LOCATION_MARKER = "-services-in-";
+
+// Detects which service (if any) the current page is "about", so city links
+// can point at the right /{country}/{service}-services-in-{city} page.
+// Matches both the original canonical service pages (e.g. /website-design)
+// and the new location pages themselves (e.g. /us/seo-services-in-dallas),
+// so links stay correct while browsing between location pages too.
+function detectActiveService(pathname) {
+  const canonical = CANONICAL_SERVICE_LOOKUP.get(pathname);
+  if (canonical) return canonical;
+
+  const segments = pathname.split("/").filter(Boolean);
+  if (segments.length === 2) {
+    const idx = segments[1].indexOf(SERVICE_LOCATION_MARKER);
+    if (idx !== -1) {
+      const serviceSlug = segments[1].slice(0, idx);
+      return SERVICES.find((s) => s.slug === serviceSlug) || null;
+    }
+  }
+  return null;
+}
+
+// Visual-only accent colors + HQ/featured flags, keyed by country code.
+// Kept local to this component since they're presentation, not SEO data.
+const COUNTRY_STYLE = {
+  us: { fi: "#2dd4bf", ti: "#06b6d4" },
+  ca: { fi: "#6366f1", ti: "#8b5cf6" },
+  in: { fi: "#0d9488", ti: "#4338ca", hq: true, featuredCity: "Gurgaon" },
+  au: { fi: "#0ea5e9", ti: "#2dd4bf" },
+  ae: { fi: "#8b5cf6", ti: "#6366f1" },
+  sa: { fi: "#8b5cf6", ti: "#6366f1" },
+  kw: { fi: "#8b5cf6", ti: "#6366f1" },
+  qa: { fi: "#8b5cf6", ti: "#6366f1" },
+  eg: { fi: "#8b5cf6", ti: "#6366f1" },
 };
 
-const locations = [
-  {
-    code: "us",
-    country: "United States",
-    region: "North America",
-    cities: [
-      "New York", "Phoenix", "Dallas", "Miami", "Las Vegas", "San Francisco",
-      "Los Angeles", "Houston", "Seattle", "San Diego", "Denver", "Atlanta",
-      "New Jersey", "Chicago", "Cuba",
-    ],
-    fi: "#2dd4bf", ti: "#06b6d4",
-  },
-  {
-    code: "ca",
-    country: "Canada",
-    region: "North America",
-    cities: ["Toronto", "Vancouver", "Montreal", "Calgary", "Edmonton", "Ottawa"],
-    fi: "#6366f1", ti: "#8b5cf6",
-  },
-  {
-    code: "in",
-    country: "India",
-    region: "Asia Pacific",
-    cities: [
-      "Bangalore", "Hyderabad", "Pune", "Chennai", "Noida", "Gurgaon",
-      "Mumbai", "Chandigarh", "Delhi", "Kolkata",
-    ],
-    featuredCity: "Gurgaon",
-    hq: true,
-    fi: "#0d9488", ti: "#4338ca",
-  },
-  {
-    code: "au",
-    country: "Australia",
-    region: "Asia Pacific",
-    cities: ["Melbourne", "Sydney", "Brisbane", "Perth", "Adelaide", "Canberra"],
-    fi: "#0ea5e9", ti: "#2dd4bf",
-  },
-  {
-    code: "sa",
-    country: "Middle East",
-    region: "Asia & Africa",
-    cities: ["Riyadh", "Dubai", "Dubai SEO", "Kuwait", "Qatar", "Abu Dhabi", "Egypt"],
-    fi: "#8b5cf6", ti: "#6366f1",
-  },
-];
+const locations = COUNTRIES.map((c) => ({
+  code: c.code,
+  country: c.country,
+  region: c.region,
+  cities: c.cities.map((city) => city.name),
+  ...COUNTRY_STYLE[c.code],
+}));
 
 export default function LocationSection() {
   const pathname = usePathname();
-  const activeService = SERVICE_PAGE_MAP[pathname];
+  const activeService = detectActiveService(pathname);
 
   return (
     <section
@@ -120,6 +90,10 @@ export default function LocationSection() {
           50%      { opacity: .6; transform: scale(1.35); }
         }
         .loc-hq-dot { animation: locPulse 2s ease-in-out infinite; }
+        .loc-city-link:hover {
+          border-color: rgba(45,212,191,.55) !important;
+          background: rgba(45,212,191,.10) !important;
+        }
       `}</style>
 
       {/* dot grid */}
@@ -141,7 +115,7 @@ export default function LocationSection() {
             <span className="w-2 h-2 rounded-full bg-gradient-to-r from-teal-400 to-cyan-400 animate-pulse flex-shrink-0" />
             <span className="text-[11px] font-bold uppercase tracking-widest bg-gradient-to-r from-teal-500 to-indigo-600 bg-clip-text text-transparent"
               style={{ fontFamily: "'Inter',sans-serif" }}>
-              {activeService ? `${activeService} — Delivered Worldwide` : "Our Global Presence"}
+              {activeService ? `${activeService.name} — Delivered Worldwide` : "Our Global Presence"}
             </span>
           </div>
 
@@ -150,7 +124,7 @@ export default function LocationSection() {
             style={{ fontFamily: "'Poppins',sans-serif" }}>
             {activeService ? (
               <>
-                {activeService}{" "}
+                {activeService.name}{" "}
                 <span className="bg-gradient-to-r from-teal-400 to-indigo-700 bg-clip-text text-transparent">
                   for Clients Worldwide
                 </span>
@@ -260,7 +234,7 @@ export default function LocationSection() {
                     <span
                       className="text-[11px] font-semibold"
                       style={{ color: "rgba(255,255,255,.50)", fontFamily: "'Inter',sans-serif" }}>
-                      {loc.cities.length} Cities
+                      {loc.cities.length} {loc.cities.length === 1 ? "City" : "Cities"}
                     </span>
                   </div>
                   <div className="flex items-center gap-1.5">
@@ -278,23 +252,15 @@ export default function LocationSection() {
                 </div>
 
                 {/* city grid */}
-                <div className={`grid ${activeService ? "grid-cols-2" : "grid-cols-2"} max-h-[120px] overflow-auto gap-1.5 mt-0 scrollbar-hide`}>
+                <div className="grid grid-cols-2 max-h-[120px] overflow-auto gap-1.5 mt-0 scrollbar-hide">
                   {loc.cities.map((city, ci) => {
                     const isFeatured = city === loc.featuredCity;
-                    return (
-                      <div
-                        key={ci}
-                        className="flex items-center gap-1.5 px-2.5 py-2 rounded-xl"
-                        style={{
-                          background: isFeatured
-                            ? `linear-gradient(135deg,${loc.fi}30,${loc.ti}20)`
-                            : "rgba(255,255,255,.045)",
-                          border: isFeatured
-                            ? `1px solid ${loc.fi}55`
-                            : "1px solid rgba(255,255,255,.07)",
-                          boxShadow: isFeatured ? `0 2px 12px ${loc.fi}20` : "none",
-                        }}
-                      >
+                    const href = activeService
+                      ? `/${loc.code}/${activeService.slug}-services-in-${slugify(city)}`
+                      : null;
+
+                    const cityTile = (
+                      <>
                         <MapPin
                           size={10}
                           className="flex-shrink-0"
@@ -302,14 +268,44 @@ export default function LocationSection() {
                         />
                         <span
                           className="text-[11px] leading-tight"
-                          title={activeService ? `${city}` : city}
                           style={{
                             fontFamily: "'Poppins',sans-serif",
                             color: isFeatured ? "#ffffff" : "rgba(255,255,255,.60)",
                             fontWeight: isFeatured ? 700 : 500,
                           }}>
-                          {activeService ? `${city}` : city}
+                          {city}
                         </span>
+                      </>
+                    );
+
+                    const tileStyle = {
+                      background: isFeatured
+                        ? `linear-gradient(135deg,${loc.fi}30,${loc.ti}20)`
+                        : "rgba(255,255,255,.045)",
+                      border: isFeatured
+                        ? `1px solid ${loc.fi}55`
+                        : "1px solid rgba(255,255,255,.07)",
+                      boxShadow: isFeatured ? `0 2px 12px ${loc.fi}20` : "none",
+                    };
+
+                    return href ? (
+                      <Link
+                        key={ci}
+                        href={href}
+                        title={`${activeService.name} in ${city}`}
+                        className="loc-city-link flex items-center gap-1.5 px-2.5 py-2 rounded-xl transition-colors duration-200"
+                        style={tileStyle}
+                      >
+                        {cityTile}
+                      </Link>
+                    ) : (
+                      <div
+                        key={ci}
+                        title={city}
+                        className="flex items-center gap-1.5 px-2.5 py-2 rounded-xl"
+                        style={tileStyle}
+                      >
+                        {cityTile}
                       </div>
                     );
                   })}

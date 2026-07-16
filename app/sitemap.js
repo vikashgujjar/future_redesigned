@@ -1,5 +1,8 @@
 export const dynamic = "force-static";
 
+import { SERVICES } from "./data/location-seo/services";
+import { ALL_LOCATIONS } from "./data/location-seo/locations";
+
 const SITE_URL = "https://futuretouch.in";
 
 // Static routes, mirrored from app/**/page.js. Orphan/dev-only routes
@@ -114,5 +117,20 @@ export default function sitemap() {
     priority: 0.6,
   }));
 
-  return [...staticEntries, ...blogEntries];
+  // Service × Location landing pages — computed directly from the same
+  // data used by generateStaticParams in app/[country]/[serviceLocation],
+  // so this list can never drift out of sync with what's actually built.
+  const locationEntries = [];
+  for (const service of SERVICES) {
+    for (const location of ALL_LOCATIONS) {
+      locationEntries.push({
+        url: `${SITE_URL}/${location.countryCode}/${service.slug}-services-in-${location.citySlug}`,
+        lastModified: now,
+        changeFrequency: "monthly",
+        priority: 0.5,
+      });
+    }
+  }
+
+  return [...staticEntries, ...blogEntries, ...locationEntries];
 }

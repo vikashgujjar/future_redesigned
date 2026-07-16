@@ -369,17 +369,6 @@ export default function HeroSectionNew() {
           </div>
         </div>
       </div>
-
-      {/* ── Scroll indicator ── */}
-      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 z-10 hidden lg:flex">
-        <span className="text-[10px] text-gray-400 font-semibold uppercase tracking-[0.2em]">
-          Scroll
-        </span>
-        <div className="w-5 h-8 rounded-full border-2 border-gray-300/70 flex items-start justify-center pt-1.5">
-          <div className="w-1 h-2 rounded-full bg-indigo-500/60 animate-bounce" />
-        </div>
-      </div>
-
     </section>
   );
 }

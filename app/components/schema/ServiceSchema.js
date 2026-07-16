@@ -1,6 +1,6 @@
 const SITE_URL = "https://futuretouch.in";
 
-export default function ServiceSchema({ name, description }) {
+export default function ServiceSchema({ name, description, areaServed = "Worldwide" }) {
   if (!name) return null;
 
   const schema = {
@@ -9,7 +9,7 @@ export default function ServiceSchema({ name, description }) {
     name,
     description,
     provider: { "@id": `${SITE_URL}/#organization` },
-    areaServed: "Worldwide",
+    areaServed,
   };
 
   return (
