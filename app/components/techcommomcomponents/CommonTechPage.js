@@ -37,6 +37,8 @@ export default function CommonTechPage({
   stack    = [],
   slider   = [],
   faq      = {},
+  areaServed = "Worldwide",
+  breadcrumbs,
 }) {
   const pathname = usePathname();
   const [openFaq,  setOpenFaq]  = useState(null);
@@ -149,10 +151,12 @@ export default function CommonTechPage({
     </svg>
   );
 
+  const breadcrumbItems = breadcrumbs || [{ name: "Home", path: "/" }, { name: banner.breadcrumb || banner.title, path: pathname }];
+
   return (
     <>
-      <ServiceSchema name={banner.breadcrumb || banner.title} description={banner.tagline} />
-      <BreadcrumbSchema items={[{ name: "Home", path: "/" }, { name: banner.breadcrumb || banner.title, path: pathname }]} />
+      <ServiceSchema name={banner.breadcrumb || banner.title} description={banner.tagline} areaServed={areaServed} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       {faq.items && faq.items.length > 0 && (
         <FaqSchema items={faq.items.map((item) => ({ question: item.title, answer: item.description }))} />
       )}

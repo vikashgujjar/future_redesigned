@@ -21,7 +21,7 @@ export function buildLocationContent(service, location) {
   const { cityName, country, blurb } = location;
   const seed = hash(`${service.slug}:${location.countryCode}:${location.citySlug}`);
 
-  const title = `${serviceName} Services in ${cityName}`;
+  const title = `${serviceName} Company in ${cityName}`;
 
   // ── Meta description ──
   const metaDescVariants = [
@@ -124,5 +124,99 @@ export function buildLocationContent(service, location) {
     faqData,
     breadcrumbs,
     keywords,
+  };
+}
+
+export function buildTechnologyLocationContent(technology, location) {
+  const { name, shortDescription, seoTitle, metaDescription, keywords = [], faqItems = [] } = technology;
+  const { cityName, country, blurb } = location;
+  const seed = hash(`${technology.slug}:${location.countryCode}:${location.citySlug}`);
+
+  const title = `${name} Company in ${cityName}`;
+
+  const metaDescVariants = [
+    `${seoTitle.replace("{city}", cityName)} — ${shortDescription} Future IT Touch delivers expert ${name.toLowerCase()} for businesses across ${country}.`,
+    `${name} services for ${cityName} companies. ${shortDescription} Trusted technology delivery and local market insight from Future IT Touch.`,
+    `Looking for ${name.toLowerCase()} in ${cityName}? Future IT Touch builds tailored solutions that combine local business context with proven technical expertise.`,
+  ];
+  const locationMetaDescription = pick(metaDescVariants, seed);
+
+  const heroDescVariants = [
+    `${cityName} businesses choose our ${name.toLowerCase()} because we combine global technical standards with local delivery insight. ${blurb} means every solution is built for performance, compliance, and growth.`,
+    `Future IT Touch provides ${name.toLowerCase()} for companies in ${cityName}. We build secure, scalable applications that help local organizations compete reliably on a global stage.`,
+    `From startups to established businesses in ${cityName}, our ${name.toLowerCase()} services deliver fast time-to-market, maintainable code, and business-focused results.`,
+  ];
+  const bannerDesc = pick(heroDescVariants, seed + 1);
+
+  const introVariants = [
+    `${name} is a strategic technology for modern businesses in ${cityName}. ${shortDescription}`,
+    `Businesses across ${cityName} rely on ${name.toLowerCase()} to power web apps, customer portals, and internal tools. ${shortDescription}`,
+    `As ${blurb}, ${cityName} demands technology solutions that work reliably and scale efficiently. We deliver ${name.toLowerCase()} systems built for those exact needs.`,
+  ];
+  const deliveryVariants = [
+    `Our ${name.toLowerCase()} development includes architecture, API design, security, and localization so your ${cityName} project launches with confidence.`,
+    `We deliver ${name.toLowerCase()} projects for ${cityName} clients with a focus on clean code, rapid iteration, and long-term maintainability.`,
+    `In ${cityName}, we help teams leverage ${name.toLowerCase()} to reduce time-to-market while preserving quality and technical resilience.`,
+  ];
+  const impactVariants = [
+    `Whether you need a customer-facing portal, marketplace, or internal workflow system, our ${name.toLowerCase()} development is tailored to ${cityName}'s business ecosystem.`,
+    `We build ${name.toLowerCase()} solutions that help ${cityName} companies improve customer experience, streamline operations, and scale faster.`,
+    `From local growth to global expansion, our ${name.toLowerCase()} development supports ${cityName} organizations at every stage of their journey.`,
+  ];
+
+  const overviewParagraphs = [
+    pick(introVariants, seed + 2),
+    pick(deliveryVariants, seed + 3),
+    {
+      boldPrefix: `Why ${cityName} businesses choose ${name}:`,
+      text: `We combine local market awareness with proven ${name.toLowerCase()} development practices to deliver solutions that work for both end users and business stakeholders.`,
+    },
+    pick(impactVariants, seed + 4),
+  ];
+
+  const locationFaqs = [
+    {
+      title: `Do you provide ${name.toLowerCase()} services for companies in ${cityName}?`,
+      description: `Yes, Future IT Touch delivers remote ${name.toLowerCase()} development for businesses across ${cityName} and the wider ${country} market with the same trusted quality as our global clients.`,
+    },
+    {
+      title: `Can you adapt ${name.toLowerCase()} solutions to local ${cityName} requirements?`,
+      description: `We understand the local business context in ${cityName} and adapt our ${name.toLowerCase()} development to your audience, compliance needs, and growth goals.`,
+    },
+    {
+      title: `How soon can I get started with ${name.toLowerCase()} in ${cityName}?`,
+      description: `We begin with a discovery call and can often start scoping your ${name.toLowerCase()} project within days, depending on your requirements and timeline.`,
+    },
+    {
+      title: `What industries do you serve in ${cityName}?`,
+      description: `We serve retail, healthcare, finance, logistics, education, and many more industries in ${cityName} with custom ${name.toLowerCase()} applications.`,
+    },
+  ];
+
+  const faqData = [...faqItems, ...locationFaqs];
+
+  const breadcrumbs = [
+    { name: "Home", path: "/" },
+    { name: country, path: null },
+    { name, path: technology.canonicalPath },
+    { name: cityName, path: null },
+  ];
+
+  const pageKeywords = [
+    ...keywords,
+    `${name.toLowerCase()} in ${cityName}`,
+    `${cityName} ${name.toLowerCase()}`,
+    `${cityName} ${technology.category.toLowerCase()}`,
+    `${technology.category.toLowerCase()} services in ${cityName}`,
+  ];
+
+  return {
+    title,
+    metaDescription: locationMetaDescription,
+    bannerDesc,
+    overviewParagraphs,
+    faqData,
+    breadcrumbs,
+    keywords: pageKeywords,
   };
 }

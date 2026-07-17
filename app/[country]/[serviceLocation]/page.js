@@ -1,9 +1,11 @@
 import { notFound } from "next/navigation";
 import CommonServicePage from "../../components/CommonServicePage";
+import CommonTechPage from "../../components/techcommomcomponents/CommonTechPage";
 import { SERVICES, getServiceBySlug } from "../../data/location-seo/services";
+import { TECHNOLOGIES, getTechnologyLocationPath } from "../../data/location-seo/technologies";
 import { ALL_LOCATIONS, getLocation } from "../../data/location-seo/locations";
-import { buildLocationContent } from "../../data/location-seo/content";
-import { getCategoryContent, SHARED_SLIDER_CARDS } from "../../data/location-seo/categoryContent";
+import { buildLocationContent, buildTechnologyLocationContent } from "../../data/location-seo/content";
+import { getCategoryContent, getTechCategoryContent, SHARED_SLIDER_CARDS } from "../../data/location-seo/categoryContent";
 
 const SITE_URL = "https://futuretouch.in";
 // Reusing the exact, already-verified banner image CommonTechPage.js uses as
@@ -12,7 +14,7 @@ const SITE_URL = "https://futuretouch.in";
 // 1,178 pages.
 const BANNER_IMG = "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&q=85";
 
-const SERVICE_LOCATION_MARKER = "-services-in-";
+const SERVICE_LOCATION_MARKER = "-company-in-";
 
 function parseServiceLocation(serviceLocation) {
   const idx = serviceLocation.indexOf(SERVICE_LOCATION_MARKER);
@@ -23,13 +25,49 @@ function parseServiceLocation(serviceLocation) {
   };
 }
 
+// Every service-location path, precomputed so technology-location
+// generation can skip any keyword slug that happens to collide with one
+// (e.g. service "ios-app-development" and technology "swift-app-development"
+// both produce the keyword "ios-app-development-company"). Service pages
+// win those rare collisions since they're resolved first below.
+const SERVICE_LOCATION_PATHS = new Set();
+for (const service of SERVICES) {
+  for (const location of ALL_LOCATIONS) {
+    SERVICE_LOCATION_PATHS.add(`/${location.countryCode}/${service.slug}${SERVICE_LOCATION_MARKER}${location.citySlug}`);
+  }
+}
+
+// Technology-location pages don't parse a hand-rolled URL marker — they
+// resolve via a direct lookup built from getTechnologyLocationPath()
+// itself (technologies.js), the single source of truth for those slugs.
+// This guarantees resolution can never drift out of sync with what that
+// function actually generates, and needs no new marker convention.
+const TECH_LOCATION_PARAMS = [];
+const TECH_LOCATION_LOOKUP = new Map();
+for (const technology of TECHNOLOGIES) {
+  for (const location of ALL_LOCATIONS) {
+    const path = getTechnologyLocationPath(technology, location.countryCode, location.citySlug);
+    if (!path || SERVICE_LOCATION_PATHS.has(path)) continue;
+    const [, country, serviceLocation] = path.split("/");
+    TECH_LOCATION_PARAMS.push({ country, serviceLocation });
+    TECH_LOCATION_LOOKUP.set(path, { technology, location });
+  }
+}
+
 function resolve(params) {
+  // Service resolution — unchanged, tried first.
   const parsed = parseServiceLocation(params.serviceLocation);
-  if (!parsed) return null;
-  const service = getServiceBySlug(parsed.serviceSlug);
-  const location = getLocation(params.country, parsed.citySlug);
-  if (!service || !location) return null;
-  return { service, location };
+  if (parsed) {
+    const service = getServiceBySlug(parsed.serviceSlug);
+    const location = getLocation(params.country, parsed.citySlug);
+    if (service && location) return { type: "service", service, location };
+  }
+
+  // Technology resolution — direct lookup, no marker parsing.
+  const techMatch = TECH_LOCATION_LOOKUP.get(`/${params.country}/${params.serviceLocation}`);
+  if (techMatch) return { type: "technology", ...techMatch };
+
+  return null;
 }
 
 // With `output: "export"` every param combination must come from
@@ -49,14 +87,15 @@ export function generateStaticParams() {
       });
     }
   }
-  return params;
+  return [...params, ...TECH_LOCATION_PARAMS];
 }
 
 export function generateMetadata({ params }) {
   const resolved = resolve(params);
   if (!resolved) return {};
-  const { service, location } = resolved;
-  const content = buildLocationContent(service, location);
+  const content = resolved.type === "technology"
+    ? buildTechnologyLocationContent(resolved.technology, resolved.location)
+    : buildLocationContent(resolved.service, resolved.location);
   const canonicalPath = `/${params.country}/${params.serviceLocation}`;
   const title = `${content.title} | Future IT Touch`;
 
@@ -85,6 +124,40 @@ export function generateMetadata({ params }) {
 export default function ServiceLocationPage({ params }) {
   const resolved = resolve(params);
   if (!resolved) notFound();
+
+  if (resolved.type === "technology") {
+    const { technology, location } = resolved;
+    const content = buildTechnologyLocationContent(technology, location);
+    const category = getTechCategoryContent(technology.category);
+
+    return (
+      <CommonTechPage
+        banner={{
+          bgImage: BANNER_IMG,
+          category: technology.category,
+          breadcrumb: content.title,
+          title: content.title,
+          tagline: content.bannerDesc,
+        }}
+        intro={{
+          badge: `Future IT Touch · ${technology.category}`,
+          heading: `${technology.name} Built For`,
+          highlight: `${location.cityName} Businesses`,
+          paras: content.overviewParagraphs.map((p) => (typeof p === "string" ? p : p.text)),
+          stats: [],
+        }}
+        services={category.services}
+        process={category.process}
+        features={category.features}
+        stack={category.stack}
+        slider={SHARED_SLIDER_CARDS}
+        faq={{ title: `${technology.name} in ${location.cityName} — FAQs`, items: content.faqData }}
+        areaServed={location.cityName}
+        breadcrumbs={content.breadcrumbs}
+      />
+    );
+  }
+
   const { service, location } = resolved;
   const content = buildLocationContent(service, location);
   const category = getCategoryContent(service.category);

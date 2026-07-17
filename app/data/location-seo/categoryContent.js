@@ -11,6 +11,10 @@ import {
   FaBullhorn, FaGoogle, FaHashtag, FaMapMarkerAlt, FaPenNib, FaChartPie,
   FaPalette, FaIdCard, FaFileAlt, FaFilm, FaLightbulb, FaAward, FaThumbsUp,
   FaShieldAlt, FaUserSecret, FaNetworkWired, FaCloud, FaLock, FaBug, FaClipboardCheck,
+  FaServer, FaDatabase, FaCogs, FaBolt, FaLeaf, FaCube, FaCubes, FaLink,
+  FaRobot, FaBrain, FaGamepad, FaWindows, FaJava, FaReact, FaVuejs, FaNodeJs,
+  FaPython, FaChartBar, FaProjectDiagram, FaFlask, FaMicrochip, FaGem,
+  FaTerminal, FaExchangeAlt, FaFingerprint,
 } from "react-icons/fa";
 
 const iconCls6 = "text-white w-6 h-6";
@@ -250,4 +254,180 @@ export const CATEGORY_CONTENT = {
 
 export function getCategoryContent(categorySlug) {
   return CATEGORY_CONTENT[categorySlug] || CATEGORY_CONTENT["website-design"];
+}
+
+// ════════════════════════════════════════════════════════════════════════
+// Technology × Location "trust building" content — same DRY approach as
+// CATEGORY_CONTENT above, but shaped for CommonTechPage.js's props
+// (services / process / features / stack) instead of CommonServicePage.js's
+// (features / bizCards / platforms / techCategories). The unique per-page
+// copy (hero, overview, FAQs) comes from buildTechnologyLocationContent()
+// in content.js — this file only supplies the shared, category-level
+// sections reused across every technology in the same category.
+const iconCls = "text-lg";
+
+// Standard delivery process — genuinely the same steps regardless of which
+// technology is involved, so it's shared across all 6 categories rather
+// than repeated with cosmetic differences.
+const TECH_PROCESS = [
+  { icon: <FaCheckCircle className={iconCls} />, title: "Requirement Analysis", desc: "Understanding your business goals, users, and technical requirements in detail." },
+  { icon: <FaLayerGroup className={iconCls} />, title: "Architecture & Design", desc: "Designing a scalable architecture and data model built for long-term growth." },
+  { icon: <FaCode className={iconCls} />, title: "Development", desc: "Building clean, maintainable code following industry best practices." },
+  { icon: <FaDatabase className={iconCls} />, title: "Integration & Data", desc: "Connecting APIs, databases, and third-party services into a reliable system." },
+  { icon: <FaShieldAlt className={iconCls} />, title: "Security Hardening", desc: "Implementing validation, authentication, and protection against common threats." },
+  { icon: <FaBolt className={iconCls} />, title: "Testing & QA", desc: "Thorough manual and automated testing for error-free, reliable performance." },
+  { icon: <FaServer className={iconCls} />, title: "Deployment", desc: "Zero-downtime deployment with proper server and environment configuration." },
+  { icon: <FaTools className={iconCls} />, title: "Ongoing Support", desc: "Monitoring, bug fixes, updates, and performance tuning after launch." },
+];
+
+const TECH_CATEGORY_CONTENT = {
+  "Web Technology": {
+    services: [
+      { icon: <FaCode />, title: "Custom Web Development", desc: "Secure, scalable web applications built to match your exact business requirements.", points: ["Dynamic web applications", "Secure backend systems", "Clean, reusable code", "Custom business logic"] },
+      { icon: <FaServer />, title: "Backend & API Development", desc: "Robust server-side logic and RESTful/GraphQL APIs that power web and mobile clients alike.", points: ["RESTful & GraphQL APIs", "Third-party integrations", "Token-based auth", "Queues & background jobs"] },
+      { icon: <FaDatabase />, title: "Database Architecture", desc: "Optimized relational and NoSQL schemas designed for fast, reliable data access at scale.", points: ["Schema design", "Query optimization", "Caching strategy", "Migration planning"] },
+      { icon: <FaShoppingCart />, title: "CMS & eCommerce Development", desc: "Content-managed sites and online stores your team can maintain without developer dependency.", points: ["WordPress & Shopify builds", "Custom CMS integration", "Payment gateway setup", "Inventory & catalog systems"] },
+      { icon: <FaShieldAlt />, title: "Security & Maintenance", desc: "Ongoing hardening against SQL injection, XSS, and CSRF, plus proactive monitoring.", points: ["Vulnerability audits", "Input validation", "Encrypted storage", "24/7 monitoring"] },
+      { icon: <FaTools />, title: "Migration & Modernization", desc: "Moving legacy systems onto modern frameworks with zero downtime and improved performance.", points: ["Legacy system audits", "Framework migration", "Performance tuning", "Code refactoring"] },
+    ],
+    features: [
+      { icon: <FaCode />, title: "Clean Architecture", desc: "We follow proven design patterns so your codebase stays modular and easy to scale as the business grows." },
+      { icon: <FaLock />, title: "Enterprise-Grade Security", desc: "Multi-layer security with input validation, CSRF protection, and encrypted data storage." },
+      { icon: <FaRocket />, title: "Performance Optimization", desc: "Query caching, lazy loading, and database indexing for consistently fast response times." },
+      { icon: <FaDatabase />, title: "Scalable Data Design", desc: "Schemas architected for high-traffic scenarios, with pooling and query optimization built in." },
+      { icon: <FaBolt />, title: "Rapid, Reliable Delivery", desc: "Modern framework tooling and CI-friendly workflows keep delivery fast without cutting corners." },
+      { icon: <FaLeaf />, title: "Long-Term Maintainability", desc: "Documented, standards-based code that's easy for any team to pick up and extend later." },
+    ],
+    stack: [
+      { name: "PHP" }, { name: "Laravel" }, { name: "Node.js" }, { name: "React.js" },
+      { name: "Vue.js" }, { name: "Angular" }, { name: "Python" }, { name: "Django" },
+      { name: "WordPress" }, { name: "Shopify" }, { name: "MySQL" }, { name: "PostgreSQL" },
+      { name: "MongoDB" }, { name: "Redis" }, { name: "REST APIs" }, { name: "Docker" },
+    ],
+  },
+
+  "Enterprise Technology": {
+    services: [
+      { icon: <FaWindows />, title: "ASP.NET Application Development", desc: "Secure, enterprise-grade applications built on the .NET ecosystem for reliability at scale.", points: ["MVC & Web API apps", "Enterprise portals", "Legacy .NET upgrades", "Windows & cloud deployment"] },
+      { icon: <FaDatabase />, title: "Enterprise Data Integration", desc: "Connecting internal systems, SQL Server databases, and third-party services into one coherent platform.", points: ["SQL Server architecture", "Service-oriented integration", "ETL & data pipelines", "Reporting dashboards"] },
+      { icon: <FaShieldAlt />, title: "Identity & Access Management", desc: "Role-based access control and enterprise authentication built for compliance-sensitive organizations.", points: ["Active Directory integration", "Single sign-on", "Role-based permissions", "Audit logging"] },
+      { icon: <FaServer />, title: "Cloud & On-Prem Deployment", desc: "Flexible deployment across Azure, AWS, or on-premise infrastructure to match your compliance needs.", points: ["Azure deployment", "On-premise hosting", "Hybrid architectures", "CI/CD pipelines"] },
+      { icon: <FaCogs />, title: "Legacy System Modernization", desc: "Migrating aging enterprise applications to current .NET versions without disrupting operations.", points: ["Framework upgrades", "Zero-downtime migration", "Performance audits", "Code refactoring"] },
+      { icon: <FaHeadset />, title: "Enterprise Support & SLAs", desc: "Dedicated support agreements built around the uptime and response times enterprise systems require.", points: ["Defined SLAs", "Proactive monitoring", "Priority incident response", "Scheduled maintenance"] },
+    ],
+    features: [
+      { icon: <FaShieldAlt />, title: "Compliance-Ready Architecture", desc: "Built with the access controls and audit trails enterprise and regulated environments expect." },
+      { icon: <FaServer />, title: "Enterprise-Scale Reliability", desc: "Systems engineered to handle high transaction volumes and mission-critical uptime requirements." },
+      { icon: <FaCogs />, title: "Deep .NET Expertise", desc: "Years of hands-on experience across the full .NET stack, from Framework to modern .NET releases." },
+      { icon: <FaLock />, title: "Enterprise Security Standards", desc: "Authentication, encryption, and access policies designed around enterprise security requirements." },
+      { icon: <FaSyncAlt />, title: "Seamless System Integration", desc: "Purpose-built connectors between your ASP.NET applications and existing enterprise infrastructure." },
+      { icon: <FaHeadset />, title: "Dedicated Enterprise Support", desc: "A consistent point of contact and defined response times for business-critical systems." },
+    ],
+    stack: [
+      { name: "ASP.NET" }, { name: "C#" }, { name: ".NET Core" }, { name: "SQL Server" },
+      { name: "Azure" }, { name: "Entity Framework" }, { name: "Web API" }, { name: "IIS" },
+      { name: "Active Directory" }, { name: "Blazor" }, { name: "Docker" }, { name: "Azure DevOps" },
+    ],
+  },
+
+  "Mobile Application": {
+    services: [
+      { icon: <FaApple />, title: "Native iOS Development", desc: "Swift-based iOS apps engineered for performance, polish, and smooth App Store review.", points: ["Swift & SwiftUI apps", "App Store optimization", "Apple ecosystem integration", "In-app purchases"] },
+      { icon: <FaAndroid />, title: "Native Android Development", desc: "Kotlin and Java-based Android apps built for stability across a wide range of devices.", points: ["Kotlin & Java apps", "Play Store readiness", "Material Design UI", "Push notifications"] },
+      { icon: <FaMobileAlt />, title: "Cross-Platform Development", desc: "Flutter, React Native, and Ionic apps that ship to iOS and Android from one shared codebase.", points: ["Single codebase delivery", "Native-like performance", "Shared business logic", "Faster time-to-market"] },
+      { icon: <FaVial />, title: "Mobile App Testing & QA", desc: "Functional, performance, and usability testing across real iOS and Android devices before launch.", points: ["Device lab testing", "Automated test suites", "Performance profiling", "Crash & error monitoring"] },
+      { icon: <FaSyncAlt />, title: "App Backend & API Integration", desc: "Secure backend services and third-party API integrations that power your mobile experience.", points: ["REST & GraphQL APIs", "Real-time sync", "Push notification services", "Offline-first architecture"] },
+      { icon: <FaTabletAlt />, title: "App Maintenance & Updates", desc: "Ongoing OS-version support, bug fixes, and feature updates after your app goes live.", points: ["OS compatibility updates", "Bug fixes & patches", "Performance monitoring", "Feature enhancements"] },
+    ],
+    features: [
+      { icon: <FaMobileAlt />, title: "Native-Quality Experience", desc: "Smooth animations and platform-appropriate UI, whether built natively or cross-platform." },
+      { icon: <FaBolt />, title: "Fast, Efficient Delivery", desc: "Modern frameworks and reusable components help us ship reliable apps without dragging out timelines." },
+      { icon: <FaShieldAlt />, title: "Secure by Design", desc: "Secure authentication, encrypted local storage, and safe API communication built in from day one." },
+      { icon: <FaSyncAlt />, title: "Seamless Backend Integration", desc: "Reliable, well-documented API integrations connecting your app to the services it depends on." },
+      { icon: <FaVial />, title: "Rigorous Device Testing", desc: "Real-device testing across screen sizes and OS versions catches issues before your users do." },
+      { icon: <FaHeadset />, title: "Post-Launch Support", desc: "Ongoing updates and monitoring to keep your app compatible as new OS versions ship." },
+    ],
+    stack: [
+      { name: "Swift" }, { name: "Kotlin" }, { name: "Java" }, { name: "Flutter" },
+      { name: "React Native" }, { name: "Ionic" }, { name: "Firebase" }, { name: "SwiftUI" },
+      { name: "Jetpack Compose" }, { name: "REST APIs" }, { name: "GraphQL" }, { name: "SQLite" },
+    ],
+  },
+
+  "Game Technology": {
+    services: [
+      { icon: <FaGamepad />, title: "Unity Game Development", desc: "2D and 3D games built in Unity for mobile, desktop, and console platforms.", points: ["2D & 3D game builds", "Mobile game optimization", "Cross-platform export", "In-game monetization"] },
+      { icon: <FaCube />, title: "3D Modeling & Environment Design", desc: "Immersive game environments and assets optimized for real-time rendering performance.", points: ["3D asset creation", "Environment design", "Performance-optimized models", "Lighting & shaders"] },
+      { icon: <FaCogs />, title: "Gameplay Systems & Mechanics", desc: "Custom gameplay logic, physics, and interaction systems built around your game design.", points: ["Custom game mechanics", "Physics & collision systems", "AI behavior scripting", "Multiplayer networking"] },
+      { icon: <FaMobileAlt />, title: "Cross-Platform Game Publishing", desc: "Preparing and deploying Unity builds across iOS, Android, Windows, and WebGL.", points: ["App store submission", "Platform-specific builds", "WebGL deployment", "Console porting guidance"] },
+      { icon: <FaVial />, title: "Game QA & Performance Testing", desc: "Playtesting and performance profiling to catch bugs and frame-rate issues before launch.", points: ["Playtesting sessions", "Frame-rate profiling", "Bug tracking", "Device compatibility testing"] },
+      { icon: <FaTools />, title: "Post-Launch Updates & Live Ops", desc: "Ongoing content updates, balancing, and bug fixes to keep players engaged after release.", points: ["Content updates", "Balance patches", "Analytics integration", "Live-ops support"] },
+    ],
+    features: [
+      { icon: <FaGamepad />, title: "End-to-End Game Development", desc: "From concept and prototyping through to store submission, handled by one dedicated team." },
+      { icon: <FaCube />, title: "Optimized 3D Performance", desc: "Assets and rendering pipelines tuned for smooth frame rates across target devices." },
+      { icon: <FaMobileAlt />, title: "True Cross-Platform Builds", desc: "One Unity project exported cleanly to mobile, desktop, and web without rework." },
+      { icon: <FaCogs />, title: "Custom Gameplay Engineering", desc: "Bespoke mechanics and systems built around your specific game design, not generic templates." },
+      { icon: <FaVial />, title: "Thorough Playtesting", desc: "Real playtesting sessions catch balance and usability issues automated tests miss." },
+      { icon: <FaHeadset />, title: "Live-Ops Ready", desc: "Analytics and update pipelines in place so you can keep improving the game post-launch." },
+    ],
+    stack: [
+      { name: "Unity" }, { name: "C#" }, { name: "Blender" }, { name: "Unity Ads" },
+      { name: "Photon" }, { name: "Firebase" }, { name: "WebGL" }, { name: "Android SDK" },
+      { name: "Xcode" }, { name: "Git" },
+    ],
+  },
+
+  "AI / ML": {
+    services: [
+      { icon: <FaBrain />, title: "AI & Machine Learning Development", desc: "Custom ML models and AI-powered features built around your specific data and use case.", points: ["Custom model training", "Predictive analytics", "NLP & text processing", "Recommendation engines"] },
+      { icon: <FaChartBar />, title: "Data Science & Analytics", desc: "Turning raw data into actionable insight with Python-based analysis and visualization.", points: ["Data pipeline design", "Statistical analysis", "Data visualization", "Reporting dashboards"] },
+      { icon: <FaFlask />, title: "Data Processing with NumPy & Pandas", desc: "High-performance numerical computing and data wrangling for research and production systems.", points: ["Large-scale data processing", "Feature engineering", "Data cleaning pipelines", "Scientific computing"] },
+      { icon: <FaRobot />, title: "AI-Powered Application Integration", desc: "Embedding trained models and AI services directly into your web or mobile applications.", points: ["Model deployment", "API-based inference", "Real-time predictions", "Chatbot integration"] },
+      { icon: <FaProjectDiagram />, title: "Research-Oriented Development", desc: "Specialized languages like Julia, Lisp, and Haskell for research, symbolic computation, and formal methods.", points: ["Scientific computing", "Symbolic AI systems", "Functional programming", "Prototype research tooling"] },
+      { icon: <FaShieldAlt />, title: "Model Testing & Validation", desc: "Rigorous evaluation of model accuracy, bias, and performance before production deployment.", points: ["Accuracy benchmarking", "Bias & fairness testing", "Performance profiling", "A/B testing frameworks"] },
+    ],
+    features: [
+      { icon: <FaBrain />, title: "Applied AI Expertise", desc: "We build models that solve real business problems, not just research demos." },
+      { icon: <FaChartBar />, title: "Data-Driven Decision Making", desc: "Clean pipelines and clear visualization turn your raw data into decisions you can act on." },
+      { icon: <FaFlask />, title: "Rigorous Experimentation", desc: "Structured testing and validation before any model reaches production." },
+      { icon: <FaRobot />, title: "Production-Ready Integration", desc: "Models deployed as reliable, scalable services your applications can actually depend on." },
+      { icon: <FaProjectDiagram />, title: "Specialized Language Expertise", desc: "Hands-on experience in NumPy, PyBrain, Julia, Lisp, and Haskell for problems general tools can't solve." },
+      { icon: <FaLeaf />, title: "Maintainable ML Pipelines", desc: "Documented, versioned pipelines so your models stay reproducible as data and requirements evolve." },
+    ],
+    stack: [
+      { name: "Python" }, { name: "NumPy" }, { name: "Pandas" }, { name: "TensorFlow" },
+      { name: "PyTorch" }, { name: "Scikit-learn" }, { name: "PyBrain" }, { name: "Julia" },
+      { name: "Lisp" }, { name: "Haskell" }, { name: "Jupyter" }, { name: "REST APIs" },
+    ],
+  },
+
+  "Blockchain": {
+    services: [
+      { icon: <FaCube />, title: "Smart Contract Development", desc: "Secure, audited smart contracts written in Solidity for Ethereum and EVM-compatible chains.", points: ["Solidity smart contracts", "Contract auditing", "Gas optimization", "Upgradeable contract patterns"] },
+      { icon: <FaLink />, title: "Blockchain Application Development", desc: "Decentralized applications (dApps) with on-chain logic and intuitive front-end experiences.", points: ["dApp development", "Wallet integration", "On-chain/off-chain architecture", "Web3 front-ends"] },
+      { icon: <FaExchangeAlt />, title: "High-Performance Blockchain Systems", desc: "C++ and Python-based blockchain infrastructure engineered for speed and reliability.", points: ["Custom blockchain protocols", "Node infrastructure", "Consensus mechanism tuning", "Performance optimization"] },
+      { icon: <FaFingerprint />, title: "Blockchain Voting & Polling Systems", desc: "Transparent, tamper-resistant polling and voting systems built on blockchain infrastructure.", points: ["Transparent vote recording", "Tamper-resistant architecture", "Result verification", "Access-controlled participation"] },
+      { icon: <FaShieldAlt />, title: "Blockchain Security Audits", desc: "Independent review of smart contracts and blockchain systems to catch vulnerabilities before launch.", points: ["Smart contract audits", "Vulnerability assessment", "Penetration testing", "Security best-practice review"] },
+      { icon: <FaDatabase />, title: "Blockchain-Backend Integration", desc: "Connecting blockchain systems to traditional databases, APIs, and existing business infrastructure.", points: ["Hybrid on/off-chain data", "API bridges", "Event indexing", "Data synchronization"] },
+    ],
+    features: [
+      { icon: <FaCube />, title: "Audited Smart Contracts", desc: "Every contract is reviewed for security and gas efficiency before it goes anywhere near mainnet." },
+      { icon: <FaLink />, title: "Full-Stack Blockchain Delivery", desc: "From smart contract to front-end, we deliver the whole dApp, not just the on-chain piece." },
+      { icon: <FaExchangeAlt />, title: "Multi-Language Expertise", desc: "Solidity, C++, and Python experience covering both application- and protocol-level work." },
+      { icon: <FaFingerprint />, title: "Transparent by Design", desc: "Systems built so results and transactions are independently verifiable, not just trusted." },
+      { icon: <FaShieldAlt />, title: "Security-First Development", desc: "Blockchain systems carry real financial risk — we treat security review as non-negotiable." },
+      { icon: <FaDatabase />, title: "Practical Hybrid Architecture", desc: "We combine on-chain guarantees with off-chain performance where it makes business sense." },
+    ],
+    stack: [
+      { name: "Solidity" }, { name: "Ethereum" }, { name: "C++" }, { name: "Python" },
+      { name: "Web3.js" }, { name: "Hardhat" }, { name: "Truffle" }, { name: "IPFS" },
+      { name: "Ethers.js" }, { name: "MetaMask" },
+    ],
+  },
+};
+
+export function getTechCategoryContent(category) {
+  const content = TECH_CATEGORY_CONTENT[category] || TECH_CATEGORY_CONTENT["Web Technology"];
+  return { ...content, process: TECH_PROCESS };
 }

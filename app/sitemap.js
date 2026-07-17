@@ -2,6 +2,7 @@ export const dynamic = "force-static";
 
 import { SERVICES } from "./data/location-seo/services";
 import { ALL_LOCATIONS } from "./data/location-seo/locations";
+import { TECHNOLOGIES, getTechnologyLocationPath } from "./data/location-seo/technologies";
 
 const SITE_URL = "https://futuretouch.in";
 
@@ -120,11 +121,15 @@ export default function sitemap() {
   // Service × Location landing pages — computed directly from the same
   // data used by generateStaticParams in app/[country]/[serviceLocation],
   // so this list can never drift out of sync with what's actually built.
+  const SERVICE_LOCATION_MARKER = "-company-in-";
   const locationEntries = [];
+  const serviceLocationPaths = new Set();
   for (const service of SERVICES) {
     for (const location of ALL_LOCATIONS) {
+      const path = `/${location.countryCode}/${service.slug}${SERVICE_LOCATION_MARKER}${location.citySlug}`;
+      serviceLocationPaths.add(path);
       locationEntries.push({
-        url: `${SITE_URL}/${location.countryCode}/${service.slug}-services-in-${location.citySlug}`,
+        url: `${SITE_URL}${path}`,
         lastModified: now,
         changeFrequency: "monthly",
         priority: 0.5,
@@ -132,5 +137,25 @@ export default function sitemap() {
     }
   }
 
-  return [...staticEntries, ...blogEntries, ...locationEntries];
+  // Technology × Location landing pages — also built from the shared location
+  // SEO dataset and available under the same route segment pattern. A
+  // technology's keyword slug can rarely collide with a service's
+  // ({slug}-company), e.g. "ios-app-development-company" is produced by
+  // both the "ios-app-development" service and "swift-app-development" —
+  // those are excluded here since the service page wins that URL.
+  const technologyLocationEntries = [];
+  for (const technology of TECHNOLOGIES) {
+    for (const location of ALL_LOCATIONS) {
+      const path = getTechnologyLocationPath(technology.slug, location.countryCode, location.citySlug);
+      if (!path || serviceLocationPaths.has(path)) continue;
+      technologyLocationEntries.push({
+        url: `${SITE_URL}${path}`,
+        lastModified: now,
+        changeFrequency: "monthly",
+        priority: 0.45,
+      });
+    }
+  }
+
+  return [...staticEntries, ...blogEntries, ...locationEntries, ...technologyLocationEntries];
 }

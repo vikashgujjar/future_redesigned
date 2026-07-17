@@ -3,19 +3,20 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MapPin, Globe, Building2, Heart } from "lucide-react";
 import { SERVICES } from "../data/location-seo/services";
-import { COUNTRIES, slugify } from "../data/location-seo/locations";
+import { TECHNOLOGIES, getTechnologyLocationPath } from "../data/location-seo/technologies";
+import { COUNTRIES, ALL_LOCATIONS, slugify } from "../data/location-seo/locations";
 
 // Canonical service pages (unchanged, existing routes) → their matching
 // entry in the shared services taxonomy, so the SAME slug is used whether a
 // visitor is on the original service page or a new location page.
 const CANONICAL_SERVICE_LOOKUP = new Map(SERVICES.map((s) => [s.canonicalPath, s]));
 
-const SERVICE_LOCATION_MARKER = "-services-in-";
+const SERVICE_LOCATION_MARKER = "-company-in-";
 
 // Detects which service (if any) the current page is "about", so city links
-// can point at the right /{country}/{service}-services-in-{city} page.
+// can point at the right /{country}/{service}-company-in-{city} page.
 // Matches both the original canonical service pages (e.g. /website-design)
-// and the new location pages themselves (e.g. /us/seo-services-in-dallas),
+// and the new location pages themselves (e.g. /us/seo-company-in-dallas),
 // so links stay correct while browsing between location pages too.
 function detectActiveService(pathname) {
   const canonical = CANONICAL_SERVICE_LOOKUP.get(pathname);
@@ -30,6 +31,42 @@ function detectActiveService(pathname) {
     }
   }
   return null;
+}
+
+// Canonical technology pages (unchanged, existing routes) → their matching
+// entry in the shared technologies taxonomy.
+const CANONICAL_TECH_LOOKUP = new Map(TECHNOLOGIES.map((t) => [t.canonicalPath, t]));
+
+// Every service-location path, so a technology keyword slug that happens to
+// collide with one (e.g. "ios-app-development-company" is produced by both
+// the "ios-app-development" service and the "swift-app-development"
+// technology) never gets registered here — that path is a service page.
+const SERVICE_LOCATION_PATHS = new Set();
+for (const service of SERVICES) {
+  for (const location of ALL_LOCATIONS) {
+    SERVICE_LOCATION_PATHS.add(`/${location.countryCode}/${service.slug}${SERVICE_LOCATION_MARKER}${location.citySlug}`);
+  }
+}
+
+// Technology location pages don't use a hand-rolled URL marker — their
+// slugs come from getTechnologyLocationPath() (technologies.js), the same
+// authoritative source the route itself resolves against. Precomputing a
+// pathname → technology lookup here means detection can never drift out of
+// sync with what that function actually generates.
+const TECH_LOCATION_LOOKUP = new Map();
+for (const technology of TECHNOLOGIES) {
+  for (const location of ALL_LOCATIONS) {
+    const path = getTechnologyLocationPath(technology, location.countryCode, location.citySlug);
+    if (path && !SERVICE_LOCATION_PATHS.has(path)) TECH_LOCATION_LOOKUP.set(path, technology);
+  }
+}
+
+// Detects which technology (if any) the current page is "about" — mirrors
+// detectActiveService, matching both canonical technology pages (e.g.
+// /reactjs-vuejs-nodejs-development-services) and technology location pages
+// themselves (e.g. /us/react-js-development-company-in-new-york).
+function detectActiveTechnology(pathname) {
+  return CANONICAL_TECH_LOOKUP.get(pathname) || TECH_LOCATION_LOOKUP.get(pathname) || null;
 }
 
 // Visual-only accent colors + HQ/featured flags, keyed by country code.
@@ -57,6 +94,8 @@ const locations = COUNTRIES.map((c) => ({
 export default function LocationSection() {
   const pathname = usePathname();
   const activeService = detectActiveService(pathname);
+  const activeTechnology = !activeService ? detectActiveTechnology(pathname) : null;
+  const activeName = activeService?.name || activeTechnology?.name || null;
 
   return (
     <section
@@ -115,16 +154,16 @@ export default function LocationSection() {
             <span className="w-2 h-2 rounded-full bg-gradient-to-r from-teal-400 to-cyan-400 animate-pulse flex-shrink-0" />
             <span className="text-[11px] font-bold uppercase tracking-widest bg-gradient-to-r from-teal-500 to-indigo-600 bg-clip-text text-transparent"
               style={{ fontFamily: "'Inter',sans-serif" }}>
-              {activeService ? `${activeService.name} — Delivered Worldwide` : "Our Global Presence"}
+              {activeName ? `${activeName} — Delivered Worldwide` : "Our Global Presence"}
             </span>
           </div>
 
           <h2
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 leading-tight"
             style={{ fontFamily: "'Poppins',sans-serif" }}>
-            {activeService ? (
+            {activeName ? (
               <>
-                {activeService.name}{" "}
+                {activeName}{" "}
                 <span className="bg-gradient-to-r from-teal-400 to-indigo-700 bg-clip-text text-transparent">
                   for Clients Worldwide
                 </span>
@@ -256,7 +295,9 @@ export default function LocationSection() {
                   {loc.cities.map((city, ci) => {
                     const isFeatured = city === loc.featuredCity;
                     const href = activeService
-                      ? `/${loc.code}/${activeService.slug}-services-in-${slugify(city)}`
+                      ? `/${loc.code}/${activeService.slug}${SERVICE_LOCATION_MARKER}${slugify(city)}`
+                      : activeTechnology
+                      ? getTechnologyLocationPath(activeTechnology, loc.code, slugify(city))
                       : null;
 
                     const cityTile = (
@@ -292,7 +333,7 @@ export default function LocationSection() {
                       <Link
                         key={ci}
                         href={href}
-                        title={`${activeService.name} in ${city}`}
+                        title={`${activeName} in ${city}`}
                         className="loc-city-link flex items-center gap-1.5 px-2.5 py-2 rounded-xl transition-colors duration-200"
                         style={tileStyle}
                       >
