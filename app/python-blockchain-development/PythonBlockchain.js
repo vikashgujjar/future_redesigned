@@ -7,6 +7,7 @@ import {
 import { FaPython } from "react-icons/fa";
 import pythonBlockchainImg from "../Assets/pd.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
 const PythonBlockchain = () => (
   <CommonTechPage
@@ -37,9 +38,8 @@ const PythonBlockchain = () => (
       ],
       stats: [
         { num: "100+", label: "Blockchain Apps Delivered",  desc: "Python blockchain apps built for DeFi, NFT, and enterprise DApp platforms.",        icon: <FaPython /> },
-        { num: "7+",   label: "Years Blockchain Expertise", desc: "Seven-plus years delivering secure Python blockchain and Web3 solutions.",             icon: <FaLayerGroup /> },
+        { num: YEARS_EXPERIENCE_DISPLAY,   label: "Years Blockchain Expertise", desc: `${YEARS_EXPERIENCE_DISPLAY} years delivering secure Python blockchain and Web3 solutions.`,             icon: <FaLayerGroup /> },
         { num: "150+", label: "Clients Served Globally",    desc: "150+ organizations trust us for secure and transparent Python blockchain solutions.",  icon: <FaStar /> },
-        { num: "24/7", label: "Support & Monitoring",       desc: "Round-the-clock monitoring and support for Python blockchain application performance.", icon: <FaHeadset /> },
       ],
     }}
 
@@ -155,7 +155,7 @@ const PythonBlockchain = () => (
 
     slider={[
       { count: "100+", title: "Python Blockchain Apps Delivered",   desc: "100+ Python blockchain applications deployed for DeFi platforms, NFT marketplaces, and enterprise DApps — security-first with optimized performance.",          image: "/Assets/seerviceSlider/slide1.webp" },
-      { count: "7+",   title: "Years of Blockchain Expertise",      desc: "Seven-plus years of Python blockchain development using Web3.py, Hyperledger, and modern DApp frameworks — robust, scalable, and secure by design.",           image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: YEARS_EXPERIENCE_DISPLAY,   title: "Years of Blockchain Expertise",      desc: `${YEARS_EXPERIENCE_DISPLAY} years of Python blockchain development using Web3.py, Hyperledger, and modern DApp frameworks — robust, scalable, and secure by design.`,           image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "150+", title: "Clients Served Globally",            desc: "150+ organizations worldwide trust us for secure, transparent, and scalable Python blockchain solutions across diverse decentralized use cases.",                image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "99%",  title: "Application Reliability Success",    desc: "99% reliability achieved through secure transaction processing, rigorous testing, and optimized performance for enterprise and decentralized applications.",     image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "24/7", title: "Support & Monitoring",               desc: "Continuous monitoring, updates, and optimization for Python blockchain applications — maintaining security, performance, and uninterrupted service.",            image: "/Assets/seerviceSlider/slide5.webp" },

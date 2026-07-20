@@ -7,6 +7,7 @@ import {
 import { SiHaskell } from "react-icons/si";
 import haskellImg from "../Assets/Haskell.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
 const Haskell = () => (
   <CommonTechPage
@@ -37,9 +38,8 @@ const Haskell = () => (
       ],
       stats: [
         { num: "150+", label: "Haskell AI Solutions",     desc: "High-performance Haskell AI & ML systems built for predictive analytics and automation.",  icon: <SiHaskell /> },
-        { num: "8+",   label: "Years Haskell Expertise",  desc: "Eight-plus years mastering Haskell for functional AI, ML, and data-intensive systems.",       icon: <FaLayerGroup /> },
+        { num: YEARS_EXPERIENCE_DISPLAY,   label: "Years Haskell Expertise",  desc: `${YEARS_EXPERIENCE_DISPLAY} years mastering Haskell for functional AI, ML, and data-intensive systems.`,       icon: <FaLayerGroup /> },
         { num: "200+", label: "Clients Empowered",        desc: "200+ organizations powered by Haskell AI and ML solutions across diverse industries.",         icon: <FaStar /> },
-        { num: "24/7", label: "Support & Monitoring",     desc: "Round-the-clock monitoring and support keeping Haskell AI systems stable and optimized.",      icon: <FaHeadset /> },
       ],
     }}
 
@@ -155,7 +155,7 @@ const Haskell = () => (
 
     slider={[
       { count: "150+", title: "Haskell AI Solutions Delivered",    desc: "150+ Haskell-powered AI and ML solutions built — delivering high-performance, scalable, and intelligent systems for predictive analytics and automation.",       image: "/Assets/seerviceSlider/slide1.webp" },
-      { count: "8+",   title: "Years of Haskell Expertise",        desc: "Eight-plus years crafting robust Haskell AI and ML solutions — optimizing performance, model training efficiency, and scalability for complex AI systems.",    image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: YEARS_EXPERIENCE_DISPLAY,   title: "Years of Haskell Expertise",        desc: `${YEARS_EXPERIENCE_DISPLAY} years crafting robust Haskell AI and ML solutions — optimizing performance, model training efficiency, and scalability for complex AI systems.`,    image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "200+", title: "Clients Empowered Globally",        desc: "200+ organizations trust us for Haskell AI solutions enhancing predictive capabilities, automation, and data-driven insights across healthcare, finance, and research.", image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "99%",  title: "Optimization Success Rate",         desc: "Up to 99% efficiency in Haskell AI computations — fast model execution, accurate predictions, and minimal resource overhead through advanced optimizations.",   image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "24/7", title: "Technical Support & Monitoring",    desc: "24/7 monitoring, updates, and optimization keeping Haskell AI and ML systems stable, secure, and performing at peak efficiency for all critical workloads.",     image: "/Assets/seerviceSlider/slide5.webp" },

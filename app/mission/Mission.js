@@ -1,6 +1,8 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import useYearsExperience from "../lib/useYearsExperience";
+import { COMPANY_START_YEAR } from "../lib/companyStats";
 import GetNewInsight from "../components/GetNewInsight";
 import {
   FaBriefcase, FaRocket, FaGlobeAsia, FaLightbulb, FaStar, FaBolt,
@@ -40,6 +42,7 @@ const missionPoints = [
 ];
 
 export default function Mission() {
+  const yearsExperience = useYearsExperience();
   return (
     <>
       <style>{`
@@ -262,7 +265,7 @@ export default function Mission() {
                 </span>
                 <div className="leading-tight">
                   <p className="text-[12px] font-bold" style={{ color:"#0f172a", fontFamily:"'Poppins',sans-serif" }}>Innovation Led</p>
-                  <p className="text-[9px] font-semibold uppercase tracking-wider" style={{ color:"#94a3b8" }}>Since 2009</p>
+                  <p className="text-[9px] font-semibold uppercase tracking-wider" style={{ color:"#94a3b8" }}>Since {COMPANY_START_YEAR}</p>
                 </div>
               </div>
             </div>
@@ -444,7 +447,7 @@ export default function Mission() {
 
               {/* Stats row */}
               <div className="flex flex-wrap gap-8">
-                {[["15+","Years of Trust"],["500+","Global Clients"],["98%","On-time Delivery"]].map(([n,l]) => (
+                {[[yearsExperience,"Years of Trust"],["500+","Global Clients"],["98%","On-time Delivery"]].map(([n,l]) => (
                   <div key={l}>
                     <p className="font-extrabold leading-none mb-1"
                       style={{ fontFamily:"'Poppins',sans-serif", fontSize:"clamp(1.6rem,3vw,2.4rem)",

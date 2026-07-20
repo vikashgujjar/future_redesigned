@@ -1,13 +1,15 @@
 "use client";
-import cwd from "../Assets/cwd.webp";
+const cwd = "https://images.unsplash.com/photo-1522252234503-e356532cafd5?w=1400&q=85";
 import CommonServicePage from "../components/CommonServicePage";
 import {
   FaMagento, FaWordpress, FaShopify, FaOpencart, FaCogs, FaServer,
   FaProjectDiagram, FaRobot, FaBars,
   FaPalette, FaChartBar, FaSearch, FaLaptopCode, FaUserCheck,
 } from "react-icons/fa";
+import useYearsExperience from "../lib/useYearsExperience";
 
 const Corporate = () => {
+  const yearsExperience = useYearsExperience();
   const features = [
     {
       title: "Appealing Layout",
@@ -70,31 +72,31 @@ const Corporate = () => {
       count: "250+",
       title: "Corporate Web Apps Delivered",
       desc: "We've developed over 250+ corporate web applications that empower businesses to operate efficiently and engage users effectively. Each project is built for performance, reliability, and seamless digital interaction.",
-      image: "/Assets/seerviceSlider/slide1.webp",
+      image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=900&q=80",
     },
     {
-      count: "15+",
+      count: yearsExperience,
       title: "Years of Industry Expertise",
-      desc: "With more than 15 years in corporate web development, Future IT Touch Pvt. Ltd. delivers robust and innovative web solutions. Our experience ensures every project blends technology, scalability, and exceptional user experience.",
-      image: "/Assets/seerviceSlider/slide2.webp",
+      desc: `With ${yearsExperience} years in corporate web development, Future IT Touch Pvt. Ltd. delivers robust and innovative web solutions. Our experience ensures every project blends technology, scalability, and exceptional user experience.`,
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80",
     },
     {
       count: "500+",
       title: "Global Businesses Served",
       desc: "Trusted by over 500 corporate clients worldwide, we create tailored web applications designed for growth and efficiency. Our expertise spans industries, delivering results that meet both local and global business goals.",
-      image: "/Assets/seerviceSlider/slide3.webp",
+      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&q=80",
     },
     {
       count: "98%",
       title: "Client Satisfaction Rate",
       desc: "Our client-first approach has earned us a 98% satisfaction rate. We focus on transparency, timely delivery, and building enterprise-grade web applications that exceed expectations and drive long-term success.",
-      image: "/Assets/seerviceSlider/slide4.webp",
+      image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=900&q=80",
     },
     {
       count: "24/7",
       title: "Reliable Technical Support",
       desc: "We provide 24/7 support to ensure your corporate web applications run seamlessly. Our dedicated support team quickly resolves issues, applies updates, and maintains consistent system performance.",
-      image: "/Assets/seerviceSlider/slide5.webp",
+      image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=900&q=80",
     },
   ];
 
@@ -179,7 +181,7 @@ const Corporate = () => {
         "Our focus is on building robust web applications that simplify complex business processes and drive productivity across departments. With innovative tools and intuitive design, our corporate web apps deliver measurable results for businesses worldwide.",
         { boldPrefix: "For Employees:", text: "Easy access dashboards, intuitive interfaces, secure logins, workflow automation, real-time data sharing, and cloud integration for seamless performance." },
         { boldPrefix: "For Management:", text: "Centralized control, detailed analytics, role-based access, performance tracking, communication tools, and data-driven decision-making." },
-        "With over 15 years of industry experience, we've delivered innovative web solutions for leading corporations. Choose our custom web app development services to transform your organization's digital workflow and boost operational efficiency.",
+        `With over ${yearsExperience} years of industry experience, we've delivered innovative web solutions for leading corporations. Choose our custom web app development services to transform your organization's digital workflow and boost operational efficiency.`,
       ]}
       overviewCtaText="Start Your Corporate Web App Project"
       featuresBadge="Trusted Business Web App Development Service"

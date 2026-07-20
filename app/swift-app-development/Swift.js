@@ -6,6 +6,7 @@ import {
 } from "react-icons/fa";
 import swiftImg from "../Assets/swift.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
 const Swift = () => (
   <CommonTechPage
@@ -36,9 +37,8 @@ const Swift = () => (
       ],
       stats: [
         { num: "150+", label: "Swift Apps Delivered",    desc: "High-performance iOS apps shipped across fintech, healthcare, and eCommerce.", icon: <FaApple /> },
-        { num: "8+",   label: "Years iOS Expertise",     desc: "Eight-plus years building scalable, secure, and elegant iOS solutions.",       icon: <FaLayerGroup /> },
+        { num: YEARS_EXPERIENCE_DISPLAY,   label: "Years iOS Expertise",     desc: `${YEARS_EXPERIENCE_DISPLAY} years building scalable, secure, and elegant iOS solutions.`,       icon: <FaLayerGroup /> },
         { num: "200+", label: "Global Clients Served",   desc: "Trusted by 200+ clients worldwide for robust and impactful Swift apps.",       icon: <FaStar /> },
-        { num: "24/7", label: "Technical Support",       desc: "Round-the-clock monitoring, maintenance, and technical assistance.",           icon: <FaHeadset /> },
       ],
     }}
 
@@ -151,7 +151,7 @@ const Swift = () => (
 
     slider={[
       { count: "150+", title: "Swift Apps Delivered",         desc: "150+ high-performance Swift iOS apps built across fintech, healthcare, travel, and eCommerce — each crafted for seamless performance and engaging UX.",           image: "/Assets/seerviceSlider/slide1.webp" },
-      { count: "8+",   title: "Years of iOS Expertise",       desc: "Eight-plus years of hands-on iOS development with deep proficiency in Swift, SwiftUI, and Xcode — delivering efficient, secure, and beautiful applications.",      image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: YEARS_EXPERIENCE_DISPLAY,   title: "Years of iOS Expertise",       desc: `${YEARS_EXPERIENCE_DISPLAY} years of hands-on iOS development with deep proficiency in Swift, SwiftUI, and Xcode — delivering efficient, secure, and beautiful applications.`,      image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "200+", title: "Satisfied Global Clients",     desc: "200+ clients from startups to enterprises trust us for innovative, reliable, and high-performing Swift apps that drive measurable digital outcomes.",               image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "99%",  title: "App Launch Success Rate",      desc: "99% App Store approval rate maintained by following Apple's Human Interface Guidelines and rigorous testing — ensuring smooth launches without rejection.",        image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "24/7", title: "Technical Support Availability", desc: "Round-the-clock Swift development support, continuous monitoring, and proactive maintenance — keeping your iOS app flawless across every new Apple OS version.", image: "/Assets/seerviceSlider/slide5.webp" },

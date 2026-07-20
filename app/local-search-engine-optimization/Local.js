@@ -1,7 +1,8 @@
 "use client";
 import image2 from "../Assets/lss.webp";
-import cwd from "../Assets/loc.webp";
+const cwd = "https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=1400&q=85";
 import CommonServicePage from "../components/CommonServicePage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 import {
   FaBuilding, FaBoxOpen, FaLayerGroup, FaFileAlt, FaFolderOpen, FaBookOpen,
   FaLightbulb, FaHandshake, FaPalette, FaChartLine,
@@ -77,31 +78,31 @@ const Local = () => {
       count: "1000+",
       title: "Local Listings Optimized",
       desc: "We have optimized over 1000 local listings across directories and search platforms, helping businesses increase local visibility and attract more nearby customers effectively.",
-      image: "/Assets/seerviceSlider/slide1.webp",
+      image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=900&q=80",
     },
     {
-      count: "15+",
+      count: YEARS_EXPERIENCE_DISPLAY,
       title: "Years of SEO Expertise",
-      desc: "With over 15 years of SEO experience, Future IT Touch Pvt. Ltd. delivers expert local search optimization strategies that improve rankings, traffic, and conversions for businesses worldwide.",
-      image: "/Assets/seerviceSlider/slide2.webp",
+      desc: `With over ${YEARS_EXPERIENCE_DISPLAY} years of SEO experience, Future IT Touch Pvt. Ltd. delivers expert local search optimization strategies that improve rankings, traffic, and conversions for businesses worldwide.`,
+      image: "https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=900&q=80",
     },
     {
       count: "500+",
       title: "Global Clients Served",
       desc: "Trusted by over 500 brands, we create local SEO campaigns that enhance online presence, improve visibility on maps, and drive measurable traffic from local searches.",
-      image: "/Assets/seerviceSlider/slide3.webp",
+      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80",
     },
     {
       count: "98%",
       title: "Client Satisfaction Rate",
       desc: "Our dedication to effective local SEO strategies has earned us a 98% satisfaction rate. We ensure each campaign drives results that meet business goals and increase local engagement.",
-      image: "/Assets/seerviceSlider/slide4.webp",
+      image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=900&q=80",
     },
     {
       count: "24/7",
       title: "Dedicated Support",
       desc: "Our team provides continuous support for local SEO campaigns, including updates, reporting, and optimizations to ensure your business remains visible and competitive in your local area.",
-      image: "/Assets/seerviceSlider/slide5.webp",
+      image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=900&q=80",
     },
   ];
 
@@ -184,7 +185,7 @@ const Local = () => {
       overviewParagraphs={[
         "At Future IT Touch Pvt. Ltd. we create comprehensive local SEO strategies that help your business rank higher in local searches, attract relevant customers, and drive conversions. Effective local SEO builds visibility, trust, and a strong online reputation.",
         "From Google Business Profile optimization to local content creation, citations, and review management, we ensure your business stands out in your area. Our experienced SEO specialists combine technical expertise, analytics, and strategy to deliver measurable local search results.",
-        "With over 15 years of experience, we provide high-quality Local SEO Services tailored to your business locations and audience. We help you attract more local customers, increase engagement, and drive leads efficiently.",
+        `With over ${YEARS_EXPERIENCE_DISPLAY} years of experience, we provide high-quality Local SEO Services tailored to your business locations and audience. We help you attract more local customers, increase engagement, and drive leads efficiently.`,
       ]}
       overviewCtaText="Improve Your Local Search Visibility Today"
       featuresBadge="Result-Oriented Local SEO Services"

@@ -54,11 +54,6 @@ export default function CommonServicePage({
   const cur = features[activeFeature] || features[0];
   const curColor = FEAT_COLORS[activeFeature % FEAT_COLORS.length];
 
-  /* resolve image src for both string URLs and Next.js StaticImageData */
-  const imgSrc = featuresStickyImg
-    ? (typeof featuresStickyImg === "string" ? featuresStickyImg : featuresStickyImg.src)
-    : null;
-
   const breadcrumbItems = breadcrumbs || [{ name: "Home", path: "/" }, { name: bannerTitle, path: pathname }];
 
   return (
@@ -122,8 +117,6 @@ export default function CommonServicePage({
             @keyframes fexBarIn  { from{transform:scaleX(0)} to{transform:scaleX(1)} }
             @keyframes fexGrad   { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
             @keyframes fexPulse  { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.45;transform:scale(.72)} }
-            @keyframes fexImgIn  { from{opacity:0;transform:scale(1.03)} to{opacity:1;transform:scale(1)} }
-            @keyframes fexContentIn { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
             @keyframes fexFloat  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
 
             .fex-bar   { animation:fexBarIn .75s cubic-bezier(.22,1,.36,1) .2s both; transform-origin:center }
@@ -183,44 +176,7 @@ export default function CommonServicePage({
             }
             .fex-tab.active .fex-tab-arrow { opacity:1; transform:translateX(0); }
 
-            /* Right panel */
-            .fex-panel {
-              border-radius:24px; overflow:hidden; position:relative;
-              min-height:500px; display:flex; flex-direction:column; justify-content:flex-end;
-            }
-            .fex-panel-img {
-              position:absolute; inset:0; background-size:cover; background-position:center;
-              animation:fexImgIn .5s cubic-bezier(.22,1,.36,1);
-              transition:transform .5s cubic-bezier(.22,1,.36,1);
-            }
-            .fex-panel:hover .fex-panel-img { transform:scale(1.04); }
-            .fex-panel-overlay {
-              position:absolute; inset:0;
-              background:linear-gradient(160deg,rgba(4,7,26,.18) 0%,rgba(4,7,26,.82) 100%);
-            }
-            .fex-panel-content {
-              position:relative; z-index:2; padding:22px 20px;
-              animation:fexContentIn .4s cubic-bezier(.22,1,.36,1);
-            }
-            @media (min-width:480px) { .fex-panel-content { padding:28px 30px; } }
-            @media (min-width:640px) { .fex-panel-content { padding:36px 38px; } }
-            .fex-panel-icon {
-              width:68px; height:68px; border-radius:20px;
-              display:flex; align-items:center; justify-content:center; font-size:28px;
-              background:rgba(255,255,255,.18); border:1.5px solid rgba(255,255,255,.35);
-              backdrop-filter:blur(12px);
-              box-shadow:0 8px 28px rgba(0,0,0,.20),0 0 24px rgba(255,255,255,.12);
-              margin-bottom:20px; color:#fff;
-              animation:fexFloat 5s ease-in-out infinite;
-            }
-            .fex-panel-badge {
-              display:inline-flex; align-items:center; gap:7px;
-              padding:5px 14px; border-radius:999px; margin-bottom:16px;
-              background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22);
-              backdrop-filter:blur(10px);
-            }
-
-            /* No-image fallback panel */
+            /* Right panel — colored gradient fallback */
             .fex-fallback {
               border-radius:24px; overflow:hidden;
               min-height:500px; display:flex; flex-direction:column; justify-content:center;
@@ -325,81 +281,25 @@ export default function CommonServicePage({
                 <div className="pb-2" />
               </div>
 
-              {/* RIGHT — Detail panel */}
-              {imgSrc ? (
-                <div className="fex-panel">
-                  {/* Background image */}
-                  <div key={`img-${activeFeature}`} className="fex-panel-img"
-                    style={{ backgroundImage:`url(${imgSrc})` }} />
-
-                  {/* Dark overlay */}
-                  <div className="fex-panel-overlay" />
-
-                  {/* Accent tint per feature */}
-                  <div className="absolute inset-0 pointer-events-none rounded-[24px]"
-                    style={{ background:`linear-gradient(160deg,${curColor.from}20,${curColor.to}18,transparent 55%)` }} />
-
-                  {/* Top accent strip */}
-                  <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-[24px]"
-                    style={{ background:`linear-gradient(90deg,${curColor.from},${curColor.to})` }} />
-
-                  {/* Content */}
-                  <div key={`content-${activeFeature}`} className="fex-panel-content">
-                    {/* Small badge */}
-                    <div className="fex-panel-badge">
-                      <span className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                        style={{ background:`linear-gradient(135deg,${curColor.from},${curColor.to})` }} />
-                      <span className="text-[10px] font-bold uppercase tracking-[.14em] text-white/75"
-                        style={{ fontFamily:"'Poppins',sans-serif" }}>
-                        Feature {String(activeFeature + 1).padStart(2,"0")}
-                      </span>
-                    </div>
-
-                    {/* Icon */}
-                    <div className="fex-panel-icon" style={{
-                      background:`linear-gradient(135deg,${curColor.from}44,${curColor.to}33)`,
-                    }}>
-                      {cur?.icon}
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="font-bold text-white leading-snug mb-3"
-                      style={{ fontFamily:"'Poppins',sans-serif", fontSize:"clamp(1.1rem,2vw,1.4rem)" }}>
-                      {cur?.title}
-                    </h3>
-
-                    {/* Separator */}
-                    <div className="mb-4 h-px"
-                      style={{ background:`linear-gradient(90deg,${curColor.from}60,${curColor.to}40,transparent)` }} />
-
-                    {/* Description */}
-                    <p className="text-[13.5px] leading-[1.84]"
-                      style={{ color:"rgba(220,235,255,.68)" }}>
-                      {cur?.description}
-                    </p>
-                  </div>
+              {/* RIGHT — Detail panel (colored gradient, no background image) */}
+              <div key={`fallback-${activeFeature}`} className="fex-fallback"
+                style={{ background:`linear-gradient(140deg,${curColor.from}15,${curColor.to}12,rgba(248,250,255,1) 65%)`,
+                         border:`1px solid ${curColor.from}20` }}>
+                <div className="fex-fallback-icon-wrap"
+                  style={{ background:`linear-gradient(135deg,${curColor.from},${curColor.to})`,
+                           "--icon-glow":`${curColor.from}44` }}>
+                  {cur?.icon}
                 </div>
-              ) : (
-                /* No image — colored gradient panel */
-                <div key={`fallback-${activeFeature}`} className="fex-fallback"
-                  style={{ background:`linear-gradient(140deg,${curColor.from}15,${curColor.to}12,rgba(248,250,255,1) 65%)`,
-                           border:`1px solid ${curColor.from}20` }}>
-                  <div className="fex-fallback-icon-wrap"
-                    style={{ background:`linear-gradient(135deg,${curColor.from},${curColor.to})`,
-                             "--icon-glow":`${curColor.from}44` }}>
-                    {cur?.icon}
-                  </div>
-                  <h3 className="font-bold leading-snug mb-4"
-                    style={{ color:"#0f172a", fontFamily:"'Poppins',sans-serif", fontSize:"clamp(1.2rem,2.2vw,1.55rem)" }}>
-                    {cur?.title}
-                  </h3>
-                  <div className="mb-4 h-[2px] w-12 rounded-full"
-                    style={{ background:`linear-gradient(90deg,${curColor.from},${curColor.to})` }} />
-                  <p className="text-[14px] leading-[1.90]" style={{ color:"#475569" }}>
-                    {cur?.description}
-                  </p>
-                </div>
-              )}
+                <h3 className="font-bold leading-snug mb-4"
+                  style={{ color:"#0f172a", fontFamily:"'Poppins',sans-serif", fontSize:"clamp(1.2rem,2.2vw,1.55rem)" }}>
+                  {cur?.title}
+                </h3>
+                <div className="mb-4 h-[2px] w-12 rounded-full"
+                  style={{ background:`linear-gradient(90deg,${curColor.from},${curColor.to})` }} />
+                <p className="text-[14px] leading-[1.90]" style={{ color:"#475569" }}>
+                  {cur?.description}
+                </p>
+              </div>
 
             </div>
           </div>

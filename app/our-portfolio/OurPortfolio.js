@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import GetNewInsight from "../components/GetNewInsight";
 import { FaExternalLinkAlt } from "react-icons/fa";
+import useYearsExperience from "../lib/useYearsExperience";
 
 import image1  from "../Assets/website1.webp";
 import image2  from "../Assets/website2.webp";
@@ -61,6 +62,7 @@ const data = [
 
 export default function OurPortfolio() {
   const [active, setActive] = useState("All");
+  const yearsExperience = useYearsExperience();
 
   const filtered = active === "All"
     ? data
@@ -335,7 +337,7 @@ export default function OurPortfolio() {
           <div className="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-6 rounded-3xl p-8"
             style={{ background:"linear-gradient(135deg,rgba(45,212,191,.06),rgba(99,102,241,.06))",
               border:"1px solid rgba(99,102,241,.10)" }}>
-            {[["500+","Projects Delivered"],["15+","Years Experience"],["50+","Industries"],["98%","Client Satisfaction"]].map(([n,l]) => (
+            {[["5000+","Projects Delivered"],[yearsExperience,"Years Experience"],["50+","Industries"],["98%","Client Satisfaction"]].map(([n,l]) => (
               <div key={l} className="text-center">
                 <p className="font-extrabold leading-none mb-1"
                   style={{ fontFamily:"'Poppins',sans-serif", fontSize:"clamp(1.5rem,2.5vw,2rem)",

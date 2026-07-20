@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import useYearsExperience from "../lib/useYearsExperience";
 import Link from "next/link";
 import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -73,6 +74,7 @@ const locations = [
 ];
 
 function Location() {
+  const yearsExperience = useYearsExperience();
   return (
     <section className="relative overflow-hidden py-16 sm:py-20 lg:py-24"
       style={{ background:"linear-gradient(150deg,#04071a 0%,#080e28 55%,#050b20 100%)",
@@ -271,8 +273,8 @@ function Location() {
           {[
             { num:"5", label:"Global Offices" },
             { num:"3", label:"Countries" },
-            { num:"15+", label:"Years Active" },
-            { num:"500+", label:"Projects Done" },
+            { num: yearsExperience, label:"Years Active" },
+            { num:"5000+", label:"Projects Done" },
           ].map((s, i) => (
             <div key={i} className="text-center py-5 rounded-2xl"
               style={{ background:"rgba(255,255,255,.04)", border:"1px solid rgba(255,255,255,.07)" }}>

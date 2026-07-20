@@ -2,6 +2,7 @@
 // (service, location) pair. Uses a deterministic hash to pick among several
 // template variants so output is stable across builds but not identical
 // mail-merge text across 1,178 pages.
+import { YEARS_EXPERIENCE_DISPLAY } from "../../lib/companyStats";
 
 function hash(str) {
   let h = 0;
@@ -33,7 +34,7 @@ export function buildLocationContent(service, location) {
 
   // ── Hero / banner description ──
   const heroDescVariants = [
-    `Future IT Touch provides ${serviceName.toLowerCase()} for businesses throughout ${cityName}. ${cityName} is ${blurb}, and we help local companies compete with reliable, remote-delivered ${serviceName.toLowerCase()} backed by 23+ years of IT experience.`,
+    `Future IT Touch provides ${serviceName.toLowerCase()} for businesses throughout ${cityName}. ${cityName} is ${blurb}, and we help local companies compete with reliable, remote-delivered ${serviceName.toLowerCase()} backed by ${YEARS_EXPERIENCE_DISPLAY} years of IT experience.`,
     `Helping companies throughout ${cityName} grow with professional ${serviceName.toLowerCase()}. As ${blurb}, ${cityName} businesses need a delivery partner who understands both technical execution and market pace — that's where Future IT Touch comes in.`,
     `Serving businesses across ${cityName} with dependable, remote-delivered ${serviceName.toLowerCase()}. ${cityName} is ${blurb}, and our team works as an extension of yours to help you move fast without compromising on quality.`,
   ];
@@ -46,7 +47,7 @@ export function buildLocationContent(service, location) {
     `As ${blurb}, ${cityName} is home to businesses that expect fast, dependable ${serviceName.toLowerCase()}. ${shortDescription}`,
   ];
   const deliveryVariants = [
-    `Future IT Touch provides remote development services for businesses in ${cityName}, combining transparent communication, agile delivery, and 23+ years of hands-on experience to keep every engagement on track.`,
+    `Future IT Touch provides remote development services for businesses in ${cityName}, combining transparent communication, agile delivery, and ${YEARS_EXPERIENCE_DISPLAY} years of hands-on experience to keep every engagement on track.`,
     `We provide ${serviceName.toLowerCase()} for clients throughout ${cityName} on a fully remote-delivery model — no compromises on responsiveness, communication, or accountability.`,
     `Our team works with businesses across ${cityName} the same way we work with clients anywhere in ${country}: clear timelines, direct communication, and measurable outcomes.`,
   ];

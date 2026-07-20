@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { COMPANY_START_YEAR } from "../lib/companyStats";
 
 /* ── Feature items — same content as original ── */
 const features = [
@@ -199,7 +200,7 @@ export default function About() {
                 <p className="text-[10px] text-gray-400 font-semibold uppercase tracking-widest leading-none mb-0.5"
                   style={{ fontFamily: "'Inter', sans-serif" }}>Established</p>
                 <p className="text-sm font-bold text-gray-800 leading-none"
-                  style={{ fontFamily: "'Poppins', sans-serif" }}>Since 2017</p>
+                  style={{ fontFamily: "'Poppins', sans-serif" }}>Since {COMPANY_START_YEAR}</p>
               </div>
             </div>
           </div>
@@ -249,7 +250,7 @@ export default function About() {
           {/* Description */}
           <p className="text-gray-500 text-base lg:text-[15px] leading-relaxed mb-8 max-w-[520px]"
             style={{ fontFamily: "'Inter', sans-serif" }}>
-            Founded in 2017, Future IT Touch is a leading website designing and development company
+            Founded in {COMPANY_START_YEAR}, Future IT Touch is a leading website designing and development company
             in India. We specialize in creating innovative and user-friendly digital solutions that
             help businesses thrive in the online world. Our dedicated team combines creativity and
             technical expertise to deliver exceptional results tailored to your needs.

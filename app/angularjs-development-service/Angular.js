@@ -6,6 +6,7 @@ import {
 } from "react-icons/fa";
 import angularImg from "../Assets/aglr.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
 const Angular = () => (
   <CommonTechPage
@@ -36,9 +37,8 @@ const Angular = () => (
       ],
       stats: [
         { num: "200+", label: "Projects Delivered",     desc: "AngularJS apps across eCommerce, healthcare, education, and finance.", icon: <FaAngular /> },
-        { num: "8+",   label: "Years of Expertise",     desc: "Eight-plus years building high-performing front-end solutions.",        icon: <FaLayerGroup /> },
+        { num: YEARS_EXPERIENCE_DISPLAY,   label: "Years of Expertise",     desc: `${YEARS_EXPERIENCE_DISPLAY} years building high-performing front-end solutions.`,        icon: <FaLayerGroup /> },
         { num: "350+", label: "Global Clients Served",  desc: "Trusted by 350+ clients across 30+ countries worldwide.",              icon: <FaStar /> },
-        { num: "24/7", label: "Technical Support",      desc: "Round-the-clock monitoring, maintenance, and technical assistance.",    icon: <FaHeadset /> },
       ],
     }}
 
@@ -153,7 +153,7 @@ const Angular = () => (
 
     slider={[
       { count: "200+", title: "AngularJS Projects Delivered",  desc: "200+ AngularJS apps across eCommerce, healthcare, education, and finance — each tailored for performance, responsive design, and seamless UX.",  image: "/Assets/seerviceSlider/slide1.webp" },
-      { count: "8+",   title: "Years of Frontend Expertise",   desc: "Eight-plus years building engaging, maintainable AngularJS solutions that stay ahead of UI/UX trends and framework advancements.",               image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: YEARS_EXPERIENCE_DISPLAY,   title: "Years of Frontend Expertise",   desc: `${YEARS_EXPERIENCE_DISPLAY} years building engaging, maintainable AngularJS solutions that stay ahead of UI/UX trends and framework advancements.`,               image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "350+", title: "Global Clients Served",         desc: "Trusted by 350+ clients across 30+ countries — delivering custom dashboards, enterprise apps, and SPAs with reliability and innovation.",          image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "98%",  title: "Client Satisfaction Rate",      desc: "98% satisfaction through quality-first delivery, transparent communication, and proactive issue resolution on every AngularJS project.",          image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "24/7", title: "Dedicated Technical Support",   desc: "Around-the-clock assistance for performance optimization, security updates, and feature enhancements — keeping your platform always reliable.",     image: "/Assets/seerviceSlider/slide5.webp" },

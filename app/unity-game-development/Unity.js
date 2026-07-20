@@ -7,6 +7,7 @@ import {
 import { SiUnity } from "react-icons/si";
 import unityImg from "../Assets/gam2d3d.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
 const Unity = () => (
   <CommonTechPage
@@ -37,9 +38,8 @@ const Unity = () => (
       ],
       stats: [
         { num: "150+", label: "Unity Games Delivered",           desc: "Action, simulation, AR/VR, and casual games launched across genres worldwide.",  icon: <SiUnity /> },
-        { num: "9+",   label: "Years Game Dev Expertise",        desc: "Nine-plus years building high-performing and visually immersive Unity experiences.", icon: <FaLayerGroup /> },
+        { num: YEARS_EXPERIENCE_DISPLAY,   label: "Years Game Dev Expertise",        desc: `${YEARS_EXPERIENCE_DISPLAY} years building high-performing and visually immersive Unity experiences.`, icon: <FaLayerGroup /> },
         { num: "300+", label: "Global Gaming Clients",           desc: "300+ studios and brands trust us for interactive Unity games across audiences.",    icon: <FaStar /> },
-        { num: "24/7", label: "Technical & Creative Support",    desc: "Round-the-clock support keeping your game updated, optimized, and engaging.",       icon: <FaHeadset /> },
       ],
     }}
 
@@ -152,7 +152,7 @@ const Unity = () => (
 
     slider={[
       { count: "150+", title: "Unity Games Delivered",           desc: "150+ Unity-powered games launched across action, simulation, AR/VR, and casual genres — built for engaging gameplay and memorable player experiences.",              image: "/Assets/seerviceSlider/slide1.webp" },
-      { count: "9+",   title: "Years of Game Dev Expertise",     desc: "Nine-plus years in Unity game development — mastering 2D, 3D, AR/VR, multiplayer systems, and optimization for high-performing cross-platform titles.",           image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: YEARS_EXPERIENCE_DISPLAY,   title: "Years of Game Dev Expertise",     desc: `${YEARS_EXPERIENCE_DISPLAY} years in Unity game development — mastering 2D, 3D, AR/VR, multiplayer systems, and optimization for high-performing cross-platform titles.`,           image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "300+", title: "Global Gaming Clients",           desc: "300+ studios and brands worldwide trust us to build interactive, polished Unity games for diverse audiences across mobile, console, and desktop platforms.",         image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "98%",  title: "Client Satisfaction Rate",        desc: "98% satisfaction rate driven by our commitment to creativity, technical excellence, on-time delivery, and long-term support on every gaming project.",             image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "24/7", title: "Technical & Creative Support",    desc: "Round-the-clock support ensuring your Unity game stays updated, optimized, and engaging for players — from launch through every future content update.",           image: "/Assets/seerviceSlider/slide5.webp" },

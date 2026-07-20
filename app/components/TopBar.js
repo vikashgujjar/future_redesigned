@@ -9,32 +9,35 @@ import {
   FaPhoneAlt,
   FaCaretDown,
   FaFacebookF,
-  FaTwitter,
   FaLinkedinIn,
   FaYoutube,
   FaGithub,
 } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import useYearsExperience from "../lib/useYearsExperience";
 
 const socials = [
   { href: "https://www.facebook.com/Futureittouch", Icon: FaFacebookF, label: "Facebook" },
-  { href: "https://x.com/futureittouch", Icon: FaTwitter, label: "Twitter" },
+  { href: "https://x.com/futureittouch", Icon: FaXTwitter, label: "X (Twitter)" },
   { href: "https://in.linkedin.com/company/future-it-touch", Icon: FaLinkedinIn, label: "LinkedIn" },
   { href: "https://www.instagram.com/future_it_touch/", Icon: FaInstagram, label: "Instagram" },
   { href: "https://www.youtube.com/channel/UCirWettrTWfsFRzdGRIc6BQ/about", Icon: FaYoutube, label: "YouTube" },
   { href: "https://github.com/Future-IT-Touch-Private-Limited", Icon: FaGithub, label: "GitHub" },
 ];
 
-const tickerItems = [
+const getTickerItems = (yearsExperience) => [
   "🚀  Trusted by 1000+ Businesses Worldwide",
   "🌍  Serving 50 Cities Across 5 Countries",
   "💻  Custom Web & Mobile App Development",
   "📈  Result-Driven Digital Marketing",
-  "⭐  23+ Years of IT Excellence Since 2001",
+  `⭐  ${yearsExperience} Years of IT Excellence`,
   "📞  24/7 Dedicated Support Available",
 ];
 
 export default function TopBar() {
   const [isOpen, setIsOpen] = useState(false);
+  const yearsExperience = useYearsExperience();
+  const tickerItems = getTickerItems(yearsExperience);
 
   return (
     <div

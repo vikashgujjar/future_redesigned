@@ -1,13 +1,15 @@
 "use client";
-import cwd from "../Assets/soci.webp";
+const cwd = "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1400&q=85";
 import soe from "../Assets/soe.webp";
 import CommonServicePage from "../components/CommonServicePage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 import {
   FaUsers, FaChartLine, FaBullhorn, FaCameraRetro, FaHashtag, FaEnvelopeOpenText,
   FaLaptop, FaLightbulb, FaHandshake, FaPalette, FaGlobe, FaCommentDots,
-  FaSearch, FaFacebookF, FaTwitter, FaLinkedin, FaInstagram, FaPinterest,
+  FaSearch, FaFacebookF, FaLinkedin, FaInstagram, FaPinterest,
   FaAd, FaPeopleArrows,
 } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Social = () => {
   const features = [
@@ -39,7 +41,7 @@ const Social = () => {
       title: "Twitter Account Management",
       description:
         "Our strategic Twitter marketing leverages powerful words and trending hashtags to strengthen your brand authority. We blend creativity and tactics to enhance your presence on this micro-blogging platform.",
-      icon: <FaTwitter />,
+      icon: <FaXTwitter />,
     },
     {
       title: "LinkedIn Profile Management",
@@ -120,31 +122,31 @@ const Social = () => {
       count: "1500+",
       title: "Campaigns Successfully Executed",
       desc: "We've successfully delivered over 1500 high-impact social media campaigns that boosted brand visibility, audience engagement, and lead conversions across diverse industries worldwide.",
-      image: "/Assets/seerviceSlider/slide1.webp",
+      image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=900&q=80",
     },
     {
-      count: "15+",
+      count: YEARS_EXPERIENCE_DISPLAY,
       title: "Years of Digital Expertise",
-      desc: "With more than 15 years of experience in digital marketing, Future IT Touch Pvt. Ltd. crafts innovative, data-driven social strategies that accelerate growth and ensure long-term brand success.",
-      image: "/Assets/seerviceSlider/slide2.webp",
+      desc: `With more than ${YEARS_EXPERIENCE_DISPLAY} years of experience in digital marketing, Future IT Touch Pvt. Ltd. crafts innovative, data-driven social strategies that accelerate growth and ensure long-term brand success.`,
+      image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=900&q=80",
     },
     {
       count: "500+",
       title: "Satisfied Global Clients",
       desc: "Trusted by over 500 leading brands worldwide, our social media professionals deliver impactful content and campaigns that build trust, foster connections, and inspire customer loyalty.",
-      image: "/Assets/seerviceSlider/slide3.webp",
+      image: "https://images.unsplash.com/photo-1618609378039-b572f64c5b42?w=900&q=80",
     },
     {
       count: "98%",
       title: "Client Satisfaction Rate",
       desc: "We're proud to maintain a 98% satisfaction rate by consistently delivering creative excellence, measurable performance, and proactive support that exceed client expectations.",
-      image: "/Assets/seerviceSlider/slide4.webp",
+      image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=900&q=80",
     },
     {
       count: "24/7",
       title: "Social Support & Monitoring",
       desc: "Our dedicated social team provides 24/7 support and real-time monitoring to ensure your brand remains active, responsive, and protected across every social platform.",
-      image: "/Assets/seerviceSlider/slide5.webp",
+      image: "https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=900&q=80",
     },
   ];
 
@@ -227,7 +229,7 @@ const Social = () => {
       overviewParagraphs={[
         "At Future IT Touch Pvt. Ltd. we help businesses connect, engage, and grow through innovative social media strategies that turn followers into customers and customers into loyal brand advocates.",
         "From creative content and influencer collaborations to paid advertising and performance tracking, our comprehensive solutions ensure your brand stands out in the digital crowd.",
-        "With over 15 years of experience, we deliver high-performing Social Media Marketing Services tailored to your goals and audience.",
+        `With over ${YEARS_EXPERIENCE_DISPLAY} years of experience, we deliver high-performing Social Media Marketing Services tailored to your goals and audience.`,
       ]}
       overviewCtaText="Grow Your Brand with Social Media Today"
       featuresBadge="Comprehensive Social Media Marketing Services"

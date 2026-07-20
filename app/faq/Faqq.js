@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
 const faqGroups = [
   {
@@ -34,7 +35,7 @@ const faqGroups = [
         answer: "We believe trust and confidence are the foundation for any successful relationship.",
         points: [
           "We have completed projects for 100+ US/European clients.",
-          "We have been 12+ years in business, dedicated to the off-shore execution model.",
+          `We have been ${YEARS_EXPERIENCE_DISPLAY} years in business, dedicated to the off-shore execution model.`,
           "Our list of references/testimonials speaks for us.",
         ],
       },

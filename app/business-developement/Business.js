@@ -1,6 +1,7 @@
 "use client";
-import gm from "../Assets/gm.webp";
+const gm = "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&q=85";
 import CommonServicePage from "../components/CommonServicePage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 import {
   FaDesktop, FaMobileAlt, FaSearch, FaShoppingCart, FaLock, FaChartLine,
   FaPaintBrush, FaRocket, FaHeadset, FaRegClock, FaTools, FaGlobe,
@@ -68,31 +69,31 @@ const cards = [
     count: "500+",
     title: "Small Business Websites Delivered",
     desc: "We have designed and launched over 500 small business websites that have helped startups and growing businesses build a strong digital presence and attract more customers.",
-    image: "/Assets/seerviceSlider/slide1.webp",
+    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80",
   },
   {
-    count: "15+",
+    count: YEARS_EXPERIENCE_DISPLAY,
     title: "Years of Web Design Experience",
-    desc: "With 15+ years in the industry, Future IT Touch brings deep expertise in building websites that not only look great but are built to convert visitors into customers.",
-    image: "/Assets/seerviceSlider/slide2.webp",
+    desc: `With ${YEARS_EXPERIENCE_DISPLAY} years in the industry, Future IT Touch brings deep expertise in building websites that not only look great but are built to convert visitors into customers.`,
+    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&q=80",
   },
   {
     count: "98%",
     title: "Client Satisfaction Rate",
     desc: "Our small business clients consistently rate us 5 stars for design quality, communication, on-time delivery, and the tangible results their websites deliver.",
-    image: "/Assets/seerviceSlider/slide3.webp",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80",
   },
   {
     count: "7 Days",
     title: "Average Launch Turnaround",
     desc: "We follow an agile, sprint-based approach that allows us to design, develop, test, and launch most small business websites within just 7–14 business days.",
-    image: "/Assets/seerviceSlider/slide4.webp",
+    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=900&q=80",
   },
   {
     count: "24/7",
     title: "Post-Launch Support",
     desc: "We don't disappear after launch. Our team is available around the clock to handle updates, fix issues, and help your website grow alongside your business.",
-    image: "/Assets/seerviceSlider/slide5.webp",
+    image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=900&q=80",
   },
 ];
 
@@ -218,7 +219,7 @@ const Business = () => {
         "A well-built website for small businesses converts visitors into buyers by creating a strong first impression. This increases revenue and helps your business grow into an established brand.",
         { boldPrefix: "For Your Business:", text: "SEO-optimized, fast-loading, mobile-responsive websites that generate enquiries and grow your customer base organically." },
         { boldPrefix: "For Your Customers:", text: "Intuitive navigation, clear service presentation, easy contact options, and a trustworthy brand experience on every device." },
-        "In the last 15 years, we have delivered effective web solutions to hundreds of small businesses and helped them enhance their growth online with measurable results.",
+        `In the last ${YEARS_EXPERIENCE_DISPLAY} years, we have delivered effective web solutions to hundreds of small businesses and helped them enhance their growth online with measurable results.`,
       ]}
       overviewCtaText="Start Your Business Website"
       featuresBadge="Small Business Website Development"

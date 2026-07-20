@@ -1,5 +1,5 @@
 "use client";
-import securityImg from "../Assets/Security.webp";
+const securityImg = "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1400&q=85";
 import CommonServicePage from "../components/CommonServicePage";
 import {
   FaBug, FaLaptopCode, FaNetworkWired, FaCloud, FaShieldAlt,
@@ -80,25 +80,25 @@ const sliderCards = [
     count: "300+",
     title: "Penetration Tests Conducted",
     desc: "300+ authorised penetration tests across web apps, APIs, networks, mobile apps, and cloud environments for Indian SMEs and enterprises.",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&q=80",
   },
   {
     count: "98%",
     title: "Critical Findings Remediated",
     desc: "98% of critical and high-severity vulnerabilities we identify are remediated by our clients within 30 days — tracked through our closure verification process.",
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=900&q=80",
   },
   {
     count: "72h",
     title: "Critical Finding Escalation",
     desc: "When we discover a critical, exploitable vulnerability during testing, we stop and notify your security team within 72 hours — before the full report is even drafted.",
-    image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?w=900&q=80",
   },
   {
     count: "0",
     title: "Unauthorised Disclosures",
     desc: "We have a perfect record of responsible disclosure — every engagement is conducted under signed authorisation and NDA, with zero incidents of unauthorised data access or disclosure.",
-    image: "https://images.unsplash.com/photo-1573164713712-03790a178651?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=900&q=80",
   },
 ];
 
@@ -183,7 +183,7 @@ const PenetrationTesting = () => (
     bannerTitle="Penetration Testing Services"
     bannerDesc="OSCP-certified ethical hackers simulating real-world attacks against your web applications, networks, APIs, mobile apps, and cloud environments — with full attack chain documentation and remediation guidance. Think like an attacker. Defend like a professional."
 
-    overviewImage="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80"
+    overviewImage="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80"
     overviewImageAlt="Penetration Testing Services"
     overviewBadge="Cyber Security · Ethical Hacking"
     overviewHeading="Authorised Ethical Hacking to"

@@ -171,8 +171,7 @@ export default function HelpingBusiness() {
           <div className="flex flex-wrap gap-8 pt-4 mt-1"
             style={{ borderTop:"1px solid rgba(255,255,255,.08)" }}>
             {[
-              { v:"12+",  l:"Industries" },
-              { v:"500+", l:"Projects"   },
+              { v:"5000+", l:"Projects"   },
               { v:"100%", l:"Satisfaction"},
             ].map((s,i) => (
               <div key={i}>

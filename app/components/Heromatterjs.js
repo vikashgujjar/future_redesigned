@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { motion, useMotionValue, animate } from "framer-motion";
+import useYearsExperience from "../lib/useYearsExperience";
 
 const skills = [
   { label: "Mobile App Development",  fi: "#2dd4bf", ti: "#06b6d4" },
@@ -124,9 +125,9 @@ function Pill({ skill, pos, arenaW, arenaH, onDragEnd, zIdx, onDragStart }) {
 }
 
 const STATS = [
-  { v: "14+",  l: "Technologies",     from: "#2dd4bf", to: "#06b6d4" },
-  { v: "7+",   l: "Years Experience", from: "#6366f1", to: "#8b5cf6" },
-  { v: "500+", l: "Projects Done",    from: "#0ea5e9", to: "#2dd4bf" },
+  { v: "14+",  l: "Core Capabilities", from: "#2dd4bf", to: "#06b6d4" },
+  { v: '8+',   l: "Years Experience", from: "#6366f1", to: "#8b5cf6" },
+  { v: "5000+", l: "Projects Done",    from: "#0ea5e9", to: "#2dd4bf" },
   { v: "98%",  l: "Client Retention", from: "#a855f7", to: "#6366f1" },
 ];
 
@@ -135,6 +136,7 @@ export default function SkillsSection() {
   const [arena, setArena]         = useState({ w: 0, h: 0 });
   const [positions, setPositions] = useState([]);
   const [topIdx, setTopIdx]       = useState(0);
+  const yearsExperience = useYearsExperience();
 
   useEffect(() => {
     if (!arenaRef.current) return;
@@ -388,7 +390,7 @@ export default function SkillsSection() {
                       background:`linear-gradient(135deg,${st.from},${st.to})`,
                       WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text"
                     }}>
-                    {st.v}
+                    {st.l === "Years Experience" ? yearsExperience : st.v}
                   </div>
                   <div className="text-[10px] text-gray-400 font-medium tracking-[.07em] uppercase mb-1.5">
                     {st.l}

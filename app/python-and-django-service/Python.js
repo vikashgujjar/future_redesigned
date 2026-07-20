@@ -6,6 +6,7 @@ import {
 } from "react-icons/fa";
 import pdImg from "../Assets/pd.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
 const Python = () => (
   <CommonTechPage
@@ -36,9 +37,8 @@ const Python = () => (
       ],
       stats: [
         { num: "150+", label: "Django Apps Delivered",  desc: "High-performance Django and Flask applications shipped globally.",   icon: <FaPython /> },
-        { num: "10+",  label: "Years Python Expertise", desc: "A decade of Python development powering scalable backend systems.",  icon: <FaLayerGroup /> },
+        { num: YEARS_EXPERIENCE_DISPLAY,  label: "Years Python Expertise", desc: `${YEARS_EXPERIENCE_DISPLAY} years of Python development powering scalable backend systems.`,  icon: <FaLayerGroup /> },
         { num: "400+", label: "Global Clients Served",  desc: "Trusted by 400+ clients worldwide for Python & Django solutions.",   icon: <FaStar /> },
-        { num: "24/7", label: "Technical Support",      desc: "Round-the-clock monitoring, maintenance, and technical assistance.", icon: <FaHeadset /> },
       ],
     }}
 
@@ -154,7 +154,7 @@ const Python = () => (
 
     slider={[
       { count: "150+", title: "Django Apps Delivered",       desc: "150+ high-performance Django and Flask applications for clients worldwide — fast, secure, and built for long-term scalability.",              image: "/Assets/seerviceSlider/slide1.webp" },
-      { count: "10+",  title: "Years of Python Expertise",   desc: "A decade of Python development delivering innovative backend systems that empower businesses through automation and scalability.",          image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: YEARS_EXPERIENCE_DISPLAY,  title: "Years of Python Expertise",   desc: `${YEARS_EXPERIENCE_DISPLAY} years of Python development delivering innovative backend systems that empower businesses through automation and scalability.`,          image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "400+", title: "Global Clients Served",       desc: "Trusted by 400+ clients globally with reliable, secure, and efficient Python & Django backend architectures built for growth.",             image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "98%",  title: "Client Satisfaction Rate",    desc: "98% satisfaction through proactive maintenance, robust architecture, and smooth app performance that consistently exceeds expectations.",   image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "24/7", title: "Dedicated Technical Support", desc: "Around-the-clock Django support, performance monitoring, and issue resolution to keep applications at peak performance every day.",         image: "/Assets/seerviceSlider/slide5.webp" },

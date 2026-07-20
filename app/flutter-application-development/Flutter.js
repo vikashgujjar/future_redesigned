@@ -7,6 +7,7 @@ import {
 } from "react-icons/fa";
 import flutterImg from "../Assets/Flutter.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
 const Flutter = () => (
   <CommonTechPage
@@ -27,7 +28,7 @@ const Flutter = () => (
       paras: [
         "Flutter by Google enables businesses to build beautiful, high-performance mobile, web, and desktop applications from a single Dart codebase — dramatically reducing development time and cost without compromising on native-quality user experiences.",
         "At Future IT Touch, our experienced Flutter developers combine deep framework expertise with strong UI/UX design skills to deliver cross-platform apps that look and feel native on every device your users carry.",
-        "With 8+ years of mobile development experience and 150+ Flutter apps delivered, we bring the expertise to take your app idea from concept to the app stores — with clean architecture, robust testing, and long-term maintenance support.",
+        `With ${YEARS_EXPERIENCE_DISPLAY} years of mobile development experience and 150+ Flutter apps delivered, we bring the expertise to take your app idea from concept to the app stores — with clean architecture, robust testing, and long-term maintenance support.`,
       ],
       highlights: [
         "Single Dart codebase for Android, iOS, web & desktop — reducing cost and time-to-market",
@@ -37,9 +38,8 @@ const Flutter = () => (
       ],
       stats: [
         { num: "150+", label: "Flutter Apps Delivered",    desc: "High-quality Flutter apps across finance, healthcare, travel, and eCommerce.",  icon: <FaMobileAlt /> },
-        { num: "8+",   label: "Years Mobile Dev Expertise", desc: "Eight-plus years mastering cross-platform Flutter and Dart development.",         icon: <FaLayerGroup /> },
+        { num: YEARS_EXPERIENCE_DISPLAY,   label: "Years Mobile Dev Expertise", desc: `${YEARS_EXPERIENCE_DISPLAY} years mastering cross-platform Flutter and Dart development.`,         icon: <FaLayerGroup /> },
         { num: "200+", label: "Satisfied Global Clients",   desc: "Trusted by 200+ clients worldwide for scalable and visually stunning apps.",      icon: <FaStar /> },
-        { num: "24/7", label: "Technical Support",          desc: "Round-the-clock monitoring, maintenance, and technical assistance.",              icon: <FaHeadset /> },
       ],
     }}
 
@@ -152,7 +152,7 @@ const Flutter = () => (
 
     slider={[
       { count: "150+", title: "Flutter Apps Delivered",          desc: "150+ Flutter apps delivered across finance, healthcare, travel, logistics, and eCommerce — pixel-perfect UI, native performance, and optimised backend integration.",             image: "/Assets/seerviceSlider/slide1.webp" },
-      { count: "8+",   title: "Years of Mobile Dev Experience",  desc: "Eight-plus years mastering cross-platform development with Flutter and Dart — from clean modular codebases to advanced Riverpod and Bloc state management for enterprises.",    image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: YEARS_EXPERIENCE_DISPLAY,   title: "Years of Mobile Dev Experience",  desc: `${YEARS_EXPERIENCE_DISPLAY} years mastering cross-platform development with Flutter and Dart — from clean modular codebases to advanced Riverpod and Bloc state management for enterprises.`,    image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "200+", title: "Satisfied Global Clients",        desc: "200+ clients from startups to enterprises trust us for scalable, visually stunning Flutter apps that align with their business objectives and delight their users.",               image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "99%",  title: "Deployment Success Rate",         desc: "99% deployment success on Google Play and Apple App Store — every app passes multi-device testing, performance optimisation, and compliance validation before submission.",        image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "24/7", title: "Technical Support Availability",  desc: "Round-the-clock Flutter support, crash analytics, bug fixes, OS compatibility updates, and feature enhancements — keeping your app performing at peak after every launch.",       image: "/Assets/seerviceSlider/slide5.webp" },

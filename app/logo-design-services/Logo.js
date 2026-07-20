@@ -1,7 +1,8 @@
 "use client";
 import d1 from "../Assets/graphic-and-logo-design-service.webp";
-import gm from "../Assets/logo-1.webp";
+const gm = "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1400&q=85";
 import CommonServicePage from "../components/CommonServicePage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 import {
   FaBuilding, FaBoxOpen, FaLayerGroup, FaFileAlt, FaFolderOpen, FaBookOpen,
   FaLightbulb, FaHandshake, FaPalette, FaChartLine,
@@ -77,31 +78,31 @@ const Logo = () => {
       count: "1000+",
       title: "Logos Successfully Designed",
       desc: "We've created over 1000 unique and professional logos for businesses across industries. Each design is tailored to capture brand identity, engage audiences, and leave a lasting impression.",
-      image: "/Assets/seerviceSlider/slide1.webp",
+      image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=900&q=80",
     },
     {
-      count: "15+",
+      count: YEARS_EXPERIENCE_DISPLAY,
       title: "Years of Design Expertise",
-      desc: "With more than 15 years of experience in logo and brand design, Future IT Touch Pvt. Ltd. delivers creative and impactful logos that elevate brand perception and recognition globally.",
-      image: "/Assets/seerviceSlider/slide2.webp",
+      desc: `With more than ${YEARS_EXPERIENCE_DISPLAY} years of experience in logo and brand design, Future IT Touch Pvt. Ltd. delivers creative and impactful logos that elevate brand perception and recognition globally.`,
+      image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=900&q=80",
     },
     {
       count: "500+",
       title: "Global Clients Served",
       desc: "Trusted by over 500 international brands, we craft logos that strengthen brand identity, improve visibility, and resonate with target audiences across multiple platforms.",
-      image: "/Assets/seerviceSlider/slide3.webp",
+      image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=900&q=80",
     },
     {
       count: "99%",
       title: "Client Satisfaction Rate",
       desc: "Our dedication to creativity, precision, and client collaboration has earned us a 99% satisfaction rate. We ensure each logo meets your vision and brand strategy perfectly.",
-      image: "/Assets/seerviceSlider/slide4.webp",
+      image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=900&q=80",
     },
     {
       count: "24/7",
       title: "Ongoing Design Support",
       desc: "Our team provides continuous support — from revisions to final delivery — making sure your logo is polished, consistent, and ready for all branding needs.",
-      image: "/Assets/seerviceSlider/slide5.webp",
+      image: "https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=900&q=80",
     },
   ];
 
@@ -184,7 +185,7 @@ const Logo = () => {
       overviewParagraphs={[
         "At Future IT Touch Pvt. Ltd. we go beyond templates to craft logos that truly reflect your brand's identity. A well-designed logo evokes emotions, builds recall, and helps grow your customer base.",
         "Think about some of the iconic brands you remember – the moment you see their logo, the entire brand story comes to mind. Our experienced designers combine symbols, calligraphy, design art, and other aesthetic elements to create logos that leave a lasting impression.",
-        "With over 15 years of experience and a team of creative professionals, we deliver high-quality and unique Business Logo Design Services tailored for all your needs. As a trusted logo design company, we have served thousands of clients worldwide, helping brands establish credibility and visual identity.",
+        `With over ${YEARS_EXPERIENCE_DISPLAY} years of experience and a team of creative professionals, we deliver high-quality and unique Business Logo Design Services tailored for all your needs. As a trusted logo design company, we have served thousands of clients worldwide, helping brands establish credibility and visual identity.`,
       ]}
       overviewCtaText="Design Your Logo Today"
       featuresBadge="Creative Logo Design Services"

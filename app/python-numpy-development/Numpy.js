@@ -8,6 +8,7 @@ import { FaPython } from "react-icons/fa";
 import { SiNumpy } from "react-icons/si";
 import numpyImg from "../Assets/pd.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
 const Numpy = () => (
   <CommonTechPage
@@ -38,9 +39,8 @@ const Numpy = () => (
       ],
       stats: [
         { num: "200+", label: "Data Solutions Delivered",  desc: "Python & NumPy analytical systems built for global businesses across industries.",  icon: <FaPython /> },
-        { num: "8+",   label: "Years Python Expertise",    desc: "Eight-plus years mastering Python's ecosystem from NumPy to Pandas and AI.",          icon: <FaLayerGroup /> },
+        { num: YEARS_EXPERIENCE_DISPLAY,   label: "Years Python Expertise",    desc: `${YEARS_EXPERIENCE_DISPLAY} years mastering Python's ecosystem from NumPy to Pandas and AI.`,          icon: <FaLayerGroup /> },
         { num: "300+", label: "Clients Empowered",         desc: "300+ organizations powered by Python–NumPy analytics and automation systems.",         icon: <FaStar /> },
-        { num: "24/7", label: "Support & Monitoring",      desc: "Round-the-clock monitoring keeping your Python–NumPy systems stable and optimized.",   icon: <FaHeadset /> },
       ],
     }}
 
@@ -156,7 +156,7 @@ const Numpy = () => (
 
     slider={[
       { count: "200+", title: "Data-Driven Solutions Delivered",      desc: "200+ Python and NumPy-powered analytical systems built — delivering performance, scalability, and computational precision for global businesses.",           image: "/Assets/seerviceSlider/slide1.webp" },
-      { count: "8+",   title: "Years of Python Expertise",            desc: "Eight-plus years mastering Python's ecosystem — NumPy, Pandas, AI frameworks, and more — ensuring superior code quality and system reliability.",           image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: YEARS_EXPERIENCE_DISPLAY,   title: "Years of Python Expertise",            desc: `${YEARS_EXPERIENCE_DISPLAY} years mastering Python's ecosystem — NumPy, Pandas, AI frameworks, and more — ensuring superior code quality and system reliability.`,           image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "300+", title: "Clients Empowered Worldwide",          desc: "300+ organizations powered by Python–NumPy systems delivering real-time analytics, automation, and high-performance computation at scale.",                  image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "99%",  title: "Performance Optimization Success Rate", desc: "Up to 99% improvement in processing efficiency achieved — reducing compute times while enhancing accuracy, scalability, and data throughput.",             image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "24/7", title: "Technical Support & Monitoring",       desc: "Continuous monitoring, updates, and optimization keeping your Python–NumPy systems stable, secure, and performing at peak capacity around the clock.",       image: "/Assets/seerviceSlider/slide5.webp" },

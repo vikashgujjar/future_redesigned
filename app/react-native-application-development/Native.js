@@ -6,6 +6,7 @@ import {
 } from "react-icons/fa";
 import rnImg from "../Assets/reactnative.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
 const Native = () => (
   <CommonTechPage
@@ -36,9 +37,8 @@ const Native = () => (
       ],
       stats: [
         { num: "200+", label: "Apps Delivered",          desc: "React Native apps shipped across healthcare, eCommerce, travel, and finance.",  icon: <FaReact /> },
-        { num: "7+",   label: "Years RN Expertise",      desc: "Seven-plus years delivering efficient, scalable React Native mobile apps.",      icon: <FaLayerGroup /> },
+        { num: YEARS_EXPERIENCE_DISPLAY,   label: "Years RN Expertise",      desc: `${YEARS_EXPERIENCE_DISPLAY} years delivering efficient, scalable React Native mobile apps.`,      icon: <FaLayerGroup /> },
         { num: "250+", label: "Global Clients Served",   desc: "Trusted by 250+ clients worldwide for cross-platform mobile excellence.",        icon: <FaStar /> },
-        { num: "24/7", label: "Technical Support",       desc: "Round-the-clock monitoring, maintenance, and technical assistance.",             icon: <FaHeadset /> },
       ],
     }}
 
@@ -151,7 +151,7 @@ const Native = () => (
 
     slider={[
       { count: "200+", title: "React Native Apps Delivered",     desc: "200+ React Native apps built for healthcare, eCommerce, travel, and finance — each crafted for speed, seamless navigation, and consistent cross-platform UX.",          image: "/Assets/seerviceSlider/slide1.webp" },
-      { count: "7+",   title: "Years of React Native Expertise", desc: "Seven-plus years specializing in React Native — delivering efficient, reliable mobile apps with Redux, Expo, and modern cross-platform development practices.",          image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: YEARS_EXPERIENCE_DISPLAY,   title: "Years of React Native Expertise", desc: `${YEARS_EXPERIENCE_DISPLAY} years specializing in React Native — delivering efficient, reliable mobile apps with Redux, Expo, and modern cross-platform development practices.`,          image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "250+", title: "Global Clients Served",           desc: "250+ clients worldwide — from fast-growing startups to established enterprises — trust us for React Native solutions that meet their digital growth objectives.",          image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "98%",  title: "Deployment Success Rate",         desc: "98% successful publishing rate maintained by following app store guidelines and rigorous pre-launch testing for stability and compliance across both platforms.",          image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "24/7", title: "Dedicated Technical Support",     desc: "React Native experts available 24/7 for support, ensuring your mobile app stays updated, secure, and compatible with all latest OS versions and devices.",             image: "/Assets/seerviceSlider/slide5.webp" },

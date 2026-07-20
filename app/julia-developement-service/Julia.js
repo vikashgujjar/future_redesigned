@@ -7,6 +7,7 @@ import {
 import { SiJulia } from "react-icons/si";
 import juliaImg from "../Assets/Julia.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
 const Julia = () => (
   <CommonTechPage
@@ -37,9 +38,8 @@ const Julia = () => (
       ],
       stats: [
         { num: "150+", label: "Julia Solutions Delivered",   desc: "High-performance Julia applications built for science, AI, and data-intensive workflows.",  icon: <SiJulia /> },
-        { num: "8+",   label: "Years Julia Expertise",       desc: "Eight-plus years mastering Julia for scientific computing, AI, and large-scale data.",         icon: <FaLayerGroup /> },
+        { num: YEARS_EXPERIENCE_DISPLAY,   label: "Years Julia Expertise",       desc: `${YEARS_EXPERIENCE_DISPLAY} years mastering Julia for scientific computing, AI, and large-scale data.`,         icon: <FaLayerGroup /> },
         { num: "200+", label: "Clients Empowered",           desc: "200+ organizations powered by Julia-based scientific and AI computation systems.",             icon: <FaStar /> },
-        { num: "24/7", label: "Support & Monitoring",        desc: "Round-the-clock support keeping Julia systems stable, optimized, and future-ready.",           icon: <FaHeadset /> },
       ],
     }}
 
@@ -155,7 +155,7 @@ const Julia = () => (
 
     slider={[
       { count: "150+", title: "Julia Solutions Delivered",          desc: "150+ Julia-powered applications built for scientific computing, AI, and real-time data processing — each engineered for performance, reliability, and accuracy.", image: "/Assets/seerviceSlider/slide1.webp" },
-      { count: "8+",   title: "Years of Julia Expertise",           desc: "Eight-plus years mastering Julia for scientific computing, AI workflows, and large-scale data processing — delivering superior algorithms and system reliability.",  image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: YEARS_EXPERIENCE_DISPLAY,   title: "Years of Julia Expertise",           desc: `${YEARS_EXPERIENCE_DISPLAY} years mastering Julia for scientific computing, AI workflows, and large-scale data processing — delivering superior algorithms and system reliability.`,  image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "200+", title: "Clients Empowered Globally",         desc: "200+ organizations powered by Julia-based solutions for scientific computation, AI, and predictive analytics — spanning research, finance, and engineering.",     image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "99%",  title: "Computation Optimization Success",   desc: "Up to 99% improvement in computational efficiency — reducing processing time while enhancing accuracy through fine-tuned algorithms and parallel processing.",    image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "24/7", title: "Technical Support & Monitoring",     desc: "Continuous monitoring, updates, and optimization keeping Julia systems stable, secure, and performing at peak capacity for all critical applications.",           image: "/Assets/seerviceSlider/slide5.webp" },

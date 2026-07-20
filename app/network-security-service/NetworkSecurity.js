@@ -1,5 +1,5 @@
 "use client";
-import securityImg from "../Assets/Security.webp";
+const securityImg = "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=1400&q=85";
 import CommonServicePage from "../components/CommonServicePage";
 import {
   FaNetworkWired, FaShieldAlt, FaLock, FaCloud, FaDatabase,
@@ -80,25 +80,25 @@ const sliderCards = [
     count: "150+",
     title: "Network Security Engagements",
     desc: "150+ network security assessments, firewall reviews, and segmentation projects delivered for Indian SMEs across BFSI, healthcare, manufacturing, and e-commerce.",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=900&q=80",
   },
   {
     count: "60%",
     title: "Average Attack Surface Reduction",
     desc: "On average, our network security engagements reduce the exposed attack surface by 60% — through firewall hardening, port closure, and legacy service decommissioning.",
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&q=80",
   },
   {
     count: "24/7",
     title: "Network Monitoring Coverage",
     desc: "Our SOC provides 24/7 network monitoring through our Security Plus and Enterprise Shield packages — real-time alert triage, anomaly detection, and rapid escalation.",
-    image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=900&q=80",
   },
   {
     count: "Zero",
     title: "Post-Hardening Network Breaches",
     desc: "Clients who complete our network hardening programme and maintain monthly configuration reviews have a perfect post-engagement breach record through their network perimeter.",
-    image: "https://images.unsplash.com/photo-1573164713712-03790a178651?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&q=80",
   },
 ];
 
@@ -179,7 +179,7 @@ const NetworkSecurity = () => (
     bannerTitle="Network Security Services"
     bannerDesc="Protecting your business network from the perimeter to the core — firewall management, IDS/IPS deployment, zero-trust architecture, network segmentation, VPN security, and 24/7 traffic monitoring. Enterprise-grade network protection sized and priced for Indian SMEs."
 
-    overviewImage="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80"
+    overviewImage="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80"
     overviewImageAlt="Network Security Services"
     overviewBadge="Cyber Security · Network Protection"
     overviewHeading="Network Security Built for"

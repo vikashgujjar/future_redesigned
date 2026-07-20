@@ -1,7 +1,8 @@
 "use client";
-import gm from "../Assets/cro.webp";
+const gm = "https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=1400&q=85";
 import d1 from "../Assets/logo-gif.webp";
 import CommonServicePage from "../components/CommonServicePage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 import {
   FaLightbulb, FaHandshake, FaPalette, FaChartLine,
   FaPencilRuler, FaDesktop, FaCode, FaSearch,
@@ -77,31 +78,31 @@ const Brochure = () => {
       count: "250+",
       title: "Brochures Successfully Delivered",
       desc: "We've designed over 250 professional brochures that clearly communicate brand messages and create strong impressions. From startups to enterprises, our brochures drive engagement and brand recognition.",
-      image: "/Assets/seerviceSlider/slide1.webp",
+      image: "https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=900&q=80",
     },
     {
-      count: "15+",
+      count: YEARS_EXPERIENCE_DISPLAY,
       title: "Years of Design Expertise",
-      desc: "With more than 15 years of experience in corporate stationery and brochure design, Future IT Touch Pvt. Ltd. delivers visually compelling and strategically effective designs.",
-      image: "/Assets/seerviceSlider/slide2.webp",
+      desc: `With more than ${YEARS_EXPERIENCE_DISPLAY} years of experience in corporate stationery and brochure design, Future IT Touch Pvt. Ltd. delivers visually compelling and strategically effective designs.`,
+      image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=900&q=80",
     },
     {
       count: "500+",
       title: "Global Clients Served",
       desc: "Trusted by over 500 brands worldwide, we produce brochures and corporate stationery that enhance brand communication and visibility across digital and print media.",
-      image: "/Assets/seerviceSlider/slide3.webp",
+      image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=900&q=80",
     },
     {
       count: "98%",
       title: "Client Satisfaction Rate",
       desc: "Our focus on design quality, attention to detail, and client collaboration has earned us a 98% satisfaction rate. We create brochures that reflect your brand identity effectively.",
-      image: "/Assets/seerviceSlider/slide4.webp",
+      image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=900&q=80",
     },
     {
       count: "24/7",
       title: "Dedicated Design Support",
       desc: "Our team provides ongoing support for revisions, print preparation, and digital adaptation, ensuring your corporate stationery and brochures meet the highest standards.",
-      image: "/Assets/seerviceSlider/slide5.webp",
+      image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=900&q=80",
     },
   ];
 

@@ -1,7 +1,8 @@
 "use client";
-import app from "../Assets/app.webp";
+const app = "https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?w=1400&q=85";
 import ec from "../Assets/and.gif";
 import CommonServicePage from "../components/CommonServicePage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 import {
   FaProjectDiagram, FaMapMarkerAlt, FaBell, FaShareAlt, FaCreditCard, FaBluetooth,
   FaLightbulb, FaMobileAlt, FaSyncAlt, FaPalette, FaCogs, FaGooglePlay,
@@ -71,31 +72,31 @@ const Android = () => {
       count: "250+",
       title: "Android Apps Delivered",
       desc: "We've successfully developed over 250 custom Android applications that empower businesses to reach and engage users effectively. Each app is optimized for performance, security, and a seamless mobile experience.",
-      image: "/Assets/seerviceSlider/slide1.webp",
+      image: "https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?w=900&q=80",
     },
     {
-      count: "15+",
+      count: YEARS_EXPERIENCE_DISPLAY,
       title: "Years of Mobile Development Expertise",
-      desc: "With more than 15 years in Android app development, Future IT Touch Pvt. Ltd. delivers cutting-edge mobile solutions. Our deep industry experience ensures every app combines innovation, scalability, and exceptional user experience.",
-      image: "/Assets/seerviceSlider/slide2.webp",
+      desc: `With more than ${YEARS_EXPERIENCE_DISPLAY} years in Android app development, Future IT Touch Pvt. Ltd. delivers cutting-edge mobile solutions. Our deep industry experience ensures every app combines innovation, scalability, and exceptional user experience.`,
+      image: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=900&q=80",
     },
     {
       count: "500+",
       title: "Global Clients Served",
       desc: "Trusted by over 500 businesses worldwide, we build Android applications tailored to diverse industries — from startups to large enterprises. Our apps help brands expand their reach and achieve measurable success.",
-      image: "/Assets/seerviceSlider/slide3.webp",
+      image: "https://images.unsplash.com/photo-1526498460520-4c246339dccb?w=900&q=80",
     },
     {
       count: "98%",
       title: "Client Satisfaction Rate",
       desc: "Our client-first approach has earned us a 98% satisfaction rate. We focus on intuitive design, smooth performance, and delivering Android apps that exceed expectations while driving long-term business growth.",
-      image: "/Assets/seerviceSlider/slide4.webp",
+      image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=900&q=80",
     },
     {
       count: "24/7",
       title: "Dedicated App Support",
       desc: "We offer 24/7 technical support to ensure your Android applications run without interruption. From maintenance to version updates, our dedicated team keeps your app secure, stable, and future-ready.",
-      image: "/Assets/seerviceSlider/slide5.webp",
+      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=900&q=80",
     },
   ];
 
@@ -180,7 +181,7 @@ const Android = () => {
         "Our team combines creativity with cutting-edge technology to develop Android apps that empower brands, improve customer engagement, and boost business efficiency. From concept to deployment, we ensure every app delivers value and scalability.",
         { boldPrefix: "For Businesses:", text: "Custom Android solutions for eCommerce, enterprise management, and service-based industries with robust integrations, analytics, and smooth performance." },
         { boldPrefix: "For Users:", text: "Intuitive UI/UX design, fast loading times, offline functionality, and secure data handling to ensure a delightful experience on every Android device." },
-        "With over 15 years of expertise in mobile development, we've delivered innovative Android apps for startups and global enterprises alike. Choose our custom Android app development services to turn your ideas into engaging digital experiences that drive results.",
+        `With over ${YEARS_EXPERIENCE_DISPLAY} years of expertise in mobile development, we've delivered innovative Android apps for startups and global enterprises alike. Choose our custom Android app development services to turn your ideas into engaging digital experiences that drive results.`,
       ]}
       overviewCtaText="Start Your Android App Project"
       featuresBadge="Trusted Android Application Development Service"

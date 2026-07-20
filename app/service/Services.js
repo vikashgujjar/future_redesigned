@@ -14,6 +14,8 @@ import { SiAngular, SiShopify } from "react-icons/si";
 import Testimonial from "../components/Testimonial";
 import Location from "../components/Location";
 import MutipleServices from "../components/MutipleServices";
+import useYearsExperience from "../lib/useYearsExperience";
+import { COMPANY_START_YEAR } from "../lib/companyStats";
 
 // ── Palette ─────────────────────────────────────────────────────────────────
 const CATEGORIES = [
@@ -54,8 +56,8 @@ const SERVICES = [
   { cat:"security", icon:<FaExclamationTriangle />,   title:"Incident Response",               desc:"24/7 incident response, digital forensics, ransomware recovery, and post-incident hardening — with 15-minute activation and DPDPA breach notification support.",     tags:["IR","Forensics","Ransomware"],        from:"#ef4444",to:"#f59e0b", href:"/incident-response-service" },
 ];
 
-const STATS = [
-  { num:"20+",   label:"Years Experience",    icon:<FaAward /> },
+const getStats = (yearsExperience) => [
+  { num: yearsExperience, label:"Years Experience",    icon:<FaAward /> },
   { num:"250+",  label:"Talented Experts",    icon:<FaUsers /> },
   { num:"1200+", label:"Apps Developed",      icon:<FaMobileAlt /> },
   { num:"120+",  label:"Countries Served",    icon:<FaGlobe /> },
@@ -81,6 +83,7 @@ const HL = "bg-[linear-gradient(125deg,#2dd4bf,#6366f1,#a855f7)] bg-[length:200%
 
 export default function Services() {
   const [active, setActive] = useState("all");
+  const yearsExperience = useYearsExperience();
   const filtered = active === "all" ? SERVICES : SERVICES.filter(s => s.cat === active);
 
   return (
@@ -200,7 +203,7 @@ export default function Services() {
       <section className="bg-[linear-gradient(135deg,#050b20,#0a0f2e)] border-b border-white/[.06]">
         <div className="max-w-[1280px] mx-auto px-5 sm:px-10 xl:px-16 py-10">
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {STATS.map((s,i) => (
+            {getStats(yearsExperience).map((s,i) => (
               <div key={i} className="group flex flex-col items-center text-center rounded-2xl p-5 border border-white/[.06] bg-white/[.03] hover:bg-white/[.06] hover:-translate-y-1 transition-all duration-300">
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white text-base mb-3 bg-[linear-gradient(135deg,#2dd4bf,#6366f1)]">
                   {s.icon}
@@ -354,7 +357,7 @@ export default function Services() {
             </h2>
             <div className="h-[3px] w-14 rounded-full mb-6 bg-[linear-gradient(90deg,#2dd4bf,#6366f1)]" />
             <p className="text-[#6a6a8e] text-base leading-relaxed mb-8 max-w-lg">
-              Since 2017 we've built a reputation on transparency, craftsmanship, and results. Here's what sets us apart from the crowd.
+              Since {COMPANY_START_YEAR} we've built a reputation on transparency, craftsmanship, and results. Here's what sets us apart from the crowd.
             </p>
             <Link href="/contact"
               className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-white font-['Poppins',sans-serif] text-sm font-bold tracking-[.06em] uppercase no-underline hover:shadow-[0_8px_28px_rgba(45,212,191,.4)] hover:-translate-y-0.5 transition-all duration-200 bg-[linear-gradient(135deg,#2dd4bf,#6366f1)]">

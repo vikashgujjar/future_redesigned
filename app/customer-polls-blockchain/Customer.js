@@ -6,6 +6,7 @@ import {
 } from "react-icons/fa";
 import customerImg from "../Assets/solidity.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
 const Customer = () => (
   <CommonTechPage
@@ -36,9 +37,8 @@ const Customer = () => (
       ],
       stats: [
         { num: "100+", label: "Blockchain Polls Delivered",  desc: "Transparent, tamper-proof blockchain polling systems built for enterprises worldwide.",  icon: <FaPoll /> },
-        { num: "7+",   label: "Years Blockchain Expertise",  desc: "Seven-plus years delivering secure and transparent blockchain-based voting solutions.",    icon: <FaLayerGroup /> },
+        { num: YEARS_EXPERIENCE_DISPLAY,   label: "Years Blockchain Expertise",  desc: `${YEARS_EXPERIENCE_DISPLAY} years delivering secure and transparent blockchain-based voting solutions.`,    icon: <FaLayerGroup /> },
         { num: "150+", label: "Clients Served Globally",     desc: "150+ organizations trust us for reliable and verifiable blockchain polling platforms.",   icon: <FaStar /> },
-        { num: "24/7", label: "Support & Monitoring",        desc: "Round-the-clock monitoring ensuring stable and secure blockchain polling operations.",     icon: <FaHeadset /> },
       ],
     }}
 
@@ -154,7 +154,7 @@ const Customer = () => (
 
     slider={[
       { count: "100+", title: "Blockchain Polls Delivered",       desc: "100+ blockchain-based polling systems implemented — delivering transparent, secure, and tamper-proof voting for elections, surveys, and customer feedback.",     image: "/Assets/seerviceSlider/slide1.webp" },
-      { count: "7+",   title: "Years of Blockchain Expertise",    desc: "Seven-plus years crafting robust blockchain polling solutions — optimizing transaction integrity, voting accuracy, and scalability for demanding use cases.", image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: YEARS_EXPERIENCE_DISPLAY,   title: "Years of Blockchain Expertise",    desc: `${YEARS_EXPERIENCE_DISPLAY} years crafting robust blockchain polling solutions — optimizing transaction integrity, voting accuracy, and scalability for demanding use cases.`, image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "150+", title: "Clients Served Globally",          desc: "150+ organizations trust us for secure and transparent blockchain voting solutions — spanning enterprises, government bodies, and research institutions.",     image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "99%",  title: "Voting Integrity Success Rate",    desc: "99% reliability and tamper-proof accuracy in blockchain polling systems — ensuring completely trustworthy, verifiable results for all stakeholders.",          image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "24/7", title: "Support & Monitoring",             desc: "Continuous monitoring, updates, and optimization maintaining stable, secure, and high-performance blockchain polling platforms at all times.",                image: "/Assets/seerviceSlider/slide5.webp" },

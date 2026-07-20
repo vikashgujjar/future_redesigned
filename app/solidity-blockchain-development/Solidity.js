@@ -6,6 +6,7 @@ import {
 } from "react-icons/fa";
 import solidityImg from "../Assets/solidity.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
 const Solidity = () => (
   <CommonTechPage
@@ -36,9 +37,8 @@ const Solidity = () => (
       ],
       stats: [
         { num: "100+", label: "Solidity Contracts Delivered",  desc: "Smart contracts deployed for DeFi, NFT, and enterprise DApp platforms.",           icon: <FaEthereum /> },
-        { num: "7+",   label: "Years Blockchain Expertise",    desc: "Seven-plus years delivering secure Solidity and Ethereum blockchain solutions.",      icon: <FaLayerGroup /> },
+        { num: YEARS_EXPERIENCE_DISPLAY,   label: "Years Blockchain Expertise",    desc: `${YEARS_EXPERIENCE_DISPLAY} years delivering secure Solidity and Ethereum blockchain solutions.`,      icon: <FaLayerGroup /> },
         { num: "150+", label: "Clients Served Globally",       desc: "150+ organizations trust us for secure, transparent Solidity smart contracts.",      icon: <FaStar /> },
-        { num: "24/7", label: "Support & Monitoring",          desc: "Round-the-clock monitoring and support for smart contract and DApp performance.",    icon: <FaHeadset /> },
       ],
     }}
 
@@ -154,7 +154,7 @@ const Solidity = () => (
 
     slider={[
       { count: "100+", title: "Solidity Contracts Delivered",     desc: "100+ smart contracts and blockchain applications deployed across DeFi, NFT marketplaces, and enterprise DApps — gas-optimized and security-audited.",           image: "/Assets/seerviceSlider/slide1.webp" },
-      { count: "7+",   title: "Years of Blockchain Expertise",    desc: "Seven-plus years of Solidity and blockchain development — delivering cutting-edge decentralized solutions with robust smart contract logic and best practices.",  image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: YEARS_EXPERIENCE_DISPLAY,   title: "Years of Blockchain Expertise",    desc: `${YEARS_EXPERIENCE_DISPLAY} years of Solidity and blockchain development — delivering cutting-edge decentralized solutions with robust smart contract logic and best practices.`,  image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "150+", title: "Clients Served Globally",          desc: "150+ organizations worldwide trust us for secure, transparent, and scalable blockchain solutions — from startups to enterprise-grade DApp platforms.",            image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "99%",  title: "Contract Reliability Success Rate",desc: "99% reliability through rigorous testing, audits, and verification — ensuring secure transactions and minimal vulnerabilities in all DApp deployments.",         image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "24/7", title: "Support & Monitoring",             desc: "Round-the-clock monitoring, maintenance, and optimization for Solidity contracts and blockchain platforms — ensuring smooth, secure operations at all times.",    image: "/Assets/seerviceSlider/slide5.webp" },

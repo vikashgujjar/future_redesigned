@@ -6,6 +6,7 @@ import {
 } from "react-icons/fa";
 import aspImg from "../Assets/asp.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
 const Asp = () => (
   <CommonTechPage
@@ -36,9 +37,8 @@ const Asp = () => (
       ],
       stats: [
         { num: "100+", label: "Apps Developed",      desc: "Over 100 ASP.NET web solutions built and maintained across industries.",    icon: <FaCode /> },
-        { num: "10+",  label: "Years .NET Expertise", desc: "A decade crafting robust, secure, and scalable .NET systems.",              icon: <FaMicrosoft /> },
+        { num: YEARS_EXPERIENCE_DISPLAY,  label: "Years .NET Expertise", desc: `${YEARS_EXPERIENCE_DISPLAY} years crafting robust, secure, and scalable .NET systems.`,              icon: <FaMicrosoft /> },
         { num: "500+", label: "Global Clients",       desc: "Trusted by 500+ clients worldwide for enterprise-grade ASP.NET solutions.", icon: <FaStar /> },
-        { num: "24/7", label: "Support & Monitoring", desc: "Round-the-clock monitoring, maintenance, and technical assistance.",        icon: <FaHeadset /> },
       ],
     }}
 
@@ -154,7 +154,7 @@ const Asp = () => (
 
     slider={[
       { count: "100+", title: "Applications Developed",    desc: "100+ ASP.NET web solutions built and maintained — delivering reliable performance and long-term stability across industries.", image: "/Assets/seerviceSlider/slide1.webp" },
-      { count: "10+",  title: "Years of .NET Expertise",   desc: "A decade of ASP.NET experience crafting robust, secure, and scalable systems that power modern enterprises worldwide.",       image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: YEARS_EXPERIENCE_DISPLAY,  title: "Years of .NET Expertise",   desc: `${YEARS_EXPERIENCE_DISPLAY} years of ASP.NET experience crafting robust, secure, and scalable systems that power modern enterprises worldwide.`,       image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "500+", title: "Global Clients Served",     desc: "Trusted by 500+ clients globally with high-performance ASP.NET applications and continuous backend support.",                  image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "98%",  title: "Client Satisfaction Rate",  desc: "98% satisfaction rate through innovation, consistent quality, and reliable .NET solutions that exceed expectations.",          image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "24/7", title: "Technical Assistance",      desc: "Round-the-clock monitoring, maintenance, and upgrade support for all your ASP.NET systems — uninterrupted service guaranteed.", image: "/Assets/seerviceSlider/slide5.webp" },

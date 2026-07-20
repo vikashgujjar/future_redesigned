@@ -8,6 +8,7 @@ import axios from "axios";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from "../firebase.config";
 import OtpVerifyModal from "./OtpVerifyModal";
+import useYearsExperience from "../lib/useYearsExperience";
 
 const slides = [
   {
@@ -59,6 +60,7 @@ export default function HeroSection() {
   const [loading, setLoading]   = useState(false);
   const timerRef   = useRef(null);
   const sectionRef = useRef(null);
+  const yearsExperience = useYearsExperience();
 
   const slide = slides[idx];
   const c  = slide.color;
@@ -639,7 +641,7 @@ export default function HeroSection() {
                 key={si}
                 className={`flex-1 ${si===0 ? "pr-6 border-r border-white/[.06]" : "pl-6"}`}
               >
-                <div className="hs-stat-num hs-stat-val mb-1">{st.v}</div>
+                <div className="hs-stat-num hs-stat-val mb-1">{st.l === "Years Expertise" ? yearsExperience : st.v}</div>
                 <div className="text-[10px] text-white/[.28] tracking-[.10em] uppercase font-medium">{st.l}</div>
               </div>
             ))}

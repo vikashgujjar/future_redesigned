@@ -6,6 +6,7 @@ import {
 } from "react-icons/fa";
 import rubyImg from "../Assets/ruby.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
 const Ruby = () => (
   <CommonTechPage
@@ -36,9 +37,8 @@ const Ruby = () => (
       ],
       stats: [
         { num: "150+", label: "AI Solutions Delivered",   desc: "Ruby & PyBrain-powered intelligent systems built for global businesses.",      icon: <FaGem /> },
-        { num: "8+",   label: "Years Ruby & AI Expertise",desc: "Eight-plus years mastering Ruby and PyBrain for intelligent AI applications.",  icon: <FaLayerGroup /> },
+        { num: YEARS_EXPERIENCE_DISPLAY,   label: "Years Ruby & AI Expertise",desc: `${YEARS_EXPERIENCE_DISPLAY} years mastering Ruby and PyBrain for intelligent AI applications.`,  icon: <FaLayerGroup /> },
         { num: "200+", label: "Clients Empowered",        desc: "200+ organizations powered by Ruby–PyBrain AI and automation systems.",         icon: <FaStar /> },
-        { num: "24/7", label: "Support & Monitoring",     desc: "Round-the-clock support keeping Ruby–PyBrain systems stable and optimized.",    icon: <FaHeadset /> },
       ],
     }}
 
@@ -154,7 +154,7 @@ const Ruby = () => (
 
     slider={[
       { count: "150+", title: "AI-Driven Solutions Delivered",      desc: "150+ Ruby & PyBrain-powered intelligent systems built — delivering performance, scalability, and predictive accuracy for global businesses.",               image: "/Assets/seerviceSlider/slide1.webp" },
-      { count: "8+",   title: "Years of Ruby & AI Expertise",       desc: "Eight-plus years mastering Ruby and PyBrain frameworks — ensuring superior code quality, reliable neural networks, and intelligent AI solutions.",          image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: YEARS_EXPERIENCE_DISPLAY,   title: "Years of Ruby & AI Expertise",       desc: `${YEARS_EXPERIENCE_DISPLAY} years mastering Ruby and PyBrain frameworks — ensuring superior code quality, reliable neural networks, and intelligent AI solutions.`,          image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "200+", title: "Clients Empowered Globally",         desc: "200+ organizations trust us for Ruby & PyBrain systems delivering AI predictions, automation, and high-performance computational intelligence.",            image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "99%",  title: "AI Optimization Success Rate",       desc: "Up to 99% improvement in AI computation efficiency — reducing processing time while enhancing predictive accuracy and system scalability.",               image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "24/7", title: "Technical Support & Monitoring",     desc: "Continuous monitoring, updates, and optimization keeping Ruby–PyBrain systems stable, secure, and performing at peak capacity around the clock.",           image: "/Assets/seerviceSlider/slide5.webp" },

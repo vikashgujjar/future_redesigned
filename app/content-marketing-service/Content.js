@@ -1,7 +1,8 @@
 "use client";
-import cwd from "../Assets/contone.webp";
+const cwd = "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1400&q=85";
 import mrk from "../Assets/mrk.gif";
 import CommonServicePage from "../components/CommonServicePage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 import {
   FaBuilding, FaBoxOpen, FaLayerGroup, FaFileAlt, FaFolderOpen, FaBookOpen,
   FaLightbulb, FaHandshake, FaPalette, FaChartLine,
@@ -77,31 +78,31 @@ const Logo = () => {
       count: "1000+",
       title: "Content Pieces Successfully Delivered",
       desc: "We've created over 1000 high-quality content pieces including blogs, articles, social media posts, and email campaigns that educate, engage, and convert audiences for businesses across industries.",
-      image: "/Assets/seerviceSlider/slide1.webp",
+      image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=900&q=80",
     },
     {
-      count: "15+",
+      count: YEARS_EXPERIENCE_DISPLAY,
       title: "Years of Content Marketing Expertise",
-      desc: "With over 15 years of experience, Future IT Touch Pvt. Ltd. crafts strategic content marketing campaigns that build brand authority, increase online visibility, and drive measurable results for businesses worldwide.",
-      image: "/Assets/seerviceSlider/slide2.webp",
+      desc: `With over ${YEARS_EXPERIENCE_DISPLAY} years of experience, Future IT Touch Pvt. Ltd. crafts strategic content marketing campaigns that build brand authority, increase online visibility, and drive measurable results for businesses worldwide.`,
+      image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=900&q=80",
     },
     {
       count: "500+",
       title: "Global Clients Served",
       desc: "Trusted by over 500 international brands, we create content strategies and materials that strengthen brand messaging, boost engagement, and deliver tangible marketing outcomes across multiple platforms.",
-      image: "/Assets/seerviceSlider/slide3.webp",
+      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=900&q=80",
     },
     {
       count: "98%",
       title: "Client Satisfaction Rate",
       desc: "Our dedication to strategy, creativity, and data-driven results has earned us a 98% satisfaction rate. We focus on delivering content marketing solutions that resonate with target audiences and achieve business goals.",
-      image: "/Assets/seerviceSlider/slide4.webp",
+      image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=900&q=80",
     },
     {
       count: "24/7",
       title: "Dedicated Marketing Support",
       desc: "Our team provides continuous support, including content planning, revisions, and campaign optimization, ensuring that every content marketing initiative is aligned with your goals and delivers maximum ROI.",
-      image: "/Assets/seerviceSlider/slide5.webp",
+      image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=900&q=80",
     },
   ];
 
@@ -184,7 +185,7 @@ const Logo = () => {
       overviewParagraphs={[
         "At Future IT Touch Pvt. Ltd. we create compelling content strategies that resonate with your audience, drive engagement, and support your business goals. Effective content marketing builds trust, authority, and lasting relationships with your customers.",
         "From blogs and social media posts to newsletters and video scripts, we craft content that speaks to your target audience. Our experienced content marketers combine storytelling, SEO, and data-driven insights to deliver content that not only informs but inspires action.",
-        "With over 15 years of experience and a team of skilled professionals, we provide high-quality Content Marketing Services tailored to your brand's needs. We help businesses increase visibility, generate leads, and establish authority in their industry.",
+        `With over ${YEARS_EXPERIENCE_DISPLAY} years of experience and a team of skilled professionals, we provide high-quality Content Marketing Services tailored to your brand's needs. We help businesses increase visibility, generate leads, and establish authority in their industry.`,
       ]}
       overviewCtaText="Start Your Content Strategy Today"
       featuresBadge="Strategic Content Marketing Services"

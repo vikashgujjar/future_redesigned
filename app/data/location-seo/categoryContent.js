@@ -16,6 +16,7 @@ import {
   FaPython, FaChartBar, FaProjectDiagram, FaFlask, FaMicrochip, FaGem,
   FaTerminal, FaExchangeAlt, FaFingerprint,
 } from "react-icons/fa";
+import { YEARS_EXPERIENCE_DISPLAY } from "../../lib/companyStats";
 
 const iconCls6 = "text-white w-6 h-6";
 const iconCls8 = "text-white w-8 h-8";
@@ -23,8 +24,8 @@ const iconCls8 = "text-white w-8 h-8";
 // Company-wide credibility stats — same across every service/location page,
 // reusing existing site imagery rather than sourcing new assets per page.
 export const SHARED_SLIDER_CARDS = [
-  { count: "1000+", title: "Projects Delivered", desc: "Over 1,000 projects successfully delivered for businesses across industries — from startups to established enterprises — in 23+ years of experience.", image: "/Assets/seerviceSlider/slide1.webp" },
-  { count: "23+", title: "Years of Industry Experience", desc: "23+ years of delivering technology and marketing solutions that balance quality with technical excellence, proven across hundreds of businesses worldwide.", image: "/Assets/seerviceSlider/slide2.webp" },
+  { count: "1000+", title: "Projects Delivered", desc: `Over 1,000 projects successfully delivered for businesses across industries — from startups to established enterprises — in ${YEARS_EXPERIENCE_DISPLAY} years of experience.`, image: "/Assets/seerviceSlider/slide1.webp" },
+  { count: YEARS_EXPERIENCE_DISPLAY, title: "Years of Industry Experience", desc: `${YEARS_EXPERIENCE_DISPLAY} years of delivering technology and marketing solutions that balance quality with technical excellence, proven across hundreds of businesses worldwide.`, image: "/Assets/seerviceSlider/slide2.webp" },
   { count: "98%", title: "Client Satisfaction Rate", desc: "Our clients consistently rate us highly for delivery quality, communication, and the business results we help them achieve.", image: "/Assets/seerviceSlider/slide3.webp" },
   { count: "50+", title: "Cities Served Worldwide", desc: "We deliver remote services to businesses across 50+ cities spanning North America, Europe, Asia Pacific, and the Middle East.", image: "/Assets/seerviceSlider/slide4.webp" },
   { count: "50+", title: "Industries Served", desc: "We've delivered solutions for clients in healthcare, retail, education, real estate, logistics, hospitality, finance, and many more industries.", image: "/Assets/seerviceSlider/slide5.webp" },

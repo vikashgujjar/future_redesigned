@@ -6,6 +6,7 @@ import {
 } from "react-icons/fa";
 import lispImg from "../Assets/lisp.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
 const Lisp = () => (
   <CommonTechPage
@@ -36,9 +37,8 @@ const Lisp = () => (
       ],
       stats: [
         { num: "150+", label: "Lisp Stores Delivered",     desc: "High-performance, scalable Lisp-powered online stores built worldwide.",         icon: <FaShoppingCart /> },
-        { num: "8+",   label: "Years Lisp Expertise",      desc: "Eight-plus years building robust Lisp e-commerce and backend solutions.",          icon: <FaLayerGroup /> },
+        { num: YEARS_EXPERIENCE_DISPLAY,   label: "Years Lisp Expertise",      desc: `${YEARS_EXPERIENCE_DISPLAY} years building robust Lisp e-commerce and backend solutions.`,          icon: <FaLayerGroup /> },
         { num: "200+", label: "Clients Empowered",         desc: "200+ organizations powered by custom Lisp online store solutions globally.",       icon: <FaStar /> },
-        { num: "24/7", label: "Support & Monitoring",      desc: "Round-the-clock support keeping Lisp stores stable, secure, and optimized.",       icon: <FaHeadset /> },
       ],
     }}
 
@@ -154,7 +154,7 @@ const Lisp = () => (
 
     slider={[
       { count: "150+", title: "Lisp Stores Delivered",            desc: "150+ Lisp-powered online stores built — delivering high-performance, scalable, and reliable e-commerce solutions with seamless user experiences worldwide.",   image: "/Assets/seerviceSlider/slide1.webp" },
-      { count: "8+",   title: "Years of Lisp Expertise",          desc: "Eight-plus years crafting robust Lisp online store solutions — optimizing performance, transaction handling, and user experience for demanding stores.",         image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: YEARS_EXPERIENCE_DISPLAY,   title: "Years of Lisp Expertise",          desc: `${YEARS_EXPERIENCE_DISPLAY} years crafting robust Lisp online store solutions — optimizing performance, transaction handling, and user experience for demanding stores.`,         image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "200+", title: "Clients Empowered Globally",       desc: "200+ organizations trust us for Lisp-based e-commerce solutions that enhance sales, automation, and superior online shopping experiences worldwide.",           image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "99%",  title: "Optimization Success Rate",        desc: "Up to 99% efficiency in backend computations and transaction processing — ensuring fast, reliable store operations even under heavy traffic and complex loads.",  image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "24/7", title: "Technical Support & Monitoring",   desc: "24/7 monitoring, updates, and optimization keeping your Lisp online store stable, secure, and performing at peak efficiency at all times.",                   image: "/Assets/seerviceSlider/slide5.webp" },

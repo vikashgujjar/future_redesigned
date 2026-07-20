@@ -3,12 +3,12 @@ import Image from "next/image";
 import { Mail, MapPin, Phone, Heart, ChevronRight } from "lucide-react";
 import {
   FaFacebookF,
-  FaTwitter,
   FaLinkedinIn,
   FaInstagram,
   FaYoutube,
   FaGithub,
 } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const ourLinks = [
   { label: "Home", href: "/" },
@@ -31,7 +31,7 @@ const companyLinks = [
 
 const socials = [
   { Icon: FaFacebookF, href: "https://www.facebook.com/Futureittouch", label: "Facebook" },
-  { Icon: FaTwitter, href: "https://x.com/futureittouch", label: "Twitter" },
+  { Icon: FaXTwitter, href: "https://x.com/futureittouch", label: "X (Twitter)" },
   { Icon: FaLinkedinIn, href: "https://in.linkedin.com/company/future-it-touch", label: "LinkedIn" },
   { Icon: FaInstagram, href: "https://www.instagram.com/future_it_touch/", label: "Instagram" },
   { Icon: FaYoutube, href: "https://www.youtube.com/channel/UCirWettrTWfsFRzdGRIc6BQ/about", label: "YouTube" },

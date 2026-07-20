@@ -18,6 +18,7 @@ import { SERVICES } from "../data/services";
 import OtpVerifyModal from "../components/OtpVerifyModal";
 import WebPageSchema from "../components/schema/WebPageSchema";
 import BreadcrumbSchema from "../components/schema/BreadcrumbSchema";
+import useYearsExperience from "../lib/useYearsExperience";
 
 const infoCards = [
   {
@@ -49,14 +50,16 @@ const infoCards = [
   },
 ];
 
-const whyItems = [
-  "Expert team with 15+ years experience",
-  "500+ successful projects delivered",
+const getWhyItems = (yearsExperience) => [
+  `Expert team with ${yearsExperience} years experience`,
+  "5000+ successful projects delivered",
   "98% client satisfaction rate",
   "24/7 dedicated support",
 ];
 
 export default function Page() {
+  const yearsExperience = useYearsExperience();
+  const whyItems = getWhyItems(yearsExperience);
   const [showOTP, setShowOTP] = useState(false);
   const [otp, setOTP] = useState("");
   const [loading, setLoading] = useState(false);

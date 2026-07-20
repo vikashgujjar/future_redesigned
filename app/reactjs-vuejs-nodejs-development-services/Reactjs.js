@@ -1,6 +1,7 @@
 import React from "react";
 import { FaReact, FaCode, FaServer, FaDatabase, FaCogs, FaShieldAlt, FaTools, FaLock, FaRocket, FaCheckCircle, FaLayerGroup, FaBolt, FaLeaf, FaSyncAlt, FaStar, FaHeadset } from "react-icons/fa";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
 const Reactjs = () => (
   <CommonTechPage
@@ -29,9 +30,8 @@ const Reactjs = () => (
       ],
       stats: [
         { num:"400+", label:"JS Projects Built",    desc:"React, Vue & Node.js solutions delivered globally.", icon:<FaReact /> },
-        { num:"10+",  label:"Years Experience",     desc:"A decade building modern JavaScript applications.",   icon:<FaLayerGroup /> },
+        { num:YEARS_EXPERIENCE_DISPLAY,  label:"Years Experience",     desc:`${YEARS_EXPERIENCE_DISPLAY} years building modern JavaScript applications.`,   icon:<FaLayerGroup /> },
         { num:"98%",  label:"Client Satisfaction",  desc:"Quality-driven approach with transparent delivery.",  icon:<FaStar /> },
-        { num:"24/7", label:"Support & Monitoring", desc:"Continuous uptime checks & dedicated support team.",  icon:<FaHeadset /> },
       ],
     }}
 
@@ -115,7 +115,7 @@ const Reactjs = () => (
 
     slider={[
       { count: "400+", title: "JS Projects Delivered",          desc: "400+ React, Vue, and Node.js apps delivered — from real-time dashboards to enterprise platforms.", image: "/Assets/seerviceSlider/slide1.webp" },
-      { count: "10+",  title: "Years of JS Expertise",          desc: "A decade of JavaScript excellence with expertise in modern frameworks, testing, and CI/CD.",       image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: YEARS_EXPERIENCE_DISPLAY,  title: "Years of JS Expertise",          desc: `${YEARS_EXPERIENCE_DISPLAY} years of JavaScript excellence with expertise in modern frameworks, testing, and CI/CD.`,       image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "98%",  title: "Client Satisfaction",            desc: "98% satisfaction rate through clean code, real-time communication, and on-time delivery.",          image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "24/7", title: "Monitoring & Support",           desc: "Continuous uptime monitoring, error tracking, and support for all React/Vue/Node applications.",     image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "250+", title: "REST & GraphQL APIs Built",      desc: "250+ production APIs powering mobile apps, third-party integrations, and microservices globally.",  image: "/Assets/seerviceSlider/slide5.webp" },

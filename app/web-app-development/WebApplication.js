@@ -1,14 +1,17 @@
 "use client";
-import gg from "../Assets/gg.webp";
-import image2 from "../Assets/gif.gif";
+const gg = "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1400&q=85";
+const image2 = "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80";
 import CommonServicePage from "../components/CommonServicePage";
 import {
   FaTools, FaDatabase,
   FaLaptopCode, FaShoppingCart, FaBuilding, FaNetworkWired, FaCode, FaCogs,
   FaServer, FaShippingFast, FaCloud, FaSms, FaVideo, FaMapMarkedAlt, FaChartLine,
 } from "react-icons/fa";
+import useYearsExperience from "../lib/useYearsExperience";
+import { COMPANY_START_YEAR } from "../lib/companyStats";
 
 const Ecommerce = () => {
+  const yearsExperience = useYearsExperience();
   const features = [
     {
       title: "Seamless Third-Party API Integration",
@@ -77,31 +80,31 @@ const Ecommerce = () => {
       count: "100+",
       title: "Applications Maintained",
       desc: "We have successfully maintained over 100 web applications, ensuring optimal performance, smooth functionality, and timely updates. Each application is carefully monitored to provide seamless experiences for your users.",
-      image: "/Assets/seerviceSlider/slide1.webp",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80",
     },
     {
-      count: "10+",
+      count: yearsExperience,
       title: "Years of Expertise",
-      desc: "With over 10 years of experience in web application maintenance and support, our team brings deep technical knowledge to every project. We ensure best practices, modern technologies, and effective maintenance strategies are applied.",
-      image: "/Assets/seerviceSlider/slide2.webp",
+      desc: `With ${yearsExperience} years of experience in web application maintenance and support, our team brings deep technical knowledge to every project. We ensure best practices, modern technologies, and effective maintenance strategies are applied.`,
+      image: "https://images.unsplash.com/photo-1522252234503-e356532cafd5?w=900&q=80",
     },
     {
       count: "500+",
       title: "Clients Supported Globally",
       desc: "Trusted by over 500 clients worldwide, we provide reliable maintenance and support for diverse web applications. Our experience spans multiple industries, ensuring your app stays robust and fully functional across all platforms.",
-      image: "/Assets/seerviceSlider/slide3.webp",
+      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=900&q=80",
     },
     {
       count: "98%",
       title: "Satisfaction Rate",
       desc: "Our client-centric approach has earned a 98% satisfaction rate. We focus on delivering proactive maintenance, timely updates, and responsive support, ensuring every application operates smoothly and meets client expectations.",
-      image: "/Assets/seerviceSlider/slide4.webp",
+      image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=900&q=80",
     },
     {
       count: "24/7",
       title: "Dedicated Support",
       desc: "We provide round-the-clock support for all web applications. Our dedicated team resolves technical issues quickly, optimizes performance, and ensures your applications remain reliable and accessible at all times.",
-      image: "/Assets/seerviceSlider/slide5.webp",
+      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&q=80",
     },
   ];
 
@@ -175,7 +178,7 @@ const Ecommerce = () => {
     <CommonServicePage
       bannerImg={gg}
       bannerTitle="WEB APPLICATION DEVELOPMENT"
-      bannerDesc="Future IT Touch Pvt. Ltd. is an award-winning website development company offering custom web application development services to startups, SMBs, and large enterprises. With an aim to driving business transformation, we are building quality web applications for diverse business domains since 2005. Leveraging cutting-edge technology frameworks, APIs, and databases, we can craft futuristic, conversion-driven, and highly optimized solutions that ensure excellent user experience."
+      bannerDesc={`Future IT Touch Pvt. Ltd. is an award-winning website development company offering custom web application development services to startups, SMBs, and large enterprises. With an aim to driving business transformation, we are building quality web applications for diverse business domains since ${COMPANY_START_YEAR}. Leveraging cutting-edge technology frameworks, APIs, and databases, we can craft futuristic, conversion-driven, and highly optimized solutions that ensure excellent user experience.`}
       overviewImage={image2}
       overviewImageAlt="Web application development"
       overviewBadge="Premium Web Application Development"
@@ -184,7 +187,7 @@ const Ecommerce = () => {
       overviewParagraphs={[
         "At Future IT Touch Pvt. Ltd. we specialize in developing robust web applications that streamline business processes, improve operational efficiency, and provide seamless user experiences across devices. Our team leverages modern frameworks and technologies to craft scalable, secure, and high-performing solutions tailored to your business needs.",
         "To ensure your web application delivers maximum value, we integrate a variety of third-party APIs to enhance functionality and enable smooth workflows. From cloud storage with Amazon S3 and CloudFront, real-time communication via Twilio and Zoom, to interactive maps using Google Maps API, our integrations cover a wide range of essential services. We also support video streaming through Vimeo, logistics integration with alamove, and advanced messaging with xotel and nableX APIs.",
-        "With over 15 years of experience, we ensure that every project is delivered with performance, scalability, and security in mind.",
+        `With over ${yearsExperience} years of experience, we ensure that every project is delivered with performance, scalability, and security in mind.`,
       ]}
       overviewCtaText="Start Your Web App Journey"
       featuresBadge="Trusted Web App Development Company"

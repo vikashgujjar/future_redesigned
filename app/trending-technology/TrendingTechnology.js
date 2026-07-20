@@ -17,6 +17,7 @@ import {
 } from "react-icons/si";
 import trendtechImg from "../Assets/trendtech.webp";
 import Location from "../components/Location";
+import useYearsExperience from "../lib/useYearsExperience";
 
 // ── gradient animated text class (matches global keyframe tcpGrad) ──
 const HL = "bg-[linear-gradient(125deg,#2dd4bf,#6366f1,#a855f7)] bg-[length:200%_200%] bg-clip-text text-transparent [animation:tcpGrad_5s_ease-in-out_infinite]";
@@ -127,14 +128,15 @@ const WHY_ITEMS = [
   { icon: <FaStar />, title: "Talent & Ecosystem",      desc: "Modern stacks attract better developers, have more third-party integrations, and enjoy longer, more robust support lifecycles." },
 ];
 
-const STATS = [
-  { num: "12+",  label: "Years of Expertise" },
-  { num: "500+", label: "Projects Delivered" },
+const getStats = (yearsExperience) => [
+  { num: yearsExperience, label: "Years of Expertise" },
+  { num: "5000+", label: "Projects Delivered" },
   { num: "200+", label: "Clients Worldwide" },
   { num: "30+",  label: "Technologies Mastered" },
 ];
 
 export default function TrendingTechnology() {
+  const yearsExperience = useYearsExperience();
   return (
     <div className="font-['Inter',sans-serif] overflow-x-clip">
 
@@ -207,7 +209,7 @@ export default function TrendingTechnology() {
 
             {/* Quick highlights */}
             <div className="mt-8 flex flex-col sm:flex-row flex-wrap gap-3 justify-center lg:justify-start">
-              {["30+ Technologies", "500+ Projects Delivered", "12+ Years Experience"].map(t => (
+              {["30+ Technologies", "5000+ Projects Delivered", `${yearsExperience} Years Experience`].map(t => (
                 <div key={t} className="inline-flex items-center gap-2 text-white/60 text-xs font-medium">
                   <FaCheckCircle className="text-[#2dd4bf] flex-shrink-0" />
                   {t}
@@ -239,7 +241,7 @@ export default function TrendingTechnology() {
       {/* ════════════ 3. STATS BAR ════════════ */}
       <section className="bg-[linear-gradient(135deg,#050b20,#0a0f2e)] border-y border-white/[.07]">
         <div className="max-w-[1280px] mx-auto px-5 sm:px-10 xl:px-16 py-10 grid grid-cols-2 md:grid-cols-4 gap-6">
-          {STATS.map((s, i) => (
+          {getStats(yearsExperience).map((s, i) => (
             <div key={i} className="text-center">
               <div className="font-['Poppins',sans-serif] font-extrabold text-3xl sm:text-4xl bg-[linear-gradient(135deg,#2dd4bf,#6366f1)] bg-clip-text text-transparent">{s.num}</div>
               <div className="text-white/55 text-sm mt-1 font-medium">{s.label}</div>

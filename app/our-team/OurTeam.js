@@ -1,8 +1,10 @@
 "use client";
 import Image from "next/image";
-import { FaLinkedinIn, FaTwitter, FaInstagram, FaEnvelope } from "react-icons/fa";
+import { FaLinkedinIn, FaInstagram, FaEnvelope } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import GetNewInsight from "../components/GetNewInsight";
 import Link from "next/link";
+import useYearsExperience from "../lib/useYearsExperience";
 
 const DEPARTMENTS = ["All", "Leadership", "Business Development", "Design", "Development", "Marketing", "HR"];
 
@@ -32,6 +34,7 @@ const DEPT_COLORS = {
 };
 
 export default function OurTeam() {
+  const yearsExperience = useYearsExperience();
   return (
     <>
       {/* ── Page Banner ── */}
@@ -116,7 +119,7 @@ export default function OurTeam() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
             {[
               { val: "50+", label: "Team Members" },
-              { val: "15+", label: "Years Together" },
+              { val: yearsExperience, label: "Years Together" },
               { val: "3", label: "Global Offices" },
               { val: "98%", label: "Team Retention" },
             ].map((s) => (
@@ -308,7 +311,7 @@ export default function OurTeam() {
                     <div className="tm-socials">
                       {[
                         { Icon: FaLinkedinIn, href: "https://linkedin.com" },
-                        { Icon: FaTwitter, href: "https://twitter.com" },
+                        { Icon: FaXTwitter, href: "https://twitter.com" },
                         { Icon: FaInstagram, href: "https://instagram.com" },
                         { Icon: FaEnvelope, href: "mailto:info@futuretouch.in" },
                       ].map(({ Icon, href }, si) => (

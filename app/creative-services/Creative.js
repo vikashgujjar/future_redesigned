@@ -1,7 +1,8 @@
 "use client";
-import cwd from "../Assets/cwd.webp";
-import devops from "../Assets/app-intro.webp";
+const cwd = "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=1400&q=85";
+const devops = "https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&q=80";
 import CommonServicePage from "../components/CommonServicePage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 import {
   FaLightbulb, FaPalette, FaCommentDots, FaUsers, FaGlobe, FaBookOpen, FaChartPie,
   FaHandshake, FaChartLine, FaPencilRuler, FaDesktop, FaCode, FaSearch,
@@ -76,31 +77,31 @@ const Ecommerce = () => {
       count: "250+",
       title: "Brands Transformed",
       desc: "We've helped over 250 businesses build strong brand identities that capture attention and connect emotionally with their audiences. From startups to enterprises, our creative solutions turn visions into recognizable brands.",
-      image: "/Assets/seerviceSlider/slide1.webp",
+      image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=900&q=80",
     },
     {
-      count: "15+",
+      count: YEARS_EXPERIENCE_DISPLAY,
       title: "Years of Creative Expertise",
-      desc: "With more than 15 years of experience in branding and creative strategy, Future IT Touch Pvt. Ltd. brings deep insight and innovation to every project, helping brands establish authority and trust in competitive markets.",
-      image: "/Assets/seerviceSlider/slide2.webp",
+      desc: `With more than ${YEARS_EXPERIENCE_DISPLAY} years of experience in branding and creative strategy, Future IT Touch Pvt. Ltd. brings deep insight and innovation to every project, helping brands establish authority and trust in competitive markets.`,
+      image: "https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=900&q=80",
     },
     {
       count: "500+",
       title: "Global Clients Empowered",
       desc: "Trusted by over 500 clients worldwide, we deliver impactful brand identity solutions tailored to each business's personality, ensuring consistent visibility and recognition across industries and audiences.",
-      image: "/Assets/seerviceSlider/slide3.webp",
+      image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=900&q=80",
     },
     {
       count: "98%",
       title: "Client Satisfaction Rate",
       desc: "Our client-first approach and dedication to creativity have earned us a 98% satisfaction rate. We collaborate closely with businesses to design meaningful brand stories that inspire and engage their audiences.",
-      image: "/Assets/seerviceSlider/slide4.webp",
+      image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=900&q=80",
     },
     {
       count: "24/7",
       title: "Creative Support",
       desc: "Our team provides continuous brand support, ensuring consistency across all touchpoints — from visual assets to digital presence. We're here to help your brand evolve, stay relevant, and grow stronger every day.",
-      image: "/Assets/seerviceSlider/slide5.webp",
+      image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=900&q=80",
     },
   ];
 
@@ -185,7 +186,7 @@ const Ecommerce = () => {
         "A strong brand identity is more than just a logo — it's the essence of how your business is perceived. Our branding services focus on creating meaningful brand experiences that connect emotionally and visually.",
         { boldPrefix: "For Businesses:", text: "We define your brand voice, messaging, and visual style to ensure consistency across every platform. From color palettes and typography to marketing assets, everything reflects your unique story." },
         { boldPrefix: "For Audiences:", text: "We design engaging visuals, creative storytelling, and user-centered brand experiences that build trust and loyalty." },
-        "With over 15 years of creative expertise, we craft distinctive brand identities that leave lasting impressions. Choose our Brand Identity & Strategy Solutions to make your business stand out.",
+        `With over ${YEARS_EXPERIENCE_DISPLAY} years of creative expertise, we craft distinctive brand identities that leave lasting impressions. Choose our Brand Identity & Strategy Solutions to make your business stand out.`,
       ]}
       overviewCtaText="Build Your Brand Identity"
       featuresBadge="Creative Agency Branding Solutions"

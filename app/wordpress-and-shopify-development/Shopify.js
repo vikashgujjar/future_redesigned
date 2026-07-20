@@ -6,6 +6,7 @@ import {
 } from "react-icons/fa";
 import wsjImg from "../Assets/wsj.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
 const Shopify = () => (
   <CommonTechPage
@@ -36,9 +37,8 @@ const Shopify = () => (
       ],
       stats: [
         { num: "250+", label: "Websites Delivered",     desc: "WordPress and Shopify sites built for global clients across industries.", icon: <FaWordpress /> },
-        { num: "10+",  label: "Years of Expertise",     desc: "A decade of CMS and eCommerce development excellence.",                   icon: <FaLayerGroup /> },
+        { num: YEARS_EXPERIENCE_DISPLAY,  label: "Years of Expertise",     desc: `${YEARS_EXPERIENCE_DISPLAY} years of CMS and eCommerce development excellence.`,                   icon: <FaLayerGroup /> },
         { num: "400+", label: "Global Clients Served",  desc: "400+ satisfied clients with strong online presences worldwide.",         icon: <FaStar /> },
-        { num: "24/7", label: "Technical Support",      desc: "Round-the-clock maintenance, updates, and technical assistance.",        icon: <FaHeadset /> },
       ],
     }}
 
@@ -153,7 +153,7 @@ const Shopify = () => (
 
     slider={[
       { count: "250+", title: "Websites Successfully Delivered",  desc: "250+ WordPress and Shopify websites built for global clients — combining creativity with functionality for impactful digital experiences.",       image: "/Assets/seerviceSlider/slide1.webp" },
-      { count: "10+",  title: "Years of Development Expertise",   desc: "Over a decade specializing in responsive, secure, and conversion-driven CMS and eCommerce websites built on the latest technologies.",         image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: YEARS_EXPERIENCE_DISPLAY,  title: "Years of Development Expertise",   desc: `${YEARS_EXPERIENCE_DISPLAY} years specializing in responsive, secure, and conversion-driven CMS and eCommerce websites built on the latest technologies.`,         image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "400+", title: "Satisfied Global Clients",         desc: "400+ clients worldwide with strong online presences powered by modern WordPress and Shopify solutions built for transparency and growth.",        image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "98%",  title: "Client Satisfaction Rate",         desc: "98% satisfaction through top-notch designs, flawless performance, timely delivery, and ongoing customer support on every project.",             image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "24/7", title: "Dedicated Technical Support",      desc: "Round-the-clock maintenance for quick fixes to full-scale upgrades — keeping your store or CMS secure and performing flawlessly.",             image: "/Assets/seerviceSlider/slide5.webp" },

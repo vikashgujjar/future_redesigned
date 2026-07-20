@@ -1,5 +1,7 @@
 "use client";
 import Image from "next/image";
+import useYearsExperience from "../lib/useYearsExperience";
+import { COMPANY_START_YEAR } from "../lib/companyStats";
 
 const IconCheck = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>;
 const IconZap = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>;
@@ -29,9 +31,10 @@ export default function OverviewSectionSplit({
   paragraphs = [],
   ctaText = "Get In Touch",
   ctaHref = "tel:+917056937000",
-  since = "Since 2017",
+  since = `Since ${COMPANY_START_YEAR}`,
   trustedLabel = "Trusted by 500+ Clients",
 }) {
+  const yearsExperience = useYearsExperience();
   const textParas = paragraphs.filter(p => typeof p === "string");
   const featureCards = paragraphs.filter(p => typeof p === "object" && p.boldPrefix);
 
@@ -88,7 +91,7 @@ export default function OverviewSectionSplit({
 
           {/* Stats strip */}
           <div className="mb-8 flex items-center justify-center gap-6 lg:justify-start">
-            {[["500+", "Clients"], ["15+", "Yrs Exp"], ["98%", "Happy"]].map(([val, label], i) => (
+            {[["500+", "Clients"], [yearsExperience, "Yrs Exp"], ["98%", "Happy"]].map(([val, label], i) => (
               <div key={label} className={`flex flex-col items-center gap-1 lg:items-start ${i > 0 ? "border-l border-indigo-100 pl-6" : ""}`}>
                 <span className="bg-gradient-to-r from-teal-500 to-indigo-700 bg-clip-text font-[Poppins,sans-serif] text-2xl font-extrabold leading-none text-transparent">
                   {val}

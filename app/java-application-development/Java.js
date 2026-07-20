@@ -6,6 +6,7 @@ import {
 } from "react-icons/fa";
 import javaImg from "../Assets/java.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
 const Java = () => (
   <CommonTechPage
@@ -36,9 +37,8 @@ const Java = () => (
       ],
       stats: [
         { num: "300+", label: "Java Apps Delivered",     desc: "Enterprise Java applications built across finance, healthcare, education, and logistics.",  icon: <FaJava /> },
-        { num: "10+",  label: "Years Java Expertise",    desc: "A decade of enterprise Java development with Spring Boot, Hibernate, and Jakarta EE.",        icon: <FaLayerGroup /> },
+        { num: YEARS_EXPERIENCE_DISPLAY,  label: "Years Java Expertise",    desc: `${YEARS_EXPERIENCE_DISPLAY} years of enterprise Java development with Spring Boot, Hibernate, and Jakarta EE.`,        icon: <FaLayerGroup /> },
         { num: "400+", label: "Global Clients Served",   desc: "400+ clients worldwide trusting us for scalable and secure Java-based solutions.",            icon: <FaStar /> },
-        { num: "24/7", label: "Technical Support",       desc: "Round-the-clock monitoring, maintenance, and technical assistance.",                          icon: <FaHeadset /> },
       ],
     }}
 
@@ -151,7 +151,7 @@ const Java = () => (
 
     slider={[
       { count: "300+", title: "Java Applications Delivered",  desc: "300+ Java apps built across finance, healthcare, education, and enterprise — engineered for performance, scalability, and long-term business value.",             image: "/Assets/seerviceSlider/slide1.webp" },
-      { count: "10+",  title: "Years of Java Expertise",      desc: "A decade of experience in Java technologies — Spring Boot, Hibernate, and Jakarta EE — delivering robust, cloud-ready, and high-performing enterprise systems.", image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: YEARS_EXPERIENCE_DISPLAY,  title: "Years of Java Expertise",      desc: `${YEARS_EXPERIENCE_DISPLAY} years of experience in Java technologies — Spring Boot, Hibernate, and Jakarta EE — delivering robust, cloud-ready, and high-performing enterprise systems.`, image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "400+", title: "Satisfied Global Clients",     desc: "400+ businesses globally trust us for custom Java solutions that power digital transformation and operational innovation across multiple industries.",           image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "99%",  title: "Deployment Success Rate",      desc: "99% successful deployment rate across cloud, on-premise, and hybrid environments — minimizing downtime and maximizing performance at every release.",           image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "24/7", title: "Dedicated Technical Support",  desc: "Our team provides 24/7 assistance keeping your Java applications secure, optimized, and continuously updated to meet evolving business requirements.",           image: "/Assets/seerviceSlider/slide5.webp" },

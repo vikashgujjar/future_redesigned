@@ -3,6 +3,7 @@ import React from "react";
 
 import Image from "next/image";
 import CommonBanner from "../components/CommonBanner";
+import { COMPANY_START_YEAR } from "../lib/companyStats";
 
 import Forms from "../components/Forms";
 import Testimonial from "../components/Testimonial";
@@ -111,7 +112,7 @@ export default function AboutShow() {
 
           <p className="text-lg mb-8 font-medium mt-8 text-[#727272] text-justify">
             We’re a boutique web and mobile app development agency based in
-            Chandigarh. Since 2010, we’ve been helping organisations reimagine
+            Chandigarh. Since {COMPANY_START_YEAR}, we’ve been helping organisations reimagine
             their business by delivering thoughtful bespoke IT solutions. We
             bring passion to our job every single day and act more as a
             technology partner to our clients than an IT vendor. Our reputation

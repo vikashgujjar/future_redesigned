@@ -7,6 +7,7 @@ import {
 import { SiCplusplus } from "react-icons/si";
 import cppBlockchainImg from "../Assets/block.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
 const Cblock = () => (
   <CommonTechPage
@@ -37,9 +38,8 @@ const Cblock = () => (
       ],
       stats: [
         { num: "150+", label: "C++ Blockchain Systems",    desc: "High-performance C++ blockchain nodes and distributed ledger systems built for enterprise.",  icon: <SiCplusplus /> },
-        { num: "8+",   label: "Years Blockchain Expertise",desc: "Eight-plus years delivering C++ blockchain node and consensus engine solutions at scale.",        icon: <FaLayerGroup /> },
+        { num: YEARS_EXPERIENCE_DISPLAY,   label: "Years Blockchain Expertise",desc: `${YEARS_EXPERIENCE_DISPLAY} years delivering C++ blockchain node and consensus engine solutions at scale.`,        icon: <FaLayerGroup /> },
         { num: "200+", label: "Clients Empowered",         desc: "200+ organizations powered by high-performance C++ blockchain and distributed ledger systems.", icon: <FaStar /> },
-        { num: "24/7", label: "Support & Monitoring",      desc: "Round-the-clock monitoring keeping C++ blockchain infrastructure stable and performant.",        icon: <FaHeadset /> },
       ],
     }}
 
@@ -155,7 +155,7 @@ const Cblock = () => (
 
     slider={[
       { count: "150+", title: "C++ Blockchain Systems Delivered",    desc: "150+ high-performance C++ blockchain nodes and distributed ledger systems deployed — built for enterprise throughput, low latency, and cryptographic security.",   image: "/Assets/seerviceSlider/slide1.webp" },
-      { count: "8+",   title: "Years of C++ Blockchain Expertise",   desc: "Eight-plus years engineering C++ blockchain infrastructure — consensus engines, cryptographic libraries, and distributed ledger systems at production scale.",     image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: YEARS_EXPERIENCE_DISPLAY,   title: "Years of C++ Blockchain Expertise",   desc: `${YEARS_EXPERIENCE_DISPLAY} years engineering C++ blockchain infrastructure — consensus engines, cryptographic libraries, and distributed ledger systems at production scale.`,     image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "200+", title: "Clients Empowered Globally",          desc: "200+ organizations worldwide trust our C++ blockchain expertise for mission-critical distributed ledger, DeFi infrastructure, and enterprise blockchain platforms.", image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "99%",  title: "System Uptime & Reliability",         desc: "99%+ uptime achieved through rigorous testing, memory-safe code practices, and optimized consensus algorithms — ensuring always-on blockchain infrastructure.",    image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "24/7", title: "Support & Infrastructure Monitoring", desc: "24/7 monitoring, protocol patch management, and performance optimization keeping C++ blockchain systems secure, stable, and performant at all times.",           image: "/Assets/seerviceSlider/slide5.webp" },

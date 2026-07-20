@@ -1,5 +1,5 @@
 "use client";
-import securityImg from "../Assets/Security.webp";
+const securityImg = "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1400&q=85";
 import CommonServicePage from "../components/CommonServicePage";
 import {
   FaExclamationTriangle, FaShieldAlt, FaSearch, FaLock,
@@ -80,25 +80,25 @@ const sliderCards = [
     count: "< 15min",
     title: "Incident Response Activation",
     desc: "Our target is to have an active incident responder engaged within 15 minutes of a confirmed incident declaration — 24 hours a day, 365 days a year.",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=900&q=80",
   },
   {
     count: "50+",
     title: "Incidents Managed",
     desc: "50+ security incidents managed for Indian SMEs — ransomware, data breaches, BEC, cloud compromise, and insider threats — with full forensic investigation and post-incident hardening.",
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&q=80",
   },
   {
     count: "72h",
     title: "DPDPA Breach Notification",
     desc: "Every incident response engagement includes DPDPA 2023 breach notification assessment — ensuring you meet the 72-hour regulatory notification obligation without missing the deadline.",
-    image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=900&q=80",
   },
   {
     count: "100%",
     title: "Root Cause Identified",
     desc: "In every incident engagement, we identify the root cause and initial access vector — giving your team the knowledge to prevent recurrence, not just recover from the current incident.",
-    image: "https://images.unsplash.com/photo-1573164713712-03790a178651?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1573164713712-03790a178651?w=900&q=80",
   },
 ];
 
@@ -189,7 +189,7 @@ const IncidentResponse = () => (
     bannerTitle="Incident Response Services"
     bannerDesc="24/7 incident response, digital forensics, ransomware recovery, and post-incident hardening for Indian businesses — with 15-minute response activation, DPDPA 2023 breach notification support, and root cause elimination. When every minute counts, we are ready."
 
-    overviewImage="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80"
+    overviewImage="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80"
     overviewImageAlt="Incident Response Services"
     overviewBadge="Cyber Security · Incident Response"
     overviewHeading="Rapid Incident Response When"

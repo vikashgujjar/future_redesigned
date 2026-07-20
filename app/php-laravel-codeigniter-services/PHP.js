@@ -1,6 +1,7 @@
 import React from "react";
 import { FaPhp, FaCode, FaServer, FaDatabase, FaCogs, FaShieldAlt, FaTools, FaLock, FaRocket, FaCheckCircle, FaLayerGroup, FaBolt, FaLeaf, FaUsers, FaStar, FaHeadset } from "react-icons/fa";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
 const PHP = () => (
   <CommonTechPage
@@ -28,10 +29,9 @@ const PHP = () => (
         "24/7 maintenance with performance monitoring",
       ],
       stats: [
-        { num:"500+", label:"Projects Delivered",   desc:"PHP, Laravel & CodeIgniter apps shipped globally.", icon:<FaCode /> },
-        { num:"10+",  label:"Years of Expertise",   desc:"A decade building secure, scalable PHP solutions.",  icon:<FaLayerGroup /> },
+        { num:"5000+", label:"Projects Delivered",   desc:"PHP, Laravel & CodeIgniter apps shipped globally.", icon:<FaCode /> },
+        { num:YEARS_EXPERIENCE_DISPLAY,  label:"Years of Expertise",   desc:`${YEARS_EXPERIENCE_DISPLAY} years building secure, scalable PHP solutions.`,  icon:<FaLayerGroup /> },
         { num:"98%",  label:"Client Satisfaction",  desc:"Client-first approach drives our quality promise.",  icon:<FaStar /> },
-        { num:"24/7", label:"Support Available",    desc:"Round-the-clock monitoring & technical support.",    icon:<FaHeadset /> },
       ],
     }}
 
@@ -114,8 +114,8 @@ const PHP = () => (
     ]}
 
     slider={[
-      { count: "500+", title: "Projects Delivered",          desc: "500+ PHP, Laravel, and CodeIgniter projects delivered — from MVPs to enterprise systems.", image: "/Assets/seerviceSlider/slide1.webp" },
-      { count: "10+",  title: "Years of PHP Expertise",      desc: "Over a decade building and scaling PHP applications across diverse industries globally.",   image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: "5000+", title: "Projects Delivered",          desc: "5000+ PHP, Laravel, and CodeIgniter projects delivered — from MVPs to enterprise systems.", image: "/Assets/seerviceSlider/slide1.webp" },
+      { count: YEARS_EXPERIENCE_DISPLAY,  title: "Years of PHP Expertise",      desc: `${YEARS_EXPERIENCE_DISPLAY} years building and scaling PHP applications across diverse industries globally.`,   image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "98%",  title: "Client Satisfaction Rate",    desc: "98% satisfaction driven by clean code, on-time delivery, and responsive support teams.",    image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "24/7", title: "Dedicated Support",           desc: "Round-the-clock monitoring, bug fixes, and technical support for all PHP applications.",     image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "300+", title: "Laravel Apps Built",          desc: "Over 300 Laravel applications delivered for businesses ranging from startups to enterprises.", image: "/Assets/seerviceSlider/slide5.webp" },

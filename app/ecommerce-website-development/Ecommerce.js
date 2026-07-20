@@ -1,6 +1,7 @@
 "use client";
-import ecc from "../Assets/ecc.svg";
+const ecc = "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1400&q=85";
 import CommonServicePage from "../components/CommonServicePage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 import {
   FaShoppingCart, FaPaintBrush, FaClock,
   FaMagento, FaWordpress, FaShopify, FaOpencart, FaCogs, FaServer,
@@ -79,9 +80,9 @@ const Ecommerce = () => {
       image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=900&q=80",
     },
     {
-      count: "15+",
+      count: YEARS_EXPERIENCE_DISPLAY,
       title: "Years of Experience",
-      desc: "With more than 15 years in eCommerce website development, Future IT Touch Pvt. Ltd. brings deep industry expertise. Our team ensures each project leverages best practices, modern technologies, and innovative design strategies.",
+      desc: `With more than ${YEARS_EXPERIENCE_DISPLAY} years in eCommerce website development, Future IT Touch Pvt. Ltd. brings deep industry expertise. Our team ensures each project leverages best practices, modern technologies, and innovative design strategies.`,
       image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&q=80",
     },
     {
@@ -213,7 +214,7 @@ const Ecommerce = () => {
         "The goal of every online store is to provide users with an experience comparable to shopping in a physical store, while ensuring administrators enjoy effortless management. Our eCommerce development services focus on:",
         { boldPrefix: "For Users:", text: "Easy navigation, engaging interface, multiple product images, quick checkout, categories & filters, secured payments, and smooth order tracking." },
         { boldPrefix: "For Admins:", text: "Simple order management, product attributes, tax & shipping integration, offers & discounts, inventory management, and detailed analytics." },
-        "With over 15 years of expertise, we've built hundreds of B2B and B2C eCommerce stores. Choose our custom eCommerce web design services to deliver exceptional digital shopping experiences for your customers.",
+        `With over ${YEARS_EXPERIENCE_DISPLAY} years of expertise, we've built hundreds of B2B and B2C eCommerce stores. Choose our custom eCommerce web design services to deliver exceptional digital shopping experiences for your customers.`,
       ]}
       overviewCtaText="Start Your eCommerce Journey"
       featuresBadge="Trusted eCommerce Website Development Company"

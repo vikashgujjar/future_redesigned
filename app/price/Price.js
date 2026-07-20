@@ -102,7 +102,7 @@ const PLANS = [
     desc: "End-to-end mobile app development for Android and iOS — from MVP to enterprise solutions.",
     plans: [
       {
-        name:"Basic",     tag:"Startup App",      price:319.99,  popular:false,
+        name:"Basic",     tag:"Startup App",      price:799.99,  popular:false,
         color:{ from:"#06b6d4", to:"#0284c7" },
         features:[
           { text:"Max Screens: 7",                 yes:true  },
@@ -114,7 +114,7 @@ const PLANS = [
         ],
       },
       {
-        name:"Advance",   tag:"Business App",     price:499.99,  popular:true,
+        name:"Advance",   tag:"Business App",     price:1499.99,  popular:true,
         color:{ from:"#6366f1", to:"#4f46e5" },
         features:[
           { text:"Max Screens: 15",                yes:true  },
@@ -126,7 +126,7 @@ const PLANS = [
         ],
       },
       {
-        name:"Ultimate",  tag:"Enterprise App",   price:599.99,  popular:false,
+        name:"Ultimate",  tag:"Enterprise App",   price:2199.99,  popular:false,
         color:{ from:"#8b5cf6", to:"#7c3aed" },
         features:[
           { text:"Max Screens: 20+",               yes:true  },

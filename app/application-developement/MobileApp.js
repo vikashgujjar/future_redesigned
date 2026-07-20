@@ -1,6 +1,7 @@
 "use client";
-import bannerImg from "../Assets/hhh.gif";
+const bannerImg = "https://images.unsplash.com/photo-1512428813834-c702c7702b78?w=1400&q=85";
 import CommonServicePage from "../components/CommonServicePage";
+import { COMPANY_START_YEAR } from "../lib/companyStats";
 import {
   FaMobileAlt, FaAndroid, FaApple, FaReact, FaCode, FaCloud, FaSync,
 } from "react-icons/fa";
@@ -182,7 +183,7 @@ const MobileApp = () => {
     <CommonServicePage
       bannerImg={bannerImg}
       bannerTitle="Mobile App Development Services"
-      bannerDesc="We are a full-stack mobile app development company in Chandigarh with all the expertise you need to build a successful, stable, and scalable mobile product. Future IT Touch Pvt. Ltd. offers comprehensive mobile app development services for iOS, Android, and cross-platform — backed by a team of 50+ designers, developers, and QA specialists serving clients across 3+ countries since 2017."
+      bannerDesc={`We are a full-stack mobile app development company in Chandigarh with all the expertise you need to build a successful, stable, and scalable mobile product. Future IT Touch Pvt. Ltd. offers comprehensive mobile app development services for iOS, Android, and cross-platform — backed by a team of 50+ designers, developers, and QA specialists serving clients across 3+ countries since ${COMPANY_START_YEAR}.`}
       overviewImage="https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=800&q=80"
       overviewImageAlt="Mobile App Development"
       overviewBadge="Custom Mobile App Solutions"

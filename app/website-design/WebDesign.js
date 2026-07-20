@@ -1,6 +1,7 @@
 "use client";
 const bannerImg = "https://images.unsplash.com/photo-1547658719-da2b51169166?w=1400&q=85";
 import CommonServicePage from "../components/CommonServicePage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 import {
   FaPaintBrush, FaMobileAlt, FaSearch, FaShoppingCart, FaCode, FaLayerGroup,
   FaRocket, FaHeadset, FaChartLine, FaDesktop, FaWordpress, FaTools,
@@ -73,32 +74,32 @@ const sliderCards = [
   {
     count: "1000+",
     title: "Websites Designed & Delivered",
-    desc: "Over 1,000 websites successfully designed and launched for businesses across industries — from startups to established enterprises — in 15+ years of web design expertise.",
-    image: "/Assets/seerviceSlider/slide1.webp",
+    desc: `Over 1,000 websites successfully designed and launched for businesses across industries — from startups to established enterprises — in ${YEARS_EXPERIENCE_DISPLAY} years of web design expertise.`,
+    image: "https://images.unsplash.com/photo-1522252234503-e356532cafd5?w=900&q=80",
   },
   {
-    count: "15+",
+    count: YEARS_EXPERIENCE_DISPLAY,
     title: "Years of Web Design Experience",
-    desc: "15+ years of crafting websites that balance stunning visual design with technical excellence — proven across hundreds of industries and business types worldwide.",
-    image: "/Assets/seerviceSlider/slide2.webp",
+    desc: `${YEARS_EXPERIENCE_DISPLAY} years of crafting websites that balance stunning visual design with technical excellence — proven across hundreds of industries and business types worldwide.`,
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=900&q=80",
   },
   {
     count: "98%",
     title: "Client Satisfaction Rate",
     desc: "Our clients consistently award us 5-star ratings for design quality, communication, on-time delivery, and the business results their new websites deliver.",
-    image: "/Assets/seerviceSlider/slide3.webp",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80",
   },
   {
     count: "3x",
     title: "Average Traffic Increase",
     desc: "Businesses that switch to our SEO-optimized websites see an average 3x increase in organic search traffic within the first 6 months after launch.",
-    image: "/Assets/seerviceSlider/slide4.webp",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&q=80",
   },
   {
     count: "50+",
     title: "Industries Served",
     desc: "We've delivered websites for clients in healthcare, retail, education, real estate, logistics, hospitality, finance, technology, and many more niche industries.",
-    image: "/Assets/seerviceSlider/slide5.webp",
+    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=900&q=80",
   },
 ];
 
@@ -220,11 +221,11 @@ const WebDesign = () => {
       overviewHeading="Turning Ideas Into"
       overviewHighlight="Powerful Digital Experiences"
       overviewParagraphs={[
-        "A great website is more than a digital brochure — it's your best salesperson, working 24/7 to attract, engage, and convert visitors into paying customers. Future IT Touch Pvt. Ltd. has been crafting high-performance websites for businesses of all sizes for over 15 years.",
+        `A great website is more than a digital brochure — it's your best salesperson, working 24/7 to attract, engage, and convert visitors into paying customers. Future IT Touch Pvt. Ltd. has been crafting high-performance websites for businesses of all sizes for over ${YEARS_EXPERIENCE_DISPLAY} years.`,
         "Whether you need a sleek corporate website, a feature-rich eCommerce store, a content-managed WordPress site, or a complex web application, we deliver solutions tailored to your specific business goals and target audience.",
         { boldPrefix: "For Your Business:", text: "Custom-designed, SEO-optimized, fast-loading websites that generate leads, build credibility, and grow your customer base organically." },
         { boldPrefix: "For Your Users:", text: "Intuitive navigation, mobile-responsive layouts, accessible design, and fast page loads — an experience that keeps visitors coming back." },
-        "In the last 15 years, we have delivered effective web solutions to thousands of businesses and helped them enhance their growth online with measurable, lasting results.",
+        `In the last ${YEARS_EXPERIENCE_DISPLAY} years, we have delivered effective web solutions to thousands of businesses and helped them enhance their growth online with measurable, lasting results.`,
       ]}
       overviewCtaText="Start Your Website Project"
       featuresBadge="Website Design & Development Services"

@@ -3,6 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { FaAngleRight, FaCheckCircle, FaAward, FaRocket, FaClock } from "react-icons/fa";
 import Login from "./Login";
+import { COMPANY_START_YEAR } from "../lib/companyStats";
 
 const features = [
   {
@@ -191,7 +192,7 @@ const WhyChoose = () => {
           </p>
 
           {/* mini stats row */}
-          <div className="flex flex-wrap gap-6 pt-2 border-t border-gray-100 mt-1">
+          {/* <div className="flex flex-wrap gap-6 pt-2 border-t border-gray-100 mt-1">
             {stats.map((s, i) => (
               <div key={i}>
                 <p className="text-2xl font-black text-gray-900"
@@ -204,7 +205,7 @@ const WhyChoose = () => {
                   style={{ fontFamily:"'Inter',sans-serif" }}>{s.label}</p>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
 
         {/* ─── CARD 2: Image (row-span-2) ─────────────── */}
@@ -235,11 +236,11 @@ const WhyChoose = () => {
           </div>
 
           {/* badge */}
-          <div className="absolute bottom-4 sm:-bottom-4 left-5 flex items-center gap-2 px-4 py-2.5 rounded-xl shadow-xl"
+          <div className="absolute bottom-4 sm:bottom-4 left-5 flex items-center gap-2 px-4 py-2.5 rounded-xl shadow-xl"
             style={{ background:"linear-gradient(135deg,#2dd4bf,#6366f1)", zIndex:2 }}>
             <FaCheckCircle className="text-white text-sm"/>
             <span className="text-white text-xs font-bold tracking-wide"
-              style={{ fontFamily:"'Poppins',sans-serif" }}>Trusted Since 2017</span>
+              style={{ fontFamily:"'Poppins',sans-serif" }}>Trusted Since {COMPANY_START_YEAR}</span>
           </div>
 
           {/* spinning hexagon decoration on image top-right */}

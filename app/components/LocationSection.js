@@ -5,6 +5,7 @@ import { MapPin, Globe, Building2, Heart } from "lucide-react";
 import { SERVICES } from "../data/location-seo/services";
 import { TECHNOLOGIES, getTechnologyLocationPath } from "../data/location-seo/technologies";
 import { COUNTRIES, ALL_LOCATIONS, slugify } from "../data/location-seo/locations";
+import useYearsExperience from "../lib/useYearsExperience";
 
 // Canonical service pages (unchanged, existing routes) → their matching
 // entry in the shared services taxonomy, so the SAME slug is used whether a
@@ -96,6 +97,7 @@ export default function LocationSection() {
   const activeService = detectActiveService(pathname);
   const activeTechnology = !activeService ? detectActiveTechnology(pathname) : null;
   const activeName = activeService?.name || activeTechnology?.name || null;
+  const yearsExperience = useYearsExperience();
 
   return (
     <section
@@ -172,7 +174,7 @@ export default function LocationSection() {
               <>
                 Growing Businesses{" "}
                 <span className="bg-gradient-to-r from-teal-400 to-indigo-700 bg-clip-text text-transparent">
-                  Since 2001
+                  for {yearsExperience} Years
                 </span>
               </>
             )}

@@ -1,6 +1,8 @@
 import Image from 'next/image';
+import useYearsExperience from '../lib/useYearsExperience';
 
 export default function CommonBannerService({ imgSrc, title, desc }) {
+  const yearsExperience = useYearsExperience();
   return (
     <section className="relative overflow-hidden bg-[#3a2b80] font-[Inter,sans-serif]">
 
@@ -83,7 +85,7 @@ export default function CommonBannerService({ imgSrc, title, desc }) {
 
           {/* Micro stats */}
           <div className="flex items-center justify-center gap-6 sm:gap-10 lg:justify-start">
-            {[['500+', 'Clients'], ['15+', 'Yrs Exp'], ['98%', 'Satisfaction']].map(([val, label]) => (
+            {[['500+', 'Clients'], [yearsExperience, 'Yrs Exp'], ['98%', 'Satisfaction']].map(([val, label]) => (
               <div key={label} className="flex flex-col items-center gap-1 lg:items-start">
                 <span className="bg-gradient-to-br from-white to-[#ffb27d] bg-clip-text font-[Poppins,sans-serif] text-xl font-extrabold leading-none text-transparent sm:text-2xl">
                   {val}

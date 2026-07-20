@@ -7,6 +7,7 @@ import {
 import { SiIonic } from "react-icons/si";
 import ionicImg from "../Assets/ionic.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
+import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
 const Ionic = () => (
   <CommonTechPage
@@ -37,9 +38,8 @@ const Ionic = () => (
       ],
       stats: [
         { num: "200+", label: "Ionic Apps Delivered",        desc: "Hybrid apps delivered across finance, healthcare, logistics, and retail.",    icon: <SiIonic /> },
-        { num: "9+",   label: "Years Hybrid Dev Expertise",  desc: "Nine-plus years building scalable Ionic and Capacitor hybrid solutions.",      icon: <FaLayerGroup /> },
+        { num: YEARS_EXPERIENCE_DISPLAY,   label: "Years Hybrid Dev Expertise",  desc: `${YEARS_EXPERIENCE_DISPLAY} years building scalable Ionic and Capacitor hybrid solutions.`,      icon: <FaLayerGroup /> },
         { num: "250+", label: "Global Clients Served",       desc: "Trusted by 250+ clients worldwide for reliable Ionic app development.",        icon: <FaStar /> },
-        { num: "24/7", label: "Technical Support",           desc: "Round-the-clock monitoring, maintenance, and technical assistance.",           icon: <FaHeadset /> },
       ],
     }}
 
@@ -152,7 +152,7 @@ const Ionic = () => (
 
     slider={[
       { count: "200+", title: "Ionic Apps Delivered",              desc: "200+ Ionic apps delivered across finance, healthcare, logistics, and retail — each known for hybrid flexibility, native-like performance, and scalable architecture.",   image: "/Assets/seerviceSlider/slide1.webp" },
-      { count: "9+",   title: "Years of Hybrid Dev Expertise",     desc: "Nine-plus years in hybrid app development with deep expertise in Ionic, Angular, and Capacitor — delivering end-to-end solutions from MVPs to enterprise platforms.",   image: "/Assets/seerviceSlider/slide2.webp" },
+      { count: YEARS_EXPERIENCE_DISPLAY,   title: "Years of Hybrid Dev Expertise",     desc: `${YEARS_EXPERIENCE_DISPLAY} years in hybrid app development with deep expertise in Ionic, Angular, and Capacitor — delivering end-to-end solutions from MVPs to enterprise platforms.`,   image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "250+", title: "Satisfied Global Clients",          desc: "250+ businesses worldwide trust us for reliable, user-centric Ionic apps — from emerging brands to complex enterprise platforms delivering measurable digital value.",    image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "99%",  title: "Deployment Success Rate",           desc: "99% deployment success rate maintained through structured QA, performance optimization, and full compliance with Android and iOS app store guidelines.",                  image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "24/7", title: "Dedicated Technical Support",       desc: "Round-the-clock support ensuring your Ionic app stays stable, secure, and up-to-date — from monitoring and bug fixing to compatibility patches and new feature rollouts.", image: "/Assets/seerviceSlider/slide5.webp" },

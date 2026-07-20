@@ -1,5 +1,5 @@
 "use client";
-import gm from "../Assets/gm.webp";
+const gm = "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1400&q=85";
 import image2 from "../Assets/gif.gif";
 import CommonServicePage from "../components/CommonServicePage";
 import {
@@ -7,8 +7,10 @@ import {
   FaWordpress, FaShoppingBag, FaMagento, FaShopify, FaDrupal, FaCode,
   FaMoneyBillWave, FaEdit, FaFileAlt, FaGlobe, FaShareAlt, FaSearch,
 } from "react-icons/fa";
+import useYearsExperience from "../lib/useYearsExperience";
 
 const Ecommerce = () => {
+  const yearsExperience = useYearsExperience();
   const features = [
     {
       title: "Affordable Website Management",
@@ -71,31 +73,31 @@ const Ecommerce = () => {
       count: "100+",
       title: "CMS Websites Delivered",
       desc: "We have successfully delivered over 100 CMS-based websites, ensuring responsive design, smooth functionality, and secure, scalable online platforms for clients worldwide.",
-      image: "/Assets/seerviceSlider/slide1.webp",
+      image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=900&q=80",
     },
     {
-      count: "10+",
+      count: yearsExperience,
       title: "Years of Expertise",
-      desc: "With over 10 years of experience in CMS and eCommerce development, our team applies modern technologies and best practices to build robust, user-friendly websites tailored to your business needs.",
-      image: "/Assets/seerviceSlider/slide2.webp",
+      desc: `With ${yearsExperience} years of experience in CMS and eCommerce development, our team applies modern technologies and best practices to build robust, user-friendly websites tailored to your business needs.`,
+      image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=900&q=80",
     },
     {
       count: "500+",
       title: "Clients Supported Globally",
       desc: "Trusted by over 500 businesses globally, we provide expert CMS development and maintenance. Our solutions span multiple industries, ensuring secure, fast, and efficient websites for all.",
-      image: "/Assets/seerviceSlider/slide3.webp",
+      image: "https://images.unsplash.com/photo-1522252234503-e356532cafd5?w=900&q=80",
     },
     {
       count: "98%",
       title: "Client Satisfaction Rate",
       desc: "Our client-centric approach in CMS and eCommerce development has earned a 98% satisfaction rate. We deliver intuitive, feature-rich websites with timely support and maintenance.",
-      image: "/Assets/seerviceSlider/slide4.webp",
+      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=900&q=80",
     },
     {
       count: "24/7",
       title: "Dedicated Support",
       desc: "We provide round-the-clock support for all CMS websites. Our team ensures smooth operation, timely updates, and quick resolution of any technical issues to keep your site reliable.",
-      image: "/Assets/seerviceSlider/slide5.webp",
+      image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=900&q=80",
     },
   ];
 

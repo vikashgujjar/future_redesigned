@@ -1,13 +1,15 @@
 "use client";
-import ec from "../Assets/ios-application-development.webp";
-import app from "../Assets/hhh.gif";
+const ec = "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80";
+const app = "https://images.unsplash.com/photo-1526498460520-4c246339dccb?w=1400&q=85";
 import CommonServicePage from "../components/CommonServicePage";
 import { FaMobileAlt, FaPaintBrush, FaClock, FaLightbulb, FaDraftingCompass, FaCode, FaBug, FaCloudUploadAlt, FaChartLine, FaTools } from "react-icons/fa";
 import { SiReact, SiFlutter, SiGooglecloud } from "react-icons/si";
 import { MdOutlineApi, MdOutlineSecurity } from "react-icons/md";
 import { RiTestTubeLine } from "react-icons/ri";
+import useYearsExperience from "../lib/useYearsExperience";
 
 const Hybrid = () => {
+  const yearsExperience = useYearsExperience();
   const features = [
     {
       title: "Idea & Strategy",
@@ -76,31 +78,31 @@ const Hybrid = () => {
       count: "300+",
       title: "Hybrid Apps Delivered",
       desc: "We've successfully built and launched over 300 hybrid mobile applications for Android and iOS using React Native, Flutter, and Ionic. Each app offers native-like performance and seamless functionality across all devices.",
-      image: "/Assets/seerviceSlider/slide1.webp",
+      image: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=900&q=80",
     },
     {
-      count: "15+",
+      count: yearsExperience,
       title: "Years of Industry Experience",
-      desc: "With over 15 years of expertise in mobile app development, Future IT Touch Pvt. Ltd. specializes in creating cost-effective and scalable hybrid applications for businesses worldwide.",
-      image: "/Assets/seerviceSlider/slide2.webp",
+      desc: `With ${yearsExperience} years of expertise in mobile app development, Future IT Touch Pvt. Ltd. specializes in creating cost-effective and scalable hybrid applications for businesses worldwide.`,
+      image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=900&q=80",
     },
     {
       count: "500+",
       title: "Satisfied Global Clients",
       desc: "Our hybrid app solutions have empowered over 500 clients globally, from startups to enterprises. We ensure every app aligns with business objectives and provides a consistent cross-platform experience.",
-      image: "/Assets/seerviceSlider/slide3.webp",
+      image: "https://images.unsplash.com/photo-1512428813834-c702c7702b78?w=900&q=80",
     },
     {
       count: "98%",
       title: "Client Satisfaction Rate",
       desc: "Our commitment to innovation, transparency, and quality has earned us a 98% client satisfaction rate. We ensure your hybrid app delivers outstanding value and reliability across platforms.",
-      image: "/Assets/seerviceSlider/slide4.webp",
+      image: "https://images.unsplash.com/photo-1526498460520-4c246339dccb?w=900&q=80",
     },
     {
       count: "24/7",
       title: "Technical Support & Maintenance",
       desc: "We offer round-the-clock support and maintenance to ensure your hybrid applications remain up-to-date, secure, and high-performing — long after deployment.",
-      image: "/Assets/seerviceSlider/slide5.webp",
+      image: "https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?w=900&q=80",
     },
   ];
 
@@ -185,7 +187,7 @@ const Hybrid = () => {
         "Our hybrid app development services help businesses save time and cost while reaching a wider audience. Using the latest frameworks like React Native, Flutter, and Ionic, we build fast, reliable, and scalable apps that work smoothly on multiple platforms.",
         { boldPrefix: "Our Expertise Includes:", text: "Cross-platform UI/UX design, API integration, native performance optimization, secure data handling, real-time syncing, and app store deployment." },
         { boldPrefix: "Why Choose Us:", text: "Faster time-to-market, cost-effective solutions, reusable code architecture, consistent user experience, and full post-launch support." },
-        "With over 15 years of experience, we've helped startups and enterprises bring their ideas to life using robust hybrid technologies. Partner with our hybrid app development experts to build high-quality, cross-platform applications that perform flawlessly across all devices.",
+        `With over ${yearsExperience} years of experience, we've helped startups and enterprises bring their ideas to life using robust hybrid technologies. Partner with our hybrid app development experts to build high-quality, cross-platform applications that perform flawlessly across all devices.`,
       ]}
       overviewCtaText="Start Your Hybrid App Project"
       featuresBadge="Our iPhone App Development Process"

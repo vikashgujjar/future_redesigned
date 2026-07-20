@@ -1,5 +1,5 @@
 "use client";
-import gm from "../Assets/qa.webp";
+const gm = "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=1400&q=85";
 import d1 from "../Assets/cr.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import {
@@ -8,8 +8,10 @@ import {
   FaFlask, FaGlobe, FaCloud, FaRobot, FaCode, FaMobileAlt,
   FaComments, FaCheckCircle, FaTachometerAlt, FaPuzzlePiece, FaTabletAlt,
 } from "react-icons/fa";
+import useYearsExperience from "../lib/useYearsExperience";
 
 const Quality = () => {
+  const yearsExperience = useYearsExperience();
   const features = [
     {
       title: "Reliable Brand Experience",
@@ -72,31 +74,31 @@ const Quality = () => {
       count: "250+",
       title: "Corporate Web Apps Delivered",
       desc: "We've tested and optimized over 250+ corporate web applications to ensure flawless performance, security, and usability. Every project undergoes rigorous QA checks to guarantee error-free functionality and reliability.",
-      image: "/Assets/seerviceSlider/slide1.webp",
+      image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=900&q=80",
     },
     {
-      count: "15+",
+      count: yearsExperience,
       title: "Years of Industry Expertise",
-      desc: "With more than 15 years in software testing and quality assurance, Future IT Touch Pvt. Ltd. ensures that every digital product we deliver meets the highest industry standards for performance and security.",
-      image: "/Assets/seerviceSlider/slide2.webp",
+      desc: `With ${yearsExperience} years in software testing and quality assurance, Future IT Touch Pvt. Ltd. ensures that every digital product we deliver meets the highest industry standards for performance and security.`,
+      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=900&q=80",
     },
     {
       count: "500+",
       title: "Global Businesses Served",
       desc: "Trusted by over 500 global clients, we provide QA and testing solutions that enhance software quality, prevent issues before launch, and ensure seamless functionality across platforms and devices.",
-      image: "/Assets/seerviceSlider/slide3.webp",
+      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&q=80",
     },
     {
       count: "98%",
       title: "Client Satisfaction Rate",
       desc: "Our commitment to precision and excellence in testing has earned us a 98% client satisfaction rate. We ensure smooth launches, superior performance, and bug-free experiences for every project.",
-      image: "/Assets/seerviceSlider/slide4.webp",
+      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=900&q=80",
     },
     {
       count: "24/7",
       title: "Reliable Technical Support",
       desc: "Our QA support team provides 24/7 monitoring, issue resolution, and ongoing validation to ensure your systems run flawlessly even after deployment, keeping performance at its peak.",
-      image: "/Assets/seerviceSlider/slide5.webp",
+      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=900&q=80",
     },
   ];
 
@@ -211,7 +213,7 @@ const Quality = () => {
         "Our QA experts use advanced testing frameworks and automation tools to identify issues before they impact users. We focus on ensuring every product release is stable, scalable, and aligned with your business objectives through continuous testing and monitoring.",
         { boldPrefix: "For Developers:", text: "Early bug detection, CI/CD testing integration, API validation, and automated regression testing for faster and more efficient development cycles." },
         { boldPrefix: "For Businesses:", text: "Comprehensive functional, performance, security, and usability testing that ensures consistent user experiences and protects your brand's reputation." },
-        "With over 15 years of experience in delivering top-notch digital solutions, our Quality Assurance services help organizations reduce risks, optimize performance, and achieve reliable, high-quality software products that users trust.",
+        `With over ${yearsExperience} years of experience in delivering top-notch digital solutions, our Quality Assurance services help organizations reduce risks, optimize performance, and achieve reliable, high-quality software products that users trust.`,
       ]}
       overviewCtaText="Start Your QA and Testing Project"
       featuresBadge="Trusted Quality Assurance Services"

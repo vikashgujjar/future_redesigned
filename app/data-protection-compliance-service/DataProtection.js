@@ -1,5 +1,5 @@
 "use client";
-import securityImg from "../Assets/Security.webp";
+const securityImg = "https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?w=1400&q=85";
 import CommonServicePage from "../components/CommonServicePage";
 import {
   FaFileAlt, FaShieldAlt, FaLock, FaDatabase, FaUserShield,
@@ -80,25 +80,25 @@ const sliderCards = [
     count: "100+",
     title: "Compliance Programmes Delivered",
     desc: "100+ DPDPA, CERT-In, ISO 27001, and PCI-DSS compliance programmes delivered to Indian SMEs — from initial gap assessment to certification and ongoing maintenance.",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?w=900&q=80",
   },
   {
     count: "4",
     title: "Compliance Frameworks Mastered",
     desc: "DPDPA 2023, CERT-In controls, ISO 27001, and sector-specific frameworks (RBI, PCI-DSS, HIPAA) — pre-built as modular programmes, not custom-built from scratch for each client.",
-    image: "https://images.unsplash.com/photo-1573164713712-03790a178651?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&q=80",
   },
   {
     count: "₹250Cr",
     title: "Maximum DPDPA Penalty Avoided",
     desc: "Non-compliance with DPDPA 2023 can attract penalties up to ₹250 crore per violation. Our compliance programme eliminates that regulatory risk for Indian businesses of all sizes.",
-    image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&q=80",
   },
   {
     count: "72h",
     title: "DPDPA Breach Notification Readiness",
     desc: "DPDPA 2023 requires breach notification to DPBI within 72 hours. Our incident response integration with the compliance programme ensures you can meet this deadline without scrambling.",
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1573164713712-03790a178651?w=900&q=80",
   },
 ];
 
@@ -184,7 +184,7 @@ const DataProtection = () => (
     bannerTitle="Data Protection & Compliance Services"
     bannerDesc="DPDPA 2023, CERT-In controls, ISO 27001, PCI-DSS, and RBI compliance programmes delivered as a managed service for Indian businesses — gap assessment, policy development, control implementation, ongoing monitoring, and audit readiness. Stay compliant, always."
 
-    overviewImage="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80"
+    overviewImage="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80"
     overviewImageAlt="Data Protection & Compliance Services"
     overviewBadge="Cyber Security · Compliance-as-a-Service"
     overviewHeading="Indian Regulatory Compliance"
