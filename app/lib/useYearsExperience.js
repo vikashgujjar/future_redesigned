@@ -1,4 +1,3 @@
-"use client";
 import { useEffect, useState } from "react";
 import { COMPANY_START_YEAR, YEARS_EXPERIENCE_DISPLAY } from "./companyStats";
 
