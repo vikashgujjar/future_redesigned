@@ -230,7 +230,7 @@ const Ecommerce = () => {
         ]},
         { title:"DevOps & Cloud", techs:[
           {name:"Docker",icon:"https://cdn.simpleicons.org/docker"},
-          {name:"AWS",icon:"https://cdn.simpleicons.org/amazonaws"},
+          {name:"AWS",icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"},
           {name:"GitHub Actions",icon:"https://cdn.simpleicons.org/githubactions"},
           {name:"Nginx",icon:"https://cdn.simpleicons.org/nginx"},
           {name:"Vercel",icon:"https://cdn.simpleicons.org/vercel/white"},
