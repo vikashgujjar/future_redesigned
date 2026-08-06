@@ -1,15 +1,7 @@
 "use client";
 import React from "react";
-import dynamic from "next/dynamic";
 import useYearsExperience from "../lib/useYearsExperience";
-
-// Swiper (carousel lib + its CSS) is only needed once this section mounts
-// client-side — keeping it out of the initial render avoids shipping
-// swiper/css on the critical rendering path.
-const LocationOfficesCarousel = dynamic(() => import("./LocationOfficesCarousel"), {
-  ssr: false,
-  loading: () => <div className="min-h-[480px]" aria-hidden="true" />,
-});
+import LocationOfficesCarousel from "./LocationOfficesCarousel";
 
 const locations = [
   {

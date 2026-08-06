@@ -2,17 +2,9 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import axios from "axios";
 import GetNewInsight from "./GetNewInsight";
-
-// Swiper (carousel lib + its CSS) is only needed once this section mounts
-// client-side — keeping it out of the initial render avoids shipping
-// swiper/css on the critical rendering path for every page load.
-const TestimonialCarousel = dynamic(() => import("./TestimonialCarousel"), {
-  ssr: false,
-  loading: () => <div className="min-h-[380px]" aria-hidden="true" />,
-});
+import TestimonialCarousel from "./TestimonialCarousel";
 
 /* ── Fallback reviews shown when API is unavailable ─────────────── */
 const FALLBACK_REVIEWS = [

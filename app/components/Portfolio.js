@@ -1,16 +1,8 @@
 "use client";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import Marquee from "react-fast-marquee";
 import { ArrowUpRight } from "lucide-react";
-
-// Swiper (carousel lib + its CSS) is only needed once this below-the-fold
-// section mounts client-side — keeping it out of the initial render avoids
-// shipping swiper/css on the critical rendering path for every page load.
-const PortfolioCarousel = dynamic(() => import("./PortfolioCarousel"), {
-  ssr: false,
-  loading: () => <div className="min-h-[420px]" aria-hidden="true" />,
-});
+import PortfolioCarousel from "./PortfolioCarousel";
 
 const portfolioItems = [
   { link: "https://moveitsolution.com/",          image: "/portfolio/1.webp",  title: "Transport Website", category: "Moving Company"    },
