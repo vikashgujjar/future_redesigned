@@ -1,5 +1,5 @@
 import {
-  Geist, Geist_Mono, Poppins, Inter,
+  Poppins, Inter,
   Playfair_Display, Bilbo_Swash_Caps, DM_Sans, Syne,
 } from "next/font/google";
 
@@ -14,16 +14,6 @@ const SITE_URL = "https://futuretouch.in";
 const SITE_NAME = "Future IT Touch Private Limited";
 const DEFAULT_DESCRIPTION =
   "Future IT Touch Private Limited is a 23+ year IT solutions provider delivering website design, mobile app development, digital marketing, cyber security, and software development for businesses worldwide.";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 /* Self-hosted replacements for the Google Fonts previously pulled in via
    blocking `@import url(fonts.googleapis.com/...)` in globals.css and a few
@@ -126,7 +116,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${inter.variable} ${playfairDisplay.variable} ${bilboSwashCaps.variable} ${dmSans.variable} ${syne.variable} antialiased overflow-x-hidden`}
+        className={`${poppins.variable} ${inter.variable} ${playfairDisplay.variable} ${bilboSwashCaps.variable} ${dmSans.variable} ${syne.variable} antialiased overflow-x-hidden`}
       >
       <OrganizationSchema />
       <a
