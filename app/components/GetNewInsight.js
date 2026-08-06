@@ -1,5 +1,11 @@
 "use client";
 
+import { useState } from "react";
+import Swal from "sweetalert2";
+import { sendLeadNotification } from "../lib/useOtpFlow";
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const BENEFITS = [
   { icon:"✦", label:"Weekly Insights" },
   { icon:"⬡", label:"No Spam, Ever"   },
@@ -7,6 +13,30 @@ const BENEFITS = [
 ];
 
 export default function GetNewInsight() {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!EMAIL_RE.test(email)) {
+      Swal.fire({ icon: "warning", title: "Invalid Email", text: "Please enter a valid email address." });
+      return;
+    }
+    setLoading(true);
+    try {
+      await sendLeadNotification({
+        name: "Newsletter Subscriber",
+        email,
+        service: "Newsletter Subscription",
+        message: `New newsletter subscription request from ${email}.`,
+      });
+      window.location.href = "/welcome";
+    } catch {
+      setLoading(false);
+      Swal.fire({ icon: "error", title: "Oops...", text: "Something went wrong. Please try again." });
+    }
+  };
+
   return (
     <section className="relative overflow-hidden py-16 sm:py-20 lg:py-24"
       style={{ background:"linear-gradient(150deg,#04071a 0%,#080e28 50%,#050b20 100%)", fontFamily:"'Inter',sans-serif" }}>
@@ -161,19 +191,27 @@ export default function GetNewInsight() {
         </div>
 
         {/* Email form */}
-        <form className="gni-form-wrap max-w-[540px] mx-auto mb-5"
-          onSubmit={(e) => e.preventDefault()}>
+        <form className="gni-form-wrap max-w-[540px] mx-auto mb-5" onSubmit={handleSubmit}>
           <input
             type="email"
             name="email"
             placeholder="Enter your email address..."
             className="gni-input"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
           />
-          <button type="submit" className="gni-submit">
-            <span className="sm:inline hidden">Subscribe</span>
-            <svg width="13" height="13" viewBox="0 0 12 12" fill="none">
-              <path d="M1.5 6h9M6.5 2l4 4-4 4" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+          <button type="submit" className="gni-submit" disabled={loading}>
+            {loading ? (
+              <div className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
+            ) : (
+              <>
+                <span className="sm:inline hidden">Subscribe</span>
+                <svg width="13" height="13" viewBox="0 0 12 12" fill="none">
+                  <path d="M1.5 6h9M6.5 2l4 4-4 4" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </>
+            )}
           </button>
         </form>
 

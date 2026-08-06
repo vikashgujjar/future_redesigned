@@ -8,11 +8,7 @@ import {
   FaMapMarkerAlt, FaArrowRight, FaCheckCircle,
 } from "react-icons/fa";
 import Swal from "sweetalert2";
-import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
-import { auth } from "../firebase.config";
+import useOtpFlow from "../lib/useOtpFlow";
 import { COUNTRY_CODES } from "../components/countryData";
 import { SERVICES } from "../data/services";
 import OtpVerifyModal from "../components/OtpVerifyModal";
@@ -60,9 +56,7 @@ const getWhyItems = (yearsExperience) => [
 export default function Page() {
   const yearsExperience = useYearsExperience();
   const whyItems = getWhyItems(yearsExperience);
-  const [showOTP, setShowOTP] = useState(false);
-  const [otp, setOTP] = useState("");
-  const [loading, setLoading] = useState(false);
+  const { showOTP, setShowOTP, otp, setOtp: setOTP, loading, sendOtp, resendOtp, verifyOtp } = useOtpFlow();
   const [formData, setFormData] = useState({
     S_name: "",
     S_email: "",
@@ -70,7 +64,6 @@ export default function Page() {
     S_subject: "",
     cr_code: "+91",
     check_term: "",
-    userEmailsir: "info@futuretouch.in",
     message: "",
   });
 
@@ -85,64 +78,28 @@ export default function Page() {
       .catch(() => {});
   }, []);
 
-  function onCaptchVerify() {
-    if (!window.recaptchaVerifierContact) {
-      window.recaptchaVerifierContact = new RecaptchaVerifier(
-        auth,
-        "recaptcha-container-contact",
-        { callback: () => { onSignup(); }, "expired-callback": () => {} }
-      );
-    }
-  }
+  const getPhone = () => formData.cr_code + formData.S_phone;
 
-  function onSignup() {
+  async function onSignup() {
     const { S_name, S_email, S_phone, message } = formData;
     if (!S_name || !S_email || !S_phone || !message) {
       Swal.fire({ icon: "warning", title: "Missing Information", text: "Please fill out all mandatory fields." });
       return;
     }
-    setShowOTP(true);
-    onCaptchVerify();
-    toast.success("OTP sent successfully!");
-    const appVerifier = window.recaptchaVerifierContact;
-    signInWithPhoneNumber(auth, formData.cr_code + formData.S_phone, appVerifier)
-      .then((res) => { window.confirmationResultContact = res; setLoading(false); setShowOTP(true); })
-      .catch(() => { setLoading(false); });
+    await sendOtp(getPhone());
   }
 
-  function reSend() {
-    const { S_name, S_email, S_phone, message } = formData;
-    if (!S_name || !S_email || !S_phone || !message) {
-      Swal.fire({ icon: "warning", title: "Missing Information", text: "Please fill out all mandatory fields." });
-      return;
-    }
-    onCaptchVerify();
-    signInWithPhoneNumber(auth, formData.cr_code + formData.S_phone, window.recaptchaVerifierContact)
-      .then((res) => { window.confirmationResultContact = res; setLoading(false); setShowOTP(true); })
-      .catch(() => { setLoading(false); });
+  async function reSend() {
+    await resendOtp(getPhone());
   }
 
   const onOTPVerify = async () => {
-    setLoading(true);
-    window.confirmationResultContact.confirm(otp)
-      .then(async () => {
-        const urlEncodedData = new URLSearchParams();
-        for (const [k, v] of Object.entries(formData)) urlEncodedData.append(k, v);
-        try {
-          await axios.post("https://futuretouchmail.onrender.com/send-email", urlEncodedData);
-          setLoading(false);
-          setFormData((prev) => ({ ...prev, S_name:"",S_email:"",S_phone:"",S_subject:"",message:"",check_term:"" }));
-          Swal.fire({ icon:"success",title:"Success!",text:"Your query has been submitted." })
-            .then(r => { if (r.isConfirmed) { setOTP(""); window.location.href = "/"; } });
-        } catch {
-          setLoading(false);
-          Swal.fire({ icon:"error",title:"Oops...",text:"Something went wrong!" });
-        }
-      })
-      .catch(() => {
-        setLoading(false);
-        Swal.fire({ icon:"error",title:"Invalid OTP",text:"Please enter the correct OTP." });
-      });
+    await verifyOtp({
+      phone: getPhone(),
+      subject: "Future IT Touch New Lead - Contact Page",
+      formData,
+      lead: { name: formData.S_name, email: formData.S_email, service: formData.S_subject, message: formData.message },
+    });
   };
 
   const handleChange = (e) => {
@@ -475,8 +432,6 @@ export default function Page() {
                 <FaLock size={10} />
                 We respect your privacy and never share your data.
               </p>
-
-              <div id="recaptcha-container-contact" />
             </div>
 
           </div>
@@ -508,8 +463,6 @@ export default function Page() {
           />
         </div>
       </div>
-
-      <ToastContainer />
     </>
   );
 }

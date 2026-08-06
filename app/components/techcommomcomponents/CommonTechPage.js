@@ -8,9 +8,7 @@ import GetNewInsight from "../GetNewInsight";
 import { COUNTRY_CODES } from "../countryData";
 import { SERVICES } from "../../data/services";
 import Swal from "sweetalert2";
-import axios from "axios";
-import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import { auth } from "../../firebase.config";
+import useOtpFlow from "../../lib/useOtpFlow";
 import OtpVerifyModal from "../OtpVerifyModal";
 import ServiceSchema from "../schema/ServiceSchema";
 import FaqSchema from "../schema/FaqSchema";
@@ -44,9 +42,7 @@ export default function CommonTechPage({
   const [openFaq,  setOpenFaq]  = useState(null);
   const [formSent, setFormSent] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", service: "", message: "", cr_code: "+91" });
-  const [showOTP, setShowOTP]   = useState(false);
-  const [otp, setOTP]           = useState("");
-  const [loading, setLoading]   = useState(false);
+  const { showOTP, setShowOTP, otp, setOtp: setOTP, loading, sendOtp, resendOtp, verifyOtp } = useOtpFlow();
 
   const handleField = (e) => setFormData(p => ({ ...p, [e.target.name]: e.target.value }));
 
@@ -61,78 +57,36 @@ export default function CommonTechPage({
       .catch(() => {});
   }, []);
 
-  // This template mounts fresh on every technology/service page. Since the
-  // reCAPTCHA verifier is bound to a DOM node that unmounts on navigation,
-  // clear the stale singleton so the next page mount creates its own.
-  useEffect(() => {
-    return () => {
-      if (typeof window !== "undefined") window.recaptchaVerifierTech = null;
-    };
-  }, []);
+  const getPhone = () => formData.cr_code + formData.phone;
 
-  function onCaptchVerify() {
-    if (typeof window !== "undefined" && !window.recaptchaVerifierTech) {
-      window.recaptchaVerifierTech = new RecaptchaVerifier(
-        auth,
-        "recaptcha-container-tech",
-        { size: "invisible", callback: () => onSignup(), "expired-callback": () => {} }
-      );
-    }
-  }
-
-  function onSignup() {
+  async function onSignup() {
     const { name, email, phone } = formData;
     if (!name || !email || !phone) {
       Swal.fire({ icon: "warning", title: "Missing Information", text: "Please fill out all the mandatory fields." });
       return;
     }
-    setShowOTP(true);
-    onCaptchVerify();
-    const appVerifier = window.recaptchaVerifierTech;
-    signInWithPhoneNumber(auth, formData.cr_code + formData.phone, appVerifier)
-      .then(result => { window.confirmationResultTech = result; setLoading(false); setShowOTP(true); })
-      .catch(() => { setLoading(false); });
+    await sendOtp(getPhone());
   }
 
   const onOTPVerify = async () => {
-    setLoading(true);
-    window.confirmationResultTech.confirm(otp)
-      .then(async () => {
-        const payload = new URLSearchParams();
-        payload.append("S_name", formData.name);
-        payload.append("S_email", formData.email);
-        payload.append("S_phone", formData.phone);
-        payload.append("S_subject", formData.service);
-        payload.append("cr_code", formData.cr_code);
-        payload.append("message", formData.message);
-        payload.append("userEmailsir", "info@futuretouch.in");
-        try {
-          await axios.post("https://futuretouchmail.onrender.com/send-email", payload);
-          setLoading(false);
-          setShowOTP(false);
-          setOTP("");
-          setFormSent(true);
-        } catch {
-          setLoading(false);
-          Swal.fire({ icon: "error", title: "Oops...", text: "Something went wrong!" });
-        }
-      })
-      .catch(() => {
-        setLoading(false);
-        Swal.fire({ icon: "error", title: "Invalid OTP", text: "Please enter the correct OTP." });
-      });
+    await verifyOtp({
+      phone: getPhone(),
+      subject: `Future IT Touch New Lead - ${banner.breadcrumb || banner.title || "Technology"} Page`,
+      formData: {
+        S_name: formData.name,
+        S_email: formData.email,
+        S_phone: formData.phone,
+        S_subject: formData.service,
+        cr_code: formData.cr_code,
+        message: formData.message,
+      },
+      lead: { name: formData.name, email: formData.email, service: formData.service, message: formData.message },
+      onSuccess: () => setFormSent(true),
+    });
   };
 
-  function handleResendOTP() {
-    onCaptchVerify();
-    signInWithPhoneNumber(auth, formData.cr_code + formData.phone, window.recaptchaVerifierTech)
-      .then(result => {
-        window.confirmationResultTech = result;
-        Swal.fire({ icon: "success", title: "OTP Resent", text: "OTP has been successfully resent." });
-      })
-      .catch(() => {
-        Swal.fire({ icon: "error", title: "Error", text: "Failed to resend OTP. Please try again later." });
-      });
+  async function handleResendOTP() {
+    await resendOtp(getPhone());
   }
 
   const handleSubmit = (e) => { e.preventDefault(); onSignup(); };
@@ -435,8 +389,6 @@ export default function CommonTechPage({
             </div>
           </div>
         </div>
-
-        <div id="recaptcha-container-tech" />
 
         <OtpVerifyModal
           show={showOTP}

@@ -4,9 +4,7 @@ import Link from "next/link";
 import { COUNTRY_CODES } from "./countryData";
 import { SERVICES } from "../data/services";
 import Swal from "sweetalert2";
-import axios from "axios";
-import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import { auth } from "../firebase.config";
+import useOtpFlow from "../lib/useOtpFlow";
 import OtpVerifyModal from "./OtpVerifyModal";
 import useYearsExperience from "../lib/useYearsExperience";
 
@@ -55,9 +53,7 @@ export default function HeroSection() {
   const [submitted, setSubmitted] = useState(false);
   const [mouse, setMouse]       = useState({ x:0, y:0 });
   const [phoneCC, setPhoneCC]   = useState(COUNTRY_CODES.find(c => c.shortName === "IN"));
-  const [showOTP, setShowOTP]   = useState(false);
-  const [otp, setOTP]           = useState("");
-  const [loading, setLoading]   = useState(false);
+  const { showOTP, setShowOTP, otp, setOtp: setOTP, loading, sendOtp, resendOtp, verifyOtp } = useOtpFlow();
   const timerRef   = useRef(null);
   const sectionRef = useRef(null);
   const yearsExperience = useYearsExperience();
@@ -124,61 +120,31 @@ export default function HeroSection() {
     startTimer();
   };
 
-  function onCaptchVerify() {
-    if (typeof window !== "undefined" && !window.recaptchaVerifierHero) {
-      window.recaptchaVerifierHero = new RecaptchaVerifier(
-        auth,
-        "recaptcha-container-hero",
-        { size: "invisible", callback: () => onSignup(), "expired-callback": () => {} }
-      );
-    }
-  }
+  const getPhone = () => phoneCC.dialCode + form.phone;
 
-  function onSignup() {
+  async function onSignup() {
     const { first, last, email, phone } = form;
     if (!first || !last || !email || !phone) {
       Swal.fire({ icon: "warning", title: "Missing Information", text: "Please fill out all the mandatory fields." });
       return;
     }
-    setShowOTP(true);
-    onCaptchVerify();
-    const appVerifier = window.recaptchaVerifierHero;
-    signInWithPhoneNumber(auth, phoneCC.dialCode + phone, appVerifier)
-      .then((result) => { window.confirmationResultHero = result; setLoading(false); setShowOTP(true); })
-      .catch(() => { setLoading(false); });
+    await sendOtp(getPhone());
   }
 
   const onOTPVerify = async () => {
-    setLoading(true);
-    window.confirmationResultHero
-      .confirm(otp)
-      .then(async () => {
-        const payload = new URLSearchParams();
-        payload.append("S_name", `${form.first} ${form.last}`.trim());
-        payload.append("S_email", form.email);
-        payload.append("S_phone", form.phone);
-        payload.append("S_subject", form.service);
-        payload.append("cr_code", phoneCC.dialCode);
-        payload.append("userEmailsir", "info@futuretouch.in");
-        try {
-          await axios.post("https://futuretouchmail.onrender.com/send-email", payload);
-          setLoading(false);
-          setShowOTP(false);
-          setOTP("");
-          setSubmitted(true);
-          setTimeout(() => {
-            setSubmitted(false);
-            setForm({ first: "", last: "", email: "", phone: "", service: "" });
-          }, 3500);
-        } catch {
-          setLoading(false);
-          Swal.fire({ icon: "error", title: "Oops...", text: "Something went wrong!" });
-        }
-      })
-      .catch(() => {
-        setLoading(false);
-        Swal.fire({ icon: "error", title: "Invalid OTP", text: "Please enter the correct OTP." });
-      });
+    await verifyOtp({
+      phone: getPhone(),
+      subject: "Future IT Touch New Lead - Homepage Hero Form",
+      formData: {
+        S_name: `${form.first} ${form.last}`.trim(),
+        S_email: form.email,
+        S_phone: form.phone,
+        S_subject: form.service,
+        cr_code: phoneCC.dialCode,
+      },
+      lead: { name: `${form.first} ${form.last}`.trim(), email: form.email, service: form.service },
+      onSuccess: () => setSubmitted(true),
+    });
   };
 
   const handleSubmit = (e) => {
@@ -778,15 +744,13 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div id="recaptcha-container-hero" />
-
       <OtpVerifyModal
         show={showOTP}
         onClose={() => setShowOTP(false)}
         otp={otp}
         setOtp={setOTP}
         onVerify={onOTPVerify}
-        onResend={onSignup}
+        onResend={() => resendOtp(getPhone())}
         loading={loading}
       />
 

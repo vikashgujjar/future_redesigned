@@ -1,23 +1,17 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { auth } from "../firebase.config";
+import useOtpFlow from "../lib/useOtpFlow";
 import {
   FaUser, FaEnvelope, FaPhone, FaCommentDots,
   FaCalendarAlt, FaCode, FaDollarSign, FaFileAlt,
   FaCloudUploadAlt, FaTimes, FaArrowRight,
 } from "react-icons/fa";
 
-import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import Swal from "sweetalert2";
-import axios from "axios";
 import { COUNTRY_CODES } from "./countryData";
 import { SERVICES } from "../data/services";
 import OtpVerifyModal from "./OtpVerifyModal";
-
-// https://email.futuretouch.in/ 
-
-// put this email
 
 const Login = ({ handleClosePopup ,isPopupOpen}) => {
 
@@ -33,13 +27,7 @@ const Login = ({ handleClosePopup ,isPopupOpen}) => {
       };
     }, [isPopupOpen]);
 
-  const [loading, setLoading] = useState(false);
-  const [showOTP2, setShowOTP2] = useState(false);
-  const [otp, setOTP] = useState("");
-
-
-
-
+  const { showOTP: showOTP2, setShowOTP: setShowOTP2, otp, setOtp: setOTP, loading, sendOtp, resendOtp, verifyOtp } = useOtpFlow();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -50,15 +38,12 @@ const Login = ({ handleClosePopup ,isPopupOpen}) => {
     S_phone: "",
 
     web_url: "",
-    // userEmailsir: "info@futuretouch.in",
-    userEmailsir: "email.futuretouch.in",
     company_name: "",
     S_subject: "",
     S_services: "",
     country: "",
     cr_code: "+91",
     state_city: "",
-    service_type: "",
     budget_range: "",
     service_type: "",
     message: "",
@@ -89,24 +74,10 @@ const Login = ({ handleClosePopup ,isPopupOpen}) => {
       .catch(() => {});
   }, []);
 
-function onCaptchVerify() {
-  if (typeof window !== "undefined" && !window.recaptchaVerifierLogin) {
-    window.recaptchaVerifierLogin = new RecaptchaVerifier(
-      auth,
-      "recaptcha-container-login",
-      {
-        size: "invisible",
-        callback: () => {
-          onSignup();
-        },
-        "expired-callback": () => {},
-      }
-    );
-  }
-}
+  const getPhone = () => formData.cr_code + formData.S_phone;
 
-  function onSignup() {
-    const { S_name, S_email, S_phone, message } = formData;
+  async function onSignup() {
+    const { S_name, S_email, S_phone } = formData;
 
     if (!S_name || !S_email || !S_phone) {
       Swal.fire({
@@ -117,81 +88,19 @@ function onCaptchVerify() {
       return;
     }
 
-    setShowOTP2(true);
-    onCaptchVerify();
-
-    const appVerifier = window.recaptchaVerifierLogin;
-
-    const formatPh = formData.cr_code + formData.S_phone;
-    signInWithPhoneNumber(auth, formatPh, appVerifier)
-      .then((confirmationResult) => {
-        window.confirmationResultLogin = confirmationResult;
-        setLoading(false);
-        setShowOTP2(true);
-      })
-      .catch(() => {
-        setLoading(false);
-      });
+    await sendOtp(getPhone());
   }
 
   const onOTPVerify = async () => {
-    setLoading(true);
-    window.confirmationResultLogin
-      .confirm(otp)
-      .then(async () => {
-        const urlEncodedData = new URLSearchParams();
-        for (const [key, value] of Object.entries(formData)) {
-          urlEncodedData.append(key, value);
-        }
-
-        try {
-          await axios.post(
-            "https://futuretouchmail.onrender.com/send-email",
-            urlEncodedData
-          );
-          setLoading(false);
-          setFormData({
-            S_name: "",
-            S_email: "",
-            S_phone: "",
-            S_subject: "",
-            message: "",
-          });
-
-          Swal.fire({
-            icon: "success",
-            title: "Success!",
-            text: "Your query has been submitted.",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              setLoading(false);
-              setOTP("");
-              window.location.href = "/";
-            }
-          });
-        } catch {
-          setLoading(false);
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Something went wrong!",
-          });
-        }
-      })
-      .catch(() => {
-        setLoading(false);
-        Swal.fire({
-          icon: "error",
-          title: "Invalid OTP",
-          text: "Please enter the correct OTP.",
-        });
-      });
+    await verifyOtp({
+      phone: getPhone(),
+      subject: "Future IT Touch New Lead - Quick Quote Popup",
+      formData,
+      lead: { name: formData.S_name, email: formData.S_email, service: formData.service_type, message: formData.message },
+    });
   };
 
   const handleResendOTP = () => {
-    const appVerifier = window.recaptchaVerifierLogin;
-    const formatPh = formData.cr_code + formData.S_phone;
-
     Swal.fire({
       title: "Resend OTP",
       text: "Are you sure you want to resend OTP?",
@@ -200,28 +109,7 @@ function onCaptchVerify() {
       confirmButtonText: "Yes, resend OTP",
       cancelButtonText: "No, cancel",
     }).then((result) => {
-      if (result.isConfirmed) {
-        setLoading(true);
-        signInWithPhoneNumber(auth, formatPh, appVerifier)
-          .then((confirmationResult) => {
-            window.confirmationResultLogin = confirmationResult;
-            setLoading(false);
-            setShowOTP2(true);
-            Swal.fire({
-              icon: "success",
-              title: "OTP Resent",
-              text: "OTP has been successfully resent.",
-            });
-          })
-          .catch((error) => {
-            setLoading(false);
-            Swal.fire({
-              icon: "error",
-              title: "Error",
-              text: "Failed to resend OTP. Please try again later.",
-            });
-          });
-      }
+      if (result.isConfirmed) resendOtp(getPhone());
     });
   };
 
@@ -266,7 +154,6 @@ function onCaptchVerify() {
 
           {/* ── Scrollable form body ── */}
           <div className="bg-white overflow-y-auto flex-1 px-6 py-5">
-            <div id="recaptcha-container-login" />
             <input type="hidden" name="action" value="request_form" />
 
             {/* Row 1 — Name + Email */}

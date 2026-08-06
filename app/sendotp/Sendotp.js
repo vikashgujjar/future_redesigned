@@ -5,14 +5,12 @@ import { CgSpinner } from "react-icons/cg";
 import { useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-// import { auth } from "../../firebase.config";
-import { auth } from "../firebase.config";
+import { getFirebaseAuth } from "../lib/lazyFirebaseAuth";
 
 import dynamic from "next/dynamic";   // ✅ ADD THIS
 
 // import OtpInput from "otp-input-react";
 const OtpInput = dynamic(() => import("otp-input-react"), { ssr: false });
-import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { toast, Toaster } from "react-hot-toast";
 
 const Sendotp = () => {
@@ -22,8 +20,9 @@ const Sendotp = () => {
   const [showOTP, setShowOTP] = useState(false);
   const [user, setUser] = useState(null);
 
-  function onCaptchVerify() {
+  async function onCaptchVerify() {
     if (!window.recaptchaVerifier) {
+      const { auth, RecaptchaVerifier } = await getFirebaseAuth();
       window.recaptchaVerifier = new RecaptchaVerifier(
         "recaptcha-container",
         {
@@ -38,14 +37,15 @@ const Sendotp = () => {
     }
   }
 
-  function onSignup() {
+  async function onSignup() {
     setLoading(true);
-    onCaptchVerify();
+    await onCaptchVerify();
 
     const appVerifier = window.recaptchaVerifier;
 
     const formatPh = "+" + "917988532993";
 
+    const { auth, signInWithPhoneNumber } = await getFirebaseAuth();
     signInWithPhoneNumber(auth, formatPh, appVerifier)
       .then((confirmationResult) => {
         window.confirmationResult = confirmationResult;

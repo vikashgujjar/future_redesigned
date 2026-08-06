@@ -5,18 +5,12 @@ import { COUNTRY_CODES } from "./countryData";
 import { SERVICES } from "../data/services";
 import Swal from "sweetalert2";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import axios from "axios";
 import Link from "next/link";
-import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import { auth } from "../firebase.config";
+import useOtpFlow from "../lib/useOtpFlow";
 import OtpVerifyModal from "./OtpVerifyModal";
 
 const Forms = () => {
-  const router = useRouter();
-  const [showOTP, setShowOTP] = useState(false);
-  const [otp, setOTP] = useState("");
-  const [loading, setLoading] = useState(false);
+  const { showOTP, setShowOTP, otp, setOtp: setOTP, loading, sendOtp, resendOtp, verifyOtp } = useOtpFlow();
   const [fileDrag, setFileDrag] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -39,76 +33,40 @@ const Forms = () => {
       .catch(() => { });
   }, []);
 
-  const buildPayload = () => {
-    const p = new URLSearchParams();
-    p.append("S_name", `${formData.first} ${formData.last}`.trim());
-    p.append("S_email", formData.email);
-    p.append("S_phone", formData.phone);
-    p.append("S_subject", formData.service);
-    p.append("cr_code", formData.cr_code);
-    p.append("userEmailsir", "Info@digitalyaatra.com");
-    return p;
-  };
+  const buildPayload = () => ({
+    S_name: `${formData.first} ${formData.last}`.trim(),
+    S_email: formData.email,
+    S_phone: formData.phone,
+    S_subject: formData.service,
+    cr_code: formData.cr_code,
+  });
 
   const resetForm = () =>
     setFormData(prev => ({ first: "", last: "", email: "", phone: "", service: "", cr_code: prev.cr_code, file: null }));
 
-  function onCaptchVerify() {
-    if (typeof window !== "undefined" && !window.recaptchaVerifierForms) {
-      window.recaptchaVerifierForms = new RecaptchaVerifier(
-        auth,
-        "recaptcha-container-forms",
-        { size: "invisible", callback: () => onSignup(), "expired-callback": () => { } }
-      );
-    }
-  }
+  const getPhone = () => formData.cr_code + formData.phone;
 
-  function onSignup() {
+  async function onSignup() {
     const { first, last, email, phone } = formData;
     if (!first || !last || !email || !phone) {
       Swal.fire({ icon: "warning", title: "Missing Information", text: "Please fill out all the mandatory fields." });
       return;
     }
-    setShowOTP(true);
-    onCaptchVerify();
-    const appVerifier = window.recaptchaVerifierForms;
-    signInWithPhoneNumber(auth, formData.cr_code + formData.phone, appVerifier)
-      .then(result => { window.confirmationResultForms = result; setLoading(false); setShowOTP(true); })
-      .catch(() => { setLoading(false); });
+    await sendOtp(getPhone());
   }
 
   const onOTPVerify = async () => {
-    setLoading(true);
-    window.confirmationResultForms.confirm(otp)
-      .then(async () => {
-        try {
-          await axios.post("https://futuretouchmail.onrender.com/send-email", buildPayload());
-          setLoading(false);
-          resetForm();
-          Swal.fire({ icon: "success", title: "Success!", text: "Your query has been submitted." })
-            .then(r => { if (r.isConfirmed) { setOTP(""); router.push("/"); } });
-        } catch {
-          setLoading(false);
-          Swal.fire({ icon: "error", title: "Oops...", text: "Something went wrong!" });
-        }
-      })
-      .catch(() => {
-        setLoading(false);
-        Swal.fire({ icon: "error", title: "Invalid OTP", text: "Please enter the correct OTP." });
-      });
+    await verifyOtp({
+      phone: getPhone(),
+      subject: "Future IT Touch New Lead - Quote Request",
+      formData: buildPayload(),
+      lead: { name: `${formData.first} ${formData.last}`.trim(), email: formData.email, service: formData.service },
+      onSuccess: resetForm,
+    });
   };
 
-  function handleResendOTP() {
-    onCaptchVerify();
-    const appVerifier = window.recaptchaVerifierForms;
-    signInWithPhoneNumber(auth, formData.cr_code + formData.phone, appVerifier)
-      .then(result => {
-        window.confirmationResultForms = result;
-        Swal.fire({ icon: "success", title: "OTP Resent", text: "OTP has been successfully resent." });
-      })
-      .catch(() => {
-        Swal.fire({ icon: "error", title: "Error", text: "Failed to resend OTP. Please try again later." });
-      });
+  async function handleResendOTP() {
+    await resendOtp(getPhone());
   }
 
   return (
@@ -225,8 +183,6 @@ const Forms = () => {
         .frm-img-spin { animation: frmSpin 6s linear infinite; }
 
       `}</style>
-
-      <div id="recaptcha-container-forms" />
 
       {/* dot grid */}
       <div className="frm-dotgrid absolute inset-0 pointer-events-none" aria-hidden="true" />
