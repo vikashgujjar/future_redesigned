@@ -109,7 +109,7 @@ export default function Privacy() {
       {/* ── Banner ── */}
       <section className="relative overflow-hidden flex items-center justify-center"
         style={{ minHeight:"clamp(280px,40vh,420px)" }}>
-        <Image src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1600&q=85"
+        <Image src="/Assets/stock/photo-1555949963-ff9fe0c870eb.webp"
           alt="Privacy Policy" fill priority unoptimized className="object-cover object-center" />
         <div className="absolute inset-0"
           style={{ background:"linear-gradient(160deg,rgba(4,5,24,.86),rgba(20,10,60,.82) 50%,rgba(4,5,24,.88))" }} />

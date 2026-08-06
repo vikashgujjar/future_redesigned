@@ -6,7 +6,7 @@ import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 const PHP = () => (
   <CommonTechPage
     banner={{
-      bgImage: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1600&q=85",
+      bgImage: "/Assets/stock/photo-1461749280684-dccba630e2f6.webp",
       category: "Web Technology",
       breadcrumb: "PHP · Laravel · CodeIgniter",
       title: "PHP · Laravel · CodeIgniter",

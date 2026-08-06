@@ -116,7 +116,7 @@ export default function DigitalMarketingService() {
             aria-hidden="true"
           >
             <Image
-              src="/Assets/connect_img.png"
+              src="/Assets/connect_img.webp"
               width={460}
               height={380}
               alt="Digital Marketing Illustration"

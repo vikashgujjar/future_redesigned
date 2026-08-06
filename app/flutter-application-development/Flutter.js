@@ -12,7 +12,7 @@ import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 const Flutter = () => (
   <CommonTechPage
     banner={{
-      bgImage: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=1600&q=85",
+      bgImage: "/Assets/stock/photo-1607746882042-944635dfe10e.webp",
       image: flutterImg,
       category: "Cross-Platform Development",
       breadcrumb: "Flutter · Dart · Cross-Platform",

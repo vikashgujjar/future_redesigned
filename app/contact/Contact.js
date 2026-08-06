@@ -174,7 +174,7 @@ export default function Page() {
       <section className="relative overflow-hidden flex items-center justify-center"
         style={{ minHeight:"clamp(280px,40vh,420px)" }}>
         <Image
-          src="https://images.unsplash.com/photo-1423592707957-3b212afa6733?w=1600&q=85"
+          src="/Assets/stock/photo-1423592707957-3b212afa6733.webp"
           alt="Contact Us"
           fill priority unoptimized
           className="object-cover object-center"

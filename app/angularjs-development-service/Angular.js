@@ -11,7 +11,7 @@ import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 const Angular = () => (
   <CommonTechPage
     banner={{
-      bgImage: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1600&q=85",
+      bgImage: "/Assets/stock/photo-1504639725590-34d0984388bd.webp",
       image: angularImg,
       category: "Frontend Technology",
       breadcrumb: "AngularJS · SPA · MEAN Stack",

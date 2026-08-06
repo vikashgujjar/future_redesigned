@@ -1,5 +1,5 @@
 "use client";
-const gm = "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=1400&q=85";
+const gm = "/Assets/stock/photo-1518186285589-2f7649de83e0.webp";
 import d1 from "../Assets/cr.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import {
@@ -74,31 +74,31 @@ const Quality = () => {
       count: "250+",
       title: "Corporate Web Apps Delivered",
       desc: "We've tested and optimized over 250+ corporate web applications to ensure flawless performance, security, and usability. Every project undergoes rigorous QA checks to guarantee error-free functionality and reliability.",
-      image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=900&q=80",
+      image: "/Assets/stock/photo-1518186285589-2f7649de83e0.webp",
     },
     {
       count: yearsExperience,
       title: "Years of Industry Expertise",
       desc: `With ${yearsExperience} years in software testing and quality assurance, Future IT Touch Pvt. Ltd. ensures that every digital product we deliver meets the highest industry standards for performance and security.`,
-      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=900&q=80",
+      image: "/Assets/stock/photo-1555949963-aa79dcee981c.webp",
     },
     {
       count: "500+",
       title: "Global Businesses Served",
       desc: "Trusted by over 500 global clients, we provide QA and testing solutions that enhance software quality, prevent issues before launch, and ensure seamless functionality across platforms and devices.",
-      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&q=80",
+      image: "/Assets/stock/photo-1498050108023-c5249f4df085.webp",
     },
     {
       count: "98%",
       title: "Client Satisfaction Rate",
       desc: "Our commitment to precision and excellence in testing has earned us a 98% client satisfaction rate. We ensure smooth launches, superior performance, and bug-free experiences for every project.",
-      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=900&q=80",
+      image: "/Assets/stock/photo-1555066931-4365d14bab8c.webp",
     },
     {
       count: "24/7",
       title: "Reliable Technical Support",
       desc: "Our QA support team provides 24/7 monitoring, issue resolution, and ongoing validation to ensure your systems run flawlessly even after deployment, keeping performance at its peak.",
-      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=900&q=80",
+      image: "/Assets/stock/photo-1526374965328-7f61d4dc18c5.webp",
     },
   ];
 

@@ -1,5 +1,5 @@
 "use client";
-const securityImg = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1400&q=85";
+const securityImg = "/Assets/stock/photo-1451187580459-43490279c0fa.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import {
   FaCloud, FaShieldAlt, FaLock, FaDatabase, FaUserShield,
@@ -80,25 +80,25 @@ const sliderCards = [
     count: "200+",
     title: "Cloud Security Assessments",
     desc: "200+ cloud security assessments across AWS, Azure, and GCP for Indian SMEs — covering IAM reviews, CSPM, network security, and compliance gap analysis.",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&q=80",
+    image: "/Assets/stock/photo-1451187580459-43490279c0fa.webp",
   },
   {
     count: "75%",
     title: "Average IAM Risk Reduction",
     desc: "After our IAM reviews, clients typically eliminate 75% of over-privileged roles and unused access keys — dramatically reducing the blast radius of any credential compromise.",
-    image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=900&q=80",
+    image: "/Assets/stock/photo-1614064641938-3bbee52942c7.webp",
   },
   {
     count: "100%",
     title: "Indian Data Residency Coverage",
     desc: "Every cloud security programme we design ensures full Indian data residency compliance — critical for DPDPA 2023 and CERT-In mandated data localisation requirements.",
-    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=900&q=80",
+    image: "/Assets/stock/photo-1544197150-b99a580bb7a8.webp",
   },
   {
     count: "4",
     title: "Compliance Frameworks Supported",
     desc: "Our cloud security programmes cover DPDPA 2023, CERT-In, ISO 27001, and PCI-DSS — as applicable to your industry — with policy-as-code automation where possible.",
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&q=80",
+    image: "/Assets/stock/photo-1563986768609-322da13575f3.webp",
   },
 ];
 
@@ -193,7 +193,7 @@ const CloudSecurity = () => (
     bannerTitle="Cloud Security Services"
     bannerDesc="Continuous cloud security posture management, IAM privilege review, data protection, container security, and compliance across AWS, Azure, and GCP — with full Indian data residency compliance for DPDPA 2023 and CERT-In requirements. Built for Indian SMEs moving to the cloud."
 
-    overviewImage="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&q=80"
+    overviewImage="/Assets/stock/photo-1614064641938-3bbee52942c7.webp"
     overviewImageAlt="Cloud Security Services"
     overviewBadge="Cyber Security · Cloud Security"
     overviewHeading="Cloud Security with"
@@ -208,7 +208,7 @@ const CloudSecurity = () => (
     featuresBadge="Our Cloud Security Services"
     featuresTitle="Comprehensive Cloud Security Across"
     featuresTitleHighlight="AWS, Azure & GCP"
-    featuresStickyImg="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&q=80"
+    featuresStickyImg="/Assets/stock/photo-1614064641938-3bbee52942c7.webp"
     features={features}
 
     bizBadge="Why Choose Us"

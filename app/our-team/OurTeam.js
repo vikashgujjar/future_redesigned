@@ -43,7 +43,7 @@ export default function OurTeam() {
 
         {/* Background image */}
         <Image
-          src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&q=85"
+          src="/Assets/stock/photo-1522071820081-009f0129c71c.webp"
           alt="Our Team"
           fill
           priority

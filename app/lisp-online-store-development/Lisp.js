@@ -11,7 +11,7 @@ import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 const Lisp = () => (
   <CommonTechPage
     banner={{
-      bgImage: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&q=85",
+      bgImage: "/Assets/stock/photo-1556742049-0cfed4f6a45d.webp",
       image: lispImg,
       category: "E-Commerce Development",
       breadcrumb: "Lisp · E-Commerce · Online Stores",

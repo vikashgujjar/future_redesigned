@@ -1,5 +1,5 @@
 "use client";
-const securityImg = "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1400&q=85";
+const securityImg = "/Assets/stock/photo-1550751827-4bd374c3f58b.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import {
   FaShieldAlt, FaBug, FaLock, FaCloud, FaDatabase,
@@ -87,25 +87,25 @@ const sliderCards = [
     count: "500+",
     title: "Security Assessments Completed",
     desc: "500+ VAPT engagements across web, mobile, API, network, and cloud — risk-ranked reports with step-by-step remediation roadmaps delivered to Indian SMEs.",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&q=80",
+    image: "/Assets/stock/photo-1550751827-4bd374c3f58b.webp",
   },
   {
     count: "40%",
     title: "Lower Cost Than Metro MSSPs",
     desc: "Our Chandigarh Tricity hub delivers enterprise-grade security operations at 40% lower overhead — and we pass every rupee of that saving directly to our clients.",
-    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=900&q=80",
+    image: "/Assets/stock/photo-1526374965328-7f61d4dc18c5.webp",
   },
   {
     count: "200+",
     title: "Indian SMEs Protected",
     desc: "200+ small and medium enterprises across India protected with 24/7 SOC monitoring, DPDPA/CERT-In compliance programmes, and proactive threat response.",
-    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=900&q=80",
+    image: "/Assets/stock/photo-1544197150-b99a580bb7a8.webp",
   },
   {
     count: "4",
     title: "Compliance Frameworks Covered",
     desc: "DPDPA 2023, CERT-In controls, ISO 27001, and sector-specific (RBI, PCI-DSS, HIPAA) — built into every package, not charged separately.",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&q=80",
+    image: "/Assets/stock/photo-1451187580459-43490279c0fa.webp",
   },
 ];
 
@@ -224,7 +224,7 @@ const CyberSecurity = () => (
     bannerTitle="Cyber Security Services for Indian SMEs"
     bannerDesc="A Tricity-based Managed Security Service Provider (MSSP) delivering enterprise-grade security, simplified compliance, and remote-first delivery — built specifically for Indian small and medium enterprises at 40% lower cost than metro-based providers. DPDPA 2023 & CERT-In compliance built into every package."
 
-    overviewImage="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80"
+    overviewImage="/Assets/stock/photo-1544197150-b99a580bb7a8.webp"
     overviewImageAlt="Cyber Security Services for Indian SMEs"
     overviewBadge="Tricity-Based MSSP · Serving SMEs Pan-India"
     overviewHeading="Enterprise Cyber Security, Built for"
@@ -239,7 +239,7 @@ const CyberSecurity = () => (
     featuresBadge="Our Security Packages & Services"
     featuresTitle="Three Simple Packages — Priced for"
     featuresTitleHighlight="Indian SMEs"
-    featuresStickyImg="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80"
+    featuresStickyImg="/Assets/stock/photo-1563986768609-322da13575f3.webp"
     features={features}
 
     bizBadge="Why Choose Us"

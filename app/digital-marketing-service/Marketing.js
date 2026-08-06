@@ -78,25 +78,25 @@ const sliderCards = [
     count: "3x",
     title: "SEO Ranking Boost",
     desc: "Achieved top-3 Google rankings for competitive keywords within 4 months through technical SEO and content optimization.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+    image: "/Assets/stock/photo-1460925895917-afdab827c52f.webp",
   },
   {
     count: "40%",
     title: "PPC Campaign Success",
     desc: "Reduced cost-per-click by 40% while tripling lead volume for a B2B SaaS client through targeted audience segmentation.",
-    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80",
+    image: "/Assets/stock/photo-1611162617474-5b21e879e113.webp",
   },
   {
     count: "250%",
     title: "Social Media Growth",
     desc: "Grew a client's Instagram following by 250% in 6 months with engaging content and strategic influencer partnerships.",
-    image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&q=80",
+    image: "/Assets/stock/photo-1432888498266-38ffec3eaf0a.webp",
   },
   {
     count: "38%",
     title: "Email Campaign Results",
     desc: "Delivered a 38% open rate and 12% click-through rate for an e-commerce email re-engagement campaign.",
-    image: "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=800&q=80",
+    image: "/Assets/stock/photo-1586864387967-d02ef85d93e8.webp",
   },
 ];
 
@@ -180,7 +180,7 @@ const Marketing = () => {
       bannerImg={devops}
       bannerTitle="Professional Digital Marketing Services"
       bannerDesc="Digital marketing needs have changed over the years with today's dynamic industry. As a towering Digital Marketing Agency in Chandigarh that has led many successful digital campaigns, we ensure that our clients move from mere digital tactics to a well-crafted digital strategy. Our unwavering commitment to innovative ideas, quality work, and time-bound deadlines has built lasting trust with our clients."
-      overviewImage="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+      overviewImage="/Assets/stock/photo-1460925895917-afdab827c52f.webp"
       overviewImageAlt="Digital Marketing Services"
       overviewBadge="Digital Marketing Services"
       overviewHeading="Digital Marketing Services for"
@@ -194,7 +194,7 @@ const Marketing = () => {
       featuresBadge="Our Digital Marketing Services"
       featuresTitle="Data-Driven Strategies That"
       featuresTitleHighlight="Deliver Real Results"
-      featuresStickyImg="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&q=80"
+      featuresStickyImg="/Assets/stock/photo-1432888498266-38ffec3eaf0a.webp"
       features={features}
       bizBadge="Our Advantages"
       bizHeading="Why Choose Us for"

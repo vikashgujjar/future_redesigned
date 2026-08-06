@@ -1,5 +1,5 @@
 "use client";
-import bannerImg from "../Assets/and.gif";
+import bannerImg from "../Assets/and.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import {
   FaMobileAlt, FaBug, FaVial, FaCheckCircle, FaCogs, FaShieldAlt, FaServer,
@@ -78,25 +78,25 @@ const sliderCards = [
     count: "47",
     title: "iOS App Quality Audit",
     desc: "Performed end-to-end functional and security testing for a healthcare iOS app, identifying 47 critical bugs before launch.",
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80",
+    image: "/Assets/stock/photo-1512941937669-90a1b58e7e9c.webp",
   },
   {
     count: "95%",
     title: "Android Performance Testing",
     desc: "Stress-tested a fintech Android app under 10,000 concurrent users, resolving memory leaks and reducing crash rate by 95%.",
-    image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&q=80",
+    image: "/Assets/stock/photo-1551650975-87deedd944c3.webp",
   },
   {
     count: "120+",
     title: "Cross-Platform Compatibility",
     desc: "Validated a retail app across 120+ device-OS combinations, ensuring consistent UI and performance for all user segments.",
-    image: "https://images.unsplash.com/photo-1596558450268-9c27524ba856?w=800&q=80",
+    image: "/Assets/stock/photo-1596558450268-9c27524ba856.webp",
   },
   {
     count: "2hr",
     title: "Automated Regression Suite",
     desc: "Built a full Appium-based automation suite that reduced regression testing time from 3 days to under 2 hours per sprint.",
-    image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&q=80",
+    image: "/Assets/stock/photo-1542831371-29b0f74f9713.webp",
   },
 ];
 
@@ -172,7 +172,7 @@ const Mobile = () => {
       bannerImg={bannerImg}
       bannerTitle="Mobile Application Testing Services"
       bannerDesc="Future IT Touch is an eminent Mobile Application Testing organisation that offers outstanding versatile application testing services. We developed our specialty in mobile testing, particularly in iOS and Android devices. With a group of devoted certified testers, we perform a wide range of web, mobile, and cross-platform portable application testing for functionality, usability, consistency, and compatibility."
-      overviewImage="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80"
+      overviewImage="/Assets/stock/photo-1512941937669-90a1b58e7e9c.webp"
       overviewImageAlt="Mobile Application Testing"
       overviewBadge="Mobile Application Testing Services"
       overviewHeading="Mobile Application"
@@ -186,7 +186,7 @@ const Mobile = () => {
       featuresBadge="Our Testing Services"
       featuresTitle="Comprehensive Testing That"
       featuresTitleHighlight="Ensures Quality"
-      featuresStickyImg="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&q=80"
+      featuresStickyImg="/Assets/stock/photo-1551650975-87deedd944c3.webp"
       features={features}
       bizBadge="Why Choose FTS for Testing"
       bizHeading="Partner with Experts for"

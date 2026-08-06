@@ -1,6 +1,6 @@
 "use client";
-const io = "https://images.unsplash.com/photo-1522125670776-3c7abb882bc2?w=800&q=80";
-const ec = "https://images.unsplash.com/photo-1611262588024-d12430b98920?w=1400&q=85";
+const io = "/Assets/stock/photo-1522125670776-3c7abb882bc2.webp";
+const ec = "/Assets/stock/photo-1611262588024-d12430b98920.webp";
 import { FaShoppingCart, FaPaintBrush, FaClock, FaUsers, FaCogs, FaApple, FaCloud, FaLock, FaChartLine, FaMobileAlt, FaPalette, FaTools, FaBriefcase, FaBullhorn } from "react-icons/fa";
 import { SiSwift } from "react-icons/si";
 import CommonServicePage from "../components/CommonServicePage";
@@ -55,11 +55,11 @@ const IOS = () => (
     // ── Slider ───────────────────────────────────────────────
     sliderTitle="Delivering Innovative iOS App Experiences with"
     sliderCards={[
-      { count: "250+",  title: "iOS Apps Delivered",    desc: "We've developed and launched over 250 iOS applications across diverse industries with superior performance and UX.",          image: "https://images.unsplash.com/photo-1522125670776-3c7abb882bc2?w=900&q=80" },
-      { count: YEARS_EXPERIENCE_DISPLAY,   title: "Years of Experience",   desc: `With ${YEARS_EXPERIENCE_DISPLAY} years of expertise Future IT Touch has mastered building scalable iOS apps using Swift, SwiftUI, and modern frameworks.`, image: "https://images.unsplash.com/photo-1611262588024-d12430b98920?w=900&q=80" },
-      { count: "500+",  title: "Global Clients Served", desc: "We've successfully delivered iOS apps for 500+ global clients from startups to enterprises.",                                 image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=900&q=80" },
-      { count: "98%",   title: "Client Satisfaction",   desc: "Our client-first approach and commitment to quality have earned us a 98% satisfaction rate.",                                 image: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=900&q=80" },
-      { count: "24/7",  title: "Technical Support",     desc: "Our dedicated support team ensures your iOS application runs flawlessly post-launch.",                                        image: "https://images.unsplash.com/photo-1512428813834-c702c7702b78?w=900&q=80" },
+      { count: "250+",  title: "iOS Apps Delivered",    desc: "We've developed and launched over 250 iOS applications across diverse industries with superior performance and UX.",          image: "/Assets/stock/photo-1522125670776-3c7abb882bc2.webp" },
+      { count: YEARS_EXPERIENCE_DISPLAY,   title: "Years of Experience",   desc: `With ${YEARS_EXPERIENCE_DISPLAY} years of expertise Future IT Touch has mastered building scalable iOS apps using Swift, SwiftUI, and modern frameworks.`, image: "/Assets/stock/photo-1611262588024-d12430b98920.webp" },
+      { count: "500+",  title: "Global Clients Served", desc: "We've successfully delivered iOS apps for 500+ global clients from startups to enterprises.",                                 image: "/Assets/stock/photo-1512941937669-90a1b58e7e9c.webp" },
+      { count: "98%",   title: "Client Satisfaction",   desc: "Our client-first approach and commitment to quality have earned us a 98% satisfaction rate.",                                 image: "/Assets/stock/photo-1607746882042-944635dfe10e.webp" },
+      { count: "24/7",  title: "Technical Support",     desc: "Our dedicated support team ensures your iOS application runs flawlessly post-launch.",                                        image: "/Assets/stock/photo-1512428813834-c702c7702b78.webp" },
     ]}
 
     // ── Platforms ────────────────────────────────────────────

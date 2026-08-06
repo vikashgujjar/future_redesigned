@@ -1,5 +1,5 @@
 "use client";
-const cwd = "https://images.unsplash.com/photo-1522252234503-e356532cafd5?w=1400&q=85";
+const cwd = "/Assets/stock/photo-1522252234503-e356532cafd5.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import {
   FaMagento, FaWordpress, FaShopify, FaOpencart, FaCogs, FaServer,
@@ -72,31 +72,31 @@ const Corporate = () => {
       count: "250+",
       title: "Corporate Web Apps Delivered",
       desc: "We've developed over 250+ corporate web applications that empower businesses to operate efficiently and engage users effectively. Each project is built for performance, reliability, and seamless digital interaction.",
-      image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=900&q=80",
+      image: "/Assets/stock/photo-1517245386807-bb43f82c33c4.webp",
     },
     {
       count: yearsExperience,
       title: "Years of Industry Expertise",
       desc: `With ${yearsExperience} years in corporate web development, Future IT Touch Pvt. Ltd. delivers robust and innovative web solutions. Our experience ensures every project blends technology, scalability, and exceptional user experience.`,
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80",
+      image: "/Assets/stock/photo-1460925895917-afdab827c52f.webp",
     },
     {
       count: "500+",
       title: "Global Businesses Served",
       desc: "Trusted by over 500 corporate clients worldwide, we create tailored web applications designed for growth and efficiency. Our expertise spans industries, delivering results that meet both local and global business goals.",
-      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&q=80",
+      image: "/Assets/stock/photo-1498050108023-c5249f4df085.webp",
     },
     {
       count: "98%",
       title: "Client Satisfaction Rate",
       desc: "Our client-first approach has earned us a 98% satisfaction rate. We focus on transparency, timely delivery, and building enterprise-grade web applications that exceed expectations and drive long-term success.",
-      image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=900&q=80",
+      image: "/Assets/stock/photo-1467232004584-a241de8bcf5d.webp",
     },
     {
       count: "24/7",
       title: "Reliable Technical Support",
       desc: "We provide 24/7 support to ensure your corporate web applications run seamlessly. Our dedicated support team quickly resolves issues, applies updates, and maintains consistent system performance.",
-      image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=900&q=80",
+      image: "/Assets/stock/photo-1547658719-da2b51169166.webp",
     },
   ];
 
@@ -187,7 +187,6 @@ const Corporate = () => {
       featuresBadge="Trusted Business Web App Development Service"
       featuresTitle="Delivering Innovative &"
       featuresTitleHighlight="Scalable Web Solutions for Corporates"
-      featuresStickyImg="/ecommerce-website-development-img.webp"
       features={features}
       bizBadge="Leading Corporate Web Application Development Company in India"
       bizHeading="Partner with Us for"

@@ -11,7 +11,7 @@ import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 const Swift = () => (
   <CommonTechPage
     banner={{
-      bgImage: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1600&q=85",
+      bgImage: "/Assets/stock/photo-1512941937669-90a1b58e7e9c.webp",
       image: swiftImg,
       category: "iOS Development",
       breadcrumb: "Swift · SwiftUI · iOS",

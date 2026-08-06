@@ -11,7 +11,7 @@ import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 const Python = () => (
   <CommonTechPage
     banner={{
-      bgImage: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1600&q=85",
+      bgImage: "/Assets/stock/photo-1526374965328-7f61d4dc18c5.webp",
       image: pdImg,
       category: "Web Technology",
       breadcrumb: "Python · Django · Flask",

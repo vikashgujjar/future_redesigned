@@ -105,8 +105,6 @@ export default function ServiceSectionNew() {
   return (
     <section className="svc-root relative overflow-hidden py-20 sm:py-28">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap');
-
         .svc-root { font-family:'Inter',sans-serif; background:#f8faff }
 
         /* ── bg ── */

@@ -105,7 +105,7 @@ export default function Refund() {
       {/* ── Banner ── */}
       <section className="relative overflow-hidden flex items-center justify-center"
         style={{ minHeight:"clamp(280px,40vh,420px)" }}>
-        <Image src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=1600&q=85"
+        <Image src="/Assets/stock/photo-1554224154-26032ffc0d07.webp"
           alt="Refund Policy" fill priority unoptimized className="object-cover object-center" />
         <div className="absolute inset-0"
           style={{ background:"linear-gradient(160deg,rgba(4,5,24,.83),rgba(20,10,60,.79) 50%,rgba(4,5,24,.86))" }} />

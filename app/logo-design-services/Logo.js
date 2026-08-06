@@ -1,6 +1,6 @@
 "use client";
 import d1 from "../Assets/graphic-and-logo-design-service.webp";
-const gm = "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1400&q=85";
+const gm = "/Assets/stock/photo-1561070791-2526d30994b5.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 import {
@@ -78,31 +78,31 @@ const Logo = () => {
       count: "1000+",
       title: "Logos Successfully Designed",
       desc: "We've created over 1000 unique and professional logos for businesses across industries. Each design is tailored to capture brand identity, engage audiences, and leave a lasting impression.",
-      image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=900&q=80",
+      image: "/Assets/stock/photo-1561070791-2526d30994b5.webp",
     },
     {
       count: YEARS_EXPERIENCE_DISPLAY,
       title: "Years of Design Expertise",
       desc: `With more than ${YEARS_EXPERIENCE_DISPLAY} years of experience in logo and brand design, Future IT Touch Pvt. Ltd. delivers creative and impactful logos that elevate brand perception and recognition globally.`,
-      image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=900&q=80",
+      image: "/Assets/stock/photo-1626785774573-4b799315345d.webp",
     },
     {
       count: "500+",
       title: "Global Clients Served",
       desc: "Trusted by over 500 international brands, we craft logos that strengthen brand identity, improve visibility, and resonate with target audiences across multiple platforms.",
-      image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=900&q=80",
+      image: "/Assets/stock/photo-1600857544200-b2f666a9a2ec.webp",
     },
     {
       count: "99%",
       title: "Client Satisfaction Rate",
       desc: "Our dedication to creativity, precision, and client collaboration has earned us a 99% satisfaction rate. We ensure each logo meets your vision and brand strategy perfectly.",
-      image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=900&q=80",
+      image: "/Assets/stock/photo-1611162616305-c69b3fa7fbe0.webp",
     },
     {
       count: "24/7",
       title: "Ongoing Design Support",
       desc: "Our team provides continuous support — from revisions to final delivery — making sure your logo is polished, consistent, and ready for all branding needs.",
-      image: "https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=900&q=80",
+      image: "/Assets/stock/photo-1588345921523-c2dcdb7f1dcd.webp",
     },
   ];
 

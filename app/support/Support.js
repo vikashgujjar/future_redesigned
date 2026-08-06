@@ -176,7 +176,7 @@ export default function Support() {
       <section className="relative overflow-hidden flex items-center justify-center"
         style={{ minHeight: "clamp(280px,40vh,420px)" }}>
         <Image
-          src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600&q=85"
+          src="/Assets/stock/photo-1521737604893-d14cc237f11d.webp"
           alt="Support" fill priority unoptimized className="object-cover object-center"
         />
         <div className="absolute inset-0"

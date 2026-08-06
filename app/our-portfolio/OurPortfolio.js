@@ -175,7 +175,7 @@ export default function OurPortfolio() {
       <section className="relative overflow-hidden flex items-center justify-center"
         style={{ minHeight:"clamp(280px,40vh,420px)", fontFamily:"'Inter',sans-serif" }}>
         <Image
-          src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&q=85"
+          src="/Assets/stock/photo-1460925895917-afdab827c52f.webp"
           alt="Our Portfolio"
           fill priority unoptimized
           className="object-cover object-center"

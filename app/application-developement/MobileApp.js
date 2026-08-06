@@ -1,5 +1,5 @@
 "use client";
-const bannerImg = "https://images.unsplash.com/photo-1512428813834-c702c7702b78?w=1400&q=85";
+const bannerImg = "/Assets/stock/photo-1512428813834-c702c7702b78.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import { COMPANY_START_YEAR } from "../lib/companyStats";
 import {
@@ -79,25 +79,25 @@ const sliderCards = [
     count: "50K+",
     title: "Healthcare App Development",
     desc: "Built a HIPAA-compliant telemedicine app with real-time video consultations, appointment booking, and EHR integration serving 50,000+ patients.",
-    image: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=800&q=80",
+    image: "/Assets/stock/photo-1607746882042-944635dfe10e.webp",
   },
   {
     count: "35%",
     title: "E-Commerce Mobile App",
     desc: "Developed a React Native shopping app with AR product preview, one-tap checkout, and loyalty rewards — driving 35% higher mobile conversion rates.",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
+    image: "/Assets/stock/photo-1556742049-0cfed4f6a45d.webp",
   },
   {
     count: "500+",
     title: "Fleet Management App",
     desc: "Created a cross-platform fleet tracking and management app with real-time GPS, driver analytics, and automated dispatch routing for a logistics company.",
-    image: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=800&q=80",
+    image: "/Assets/stock/photo-1519003722824-194d4455a60c.webp",
   },
   {
     count: "100K",
     title: "Fitness & Wellness App",
     desc: "Launched a Flutter-based fitness app with AI workout recommendations, wearable integration, and social challenges — reaching 100K downloads in 3 months.",
-    image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&q=80",
+    image: "/Assets/stock/photo-1551650975-87deedd944c3.webp",
   },
 ];
 
@@ -184,7 +184,7 @@ const MobileApp = () => {
       bannerImg={bannerImg}
       bannerTitle="Mobile App Development Services"
       bannerDesc={`We are a full-stack mobile app development company in Chandigarh with all the expertise you need to build a successful, stable, and scalable mobile product. Future IT Touch Pvt. Ltd. offers comprehensive mobile app development services for iOS, Android, and cross-platform — backed by a team of 50+ designers, developers, and QA specialists serving clients across 3+ countries since ${COMPANY_START_YEAR}.`}
-      overviewImage="https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=800&q=80"
+      overviewImage="/Assets/stock/photo-1607746882042-944635dfe10e.webp"
       overviewImageAlt="Mobile App Development"
       overviewBadge="Custom Mobile App Solutions"
       overviewHeading="Crafting Powerful, Scalable &"
@@ -199,7 +199,7 @@ const MobileApp = () => {
       featuresBadge="Our App Development Services"
       featuresTitle="Building Solutions for"
       featuresTitleHighlight="Every Platform"
-      featuresStickyImg="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
+      featuresStickyImg="/Assets/stock/photo-1556742049-0cfed4f6a45d.webp"
       features={features}
       bizBadge="Why Choose Us"
       bizHeading="Partner with Experts for"

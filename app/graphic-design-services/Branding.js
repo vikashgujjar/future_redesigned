@@ -78,25 +78,25 @@ const sliderCards = [
     count: "40%",
     title: "Brand Identity Overhaul",
     desc: "Redesigned a complete brand identity for a fintech startup — logo, typography, color palette, and stationery — resulting in 40% improved brand recognition.",
-    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80",
+    image: "/Assets/stock/photo-1561070791-2526d30994b5.webp",
   },
   {
     count: "25%",
     title: "Product Packaging Design",
     desc: "Created eye-catching packaging for a cosmetics brand that increased shelf visibility and contributed to a 25% sales uplift in the first quarter after launch.",
-    image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=800&q=80",
+    image: "/Assets/stock/photo-1600857544200-b2f666a9a2ec.webp",
   },
   {
     count: "3x",
     title: "Social Media Campaign Graphics",
     desc: "Produced a 3-month social media visual campaign for a hospitality brand, achieving 3x engagement increase across all platforms.",
-    image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80",
+    image: "/Assets/stock/photo-1611162616305-c69b3fa7fbe0.webp",
   },
   {
     count: "500+",
     title: "Corporate Brochure Suite",
     desc: "Designed a full corporate brochure suite including company profile, product catalog, and investor deck for a manufacturing client.",
-    image: "https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&q=80",
+    image: "/Assets/stock/photo-1588345921523-c2dcdb7f1dcd.webp",
   },
 ];
 
@@ -172,7 +172,7 @@ const Branding = () => {
       bannerImg={devops}
       bannerTitle="Graphic Design Services"
       bannerDesc="Simplicity, creativity, a dash of humor, and good typography are the essential elements of graphic design at Future IT Touch Pvt. Ltd. Effective design plays a vital role in distinguishing your business from the rest — giving you The Design Edge. With right aesthetics prompting visual perception, your business is bound to be valued more. Our team is always ready to jump with brilliant ideas to convey a story through design."
-      overviewImage="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80"
+      overviewImage="/Assets/stock/photo-1561070791-2526d30994b5.webp"
       overviewImageAlt="Graphic Design Services"
       overviewBadge="Custom Graphic Design Services"
       overviewHeading="Custom Graphic Design"
@@ -186,7 +186,7 @@ const Branding = () => {
       featuresBadge="Our Design Services"
       featuresTitle="Creative Designs That"
       featuresTitleHighlight="Build Memorable Brands"
-      featuresStickyImg="https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=800&q=80"
+      featuresStickyImg="/Assets/stock/photo-1600857544200-b2f666a9a2ec.webp"
       features={features}
       bizBadge="Our Advantages"
       bizHeading="Why Choose Us for"

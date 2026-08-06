@@ -12,7 +12,7 @@ import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 const PythonBlockchain = () => (
   <CommonTechPage
     banner={{
-      bgImage: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1600&q=85",
+      bgImage: "/Assets/stock/photo-1639762681485-074b7f938ba0.webp",
       image: pythonBlockchainImg,
       category: "Blockchain Development",
       breadcrumb: "Python · Blockchain · DApps",

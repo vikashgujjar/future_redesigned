@@ -12,7 +12,7 @@ import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 const Unity = () => (
   <CommonTechPage
     banner={{
-      bgImage: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=1600&q=85",
+      bgImage: "/Assets/stock/photo-1538481199705-c710c4e965fc.webp",
       image: unityImg,
       category: "Game Development",
       breadcrumb: "Unity · AR/VR · Multiplayer",

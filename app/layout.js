@@ -1,4 +1,7 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Geist, Geist_Mono, Poppins, Inter,
+  Playfair_Display, Bilbo_Swash_Caps, DM_Sans, Syne,
+} from "next/font/google";
 
 import "./globals.css";
 import TopBar from "./components/TopBar";
@@ -20,6 +23,47 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+/* Self-hosted replacements for the Google Fonts previously pulled in via
+   blocking `@import url(fonts.googleapis.com/...)` in globals.css and a few
+   client components. next/font downloads these at build time and serves them
+   from our own origin under the same font-family name, so every existing
+   `fontFamily: "'Poppins', sans-serif"` inline style across the app picks
+   them up automatically — no per-component changes needed. */
+const poppins = Poppins({
+  weight: ["400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+  display: "swap",
+});
+const inter = Inter({
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+});
+const playfairDisplay = Playfair_Display({
+  weight: ["700", "900"],
+  subsets: ["latin"],
+  display: "swap",
+  preload: false,
+});
+const bilboSwashCaps = Bilbo_Swash_Caps({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+  preload: false,
+});
+const dmSans = DM_Sans({
+  weight: ["300", "400", "500", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  preload: false,
+});
+const syne = Syne({
+  weight: ["700", "800"],
+  subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 export const metadata = {
@@ -82,7 +126,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${inter.variable} ${playfairDisplay.variable} ${bilboSwashCaps.variable} ${dmSans.variable} ${syne.variable} antialiased overflow-x-hidden`}
       >
       <OrganizationSchema />
       <a

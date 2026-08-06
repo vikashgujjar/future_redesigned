@@ -1,6 +1,5 @@
 "use client";
-import d1 from "../Assets/logo-gif.gif";
-const gm = "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=1400&q=85";
+const gm = "/Assets/stock/photo-1626785774573-4b799315345d.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 import {
@@ -77,31 +76,31 @@ const Animated = () => {
       count: "250+",
       title: "Videos Successfully Delivered",
       desc: "We've produced over 250 high-quality explainer videos that simplify complex ideas and help businesses communicate their stories effectively. From startups to enterprises, our videos drive engagement and conversions.",
-      image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=900&q=80",
+      image: "/Assets/stock/photo-1626785774573-4b799315345d.webp",
     },
     {
       count: YEARS_EXPERIENCE_DISPLAY,
       title: "Years of Production Expertise",
       desc: `With more than ${YEARS_EXPERIENCE_DISPLAY} years of experience in creative storytelling and animation, Future IT Touch Pvt. Ltd. delivers impactful explainer videos that educate, inspire, and connect with audiences worldwide.`,
-      image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=900&q=80",
+      image: "/Assets/stock/photo-1586953208448-b95a79798f07.webp",
     },
     {
       count: "500+",
       title: "Global Clients Served",
       desc: "Trusted by over 500 international brands, we create explainer videos that enhance communication, strengthen marketing efforts, and increase brand visibility across digital platforms.",
-      image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=900&q=80",
+      image: "/Assets/stock/photo-1600857544200-b2f666a9a2ec.webp",
     },
     {
       count: "98%",
       title: "Client Satisfaction Rate",
       desc: "Our commitment to creativity, clarity, and storytelling excellence has earned us a 98% satisfaction rate. We focus on delivering videos that truly represent your brand and connect with your audience.",
-      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=900&q=80",
+      image: "/Assets/stock/photo-1555066931-4365d14bab8c.webp",
     },
     {
       count: "24/7",
       title: "Dedicated Video Support",
       desc: "Our creative team provides round-the-clock support — from script revisions to post-production edits — ensuring every video meets your goals and maintains top-tier quality at all times.",
-      image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=900&q=80",
+      image: "/Assets/stock/photo-1561070791-2526d30994b5.webp",
     },
   ];
 
@@ -190,7 +189,6 @@ const Animated = () => {
       featuresBadge="Engaging Explainer Video Services"
       featuresTitle="Turning Complex Ideas into Clear,"
       featuresTitleHighlight="Captivating Visual Stories"
-      featuresStickyImg={d1}
       features={features}
       bizBadge="Leading Explainer Video Production Company in India"
       bizHeading="Creating Videos That Explain, Engage &"

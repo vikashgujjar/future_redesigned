@@ -1,6 +1,6 @@
 "use client";
-const ec = "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80";
-const app = "https://images.unsplash.com/photo-1526498460520-4c246339dccb?w=1400&q=85";
+const ec = "/Assets/stock/photo-1512941937669-90a1b58e7e9c.webp";
+const app = "/Assets/stock/photo-1526498460520-4c246339dccb.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import { FaMobileAlt, FaPaintBrush, FaClock, FaLightbulb, FaDraftingCompass, FaCode, FaBug, FaCloudUploadAlt, FaChartLine, FaTools } from "react-icons/fa";
 import { SiReact, SiFlutter, SiGooglecloud } from "react-icons/si";
@@ -78,31 +78,31 @@ const Hybrid = () => {
       count: "300+",
       title: "Hybrid Apps Delivered",
       desc: "We've successfully built and launched over 300 hybrid mobile applications for Android and iOS using React Native, Flutter, and Ionic. Each app offers native-like performance and seamless functionality across all devices.",
-      image: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=900&q=80",
+      image: "/Assets/stock/photo-1607746882042-944635dfe10e.webp",
     },
     {
       count: yearsExperience,
       title: "Years of Industry Experience",
       desc: `With ${yearsExperience} years of expertise in mobile app development, Future IT Touch Pvt. Ltd. specializes in creating cost-effective and scalable hybrid applications for businesses worldwide.`,
-      image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=900&q=80",
+      image: "/Assets/stock/photo-1607082348824-0a96f2a4b9da.webp",
     },
     {
       count: "500+",
       title: "Satisfied Global Clients",
       desc: "Our hybrid app solutions have empowered over 500 clients globally, from startups to enterprises. We ensure every app aligns with business objectives and provides a consistent cross-platform experience.",
-      image: "https://images.unsplash.com/photo-1512428813834-c702c7702b78?w=900&q=80",
+      image: "/Assets/stock/photo-1512428813834-c702c7702b78.webp",
     },
     {
       count: "98%",
       title: "Client Satisfaction Rate",
       desc: "Our commitment to innovation, transparency, and quality has earned us a 98% client satisfaction rate. We ensure your hybrid app delivers outstanding value and reliability across platforms.",
-      image: "https://images.unsplash.com/photo-1526498460520-4c246339dccb?w=900&q=80",
+      image: "/Assets/stock/photo-1526498460520-4c246339dccb.webp",
     },
     {
       count: "24/7",
       title: "Technical Support & Maintenance",
       desc: "We offer round-the-clock support and maintenance to ensure your hybrid applications remain up-to-date, secure, and high-performing — long after deployment.",
-      image: "https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?w=900&q=80",
+      image: "/Assets/stock/photo-1607252650355-f7fd0460ccdb.webp",
     },
   ];
 

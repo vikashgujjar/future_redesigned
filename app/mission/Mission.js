@@ -151,7 +151,7 @@ export default function Mission() {
       <section className="relative overflow-hidden flex items-center justify-center"
         style={{ minHeight:"clamp(280px,40vh,420px)", fontFamily:"'Inter',sans-serif" }}>
         <Image
-          src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&q=85"
+          src="/Assets/stock/photo-1552664730-d307ca884978.webp"
           alt="Mission & Vision"
           fill priority unoptimized
           className="object-cover object-center"
@@ -224,7 +224,7 @@ export default function Mission() {
                 style={{ background:"linear-gradient(135deg,#2dd4bf,#6366f1,#a855f7)" }}>
                 <div className="mv2-vis-frame" style={{ height:"clamp(340px,45vw,520px)" }}>
                   <Image
-                    src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&q=85"
+                    src="/Assets/stock/photo-1451187580459-43490279c0fa.webp"
                     alt="Our Vision — Global IT"
                     fill unoptimized
                     className="object-cover object-center"

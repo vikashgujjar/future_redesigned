@@ -11,7 +11,7 @@ import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 const Asp = () => (
   <CommonTechPage
     banner={{
-      bgImage: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=1600&q=85",
+      bgImage: "/Assets/stock/photo-1542831371-29b0f74f9713.webp",
       image: aspImg,
       category: "Enterprise Technology",
       breadcrumb: "Microsoft · .NET · ASP.NET",

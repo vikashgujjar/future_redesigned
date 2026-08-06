@@ -1,5 +1,5 @@
 "use client";
-const cwd = "https://images.unsplash.com/photo-1533750516457-a7f992034fec?w=1400&q=85";
+const cwd = "/Assets/stock/photo-1533750516457-a7f992034fec.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 import {
@@ -69,31 +69,31 @@ const PPC = () => {
       count: "1500+",
       title: "PPC Campaigns Successfully Executed",
       desc: "We've executed over 1500 result-driven PPC campaigns across Google, Facebook, YouTube, and LinkedIn. Each campaign is crafted to maximize reach, engagement, and ROI, ensuring high-quality leads and conversions.",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80",
+      image: "/Assets/stock/photo-1460925895917-afdab827c52f.webp",
     },
     {
       count: YEARS_EXPERIENCE_DISPLAY,
       title: "Years of PPC Expertise",
       desc: `With over ${YEARS_EXPERIENCE_DISPLAY} years of experience in PPC management, our team delivers data-driven strategies that optimize ad spend, improve campaign performance, and help businesses achieve measurable growth.`,
-      image: "https://images.unsplash.com/photo-1533750516457-a7f992034fec?w=900&q=80",
+      image: "/Assets/stock/photo-1533750516457-a7f992034fec.webp",
     },
     {
       count: "500+",
       title: "Satisfied Global Clients",
       desc: "Trusted by more than 500 brands worldwide, we manage PPC campaigns that increase visibility, attract ready-to-buy customers, and generate tangible ROI for businesses of all sizes.",
-      image: "https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=900&q=80",
+      image: "/Assets/stock/photo-1611926653458-09294b3142bf.webp",
     },
     {
       count: "98%",
       title: "Client Satisfaction Rate",
       desc: "Our focus on delivering high-performing campaigns has earned a 98% client satisfaction rate. We ensure transparent reporting, timely execution, and constant optimization for each client.",
-      image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=900&q=80",
+      image: "/Assets/stock/photo-1553877522-43269d4ea984.webp",
     },
     {
       count: "24/7",
       title: "Ongoing Campaign Monitoring",
       desc: "Our PPC experts provide round-the-clock monitoring to optimize bids, tweak ads, and refine targeting strategies, ensuring your campaigns always perform at their peak.",
-      image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=900&q=80",
+      image: "/Assets/stock/photo-1611162617474-5b21e879e113.webp",
     },
   ];
 

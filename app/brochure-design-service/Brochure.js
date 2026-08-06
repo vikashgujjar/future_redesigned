@@ -1,6 +1,5 @@
 "use client";
-const gm = "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=1400&q=85";
-import d1 from "../Assets/bro.gif";
+const gm = "/Assets/stock/photo-1611162616305-c69b3fa7fbe0.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 import {
@@ -78,31 +77,31 @@ const Brochure = () => {
       count: "250+",
       title: "Videos Successfully Delivered",
       desc: "We've produced over 250 high-quality explainer videos that simplify complex ideas and help businesses communicate their stories effectively. From startups to enterprises, our videos drive engagement and conversions.",
-      image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=900&q=80",
+      image: "/Assets/stock/photo-1611162616305-c69b3fa7fbe0.webp",
     },
     {
       count: YEARS_EXPERIENCE_DISPLAY,
       title: "Years of Production Expertise",
       desc: `With more than ${YEARS_EXPERIENCE_DISPLAY} years of experience in creative storytelling and animation, Future IT Touch Pvt. Ltd. delivers impactful explainer videos that educate, inspire, and connect with audiences worldwide.`,
-      image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=900&q=80",
+      image: "/Assets/stock/photo-1586953208448-b95a79798f07.webp",
     },
     {
       count: "500+",
       title: "Global Clients Served",
       desc: "Trusted by over 500 international brands, we create explainer videos that enhance communication, strengthen marketing efforts, and increase brand visibility across digital platforms.",
-      image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=900&q=80",
+      image: "/Assets/stock/photo-1600857544200-b2f666a9a2ec.webp",
     },
     {
       count: "98%",
       title: "Client Satisfaction Rate",
       desc: "Our commitment to creativity, clarity, and storytelling excellence has earned us a 98% satisfaction rate. We focus on delivering videos that truly represent your brand and connect with your audience.",
-      image: "https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=900&q=80",
+      image: "/Assets/stock/photo-1588345921523-c2dcdb7f1dcd.webp",
     },
     {
       count: "24/7",
       title: "Dedicated Video Support",
       desc: "Our creative team provides round-the-clock support — from script revisions to post-production edits — ensuring every video meets your goals and maintains top-tier quality at all times.",
-      image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=900&q=80",
+      image: "/Assets/stock/photo-1561070791-2526d30994b5.webp",
     },
   ];
 
@@ -191,7 +190,6 @@ const Brochure = () => {
       featuresBadge="Creative Brochure Design Services"
       featuresTitle="Transforming Brand Messages into"
       featuresTitleHighlight="Visually Stunning Print Designs"
-      featuresStickyImg={d1}
       features={features}
       bizBadge="Professional Brochure Design Company in India"
       bizHeading="Crafting Brochures That Attract, Inform &"

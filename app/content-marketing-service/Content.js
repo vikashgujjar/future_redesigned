@@ -1,6 +1,5 @@
 "use client";
-const cwd = "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1400&q=85";
-import mrk from "../Assets/mrk.gif";
+const cwd = "/Assets/stock/photo-1499750310107-5fef28a66643.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 import {
@@ -78,31 +77,31 @@ const Logo = () => {
       count: "1000+",
       title: "Content Pieces Successfully Delivered",
       desc: "We've created over 1000 high-quality content pieces including blogs, articles, social media posts, and email campaigns that educate, engage, and convert audiences for businesses across industries.",
-      image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=900&q=80",
+      image: "/Assets/stock/photo-1499750310107-5fef28a66643.webp",
     },
     {
       count: YEARS_EXPERIENCE_DISPLAY,
       title: "Years of Content Marketing Expertise",
       desc: `With over ${YEARS_EXPERIENCE_DISPLAY} years of experience, Future IT Touch Pvt. Ltd. crafts strategic content marketing campaigns that build brand authority, increase online visibility, and drive measurable results for businesses worldwide.`,
-      image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=900&q=80",
+      image: "/Assets/stock/photo-1455390582262-044cdead277a.webp",
     },
     {
       count: "500+",
       title: "Global Clients Served",
       desc: "Trusted by over 500 international brands, we create content strategies and materials that strengthen brand messaging, boost engagement, and deliver tangible marketing outcomes across multiple platforms.",
-      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=900&q=80",
+      image: "/Assets/stock/photo-1486312338219-ce68d2c6f44d.webp",
     },
     {
       count: "98%",
       title: "Client Satisfaction Rate",
       desc: "Our dedication to strategy, creativity, and data-driven results has earned us a 98% satisfaction rate. We focus on delivering content marketing solutions that resonate with target audiences and achieve business goals.",
-      image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=900&q=80",
+      image: "/Assets/stock/photo-1611162617474-5b21e879e113.webp",
     },
     {
       count: "24/7",
       title: "Dedicated Marketing Support",
       desc: "Our team provides continuous support, including content planning, revisions, and campaign optimization, ensuring that every content marketing initiative is aligned with your goals and delivers maximum ROI.",
-      image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=900&q=80",
+      image: "/Assets/stock/photo-1517245386807-bb43f82c33c4.webp",
     },
   ];
 
@@ -191,7 +190,6 @@ const Logo = () => {
       featuresBadge="Strategic Content Marketing Services"
       featuresTitle="Creating Engaging Content That Educates,"
       featuresTitleHighlight="Inspires & Converts"
-      featuresStickyImg={mrk}
       features={features}
       bizBadge="Professional Content Marketing Company in India"
       bizHeading="Crafting Content That Engages, Educates &"

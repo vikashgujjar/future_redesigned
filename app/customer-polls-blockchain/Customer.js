@@ -11,7 +11,7 @@ import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 const Customer = () => (
   <CommonTechPage
     banner={{
-      bgImage: "https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=1600&q=85",
+      bgImage: "/Assets/stock/photo-1614680376593-902f74cf0d41.webp",
       image: customerImg,
       category: "Blockchain Voting & Polls",
       breadcrumb: "Blockchain · Customer Polls · Voting",

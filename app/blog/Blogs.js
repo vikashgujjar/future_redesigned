@@ -135,7 +135,7 @@ export default function Blog() {
       <section className="relative overflow-hidden flex items-center justify-center"
         style={{ minHeight:"clamp(280px,40vh,420px)", fontFamily:"'Inter',sans-serif" }}>
         <Image
-          src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1600&q=85"
+          src="/Assets/stock/photo-1499750310107-5fef28a66643.webp"
           alt="Blog"
           fill priority unoptimized
           className="object-cover object-center"

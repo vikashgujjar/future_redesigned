@@ -12,7 +12,7 @@ const SITE_URL = "https://futuretouch.in";
 // its own default across ~20 technology pages — proven working, thematically
 // generic, and avoids hotlinking unverified new Unsplash photo IDs across
 // 1,178 pages.
-const BANNER_IMG = "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&q=85";
+const BANNER_IMG = "/Assets/stock/photo-1518770660439-4636190af475.webp";
 
 const SERVICE_LOCATION_MARKER = "-company-in-";
 

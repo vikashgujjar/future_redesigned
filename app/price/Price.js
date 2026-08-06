@@ -239,7 +239,7 @@ export default function PricePackage() {
       <section className="relative overflow-hidden flex items-center justify-center"
         style={{ minHeight:"clamp(280px,40vh,420px)", fontFamily:"'Inter',sans-serif" }}>
         <Image
-          src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1600&q=85"
+          src="/Assets/stock/photo-1554224155-6726b3ff858f.webp"
           alt="Pricing Plans"
           fill priority unoptimized
           className="object-cover object-center"

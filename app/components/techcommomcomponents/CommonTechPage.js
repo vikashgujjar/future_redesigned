@@ -94,7 +94,7 @@ export default function CommonTechPage({
   const ac   = (i) => PALETTE[i % PALETTE.length];
   const grad = (a, dir = "135deg") => `linear-gradient(${dir},${a.from},${a.to})`;
 
-  const bgSrc       = banner.bgImage || "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&q=85";
+  const bgSrc       = banner.bgImage || "/Assets/stock/photo-1518770660439-4636190af475.webp";
   const highlights  = intro.highlights || features.slice(0, 4).map(f => f.title);
   const expertItems = features.slice(0, 5);
 

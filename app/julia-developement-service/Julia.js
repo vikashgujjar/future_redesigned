@@ -12,7 +12,7 @@ import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 const Julia = () => (
   <CommonTechPage
     banner={{
-      bgImage: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1600&q=85",
+      bgImage: "/Assets/stock/photo-1635070041078-e363dbe005cb.webp",
       image: juliaImg,
       category: "Scientific Computing & AI",
       breadcrumb: "Julia · AI · High Performance",

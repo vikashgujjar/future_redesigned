@@ -38,7 +38,7 @@ export default function CommonServicePage({
   overviewBadge, overviewHeading, overviewHighlight,
   overviewParagraphs = [], overviewCtaText = "Get In Touch",
   featuresBadge = "Our Process", featuresTitle = "Why choose us",
-  featuresTitleHighlight = "", featuresStickyImg, features = [],
+  featuresTitleHighlight = "", features = [],
   bizBadge = "Our Advantages", bizHeading = "Partner with Us for",
   bizHighlight = "Growth & Innovation", bizCards = [],
   sliderTitle = "Delivering Innovative Experiences", sliderCards = [],

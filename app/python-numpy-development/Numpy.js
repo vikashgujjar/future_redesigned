@@ -13,7 +13,7 @@ import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 const Numpy = () => (
   <CommonTechPage
     banner={{
-      bgImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=85",
+      bgImage: "/Assets/stock/photo-1551288049-bebda4e38f71.webp",
       image: numpyImg,
       category: "Data Science & Scientific Computing",
       breadcrumb: "Python · NumPy · Data Science",

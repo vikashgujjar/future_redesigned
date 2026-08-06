@@ -6,7 +6,7 @@ import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 const Reactjs = () => (
   <CommonTechPage
     banner={{
-      bgImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1600&q=85",
+      bgImage: "/Assets/stock/photo-1555066931-4365d14bab8c.webp",
       category: "Web Technology",
       breadcrumb: "React · Vue · Node.js",
       title: "React JS · Vue JS · Node JS",

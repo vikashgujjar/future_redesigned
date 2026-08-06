@@ -1,6 +1,6 @@
 "use client";
-const cwd = "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=1400&q=85";
-const devops = "https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&q=80";
+const cwd = "/Assets/stock/photo-1600857544200-b2f666a9a2ec.webp";
+const devops = "/Assets/stock/photo-1588345921523-c2dcdb7f1dcd.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 import {
@@ -77,31 +77,31 @@ const Ecommerce = () => {
       count: "250+",
       title: "Brands Transformed",
       desc: "We've helped over 250 businesses build strong brand identities that capture attention and connect emotionally with their audiences. From startups to enterprises, our creative solutions turn visions into recognizable brands.",
-      image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=900&q=80",
+      image: "/Assets/stock/photo-1600857544200-b2f666a9a2ec.webp",
     },
     {
       count: YEARS_EXPERIENCE_DISPLAY,
       title: "Years of Creative Expertise",
       desc: `With more than ${YEARS_EXPERIENCE_DISPLAY} years of experience in branding and creative strategy, Future IT Touch Pvt. Ltd. brings deep insight and innovation to every project, helping brands establish authority and trust in competitive markets.`,
-      image: "https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=900&q=80",
+      image: "/Assets/stock/photo-1588345921523-c2dcdb7f1dcd.webp",
     },
     {
       count: "500+",
       title: "Global Clients Empowered",
       desc: "Trusted by over 500 clients worldwide, we deliver impactful brand identity solutions tailored to each business's personality, ensuring consistent visibility and recognition across industries and audiences.",
-      image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=900&q=80",
+      image: "/Assets/stock/photo-1626785774573-4b799315345d.webp",
     },
     {
       count: "98%",
       title: "Client Satisfaction Rate",
       desc: "Our client-first approach and dedication to creativity have earned us a 98% satisfaction rate. We collaborate closely with businesses to design meaningful brand stories that inspire and engage their audiences.",
-      image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=900&q=80",
+      image: "/Assets/stock/photo-1561070791-2526d30994b5.webp",
     },
     {
       count: "24/7",
       title: "Creative Support",
       desc: "Our team provides continuous brand support, ensuring consistency across all touchpoints — from visual assets to digital presence. We're here to help your brand evolve, stay relevant, and grow stronger every day.",
-      image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=900&q=80",
+      image: "/Assets/stock/photo-1611162616305-c69b3fa7fbe0.webp",
     },
   ];
 

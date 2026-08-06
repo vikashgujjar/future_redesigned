@@ -1,5 +1,5 @@
 "use client";
-const gm = "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&q=85";
+const gm = "/Assets/stock/photo-1497366216548-37526070297c.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 import {
@@ -69,31 +69,31 @@ const cards = [
     count: "500+",
     title: "Small Business Websites Delivered",
     desc: "We have designed and launched over 500 small business websites that have helped startups and growing businesses build a strong digital presence and attract more customers.",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80",
+    image: "/Assets/stock/photo-1497366216548-37526070297c.webp",
   },
   {
     count: YEARS_EXPERIENCE_DISPLAY,
     title: "Years of Web Design Experience",
     desc: `With ${YEARS_EXPERIENCE_DISPLAY} years in the industry, Future IT Touch brings deep expertise in building websites that not only look great but are built to convert visitors into customers.`,
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&q=80",
+    image: "/Assets/stock/photo-1454165804606-c3d57bc86b40.webp",
   },
   {
     count: "98%",
     title: "Client Satisfaction Rate",
     desc: "Our small business clients consistently rate us 5 stars for design quality, communication, on-time delivery, and the tangible results their websites deliver.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80",
+    image: "/Assets/stock/photo-1460925895917-afdab827c52f.webp",
   },
   {
     count: "7 Days",
     title: "Average Launch Turnaround",
     desc: "We follow an agile, sprint-based approach that allows us to design, develop, test, and launch most small business websites within just 7–14 business days.",
-    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=900&q=80",
+    image: "/Assets/stock/photo-1553877522-43269d4ea984.webp",
   },
   {
     count: "24/7",
     title: "Post-Launch Support",
     desc: "We don't disappear after launch. Our team is available around the clock to handle updates, fix issues, and help your website grow alongside your business.",
-    image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=900&q=80",
+    image: "/Assets/stock/photo-1518186285589-2f7649de83e0.webp",
   },
 ];
 
@@ -209,7 +209,7 @@ const Business = () => {
       bannerImg={gm}
       bannerTitle="SMALL BUSINESS WEBSITE DESIGN SERVICES"
       bannerDesc="The biggest challenge faced by any small business is expanding its customer base. With the rising costs of traditional media, a professionally developed website is the most effective first step toward building a strong digital presence. Future IT Touch Pvt. Ltd. provides affordable, custom small business website design services to clients worldwide — helping startups and growing businesses enhance their online presence and drive real growth."
-      overviewImage="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+      overviewImage="/Assets/stock/photo-1460925895917-afdab827c52f.webp"
       overviewImageAlt="Small business website design"
       overviewBadge="Website For Small Business & Startups"
       overviewHeading="Rise from a Startup to an"
@@ -225,7 +225,7 @@ const Business = () => {
       featuresBadge="Small Business Website Development"
       featuresTitle="Building Websites That Help Your Business"
       featuresTitleHighlight="Grow Online"
-      featuresStickyImg="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80"
+      featuresStickyImg="/Assets/stock/photo-1497366216548-37526070297c.webp"
       features={features}
       bizBadge="Why Choose Future IT Touch"
       bizHeading="We Build Websites That"

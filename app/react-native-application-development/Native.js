@@ -11,7 +11,7 @@ import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 const Native = () => (
   <CommonTechPage
     banner={{
-      bgImage: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1600&q=85",
+      bgImage: "/Assets/stock/photo-1551650975-87deedd944c3.webp",
       image: rnImg,
       category: "Mobile Development",
       breadcrumb: "React Native · iOS · Android",

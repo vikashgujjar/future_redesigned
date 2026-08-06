@@ -1,6 +1,5 @@
 "use client";
-const app = "https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?w=1400&q=85";
-import ec from "../Assets/and.gif";
+const app = "/Assets/stock/photo-1607252650355-f7fd0460ccdb.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 import {
@@ -72,31 +71,31 @@ const Android = () => {
       count: "250+",
       title: "Android Apps Delivered",
       desc: "We've successfully developed over 250 custom Android applications that empower businesses to reach and engage users effectively. Each app is optimized for performance, security, and a seamless mobile experience.",
-      image: "https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?w=900&q=80",
+      image: "/Assets/stock/photo-1607252650355-f7fd0460ccdb.webp",
     },
     {
       count: YEARS_EXPERIENCE_DISPLAY,
       title: "Years of Mobile Development Expertise",
       desc: `With more than ${YEARS_EXPERIENCE_DISPLAY} years in Android app development, Future IT Touch Pvt. Ltd. delivers cutting-edge mobile solutions. Our deep industry experience ensures every app combines innovation, scalability, and exceptional user experience.`,
-      image: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=900&q=80",
+      image: "/Assets/stock/photo-1607746882042-944635dfe10e.webp",
     },
     {
       count: "500+",
       title: "Global Clients Served",
       desc: "Trusted by over 500 businesses worldwide, we build Android applications tailored to diverse industries — from startups to large enterprises. Our apps help brands expand their reach and achieve measurable success.",
-      image: "https://images.unsplash.com/photo-1526498460520-4c246339dccb?w=900&q=80",
+      image: "/Assets/stock/photo-1526498460520-4c246339dccb.webp",
     },
     {
       count: "98%",
       title: "Client Satisfaction Rate",
       desc: "Our client-first approach has earned us a 98% satisfaction rate. We focus on intuitive design, smooth performance, and delivering Android apps that exceed expectations while driving long-term business growth.",
-      image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=900&q=80",
+      image: "/Assets/stock/photo-1607082348824-0a96f2a4b9da.webp",
     },
     {
       count: "24/7",
       title: "Dedicated App Support",
       desc: "We offer 24/7 technical support to ensure your Android applications run without interruption. From maintenance to version updates, our dedicated team keeps your app secure, stable, and future-ready.",
-      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=900&q=80",
+      image: "/Assets/stock/photo-1512941937669-90a1b58e7e9c.webp",
     },
   ];
 
@@ -187,7 +186,6 @@ const Android = () => {
       featuresBadge="Trusted Android Application Development Service"
       featuresTitle="Building Innovative, Scalable & High-Performance"
       featuresTitleHighlight="Android Apps"
-      featuresStickyImg={ec}
       features={features}
       bizBadge="Benefits of Our Android App Development Services"
       bizHeading="Leverage the Power of Android to"

@@ -12,7 +12,7 @@ import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 const Ionic = () => (
   <CommonTechPage
     banner={{
-      bgImage: "https://images.unsplash.com/photo-1526925539332-aa3b66e35444?w=1600&q=85",
+      bgImage: "/Assets/stock/photo-1526925539332-aa3b66e35444.webp",
       image: ionicImg,
       category: "Hybrid App Development",
       breadcrumb: "Ionic · Capacitor · Hybrid",

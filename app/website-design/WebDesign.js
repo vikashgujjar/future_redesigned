@@ -1,5 +1,5 @@
 "use client";
-const bannerImg = "https://images.unsplash.com/photo-1547658719-da2b51169166?w=1400&q=85";
+const bannerImg = "/Assets/stock/photo-1547658719-da2b51169166.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 import {
@@ -75,31 +75,31 @@ const sliderCards = [
     count: "1000+",
     title: "Websites Designed & Delivered",
     desc: `Over 1,000 websites successfully designed and launched for businesses across industries — from startups to established enterprises — in ${YEARS_EXPERIENCE_DISPLAY} years of web design expertise.`,
-    image: "https://images.unsplash.com/photo-1522252234503-e356532cafd5?w=900&q=80",
+    image: "/Assets/stock/photo-1522252234503-e356532cafd5.webp",
   },
   {
     count: YEARS_EXPERIENCE_DISPLAY,
     title: "Years of Web Design Experience",
     desc: `${YEARS_EXPERIENCE_DISPLAY} years of crafting websites that balance stunning visual design with technical excellence — proven across hundreds of industries and business types worldwide.`,
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=900&q=80",
+    image: "/Assets/stock/photo-1555066931-4365d14bab8c.webp",
   },
   {
     count: "98%",
     title: "Client Satisfaction Rate",
     desc: "Our clients consistently award us 5-star ratings for design quality, communication, on-time delivery, and the business results their new websites deliver.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80",
+    image: "/Assets/stock/photo-1460925895917-afdab827c52f.webp",
   },
   {
     count: "3x",
     title: "Average Traffic Increase",
     desc: "Businesses that switch to our SEO-optimized websites see an average 3x increase in organic search traffic within the first 6 months after launch.",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&q=80",
+    image: "/Assets/stock/photo-1498050108023-c5249f4df085.webp",
   },
   {
     count: "50+",
     title: "Industries Served",
     desc: "We've delivered websites for clients in healthcare, retail, education, real estate, logistics, hospitality, finance, technology, and many more niche industries.",
-    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=900&q=80",
+    image: "/Assets/stock/photo-1517245386807-bb43f82c33c4.webp",
   },
 ];
 
@@ -215,7 +215,7 @@ const WebDesign = () => {
       bannerImg={bannerImg}
       bannerTitle="WEBSITE DESIGN & DEVELOPMENT SERVICES"
       bannerDesc="The biggest challenge faced by any small business is to expand its customer base. With the rising expenses of electronic and print media, a professionally developed website is the first step toward achieving this aim. Future IT Touch Pvt. Ltd. provides a comprehensive range of website design and development services to clients worldwide — customized exclusively for startups and enterprises at affordable rates."
-      overviewImage="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80"
+      overviewImage="/Assets/stock/photo-1467232004584-a241de8bcf5d.webp"
       overviewImageAlt="Website Design & Development"
       overviewBadge="Website Design & Development Services"
       overviewHeading="Turning Ideas Into"
@@ -231,7 +231,7 @@ const WebDesign = () => {
       featuresBadge="Website Design & Development Services"
       featuresTitle="Building Websites That"
       featuresTitleHighlight="Drive Business Growth"
-      featuresStickyImg="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&q=80"
+      featuresStickyImg="/Assets/stock/photo-1551650975-87deedd944c3.webp"
       features={features}
       bizBadge="Why Choose Future IT Touch"
       bizHeading="We Build Websites That"

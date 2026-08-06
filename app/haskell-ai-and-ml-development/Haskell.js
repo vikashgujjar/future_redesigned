@@ -12,7 +12,7 @@ import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 const Haskell = () => (
   <CommonTechPage
     banner={{
-      bgImage: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1600&q=85",
+      bgImage: "/Assets/stock/photo-1620712943543-bcc4688e7485.webp",
       image: haskellImg,
       category: "AI & Machine Learning",
       breadcrumb: "Haskell · AI · ML",

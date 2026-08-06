@@ -12,7 +12,7 @@ import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 const Cblock = () => (
   <CommonTechPage
     banner={{
-      bgImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600&q=85",
+      bgImage: "/Assets/stock/photo-1558494949-ef010cbdcc31.webp",
       image: cppBlockchainImg,
       category: "Blockchain Node Development",
       breadcrumb: "C++ · Blockchain · Distributed Ledger",

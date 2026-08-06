@@ -11,7 +11,7 @@ import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 const Ruby = () => (
   <CommonTechPage
     banner={{
-      bgImage: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1600&q=85",
+      bgImage: "/Assets/stock/photo-1677442135703-1787eea5ce01.webp",
       image: rubyImg,
       category: "AI & Machine Learning",
       breadcrumb: "Ruby · PyBrain · Neural Networks",

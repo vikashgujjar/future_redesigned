@@ -444,14 +444,14 @@ export default function HeroSection() {
           line-height: 1;
         }
         .hs-form-title {
-          font-family: 'Syne', sans-serif;
-          font-weight: 800;
+          font-family: 'Poppins', sans-serif;
+          font-weight: 700;
           font-size: 1.1rem;
-          letter-spacing: -0.015em;
+          letter-spacing: 0.015em;
         }
         .hs-success-title {
-          font-family: 'Syne', sans-serif;
-          font-weight: 700;
+          font-family: 'Poppins', sans-serif;
+          font-weight: 500;
         }
       `}</style>
 

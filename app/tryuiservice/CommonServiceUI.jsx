@@ -1,7 +1,6 @@
 import React from "react";
 
 import Image from "next/image";
-import Ism from "../Assets/lsm.gif";
 import gm from "../Assets/gm.webp";
 import d1 from "../Assets/d1.webp";
 import d2 from "../Assets/portfolio-img-6.webp";

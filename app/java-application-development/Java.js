@@ -11,7 +11,7 @@ import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 const Java = () => (
   <CommonTechPage
     banner={{
-      bgImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1600&q=85",
+      bgImage: "/Assets/stock/photo-1555066931-4365d14bab8c.webp",
       image: javaImg,
       category: "Enterprise App Development",
       breadcrumb: "Java · Spring Boot · Microservices",

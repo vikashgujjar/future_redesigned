@@ -13,7 +13,7 @@ export default function WhyusChild() {
 
         {/* Background image */}
         <Image
-          src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=1600&q=85"
+          src="/Assets/stock/photo-1600880292089-90a7e086ee0c.webp"
           alt="Why Choose Future IT Touch"
           fill
           priority

@@ -11,7 +11,7 @@ import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 const Solidity = () => (
   <CommonTechPage
     banner={{
-      bgImage: "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?w=1600&q=85",
+      bgImage: "/Assets/stock/photo-1622630998477-20aa696ecb05.webp",
       image: solidityImg,
       category: "Smart Contract Development",
       breadcrumb: "Solidity · Ethereum · DApps",

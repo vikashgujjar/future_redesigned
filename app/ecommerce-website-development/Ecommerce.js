@@ -1,5 +1,5 @@
 "use client";
-const ecc = "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1400&q=85";
+const ecc = "/Assets/stock/photo-1498050108023-c5249f4df085.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 import {
@@ -77,31 +77,31 @@ const Ecommerce = () => {
       count: "250+",
       title: "Websites Delivered",
       desc: "We have crafted over 250+ eCommerce websites that captivate customers and drive sales. Each store is designed to be visually appealing, user-friendly, and fully optimized for performance, ensuring an outstanding online shopping experience.",
-      image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=900&q=80",
+      image: "/Assets/stock/photo-1607082348824-0a96f2a4b9da.webp",
     },
     {
       count: YEARS_EXPERIENCE_DISPLAY,
       title: "Years of Experience",
       desc: `With more than ${YEARS_EXPERIENCE_DISPLAY} years in eCommerce website development, Future IT Touch Pvt. Ltd. brings deep industry expertise. Our team ensures each project leverages best practices, modern technologies, and innovative design strategies.`,
-      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&q=80",
+      image: "/Assets/stock/photo-1522202176988-66273c2fd55f.webp",
     },
     {
       count: "500+",
       title: "Global Clients Served",
       desc: "Trusted by over 500 clients globally, we deliver tailor-made eCommerce solutions that meet diverse business needs. Our experience spans multiple industries and markets, ensuring websites that resonate with both local and international customers.",
-      image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=900&q=80",
+      image: "/Assets/stock/photo-1573164713988-8665fc963095.webp",
     },
     {
       count: "98%",
       title: "Client Satisfaction Rate",
       desc: "Our client-centric approach has earned us a 98% satisfaction rate. We focus on clear communication, timely delivery, and creating online stores that exceed expectations and foster long-term business partnerships.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80",
+      image: "/Assets/stock/photo-1551288049-bebda4e38f71.webp",
     },
     {
       count: "24/7",
       title: "Dedicated Support",
       desc: "We provide round-the-clock support for all your eCommerce websites. Our dedicated team ensures technical issues are resolved promptly, updates are applied efficiently, and your online store operates smoothly at all times.",
-      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&q=80",
+      image: "/Assets/stock/photo-1516321318423-f06f85e504b3.webp",
     },
   ];
 
@@ -204,7 +204,7 @@ const Ecommerce = () => {
       bannerTitle="ECOMMERCE WEBSITE DESIGN SERVICES"
       bannerDesc={`Are you planning to expand your business by reaching out to your customers online? An eCommerce website would be the best option to enhance your customer base and increase your sales. Whether you want to create your first online store or overcome the sales slump with your existing one, we can help you out with our results-driven eCommerce website design services. Hire experienced developers from Future IT Touch Pvt. Ltd. for top-notch eCommerce web development solutions with a rich user interface, integration of payment gateway and shipping API, advanced security features, easy-to-manage product inventory and much more.
 `}
-      overviewImage="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
+      overviewImage="/Assets/stock/photo-1556742049-0cfed4f6a45d.webp"
       overviewImageAlt="eCommerce website development"
       overviewBadge="Trusted eCommerce Website Development"
       overviewHeading="Building Engaging"
@@ -220,7 +220,7 @@ const Ecommerce = () => {
       featuresBadge="Trusted eCommerce Website Development Company"
       featuresTitle="Creating Online Stores That"
       featuresTitleHighlight="Engage & Convert"
-      featuresStickyImg="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80"
+      featuresStickyImg="/Assets/stock/photo-1563013544-824ae1b704d3.webp"
       features={features}
       bizBadge="Leading eCommerce Website Design Company in India"
       bizHeading="Partner with Us for"

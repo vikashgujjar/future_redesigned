@@ -1,5 +1,5 @@
 "use client";
-const cwd = "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1400&q=85";
+const cwd = "/Assets/stock/photo-1611162617474-5b21e879e113.webp";
 import soe from "../Assets/soe.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
@@ -122,31 +122,31 @@ const Social = () => {
       count: "1500+",
       title: "Campaigns Successfully Executed",
       desc: "We've successfully delivered over 1500 high-impact social media campaigns that boosted brand visibility, audience engagement, and lead conversions across diverse industries worldwide.",
-      image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=900&q=80",
+      image: "/Assets/stock/photo-1611162617474-5b21e879e113.webp",
     },
     {
       count: YEARS_EXPERIENCE_DISPLAY,
       title: "Years of Digital Expertise",
       desc: `With more than ${YEARS_EXPERIENCE_DISPLAY} years of experience in digital marketing, Future IT Touch Pvt. Ltd. crafts innovative, data-driven social strategies that accelerate growth and ensure long-term brand success.`,
-      image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=900&q=80",
+      image: "/Assets/stock/photo-1432888498266-38ffec3eaf0a.webp",
     },
     {
       count: "500+",
       title: "Satisfied Global Clients",
       desc: "Trusted by over 500 leading brands worldwide, our social media professionals deliver impactful content and campaigns that build trust, foster connections, and inspire customer loyalty.",
-      image: "https://images.unsplash.com/photo-1618609378039-b572f64c5b42?w=900&q=80",
+      image: "/Assets/stock/photo-1618609378039-b572f64c5b42.webp",
     },
     {
       count: "98%",
       title: "Client Satisfaction Rate",
       desc: "We're proud to maintain a 98% satisfaction rate by consistently delivering creative excellence, measurable performance, and proactive support that exceed client expectations.",
-      image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=900&q=80",
+      image: "/Assets/stock/photo-1499750310107-5fef28a66643.webp",
     },
     {
       count: "24/7",
       title: "Social Support & Monitoring",
       desc: "Our dedicated social team provides 24/7 support and real-time monitoring to ensure your brand remains active, responsive, and protected across every social platform.",
-      image: "https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=900&q=80",
+      image: "/Assets/stock/photo-1611926653458-09294b3142bf.webp",
     },
   ];
 
