@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Location from "../components/Location";
+import MapEmbed from "../components/MapEmbed";
 import {
   FaEnvelope, FaLock, FaPhoneAlt, FaSkype,
   FaMapMarkerAlt, FaArrowRight, FaCheckCircle,
@@ -453,12 +454,9 @@ export default function Page() {
       <div style={{ padding:"0 0vw 0px" }}>
         <div style={{ borderRadius:20, overflow:"hidden",
           boxShadow:"0 8px 40px rgba(99,102,241,.10)", border:"1px solid rgba(99,102,241,.10)" }}>
-          <iframe
+          <MapEmbed
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d27444.62041181375!2d76.683024!3d30.702160000000003!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a838963fb5049%3A0x4188b8c6dd4c764a!2sFuture%20IT%20Touch%20Private%20Limited%20%7C%20Website%20Design%20and%20Development%20Company!5e0!3m2!1sen!2sin!4v1716290401199!5m2!1sen!2sin"
-            width="100%" height="440"
-            style={{ border:0, display:"block" }}
-            allowFullScreen="" loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
+            height={440}
             title="Future IT Touch Private Limited - Location"
           />
         </div>

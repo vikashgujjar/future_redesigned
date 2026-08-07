@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import useOtpFlow from "../lib/useOtpFlow";
 import OtpVerifyModal from "./OtpVerifyModal";
+import MapEmbed from "./MapEmbed";
 
 const Forms = () => {
   const { showOTP, setShowOTP, otp, setOtp: setOTP, loading, sendOtp, resendOtp, verifyOtp } = useOtpFlow();
@@ -445,14 +446,10 @@ const Forms = () => {
             <div
               className="overflow-hidden rounded-[13px]"
               style={{ border: "1px solid rgba(255,255,255,.07)" }}>
-              <iframe
+              <MapEmbed
                 src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d27444.62041181375!2d76.683024!3d30.702160000000003!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a838963fb5049%3A0x4188b8c6dd4c764a!2sFuture%20IT%20Touch%20Private%20Limited%20%7C%20Website%20Design%20and%20Development%20Company!5e0!3m2!1sen!2sin!4v1716290401199!5m2!1sen!2sin"
-                width="100%"
-                height="230"
-                style={{ border: 0, display: "block", filter: "grayscale(20%) contrast(1.05)" }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
+                height={230}
+                style={{ filter: "grayscale(20%) contrast(1.05)" }}
                 title="Future IT Touch Private Limited - Location"
               />
             </div>
