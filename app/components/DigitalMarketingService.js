@@ -92,7 +92,7 @@ export default function DigitalMarketingService() {
             {/* Bilbo script */}
             <span
               className="text-xl sm:text-2xl tracking-widest block mb-4"
-              style={{ fontFamily: "'Bilbo Swash Caps', cursive", color: "rgba(255,255,255,.75)" }}>
+              style={{ fontFamily: "cursive", color: "rgba(255,255,255,.75)" }}>
               Digital Marketing Services
             </span>
 

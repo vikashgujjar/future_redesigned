@@ -132,10 +132,10 @@ export default function SkillsSection() {
         }
         @keyframes skPing  { 75%,100%{transform:scale(2.1);opacity:0} }
         @keyframes skScan  {
-          0%  { top:48px; opacity:.40 }
+          0%  { transform:translateY(0); opacity:.40 }
           48% { opacity:.72 }
-          50% { top:calc(100% - 54px); opacity:.40 }
-          100%{ top:48px; opacity:.40 }
+          50% { transform:translateY(498px); opacity:.40 }
+          100%{ transform:translateY(0); opacity:.40 }
         }
         @keyframes skStatIn {
           from{opacity:0;transform:translateY(14px) scale(.97)}
@@ -151,7 +151,7 @@ export default function SkillsSection() {
         .sk-dot    { animation:skGlow 2.8s ease-in-out infinite }
 
         .sk-scan {
-          position:absolute; left:0; right:0; height:1.5px; pointer-events:none; z-index:3;
+          position:absolute; left:0; right:0; top:48px; height:1.5px; pointer-events:none; z-index:3;
           background:linear-gradient(90deg,transparent 0%,rgba(45,212,191,.58) 30%,rgba(99,102,241,.52) 70%,transparent 100%);
           animation:skScan 5.5s ease-in-out infinite;
         }
@@ -400,8 +400,13 @@ export default function SkillsSection() {
               {/* Scan line */}
               <div className="sk-scan" />
 
-              {/* Pills */}
-              {positions.length > 0 && skills.map((skill, i) => (
+              {/* Pills — gated on real arena dimensions, not just a non-empty
+                  positions array. This section is CSS-hidden below the `md`
+                  breakpoint (max-md:hidden), so on mobile the arena reports a
+                  0×0 bounding rect; without this check the framer-motion
+                  chunk each Pill dynamically imports would still fetch there
+                  even though nothing is ever visible. */}
+              {arena.w > 0 && arena.h > 0 && positions.length > 0 && skills.map((skill, i) => (
                 <Pill
                   key={i}
                   skill={skill}

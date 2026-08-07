@@ -99,7 +99,7 @@ export default function AboutShow() {
           />
           <span
             className=" text-4xl mb-8 bg-gradient-to-r from-teal-400 to-indigo-700 text-transparent bg-clip-text tracking-widest"
-            style={{ fontFamily: "'Bilbo Swash Caps', cursive" }}
+            style={{ fontFamily: "cursive" }}
           >
             About Us
           </span>

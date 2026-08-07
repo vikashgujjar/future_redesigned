@@ -151,7 +151,7 @@ const WhyChoose = () => {
 
           {/* script */}
           {/* <span className="text-4xl lg:text-5xl block bg-gradient-to-r from-teal-400 to-indigo-700 text-transparent bg-clip-text -mb-1"
-            style={{ fontFamily:"'Bilbo Swash Caps',cursive" }}>
+            style={{ fontFamily:"cursive" }}>
             Why Choose Us
           </span> */}
 

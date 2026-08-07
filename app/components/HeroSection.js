@@ -62,25 +62,49 @@ export default function HeroSection() {
   const c  = slide.color;
   const cB = slide.colorB;
 
-  /* scroll zoom */
+  /* scroll zoom — rAF-throttled: raw "scroll" fires far more often than the
+     screen repaints, and each firing was triggering a full re-render.
+     Coalescing to one state update per frame cuts that to ~60/s max. */
   useEffect(() => {
-    const fn = () => setScrollY(window.scrollY);
+    let rafId = null;
+    const fn = () => {
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        setScrollY(window.scrollY);
+      });
+    };
     window.addEventListener("scroll", fn, { passive: true });
-    return () => window.removeEventListener("scroll", fn);
+    return () => {
+      window.removeEventListener("scroll", fn);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
   }, []);
 
-  /* mouse parallax */
+  /* mouse parallax — same rAF coalescing, plus it means the
+     getBoundingClientRect() layout read below also only happens once per
+     frame instead of on every raw mousemove event. */
   useEffect(() => {
+    let rafId = null;
+    let latestEvent = null;
     const fn = (e) => {
-      const rect = sectionRef.current?.getBoundingClientRect();
-      if (!rect) return;
-      setMouse({
-        x: ((e.clientX - rect.left) / rect.width  - 0.5) * 2,
-        y: ((e.clientY - rect.top)  / rect.height - 0.5) * 2,
+      latestEvent = e;
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        const rect = sectionRef.current?.getBoundingClientRect();
+        if (!rect || !latestEvent) return;
+        setMouse({
+          x: ((latestEvent.clientX - rect.left) / rect.width  - 0.5) * 2,
+          y: ((latestEvent.clientY - rect.top)  / rect.height - 0.5) * 2,
+        });
       });
     };
     window.addEventListener("mousemove", fn, { passive: true });
-    return () => window.removeEventListener("mousemove", fn);
+    return () => {
+      window.removeEventListener("mousemove", fn);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   /* auto-detect country from IP */
@@ -178,7 +202,7 @@ export default function HeroSection() {
         @keyframes hsExit { from{opacity:1;transform:translateY(0)}      to{opacity:0;transform:translateY(-14px)} }
         @keyframes hsBgIn { from{opacity:0;transform:scale(1.09)}        to{opacity:1;transform:scale(1)} }
         @keyframes hsSpin { from{transform:rotate(0)}                    to{transform:rotate(360deg)} }
-        @keyframes hsBar  { from{width:0%}                               to{width:100%} }
+        @keyframes hsBar  { from{transform:scaleX(0)}                    to{transform:scaleX(1)} }
         @keyframes hsMrq  { from{transform:translateX(0)}                to{transform:translateX(-50%)} }
         @keyframes hsPing { 75%,100%{transform:scale(2.2);opacity:0} }
         @keyframes hsImgRev { from{opacity:0;transform:scale(.88) rotate(-3deg)} to{opacity:1;transform:scale(1) rotate(0)} }
@@ -204,7 +228,7 @@ export default function HeroSection() {
 
         .hs-bg-in  { animation: hsBgIn .9s cubic-bezier(.22,1,.36,1) both }
         .hs-img-in { animation: hsImgRev .75s cubic-bezier(.22,1,.36,1) both }
-        .hs-bar    { animation: hsBar 6.5s linear both }
+        .hs-bar    { width:100%; transform-origin:left; animation: hsBar 6.5s linear both }
         .hs-float  { animation: hsFloat 8s ease-in-out infinite }
         .hs-blob   { animation: hsBlobMove 14s ease-in-out infinite }
         .hs-mrq    { display:flex; width:max-content; animation:hsMrq 22s linear infinite }
@@ -285,7 +309,7 @@ export default function HeroSection() {
           color: color-mix(in srgb, var(--hc) 28%, transparent);
           letter-spacing: 0.1em !important;
           transition: -webkit-text-stroke-color 1s, color 1s;
-          font-family: 'Playfair Display', serif !important;
+          font-family: Georgia, 'Times New Roman', serif !important;
         }
         .hs-stat-val {
           background: linear-gradient(90deg, var(--hc), var(--hcb));
