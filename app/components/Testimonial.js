@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import axios from "axios";
 import GetNewInsight from "./GetNewInsight";
 import TestimonialCarousel from "./TestimonialCarousel";
 
@@ -54,11 +53,9 @@ const Testimonial = () => {
         }
         const placeId = "ChIJSVD7Y4mDGjkRSnZM3ca4iEE";
         const apiKey = "AIzaSyD-LPUhqM4jZ6O5YVt07jyeEuNOLT5ObIM";
-        const response = await axios.get(
-          `https://googlemapreviews-1.onrender.com/api/google-reviews`,
-          { params: { placeId, apiKey } }
-        );
-        const fetched = response.data;
+        const qs = new URLSearchParams({ placeId, apiKey });
+        const response = await fetch(`https://googlemapreviews-1.onrender.com/api/google-reviews?${qs}`);
+        const fetched = await response.json();
         localStorage.setItem("reviews", JSON.stringify(fetched));
         setReviews(fetched);
         setLoading(false);

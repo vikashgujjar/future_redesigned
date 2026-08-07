@@ -5,7 +5,13 @@ import { RxCross2 } from "react-icons/rx";
 import { FaEnvelope, FaPhoneAlt, FaSkype, FaChevronDown, FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
-import Login from "./Login";
+import dynamic from "next/dynamic";
+
+// Header renders on every page, but the quote-request popup it opens is
+// closed by default — code-splitting it out keeps its form/validation JS
+// (and the sweetalert2/axios it pulls in) out of every page's initial load,
+// fetched only once someone actually clicks "Request A Quote".
+const Login = dynamic(() => import("./Login"));
 
 /* ─── Mega menu data ─────────────────────────────── */
 const serviceColumns = [

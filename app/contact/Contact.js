@@ -7,7 +7,7 @@ import {
   FaEnvelope, FaLock, FaPhoneAlt, FaSkype,
   FaMapMarkerAlt, FaArrowRight, FaCheckCircle,
 } from "react-icons/fa";
-import Swal from "sweetalert2";
+import { swalFire } from "../lib/swal";
 import useOtpFlow from "../lib/useOtpFlow";
 import { COUNTRY_CODES } from "../components/countryData";
 import { SERVICES } from "../data/services";
@@ -83,7 +83,7 @@ export default function Page() {
   async function onSignup() {
     const { S_name, S_email, S_phone, message } = formData;
     if (!S_name || !S_email || !S_phone || !message) {
-      Swal.fire({ icon: "warning", title: "Missing Information", text: "Please fill out all mandatory fields." });
+      swalFire({ icon: "warning", title: "Missing Information", text: "Please fill out all mandatory fields." });
       return;
     }
     await sendOtp(getPhone());

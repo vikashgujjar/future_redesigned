@@ -7,7 +7,7 @@ import {
   FaCheckCircle, FaArrowRight, FaLock, FaHeadset,
   FaCreditCard, FaTasks, FaPaintBrush, FaServer, FaComments,
 } from "react-icons/fa";
-import Swal from "sweetalert2";
+import { swalFire } from "../lib/swal";
 import axios from "axios";
 
 const categories = [
@@ -93,7 +93,7 @@ export default function Support() {
     e.preventDefault();
     const { S_name, S_email, S_phone, message } = form;
     if (!S_name || !S_email || !S_phone || !message) {
-      Swal.fire({ icon: "warning", title: "Missing Fields", text: "Please fill in all required fields." });
+      swalFire({ icon: "warning", title: "Missing Fields", text: "Please fill in all required fields." });
       return;
     }
     setLoading(true);
@@ -103,10 +103,10 @@ export default function Support() {
       await axios.post("https://futuretouchmail.onrender.com/send-email", urlEncoded);
       setLoading(false);
       setForm({ S_name:"",S_email:"",S_phone:"",S_subject:"",category:"",priority:"Medium",message:"",userEmailsir:"info@futuretouch.in" });
-      Swal.fire({ icon: "success", title: "Ticket Submitted!", text: "Our team will get back to you within 4–8 business hours." });
+      swalFire({ icon: "success", title: "Ticket Submitted!", text: "Our team will get back to you within 4–8 business hours." });
     } catch {
       setLoading(false);
-      Swal.fire({ icon: "error", title: "Submission Failed", text: "Something went wrong. Please try again or email us directly." });
+      swalFire({ icon: "error", title: "Submission Failed", text: "Something went wrong. Please try again or email us directly." });
     }
   };
 

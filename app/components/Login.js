@@ -8,7 +8,7 @@ import {
   FaCloudUploadAlt, FaTimes, FaArrowRight,
 } from "react-icons/fa";
 
-import Swal from "sweetalert2";
+import { swalFire } from "../lib/swal";
 import { COUNTRY_CODES } from "./countryData";
 import { SERVICES } from "../data/services";
 import OtpVerifyModal from "./OtpVerifyModal";
@@ -80,7 +80,7 @@ const Login = ({ handleClosePopup ,isPopupOpen}) => {
     const { S_name, S_email, S_phone } = formData;
 
     if (!S_name || !S_email || !S_phone) {
-      Swal.fire({
+      swalFire({
         icon: "warning",
         title: "Missing Information",
         text: "Please fill out all the mandatory fields.",
@@ -101,7 +101,7 @@ const Login = ({ handleClosePopup ,isPopupOpen}) => {
   };
 
   const handleResendOTP = () => {
-    Swal.fire({
+    swalFire({
       title: "Resend OTP",
       text: "Are you sure you want to resend OTP?",
       icon: "question",

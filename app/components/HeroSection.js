@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { COUNTRY_CODES } from "./countryData";
 import { SERVICES } from "../data/services";
-import Swal from "sweetalert2";
+import { swalFire } from "../lib/swal";
 import useOtpFlow from "../lib/useOtpFlow";
 import OtpVerifyModal from "./OtpVerifyModal";
 import useYearsExperience from "../lib/useYearsExperience";
@@ -125,7 +125,7 @@ export default function HeroSection() {
   async function onSignup() {
     const { first, last, email, phone } = form;
     if (!first || !last || !email || !phone) {
-      Swal.fire({ icon: "warning", title: "Missing Information", text: "Please fill out all the mandatory fields." });
+      swalFire({ icon: "warning", title: "Missing Information", text: "Please fill out all the mandatory fields." });
       return;
     }
     await sendOtp(getPhone());

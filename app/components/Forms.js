@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { COUNTRY_CODES } from "./countryData";
 import { SERVICES } from "../data/services";
-import Swal from "sweetalert2";
+import { swalFire } from "../lib/swal";
 import Image from "next/image";
 import Link from "next/link";
 import useOtpFlow from "../lib/useOtpFlow";
@@ -49,7 +49,7 @@ const Forms = () => {
   async function onSignup() {
     const { first, last, email, phone } = formData;
     if (!first || !last || !email || !phone) {
-      Swal.fire({ icon: "warning", title: "Missing Information", text: "Please fill out all the mandatory fields." });
+      swalFire({ icon: "warning", title: "Missing Information", text: "Please fill out all the mandatory fields." });
       return;
     }
     await sendOtp(getPhone());

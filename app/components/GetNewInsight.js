@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Swal from "sweetalert2";
+import { swalFire } from "../lib/swal";
 import { sendLeadNotification } from "../lib/useOtpFlow";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -19,7 +19,7 @@ export default function GetNewInsight() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!EMAIL_RE.test(email)) {
-      Swal.fire({ icon: "warning", title: "Invalid Email", text: "Please enter a valid email address." });
+      swalFire({ icon: "warning", title: "Invalid Email", text: "Please enter a valid email address." });
       return;
     }
     setLoading(true);
@@ -33,7 +33,7 @@ export default function GetNewInsight() {
       window.location.href = "/welcome";
     } catch {
       setLoading(false);
-      Swal.fire({ icon: "error", title: "Oops...", text: "Something went wrong. Please try again." });
+      swalFire({ icon: "error", title: "Oops...", text: "Something went wrong. Please try again." });
     }
   };
 

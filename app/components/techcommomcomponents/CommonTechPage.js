@@ -7,7 +7,7 @@ import CommonSlider from "./CommonSlider";
 import GetNewInsight from "../GetNewInsight";
 import { COUNTRY_CODES } from "../countryData";
 import { SERVICES } from "../../data/services";
-import Swal from "sweetalert2";
+import { swalFire } from "../../lib/swal";
 import useOtpFlow from "../../lib/useOtpFlow";
 import OtpVerifyModal from "../OtpVerifyModal";
 import ServiceSchema from "../schema/ServiceSchema";
@@ -62,7 +62,7 @@ export default function CommonTechPage({
   async function onSignup() {
     const { name, email, phone } = formData;
     if (!name || !email || !phone) {
-      Swal.fire({ icon: "warning", title: "Missing Information", text: "Please fill out all the mandatory fields." });
+      swalFire({ icon: "warning", title: "Missing Information", text: "Please fill out all the mandatory fields." });
       return;
     }
     await sendOtp(getPhone());

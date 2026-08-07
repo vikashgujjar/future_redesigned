@@ -1,13 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import axios from "axios";
-import Swal from "sweetalert2";
+import { swalFire } from "./swal";
 
 const OTP_API = "https://enquiry.futuretouch.org/api";
 const MAIL_API = "https://mail.futuretouch.org/api";
 const SEND_TO = "info@futuretouch.in";
 const COMPANY_NAME = "Future IT Touch Pvt. Ltd.";
+
+// axios is only needed once a lead form is actually submitted — loading it
+// lazily (and caching the import) keeps it out of every page's initial JS,
+// since this hook is used by nearly every form site-wide.
+let axiosPromise;
+function getAxios() {
+  if (!axiosPromise) axiosPromise = import("axios").then((m) => m.default);
+  return axiosPromise;
+}
 
 /* Fires the lead-notification email directly — used both as the OTP flow's
    secondary notification below, and standalone by forms that skip OTP
@@ -40,16 +48,16 @@ export default function useOtpFlow() {
 
   const sendOtp = async (phone) => {
     try {
-      const res = await axios.post(`${OTP_API}/send-otp`, { phone });
+      const res = await (await getAxios()).post(`${OTP_API}/send-otp`, { phone });
       if (!res.data.success) {
-        Swal.fire({ icon: "error", title: "Failed to Send OTP", text: res.data.message || "Unable to send OTP. Please try again." });
+        swalFire({ icon: "error", title: "Failed to Send OTP", text: res.data.message || "Unable to send OTP. Please try again." });
         return false;
       }
       setShowOTP(true);
-      Swal.fire({ icon: "success", title: "OTP Sent", text: "An OTP has been sent to your phone number." });
+      swalFire({ icon: "success", title: "OTP Sent", text: "An OTP has been sent to your phone number." });
       return true;
     } catch (error) {
-      Swal.fire({
+      swalFire({
         icon: "error",
         title: "Failed to Send OTP",
         text: error?.response?.data?.message || "Something went wrong.",
@@ -60,14 +68,14 @@ export default function useOtpFlow() {
 
   const resendOtp = async (phone) => {
     try {
-      const res = await axios.post(`${OTP_API}/send-otp`, { phone });
+      const res = await (await getAxios()).post(`${OTP_API}/send-otp`, { phone });
       if (res.data.success) {
-        Swal.fire({ icon: "success", title: "OTP Resent", text: "A new OTP has been sent to your phone number." });
+        swalFire({ icon: "success", title: "OTP Resent", text: "A new OTP has been sent to your phone number." });
       } else {
-        Swal.fire({ icon: "error", title: "Error", text: res.data.message || "Failed to resend OTP. Please try again." });
+        swalFire({ icon: "error", title: "Error", text: res.data.message || "Failed to resend OTP. Please try again." });
       }
     } catch (error) {
-      Swal.fire({
+      swalFire({
         icon: "error",
         title: "Error",
         text: error?.response?.data?.message || "Failed to resend OTP. Please check your network and try again.",
@@ -78,7 +86,7 @@ export default function useOtpFlow() {
   const verifyOtp = async ({ phone, subject, formData, lead, redirectTo = "/welcome", onSuccess }) => {
     setLoading(true);
     try {
-      const res = await axios.post(`${OTP_API}/verify-otp`, {
+      const res = await (await getAxios()).post(`${OTP_API}/verify-otp`, {
         phone,
         otp,
         sendto: SEND_TO,
@@ -86,7 +94,7 @@ export default function useOtpFlow() {
         formdata: formData,
       });
       if (!res.data.success) {
-        Swal.fire({ icon: "error", title: "Failed to Verify OTP", text: res.data.message || "Verification failed, please try again." });
+        swalFire({ icon: "error", title: "Failed to Verify OTP", text: res.data.message || "Verification failed, please try again." });
         return;
       }
 
@@ -96,14 +104,14 @@ export default function useOtpFlow() {
         console.error("Failed to send lead notification email:", mailError);
       }
 
-      Swal.fire({ icon: "success", title: "Verified", text: "OTP verified and message sent." }).then(() => {
+      swalFire({ icon: "success", title: "Verified", text: "OTP verified and message sent." }).then(() => {
         setShowOTP(false);
         setOtp("");
         onSuccess?.();
         if (redirectTo) window.location.href = redirectTo;
       });
     } catch (error) {
-      Swal.fire({
+      swalFire({
         icon: "error",
         title: "Failed to Verify OTP",
         text: error?.response?.data?.message || "Something went wrong.",
