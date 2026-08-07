@@ -1,8 +1,7 @@
 "use client";
 import React, { useState, useRef, useCallback } from "react";
 import { usePathname } from "next/navigation";
-import { RxCross2 } from "react-icons/rx";
-import { FaEnvelope, FaPhoneAlt, FaSkype, FaChevronDown, FaArrowRight } from "react-icons/fa";
+import { RxCross2, FaEnvelope, FaPhoneAlt, FaSkype, FaChevronDown, FaArrowRight } from "./icons";
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";

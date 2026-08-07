@@ -7,8 +7,8 @@ import {
   FaInstagram,
   FaYoutube,
   FaGithub,
-} from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+  FaXTwitter,
+} from "./icons";
 
 const ourLinks = [
   { label: "Home", href: "/" },

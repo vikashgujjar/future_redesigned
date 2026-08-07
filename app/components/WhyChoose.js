@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import { FaAngleRight, FaCheckCircle, FaAward, FaRocket, FaClock } from "react-icons/fa";
+import { FaAngleRight, FaCheckCircle, FaAward, FaRocket, FaClock } from "./icons";
 import Login from "./Login";
 import { COMPANY_START_YEAR } from "../lib/companyStats";
 

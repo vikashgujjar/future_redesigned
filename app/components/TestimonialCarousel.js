@@ -1,7 +1,7 @@
 "use client";
 import { useRef } from "react";
 import Image from "next/image";
-import { FaQuoteRight, FaStar, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaQuoteRight, FaStar, FaChevronLeft, FaChevronRight } from "./icons";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
