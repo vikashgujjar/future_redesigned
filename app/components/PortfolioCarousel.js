@@ -53,9 +53,9 @@ export default function PortfolioCarousel({ items }) {
                   {item.title}
                 </h3>
               </div>
-              <Link href={item.link} target="_blank" rel="noopener noreferrer" className="pf-arrow" aria-label={`Visit ${item.title}`}>
+              {/* <Link href={item.link} target="_blank" rel="noopener noreferrer" className="pf-arrow" aria-label={`Visit ${item.title}`}>
                 <ArrowUpRight size={17} />
-              </Link>
+              </Link> */}
             </div>
           </div>
         </SwiperSlide>
