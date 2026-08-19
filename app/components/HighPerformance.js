@@ -79,7 +79,7 @@ export default function HighPerformance() {
               className="flex flex-col items-start gap-4 p-6 border border-gray-200 rounded-xl bg-white shadow-md hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300"
             >
               <div className="flex  -mt-14 bg-white justify-center items-center p-4 rounded w-20 h-20 bg-gradient-to-r border border-gray-400">
-                <Image src={feature.icon} alt="" width={512} height={512} unoptimized />
+                <Image src={feature.icon} alt={feature.title} width={512} height={512} unoptimized />
               </div>
               <h4 className="text-lg font-semibold text-gray-900">
                 {feature.title}

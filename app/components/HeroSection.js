@@ -485,7 +485,7 @@ export default function HeroSection() {
         className="hs-bg-in absolute inset-0 z-0"
         style={{ transform:`scale(${imgScale})`, transformOrigin:"center", transition:"transform .06s linear" }}
       >
-        <img src={slide.image} alt="" aria-hidden="true" className="w-full h-full object-cover object-center block" />
+        <img src={slide.image} alt={slide.tag} aria-hidden="true" className="w-full h-full object-cover object-center block" />
       </div>
 
       {/* ── Overlays ── */}
@@ -666,7 +666,7 @@ export default function HeroSection() {
               <div className="hs-float absolute -top-11 -right-5 w-[120px] h-[120px] sm:w-[132px] sm:h-[132px] rounded-full z-10">
                 <div className="hs-spin-ring hs-img-ring absolute -inset-[3px] rounded-full z-0" />
                 <div className="absolute inset-[3px] rounded-full overflow-hidden z-10 bg-[#07091A]">
-                  <img key={`ci-${tick}`} className="hs-img-in w-full h-full object-cover object-center" src={slide.image} alt="" />
+                  <img key={`ci-${tick}`} className="hs-img-in w-full h-full object-cover object-center" src={slide.image} alt={slide.tag} />
                   <div className="hs-img-overlay absolute inset-0" />
                 </div>
               </div>

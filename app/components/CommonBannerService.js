@@ -110,7 +110,7 @@ export default function CommonBannerService({ imgSrc, title, desc }) {
             <div className="relative aspect-[4/3] overflow-hidden rounded-[calc(2rem-2px)] bg-[#2c1f66]">
               <Image
                 src={imgSrc}
-                alt=""
+                alt={title}
                 fill
                 priority
                 className="object-cover object-center transition-transform duration-700 group-hover:scale-105"

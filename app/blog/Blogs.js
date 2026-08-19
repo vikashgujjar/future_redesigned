@@ -3,43 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import GetNewInsight from "../components/GetNewInsight";
 import { FaClock, FaTag, FaArrowRight } from "react-icons/fa";
+import { BLOG_POSTS } from "./blogPosts";
 
-import blog1 from "../Assets/blog-dg-1.webp";
-import blog2 from "../Assets/blog-dg-2.webp";
-import blog3 from "../Assets/blog-dg-3.webp";
-
-const blogData = [
-  {
-    title:    "Everything You Need To Know About Nodejs!",
-    category: "Node.js",
-    date:     "Sep 23, 2020",
-    readTime: "5 min read",
-    content:  "Node.js is a fast, scalable runtime for server-side JavaScript, ideal for real-time applications. Built on Chrome's V8 engine, it enables efficient, non-blocking I/O for data-intensive apps.",
-    image:    blog1,
-    slug:     "/blog/everything-you-need-to-know-about-nodejs",
-    accent:   { from:"#06b6d4", to:"#0284c7" },
-  },
-  {
-    title:    "Exploring the Key Features of Laravel 7 Framework",
-    category: "Laravel",
-    date:     "Sep 24, 2020",
-    readTime: "6 min read",
-    content:  "Laravel 7 offers elegant syntax, robust routing, authentication, scheduling, real-time broadcasting, and seamless integration — making PHP development faster and more enjoyable than ever.",
-    image:    blog2,
-    slug:     "/blog/exploring-the-key-features-of-laravel-7-framework",
-    accent:   { from:"#6366f1", to:"#4f46e5" },
-  },
-  {
-    title:    "Best Technology for Mobile Application Development",
-    category: "Mobile App",
-    date:     "Sep 25, 2020",
-    readTime: "7 min read",
-    content:  "React Native, Flutter, Swift, Kotlin, Xamarin, and Ionic each excel in mobile development with unique advantages. Choosing the right stack depends on your target platform and business goals.",
-    image:    blog3,
-    slug:     "/blog/best-technology-for-mobile-application-development",
-    accent:   { from:"#10b981", to:"#059669" },
-  },
-];
+const blogData = BLOG_POSTS.map((post) => ({
+  ...post,
+  content: post.excerpt,
+  slug: `/blog/${post.slug}`,
+}));
 
 export default function Blog() {
   return (

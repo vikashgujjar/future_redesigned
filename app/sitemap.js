@@ -3,6 +3,7 @@ export const dynamic = "force-static";
 import { SERVICES } from "./data/location-seo/services";
 import { ALL_LOCATIONS } from "./data/location-seo/locations";
 import { TECHNOLOGIES, getTechnologyLocationPath } from "./data/location-seo/technologies";
+import { BLOG_POSTS } from "./blog/blogPosts";
 
 const SITE_URL = "https://futuretouch.in";
 
@@ -94,13 +95,6 @@ const STATIC_ROUTES = [
   { path: "/support", priority: 0.4, changeFrequency: "monthly" },
 ];
 
-// Kept in sync with app/blog/[slug]/page.js's generateStaticParams()
-const BLOG_SLUGS = [
-  "everything-you-need-to-know-about-nodejs",
-  "exploring-the-key-features-of-laravel-7-framework",
-  "best-technology-for-mobile-application-development",
-];
-
 export default function sitemap() {
   const now = new Date();
 
@@ -111,8 +105,8 @@ export default function sitemap() {
     priority: route.priority,
   }));
 
-  const blogEntries = BLOG_SLUGS.map((slug) => ({
-    url: `${SITE_URL}/blog/${slug}`,
+  const blogEntries = BLOG_POSTS.map((post) => ({
+    url: `${SITE_URL}/blog/${post.slug}`,
     lastModified: now,
     changeFrequency: "monthly",
     priority: 0.6,

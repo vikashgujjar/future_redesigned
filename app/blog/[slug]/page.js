@@ -1,20 +1,10 @@
-const BlogContent = [
-  {
-    slug: "everything-you-need-to-know-about-nodejs",
-  },
-  {
-    slug: "exploring-the-key-features-of-laravel-7-framework",
-  },
-  {
-    slug: "best-technology-for-mobile-application-development",
-  },
-];
-
-export function generateStaticParams() {
-  return BlogContent.map((item) => ({ slug: item.slug }));
-}
 import React from "react";
 import BlogView from "./BlogView";
+import { BLOG_POSTS } from "../blogPosts";
+
+export function generateStaticParams() {
+  return BLOG_POSTS.map((post) => ({ slug: post.slug }));
+}
 
 export const metadata = {
   title: "Blog - Future IT Touch Private Limited",

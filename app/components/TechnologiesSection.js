@@ -123,7 +123,7 @@ function TechIcon({ tech, ti }) {
     <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-white/[0.06]">
       <img
         src={tech.icon}
-        alt=""
+        alt={tech.name}
         width={16}
         height={16}
         loading="lazy"
