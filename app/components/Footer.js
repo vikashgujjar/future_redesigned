@@ -118,10 +118,9 @@ export default function Footer() {
 
       {/* ══ MAIN GRID ════════════════════════════════ */}
       <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 md:px-10 xl:px-24 pt-14 pb-10">
-        <div className="grid grid-cols-2 lg:grid-cols-[2fr_1fr_1.1fr_1.8fr] gap-10 lg:gap-8">
-
+        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-[2fr_1fr_1.1fr_1.8fr] gap-10 lg:gap-8">
           {/* ── Col 1: Logo + About ────────────── */}
-          <div className="flex flex-col gap-5 col-span-2 lg:col-span-1">
+          <div className="flex flex-col gap-5 cols-span-1 sm:col-span-3 lg:col-span-1">
             <Link href="/">
               <Image
                 src="/Assets/secondary-logo.webp"
@@ -151,7 +150,6 @@ export default function Footer() {
               Become Partner <ChevronRight size={14} />
             </Link>
           </div>
-
           {/* ── Col 2: Our Links ───────────────── */}
           <div>
             <h5 className="ft-col-title bg-gradient-to-r from-teal-400 to-indigo-500 bg-clip-text text-transparent">
@@ -168,7 +166,6 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-
           {/* ── Col 3: Company ─────────────────── */}
           <div>
             <h5 className="ft-col-title bg-gradient-to-r from-teal-400 to-indigo-500 bg-clip-text text-transparent">
@@ -185,9 +182,8 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-
           {/* ── Col 4: Contact ─────────────────── */}
-          <div className="col-span-2 lg:col-span-1">
+          <div>
             <h5 className="ft-col-title bg-gradient-to-r from-teal-400 to-indigo-500 bg-clip-text text-transparent">
               Contact Us
             </h5>
@@ -240,7 +236,6 @@ export default function Footer() {
 
             </ul>
           </div>
-
         </div>
       </div>
 

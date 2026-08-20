@@ -1,8 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FaSearch, FaUser, FaClock, FaTag, FaArrowRight, FaChevronRight } from "react-icons/fa";
+import { FaSearch, FaUser, FaClock, FaTag, FaArrowRight, FaChevronRight, FaChevronLeft } from "react-icons/fa";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 import { BLOG_POSTS } from "../blogPosts";
 
 const BlogContent = BLOG_POSTS.map((post) => ({ ...post, blogImg: post.image }));
@@ -18,6 +20,7 @@ const categories = [
 
 export default function BlogView({ slug }) {
   const [search, setSearch] = useState("");
+  const relatedSwiperRef = useRef(null);
   const post = BlogContent.find(p => p.slug === slug);
   const related = BlogContent.filter(p => p.slug !== slug);
   const filtered = search
@@ -294,7 +297,7 @@ export default function BlogView({ slug }) {
             </article>
 
             {/* ══════════════ SIDEBAR ══════════════ */}
-            <aside className="space-y-5">
+            <aside className="space-y-5 lg:sticky lg:top-[122px] lg:self-start">
 
               {/* Search */}
               <div className="bv-side-card">
@@ -385,37 +388,68 @@ export default function BlogView({ slug }) {
                 }}>
                   You Might Also Like
                 </h3>
-                <Link href="/blog"
-                  className="inline-flex items-center gap-1.5 text-[12.5px] font-semibold"
-                  style={{ color: "#4f46e5", fontFamily: "'Poppins',sans-serif", textDecoration: "none" }}>
-                  View All <FaArrowRight size={10} />
-                </Link>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                {related.map((p, i) => (
-                  <Link key={i} href={`/blog/${p.slug}`} className="bv-rel-card">
-                    <div className="bv-rel-img">
-                      <Image src={p.blogImg} alt={p.title} fill className="object-cover" />
-                      <div className="absolute top-0 left-0 right-0 h-[3px]"
-                        style={{ background: `linear-gradient(90deg,${p.accent.from},${p.accent.to})` }} />
-                    </div>
-                    <div className="p-4">
-                      <span className="text-[10px] font-bold uppercase tracking-[.10em] mb-2 inline-block"
-                        style={{ color: p.accent.from, fontFamily: "'Poppins',sans-serif" }}>
-                        {p.category}
-                      </span>
-                      <h4 className="font-bold leading-snug text-[.92rem]"
-                        style={{ color: "#0f172a", fontFamily: "'Poppins',sans-serif" }}>
-                        {p.title}
-                      </h4>
-                      <p className="text-[11.5px] mt-1.5 flex items-center gap-1.5"
-                        style={{ color: "#94a3b8", fontFamily: "'Poppins',sans-serif" }}>
-                        <FaClock size={9} /> {p.date} · {p.readTime}
-                      </p>
-                    </div>
+                <div className="flex items-center gap-4">
+                  <Link href="/blog"
+                    className="inline-flex items-center gap-1.5 text-[12.5px] font-semibold"
+                    style={{ color: "#4f46e5", fontFamily: "'Poppins',sans-serif", textDecoration: "none" }}>
+                    View All <FaArrowRight size={10} />
                   </Link>
-                ))}
+                  <div className="hidden sm:flex items-center gap-2">
+                    <button
+                      onClick={() => relatedSwiperRef.current?.swiper?.slidePrev()}
+                      className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:-translate-y-px"
+                      style={{ border: "1.5px solid rgba(99,102,241,.20)", background: "white", color: "#6366f1" }}
+                      aria-label="Previous related post"
+                    >
+                      <FaChevronLeft className="text-xs" />
+                    </button>
+                    <button
+                      onClick={() => relatedSwiperRef.current?.swiper?.slideNext()}
+                      className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:-translate-y-px shadow-md"
+                      style={{ background: "linear-gradient(135deg,#2dd4bf,#6366f1)", color: "white" }}
+                      aria-label="Next related post"
+                    >
+                      <FaChevronRight className="text-xs" />
+                    </button>
+                  </div>
+                </div>
               </div>
+              <Swiper
+                ref={relatedSwiperRef}
+                spaceBetween={16}
+                breakpoints={{
+                  0:    { slidesPerView: 2, spaceBetween: 16 },
+                  640:  { slidesPerView: 2, spaceBetween: 20 },
+                  1024: { slidesPerView: 3, spaceBetween: 24 },
+                }}
+                className="bv-rel-swiper !pb-2"
+              >
+                {related.map((p, i) => (
+                  <SwiperSlide key={i}>
+                    <Link href={`/blog/${p.slug}`} className="bv-rel-card">
+                      <div className="bv-rel-img">
+                        <Image src={p.blogImg} alt={p.title} fill className="object-cover" />
+                        <div className="absolute top-0 left-0 right-0 h-[3px]"
+                          style={{ background: `linear-gradient(90deg,${p.accent.from},${p.accent.to})` }} />
+                      </div>
+                      <div className="p-4">
+                        <span className="text-[10px] font-bold uppercase tracking-[.10em] mb-2 inline-block"
+                          style={{ color: p.accent.from, fontFamily: "'Poppins',sans-serif" }}>
+                          {p.category}
+                        </span>
+                        <h4 className="font-bold leading-snug text-[.92rem]"
+                          style={{ color: "#0f172a", fontFamily: "'Poppins',sans-serif" }}>
+                          {p.title}
+                        </h4>
+                        <p className="text-[11.5px] mt-1.5 flex items-center gap-1.5"
+                          style={{ color: "#94a3b8", fontFamily: "'Poppins',sans-serif" }}>
+                          <FaClock size={9} /> {p.date} · {p.readTime}
+                        </p>
+                      </div>
+                    </Link>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </div>
           )}
 

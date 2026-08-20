@@ -13,7 +13,8 @@ export const metadata = {
   keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
 };
 
-export default function Page({ params: { slug } }) {
+export default async function Page({ params }) {
+  const { slug } = await params;
   return (
     <div>
       <BlogView slug={slug} />
