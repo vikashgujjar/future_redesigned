@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { swalFire } from "./swal";
 
-const OTP_API = "https://enquiry.futuretouch.org/api";
-const MAIL_API = "https://mail.futuretouch.org/api";
+const OTP_API = process.env.NEXT_PUBLIC_OTP_API_URL || "https://enquiry.futuretouch.org/api";
+const MAIL_API = process.env.NEXT_PUBLIC_MAIL_API_URL || "https://mail.futuretouch.org/api";
 const SEND_TO = "info@futuretouch.in";
 const COMPANY_NAME = "Future IT Touch Pvt. Ltd.";
 

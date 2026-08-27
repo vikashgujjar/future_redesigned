@@ -8,22 +8,23 @@ import {
   FaBriefcase, FaRocket, FaGlobeAsia, FaLightbulb, FaStar, FaBolt,
 } from "react-icons/fa";
 
-const values = [
-  { num:"01", icon:<FaBriefcase />, title:"Professionalism", from:"#06b6d4", to:"#0284c7",
-    description:"We pride in being punctual and organized. We help you and provide our services till the end, striving to understand your business and give you the best at every stage." },
-  { num:"02", icon:<FaRocket />, title:"Enthusiasm", from:"#6366f1", to:"#4f46e5",
-    description:"We are a team excited to learn new things and push boundaries of the digital world. We work creatively and have fun bonding with our clients and each other." },
-  { num:"03", icon:<FaGlobeAsia />, title:"Diversity", from:"#10b981", to:"#059669",
-    description:"We have worked with a variety of niches — health, banking, retail, and more. Tackling diverse problems has only helped us gain experience and made us stronger." },
-  { num:"04", icon:<FaLightbulb />, title:"Creativity", from:"#f59e0b", to:"#d97706",
-    description:"We have tailored plans to suit all your needs. We come up with new ideas to tackle your problems and make you unique. We love to feed our creative monsters." },
-  { num:"05", icon:<FaStar />, title:"Originality", from:"#ec4899", to:"#db2777",
-    description:"Our creative heads come up with authentic content and plans tailored just for your needs. We give quick and innovative solutions to your unique problems." },
-  { num:"06", icon:<FaBolt />, title:"Agile", from:"#8b5cf6", to:"#7c3aed",
-    description:"We have a people-first approach. We pride ourselves in understanding and bonding with the client — really getting to know what they desire and reflecting it in their work." },
+const VALUE_ICONS = [<FaBriefcase />, <FaRocket />, <FaGlobeAsia />, <FaLightbulb />, <FaStar />, <FaBolt />];
+const VALUE_COLORS = [
+  { from:"#06b6d4", to:"#0284c7" }, { from:"#6366f1", to:"#4f46e5" }, { from:"#10b981", to:"#059669" },
+  { from:"#f59e0b", to:"#d97706" }, { from:"#ec4899", to:"#db2777" }, { from:"#8b5cf6", to:"#7c3aed" },
 ];
 
-const visionPoints = [
+const FALLBACK_VALUES = [
+  { title:"Professionalism", description:"We pride in being punctual and organized. We help you and provide our services till the end, striving to understand your business and give you the best at every stage." },
+  { title:"Enthusiasm", description:"We are a team excited to learn new things and push boundaries of the digital world. We work creatively and have fun bonding with our clients and each other." },
+  { title:"Diversity", description:"We have worked with a variety of niches — health, banking, retail, and more. Tackling diverse problems has only helped us gain experience and made us stronger." },
+  { title:"Creativity", description:"We have tailored plans to suit all your needs. We come up with new ideas to tackle your problems and make you unique. We love to feed our creative monsters." },
+  { title:"Originality", description:"Our creative heads come up with authentic content and plans tailored just for your needs. We give quick and innovative solutions to your unique problems." },
+  { title:"Agile", description:"We have a people-first approach. We pride ourselves in understanding and bonding with the client — really getting to know what they desire and reflecting it in their work." },
+];
+
+const FALLBACK_VISION_INTRO = "At Future IT Touch, we are always looking toward the future — anticipating emerging trends and positioning your business for sustained growth. Integrity is non-negotiable and no assignment is too small.";
+const FALLBACK_VISION_POINTS = [
   "Explore new opportunities that maximize business value, consistent growth, and sustainability.",
   "Meet the expectations of our customers, employees, and partners at every stage.",
   "Operate globally and bring the benefits of IT to improve quality for clients worldwide.",
@@ -32,7 +33,8 @@ const visionPoints = [
   "Be globally recognized for providing quality services to customers while adhering to our values.",
 ];
 
-const missionPoints = [
+const FALLBACK_MISSION_INTRO = "Our mission is to maintain long-term relationships with our customers and deliver quality services on time with first-class technology support at competitive pricing. We create innovative and efficient ways to help our clients meet the rapidly changing demands of the digital marketplace — so they stay ahead of the competition.";
+const FALLBACK_MISSION_POINTS = [
   "Understand customer needs and make technology work to resolve those needs.",
   "Explore new opportunities that maximize business value and ensure consistent growth.",
   "Empower clients to respond faster and more intuitively to changing market dynamics.",
@@ -41,8 +43,19 @@ const missionPoints = [
   "Collaborate with our clients in their continued long-term success.",
 ];
 
-export default function Mission() {
+export default function Mission({ mission } = {}) {
   const yearsExperience = useYearsExperience();
+  const values = (mission?.values?.length ? mission.values : FALLBACK_VALUES).map((v, i) => ({
+    num: String(i + 1).padStart(2, "0"),
+    icon: VALUE_ICONS[i % VALUE_ICONS.length],
+    title: v.title,
+    description: v.description,
+    ...VALUE_COLORS[i % VALUE_COLORS.length],
+  }));
+  const visionIntro = mission?.vision?.intro || FALLBACK_VISION_INTRO;
+  const visionPoints = mission?.vision?.points?.length ? mission.vision.points : FALLBACK_VISION_POINTS;
+  const missionIntro = mission?.mission?.intro || FALLBACK_MISSION_INTRO;
+  const missionPoints = mission?.mission?.points?.length ? mission.mission.points : FALLBACK_MISSION_POINTS;
   return (
     <>
       <style>{`
@@ -294,7 +307,7 @@ export default function Mission() {
                 style={{ background:"linear-gradient(90deg,#2dd4bf,#6366f1)" }} />
 
               <p className="text-[14px] leading-[1.88] mb-8" style={{ color:"#4a5070" }}>
-                At Future IT Touch, we are always looking toward the future — anticipating emerging trends and positioning your business for sustained growth. Integrity is non-negotiable and no assignment is too small.
+                {visionIntro}
               </p>
 
               {/* Numbered vision points */}
@@ -442,7 +455,7 @@ export default function Mission() {
 
               <p className="text-[15px] leading-[1.90] mb-8"
                 style={{ color:"rgba(180,210,240,.65)" }}>
-                Our mission is to maintain long-term relationships with our customers and deliver quality services on time with first-class technology support at competitive pricing. We create innovative and efficient ways to help our clients meet the rapidly changing demands of the digital marketplace — so they stay ahead of the competition.
+                {missionIntro}
               </p>
 
               {/* Stats row */}

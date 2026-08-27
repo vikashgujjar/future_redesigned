@@ -166,43 +166,51 @@ const techCategories = [
   },
 ];
 
-const Mobile = () => {
+const FALLBACK_CONTENT = {
+  bannerImg,
+  bannerTitle: "Mobile Application Testing Services",
+  bannerDesc: "Future IT Touch is an eminent Mobile Application Testing organisation that offers outstanding versatile application testing services. We developed our specialty in mobile testing, particularly in iOS and Android devices. With a group of devoted certified testers, we perform a wide range of web, mobile, and cross-platform portable application testing for functionality, usability, consistency, and compatibility.",
+  overviewImage: "/Assets/stock/photo-1512941937669-90a1b58e7e9c.webp",
+  overviewImageAlt: "Mobile Application Testing",
+  overviewBadge: "Mobile Application Testing Services",
+  overviewHeading: "Mobile Application",
+  overviewHighlight: "Testing",
+  overviewParagraphs: [
+    "Future IT Touch is an eminent Mobile Application Testing organisation that offers outstanding versatile application testing services. We developed our specialty in mobile testing, particularly in iOS and Android.",
+    "With a group of devoted certified testers, we perform a wide range of web, mobile, and cross-platform application testing. We test applications for functionality, usability, consistency, and compatibility for longer use and stability.",
+    "Our QA approach combines manual and automated testing to deliver comprehensive coverage — catching bugs before they reach your users and protecting your brand reputation.",
+  ],
+  overviewCtaText: "Start Your Testing Project",
+  features,
+  bizCards,
+  sliderCards,
+  platforms,
+  techCategories,
+  faqData,
+};
+
+const Mobile = ({ cms } = {}) => {
+  const content = cms
+    ? { ...cms, bannerImg: cms.bannerImg || bannerImg, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    : FALLBACK_CONTENT;
+
   return (
     <CommonServicePage
-      bannerImg={bannerImg}
-      bannerTitle="Mobile Application Testing Services"
-      bannerDesc="Future IT Touch is an eminent Mobile Application Testing organisation that offers outstanding versatile application testing services. We developed our specialty in mobile testing, particularly in iOS and Android devices. With a group of devoted certified testers, we perform a wide range of web, mobile, and cross-platform portable application testing for functionality, usability, consistency, and compatibility."
-      overviewImage="/Assets/stock/photo-1512941937669-90a1b58e7e9c.webp"
-      overviewImageAlt="Mobile Application Testing"
-      overviewBadge="Mobile Application Testing Services"
-      overviewHeading="Mobile Application"
-      overviewHighlight="Testing"
-      overviewParagraphs={[
-        "Future IT Touch is an eminent Mobile Application Testing organisation that offers outstanding versatile application testing services. We developed our specialty in mobile testing, particularly in iOS and Android.",
-        "With a group of devoted certified testers, we perform a wide range of web, mobile, and cross-platform application testing. We test applications for functionality, usability, consistency, and compatibility for longer use and stability.",
-        "Our QA approach combines manual and automated testing to deliver comprehensive coverage — catching bugs before they reach your users and protecting your brand reputation.",
-      ]}
-      overviewCtaText="Start Your Testing Project"
+      {...content}
       featuresBadge="Our Testing Services"
       featuresTitle="Comprehensive Testing That"
       featuresTitleHighlight="Ensures Quality"
       featuresStickyImg="/Assets/stock/photo-1551650975-87deedd944c3.webp"
-      features={features}
       bizBadge="Why Choose FTS for Testing"
       bizHeading="Partner with Experts for"
       bizHighlight="Bug-Free Mobile Apps"
-      bizCards={bizCards}
       sliderTitle="Delivering Quality Assurance Excellence Across Platforms"
-      sliderCards={sliderCards}
       platformsTitle="Testing Tools & Platforms We Use"
-      platforms={platforms}
       techBadge="Our QA Tech Stack"
       techHeading="Technologies"
       techHeadingHighlight="We Test With"
       techDescription="We use industry-leading testing frameworks, automation tools, and CI/CD integrations to deliver thorough, efficient, and reliable mobile app quality assurance."
-      techCategories={techCategories}
       faqTitle="Frequently Asked Questions — Mobile App Testing"
-      faqData={faqData}
     />
   );
 };

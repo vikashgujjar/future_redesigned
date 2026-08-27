@@ -9,8 +9,7 @@ import {
   FaPencilRuler, FaDesktop, FaCode, FaSearch,
 } from "react-icons/fa";
 
-const Local = () => {
-  const features = [
+const features = [
     {
       title: "Local SEO Audit & Strategy",
       description:
@@ -172,61 +171,72 @@ const Local = () => {
     },
   ];
 
+const techCategories = [
+  { title:"Analytics & SEO", techs:[
+    {name:"Google Analytics",icon:"https://cdn.simpleicons.org/googleanalytics"},
+    {name:"Google Search Console",icon:"https://cdn.simpleicons.org/googlesearchconsole"},
+    {name:"Ahrefs",icon:"https://cdn.simpleicons.org/ahrefs"},
+    {name:"Semrush",icon:"https://cdn.simpleicons.org/semrush"},
+  ]},
+  { title:"Advertising", techs:[
+    {name:"Google Ads",icon:"https://cdn.simpleicons.org/googleads"},
+    {name:"Meta Ads",icon:"https://cdn.simpleicons.org/meta"},
+    {name:"LinkedIn Ads",icon:"https://cdn.simpleicons.org/linkedin"},
+  ]},
+  { title:"Social & Email", techs:[
+    {name:"HubSpot",icon:"https://cdn.simpleicons.org/hubspot"},
+    {name:"Mailchimp",icon:"https://cdn.simpleicons.org/mailchimp"},
+    {name:"Buffer",icon:"https://cdn.simpleicons.org/buffer"},
+    {name:"Hootsuite",icon:"https://cdn.simpleicons.org/hootsuite"},
+  ]},
+  { title:"Content & CMS", techs:[
+    {name:"WordPress",icon:"https://cdn.simpleicons.org/wordpress"},
+    {name:"Webflow",icon:"https://cdn.simpleicons.org/webflow"},
+    {name:"Canva",icon:"https://cdn.simpleicons.org/canva"},
+  ]},
+];
+
+const FALLBACK_CONTENT = {
+  bannerImg: cwd,
+  bannerTitle: "LOCAL SEO SERVICES",
+  bannerDesc: "Future IT Touch Pvt. Ltd. With about 46% of all the Google searches featuring a local intent, Google is placing more importance on delivering local results that offer an immediate solution to the customers. Also, studies reveal that 78% of location-oriented searches invariably lead to offline conversion. All these statistics are compelling businesses to prepare for proximity-based search. If your business is not optimized for geo-targeted search, it's high time to avail local SEO services.",
+  overviewImage: cwd,
+  overviewImageAlt: "Local SEO Services",
+  overviewBadge: "Professional & Result-Oriented Local SEO Services",
+  overviewHeading: "Optimizing Your Local Presence to",
+  overviewHighlight: "Attract Nearby Customers",
+  overviewParagraphs: [
+    "At Future IT Touch Pvt. Ltd. we create comprehensive local SEO strategies that help your business rank higher in local searches, attract relevant customers, and drive conversions. Effective local SEO builds visibility, trust, and a strong online reputation.",
+    "From Google Business Profile optimization to local content creation, citations, and review management, we ensure your business stands out in your area. Our experienced SEO specialists combine technical expertise, analytics, and strategy to deliver measurable local search results.",
+    `With over ${YEARS_EXPERIENCE_DISPLAY} years of experience, we provide high-quality Local SEO Services tailored to your business locations and audience. We help you attract more local customers, increase engagement, and drive leads efficiently.`,
+  ],
+  overviewCtaText: "Improve Your Local Search Visibility Today",
+  features,
+  bizCards: businessData,
+  sliderCards: cards,
+  platforms,
+  techCategories,
+  faqData,
+};
+
+const Local = ({ cms } = {}) => {
+  const content = cms
+    ? { ...cms, bannerImg: cms.bannerImg || cwd, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    : FALLBACK_CONTENT;
+
   return (
     <CommonServicePage
-      bannerImg={cwd}
-      bannerTitle="LOCAL SEO SERVICES"
-      bannerDesc="Future IT Touch Pvt. Ltd. With about 46% of all the Google searches featuring a local intent, Google is placing more importance on delivering local results that offer an immediate solution to the customers. Also, studies reveal that 78% of location-oriented searches invariably lead to offline conversion. All these statistics are compelling businesses to prepare for proximity-based search. If your business is not optimized for geo-targeted search, it's high time to avail local SEO services."
-      overviewImage={cwd}
-      overviewImageAlt="Local SEO Services"
-      overviewBadge="Professional & Result-Oriented Local SEO Services"
-      overviewHeading="Optimizing Your Local Presence to"
-      overviewHighlight="Attract Nearby Customers"
-      overviewParagraphs={[
-        "At Future IT Touch Pvt. Ltd. we create comprehensive local SEO strategies that help your business rank higher in local searches, attract relevant customers, and drive conversions. Effective local SEO builds visibility, trust, and a strong online reputation.",
-        "From Google Business Profile optimization to local content creation, citations, and review management, we ensure your business stands out in your area. Our experienced SEO specialists combine technical expertise, analytics, and strategy to deliver measurable local search results.",
-        `With over ${YEARS_EXPERIENCE_DISPLAY} years of experience, we provide high-quality Local SEO Services tailored to your business locations and audience. We help you attract more local customers, increase engagement, and drive leads efficiently.`,
-      ]}
-      overviewCtaText="Improve Your Local Search Visibility Today"
+      {...content}
       featuresBadge="Result-Oriented Local SEO Services"
       featuresTitle="Boosting Your Online Presence to"
       featuresTitleHighlight="Drive Local Customers"
       featuresStickyImg={image2}
-      features={features}
       bizBadge="Professional Local SEO Company in India"
       bizHeading="Boosting Local Visibility to"
       bizHighlight="Attract Nearby Customers"
-      bizCards={businessData}
       sliderTitle="Improving Local Search Rankings & Customer Visibility"
-      sliderCards={cards}
       platformsTitle="Local SEO Solutions We Deliver"
-      platforms={platforms}
       faqTitle="About Our Local SEO Services"
-      faqData={faqData}
-      techCategories={[
-        { title:"Analytics & SEO", techs:[
-          {name:"Google Analytics",icon:"https://cdn.simpleicons.org/googleanalytics"},
-          {name:"Google Search Console",icon:"https://cdn.simpleicons.org/googlesearchconsole"},
-          {name:"Ahrefs",icon:"https://cdn.simpleicons.org/ahrefs"},
-          {name:"Semrush",icon:"https://cdn.simpleicons.org/semrush"},
-        ]},
-        { title:"Advertising", techs:[
-          {name:"Google Ads",icon:"https://cdn.simpleicons.org/googleads"},
-          {name:"Meta Ads",icon:"https://cdn.simpleicons.org/meta"},
-          {name:"LinkedIn Ads",icon:"https://cdn.simpleicons.org/linkedin"},
-        ]},
-        { title:"Social & Email", techs:[
-          {name:"HubSpot",icon:"https://cdn.simpleicons.org/hubspot"},
-          {name:"Mailchimp",icon:"https://cdn.simpleicons.org/mailchimp"},
-          {name:"Buffer",icon:"https://cdn.simpleicons.org/buffer"},
-          {name:"Hootsuite",icon:"https://cdn.simpleicons.org/hootsuite"},
-        ]},
-        { title:"Content & CMS", techs:[
-          {name:"WordPress",icon:"https://cdn.simpleicons.org/wordpress"},
-          {name:"Webflow",icon:"https://cdn.simpleicons.org/webflow"},
-          {name:"Canva",icon:"https://cdn.simpleicons.org/canva"},
-        ]},
-      ]}
     />
   );
 };

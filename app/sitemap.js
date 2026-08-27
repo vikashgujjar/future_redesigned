@@ -3,7 +3,7 @@ export const dynamic = "force-static";
 import { SERVICES } from "./data/location-seo/services";
 import { ALL_LOCATIONS } from "./data/location-seo/locations";
 import { TECHNOLOGIES, getTechnologyLocationPath } from "./data/location-seo/technologies";
-import { BLOG_POSTS } from "./blog/blogPosts";
+import loadPosts from "./blog/loadPosts";
 
 const SITE_URL = "https://futuretouch.in";
 
@@ -95,7 +95,7 @@ const STATIC_ROUTES = [
   { path: "/support", priority: 0.4, changeFrequency: "monthly" },
 ];
 
-export default function sitemap() {
+export default async function sitemap() {
   const now = new Date();
 
   const staticEntries = STATIC_ROUTES.map((route) => ({
@@ -105,7 +105,12 @@ export default function sitemap() {
     priority: route.priority,
   }));
 
-  const blogEntries = BLOG_POSTS.map((post) => ({
+  // Uses the same CMS-aware loader (with local fallback) that
+  // generateStaticParams uses for /blog/[slug] — so a post the CMS marks
+  // unpublished is excluded from both the static export AND the sitemap,
+  // and a post added only through the CMS is included in both.
+  const posts = await loadPosts();
+  const blogEntries = posts.map((post) => ({
     url: `${SITE_URL}/blog/${post.slug}`,
     lastModified: now,
     changeFrequency: "monthly",

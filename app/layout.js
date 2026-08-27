@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import LocationSection from "./components/LocationSection";
 import OrganizationSchema from "./components/schema/OrganizationSchema";
+import { getNavigationMenu, toMegaColumns, toFlatLinks } from "./lib/cms";
 
 const SITE_URL = "https://futuretouch.in";
 const SITE_NAME = "Future IT Touch Private Limited";
@@ -100,7 +101,13 @@ export const viewport = {
 };
 
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const [servicesMenu, techMenu, aboutMenu] = await Promise.all([
+    getNavigationMenu("header_services"),
+    getNavigationMenu("header_technologies"),
+    getNavigationMenu("header_about"),
+  ]);
+
   return (
     <html lang="en">
       <body
@@ -115,7 +122,11 @@ export default function RootLayout({ children }) {
       </a>
       <header>
         <TopBar/>
-        <Header/>
+        <Header
+          serviceColumns={toMegaColumns(servicesMenu)}
+          techColumns={toMegaColumns(techMenu)}
+          aboutDropdown={toFlatLinks(aboutMenu)}
+        />
       </header>
       {/* Spacer: TopBar (h-9 = 36px) + Header mobile (60px) / desktop (70px) */}
       <div className="h-[96px] lg:h-[106px]" />

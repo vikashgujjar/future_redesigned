@@ -1,22 +1,50 @@
 "use client";
 import Image from "next/image";
 
-const cardsData = [
-  { id:1,  src:"/Assets/icon-1.webp",  text:"Social Networking",     fi:"#2dd4bf", ti:"#06b6d4" },
-  { id:2,  src:"/Assets/icon-2.webp",  text:"Digital Marketing",     fi:"#6366f1", ti:"#8b5cf6" },
-  { id:3,  src:"/Assets/icon-3.webp",  text:"Ecommerce Development", fi:"#0ea5e9", ti:"#2dd4bf" },
-  { id:4,  src:"/Assets/icon-4.webp",  text:"Video Service",         fi:"#8b5cf6", ti:"#6366f1" },
-  { id:5,  src:"/Assets/icon-5.webp",  text:"Banking Service",       fi:"#2dd4bf", ti:"#6366f1" },
-  { id:6,  src:"/Assets/icon-6.webp",  text:"Enterprise Service",    fi:"#6366f1", ti:"#0ea5e9" },
-  { id:7,  src:"/Assets/icon-7.webp",  text:"Education Service",     fi:"#06b6d4", ti:"#2dd4bf" },
-  { id:8,  src:"/Assets/icon-8.webp",  text:"Tour and Travels",      fi:"#a855f7", ti:"#6366f1" },
-  { id:9,  src:"/Assets/icon-9.webp",  text:"Health Service",        fi:"#2dd4bf", ti:"#0ea5e9" },
-  { id:10, src:"/Assets/icon-10.webp", text:"Event & Ticket",        fi:"#6366f1", ti:"#8b5cf6" },
-  { id:11, src:"/Assets/icon-11.webp", text:"Restaurant Service",    fi:"#0ea5e9", ti:"#6366f1" },
-  { id:12, src:"/Assets/icon-12.webp", text:"Business Consultant",   fi:"#8b5cf6", ti:"#2dd4bf" },
+// Cosmetic gradient pair per card — cycled by position so a CMS-managed card
+// list still gets varied colors without an editor having to pick them.
+const PALETTE = [
+  { fi:"#2dd4bf", ti:"#06b6d4" }, { fi:"#6366f1", ti:"#8b5cf6" },
+  { fi:"#0ea5e9", ti:"#2dd4bf" }, { fi:"#8b5cf6", ti:"#6366f1" },
+  { fi:"#2dd4bf", ti:"#6366f1" }, { fi:"#6366f1", ti:"#0ea5e9" },
+  { fi:"#06b6d4", ti:"#2dd4bf" }, { fi:"#a855f7", ti:"#6366f1" },
+  { fi:"#2dd4bf", ti:"#0ea5e9" }, { fi:"#6366f1", ti:"#8b5cf6" },
+  { fi:"#0ea5e9", ti:"#6366f1" }, { fi:"#8b5cf6", ti:"#2dd4bf" },
 ];
 
-export default function HelpingBusiness() {
+const FALLBACK_CARDS = [
+  { text:"Social Networking",     src:"/Assets/icon-1.webp"  },
+  { text:"Digital Marketing",     src:"/Assets/icon-2.webp"  },
+  { text:"Ecommerce Development", src:"/Assets/icon-3.webp"  },
+  { text:"Video Service",         src:"/Assets/icon-4.webp"  },
+  { text:"Banking Service",       src:"/Assets/icon-5.webp"  },
+  { text:"Enterprise Service",    src:"/Assets/icon-6.webp"  },
+  { text:"Education Service",     src:"/Assets/icon-7.webp"  },
+  { text:"Tour and Travels",      src:"/Assets/icon-8.webp"  },
+  { text:"Health Service",        src:"/Assets/icon-9.webp"  },
+  { text:"Event & Ticket",        src:"/Assets/icon-10.webp" },
+  { text:"Restaurant Service",    src:"/Assets/icon-11.webp" },
+  { text:"Business Consultant",   src:"/Assets/icon-12.webp" },
+];
+
+const FALLBACK_PARAGRAPHS = [
+  "We develop websites that build businesses! We believe, there is no room for a one-size-fits-all approach in web development services. Each website is unique and it needs a personal touch to meet specific business needs. Our experienced UI/UX designers and full stack web development team can effectively transform your idea into reality.",
+  "As a reputable website development company in India, we've assisted hundreds of companies worldwide to achieve their goals, drive businesses growth, and create happy customers. From LAMP to MEAN — business websites for startups to custom web applications for corporate — we do it all!",
+];
+
+const FALLBACK_STATS = [
+  { value:"5000+", label:"Projects"    },
+  { value:"100%",  label:"Satisfaction"},
+];
+
+export default function HelpingBusiness({ heading, paragraphs, stats, cards } = {}) {
+  const cardsData = (cards?.length ? cards : FALLBACK_CARDS).map((c, i) => ({
+    id: i + 1, src: c.src, text: c.text, ...PALETTE[i % PALETTE.length],
+  }));
+  const headingText = heading || "Helping Businesses in All Domains";
+  const paragraphList = paragraphs?.length ? paragraphs : FALLBACK_PARAGRAPHS;
+  const statsList = stats?.length ? stats : FALLBACK_STATS;
+
   return (
     <section
       className="relative overflow-hidden py-16 sm:py-20 lg:py-24 px-4 sm:px-6 md:px-10 xl:px-24"
@@ -140,10 +168,14 @@ export default function HelpingBusiness() {
           <h2
             className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-snug text-white"
             style={{ fontFamily:"'Poppins',sans-serif" }}>
-            Helping Businesses in{" "}
-            <span className="bg-gradient-to-r from-teal-400 to-indigo-500 bg-clip-text text-transparent">
-              All Domains
-            </span>
+            {headingText === "Helping Businesses in All Domains" ? (
+              <>
+                Helping Businesses in{" "}
+                <span className="bg-gradient-to-r from-teal-400 to-indigo-500 bg-clip-text text-transparent">
+                  All Domains
+                </span>
+              </>
+            ) : headingText}
           </h2>
 
           {/* divider */}
@@ -151,37 +183,25 @@ export default function HelpingBusiness() {
             style={{ background:"linear-gradient(to right,#2dd4bf,#6366f1)" }}/>
 
           {/* paragraphs */}
-          <p className="text-sm sm:text-base leading-7"
-            style={{ fontFamily:"'Inter',sans-serif", color:"rgba(255,255,255,.50)" }}>
-            We develop websites that build businesses! We believe, there is no room for a
-            one-size-fits-all approach in web development services. Each website is unique
-            and it needs a personal touch to meet specific business needs. Our experienced
-            UI/UX designers and full stack web development team can effectively transform
-            your idea into reality.
-          </p>
-          <p className="text-sm sm:text-base leading-7"
-            style={{ fontFamily:"'Inter',sans-serif", color:"rgba(255,255,255,.50)" }}>
-            As a reputable website development company in India, we&apos;ve assisted hundreds
-            of companies worldwide to achieve their goals, drive businesses growth, and create
-            happy customers. From LAMP to MEAN — business websites for startups to custom web
-            applications for corporate — we do it all!
-          </p>
+          {paragraphList.map((p, i) => (
+            <p key={i} className="text-sm sm:text-base leading-7"
+              style={{ fontFamily:"'Inter',sans-serif", color:"rgba(255,255,255,.50)" }}>
+              {p}
+            </p>
+          ))}
 
           {/* stats */}
           <div className="flex flex-wrap gap-8 pt-4 mt-1"
             style={{ borderTop:"1px solid rgba(255,255,255,.08)" }}>
-            {[
-              { v:"5000+", l:"Projects"   },
-              { v:"100%", l:"Satisfaction"},
-            ].map((s,i) => (
+            {statsList.map((s,i) => (
               <div key={i}>
                 <p className="text-2xl font-black bg-gradient-to-br from-teal-400 to-indigo-500 bg-clip-text text-transparent"
                   style={{ fontFamily:"'Poppins',sans-serif" }}>
-                  {s.v}
+                  {s.value ?? s.v}
                 </p>
                 <p className="text-xs mt-0.5"
                   style={{ fontFamily:"'Inter',sans-serif", color:"rgba(255,255,255,.38)" }}>
-                  {s.l}
+                  {s.label ?? s.l}
                 </p>
               </div>
             ))}

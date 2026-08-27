@@ -186,50 +186,59 @@ const faqData = [
   },
 ];
 
-const PenetrationTesting = () => (
-  <CommonServicePage
-    bannerImg={securityImg}
-    bannerTitle="Penetration Testing Services"
-    bannerDesc="OSCP-certified ethical hackers simulating real-world attacks against your web applications, networks, APIs, mobile apps, and cloud environments — with full attack chain documentation and remediation guidance. Think like an attacker. Defend like a professional."
+const FALLBACK_CONTENT = {
+  bannerImg: securityImg,
+  bannerTitle: "Penetration Testing Services",
+  bannerDesc: "OSCP-certified ethical hackers simulating real-world attacks against your web applications, networks, APIs, mobile apps, and cloud environments — with full attack chain documentation and remediation guidance. Think like an attacker. Defend like a professional.",
 
-    overviewImage="/Assets/stock/photo-1526374965328-7f61d4dc18c5.webp"
-    overviewImageAlt="Penetration Testing Services"
-    overviewBadge="Cyber Security · Ethical Hacking"
-    overviewHeading="Authorised Ethical Hacking to"
-    overviewHighlight="Find What Attackers Will Find"
-    overviewParagraphs={[
-      "Penetration testing goes beyond automated scanning — our OSCP-certified engineers actively attempt to breach your defences using the same techniques, tools, and mindset as real threat actors. Every test is conducted under a signed authorisation agreement within a defined scope.",
-      "We cover all major attack surfaces: web applications (OWASP Top 10), network infrastructure (internal and external), APIs (OWASP API Security Top 10), mobile applications (Android and iOS), and cloud environments (AWS, Azure, GCP).",
-      "Every engagement delivers a dual-audience report — an executive summary for leadership and a technical deep-dive for your engineering team — complete with full attack chain walkthroughs, business impact analysis, and actionable remediation guidance.",
-    ]}
-    overviewCtaText="Request a Pentest Scoping Call"
+  overviewImage: "/Assets/stock/photo-1526374965328-7f61d4dc18c5.webp",
+  overviewImageAlt: "Penetration Testing Services",
+  overviewBadge: "Cyber Security · Ethical Hacking",
+  overviewHeading: "Authorised Ethical Hacking to",
+  overviewHighlight: "Find What Attackers Will Find",
+  overviewParagraphs: [
+    "Penetration testing goes beyond automated scanning — our OSCP-certified engineers actively attempt to breach your defences using the same techniques, tools, and mindset as real threat actors. Every test is conducted under a signed authorisation agreement within a defined scope.",
+    "We cover all major attack surfaces: web applications (OWASP Top 10), network infrastructure (internal and external), APIs (OWASP API Security Top 10), mobile applications (Android and iOS), and cloud environments (AWS, Azure, GCP).",
+    "Every engagement delivers a dual-audience report — an executive summary for leadership and a technical deep-dive for your engineering team — complete with full attack chain walkthroughs, business impact analysis, and actionable remediation guidance.",
+  ],
+  overviewCtaText: "Request a Pentest Scoping Call",
+  features,
+  bizCards,
+  sliderCards,
+  platforms,
+  techCategories,
+  faqData,
+};
 
-    featuresBadge="Our Penetration Testing Services"
-    featuresTitle="Comprehensive Ethical Hacking Across"
-    featuresTitleHighlight="Every Attack Surface"
-    featuresStickyImg="/Assets/stock/photo-1563986768609-322da13575f3.webp"
-    features={features}
+const PenetrationTesting = ({ cms } = {}) => {
+  const content = cms
+    ? { ...cms, bannerImg: cms.bannerImg || securityImg, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    : FALLBACK_CONTENT;
 
-    bizBadge="Why Choose Us"
-    bizHeading="Penetration Testing by"
-    bizHighlight="Certified Professionals"
-    bizCards={bizCards}
+  return (
+    <CommonServicePage
+      {...content}
+      featuresBadge="Our Penetration Testing Services"
+      featuresTitle="Comprehensive Ethical Hacking Across"
+      featuresTitleHighlight="Every Attack Surface"
+      featuresStickyImg="/Assets/stock/photo-1563986768609-322da13575f3.webp"
 
-    sliderTitle="Penetration Testing Results That Prove Real-World Security"
-    sliderCards={sliderCards}
+      bizBadge="Why Choose Us"
+      bizHeading="Penetration Testing by"
+      bizHighlight="Certified Professionals"
 
-    platformsTitle="Tools Our Pentesters Use"
-    platforms={platforms}
+      sliderTitle="Penetration Testing Results That Prove Real-World Security"
 
-    techBadge="Our Penetration Testing Stack"
-    techHeading="Tools & Techniques"
-    techHeadingHighlight="We Attack With"
-    techDescription="Our engineers use the same tools and techniques as real-world attackers — in a controlled, authorised, and responsible manner — to expose the vulnerabilities that matter most."
-    techCategories={techCategories}
+      platformsTitle="Tools Our Pentesters Use"
 
-    faqTitle="Frequently Asked Questions — Penetration Testing"
-    faqData={faqData}
-  />
-);
+      techBadge="Our Penetration Testing Stack"
+      techHeading="Tools & Techniques"
+      techHeadingHighlight="We Attack With"
+      techDescription="Our engineers use the same tools and techniques as real-world attackers — in a controlled, authorised, and responsible manner — to expose the vulnerabilities that matter most."
+
+      faqTitle="Frequently Asked Questions — Penetration Testing"
+    />
+  );
+};
 
 export default PenetrationTesting;

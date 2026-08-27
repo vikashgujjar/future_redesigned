@@ -8,7 +8,7 @@ import useYearsExperience from "../lib/useYearsExperience";
 
 const DEPARTMENTS = ["All", "Leadership", "Business Development", "Design", "Development", "Marketing", "HR"];
 
-const team = [
+const FALLBACK_TEAM = [
   /* ── Leadership ── */
   { name: "Vinod Tanwar", role: "Founder & CEO", dept: "Leadership", img: "/Assets/vinod.webp" },
   { name: "Pooja", role: "Founder & CEO", dept: "Leadership", img: "/Assets/pooja.webp" },
@@ -33,8 +33,9 @@ const DEPT_COLORS = {
   "HR": { from: "#f43f5e", to: "#e11d48" },
 };
 
-export default function OurTeam() {
+export default function OurTeam({ team: cmsTeam } = {}) {
   const yearsExperience = useYearsExperience();
+  const team = cmsTeam?.length ? cmsTeam : FALLBACK_TEAM;
   return (
     <>
       {/* ── Page Banner ── */}
@@ -310,10 +311,10 @@ export default function OurTeam() {
                     {/* Social icons */}
                     <div className="tm-socials">
                       {[
-                        { Icon: FaLinkedinIn, href: "https://linkedin.com" },
-                        { Icon: FaXTwitter, href: "https://twitter.com" },
-                        { Icon: FaInstagram, href: "https://instagram.com" },
-                        { Icon: FaEnvelope, href: "mailto:info@futuretouch.in" },
+                        { Icon: FaLinkedinIn, href: member.social?.linkedin || "https://linkedin.com" },
+                        { Icon: FaXTwitter, href: member.social?.twitter || "https://twitter.com" },
+                        { Icon: FaInstagram, href: member.social?.instagram || "https://instagram.com" },
+                        { Icon: FaEnvelope, href: `mailto:${member.email || "info@futuretouch.in"}` },
                       ].map(({ Icon, href }, si) => (
                         <a key={si} href={href} target="_blank" rel="noopener noreferrer" className="tm-social-btn">
                           <Icon />

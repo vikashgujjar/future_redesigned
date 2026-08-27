@@ -9,9 +9,8 @@ import cppBlockchainImg from "../Assets/block.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
-const Cblock = () => (
-  <CommonTechPage
-    banner={{
+const FALLBACK_CONTENT = {
+    banner: {
       bgImage: "/Assets/stock/photo-1558494949-ef010cbdcc31.webp",
       image: cppBlockchainImg,
       category: "Blockchain Node Development",
@@ -19,9 +18,9 @@ const Cblock = () => (
       title: "C++ · Blockchain · Distributed Ledger",
       tagline:
         "Build high-performance, ultra-low-latency blockchain nodes, consensus engines, and distributed ledger systems using C++ — the language powering Bitcoin Core, Ethereum clients, and the world's most demanding blockchain infrastructure.",
-    }}
+    },
 
-    intro={{
+    intro: {
       badge: "Future IT Touch · C++ Blockchain Experts",
       heading: "Build High-Performance Blockchain Nodes with",
       highlight: "C++ Blockchain Development",
@@ -41,9 +40,9 @@ const Cblock = () => (
         { num: YEARS_EXPERIENCE_DISPLAY,   label: "Years Blockchain Expertise",desc: `${YEARS_EXPERIENCE_DISPLAY} years delivering C++ blockchain node and consensus engine solutions at scale.`,        icon: <FaLayerGroup /> },
         { num: "200+", label: "Clients Empowered",         desc: "200+ organizations powered by high-performance C++ blockchain and distributed ledger systems.", icon: <FaStar /> },
       ],
-    }}
+    },
 
-    services={[
+    services: [
       {
         icon: <SiCplusplus />,
         title: "Custom C++ Blockchain Development",
@@ -110,9 +109,9 @@ const Cblock = () => (
           "Throughput & scalability consulting",
         ],
       },
-    ]}
+    ],
 
-    process={[
+    process: [
       { icon: <FaCheckCircle />, title: "Requirement Analysis",               desc: "Defining your blockchain goals, throughput requirements, consensus model, and network topology — designing a C++ solution roadmap optimized for your use case." },
       { icon: <FaServer />,      title: "System Architecture Planning",       desc: "Architecting scalable C++ blockchain systems — node topology, P2P networking layer, mempool design, and consensus integration for maximum performance." },
       { icon: <FaCogs />,        title: "Consensus & Protocol Design",        desc: "Engineering custom consensus mechanisms and network protocols in C++ — optimizing for latency, finality, throughput, and adversarial resilience." },
@@ -123,18 +122,18 @@ const Cblock = () => (
       { icon: <FaBug />,         title: "Testing & Quality Assurance",        desc: "Rigorous unit, integration, and stress testing of all C++ blockchain components — ensuring correctness, safety, and performance under high load." },
       { icon: <FaCode />,        title: "Deployment & Monitoring",            desc: "Handling production node deployment, network bootstrapping, and real-time monitoring to ensure stable and secure blockchain operations." },
       { icon: <FaSyncAlt />,     title: "Maintenance & Long-Term Support",    desc: "Ongoing protocol upgrades, security patches, and performance audits — ensuring your C++ blockchain infrastructure stays cutting-edge and reliable." },
-    ]}
+    ],
 
-    features={[
+    features: [
       { icon: <SiCplusplus />, title: "Ultra-Fast C++ Blockchain Nodes",    desc: "Production-grade blockchain nodes written in C++ for maximum throughput, minimal latency, and deterministic performance at any network scale." },
       { icon: <FaCogs />,      title: "Custom Consensus Mechanisms",        desc: "Bespoke PoW, PoS, PBFT, or hybrid consensus engines designed for your specific finality, security, and decentralization requirements." },
       { icon: <FaServer />,    title: "Enterprise Distributed Ledgers",     desc: "Scalable, tamper-proof distributed ledger systems integrated with existing enterprise backends and cloud infrastructure." },
       { icon: <FaLock />,      title: "Cryptographic Security",             desc: "Battle-tested cryptographic primitives — ECDSA, SHA-256, Merkle trees — ensuring all blockchain state and transactions are provably secure." },
       { icon: <FaRocket />,    title: "Performance Optimization",           desc: "C++ blockchain code profiled and tuned for peak TPS, minimal memory footprint, and efficient CPU utilization in production environments." },
       { icon: <FaTools />,     title: "Ongoing Support & Optimization",     desc: "Continuous monitoring, protocol upgrades, and performance audits keeping your C++ blockchain infrastructure secure and future-ready." },
-    ]}
+    ],
 
-    stack={[
+    stack: [
       { name: "C++17 / C++20" },
       { name: "Boost.Asio" },
       { name: "libp2p" },
@@ -151,17 +150,17 @@ const Cblock = () => (
       { name: "GitHub Actions / CI" },
       { name: "Clang / GCC" },
       { name: "Valgrind / ASan" },
-    ]}
+    ],
 
-    slider={[
+    slider: [
       { count: "150+", title: "C++ Blockchain Systems Delivered",    desc: "150+ high-performance C++ blockchain nodes and distributed ledger systems deployed — built for enterprise throughput, low latency, and cryptographic security.",   image: "/Assets/seerviceSlider/slide1.webp" },
       { count: YEARS_EXPERIENCE_DISPLAY,   title: "Years of C++ Blockchain Expertise",   desc: `${YEARS_EXPERIENCE_DISPLAY} years engineering C++ blockchain infrastructure — consensus engines, cryptographic libraries, and distributed ledger systems at production scale.`,     image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "200+", title: "Clients Empowered Globally",          desc: "200+ organizations worldwide trust our C++ blockchain expertise for mission-critical distributed ledger, DeFi infrastructure, and enterprise blockchain platforms.", image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "99%",  title: "System Uptime & Reliability",         desc: "99%+ uptime achieved through rigorous testing, memory-safe code practices, and optimized consensus algorithms — ensuring always-on blockchain infrastructure.",    image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "24/7", title: "Support & Infrastructure Monitoring", desc: "24/7 monitoring, protocol patch management, and performance optimization keeping C++ blockchain systems secure, stable, and performant at all times.",           image: "/Assets/seerviceSlider/slide5.webp" },
-    ]}
+    ],
 
-    faq={{
+    faq: {
       title: "C++ Blockchain Development Services",
       items: [
         { title: "Why use C++ for blockchain development?",              description: "C++ offers unmatched performance, fine-grained memory control, and low-level hardware access — making it the language of choice for Bitcoin Core, Ethereum clients, and high-throughput blockchain infrastructure." },
@@ -175,8 +174,24 @@ const Cblock = () => (
         { title: "Which industries use C++ blockchain solutions?",       description: "Fintech, DeFi infrastructure, supply chain, healthcare data integrity, and any industry requiring auditable, high-throughput distributed ledger systems." },
         { title: "Do you provide long-term support for C++ blockchain projects?", description: "Yes, we offer ongoing maintenance including protocol upgrades, security patches, performance audits, and 24/7 infrastructure monitoring post-deployment." },
       ],
-    }}
-  />
-);
+    },
+};
+
+const Cblock = ({ cms } = {}) => {
+  const content = cms
+    ? {
+        banner: { ...FALLBACK_CONTENT.banner, ...cms.banner, bgImage: cms.banner.bgImage || FALLBACK_CONTENT.banner.bgImage },
+        intro: { ...FALLBACK_CONTENT.intro, ...cms.intro },
+        services: cms.services || FALLBACK_CONTENT.services,
+        process: cms.process || FALLBACK_CONTENT.process,
+        features: cms.features,
+        stack: cms.stack || FALLBACK_CONTENT.stack,
+        slider: cms.slider,
+        faq: { title: FALLBACK_CONTENT.faq.title, items: cms.faq.items },
+      }
+    : FALLBACK_CONTENT;
+
+  return <CommonTechPage {...content} />;
+};
 
 export default Cblock;

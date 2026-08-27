@@ -1,12 +1,17 @@
 import TrendingTechnology from "./TrendingTechnology";
+import { buildPageMetadata } from "../lib/cms";
 
-export const metadata = {
+const DEFAULT_METADATA = {
   title: "Trending Technology - Future IT Touch Private Limited",
   description:
     "Explore the trending technologies we work with — from mobile and web frameworks to blockchain, AI, and game development — across every major app and web category.",
   keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
 };
 
-export default function Page() {
+export async function generateMetadata() {
+  return buildPageMetadata("trending-technology", DEFAULT_METADATA);
+}
+
+export default async function Page() {
   return <TrendingTechnology/>
 }

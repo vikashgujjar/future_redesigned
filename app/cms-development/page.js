@@ -1,6 +1,7 @@
 import CMS from "./CMS";
+import { getServicePageCms, mapServicePageProps, loadServicePageSeo } from '../lib/loadServicePage'
 
-export const metadata = {
+const DEFAULT_METADATA = {
   title: "CMS Web Development Company | WordPress & Custom CMS Solutions",
   description:
     "CMS web development services on WordPress, Joomla, Drupal, and Magento — giving your team full control to manage content, publish pages, and update your site without developer dependency.",
@@ -11,6 +12,12 @@ export const metadata = {
   ],
 };
 
-export default function Page() {
-  return <CMS />;
+export async function generateMetadata() {
+  return loadServicePageSeo("cms-development", DEFAULT_METADATA);
+}
+
+export default async function Page() {
+  const cmsRaw = await getServicePageCms("cms-development");
+  const cms = cmsRaw ? mapServicePageProps(cmsRaw) : null;
+  return <CMS cms={cms} />;
 }

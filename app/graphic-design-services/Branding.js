@@ -166,43 +166,51 @@ const techCategories = [
   },
 ];
 
-const Branding = () => {
+const FALLBACK_CONTENT = {
+  bannerImg: devops,
+  bannerTitle: "Graphic Design Services",
+  bannerDesc: "Simplicity, creativity, a dash of humor, and good typography are the essential elements of graphic design at Future IT Touch Pvt. Ltd. Effective design plays a vital role in distinguishing your business from the rest — giving you The Design Edge. With right aesthetics prompting visual perception, your business is bound to be valued more. Our team is always ready to jump with brilliant ideas to convey a story through design.",
+  overviewImage: "/Assets/stock/photo-1561070791-2526d30994b5.webp",
+  overviewImageAlt: "Graphic Design Services",
+  overviewBadge: "Custom Graphic Design Services",
+  overviewHeading: "Custom Graphic Design",
+  overviewHighlight: "Services We Offer",
+  overviewParagraphs: [
+    "Future IT Touch Pvt. Ltd. is one of the leading graphic design agencies that gives your business a distinct expression and shows it to the world on a branded platter of your own.",
+    "We invest creativity, innovative minds, and technology at the helm of our graphic designers, aimed towards attaining clients' graphic design requirements — from logos and brochures to digital assets and packaging.",
+    "Our team of expert designers crafts visuals that communicate your brand message effectively, tailored to your specific business needs and target audience.",
+  ],
+  overviewCtaText: "Request A Quote",
+  features,
+  bizCards,
+  sliderCards,
+  platforms,
+  techCategories,
+  faqData,
+};
+
+const Branding = ({ cms } = {}) => {
+  const content = cms
+    ? { ...cms, bannerImg: cms.bannerImg || devops, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    : FALLBACK_CONTENT;
+
   return (
     <CommonServicePage
-      bannerImg={devops}
-      bannerTitle="Graphic Design Services"
-      bannerDesc="Simplicity, creativity, a dash of humor, and good typography are the essential elements of graphic design at Future IT Touch Pvt. Ltd. Effective design plays a vital role in distinguishing your business from the rest — giving you The Design Edge. With right aesthetics prompting visual perception, your business is bound to be valued more. Our team is always ready to jump with brilliant ideas to convey a story through design."
-      overviewImage="/Assets/stock/photo-1561070791-2526d30994b5.webp"
-      overviewImageAlt="Graphic Design Services"
-      overviewBadge="Custom Graphic Design Services"
-      overviewHeading="Custom Graphic Design"
-      overviewHighlight="Services We Offer"
-      overviewParagraphs={[
-        "Future IT Touch Pvt. Ltd. is one of the leading graphic design agencies that gives your business a distinct expression and shows it to the world on a branded platter of your own.",
-        "We invest creativity, innovative minds, and technology at the helm of our graphic designers, aimed towards attaining clients' graphic design requirements — from logos and brochures to digital assets and packaging.",
-        "Our team of expert designers crafts visuals that communicate your brand message effectively, tailored to your specific business needs and target audience.",
-      ]}
-      overviewCtaText="Request A Quote"
+      {...content}
       featuresBadge="Our Design Services"
       featuresTitle="Creative Designs That"
       featuresTitleHighlight="Build Memorable Brands"
       featuresStickyImg="/Assets/stock/photo-1600857544200-b2f666a9a2ec.webp"
-      features={features}
       bizBadge="Our Advantages"
       bizHeading="Why Choose Us for"
       bizHighlight="Design & Branding"
-      bizCards={bizCards}
       sliderTitle="Delivering Creative Design Solutions That Drive Business Growth"
-      sliderCards={sliderCards}
       platformsTitle="Design Tools & Platforms We Use"
-      platforms={platforms}
       techBadge="Our Design Tech Stack"
       techHeading="Tools"
       techHeadingHighlight="We Design With"
       techDescription="We use the industry's most powerful design tools to create stunning visuals, from initial concepts to final production-ready assets."
-      techCategories={techCategories}
       faqTitle="Frequently Asked Questions — Graphic Design"
-      faqData={faqData}
     />
   );
 };

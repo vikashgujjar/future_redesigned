@@ -5,7 +5,7 @@ import { useState } from "react";
 import { FaArrowRight } from "./icons";
 
 /* ─── data ───────────────────────────────────────────── */
-const servicesData = [
+const FALLBACK_SERVICES = [
   {
     icon: "/Assets/data.webp",
     title: "Web Development",
@@ -103,8 +103,17 @@ const palette = [
 ];
 
 /* ─── main ─────────────────────────────────────────────── */
-export default function Service() {
+export default function Service({ services: cmsServices } = {}) {
   const [active, setActive] = useState(0);
+
+  const servicesData = (cmsServices?.length ? cmsServices : FALLBACK_SERVICES).map((s, i) => ({
+    icon: s.icon,
+    title: s.title,
+    number: String(i + 1).padStart(2, "0"),
+    headinglink: s.link ?? s.headinglink,
+    description: s.description,
+    tags: s.tags ?? [],
+  }));
 
   return (
     <section

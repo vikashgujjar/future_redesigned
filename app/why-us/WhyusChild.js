@@ -4,7 +4,7 @@ import Link from "next/link";
 import WhyChoose from "../components/WhyChoose";
 import GetNewInsight from "../components/GetNewInsight";
 
-export default function WhyusChild() {
+export default function WhyusChild({ whyChoose } = {}) {
   return (
     <>
       {/* ── Page Banner ── */}
@@ -125,7 +125,14 @@ export default function WhyusChild() {
       </section>
 
       {/* ── Why Choose Component ── */}
-      <WhyChoose />
+      <WhyChoose
+        heading={whyChoose?.heading}
+        description={whyChoose?.description}
+        description2={whyChoose?.description_2}
+        features={whyChoose?.features}
+        ctaHeading={whyChoose?.cta?.heading}
+        ctaDescription={whyChoose?.cta?.description}
+      />
 
       <GetNewInsight />
     </>

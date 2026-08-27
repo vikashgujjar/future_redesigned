@@ -174,43 +174,51 @@ const techCategories = [
   },
 ];
 
-const Marketing = () => {
+const FALLBACK_CONTENT = {
+  bannerImg: devops,
+  bannerTitle: "Professional Digital Marketing Services",
+  bannerDesc: "Digital marketing needs have changed over the years with today's dynamic industry. As a towering Digital Marketing Agency in Chandigarh that has led many successful digital campaigns, we ensure that our clients move from mere digital tactics to a well-crafted digital strategy. Our unwavering commitment to innovative ideas, quality work, and time-bound deadlines has built lasting trust with our clients.",
+  overviewImage: "/Assets/stock/photo-1460925895917-afdab827c52f.webp",
+  overviewImageAlt: "Digital Marketing Services",
+  overviewBadge: "Digital Marketing Services",
+  overviewHeading: "Digital Marketing Services for",
+  overviewHighlight: "Growing Your Company",
+  overviewParagraphs: [
+    "Digital marketing is like fishing — you need the right tools, the right location, and a proven strategy. With the rise of the internet, a vast new avenue for advertising and selling has opened up for businesses of every size.",
+    "Despite being cost-effective, digital marketing is highly competitive. Your brand can easily get lost in the noise. Mere presence on social media is not enough — you need a strategic, data-driven approach.",
+    "Future IT Touch Pvt. Ltd. provides result-driven digital marketing services that help businesses increase visibility, generate qualified leads, and build lasting brand awareness across all digital channels.",
+  ],
+  overviewCtaText: "Request A Quote",
+  features,
+  bizCards,
+  sliderCards,
+  platforms,
+  techCategories,
+  faqData,
+};
+
+const Marketing = ({ cms } = {}) => {
+  const content = cms
+    ? { ...cms, bannerImg: cms.bannerImg || devops, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    : FALLBACK_CONTENT;
+
   return (
     <CommonServicePage
-      bannerImg={devops}
-      bannerTitle="Professional Digital Marketing Services"
-      bannerDesc="Digital marketing needs have changed over the years with today's dynamic industry. As a towering Digital Marketing Agency in Chandigarh that has led many successful digital campaigns, we ensure that our clients move from mere digital tactics to a well-crafted digital strategy. Our unwavering commitment to innovative ideas, quality work, and time-bound deadlines has built lasting trust with our clients."
-      overviewImage="/Assets/stock/photo-1460925895917-afdab827c52f.webp"
-      overviewImageAlt="Digital Marketing Services"
-      overviewBadge="Digital Marketing Services"
-      overviewHeading="Digital Marketing Services for"
-      overviewHighlight="Growing Your Company"
-      overviewParagraphs={[
-        "Digital marketing is like fishing — you need the right tools, the right location, and a proven strategy. With the rise of the internet, a vast new avenue for advertising and selling has opened up for businesses of every size.",
-        "Despite being cost-effective, digital marketing is highly competitive. Your brand can easily get lost in the noise. Mere presence on social media is not enough — you need a strategic, data-driven approach.",
-        "Future IT Touch Pvt. Ltd. provides result-driven digital marketing services that help businesses increase visibility, generate qualified leads, and build lasting brand awareness across all digital channels.",
-      ]}
-      overviewCtaText="Request A Quote"
+      {...content}
       featuresBadge="Our Digital Marketing Services"
       featuresTitle="Data-Driven Strategies That"
       featuresTitleHighlight="Deliver Real Results"
       featuresStickyImg="/Assets/stock/photo-1432888498266-38ffec3eaf0a.webp"
-      features={features}
       bizBadge="Our Advantages"
       bizHeading="Why Choose Us for"
       bizHighlight="Digital Marketing"
-      bizCards={bizCards}
       sliderTitle="Delivering Impactful Digital Marketing Campaigns"
-      sliderCards={sliderCards}
       platformsTitle="Marketing Platforms We Use"
-      platforms={platforms}
       techBadge="Our Marketing Tech Stack"
       techHeading="Technologies"
       techHeadingHighlight="We Market With"
       techDescription="We leverage the most powerful marketing tools and platforms to plan, execute, and measure campaigns that drive measurable business growth."
-      techCategories={techCategories}
       faqTitle="Frequently Asked Questions — Digital Marketing"
-      faqData={faqData}
     />
   );
 };

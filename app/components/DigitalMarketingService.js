@@ -2,31 +2,40 @@
 import React from "react";
 import Image from "next/image";
 
-const services = [
+const PALETTE = [
+  { fi: "#2dd4bf", ti: "#06b6d4" },
+  { fi: "#6366f1", ti: "#8b5cf6" },
+  { fi: "#0ea5e9", ti: "#2dd4bf" },
+];
+
+const FALLBACK_SERVICES = [
   {
     src:   "/Assets/search.webp",
-    alt:   "SEO",
     title: "Search Engine Optimisation",
     desc:  "Boost your website's visibility with our personalized SEO services, designed to improve search rankings and connect you with your ideal audience.",
-    fi: "#2dd4bf", ti: "#06b6d4", num: "01",
   },
   {
     src:   "/Assets/family.webp",
-    alt:   "Social Media",
     title: "Social Media Marketing",
     desc:  "Enhance your brand's reach with our customized Social Media Marketing services, designed to authentically engage your audience and foster meaningful growth.",
-    fi: "#6366f1", ti: "#8b5cf6", num: "02",
   },
   {
     src:   "/Assets/digital-marketing.webp",
-    alt:   "SEM",
     title: "Search Engine Marketing / Paid Ads",
     desc:  "Drive targeted traffic and enhance your online presence with our specialized Search Engine Marketing and Paid Ads services, crafted to optimize ROI and achieve measurable success.",
-    fi: "#0ea5e9", ti: "#2dd4bf", num: "03",
   },
 ];
 
-export default function DigitalMarketingService() {
+export default function DigitalMarketingService({ services: cmsServices } = {}) {
+  const services = (cmsServices?.length ? cmsServices : FALLBACK_SERVICES).map((s, i) => ({
+    src: s.icon ?? s.src,
+    alt: s.title,
+    title: s.title,
+    desc: s.desc,
+    num: String(i + 1).padStart(2, "0"),
+    ...PALETTE[i % PALETTE.length],
+  }));
+
   return (
     <section
       className="relative overflow-hidden py-16 sm:py-20 lg:py-24 px-4 sm:px-6 md:px-10 xl:px-24"

@@ -8,7 +8,7 @@ import {
 } from "react-icons/fa";
 import useYearsExperience from "../lib/useYearsExperience";
 
-const Corporate = () => {
+const Corporate = ({ cms } = {}) => {
   const yearsExperience = useYearsExperience();
   const features = [
     {
@@ -166,69 +166,79 @@ const Corporate = () => {
     },
   ];
 
+  const techCategories = [
+    { title:"Frontend", techs:[
+      {name:"React.js",icon:"https://cdn.simpleicons.org/react"},
+      {name:"Next.js",icon:"https://cdn.simpleicons.org/nextdotjs/white"},
+      {name:"Angular",icon:"https://cdn.simpleicons.org/angular"},
+      {name:"Vue.js",icon:"https://cdn.simpleicons.org/vuedotjs"},
+      {name:"TypeScript",icon:"https://cdn.simpleicons.org/typescript"},
+      {name:"HTML/CSS",icon:"https://cdn.simpleicons.org/html5"},
+    ]},
+    { title:"Backend", techs:[
+      {name:"Node.js",icon:"https://cdn.simpleicons.org/nodedotjs"},
+      {name:"PHP",icon:"https://cdn.simpleicons.org/php"},
+      {name:"Laravel",icon:"https://cdn.simpleicons.org/laravel"},
+      {name:"Python",icon:"https://cdn.simpleicons.org/python"},
+      {name:"Express.js",icon:"https://cdn.simpleicons.org/express/white"},
+      {name:".NET",icon:"https://cdn.simpleicons.org/dotnet"},
+    ]},
+    { title:"Database", techs:[
+      {name:"MySQL",icon:"https://cdn.simpleicons.org/mysql"},
+      {name:"PostgreSQL",icon:"https://cdn.simpleicons.org/postgresql"},
+      {name:"MongoDB",icon:"https://cdn.simpleicons.org/mongodb"},
+      {name:"Redis",icon:"https://cdn.simpleicons.org/redis"},
+    ]},
+    { title:"DevOps & Cloud", techs:[
+      {name:"Docker",icon:"https://cdn.simpleicons.org/docker"},
+      {name:"AWS",icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"},
+      {name:"GitHub Actions",icon:"https://cdn.simpleicons.org/githubactions"},
+      {name:"Nginx",icon:"https://cdn.simpleicons.org/nginx"},
+      {name:"Vercel",icon:"https://cdn.simpleicons.org/vercel/white"},
+    ]},
+  ];
+
+  const FALLBACK_CONTENT = {
+    bannerImg: cwd,
+    bannerTitle: "CORPORATE WEBSITE DESIGN",
+    bannerDesc: "An innovative and engaging website is crucial to maximize your business efficiency. Future IT Touch Pvt. Ltd. corporate website design company can be your right partner. From simple, informative blogging site to complex web applications and eCommerce website development – we provide a comprehensive web solution. Our team is adept at developing fast-loading, responsive, and user-friendly websites that have consistent accessibility across multiple devices and browsers. Backed with a long experience and industry exposure, we have satisfied a global clientele with a futuristic web solution. Transform your ideas into reality with us.",
+    overviewImage: cwd,
+    overviewImageAlt: "Corporate website design",
+    overviewBadge: "Reliable Corporate Web App Development",
+    overviewHeading: "Building Powerful and",
+    overviewHighlight: "Scalable Business Applications",
+    overviewParagraphs: [
+      "At Future IT Touch Pvt. Ltd. we craft secure and scalable web applications designed to streamline operations, enhance collaboration, and empower enterprises to achieve their digital goals with efficiency and precision.",
+      "Our focus is on building robust web applications that simplify complex business processes and drive productivity across departments. With innovative tools and intuitive design, our corporate web apps deliver measurable results for businesses worldwide.",
+      { boldPrefix: "For Employees:", text: "Easy access dashboards, intuitive interfaces, secure logins, workflow automation, real-time data sharing, and cloud integration for seamless performance." },
+      { boldPrefix: "For Management:", text: "Centralized control, detailed analytics, role-based access, performance tracking, communication tools, and data-driven decision-making." },
+      `With over ${yearsExperience} years of industry experience, we've delivered innovative web solutions for leading corporations. Choose our custom web app development services to transform your organization's digital workflow and boost operational efficiency.`,
+    ],
+    overviewCtaText: "Start Your Corporate Web App Project",
+    features,
+    bizCards: businessData,
+    sliderCards: cards,
+    platforms,
+    techCategories,
+    faqData,
+  };
+
+  const content = cms
+    ? { ...cms, bannerImg: cms.bannerImg || cwd, overviewImage: cms.overviewImage || cwd }
+    : FALLBACK_CONTENT;
+
   return (
     <CommonServicePage
-      bannerImg={cwd}
-      bannerTitle="CORPORATE WEBSITE DESIGN"
-      bannerDesc="An innovative and engaging website is crucial to maximize your business efficiency. Future IT Touch Pvt. Ltd. corporate website design company can be your right partner. From simple, informative blogging site to complex web applications and eCommerce website development – we provide a comprehensive web solution. Our team is adept at developing fast-loading, responsive, and user-friendly websites that have consistent accessibility across multiple devices and browsers. Backed with a long experience and industry exposure, we have satisfied a global clientele with a futuristic web solution. Transform your ideas into reality with us."
-      overviewImage={cwd}
-      overviewImageAlt="Corporate website design"
-      overviewBadge="Reliable Corporate Web App Development"
-      overviewHeading="Building Powerful and"
-      overviewHighlight="Scalable Business Applications"
-      overviewParagraphs={[
-        "At Future IT Touch Pvt. Ltd. we craft secure and scalable web applications designed to streamline operations, enhance collaboration, and empower enterprises to achieve their digital goals with efficiency and precision.",
-        "Our focus is on building robust web applications that simplify complex business processes and drive productivity across departments. With innovative tools and intuitive design, our corporate web apps deliver measurable results for businesses worldwide.",
-        { boldPrefix: "For Employees:", text: "Easy access dashboards, intuitive interfaces, secure logins, workflow automation, real-time data sharing, and cloud integration for seamless performance." },
-        { boldPrefix: "For Management:", text: "Centralized control, detailed analytics, role-based access, performance tracking, communication tools, and data-driven decision-making." },
-        `With over ${yearsExperience} years of industry experience, we've delivered innovative web solutions for leading corporations. Choose our custom web app development services to transform your organization's digital workflow and boost operational efficiency.`,
-      ]}
-      overviewCtaText="Start Your Corporate Web App Project"
+      {...content}
       featuresBadge="Trusted Business Web App Development Service"
       featuresTitle="Delivering Innovative &"
       featuresTitleHighlight="Scalable Web Solutions for Corporates"
-      features={features}
       bizBadge="Leading Corporate Web Application Development Company in India"
       bizHeading="Partner with Us for"
       bizHighlight="Excellence & Innovation"
-      bizCards={businessData}
       sliderTitle="Delivering Innovative Corporate Web Solutions with"
-      sliderCards={cards}
       platformsTitle="Cutting-Edge Web Application Development for Corporates – End-to-End Robust Web Solutions for Your Business"
-      platforms={platforms}
       faqTitle="About eCommerce Website Developmen"
-      faqData={faqData}
-      techCategories={[
-        { title:"Frontend", techs:[
-          {name:"React.js",icon:"https://cdn.simpleicons.org/react"},
-          {name:"Next.js",icon:"https://cdn.simpleicons.org/nextdotjs/white"},
-          {name:"Angular",icon:"https://cdn.simpleicons.org/angular"},
-          {name:"Vue.js",icon:"https://cdn.simpleicons.org/vuedotjs"},
-          {name:"TypeScript",icon:"https://cdn.simpleicons.org/typescript"},
-          {name:"HTML/CSS",icon:"https://cdn.simpleicons.org/html5"},
-        ]},
-        { title:"Backend", techs:[
-          {name:"Node.js",icon:"https://cdn.simpleicons.org/nodedotjs"},
-          {name:"PHP",icon:"https://cdn.simpleicons.org/php"},
-          {name:"Laravel",icon:"https://cdn.simpleicons.org/laravel"},
-          {name:"Python",icon:"https://cdn.simpleicons.org/python"},
-          {name:"Express.js",icon:"https://cdn.simpleicons.org/express/white"},
-          {name:".NET",icon:"https://cdn.simpleicons.org/dotnet"},
-        ]},
-        { title:"Database", techs:[
-          {name:"MySQL",icon:"https://cdn.simpleicons.org/mysql"},
-          {name:"PostgreSQL",icon:"https://cdn.simpleicons.org/postgresql"},
-          {name:"MongoDB",icon:"https://cdn.simpleicons.org/mongodb"},
-          {name:"Redis",icon:"https://cdn.simpleicons.org/redis"},
-        ]},
-        { title:"DevOps & Cloud", techs:[
-          {name:"Docker",icon:"https://cdn.simpleicons.org/docker"},
-          {name:"AWS",icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"},
-          {name:"GitHub Actions",icon:"https://cdn.simpleicons.org/githubactions"},
-          {name:"Nginx",icon:"https://cdn.simpleicons.org/nginx"},
-          {name:"Vercel",icon:"https://cdn.simpleicons.org/vercel/white"},
-        ]},
-      ]}
     />
   );
 };

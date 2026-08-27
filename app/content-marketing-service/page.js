@@ -1,7 +1,7 @@
 import Contentt from "./Content";
+import { getServicePageCms, mapServicePageProps, loadServicePageSeo } from '../lib/loadServicePage'
 
-
-export const metadata = {
+const DEFAULT_METADATA = {
   title: "Content Marketing Services | Content Strategy & Creation",
   description: "Content marketing services that build authority and drive organic traffic — blog content, SEO copywriting, content strategy, and distribution built around your audience's search intent.",
   keywords: [
@@ -10,10 +10,16 @@ export const metadata = {
   ],
 };
 
-export default function page() {
+export async function generateMetadata() {
+  return loadServicePageSeo("content-marketing-service", DEFAULT_METADATA);
+}
+
+export default async function page() {
+  const cmsRaw = await getServicePageCms("content-marketing-service");
+  const cms = cmsRaw ? mapServicePageProps(cmsRaw) : null;
   return (
     <div>
-      <Contentt/>
+      <Contentt cms={cms}/>
     </div>
   )
 }

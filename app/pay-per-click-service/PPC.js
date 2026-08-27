@@ -6,8 +6,7 @@ import {
   FaBullhorn, FaSearch, FaEnvelopeOpenText, FaLaptopCode, FaUsers, FaChartLine,
 } from "react-icons/fa";
 
-const PPC = () => {
-  const features = [
+const features = [
     {
       title: "Targeted Campaigns",
       description:
@@ -163,63 +162,74 @@ const PPC = () => {
     },
   ];
 
+const techCategories = [
+  { title:"Analytics & SEO", techs:[
+    {name:"Google Analytics",icon:"https://cdn.simpleicons.org/googleanalytics"},
+    {name:"Google Search Console",icon:"https://cdn.simpleicons.org/googlesearchconsole"},
+    {name:"Ahrefs",icon:"https://cdn.simpleicons.org/ahrefs"},
+    {name:"Semrush",icon:"https://cdn.simpleicons.org/semrush"},
+  ]},
+  { title:"Advertising", techs:[
+    {name:"Google Ads",icon:"https://cdn.simpleicons.org/googleads"},
+    {name:"Meta Ads",icon:"https://cdn.simpleicons.org/meta"},
+    {name:"LinkedIn Ads",icon:"https://cdn.simpleicons.org/linkedin"},
+  ]},
+  { title:"Social & Email", techs:[
+    {name:"HubSpot",icon:"https://cdn.simpleicons.org/hubspot"},
+    {name:"Mailchimp",icon:"https://cdn.simpleicons.org/mailchimp"},
+    {name:"Buffer",icon:"https://cdn.simpleicons.org/buffer"},
+    {name:"Hootsuite",icon:"https://cdn.simpleicons.org/hootsuite"},
+  ]},
+  { title:"Content & CMS", techs:[
+    {name:"WordPress",icon:"https://cdn.simpleicons.org/wordpress"},
+    {name:"Webflow",icon:"https://cdn.simpleicons.org/webflow"},
+    {name:"Canva",icon:"https://cdn.simpleicons.org/canva"},
+  ]},
+];
+
+const FALLBACK_CONTENT = {
+  bannerImg: cwd,
+  bannerTitle: "PPC MANAGEMENT SERVICES",
+  bannerDesc: "Looking for the quickest way to bring ready-to-buy customers to your website and mobile app? PPC (Pay-per-Click) offers the perfect solution. As a leading PPC management company in India we specialize in various PPC management services such as Google Adwords, Facebook and YouTube advertisements. As an certified PPC service provider in India, we have been serving a global clientele from varied industries and demographic for the past ten years in the most efficient manner.",
+  overviewImage: cwd,
+  overviewImageAlt: "PPC Management Services",
+  overviewBadge: "Result-Oriented PPC Management",
+  overviewHeading: "Driving Targeted Traffic &",
+  overviewHighlight: "Maximizing ROI with PPC Campaigns",
+  overviewParagraphs: [
+    "At Future IT Touch Pvt. Ltd. we create highly effective Pay-Per-Click (PPC) campaigns to bring ready-to-buy customers to your website or mobile app. Our certified PPC experts specialize in Google Ads, Facebook Ads, YouTube Ads, and more, delivering measurable results with cost-effective campaigns.",
+    "Our PPC services are designed to maximize your visibility, drive targeted traffic, and generate high-quality leads that convert into sales.",
+    { boldPrefix: "For Businesses:", text: "Targeted ad campaigns, strategic keyword bidding, precise audience segmentation, retargeting, and data-driven optimization to maximize ROI." },
+    { boldPrefix: "For Marketing Teams:", text: "Detailed analytics, campaign performance tracking, budget optimization, and reporting to guide strategy and enhance results." },
+    `With over ${YEARS_EXPERIENCE_DISPLAY} years of experience in PPC management, we've delivered successful campaigns for clients across industries. Choose our PPC management services to boost your online presence, attract qualified leads, and increase conversions.`,
+  ],
+  overviewCtaText: "Start Your PPC Campaign Today",
+  features,
+  bizCards: businessData,
+  sliderCards: cards,
+  platforms,
+  techCategories,
+  faqData,
+};
+
+const PPC = ({ cms } = {}) => {
+  const content = cms
+    ? { ...cms, bannerImg: cms.bannerImg || cwd, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    : FALLBACK_CONTENT;
+
   return (
     <CommonServicePage
-      bannerImg={cwd}
-      bannerTitle="PPC MANAGEMENT SERVICES"
-      bannerDesc="Looking for the quickest way to bring ready-to-buy customers to your website and mobile app? PPC (Pay-per-Click) offers the perfect solution. As a leading PPC management company in India we specialize in various PPC management services such as Google Adwords, Facebook and YouTube advertisements. As an certified PPC service provider in India, we have been serving a global clientele from varied industries and demographic for the past ten years in the most efficient manner."
-      overviewImage={cwd}
-      overviewImageAlt="PPC Management Services"
-      overviewBadge="Result-Oriented PPC Management"
-      overviewHeading="Driving Targeted Traffic &"
-      overviewHighlight="Maximizing ROI with PPC Campaigns"
-      overviewParagraphs={[
-        "At Future IT Touch Pvt. Ltd. we create highly effective Pay-Per-Click (PPC) campaigns to bring ready-to-buy customers to your website or mobile app. Our certified PPC experts specialize in Google Ads, Facebook Ads, YouTube Ads, and more, delivering measurable results with cost-effective campaigns.",
-        "Our PPC services are designed to maximize your visibility, drive targeted traffic, and generate high-quality leads that convert into sales.",
-        { boldPrefix: "For Businesses:", text: "Targeted ad campaigns, strategic keyword bidding, precise audience segmentation, retargeting, and data-driven optimization to maximize ROI." },
-        { boldPrefix: "For Marketing Teams:", text: "Detailed analytics, campaign performance tracking, budget optimization, and reporting to guide strategy and enhance results." },
-        `With over ${YEARS_EXPERIENCE_DISPLAY} years of experience in PPC management, we've delivered successful campaigns for clients across industries. Choose our PPC management services to boost your online presence, attract qualified leads, and increase conversions.`,
-      ]}
-      overviewCtaText="Start Your PPC Campaign Today"
+      {...content}
       featuresBadge="Trusted PPC Management Services"
       featuresTitle="Delivering Result-Driven Paid Campaigns for"
       featuresTitleHighlight="Maximum ROI"
       featuresStickyImg={cwd}
-      features={features}
       bizBadge="Leading PPC Management Company in India"
       bizHeading="Maximize Conversions &"
       bizHighlight="ROI with Expert PPC Strategies"
-      bizCards={businessData}
       sliderTitle="Maximize Conversions with Expert PPC Management Solutions "
-      sliderCards={cards}
       platformsTitle="Comprehensive PPC Management Services – Target, Engage & Convert Your Audience Effectively"
-      platforms={platforms}
       faqTitle=" About PPC Management Services"
-      faqData={faqData}
-      techCategories={[
-        { title:"Analytics & SEO", techs:[
-          {name:"Google Analytics",icon:"https://cdn.simpleicons.org/googleanalytics"},
-          {name:"Google Search Console",icon:"https://cdn.simpleicons.org/googlesearchconsole"},
-          {name:"Ahrefs",icon:"https://cdn.simpleicons.org/ahrefs"},
-          {name:"Semrush",icon:"https://cdn.simpleicons.org/semrush"},
-        ]},
-        { title:"Advertising", techs:[
-          {name:"Google Ads",icon:"https://cdn.simpleicons.org/googleads"},
-          {name:"Meta Ads",icon:"https://cdn.simpleicons.org/meta"},
-          {name:"LinkedIn Ads",icon:"https://cdn.simpleicons.org/linkedin"},
-        ]},
-        { title:"Social & Email", techs:[
-          {name:"HubSpot",icon:"https://cdn.simpleicons.org/hubspot"},
-          {name:"Mailchimp",icon:"https://cdn.simpleicons.org/mailchimp"},
-          {name:"Buffer",icon:"https://cdn.simpleicons.org/buffer"},
-          {name:"Hootsuite",icon:"https://cdn.simpleicons.org/hootsuite"},
-        ]},
-        { title:"Content & CMS", techs:[
-          {name:"WordPress",icon:"https://cdn.simpleicons.org/wordpress"},
-          {name:"Webflow",icon:"https://cdn.simpleicons.org/webflow"},
-          {name:"Canva",icon:"https://cdn.simpleicons.org/canva"},
-        ]},
-      ]}
     />
   );
 };

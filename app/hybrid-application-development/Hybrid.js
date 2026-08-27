@@ -8,7 +8,7 @@ import { MdOutlineApi, MdOutlineSecurity } from "react-icons/md";
 import { RiTestTubeLine } from "react-icons/ri";
 import useYearsExperience from "../lib/useYearsExperience";
 
-const Hybrid = () => {
+const Hybrid = ({ cms } = {}) => {
   const yearsExperience = useYearsExperience();
   const features = [
     {
@@ -172,66 +172,76 @@ const Hybrid = () => {
     },
   ];
 
+  const techCategories = [
+    { title:"Mobile Frameworks", techs:[
+      {name:"Flutter",icon:"https://cdn.simpleicons.org/flutter"},
+      {name:"React Native",icon:"https://cdn.simpleicons.org/react"},
+      {name:"Android",icon:"https://cdn.simpleicons.org/android"},
+      {name:"iOS / Swift",icon:"https://cdn.simpleicons.org/swift"},
+      {name:"Kotlin",icon:"https://cdn.simpleicons.org/kotlin"},
+    ]},
+    { title:"Backend & APIs", techs:[
+      {name:"Node.js",icon:"https://cdn.simpleicons.org/nodedotjs"},
+      {name:"Firebase",icon:"https://cdn.simpleicons.org/firebase"},
+      {name:"REST APIs",icon:"https://cdn.simpleicons.org/fastapi"},
+      {name:"GraphQL",icon:"https://cdn.simpleicons.org/graphql"},
+    ]},
+    { title:"Database & Storage", techs:[
+      {name:"SQLite",icon:"https://cdn.simpleicons.org/sqlite"},
+      {name:"Firebase",icon:"https://cdn.simpleicons.org/firebase"},
+      {name:"MongoDB",icon:"https://cdn.simpleicons.org/mongodb"},
+      {name:"MySQL",icon:"https://cdn.simpleicons.org/mysql"},
+    ]},
+    { title:"Testing & DevOps", techs:[
+      {name:"Appium",icon:"https://cdn.simpleicons.org/appium"},
+      {name:"Jest",icon:"https://cdn.simpleicons.org/jest"},
+      {name:"GitHub Actions",icon:"https://cdn.simpleicons.org/githubactions"},
+      {name:"Docker",icon:"https://cdn.simpleicons.org/docker"},
+    ]},
+  ];
+
+  const FALLBACK_CONTENT = {
+    bannerImg: app,
+    bannerTitle: "HYBRID APP DEVELOPMENT SERVICES",
+    bannerDesc: "Need an app for your business that can run seamlessly across Android and iPhone yet limited by budget constraints? A Hybrid App is the answer. It is a mixture of Native and Web Apps, giving you a cross-platform experience along with scalable features in a highly customized Mobile Application. Few most popular technologies for developing hybrid apps include Ionic, a PhoneGap / Cordova based HTML5 framework and Flutter, Google's UI toolkit for building beautiful, natively compiled apps. Future IT Touch Pvt. Ltd. is an certified mobile app development agency with substantial experience in cross-platform app development. Our team of expert developers specialize in providing Hybrid App Development Services as per your business requirements.",
+    overviewImage: ec,
+    overviewImageAlt: "Hybrid App Development",
+    overviewBadge: "Trusted Hybrid Application Development",
+    overviewHeading: "Building Powerful",
+    overviewHighlight: "Cross-Platform Mobile Apps",
+    overviewParagraphs: [
+      "At Future IT Touch Pvt. Ltd. we specialize in creating hybrid mobile applications that deliver native-like performance, consistent UI, and seamless user experiences across Android, iOS, and the web — all from a single codebase.",
+      "Our hybrid app development services help businesses save time and cost while reaching a wider audience. Using the latest frameworks like React Native, Flutter, and Ionic, we build fast, reliable, and scalable apps that work smoothly on multiple platforms.",
+      { boldPrefix: "Our Expertise Includes:", text: "Cross-platform UI/UX design, API integration, native performance optimization, secure data handling, real-time syncing, and app store deployment." },
+      { boldPrefix: "Why Choose Us:", text: "Faster time-to-market, cost-effective solutions, reusable code architecture, consistent user experience, and full post-launch support." },
+      `With over ${yearsExperience} years of experience, we've helped startups and enterprises bring their ideas to life using robust hybrid technologies. Partner with our hybrid app development experts to build high-quality, cross-platform applications that perform flawlessly across all devices.`,
+    ],
+    overviewCtaText: "Start Your Hybrid App Project",
+    features,
+    bizCards: businessData,
+    sliderCards: cards,
+    platforms,
+    techCategories,
+    faqData,
+  };
+
+  const content = cms
+    ? { ...cms, bannerImg: cms.bannerImg || app, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    : FALLBACK_CONTENT;
+
   return (
     <CommonServicePage
-      bannerImg={app}
-      bannerTitle="HYBRID APP DEVELOPMENT SERVICES"
-      bannerDesc="Need an app for your business that can run seamlessly across Android and iPhone yet limited by budget constraints? A Hybrid App is the answer. It is a mixture of Native and Web Apps, giving you a cross-platform experience along with scalable features in a highly customized Mobile Application. Few most popular technologies for developing hybrid apps include Ionic, a PhoneGap / Cordova based HTML5 framework and Flutter, Google's UI toolkit for building beautiful, natively compiled apps. Future IT Touch Pvt. Ltd. is an certified mobile app development agency with substantial experience in cross-platform app development. Our team of expert developers specialize in providing Hybrid App Development Services as per your business requirements."
-      overviewImage={ec}
-      overviewImageAlt="Hybrid App Development"
-      overviewBadge="Trusted Hybrid Application Development"
-      overviewHeading="Building Powerful"
-      overviewHighlight="Cross-Platform Mobile Apps"
-      overviewParagraphs={[
-        "At Future IT Touch Pvt. Ltd. we specialize in creating hybrid mobile applications that deliver native-like performance, consistent UI, and seamless user experiences across Android, iOS, and the web — all from a single codebase.",
-        "Our hybrid app development services help businesses save time and cost while reaching a wider audience. Using the latest frameworks like React Native, Flutter, and Ionic, we build fast, reliable, and scalable apps that work smoothly on multiple platforms.",
-        { boldPrefix: "Our Expertise Includes:", text: "Cross-platform UI/UX design, API integration, native performance optimization, secure data handling, real-time syncing, and app store deployment." },
-        { boldPrefix: "Why Choose Us:", text: "Faster time-to-market, cost-effective solutions, reusable code architecture, consistent user experience, and full post-launch support." },
-        `With over ${yearsExperience} years of experience, we've helped startups and enterprises bring their ideas to life using robust hybrid technologies. Partner with our hybrid app development experts to build high-quality, cross-platform applications that perform flawlessly across all devices.`,
-      ]}
-      overviewCtaText="Start Your Hybrid App Project"
+      {...content}
       featuresBadge="Our iPhone App Development Process"
       featuresTitle="Trusted iOS app developers in India,"
       featuresTitleHighlight="delivering seamless and innovative apps"
       featuresStickyImg={app}
-      features={features}
       bizBadge="Leading Hybrid App Development Company in India"
       bizHeading="Build Powerful Apps That Work on"
       bizHighlight="Every Platform"
-      bizCards={businessData}
       sliderTitle="Delivering Powerful Hybrid App Experiences with"
-      sliderCards={cards}
       platformsTitle="Hybrid App Development Technologies We Use"
-      platforms={platforms}
       faqTitle="About Hybrid Application Development"
-      faqData={faqData}
-      techCategories={[
-        { title:"Mobile Frameworks", techs:[
-          {name:"Flutter",icon:"https://cdn.simpleicons.org/flutter"},
-          {name:"React Native",icon:"https://cdn.simpleicons.org/react"},
-          {name:"Android",icon:"https://cdn.simpleicons.org/android"},
-          {name:"iOS / Swift",icon:"https://cdn.simpleicons.org/swift"},
-          {name:"Kotlin",icon:"https://cdn.simpleicons.org/kotlin"},
-        ]},
-        { title:"Backend & APIs", techs:[
-          {name:"Node.js",icon:"https://cdn.simpleicons.org/nodedotjs"},
-          {name:"Firebase",icon:"https://cdn.simpleicons.org/firebase"},
-          {name:"REST APIs",icon:"https://cdn.simpleicons.org/fastapi"},
-          {name:"GraphQL",icon:"https://cdn.simpleicons.org/graphql"},
-        ]},
-        { title:"Database & Storage", techs:[
-          {name:"SQLite",icon:"https://cdn.simpleicons.org/sqlite"},
-          {name:"Firebase",icon:"https://cdn.simpleicons.org/firebase"},
-          {name:"MongoDB",icon:"https://cdn.simpleicons.org/mongodb"},
-          {name:"MySQL",icon:"https://cdn.simpleicons.org/mysql"},
-        ]},
-        { title:"Testing & DevOps", techs:[
-          {name:"Appium",icon:"https://cdn.simpleicons.org/appium"},
-          {name:"Jest",icon:"https://cdn.simpleicons.org/jest"},
-          {name:"GitHub Actions",icon:"https://cdn.simpleicons.org/githubactions"},
-          {name:"Docker",icon:"https://cdn.simpleicons.org/docker"},
-        ]},
-      ]}
     />
   );
 };

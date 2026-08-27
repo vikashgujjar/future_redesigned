@@ -203,45 +203,53 @@ const techCategories = [
   },
 ];
 
-const Business = () => {
+const FALLBACK_CONTENT = {
+  bannerImg: gm,
+  bannerTitle: "SMALL BUSINESS WEBSITE DESIGN SERVICES",
+  bannerDesc: "The biggest challenge faced by any small business is expanding its customer base. With the rising costs of traditional media, a professionally developed website is the most effective first step toward building a strong digital presence. Future IT Touch Pvt. Ltd. provides affordable, custom small business website design services to clients worldwide — helping startups and growing businesses enhance their online presence and drive real growth.",
+  overviewImage: "/Assets/stock/photo-1460925895917-afdab827c52f.webp",
+  overviewImageAlt: "Small business website design",
+  overviewBadge: "Website For Small Business & Startups",
+  overviewHeading: "Rise from a Startup to an",
+  overviewHighlight: "Established Brand",
+  overviewParagraphs: [
+    "Whether you run a small business or have invested in a startup, we build professional, results-driven websites at very reasonable price points. We use the latest technologies, create attractive design layouts, and develop business-oriented features to uplift your user experience.",
+    "A well-built website for small businesses converts visitors into buyers by creating a strong first impression. This increases revenue and helps your business grow into an established brand.",
+    { boldPrefix: "For Your Business:", text: "SEO-optimized, fast-loading, mobile-responsive websites that generate enquiries and grow your customer base organically." },
+    { boldPrefix: "For Your Customers:", text: "Intuitive navigation, clear service presentation, easy contact options, and a trustworthy brand experience on every device." },
+    `In the last ${YEARS_EXPERIENCE_DISPLAY} years, we have delivered effective web solutions to hundreds of small businesses and helped them enhance their growth online with measurable results.`,
+  ],
+  overviewCtaText: "Start Your Business Website",
+  features,
+  bizCards: businessData,
+  sliderCards: cards,
+  platforms,
+  techCategories,
+  faqData,
+};
+
+const Business = ({ cms } = {}) => {
+  const content = cms
+    ? { ...cms, bannerImg: cms.bannerImg || gm, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    : FALLBACK_CONTENT;
+
   return (
     <CommonServicePage
-      bannerImg={gm}
-      bannerTitle="SMALL BUSINESS WEBSITE DESIGN SERVICES"
-      bannerDesc="The biggest challenge faced by any small business is expanding its customer base. With the rising costs of traditional media, a professionally developed website is the most effective first step toward building a strong digital presence. Future IT Touch Pvt. Ltd. provides affordable, custom small business website design services to clients worldwide — helping startups and growing businesses enhance their online presence and drive real growth."
-      overviewImage="/Assets/stock/photo-1460925895917-afdab827c52f.webp"
-      overviewImageAlt="Small business website design"
-      overviewBadge="Website For Small Business & Startups"
-      overviewHeading="Rise from a Startup to an"
-      overviewHighlight="Established Brand"
-      overviewParagraphs={[
-        "Whether you run a small business or have invested in a startup, we build professional, results-driven websites at very reasonable price points. We use the latest technologies, create attractive design layouts, and develop business-oriented features to uplift your user experience.",
-        "A well-built website for small businesses converts visitors into buyers by creating a strong first impression. This increases revenue and helps your business grow into an established brand.",
-        { boldPrefix: "For Your Business:", text: "SEO-optimized, fast-loading, mobile-responsive websites that generate enquiries and grow your customer base organically." },
-        { boldPrefix: "For Your Customers:", text: "Intuitive navigation, clear service presentation, easy contact options, and a trustworthy brand experience on every device." },
-        `In the last ${YEARS_EXPERIENCE_DISPLAY} years, we have delivered effective web solutions to hundreds of small businesses and helped them enhance their growth online with measurable results.`,
-      ]}
-      overviewCtaText="Start Your Business Website"
+      {...content}
       featuresBadge="Small Business Website Development"
       featuresTitle="Building Websites That Help Your Business"
       featuresTitleHighlight="Grow Online"
       featuresStickyImg="/Assets/stock/photo-1497366216548-37526070297c.webp"
-      features={features}
       bizBadge="Why Choose Future IT Touch"
       bizHeading="We Build Websites That"
       bizHighlight="Work for Your Business"
-      bizCards={businessData}
       sliderTitle="Delivering Professional Websites That Drive Small Business Growth"
-      sliderCards={cards}
       platformsTitle="Small Business Website Solutions We Deliver"
-      platforms={platforms}
       techBadge="Our Web Tech Stack"
       techHeading="Technologies"
       techHeadingHighlight="We Build With"
       techDescription="We use modern, proven technologies to deliver fast, secure, and easy-to-manage websites that help small businesses compete online effectively."
-      techCategories={techCategories}
       faqTitle="About Small Business Website Design"
-      faqData={faqData}
     />
   );
 };

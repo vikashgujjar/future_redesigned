@@ -187,50 +187,60 @@ const faqData = [
   },
 ];
 
-const DataProtection = () => (
-  <CommonServicePage
-    bannerImg={securityImg}
-    bannerTitle="Data Protection & Compliance Services"
-    bannerDesc="DPDPA 2023, CERT-In controls, ISO 27001, PCI-DSS, and RBI compliance programmes delivered as a managed service for Indian businesses — gap assessment, policy development, control implementation, ongoing monitoring, and audit readiness. Stay compliant, always."
+const FALLBACK_CONTENT = {
+  bannerImg: securityImg,
+  bannerTitle: "Data Protection & Compliance Services",
+  bannerDesc: "DPDPA 2023, CERT-In controls, ISO 27001, PCI-DSS, and RBI compliance programmes delivered as a managed service for Indian businesses — gap assessment, policy development, control implementation, ongoing monitoring, and audit readiness. Stay compliant, always.",
 
-    overviewImage="/Assets/stock/photo-1516321318423-f06f85e504b3.webp"
-    overviewImageAlt="Data Protection & Compliance Services"
-    overviewBadge="Cyber Security · Compliance-as-a-Service"
-    overviewHeading="Indian Regulatory Compliance"
-    overviewHighlight="Built In, Not Bolted On"
-    overviewParagraphs={[
-      "DPDPA 2023 is now in force. CERT-In controls are mandatory. ISO 27001 is increasingly required by enterprise clients and government vendors. Non-compliance is no longer a theoretical risk — it is a live business and legal liability for every Indian organisation that processes personal data.",
-      "We provide Compliance-as-a-Service — managing your entire compliance programme across DPDPA 2023, CERT-In, ISO 27001, PCI-DSS, and sector-specific frameworks (RBI, HIPAA) as an ongoing managed service. Our team handles gap assessments, policy drafting, control implementation, employee training, evidence collection, and audit preparation.",
-      "Unlike legal consultants who deliver a report and leave, we stay with you — keeping controls active, updating policies when regulations change, and providing year-round audit readiness so compliance is never a last-minute scramble.",
-    ]}
-    overviewCtaText="Request a Free Compliance Gap Assessment"
+  overviewImage: "/Assets/stock/photo-1516321318423-f06f85e504b3.webp",
+  overviewImageAlt: "Data Protection & Compliance Services",
+  overviewBadge: "Cyber Security · Compliance-as-a-Service",
+  overviewHeading: "Indian Regulatory Compliance",
+  overviewHighlight: "Built In, Not Bolted On",
+  overviewParagraphs: [
+    "DPDPA 2023 is now in force. CERT-In controls are mandatory. ISO 27001 is increasingly required by enterprise clients and government vendors. Non-compliance is no longer a theoretical risk — it is a live business and legal liability for every Indian organisation that processes personal data.",
+    "We provide Compliance-as-a-Service — managing your entire compliance programme across DPDPA 2023, CERT-In, ISO 27001, PCI-DSS, and sector-specific frameworks (RBI, HIPAA) as an ongoing managed service. Our team handles gap assessments, policy drafting, control implementation, employee training, evidence collection, and audit preparation.",
+    "Unlike legal consultants who deliver a report and leave, we stay with you — keeping controls active, updating policies when regulations change, and providing year-round audit readiness so compliance is never a last-minute scramble.",
+  ],
+  overviewCtaText: "Request a Free Compliance Gap Assessment",
 
-    featuresBadge="Our Compliance Services"
-    featuresTitle="End-to-End Compliance Across"
-    featuresTitleHighlight="All Indian Regulations"
-    featuresStickyImg="/Assets/stock/photo-1573164713712-03790a178651.webp"
-    features={features}
+  features,
+  bizCards,
+  sliderCards,
+  platforms,
+  techCategories,
+  faqData,
+};
 
-    bizBadge="Why Choose Us"
-    bizHeading="Compliance Expertise That"
-    bizHighlight="Covers Legal & Technical"
-    bizCards={bizCards}
+const DataProtection = ({ cms } = {}) => {
+  const content = cms
+    ? { ...cms, bannerImg: cms.bannerImg || securityImg, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    : FALLBACK_CONTENT;
 
-    sliderTitle="Compliance Outcomes That Protect Your Business"
-    sliderCards={sliderCards}
+  return (
+    <CommonServicePage
+      {...content}
+      featuresBadge="Our Compliance Services"
+      featuresTitle="End-to-End Compliance Across"
+      featuresTitleHighlight="All Indian Regulations"
+      featuresStickyImg="/Assets/stock/photo-1573164713712-03790a178651.webp"
 
-    platformsTitle="Our Compliance Tools & Frameworks"
-    platforms={platforms}
+      bizBadge="Why Choose Us"
+      bizHeading="Compliance Expertise That"
+      bizHighlight="Covers Legal & Technical"
 
-    techBadge="Our Compliance Tech Stack"
-    techHeading="Frameworks & Technologies"
-    techHeadingHighlight="We Implement"
-    techDescription="We implement compliance controls using industry-standard security tools, GRC platforms, and cloud-native policy engines — ensuring your compliance programme has technical teeth, not just paper policies."
-    techCategories={techCategories}
+      sliderTitle="Compliance Outcomes That Protect Your Business"
 
-    faqTitle="Frequently Asked Questions — Data Protection & Compliance"
-    faqData={faqData}
-  />
-);
+      platformsTitle="Our Compliance Tools & Frameworks"
+
+      techBadge="Our Compliance Tech Stack"
+      techHeading="Frameworks & Technologies"
+      techHeadingHighlight="We Implement"
+      techDescription="We implement compliance controls using industry-standard security tools, GRC platforms, and cloud-native policy engines — ensuring your compliance programme has technical teeth, not just paper policies."
+
+      faqTitle="Frequently Asked Questions — Data Protection & Compliance"
+    />
+  );
+};
 
 export default DataProtection;

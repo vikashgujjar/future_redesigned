@@ -9,9 +9,8 @@ import flutterImg from "../Assets/Flutter.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
-const Flutter = () => (
-  <CommonTechPage
-    banner={{
+const FALLBACK_CONTENT = {
+    banner: {
       bgImage: "/Assets/stock/photo-1607746882042-944635dfe10e.webp",
       image: flutterImg,
       category: "Cross-Platform Development",
@@ -19,9 +18,9 @@ const Flutter = () => (
       title: "Flutter · Dart · Cross-Platform",
       tagline:
         "Build stunning, high-performance cross-platform applications for Android, iOS, web, and desktop from a single Dart codebase — faster delivery, lower cost, native-quality experience.",
-    }}
+    },
 
-    intro={{
+    intro: {
       badge: "Future IT Touch · Flutter Experts",
       heading: "Build Stunning Apps for Every Platform with",
       highlight: "Flutter & Dart",
@@ -41,9 +40,9 @@ const Flutter = () => (
         { num: YEARS_EXPERIENCE_DISPLAY,   label: "Years Mobile Dev Expertise", desc: `${YEARS_EXPERIENCE_DISPLAY} years mastering cross-platform Flutter and Dart development.`,         icon: <FaLayerGroup /> },
         { num: "200+", label: "Satisfied Global Clients",   desc: "Trusted by 200+ clients worldwide for scalable and visually stunning apps.",      icon: <FaStar /> },
       ],
-    }}
+    },
 
-    services={[
+    services: [
       {
         icon: <FaMobileAlt />,
         title: "Custom Flutter App Development",
@@ -110,9 +109,9 @@ const Flutter = () => (
           "Feature rollouts & dependency upgrades",
         ],
       },
-    ]}
+    ],
 
-    process={[
+    process: [
       { icon: <FaCheckCircle />, title: "Requirements Analysis",          desc: "Understanding your business goals, target audience, and platform requirements to create a clear, realistic roadmap for your Flutter app development." },
       { icon: <FaPaintBrush />,  title: "UI/UX Design & Prototyping",     desc: "Designing intuitive wireframes and interactive prototypes with Flutter's design language — ensuring seamless usability and strong brand consistency across all platforms." },
       { icon: <FaCode />,        title: "Flutter App Development",        desc: "Writing clean, modular Dart code leveraging Flutter's rich widget system and state management tools (Riverpod, Bloc) for high-performance, maintainable applications." },
@@ -120,18 +119,18 @@ const Flutter = () => (
       { icon: <FaBug />,         title: "Testing & Quality Assurance",    desc: "Performing comprehensive unit, widget, and integration tests across Android and iOS devices — ensuring stability, performance, and a bug-free user experience at every level." },
       { icon: <FaRocket />,      title: "App Store & Play Store Launch",  desc: "Handling end-to-end deployment with store listing optimization, compliance checks, and metadata setup — ensuring smooth, rejection-free launches on both major app stores." },
       { icon: <FaSync />,        title: "Post-Launch Monitoring & Support", desc: "Continuous crash analytics, OS compatibility updates, performance improvements, and proactive feature development to keep your Flutter app evolving and performing flawlessly." },
-    ]}
+    ],
 
-    features={[
+    features: [
       { icon: <FaMobileAlt />,  title: "Cross-Platform Expertise",        desc: "Flutter apps that run seamlessly on Android, iOS, web, and desktop from a single codebase — reducing development cost while maintaining native-quality performance everywhere." },
       { icon: <FaLaptopCode />, title: "Widget-Based UI Design",           desc: "Dynamic, responsive UIs built with Flutter's rich widget library — ensuring exceptional, branded user experiences on every device, screen size, and operating system." },
       { icon: <FaCogs />,       title: "Custom App Features",              desc: "Live chat, push notifications, in-app purchases, offline sync, and more — every custom feature designed precisely to serve your business goals and delight your users." },
       { icon: <FaLock />,       title: "Data Security & Encryption",       desc: "Best-in-class encryption, secure API communication, and token-based authentication to protect your users' data, identity, and transactions at every application layer." },
       { icon: <FaRocket />,     title: "App Store Optimization",           desc: "Store listing enhancement, performance benchmarks, and metadata optimization to drive more organic downloads and better search visibility on Play Store and App Store." },
       { icon: <FaSync />,       title: "Ongoing Maintenance & Updates",    desc: "Continuous post-launch support including OS version updates, dependency upgrades, performance improvements, and new feature rollouts to keep your app future-ready." },
-    ]}
+    ],
 
-    stack={[
+    stack: [
       { name: "Flutter 3.x" },
       { name: "Dart 3.x" },
       { name: "Android SDK" },
@@ -148,17 +147,17 @@ const Flutter = () => (
       { name: "Fastlane" },
       { name: "Firebase Test Lab" },
       { name: "Docker" },
-    ]}
+    ],
 
-    slider={[
+    slider: [
       { count: "150+", title: "Flutter Apps Delivered",          desc: "150+ Flutter apps delivered across finance, healthcare, travel, logistics, and eCommerce — pixel-perfect UI, native performance, and optimised backend integration.",             image: "/Assets/seerviceSlider/slide1.webp" },
       { count: YEARS_EXPERIENCE_DISPLAY,   title: "Years of Mobile Dev Experience",  desc: `${YEARS_EXPERIENCE_DISPLAY} years mastering cross-platform development with Flutter and Dart — from clean modular codebases to advanced Riverpod and Bloc state management for enterprises.`,    image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "200+", title: "Satisfied Global Clients",        desc: "200+ clients from startups to enterprises trust us for scalable, visually stunning Flutter apps that align with their business objectives and delight their users.",               image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "99%",  title: "Deployment Success Rate",         desc: "99% deployment success on Google Play and Apple App Store — every app passes multi-device testing, performance optimisation, and compliance validation before submission.",        image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "24/7", title: "Technical Support Availability",  desc: "Round-the-clock Flutter support, crash analytics, bug fixes, OS compatibility updates, and feature enhancements — keeping your app performing at peak after every launch.",       image: "/Assets/seerviceSlider/slide5.webp" },
-    ]}
+    ],
 
-    faq={{
+    faq: {
       title: "Flutter App Development",
       items: [
         { title: "Why choose Flutter for app development?",         description: "Flutter enables building fast, native-like apps for Android and iOS using a single codebase — reducing cost and development time while maintaining high performance and consistent UI across all platforms." },
@@ -172,8 +171,24 @@ const Flutter = () => (
         { title: "Do you provide App Store and Play Store support?", description: "Yes — we handle the complete submission process for both stores including store listing setup, ASO optimization, compliance review, and post-launch monitoring." },
         { title: "Is Flutter suitable for startups?",               description: "Absolutely. Flutter's single codebase approach significantly reduces development cost and time-to-market, making it an ideal choice for startups looking to launch on both platforms quickly." },
       ],
-    }}
-  />
-);
+    },
+};
+
+const Flutter = ({ cms } = {}) => {
+  const content = cms
+    ? {
+        banner: { ...FALLBACK_CONTENT.banner, ...cms.banner, bgImage: cms.banner.bgImage || FALLBACK_CONTENT.banner.bgImage },
+        intro: { ...FALLBACK_CONTENT.intro, ...cms.intro },
+        services: cms.services || FALLBACK_CONTENT.services,
+        process: cms.process || FALLBACK_CONTENT.process,
+        features: cms.features,
+        stack: cms.stack || FALLBACK_CONTENT.stack,
+        slider: cms.slider,
+        faq: { title: FALLBACK_CONTENT.faq.title, items: cms.faq.items },
+      }
+    : FALLBACK_CONTENT;
+
+  return <CommonTechPage {...content} />;
+};
 
 export default Flutter;

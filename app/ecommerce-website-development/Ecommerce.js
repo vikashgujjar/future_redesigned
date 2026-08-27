@@ -8,7 +8,7 @@ import {
   FaSitemap, FaImages, FaLock, FaFilter, FaShippingFast, FaBoxes, FaChartLine,
 } from "react-icons/fa";
 
-const Ecommerce = () => {
+const Ecommerce = ({ cms } = {}) => {
   const features = [
     {
       title: "Easy Navigation & Engaging Interface",
@@ -198,46 +198,54 @@ const Ecommerce = () => {
     },
   ];
 
+  const FALLBACK_CONTENT = {
+    bannerImg: ecc,
+    bannerTitle: "ECOMMERCE WEBSITE DESIGN SERVICES",
+    bannerDesc: `Are you planning to expand your business by reaching out to your customers online? An eCommerce website would be the best option to enhance your customer base and increase your sales. Whether you want to create your first online store or overcome the sales slump with your existing one, we can help you out with our results-driven eCommerce website design services. Hire experienced developers from Future IT Touch Pvt. Ltd. for top-notch eCommerce web development solutions with a rich user interface, integration of payment gateway and shipping API, advanced security features, easy-to-manage product inventory and much more.
+`,
+    overviewImage: "/Assets/stock/photo-1556742049-0cfed4f6a45d.webp",
+    overviewImageAlt: "eCommerce website development",
+    overviewBadge: "Trusted eCommerce Website Development",
+    overviewHeading: "Building Engaging",
+    overviewHighlight: "Online Storefronts",
+    overviewParagraphs: [
+      "At Future IT Touch Pvt. Ltd. we specialize in creating eCommerce websites that deliver seamless user experiences and powerful management features for businesses worldwide.",
+      "The goal of every online store is to provide users with an experience comparable to shopping in a physical store, while ensuring administrators enjoy effortless management. Our eCommerce development services focus on:",
+      { boldPrefix: "For Users:", text: "Easy navigation, engaging interface, multiple product images, quick checkout, categories & filters, secured payments, and smooth order tracking." },
+      { boldPrefix: "For Admins:", text: "Simple order management, product attributes, tax & shipping integration, offers & discounts, inventory management, and detailed analytics." },
+      `With over ${YEARS_EXPERIENCE_DISPLAY} years of expertise, we've built hundreds of B2B and B2C eCommerce stores. Choose our custom eCommerce web design services to deliver exceptional digital shopping experiences for your customers.`,
+    ],
+    overviewCtaText: "Start Your eCommerce Journey",
+    features,
+    bizCards: businessData,
+    sliderCards: cards,
+    platforms,
+    techCategories,
+    faqData,
+  };
+
+  const content = cms
+    ? { ...cms, bannerImg: cms.bannerImg || ecc, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    : FALLBACK_CONTENT;
+
   return (
     <CommonServicePage
-      bannerImg={ecc}
-      bannerTitle="ECOMMERCE WEBSITE DESIGN SERVICES"
-      bannerDesc={`Are you planning to expand your business by reaching out to your customers online? An eCommerce website would be the best option to enhance your customer base and increase your sales. Whether you want to create your first online store or overcome the sales slump with your existing one, we can help you out with our results-driven eCommerce website design services. Hire experienced developers from Future IT Touch Pvt. Ltd. for top-notch eCommerce web development solutions with a rich user interface, integration of payment gateway and shipping API, advanced security features, easy-to-manage product inventory and much more.
-`}
-      overviewImage="/Assets/stock/photo-1556742049-0cfed4f6a45d.webp"
-      overviewImageAlt="eCommerce website development"
-      overviewBadge="Trusted eCommerce Website Development"
-      overviewHeading="Building Engaging"
-      overviewHighlight="Online Storefronts"
-      overviewParagraphs={[
-        "At Future IT Touch Pvt. Ltd. we specialize in creating eCommerce websites that deliver seamless user experiences and powerful management features for businesses worldwide.",
-        "The goal of every online store is to provide users with an experience comparable to shopping in a physical store, while ensuring administrators enjoy effortless management. Our eCommerce development services focus on:",
-        { boldPrefix: "For Users:", text: "Easy navigation, engaging interface, multiple product images, quick checkout, categories & filters, secured payments, and smooth order tracking." },
-        { boldPrefix: "For Admins:", text: "Simple order management, product attributes, tax & shipping integration, offers & discounts, inventory management, and detailed analytics." },
-        `With over ${YEARS_EXPERIENCE_DISPLAY} years of expertise, we've built hundreds of B2B and B2C eCommerce stores. Choose our custom eCommerce web design services to deliver exceptional digital shopping experiences for your customers.`,
-      ]}
-      overviewCtaText="Start Your eCommerce Journey"
+      {...content}
       featuresBadge="Trusted eCommerce Website Development Company"
       featuresTitle="Creating Online Stores That"
       featuresTitleHighlight="Engage & Convert"
       featuresStickyImg="/Assets/stock/photo-1563013544-824ae1b704d3.webp"
-      features={features}
       bizBadge="Leading eCommerce Website Design Company in India"
       bizHeading="Partner with Us for"
       bizHighlight="Growth & Innovation"
-      bizCards={businessData}
       sliderTitle=" Delivering Engaging eCommerce Experiences with"
-      sliderCards={cards}
       platformsTitle={`Ecommerce Website Development Platforms We Use
 `}
-      platforms={platforms}
       faqTitle="About eCommerce Website Developmen"
-      faqData={faqData}
       techBadge="eCommerce Tech Stack"
       techHeading="Technologies"
       techHeadingHighlight="We Build With"
       techDescription="From storefronts to payment gateways, we use the right combination of modern technologies to deliver fast, secure, and scalable eCommerce experiences."
-      techCategories={techCategories}
     />
   );
 };

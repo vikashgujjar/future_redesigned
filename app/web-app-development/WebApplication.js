@@ -10,7 +10,7 @@ import {
 import useYearsExperience from "../lib/useYearsExperience";
 import { COMPANY_START_YEAR } from "../lib/companyStats";
 
-const Ecommerce = () => {
+const Ecommerce = ({ cms } = {}) => {
   const yearsExperience = useYearsExperience();
   const features = [
     {
@@ -174,68 +174,78 @@ const Ecommerce = () => {
     },
   ];
 
+  const techCategories = [
+    { title:"Frontend", techs:[
+      {name:"React.js",icon:"https://cdn.simpleicons.org/react"},
+      {name:"Next.js",icon:"https://cdn.simpleicons.org/nextdotjs/white"},
+      {name:"Angular",icon:"https://cdn.simpleicons.org/angular"},
+      {name:"Vue.js",icon:"https://cdn.simpleicons.org/vuedotjs"},
+      {name:"TypeScript",icon:"https://cdn.simpleicons.org/typescript"},
+      {name:"HTML/CSS",icon:"https://cdn.simpleicons.org/html5"},
+    ]},
+    { title:"Backend", techs:[
+      {name:"Node.js",icon:"https://cdn.simpleicons.org/nodedotjs"},
+      {name:"PHP",icon:"https://cdn.simpleicons.org/php"},
+      {name:"Laravel",icon:"https://cdn.simpleicons.org/laravel"},
+      {name:"Python",icon:"https://cdn.simpleicons.org/python"},
+      {name:"Express.js",icon:"https://cdn.simpleicons.org/express/white"},
+      {name:".NET",icon:"https://cdn.simpleicons.org/dotnet"},
+    ]},
+    { title:"Database", techs:[
+      {name:"MySQL",icon:"https://cdn.simpleicons.org/mysql"},
+      {name:"PostgreSQL",icon:"https://cdn.simpleicons.org/postgresql"},
+      {name:"MongoDB",icon:"https://cdn.simpleicons.org/mongodb"},
+      {name:"Redis",icon:"https://cdn.simpleicons.org/redis"},
+    ]},
+    { title:"DevOps & Cloud", techs:[
+      {name:"Docker",icon:"https://cdn.simpleicons.org/docker"},
+      {name:"AWS",icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"},
+      {name:"GitHub Actions",icon:"https://cdn.simpleicons.org/githubactions"},
+      {name:"Nginx",icon:"https://cdn.simpleicons.org/nginx"},
+      {name:"Vercel",icon:"https://cdn.simpleicons.org/vercel/white"},
+    ]},
+  ];
+
+  const FALLBACK_CONTENT = {
+    bannerImg: gg,
+    bannerTitle: "WEB APPLICATION DEVELOPMENT",
+    bannerDesc: `Future IT Touch Pvt. Ltd. is an award-winning website development company offering custom web application development services to startups, SMBs, and large enterprises. With an aim to driving business transformation, we are building quality web applications for diverse business domains since ${COMPANY_START_YEAR}. Leveraging cutting-edge technology frameworks, APIs, and databases, we can craft futuristic, conversion-driven, and highly optimized solutions that ensure excellent user experience.`,
+    overviewImage: image2,
+    overviewImageAlt: "Web application development",
+    overviewBadge: "Premium Web Application Development",
+    overviewHeading: "Building Powerful and",
+    overviewHighlight: "Scalable Web Applications",
+    overviewParagraphs: [
+      "At Future IT Touch Pvt. Ltd. we specialize in developing robust web applications that streamline business processes, improve operational efficiency, and provide seamless user experiences across devices. Our team leverages modern frameworks and technologies to craft scalable, secure, and high-performing solutions tailored to your business needs.",
+      "To ensure your web application delivers maximum value, we integrate a variety of third-party APIs to enhance functionality and enable smooth workflows. From cloud storage with Amazon S3 and CloudFront, real-time communication via Twilio and Zoom, to interactive maps using Google Maps API, our integrations cover a wide range of essential services. We also support video streaming through Vimeo, logistics integration with alamove, and advanced messaging with xotel and nableX APIs.",
+      `With over ${yearsExperience} years of experience, we ensure that every project is delivered with performance, scalability, and security in mind.`,
+    ],
+    overviewCtaText: "Start Your Web App Journey",
+    features,
+    bizCards: businessData,
+    sliderCards: cards,
+    platforms,
+    techCategories,
+    faqData,
+  };
+
+  const content = cms
+    ? { ...cms, bannerImg: cms.bannerImg || gg, overviewImage: cms.overviewImage || image2 }
+    : FALLBACK_CONTENT;
+
   return (
     <CommonServicePage
-      bannerImg={gg}
-      bannerTitle="WEB APPLICATION DEVELOPMENT"
-      bannerDesc={`Future IT Touch Pvt. Ltd. is an award-winning website development company offering custom web application development services to startups, SMBs, and large enterprises. With an aim to driving business transformation, we are building quality web applications for diverse business domains since ${COMPANY_START_YEAR}. Leveraging cutting-edge technology frameworks, APIs, and databases, we can craft futuristic, conversion-driven, and highly optimized solutions that ensure excellent user experience.`}
-      overviewImage={image2}
-      overviewImageAlt="Web application development"
-      overviewBadge="Premium Web Application Development"
-      overviewHeading="Building Powerful and"
-      overviewHighlight="Scalable Web Applications"
-      overviewParagraphs={[
-        "At Future IT Touch Pvt. Ltd. we specialize in developing robust web applications that streamline business processes, improve operational efficiency, and provide seamless user experiences across devices. Our team leverages modern frameworks and technologies to craft scalable, secure, and high-performing solutions tailored to your business needs.",
-        "To ensure your web application delivers maximum value, we integrate a variety of third-party APIs to enhance functionality and enable smooth workflows. From cloud storage with Amazon S3 and CloudFront, real-time communication via Twilio and Zoom, to interactive maps using Google Maps API, our integrations cover a wide range of essential services. We also support video streaming through Vimeo, logistics integration with alamove, and advanced messaging with xotel and nableX APIs.",
-        `With over ${yearsExperience} years of experience, we ensure that every project is delivered with performance, scalability, and security in mind.`,
-      ]}
-      overviewCtaText="Start Your Web App Journey"
+      {...content}
       featuresBadge="Trusted Web App Development Company"
       featuresTitle="Creating Web Applications That Are"
       featuresTitleHighlight="Powerful & Scalable"
       featuresStickyImg={image2}
-      features={features}
       bizBadge="Reliable Web Application Maintenance & Support"
       bizHeading="Ensuring Your Web Applications Run"
       bizHighlight="Smoothly & Efficiently"
-      bizCards={businessData}
       sliderTitle="Ensuring Smooth & Reliable Web Application Performance"
-      sliderCards={cards}
       platformsTitle="Our Suite of Web Application Development Services"
-      platforms={platforms}
       faqTitle="About eCommerce Website Development"
-      faqData={faqData}
-      techCategories={[
-        { title:"Frontend", techs:[
-          {name:"React.js",icon:"https://cdn.simpleicons.org/react"},
-          {name:"Next.js",icon:"https://cdn.simpleicons.org/nextdotjs/white"},
-          {name:"Angular",icon:"https://cdn.simpleicons.org/angular"},
-          {name:"Vue.js",icon:"https://cdn.simpleicons.org/vuedotjs"},
-          {name:"TypeScript",icon:"https://cdn.simpleicons.org/typescript"},
-          {name:"HTML/CSS",icon:"https://cdn.simpleicons.org/html5"},
-        ]},
-        { title:"Backend", techs:[
-          {name:"Node.js",icon:"https://cdn.simpleicons.org/nodedotjs"},
-          {name:"PHP",icon:"https://cdn.simpleicons.org/php"},
-          {name:"Laravel",icon:"https://cdn.simpleicons.org/laravel"},
-          {name:"Python",icon:"https://cdn.simpleicons.org/python"},
-          {name:"Express.js",icon:"https://cdn.simpleicons.org/express/white"},
-          {name:".NET",icon:"https://cdn.simpleicons.org/dotnet"},
-        ]},
-        { title:"Database", techs:[
-          {name:"MySQL",icon:"https://cdn.simpleicons.org/mysql"},
-          {name:"PostgreSQL",icon:"https://cdn.simpleicons.org/postgresql"},
-          {name:"MongoDB",icon:"https://cdn.simpleicons.org/mongodb"},
-          {name:"Redis",icon:"https://cdn.simpleicons.org/redis"},
-        ]},
-        { title:"DevOps & Cloud", techs:[
-          {name:"Docker",icon:"https://cdn.simpleicons.org/docker"},
-          {name:"AWS",icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"},
-          {name:"GitHub Actions",icon:"https://cdn.simpleicons.org/githubactions"},
-          {name:"Nginx",icon:"https://cdn.simpleicons.org/nginx"},
-          {name:"Vercel",icon:"https://cdn.simpleicons.org/vercel/white"},
-        ]},
-      ]}
     />
   );
 };

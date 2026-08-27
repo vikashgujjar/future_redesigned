@@ -187,50 +187,53 @@ const faqData = [
   },
 ];
 
-const CloudSecurity = () => (
-  <CommonServicePage
-    bannerImg={securityImg}
-    bannerTitle="Cloud Security Services"
-    bannerDesc="Continuous cloud security posture management, IAM privilege review, data protection, container security, and compliance across AWS, Azure, and GCP — with full Indian data residency compliance for DPDPA 2023 and CERT-In requirements. Built for Indian SMEs moving to the cloud."
+const FALLBACK_CONTENT = {
+  bannerImg: securityImg,
+  bannerTitle: "Cloud Security Services",
+  bannerDesc: "Continuous cloud security posture management, IAM privilege review, data protection, container security, and compliance across AWS, Azure, and GCP — with full Indian data residency compliance for DPDPA 2023 and CERT-In requirements. Built for Indian SMEs moving to the cloud.",
+  overviewImage: "/Assets/stock/photo-1614064641938-3bbee52942c7.webp",
+  overviewImageAlt: "Cloud Security Services",
+  overviewBadge: "Cyber Security · Cloud Security",
+  overviewHeading: "Cloud Security with",
+  overviewHighlight: "Indian Data Residency Built In",
+  overviewParagraphs: [
+    "The cloud has transformed how Indian businesses operate — but it has also introduced a new category of security risk that traditional security tools don't cover. Misconfigured S3 buckets, over-privileged IAM roles, and unencrypted databases are responsible for the majority of cloud breaches worldwide.",
+    "Our cloud security programme provides continuous posture management across AWS, Azure, and GCP — detecting misconfigurations in real time, enforcing least-privilege access, securing container workloads, and implementing compliance controls aligned to DPDPA 2023, CERT-In, and ISO 27001.",
+    "We specialise in Indian data residency configurations — ensuring your cloud architecture keeps personal data within Indian borders, satisfying DPDPA 2023 requirements and eliminating cross-border data transfer risks.",
+  ],
+  overviewCtaText: "Request a Cloud Security Assessment",
+  features,
+  bizCards,
+  sliderCards,
+  platforms,
+  techCategories,
+  faqData,
+};
 
-    overviewImage="/Assets/stock/photo-1614064641938-3bbee52942c7.webp"
-    overviewImageAlt="Cloud Security Services"
-    overviewBadge="Cyber Security · Cloud Security"
-    overviewHeading="Cloud Security with"
-    overviewHighlight="Indian Data Residency Built In"
-    overviewParagraphs={[
-      "The cloud has transformed how Indian businesses operate — but it has also introduced a new category of security risk that traditional security tools don't cover. Misconfigured S3 buckets, over-privileged IAM roles, and unencrypted databases are responsible for the majority of cloud breaches worldwide.",
-      "Our cloud security programme provides continuous posture management across AWS, Azure, and GCP — detecting misconfigurations in real time, enforcing least-privilege access, securing container workloads, and implementing compliance controls aligned to DPDPA 2023, CERT-In, and ISO 27001.",
-      "We specialise in Indian data residency configurations — ensuring your cloud architecture keeps personal data within Indian borders, satisfying DPDPA 2023 requirements and eliminating cross-border data transfer risks.",
-    ]}
-    overviewCtaText="Request a Cloud Security Assessment"
+const CloudSecurity = ({ cms } = {}) => {
+  const content = cms
+    ? { ...cms, bannerImg: cms.bannerImg || securityImg, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    : FALLBACK_CONTENT;
 
-    featuresBadge="Our Cloud Security Services"
-    featuresTitle="Comprehensive Cloud Security Across"
-    featuresTitleHighlight="AWS, Azure & GCP"
-    featuresStickyImg="/Assets/stock/photo-1614064641938-3bbee52942c7.webp"
-    features={features}
-
-    bizBadge="Why Choose Us"
-    bizHeading="Cloud Security by"
-    bizHighlight="Indian Compliance Experts"
-    bizCards={bizCards}
-
-    sliderTitle="Cloud Security Outcomes for Indian Businesses"
-    sliderCards={sliderCards}
-
-    platformsTitle="Cloud Security Platforms We Use"
-    platforms={platforms}
-
-    techBadge="Our Cloud Security Stack"
-    techHeading="Tools & Platforms"
-    techHeadingHighlight="We Secure Clouds With"
-    techDescription="We use native cloud security services combined with best-in-class third-party CSPM, SIEM, and secrets management tools to deliver continuous cloud security without complexity."
-    techCategories={techCategories}
-
-    faqTitle="Frequently Asked Questions — Cloud Security"
-    faqData={faqData}
-  />
-);
+  return (
+    <CommonServicePage
+      {...content}
+      featuresBadge="Our Cloud Security Services"
+      featuresTitle="Comprehensive Cloud Security Across"
+      featuresTitleHighlight="AWS, Azure & GCP"
+      featuresStickyImg="/Assets/stock/photo-1614064641938-3bbee52942c7.webp"
+      bizBadge="Why Choose Us"
+      bizHeading="Cloud Security by"
+      bizHighlight="Indian Compliance Experts"
+      sliderTitle="Cloud Security Outcomes for Indian Businesses"
+      platformsTitle="Cloud Security Platforms We Use"
+      techBadge="Our Cloud Security Stack"
+      techHeading="Tools & Platforms"
+      techHeadingHighlight="We Secure Clouds With"
+      techDescription="We use native cloud security services combined with best-in-class third-party CSPM, SIEM, and secrets management tools to deliver continuous cloud security without complexity."
+      faqTitle="Frequently Asked Questions — Cloud Security"
+    />
+  );
+};
 
 export default CloudSecurity;

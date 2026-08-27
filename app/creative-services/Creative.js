@@ -8,7 +8,7 @@ import {
   FaHandshake, FaChartLine, FaPencilRuler, FaDesktop, FaCode, FaSearch,
 } from "react-icons/fa";
 
-const Ecommerce = () => {
+const Ecommerce = ({ cms } = {}) => {
   const features = [
     {
       title: "Strategic Brand Positioning",
@@ -171,58 +171,68 @@ const Ecommerce = () => {
     },
   ];
 
+  const techCategories = [
+    { title:"Design Tools", techs:[
+      {name:"Figma",icon:"https://cdn.simpleicons.org/figma"},
+      {name:"Adobe XD",icon:"https://cdn.simpleicons.org/adobexd"},
+      {name:"Photoshop",icon:"https://cdn.simpleicons.org/adobephotoshop"},
+      {name:"Illustrator",icon:"https://cdn.simpleicons.org/adobeillustrator"},
+      {name:"InDesign",icon:"https://cdn.simpleicons.org/adobeindesign"},
+    ]},
+    { title:"Animation & Video", techs:[
+      {name:"After Effects",icon:"https://cdn.simpleicons.org/adobeaftereffects"},
+      {name:"Premiere Pro",icon:"https://cdn.simpleicons.org/adobepremierepro"},
+      {name:"Blender",icon:"https://cdn.simpleicons.org/blender"},
+    ]},
+    { title:"Prototyping", techs:[
+      {name:"Figma Prototype",icon:"https://cdn.simpleicons.org/figma"},
+      {name:"Canva",icon:"https://cdn.simpleicons.org/canva"},
+      {name:"Sketch",icon:"https://cdn.simpleicons.org/sketch"},
+    ]},
+  ];
+
+  const FALLBACK_CONTENT = {
+    bannerImg: cwd,
+    bannerTitle: "Creative Agency Branding",
+    bannerDesc: "Future IT Touch Pvt. Ltd. is the governing creative branding agency in India taking care of the details of customer's needs. Since, a brand is what people will perceive, the team at Future IT Touch Pvt. Ltd. sharpens the branding strategies in a way to attract your audience. The Internet is flooded with loads of diverse definitions of what a brand is. Let's just knock out the confusion and keep it simple and straight. A brand is the identity or personality of your business. And, when personality goes unpleasant, everything goes out of order. Future IT Touch Pvt. Ltd. is armed with quality dipped product branding services in India which leaves you with results giving your business an everlasting success. We guard the personality of your business to make you stand out in the crowd.",
+    overviewImage: devops,
+    overviewImageAlt: "Brand Identity & Strategy Services",
+    overviewBadge: "Trusted Brand Identity & Strategy Development",
+    overviewHeading: "Crafting Brands That Speak,",
+    overviewHighlight: "Connect, and Grow",
+    overviewParagraphs: [
+      "At Future IT Touch Pvt. Ltd. we help businesses establish strong, consistent brand identities through strategy, creativity, and design excellence.",
+      "A strong brand identity is more than just a logo — it's the essence of how your business is perceived. Our branding services focus on creating meaningful brand experiences that connect emotionally and visually.",
+      { boldPrefix: "For Businesses:", text: "We define your brand voice, messaging, and visual style to ensure consistency across every platform. From color palettes and typography to marketing assets, everything reflects your unique story." },
+      { boldPrefix: "For Audiences:", text: "We design engaging visuals, creative storytelling, and user-centered brand experiences that build trust and loyalty." },
+      `With over ${YEARS_EXPERIENCE_DISPLAY} years of creative expertise, we craft distinctive brand identities that leave lasting impressions. Choose our Brand Identity & Strategy Solutions to make your business stand out.`,
+    ],
+    overviewCtaText: "Build Your Brand Identity",
+    features,
+    bizCards: businessData,
+    sliderCards: cards,
+    platforms,
+    techCategories,
+    faqData,
+  };
+
+  const content = cms
+    ? { ...cms, bannerImg: cms.bannerImg || cwd, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    : FALLBACK_CONTENT;
+
   return (
     <CommonServicePage
-      bannerImg={cwd}
-      bannerTitle="Creative Agency Branding"
-      bannerDesc="Future IT Touch Pvt. Ltd. is the governing creative branding agency in India taking care of the details of customer's needs. Since, a brand is what people will perceive, the team at Future IT Touch Pvt. Ltd. sharpens the branding strategies in a way to attract your audience. The Internet is flooded with loads of diverse definitions of what a brand is. Let's just knock out the confusion and keep it simple and straight. A brand is the identity or personality of your business. And, when personality goes unpleasant, everything goes out of order. Future IT Touch Pvt. Ltd. is armed with quality dipped product branding services in India which leaves you with results giving your business an everlasting success. We guard the personality of your business to make you stand out in the crowd."
-      overviewImage={devops}
-      overviewImageAlt="Brand Identity & Strategy Services"
-      overviewBadge="Trusted Brand Identity & Strategy Development"
-      overviewHeading="Crafting Brands That Speak,"
-      overviewHighlight="Connect, and Grow"
-      overviewParagraphs={[
-        "At Future IT Touch Pvt. Ltd. we help businesses establish strong, consistent brand identities through strategy, creativity, and design excellence.",
-        "A strong brand identity is more than just a logo — it's the essence of how your business is perceived. Our branding services focus on creating meaningful brand experiences that connect emotionally and visually.",
-        { boldPrefix: "For Businesses:", text: "We define your brand voice, messaging, and visual style to ensure consistency across every platform. From color palettes and typography to marketing assets, everything reflects your unique story." },
-        { boldPrefix: "For Audiences:", text: "We design engaging visuals, creative storytelling, and user-centered brand experiences that build trust and loyalty." },
-        `With over ${YEARS_EXPERIENCE_DISPLAY} years of creative expertise, we craft distinctive brand identities that leave lasting impressions. Choose our Brand Identity & Strategy Solutions to make your business stand out.`,
-      ]}
-      overviewCtaText="Build Your Brand Identity"
+      {...content}
       featuresBadge="Creative Agency Branding Solutions"
       featuresTitle="Building Powerful Brand Identities That"
       featuresTitleHighlight="Inspire & Connect"
       featuresStickyImg={devops}
-      features={features}
       bizBadge="Leading Brand Identity & Creative Agency in India"
       bizHeading="Crafting Unique Identities that"
       bizHighlight="Inspire & Connect"
-      bizCards={businessData}
       sliderTitle="Crafting Memorable Brand Identities with Creativity & Strategy"
-      sliderCards={cards}
       platformsTitle="Brand Identity & Creative Solutions We Deliver"
-      platforms={platforms}
       faqTitle="About Brand Identity & Creative Solutions"
-      faqData={faqData}
-      techCategories={[
-        { title:"Design Tools", techs:[
-          {name:"Figma",icon:"https://cdn.simpleicons.org/figma"},
-          {name:"Adobe XD",icon:"https://cdn.simpleicons.org/adobexd"},
-          {name:"Photoshop",icon:"https://cdn.simpleicons.org/adobephotoshop"},
-          {name:"Illustrator",icon:"https://cdn.simpleicons.org/adobeillustrator"},
-          {name:"InDesign",icon:"https://cdn.simpleicons.org/adobeindesign"},
-        ]},
-        { title:"Animation & Video", techs:[
-          {name:"After Effects",icon:"https://cdn.simpleicons.org/adobeaftereffects"},
-          {name:"Premiere Pro",icon:"https://cdn.simpleicons.org/adobepremierepro"},
-          {name:"Blender",icon:"https://cdn.simpleicons.org/blender"},
-        ]},
-        { title:"Prototyping", techs:[
-          {name:"Figma Prototype",icon:"https://cdn.simpleicons.org/figma"},
-          {name:"Canva",icon:"https://cdn.simpleicons.org/canva"},
-          {name:"Sketch",icon:"https://cdn.simpleicons.org/sketch"},
-        ]},
-      ]}
     />
   );
 };

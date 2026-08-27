@@ -9,7 +9,18 @@ import Forms from "../components/Forms";
 import Testimonial from "../components/Testimonial";
 import WebPageSchema from "../components/schema/WebPageSchema";
 import BreadcrumbSchema from "../components/schema/BreadcrumbSchema";
-export default function AboutShow() {
+
+const FALLBACK_INTRO = `We’re a boutique web and mobile app development agency based in Chandigarh. Since ${COMPANY_START_YEAR}, we’ve been helping organisations reimagine their business by delivering thoughtful bespoke IT solutions. We bring passion to our job every single day and act more as a technology partner to our clients than an IT vendor. Our reputation lies in the success of our clients. We don’t believe in excuses and take pride to put our name on our work. We’ve expanded our presence globally and won clients from foreign markets including USA, Canada, Middle East and Australia.`;
+const FALLBACK_FOUNDER_BIO = `Vinod Tanwar is the co-founder & CEO of Future IT Touch Pvt. Ltd.. He’s a self-starter and oversees the business development. Vinod Tanwar is the best person to talk to if you want to know what’s happening in the tech world. He’s a dreamer and a doer. He loves the idea of getting to know clients and thinking about how to solve their challenges. He gets really excited about the prospect of crafting solutions for them!`;
+
+export default function AboutShow({ about } = {}) {
+  const introParagraphs = about?.intro_paragraphs?.length ? about.intro_paragraphs : [FALLBACK_INTRO];
+  const founderBioParagraphs = about?.founder?.bio_paragraphs?.length
+    ? about.founder.bio_paragraphs
+    : [FALLBACK_FOUNDER_BIO];
+  const founderImage = about?.founder?.image || "/Assets/vinod.webp";
+  const founderAlt = about?.founder?.name || "Vinod Tanwar";
+
   return (
     <div>
       <WebPageSchema
@@ -26,10 +37,10 @@ export default function AboutShow() {
           <div className="w-60 h-32 sm:h-32 md:h-40 lg:h-60 bg-teal-400 rounded-full padding-about relative zoom-pulse">
             <Image
               className="w-full h-full p-2 sm:p-2 md:p-3 lg:p-5 bg-white rounded-full object-cover "
-              src={"/Assets/vinod.webp"}
+              src={founderImage}
               width={400}
               height={400}
-              alt="Vinod Tanwar"
+              alt={founderAlt}
             />
             <Image
               className="shape-2 top-45 left-4  absolute zoom-pluse rotate-[150deg]"
@@ -110,26 +121,16 @@ export default function AboutShow() {
             </span>
           </h3>
 
-          <p className="text-lg mb-8 font-medium mt-8 text-[#727272] text-justify">
-            We’re a boutique web and mobile app development agency based in
-            Chandigarh. Since {COMPANY_START_YEAR}, we’ve been helping organisations reimagine
-            their business by delivering thoughtful bespoke IT solutions. We
-            bring passion to our job every single day and act more as a
-            technology partner to our clients than an IT vendor. Our reputation
-            lies in the success of our clients. We don’t believe in excuses and
-            take pride to put our name on our work. We’ve expanded our presence
-            globally and won clients from foreign markets including USA, Canada,
-            Middle East and Australia.
-          </p>
-          <p className="mb-9 text-lg font-medium text-[#727272] text-justify">
-            Vinod Tanwar is the co-founder & CEO of Future IT Touch Pvt. Ltd..
-            He’s a self-starter and oversees the business development. Vinod
-            Tanwar is the best person to talk to if you want to know what’s
-            happening in the tech world. He’s a dreamer and a doer. He loves the
-            idea of getting to know clients and thinking about how to solve
-            their challenges. He gets really excited about the prospect of
-            crafting solutions for them!
-          </p>
+          {introParagraphs.map((p, i) => (
+            <p key={i} className="text-lg mb-8 font-medium mt-8 text-[#727272] text-justify">
+              {p}
+            </p>
+          ))}
+          {founderBioParagraphs.map((p, i) => (
+            <p key={i} className="mb-9 text-lg font-medium text-[#727272] text-justify">
+              {p}
+            </p>
+          ))}
         </div>
       </div>
 

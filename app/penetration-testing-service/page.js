@@ -1,6 +1,7 @@
 import PenetrationTesting from "./PenetrationTesting";
+import { getServicePageCms, mapServicePageProps, loadServicePageSeo } from '../lib/loadServicePage'
 
-export const metadata = {
+const DEFAULT_METADATA = {
   title: "Penetration Testing Services | Future IT Touch",
   description:
     "Professional penetration testing services — ethical hacking by OSCP-certified engineers to identify and demonstrate exploitable security vulnerabilities before real attackers do.",
@@ -11,6 +12,12 @@ export const metadata = {
   ],
 };
 
-export default function Page() {
-  return <PenetrationTesting />;
+export async function generateMetadata() {
+  return loadServicePageSeo("penetration-testing-service", DEFAULT_METADATA);
+}
+
+export default async function Page() {
+  const cmsRaw = await getServicePageCms("penetration-testing-service");
+  const cms = cmsRaw ? mapServicePageProps(cmsRaw) : null;
+  return <PenetrationTesting cms={cms} />;
 }

@@ -9,8 +9,13 @@ import {
   FaGithub,
   FaXTwitter,
 } from "./icons";
+import { getNavigationMenu, getSiteSettings } from "../lib/cms";
 
-const ourLinks = [
+// Used whenever the CMS API isn't reachable at build time (e.g. a local
+// checkout without the admin server running) — this is a static-export site,
+// so a CMS outage must never fail the build. Kept in sync with the seeded
+// SiteSettingSeeder / NavigationSeeder content in future-touch-services-admin.
+const FALLBACK_OUR_LINKS = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
   { label: "Why Us", href: "/why-us" },
@@ -20,7 +25,7 @@ const ourLinks = [
   { label: "Contact Us", href: "/contact" },
 ];
 
-const companyLinks = [
+const FALLBACK_COMPANY_LINKS = [
   { label: "Get A Quote", href: "/contact" },
   { label: "Our Pricing Package", href: "/price" },
   { label: "Customer's FAQ", href: "/faq" },
@@ -29,13 +34,29 @@ const companyLinks = [
   { label: "Terms & Conditions", href: "/Terms-Conditions" },
 ];
 
-const socials = [
-  { Icon: FaFacebookF, href: "https://www.facebook.com/Futureittouch", label: "Facebook" },
-  { Icon: FaXTwitter, href: "https://x.com/futureittouch", label: "X (Twitter)" },
-  { Icon: FaLinkedinIn, href: "https://in.linkedin.com/company/future-it-touch", label: "LinkedIn" },
-  { Icon: FaInstagram, href: "https://www.instagram.com/future_it_touch/", label: "Instagram" },
-  { Icon: FaYoutube, href: "https://www.youtube.com/channel/UCirWettrTWfsFRzdGRIc6BQ/about", label: "YouTube" },
-  { Icon: FaGithub, href: "https://github.com/Future-IT-Touch-Private-Limited", label: "GitHub" },
+const FALLBACK_SETTINGS = {
+  logo: null,
+  description:
+    "Future IT Touch Pvt. Ltd. is an innovative one-stop Web Solution Company in Chandigarh, delivering solutions with customized & quality services to businesses globally.",
+  contact: { phone_primary: "+91-7056937000", email: "info@futuretouch.in" },
+  address: { line: "SCO 54-55, 2nd Floor, Near Mukat Hospital, 34A Sector", city: "Chandigarh", postal_code: "160022" },
+  social: {
+    facebook: "https://www.facebook.com/Futureittouch",
+    x: "https://x.com/futureittouch",
+    linkedin: "https://in.linkedin.com/company/future-it-touch",
+    instagram: "https://www.instagram.com/future_it_touch/",
+    youtube: "https://www.youtube.com/channel/UCirWettrTWfsFRzdGRIc6BQ/about",
+    github: "https://github.com/Future-IT-Touch-Private-Limited",
+  },
+};
+
+const SOCIAL_ICONS = [
+  { key: "facebook", Icon: FaFacebookF, label: "Facebook" },
+  { key: "x", Icon: FaXTwitter, label: "X (Twitter)" },
+  { key: "linkedin", Icon: FaLinkedinIn, label: "LinkedIn" },
+  { key: "instagram", Icon: FaInstagram, label: "Instagram" },
+  { key: "youtube", Icon: FaYoutube, label: "YouTube" },
+  { key: "github", Icon: FaGithub, label: "GitHub" },
 ];
 
 const badges = [
@@ -45,7 +66,28 @@ const badges = [
   "/Assets/badges-d.webp",
 ];
 
-export default function Footer() {
+export default async function Footer() {
+  const [ourLinksMenu, companyLinksMenu, settings] = await Promise.all([
+    getNavigationMenu("footer_links"),
+    getNavigationMenu("footer_company"),
+    getSiteSettings(),
+  ]);
+
+  const ourLinks = ourLinksMenu?.items?.length
+    ? ourLinksMenu.items.map((item) => ({ label: item.label, href: item.url }))
+    : FALLBACK_OUR_LINKS;
+
+  const companyLinks = companyLinksMenu?.items?.length
+    ? companyLinksMenu.items.map((item) => ({ label: item.label, href: item.url }))
+    : FALLBACK_COMPANY_LINKS;
+
+  const logo = settings?.logo ?? FALLBACK_SETTINGS.logo;
+  const description = settings?.description ?? FALLBACK_SETTINGS.description;
+  const contact = settings?.contact ?? FALLBACK_SETTINGS.contact;
+  const address = settings?.address ?? FALLBACK_SETTINGS.address;
+  const social = settings?.social ?? FALLBACK_SETTINGS.social;
+  const addressLine = [address.line, address.city, address.postal_code].filter(Boolean).join(", ");
+
   return (
     <footer
       className="relative overflow-hidden"
@@ -123,10 +165,11 @@ export default function Footer() {
           <div className="flex flex-col gap-5 cols-span-1 sm:col-span-3 lg:col-span-1">
             <Link href="/">
               <Image
-                src="/Assets/secondary-logo.webp"
+                src={logo || "/Assets/secondary-logo.webp"}
                 width={200}
                 height={50}
                 alt="Future IT Touch Logo"
+                unoptimized={!!logo}
                 className="w-44 sm:w-52"
               />
             </Link>
@@ -134,8 +177,7 @@ export default function Footer() {
             <p
               className="text-sm leading-7"
               style={{ fontFamily: "'Inter',sans-serif", color: "rgba(255,255,255,.42)" }}>
-              Future IT Touch Pvt. Ltd. is an innovative one-stop Web Solution Company in Chandigarh,
-              delivering solutions with customized &amp; quality services to businesses globally.
+              {description}
             </p>
 
             <Link
@@ -199,8 +241,7 @@ export default function Footer() {
                 <p
                   className="text-[13px] leading-[1.65]"
                   style={{ fontFamily: "'Inter',sans-serif", color: "rgba(255,255,255,.42)" }}>
-                  SCO 54-55, 2nd Floor, Near Mukat Hospital,<br />
-                  34A Sector, Chandigarh, 1600022
+                  {addressLine}
                 </p>
               </li>
 
@@ -212,10 +253,10 @@ export default function Footer() {
                   <Mail size={13} style={{ color: "#6366f1" }} />
                 </div>
                 <a
-                  href="mailto:info@futuretouch.in"
+                  href={`mailto:${contact.email}`}
                   className="text-[13px] transition-colors hover:text-teal-400"
                   style={{ fontFamily: "'Inter',sans-serif", color: "rgba(255,255,255,.42)" }}>
-                  info@futuretouch.in
+                  {contact.email}
                 </a>
               </li>
 
@@ -227,10 +268,10 @@ export default function Footer() {
                   <Phone size={13} style={{ color: "#0ea5e9" }} />
                 </div>
                 <a
-                  href="tel:+91-7056937000"
+                  href={`tel:${contact.phone_primary}`}
                   className="text-[13px] transition-colors hover:text-teal-400"
                   style={{ fontFamily: "'Inter',sans-serif", color: "rgba(255,255,255,.42)" }}>
-                  +91-7056937000
+                  {contact.phone_primary}
                 </a>
               </li>
 
@@ -256,11 +297,15 @@ export default function Footer() {
               Follow Us :
             </p>
             <div className="flex items-center gap-2">
-              {socials.map(({ Icon, href, label }) => (
-                <Link key={label} href={href} target="_blank" aria-label={label} className="ft-social">
-                  <Icon size={14} />
-                </Link>
-              ))}
+              {SOCIAL_ICONS.map(({ key, Icon, label }) => {
+                const href = social[key];
+                if (!href) return null;
+                return (
+                  <Link key={label} href={href} target="_blank" aria-label={label} className="ft-social">
+                    <Icon size={14} />
+                  </Link>
+                );
+              })}
             </div>
           </div>
 
@@ -281,36 +326,32 @@ export default function Footer() {
 
         </div>
       </div>
-
-      {/* ══ BOTTOM BAR ═══════════════════════════════ */}
+      
+       {/* ══ BOTTOM BAR ═══════════════════════════════ */}
       <div
         className="relative z-10"
         style={{ background: "rgba(0,0,0,.28)", borderTop: "1px solid rgba(255,255,255,.06)" }}
       >
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-10 xl:px-24 py-5">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
-
             {/* Copyright */}
             <p
               className="text-[12px]"
               style={{ fontFamily: "'Inter',sans-serif", color: "rgba(255,255,255,.28)" }}>
               Copyright © 2017 Future IT Touch Pvt. Ltd. All rights reserved.
             </p>
-
             {/* Made with love */}
             <p
               className="flex items-center gap-1.5 text-[12px]"
               style={{ fontFamily: "'Inter',sans-serif", color: "rgba(255,255,255,.28)" }}>
               Made with <Heart size={11} fill="#ef4444" color="#ef4444" /> in Chandigarh
             </p>
-
             {/* Policy links */}
             <div className="flex items-center gap-5">
               <Link href="/Privacy-Policy" className="ft-bottom-link">Privacy Policy</Link>
               <Link href="/faq" className="ft-bottom-link">FAQ</Link>
               <Link href="/Terms-Conditions" className="ft-bottom-link">Terms</Link>
             </div>
-
           </div>
         </div>
       </div>

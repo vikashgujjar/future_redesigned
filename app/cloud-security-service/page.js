@@ -1,6 +1,7 @@
 import CloudSecurity from "./CloudSecurity";
+import { getServicePageCms, mapServicePageProps, loadServicePageSeo } from '../lib/loadServicePage'
 
-export const metadata = {
+const DEFAULT_METADATA = {
   title: "Cloud Security Services | Future IT Touch",
   description:
     "Cloud security posture management, IAM review, container security, and continuous compliance monitoring across AWS, Azure, and GCP — built for Indian SMEs.",
@@ -10,6 +11,12 @@ export const metadata = {
   ],
 };
 
-export default function Page() {
-  return <CloudSecurity />;
+export async function generateMetadata() {
+  return loadServicePageSeo("cloud-security-service", DEFAULT_METADATA);
+}
+
+export default async function Page() {
+  const cmsRaw = await getServicePageCms("cloud-security-service");
+  const cms = cmsRaw ? mapServicePageProps(cmsRaw) : null;
+  return <CloudSecurity cms={cms} />;
 }

@@ -8,8 +8,7 @@ import {
   FaBullhorn, FaLaptopCode,
 } from "react-icons/fa";
 
-const Seo = () => {
-  const features = [
+const features = [
     {
       title: "Website Analysis",
       description:
@@ -165,63 +164,74 @@ const Seo = () => {
     },
   ];
 
+const techCategories = [
+  { title:"Analytics & SEO", techs:[
+    {name:"Google Analytics",icon:"https://cdn.simpleicons.org/googleanalytics"},
+    {name:"Google Search Console",icon:"https://cdn.simpleicons.org/googlesearchconsole"},
+    {name:"Ahrefs",icon:"https://cdn.simpleicons.org/ahrefs"},
+    {name:"Semrush",icon:"https://cdn.simpleicons.org/semrush"},
+  ]},
+  { title:"Advertising", techs:[
+    {name:"Google Ads",icon:"https://cdn.simpleicons.org/googleads"},
+    {name:"Meta Ads",icon:"https://cdn.simpleicons.org/meta"},
+    {name:"LinkedIn Ads",icon:"https://cdn.simpleicons.org/linkedin"},
+  ]},
+  { title:"Social & Email", techs:[
+    {name:"HubSpot",icon:"https://cdn.simpleicons.org/hubspot"},
+    {name:"Mailchimp",icon:"https://cdn.simpleicons.org/mailchimp"},
+    {name:"Buffer",icon:"https://cdn.simpleicons.org/buffer"},
+    {name:"Hootsuite",icon:"https://cdn.simpleicons.org/hootsuite"},
+  ]},
+  { title:"Content & CMS", techs:[
+    {name:"WordPress",icon:"https://cdn.simpleicons.org/wordpress"},
+    {name:"Webflow",icon:"https://cdn.simpleicons.org/webflow"},
+    {name:"Canva",icon:"https://cdn.simpleicons.org/canva"},
+  ]},
+];
+
+const FALLBACK_CONTENT = {
+  bannerImg: cwd,
+  bannerTitle: "SEO SERVICES",
+  bannerDesc: "Digital revolution has contributed to a crowded Search Engine Result Page (SERP) and studies reveal 75% of people never scroll past the first page. Businesses across industries are trying to outrank each other and achieve a top rank in the leading search engines.In such a competitive landscape, you cannot ace the ranking race without having a proper SEO strategy in place. And this is where we come in. Our niche-specific, data-driven, strategic SEO services can enhance your rank on the SERP. As a reliable SEO agency in India, we appoint the best minds in the industry to collaborate and fuel your business growth. Get a chance to focus on your business while we take.",
+  overviewImage: cwd,
+  overviewImageAlt: "SEO Services",
+  overviewBadge: "Result-Driven SEO Services",
+  overviewHeading: "Boost Organic Traffic & Rankings with",
+  overviewHighlight: "Proven SEO Strategies",
+  overviewParagraphs: [
+    "At Future IT Touch Pvt. Ltd., we offer comprehensive Search Engine Optimization (SEO) services that help your business achieve higher visibility, better search rankings, and consistent organic traffic. Our SEO experts specialize in on-page, off-page, and technical SEO to deliver sustainable growth for your brand.",
+    "Our SEO strategies are data-driven and tailored to your business goals — ensuring long-term success in competitive markets.",
+    { boldPrefix: "For Businesses:", text: "Keyword research, content optimization, backlink building, and local SEO techniques designed to attract high-intent visitors and improve conversions." },
+    { boldPrefix: "For Marketing Teams:", text: "Detailed performance analytics, competitor insights, and monthly reports to measure keyword rankings, traffic growth, and ROI effectively." },
+    `With over ${YEARS_EXPERIENCE_DISPLAY} years of SEO expertise, we've helped brands across industries achieve top rankings and drive organic leads. Partner with Future IT Touch Pvt. Ltd. to dominate search results and grow your online presence organically.`,
+  ],
+  overviewCtaText: "Start Your SEO Campaign Today",
+  features,
+  bizCards: businessData,
+  sliderCards: cards,
+  platforms,
+  techCategories,
+  faqData,
+};
+
+const Seo = ({ cms } = {}) => {
+  const content = cms
+    ? { ...cms, bannerImg: cms.bannerImg || cwd, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    : FALLBACK_CONTENT;
+
   return (
     <CommonServicePage
-      bannerImg={cwd}
-      bannerTitle="SEO SERVICES"
-      bannerDesc="Digital revolution has contributed to a crowded Search Engine Result Page (SERP) and studies reveal 75% of people never scroll past the first page. Businesses across industries are trying to outrank each other and achieve a top rank in the leading search engines.In such a competitive landscape, you cannot ace the ranking race without having a proper SEO strategy in place. And this is where we come in. Our niche-specific, data-driven, strategic SEO services can enhance your rank on the SERP. As a reliable SEO agency in India, we appoint the best minds in the industry to collaborate and fuel your business growth. Get a chance to focus on your business while we take."
-      overviewImage={cwd}
-      overviewImageAlt="SEO Services"
-      overviewBadge="Result-Driven SEO Services"
-      overviewHeading="Boost Organic Traffic & Rankings with"
-      overviewHighlight="Proven SEO Strategies"
-      overviewParagraphs={[
-        "At Future IT Touch Pvt. Ltd., we offer comprehensive Search Engine Optimization (SEO) services that help your business achieve higher visibility, better search rankings, and consistent organic traffic. Our SEO experts specialize in on-page, off-page, and technical SEO to deliver sustainable growth for your brand.",
-        "Our SEO strategies are data-driven and tailored to your business goals — ensuring long-term success in competitive markets.",
-        { boldPrefix: "For Businesses:", text: "Keyword research, content optimization, backlink building, and local SEO techniques designed to attract high-intent visitors and improve conversions." },
-        { boldPrefix: "For Marketing Teams:", text: "Detailed performance analytics, competitor insights, and monthly reports to measure keyword rankings, traffic growth, and ROI effectively." },
-        `With over ${YEARS_EXPERIENCE_DISPLAY} years of SEO expertise, we've helped brands across industries achieve top rankings and drive organic leads. Partner with Future IT Touch Pvt. Ltd. to dominate search results and grow your online presence organically.`,
-      ]}
-      overviewCtaText="Start Your SEO Campaign Today"
+      {...content}
       featuresBadge="Result-Oriented SEO Services"
       featuresTitle="Drive Quality Traffic, Boost Rankings &"
       featuresTitleHighlight="Grow Your Business Organically"
       featuresStickyImg={featureImage}
-      features={features}
       bizBadge="Leading SEO Company in India"
       bizHeading="Drive Organic Growth &"
       bizHighlight="Boost Your Rankings with Expert SEO Strategies"
-      bizCards={businessData}
       sliderTitle="Maximize Conversions with Expert PPC Management Solutions "
-      sliderCards={cards}
       platformsTitle="Comprehensive PPC Management Services – Target, Engage & Convert Your Audience Effectively"
-      platforms={platforms}
       faqTitle=" About PPC Management Services"
-      faqData={faqData}
-      techCategories={[
-        { title:"Analytics & SEO", techs:[
-          {name:"Google Analytics",icon:"https://cdn.simpleicons.org/googleanalytics"},
-          {name:"Google Search Console",icon:"https://cdn.simpleicons.org/googlesearchconsole"},
-          {name:"Ahrefs",icon:"https://cdn.simpleicons.org/ahrefs"},
-          {name:"Semrush",icon:"https://cdn.simpleicons.org/semrush"},
-        ]},
-        { title:"Advertising", techs:[
-          {name:"Google Ads",icon:"https://cdn.simpleicons.org/googleads"},
-          {name:"Meta Ads",icon:"https://cdn.simpleicons.org/meta"},
-          {name:"LinkedIn Ads",icon:"https://cdn.simpleicons.org/linkedin"},
-        ]},
-        { title:"Social & Email", techs:[
-          {name:"HubSpot",icon:"https://cdn.simpleicons.org/hubspot"},
-          {name:"Mailchimp",icon:"https://cdn.simpleicons.org/mailchimp"},
-          {name:"Buffer",icon:"https://cdn.simpleicons.org/buffer"},
-          {name:"Hootsuite",icon:"https://cdn.simpleicons.org/hootsuite"},
-        ]},
-        { title:"Content & CMS", techs:[
-          {name:"WordPress",icon:"https://cdn.simpleicons.org/wordpress"},
-          {name:"Webflow",icon:"https://cdn.simpleicons.org/webflow"},
-          {name:"Canva",icon:"https://cdn.simpleicons.org/canva"},
-        ]},
-      ]}
     />
   );
 };

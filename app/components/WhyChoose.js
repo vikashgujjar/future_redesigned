@@ -5,41 +5,55 @@ import { FaAngleRight, FaCheckCircle, FaAward, FaRocket, FaClock } from "./icons
 import Login from "./Login";
 import { COMPANY_START_YEAR } from "../lib/companyStats";
 
-const features = [
+const FEATURE_ICONS = [FaRocket, FaAward, FaClock];
+const FEATURE_COLORS = [
+  { from: "#2dd4bf", to: "#6366f1" },
+  { from: "#6366f1", to: "#8b5cf6" },
+  { from: "#0ea5e9", to: "#2dd4bf" },
+];
+
+const FALLBACK_FEATURES = [
   {
-    number: "01",
-    icon: FaRocket,
     img: "/Assets/online-test.webp",
     title: "Streamlined Project Management",
     desc: "Proper allocation of tasks, clear milestones, and deadline-driven workflows ensure every project runs on schedule.",
-    from: "#2dd4bf", to: "#6366f1",
   },
   {
-    number: "02",
-    icon: FaAward,
     img: "/Assets/employee.webp",
     title: "Dedicated Team of Experts",
     desc: "A mature team of skilled engineers committed to delivering quality software solutions for long-term business growth.",
-    from: "#6366f1", to: "#8b5cf6",
   },
   {
-    number: "03",
-    icon: FaClock,
     img: "/Assets/hand-shake.webp",
     title: "Completion of Project in Given Time",
     desc: "A clear project timetable organizes tasks, resources and due dates so every deliverable lands on time and on budget.",
-    from: "#0ea5e9", to: "#2dd4bf",
   },
 ];
 
-const stats = [
-  { value: "500+", label: "Projects Delivered" },
-  { value: "8+",   label: "Years Experience"   },
-  { value: "200+", label: "Happy Clients"       },
-];
+const FALLBACK_HEADING = "Why Future IT Touch Pvt. Ltd. Ranked Top Among Leading Web & App Development Companies";
+const FALLBACK_DESCRIPTION = "Our top IT company in India, known for innovation and top-notch solutions, offers web development, software, and mobile app development services — driving business growth and staying at the forefront of technology.";
+const FALLBACK_DESCRIPTION_2 = "As a top web development company, we create robust, scalable websites for diverse business objectives. Our skilled developers use the latest technologies to deliver flawless, on-time, and budget-friendly projects, making us a trusted partner for web development endeavors. From static sites to complex web apps, we hand over on time and budget. We are your trusted partner in crafting visually stunning and highly functional websites that leave a lasting impression. Elevate your online presence with Future IT Touch.";
+const FALLBACK_CTA_HEADING = "Let's Start A New Project Together";
+const FALLBACK_CTA_DESCRIPTION = "You already have a project in mind and want to work with us? Fill out the form and let us know in which direction it should go.";
 
-const WhyChoose = () => {
+const WhyChoose = ({
+  heading, description, description2, features: cmsFeatures, ctaHeading, ctaDescription,
+} = {}) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const headingText = heading || FALLBACK_HEADING;
+  const descriptionText = description || FALLBACK_DESCRIPTION;
+  const description2Text = description2 || FALLBACK_DESCRIPTION_2;
+  const ctaHeadingText = ctaHeading || FALLBACK_CTA_HEADING;
+  const ctaDescriptionText = ctaDescription || FALLBACK_CTA_DESCRIPTION;
+  const features = (cmsFeatures?.length ? cmsFeatures : FALLBACK_FEATURES).map((f, i) => ({
+    number: String(i + 1).padStart(2, "0"),
+    icon: FEATURE_ICONS[i % FEATURE_ICONS.length],
+    img: f.img || FALLBACK_FEATURES[i % FALLBACK_FEATURES.length].img,
+    title: f.title,
+    desc: f.desc,
+    ...FEATURE_COLORS[i % FEATURE_COLORS.length],
+  }));
 
   return (
     <section className="relative overflow-hidden bg-white py-16 sm:py-20 lg:py-24 px-4 sm:px-6 md:px-10 xl:px-24">
@@ -158,12 +172,16 @@ const WhyChoose = () => {
           {/* heading */}
           <h2 className="text-2xl sm:text-3xl lg:text-[2rem] font-bold leading-snug text-gray-900"
             style={{ fontFamily:"'Poppins',sans-serif" }}>
-            Why{" "}
-            <span style={{ background:"linear-gradient(to right,#2dd4bf,#6366f1)",
-              WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>
-              Future IT Touch Pvt. Ltd.
-            </span>{" "}
-            Ranked Top Among Leading Web &amp; App Development Companies
+            {headingText === FALLBACK_HEADING ? (
+              <>
+                Why{" "}
+                <span style={{ background:"linear-gradient(to right,#2dd4bf,#6366f1)",
+                  WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>
+                  Future IT Touch Pvt. Ltd.
+                </span>{" "}
+                Ranked Top Among Leading Web &amp; App Development Companies
+              </>
+            ) : headingText}
           </h2>
 
           {/* divider */}
@@ -173,22 +191,30 @@ const WhyChoose = () => {
           {/* description */}
           <p className="text-gray-500 text-base leading-7"
             style={{ fontFamily:"'Inter',sans-serif" }}>
-            Our <strong className="text-gray-800 font-semibold">top IT company in India,</strong>{" "}
-            known for innovation and top-notch solutions, offers web development, software, and
-            mobile app development services — driving business growth and staying at the
-            forefront of technology.
+            {descriptionText === FALLBACK_DESCRIPTION ? (
+              <>
+                Our <strong className="text-gray-800 font-semibold">top IT company in India,</strong>{" "}
+                known for innovation and top-notch solutions, offers web development, software, and
+                mobile app development services — driving business growth and staying at the
+                forefront of technology.
+              </>
+            ) : descriptionText}
           </p>
 
           {/* second description */}
           <p className="text-gray-500 text-sm leading-7"
             style={{ fontFamily:"'Inter',sans-serif" }}>
-            As a top web development company, we create robust, scalable websites for diverse
-            business objectives. Our skilled developers use the latest technologies to deliver
-            flawless, on-time, and budget-friendly projects, making us a trusted partner for
-            web development endeavors. From static sites to complex web apps, we hand over on
-            time and budget. We are your trusted partner in crafting visually stunning and
-            highly functional websites that leave a lasting impression. Elevate your online
-            presence with <strong className="text-gray-800 font-semibold">Future IT Touch.</strong>
+            {description2Text === FALLBACK_DESCRIPTION_2 ? (
+              <>
+                As a top web development company, we create robust, scalable websites for diverse
+                business objectives. Our skilled developers use the latest technologies to deliver
+                flawless, on-time, and budget-friendly projects, making us a trusted partner for
+                web development endeavors. From static sites to complex web apps, we hand over on
+                time and budget. We are your trusted partner in crafting visually stunning and
+                highly functional websites that leave a lasting impression. Elevate your online
+                presence with <strong className="text-gray-800 font-semibold">Future IT Touch.</strong>
+              </>
+            ) : description2Text}
           </p>
 
           {/* mini stats row */}
@@ -334,12 +360,13 @@ const WhyChoose = () => {
             <div className="w-10 h-1 rounded-full bg-white/40 mb-5" />
             <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3 leading-snug"
               style={{ fontFamily:"'Poppins',sans-serif" }}>
-              Let&apos;s Start A <span className="text-teal-200">New Project</span> Together
+              {ctaHeadingText === FALLBACK_CTA_HEADING ? (
+                <>Let&apos;s Start A <span className="text-teal-200">New Project</span> Together</>
+              ) : ctaHeadingText}
             </h3>
             <p className="text-white/70 text-sm leading-6 mb-6 max-w-md"
               style={{ fontFamily:"'Inter',sans-serif" }}>
-              You already have a project in mind and want to work with us? Fill out the form
-              and let us know in which direction it should go.
+              {ctaDescriptionText}
             </p>
             <button onClick={() => setIsPopupOpen(true)}
               className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-white text-sm font-bold

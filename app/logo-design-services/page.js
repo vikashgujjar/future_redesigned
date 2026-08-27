@@ -1,7 +1,8 @@
 import React from 'react'
 import Logo from './Logo'
+import { getServicePageCms, mapServicePageProps, loadServicePageSeo } from '../lib/loadServicePage'
 
-export const metadata = {
+const DEFAULT_METADATA = {
   title: "Logo Design Services | Custom Brand Logo Design",
   description:
     "Custom logo design services that give your brand a unique, memorable identity — concept development, revisions, and full brand asset delivery for businesses of every size.",
@@ -11,11 +12,16 @@ export const metadata = {
   ],
 };
 
+export async function generateMetadata() {
+  return loadServicePageSeo("logo-design-services", DEFAULT_METADATA);
+}
 
-export default function page() {
+export default async function page() {
+  const cmsRaw = await getServicePageCms("logo-design-services");
+  const cms = cmsRaw ? mapServicePageProps(cmsRaw) : null;
   return (
     <div>
-      <Logo/>
+      <Logo cms={cms}/>
     </div>
   )
 }

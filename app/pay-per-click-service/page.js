@@ -1,8 +1,9 @@
 import React from 'react'
 import PPC from './PPC'
+import { getServicePageCms, mapServicePageProps, loadServicePageSeo } from '../lib/loadServicePage'
 
 
-export const metadata = {
+const DEFAULT_METADATA = {
   title: "PPC Management Services | Google Ads & Paid Search Experts",
   description: "PPC management services delivering targeted ad campaigns and data-driven bidding strategies across Google Ads and social platforms — built to maximize ROI, not just clicks.",
   keywords: [
@@ -10,10 +11,17 @@ export const metadata = {
     "paid search advertising", "PPC agency", "pay per click marketing services",
   ],
 };
-export default function page() {
+
+export async function generateMetadata() {
+  return loadServicePageSeo("pay-per-click-service", DEFAULT_METADATA);
+}
+
+export default async function page() {
+  const cmsRaw = await getServicePageCms("pay-per-click-service");
+  const cms = cmsRaw ? mapServicePageProps(cmsRaw) : null;
   return (
     <div>
-      <PPC/>
+      <PPC cms={cms}/>
     </div>
   )
 }

@@ -9,8 +9,7 @@ import {
   FaPencilRuler, FaDesktop, FaCode, FaSearch,
 } from "react-icons/fa";
 
-const Logo = () => {
-  const features = [
+const features = [
     {
       title: "Custom Business Logo Design",
       description:
@@ -172,56 +171,67 @@ const Logo = () => {
     },
   ];
 
+const techCategories = [
+  { title:"Design Tools", techs:[
+    {name:"Figma",icon:"https://cdn.simpleicons.org/figma"},
+    {name:"Adobe XD",icon:"https://cdn.simpleicons.org/adobexd"},
+    {name:"Photoshop",icon:"https://cdn.simpleicons.org/adobephotoshop"},
+    {name:"Illustrator",icon:"https://cdn.simpleicons.org/adobeillustrator"},
+    {name:"InDesign",icon:"https://cdn.simpleicons.org/adobeindesign"},
+  ]},
+  { title:"Animation & Video", techs:[
+    {name:"After Effects",icon:"https://cdn.simpleicons.org/adobeaftereffects"},
+    {name:"Premiere Pro",icon:"https://cdn.simpleicons.org/adobepremierepro"},
+    {name:"Blender",icon:"https://cdn.simpleicons.org/blender"},
+  ]},
+  { title:"Prototyping", techs:[
+    {name:"Figma Prototype",icon:"https://cdn.simpleicons.org/figma"},
+    {name:"Canva",icon:"https://cdn.simpleicons.org/canva"},
+    {name:"Sketch",icon:"https://cdn.simpleicons.org/sketch"},
+  ]},
+];
+
+const FALLBACK_CONTENT = {
+  bannerImg: gm,
+  bannerTitle: "LOGO DESIGN SERVICES",
+  bannerDesc: "A well-designed logo is more than just a creative mark. It facilitates brand recognition. As an certified logo design company in India, our experienced logo designers know how to deliver a memorable logo that noticeably stands out, ultimately building a unique identity. Engage our logo design services to get a perfect emblem that best represents your brand.",
+  overviewImage: gm,
+  overviewImageAlt: "Logo Design Services",
+  overviewBadge: "Professional & Creative Logo Design Services",
+  overviewHeading: "Designing Logos That Inspire",
+  overviewHighlight: "a Unique Brand Vision",
+  overviewParagraphs: [
+    "At Future IT Touch Pvt. Ltd. we go beyond templates to craft logos that truly reflect your brand's identity. A well-designed logo evokes emotions, builds recall, and helps grow your customer base.",
+    "Think about some of the iconic brands you remember – the moment you see their logo, the entire brand story comes to mind. Our experienced designers combine symbols, calligraphy, design art, and other aesthetic elements to create logos that leave a lasting impression.",
+    `With over ${YEARS_EXPERIENCE_DISPLAY} years of experience and a team of creative professionals, we deliver high-quality and unique Business Logo Design Services tailored for all your needs. As a trusted logo design company, we have served thousands of clients worldwide, helping brands establish credibility and visual identity.`,
+  ],
+  overviewCtaText: "Design Your Logo Today",
+  features,
+  bizCards: businessData,
+  sliderCards: cards,
+  platforms,
+  techCategories,
+  faqData,
+};
+
+const Logo = ({ cms } = {}) => {
+  const content = cms
+    ? { ...cms, bannerImg: cms.bannerImg || gm, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    : FALLBACK_CONTENT;
+
   return (
     <CommonServicePage
-      bannerImg={gm}
-      bannerTitle="LOGO DESIGN SERVICES"
-      bannerDesc="A well-designed logo is more than just a creative mark. It facilitates brand recognition. As an certified logo design company in India, our experienced logo designers know how to deliver a memorable logo that noticeably stands out, ultimately building a unique identity. Engage our logo design services to get a perfect emblem that best represents your brand."
-      overviewImage={gm}
-      overviewImageAlt="Logo Design Services"
-      overviewBadge="Professional & Creative Logo Design Services"
-      overviewHeading="Designing Logos That Inspire"
-      overviewHighlight="a Unique Brand Vision"
-      overviewParagraphs={[
-        "At Future IT Touch Pvt. Ltd. we go beyond templates to craft logos that truly reflect your brand's identity. A well-designed logo evokes emotions, builds recall, and helps grow your customer base.",
-        "Think about some of the iconic brands you remember – the moment you see their logo, the entire brand story comes to mind. Our experienced designers combine symbols, calligraphy, design art, and other aesthetic elements to create logos that leave a lasting impression.",
-        `With over ${YEARS_EXPERIENCE_DISPLAY} years of experience and a team of creative professionals, we deliver high-quality and unique Business Logo Design Services tailored for all your needs. As a trusted logo design company, we have served thousands of clients worldwide, helping brands establish credibility and visual identity.`,
-      ]}
-      overviewCtaText="Design Your Logo Today"
+      {...content}
       featuresBadge="Creative Logo Design Services"
       featuresTitle="Transforming Brand Identities into"
       featuresTitleHighlight="Memorable Logos"
       featuresStickyImg={d1}
-      features={features}
       bizBadge="Professional Logo Design Company in India"
       bizHeading="Crafting Logos That Inspire, Engage &"
       bizHighlight="Build Brand Identity"
-      bizCards={businessData}
       sliderTitle="Designing Memorable Logos That Build Brand Identity & Recognition"
-      sliderCards={cards}
       platformsTitle="Logo Design Solutions We Deliver"
-      platforms={platforms}
       faqTitle="About Our Logo Design Services"
-      faqData={faqData}
-      techCategories={[
-        { title:"Design Tools", techs:[
-          {name:"Figma",icon:"https://cdn.simpleicons.org/figma"},
-          {name:"Adobe XD",icon:"https://cdn.simpleicons.org/adobexd"},
-          {name:"Photoshop",icon:"https://cdn.simpleicons.org/adobephotoshop"},
-          {name:"Illustrator",icon:"https://cdn.simpleicons.org/adobeillustrator"},
-          {name:"InDesign",icon:"https://cdn.simpleicons.org/adobeindesign"},
-        ]},
-        { title:"Animation & Video", techs:[
-          {name:"After Effects",icon:"https://cdn.simpleicons.org/adobeaftereffects"},
-          {name:"Premiere Pro",icon:"https://cdn.simpleicons.org/adobepremierepro"},
-          {name:"Blender",icon:"https://cdn.simpleicons.org/blender"},
-        ]},
-        { title:"Prototyping", techs:[
-          {name:"Figma Prototype",icon:"https://cdn.simpleicons.org/figma"},
-          {name:"Canva",icon:"https://cdn.simpleicons.org/canva"},
-          {name:"Sketch",icon:"https://cdn.simpleicons.org/sketch"},
-        ]},
-      ]}
     />
   );
 };

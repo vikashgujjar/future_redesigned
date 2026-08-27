@@ -1,6 +1,7 @@
 import Business from "./Business";
+import { getServicePageCms, mapServicePageProps, loadServicePageSeo } from '../lib/loadServicePage'
 
-export const metadata = {
+const DEFAULT_METADATA = {
   title: "Small Business Website Design | Affordable Web Design Services",
   description:
     "Affordable small business website design services — mobile-responsive, SEO-ready websites with SSL security and optional eCommerce, custom-built and launched fast for startups and growing businesses.",
@@ -11,6 +12,12 @@ export const metadata = {
   ],
 };
 
-export default function Page() {
-  return <Business />;
+export async function generateMetadata() {
+  return loadServicePageSeo("business-developement", DEFAULT_METADATA);
+}
+
+export default async function Page() {
+  const cmsRaw = await getServicePageCms("business-developement");
+  const cms = cmsRaw ? mapServicePageProps(cmsRaw) : null;
+  return <Business cms={cms} />;
 }

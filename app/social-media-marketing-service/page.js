@@ -1,7 +1,8 @@
 import React from 'react'
 import Social from './Social'
+import { getServicePageCms, mapServicePageProps, loadServicePageSeo } from '../lib/loadServicePage'
 
-export const metadata = {
+const DEFAULT_METADATA = {
   title: "Social Media Marketing Services | Grow Your Brand Online",
   description: "Social media marketing services that build engaged audiences and measurable growth across Instagram, Facebook, LinkedIn, and more — content strategy, community management, and paid campaigns.",
   keywords: [
@@ -11,10 +12,16 @@ export const metadata = {
   ],
 };
 
-export default function page() {
+export async function generateMetadata() {
+  return loadServicePageSeo("social-media-marketing-service", DEFAULT_METADATA);
+}
+
+export default async function page() {
+  const cmsRaw = await getServicePageCms("social-media-marketing-service");
+  const cms = cmsRaw ? mapServicePageProps(cmsRaw) : null;
   return (
     <div>
-      <Social/>
+      <Social cms={cms} />
     </div>
   )
 }

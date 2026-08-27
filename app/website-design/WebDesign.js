@@ -209,45 +209,55 @@ const techCategories = [
   },
 ];
 
-const WebDesign = () => {
+const FALLBACK_CONTENT = {
+  bannerImg,
+  bannerTitle: "WEBSITE DESIGN & DEVELOPMENT SERVICES",
+  bannerDesc: "The biggest challenge faced by any small business is to expand its customer base. With the rising expenses of electronic and print media, a professionally developed website is the first step toward achieving this aim. Future IT Touch Pvt. Ltd. provides a comprehensive range of website design and development services to clients worldwide — customized exclusively for startups and enterprises at affordable rates.",
+  overviewImage: "/Assets/stock/photo-1467232004584-a241de8bcf5d.webp",
+  overviewImageAlt: "Website Design & Development",
+  overviewBadge: "Website Design & Development Services",
+  overviewHeading: "Turning Ideas Into",
+  overviewHighlight: "Powerful Digital Experiences",
+  overviewParagraphs: [
+    `A great website is more than a digital brochure — it's your best salesperson, working 24/7 to attract, engage, and convert visitors into paying customers. Future IT Touch Pvt. Ltd. has been crafting high-performance websites for businesses of all sizes for over ${YEARS_EXPERIENCE_DISPLAY} years.`,
+    "Whether you need a sleek corporate website, a feature-rich eCommerce store, a content-managed WordPress site, or a complex web application, we deliver solutions tailored to your specific business goals and target audience.",
+    { boldPrefix: "For Your Business:", text: "Custom-designed, SEO-optimized, fast-loading websites that generate leads, build credibility, and grow your customer base organically." },
+    { boldPrefix: "For Your Users:", text: "Intuitive navigation, mobile-responsive layouts, accessible design, and fast page loads — an experience that keeps visitors coming back." },
+    `In the last ${YEARS_EXPERIENCE_DISPLAY} years, we have delivered effective web solutions to thousands of businesses and helped them enhance their growth online with measurable, lasting results.`,
+  ],
+  overviewCtaText: "Start Your Website Project",
+  features,
+  bizCards,
+  sliderCards,
+  platforms,
+  techCategories,
+  faqData,
+};
+
+const WebDesign = ({ cms } = {}) => {
+  // Images aren't uploaded to the CMS yet, so keep the local ones even when
+  // CMS text content is used — same merge pattern as blog/team/portfolio.
+  const content = cms
+    ? { ...cms, bannerImg: cms.bannerImg || bannerImg, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    : FALLBACK_CONTENT;
+
   return (
     <CommonServicePage
-      bannerImg={bannerImg}
-      bannerTitle="WEBSITE DESIGN & DEVELOPMENT SERVICES"
-      bannerDesc="The biggest challenge faced by any small business is to expand its customer base. With the rising expenses of electronic and print media, a professionally developed website is the first step toward achieving this aim. Future IT Touch Pvt. Ltd. provides a comprehensive range of website design and development services to clients worldwide — customized exclusively for startups and enterprises at affordable rates."
-      overviewImage="/Assets/stock/photo-1467232004584-a241de8bcf5d.webp"
-      overviewImageAlt="Website Design & Development"
-      overviewBadge="Website Design & Development Services"
-      overviewHeading="Turning Ideas Into"
-      overviewHighlight="Powerful Digital Experiences"
-      overviewParagraphs={[
-        `A great website is more than a digital brochure — it's your best salesperson, working 24/7 to attract, engage, and convert visitors into paying customers. Future IT Touch Pvt. Ltd. has been crafting high-performance websites for businesses of all sizes for over ${YEARS_EXPERIENCE_DISPLAY} years.`,
-        "Whether you need a sleek corporate website, a feature-rich eCommerce store, a content-managed WordPress site, or a complex web application, we deliver solutions tailored to your specific business goals and target audience.",
-        { boldPrefix: "For Your Business:", text: "Custom-designed, SEO-optimized, fast-loading websites that generate leads, build credibility, and grow your customer base organically." },
-        { boldPrefix: "For Your Users:", text: "Intuitive navigation, mobile-responsive layouts, accessible design, and fast page loads — an experience that keeps visitors coming back." },
-        `In the last ${YEARS_EXPERIENCE_DISPLAY} years, we have delivered effective web solutions to thousands of businesses and helped them enhance their growth online with measurable, lasting results.`,
-      ]}
-      overviewCtaText="Start Your Website Project"
+      {...content}
       featuresBadge="Website Design & Development Services"
       featuresTitle="Building Websites That"
       featuresTitleHighlight="Drive Business Growth"
       featuresStickyImg="/Assets/stock/photo-1551650975-87deedd944c3.webp"
-      features={features}
       bizBadge="Why Choose Future IT Touch"
       bizHeading="We Build Websites That"
       bizHighlight="Deliver Real Results"
-      bizCards={bizCards}
       sliderTitle="Delivering Website Experiences That Grow Businesses Online"
-      sliderCards={sliderCards}
       platformsTitle="Website Solutions We Deliver"
-      platforms={platforms}
       techBadge="Our Web Tech Stack"
       techHeading="Technologies"
       techHeadingHighlight="We Build With"
       techDescription="We use modern, proven web technologies to deliver fast, secure, scalable, and beautifully designed websites that help businesses compete and win online."
-      techCategories={techCategories}
       faqTitle="Frequently Asked Questions — Website Design"
-      faqData={faqData}
     />
   );
 };

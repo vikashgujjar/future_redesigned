@@ -44,6 +44,23 @@ const Testimonial = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    /* CMS testimonials (Laravel) are the fallback tier if Google reviews are
+       unavailable — only the small hardcoded array below is the last resort
+       if the CMS itself is unreachable. */
+    const fetchCmsTestimonials = async () => {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      if (!apiUrl) return null;
+      try {
+        const res = await fetch(`${apiUrl}/testimonials`);
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json?.data?.length ? json.data : null;
+      } catch (err) {
+        console.error(`[cms] /testimonials unreachable (${err.message}) — falling back further.`);
+        return null;
+      }
+    };
+
     const fetchGoogleReviews = async () => {
       try {
         const storedReviews = localStorage.getItem("reviews");
@@ -52,22 +69,29 @@ const Testimonial = () => {
           setLoading(false);
         }
         const placeId = "ChIJSVD7Y4mDGjkRSnZM3ca4iEE";
-        const apiKey = "AIzaSyD-LPUhqM4jZ6O5YVt07jyeEuNOLT5ObIM";
+        const apiKey = process.env.NEXT_PUBLIC_GOOGLE_REVIEWS_API_KEY;
+        if (!apiKey) throw new Error("NEXT_PUBLIC_GOOGLE_REVIEWS_API_KEY not configured");
         const qs = new URLSearchParams({ placeId, apiKey });
         const response = await fetch(`https://googlemapreviews-1.onrender.com/api/google-reviews?${qs}`);
         const fetched = await response.json();
-        localStorage.setItem("reviews", JSON.stringify(fetched));
-        setReviews(fetched);
-        setLoading(false);
+        if (fetched?.length) {
+          localStorage.setItem("reviews", JSON.stringify(fetched));
+          setReviews(fetched);
+          setLoading(false);
+          return;
+        }
+        throw new Error("empty response");
       } catch (error) {
         console.error("Error fetching Google reviews:", error);
+        const cmsReviews = await fetchCmsTestimonials();
+        if (cmsReviews) setReviews(cmsReviews);
         setLoading(false);
       }
     };
     fetchGoogleReviews();
   }, []);
 
-  /* use live reviews if loaded, otherwise show fallback */
+  /* use live reviews if loaded, otherwise show the last-resort hardcoded set */
   const displayReviews = reviews.length > 0 ? reviews : FALLBACK_REVIEWS;
 
   /* ── loading skeleton ─────────────────────────────── */

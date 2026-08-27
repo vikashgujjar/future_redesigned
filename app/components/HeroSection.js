@@ -8,7 +8,7 @@ import useOtpFlow from "../lib/useOtpFlow";
 import OtpVerifyModal from "./OtpVerifyModal";
 import useYearsExperience from "../lib/useYearsExperience";
 
-const slides = [
+const FALLBACK_SLIDES = [
   {
     tag: "Website Development",
     eyebrow: "We Build Your",
@@ -39,12 +39,31 @@ const slides = [
   },
 ];
 
-const MARQUEE_ITEMS = [
+const FALLBACK_MARQUEE_ITEMS = [
   "Website Development","Digital Marketing","SEO Optimization",
   "UI/UX Design","Mobile Apps","E-Commerce","Brand Strategy","Performance Audits",
 ];
 
-export default function HeroSection() {
+// CMS slides store stat1/stat2 as plain strings ("12+ Years Expertise"); the
+// local fallback splits them into {v,l}. Normalize both into the same shape.
+function normalizeSlide(slide) {
+  const splitStat = (s) => {
+    if (typeof s !== "string") return s;
+    const m = s.match(/^(\S+)\s+(.*)$/);
+    return m ? { v: m[1], l: m[2] } : { v: s, l: "" };
+  };
+  return {
+    ...slide,
+    image: slide.image || "/images/HeroSection/slider-img-1.webp",
+    stat1: splitStat(slide.stat1),
+    stat2: splitStat(slide.stat2),
+  };
+}
+
+export default function HeroSection({ slides: cmsSlides, marqueeItems: cmsMarqueeItems } = {}) {
+  const slides = cmsSlides?.length ? cmsSlides.map(normalizeSlide) : FALLBACK_SLIDES;
+  const MARQUEE_ITEMS = cmsMarqueeItems?.length ? cmsMarqueeItems : FALLBACK_MARQUEE_ITEMS;
+
   const [idx, setIdx]           = useState(0);
   const [tick, setTick]         = useState(0);
   const [phase, setPhase]       = useState("idle");

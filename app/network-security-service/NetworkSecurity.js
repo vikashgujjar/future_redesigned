@@ -183,50 +183,59 @@ const faqData = [
   },
 ];
 
-const NetworkSecurity = () => (
-  <CommonServicePage
-    bannerImg={securityImg}
-    bannerTitle="Network Security Services"
-    bannerDesc="Protecting your business network from the perimeter to the core — firewall management, IDS/IPS deployment, zero-trust architecture, network segmentation, VPN security, and 24/7 traffic monitoring. Enterprise-grade network protection sized and priced for Indian SMEs."
+const FALLBACK_CONTENT = {
+  bannerImg: securityImg,
+  bannerTitle: "Network Security Services",
+  bannerDesc: "Protecting your business network from the perimeter to the core — firewall management, IDS/IPS deployment, zero-trust architecture, network segmentation, VPN security, and 24/7 traffic monitoring. Enterprise-grade network protection sized and priced for Indian SMEs.",
 
-    overviewImage="/Assets/stock/photo-1451187580459-43490279c0fa.webp"
-    overviewImageAlt="Network Security Services"
-    overviewBadge="Cyber Security · Network Protection"
-    overviewHeading="Network Security Built for"
-    overviewHighlight="Modern Indian Businesses"
-    overviewParagraphs={[
-      "Your network is the backbone of your business — and the most common entry point for attackers. From unpatched firewalls and exposed remote desktop ports to misconfigured VLANs and absent traffic monitoring, Indian SMEs face network threats that require enterprise-grade defences at SME-scale budgets.",
-      "We design and implement layered network security — combining firewall hardening, IDS/IPS deployment, zero-trust segmentation, and continuous traffic monitoring — aligned to CERT-In's mandatory controls and DPDPA 2023 requirements.",
-      "Our managed network security service means you don't need a dedicated in-house network security team. Our Tricity-based SOC handles configuration reviews, alert triage, and threat response — at 40% lower cost than metro-based alternatives.",
-    ]}
-    overviewCtaText="Request a Network Security Review"
+  overviewImage: "/Assets/stock/photo-1451187580459-43490279c0fa.webp",
+  overviewImageAlt: "Network Security Services",
+  overviewBadge: "Cyber Security · Network Protection",
+  overviewHeading: "Network Security Built for",
+  overviewHighlight: "Modern Indian Businesses",
+  overviewParagraphs: [
+    "Your network is the backbone of your business — and the most common entry point for attackers. From unpatched firewalls and exposed remote desktop ports to misconfigured VLANs and absent traffic monitoring, Indian SMEs face network threats that require enterprise-grade defences at SME-scale budgets.",
+    "We design and implement layered network security — combining firewall hardening, IDS/IPS deployment, zero-trust segmentation, and continuous traffic monitoring — aligned to CERT-In's mandatory controls and DPDPA 2023 requirements.",
+    "Our managed network security service means you don't need a dedicated in-house network security team. Our Tricity-based SOC handles configuration reviews, alert triage, and threat response — at 40% lower cost than metro-based alternatives.",
+  ],
+  overviewCtaText: "Request a Network Security Review",
+  features,
+  bizCards,
+  sliderCards,
+  platforms,
+  techCategories,
+  faqData,
+};
 
-    featuresBadge="Our Network Security Services"
-    featuresTitle="Layered Network Protection from"
-    featuresTitleHighlight="Perimeter to Core"
-    featuresStickyImg="/Assets/stock/photo-1614064641938-3bbee52942c7.webp"
-    features={features}
+const NetworkSecurity = ({ cms } = {}) => {
+  const content = cms
+    ? { ...cms, bannerImg: cms.bannerImg || securityImg, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    : FALLBACK_CONTENT;
 
-    bizBadge="Why Choose Us"
-    bizHeading="Network Security Sized for"
-    bizHighlight="SME Scale & Budget"
-    bizCards={bizCards}
+  return (
+    <CommonServicePage
+      {...content}
+      featuresBadge="Our Network Security Services"
+      featuresTitle="Layered Network Protection from"
+      featuresTitleHighlight="Perimeter to Core"
+      featuresStickyImg="/Assets/stock/photo-1614064641938-3bbee52942c7.webp"
 
-    sliderTitle="Network Security Outcomes That Protect What Matters"
-    sliderCards={sliderCards}
+      bizBadge="Why Choose Us"
+      bizHeading="Network Security Sized for"
+      bizHighlight="SME Scale & Budget"
 
-    platformsTitle="Network Security Platforms We Deploy"
-    platforms={platforms}
+      sliderTitle="Network Security Outcomes That Protect What Matters"
 
-    techBadge="Our Network Security Stack"
-    techHeading="Tools & Technologies"
-    techHeadingHighlight="We Secure Networks With"
-    techDescription="We deploy and manage industry-standard network security tools — from open-source IDS/IPS to commercial NGFW and cloud-native network controls — right-sized for your environment."
-    techCategories={techCategories}
+      platformsTitle="Network Security Platforms We Deploy"
 
-    faqTitle="Frequently Asked Questions — Network Security"
-    faqData={faqData}
-  />
-);
+      techBadge="Our Network Security Stack"
+      techHeading="Tools & Technologies"
+      techHeadingHighlight="We Secure Networks With"
+      techDescription="We deploy and manage industry-standard network security tools — from open-source IDS/IPS to commercial NGFW and cloud-native network controls — right-sized for your environment."
+
+      faqTitle="Frequently Asked Questions — Network Security"
+    />
+  );
+};
 
 export default NetworkSecurity;

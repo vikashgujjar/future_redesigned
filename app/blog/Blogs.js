@@ -1,17 +1,15 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
 import GetNewInsight from "../components/GetNewInsight";
 import { FaClock, FaTag, FaArrowRight } from "react-icons/fa";
-import { BLOG_POSTS } from "./blogPosts";
 
-const blogData = BLOG_POSTS.map((post) => ({
-  ...post,
-  content: post.excerpt,
-  slug: `/blog/${post.slug}`,
-}));
+export default function Blog({ posts }) {
+  const blogData = posts.map((post) => ({
+    ...post,
+    content: post.excerpt,
+    slug: `/blog/${post.slug}`,
+  }));
 
-export default function Blog() {
   return (
     <>
       <style>{`

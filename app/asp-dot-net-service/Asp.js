@@ -8,9 +8,8 @@ import aspImg from "../Assets/asp.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
-const Asp = () => (
-  <CommonTechPage
-    banner={{
+const FALLBACK_CONTENT = {
+    banner: {
       bgImage: "/Assets/stock/photo-1542831371-29b0f74f9713.webp",
       image: aspImg,
       category: "Enterprise Technology",
@@ -18,9 +17,9 @@ const Asp = () => (
       title: "ASP.NET · .NET Core · MVC",
       tagline:
         "Build robust, secure, and enterprise-grade web applications using Microsoft's most powerful .NET ecosystem — trusted by businesses worldwide.",
-    }}
+    },
 
-    intro={{
+    intro: {
       badge: "Future IT Touch · .NET Experts",
       heading: "Enterprise-Grade Web Apps with",
       highlight: "ASP.NET, .NET Core & MVC",
@@ -40,9 +39,9 @@ const Asp = () => (
         { num: YEARS_EXPERIENCE_DISPLAY,  label: "Years .NET Expertise", desc: `${YEARS_EXPERIENCE_DISPLAY} years crafting robust, secure, and scalable .NET systems.`,              icon: <FaMicrosoft /> },
         { num: "500+", label: "Global Clients",       desc: "Trusted by 500+ clients worldwide for enterprise-grade ASP.NET solutions.", icon: <FaStar /> },
       ],
-    }}
+    },
 
-    services={[
+    services: [
       {
         icon: <FaCode />,
         title: "Custom ASP.NET Web Development",
@@ -109,9 +108,9 @@ const Asp = () => (
           "Expert .NET consultation",
         ],
       },
-    ]}
+    ],
 
-    process={[
+    process: [
       { icon: <FaCheckCircle />, title: "Requirements Analysis",       desc: "Defining your business goals, audience, and technical needs to design a tailored ASP.NET solution." },
       { icon: <FaLayerGroup />,  title: "Planning & Architecture",     desc: "Designing a well-structured backend and database model for scalability, maintainability, and long-term performance." },
       { icon: <FaCode />,        title: "Frontend Integration",        desc: "Collaborating to deliver responsive, engaging UIs seamlessly integrated with the ASP.NET backend." },
@@ -122,19 +121,23 @@ const Asp = () => (
       { icon: <FaBolt />,        title: "Testing & QA",                desc: "Running comprehensive manual and automated tests to ensure flawless functionality and user experience." },
       { icon: <FaRocket />,      title: "Deployment & Server Setup",   desc: "Deploying on Azure, AWS, or private servers with zero-downtime launch and proper scaling configuration." },
       { icon: <FaSyncAlt />,     title: "Maintenance & Support",       desc: "Continuous updates, monitoring, and troubleshooting — keeping your .NET applications optimized and secure." },
-    ]}
+    ],
 
-    features={[
+    features: [
       { icon: <FaCode />,       title: "Custom ASP.NET Solutions",           desc: "Dynamic and secure ASP.NET web applications aligned with your business objectives — built with clean, efficient code for top performance and flexibility." },
       { icon: <FaCogs />,       title: "ASP.NET Core Development",           desc: "Feature-rich, high-performance web apps using ASP.NET Core with fast execution, modular design, and future-ready cross-platform architecture." },
       { icon: <FaServer />,     title: "MVC-Based Web Applications",         desc: "Specializing in ASP.NET MVC projects that provide strong separation of logic, clean code structure, and consistent long-term maintainability." },
       { icon: <FaLock />,       title: "Enterprise Security Implementation",  desc: "Top-tier security layers including role-based access, Microsoft Identity management, and secure token authentication for complete system protection." },
       { icon: <FaRocket />,     title: "Performance Optimization",           desc: "Enhanced .NET applications with caching, async operations, and optimized database queries for lightning-fast performance and effortless scalability." },
       { icon: <FaTools />,      title: "Maintenance & Support",              desc: "24/7 monitoring, version upgrades, and troubleshooting to ensure your ASP.NET applications stay efficient, secure, and always up-to-date." },
-    ]}
+    ],
 
-    techCategories={[
-      { title:".NET Technology Stack", techs:[
+    // NOTE: originally passed to CommonTechPage as `techCategories`, a prop
+    // that component doesn't accept (it renders `stack`, a flat list) — so
+    // this section never actually rendered. Flattened into `stack` here,
+    // same tech names/icons, to match the shape every other technology-
+    // template page already uses and that CommonTechPage actually consumes.
+    stack: [
         {name:"ASP.NET Core 8",icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-plain.svg"},
         {name:".NET 8 / 9",icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg"},
         {name:"C# 12",icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg"},
@@ -150,8 +153,6 @@ const Asp = () => (
         {name:"Microsoft Identity"},
         {name:"Redis",icon:"https://cdn.simpleicons.org/redis"},
         {name:"Dapper"},
-      ]},
-      { title:"Cloud Platforms We Deploy On", techs:[
         {name:"AWS",icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"},
         {name:"Microsoft Azure",icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg"},
         {name:"Google Cloud Platform (GCP)",icon:"https://cdn.simpleicons.org/googlecloud"},
@@ -164,18 +165,17 @@ const Asp = () => (
         {name:"VMware Cloud",icon:"https://cdn.simpleicons.org/vmware"},
         {name:"OVHcloud",icon:"https://cdn.simpleicons.org/ovh"},
         {name:"Other Cloud Providers"},
-      ]},
-    ]}
+    ],
 
-    slider={[
+    slider: [
       { count: "100+", title: "Applications Developed",    desc: "100+ ASP.NET web solutions built and maintained — delivering reliable performance and long-term stability across industries.", image: "/Assets/seerviceSlider/slide1.webp" },
       { count: YEARS_EXPERIENCE_DISPLAY,  title: "Years of .NET Expertise",   desc: `${YEARS_EXPERIENCE_DISPLAY} years of ASP.NET experience crafting robust, secure, and scalable systems that power modern enterprises worldwide.`,       image: "/Assets/seerviceSlider/slide2.webp" },
       { count: "500+", title: "Global Clients Served",     desc: "Trusted by 500+ clients globally with high-performance ASP.NET applications and continuous backend support.",                  image: "/Assets/seerviceSlider/slide3.webp" },
       { count: "98%",  title: "Client Satisfaction Rate",  desc: "98% satisfaction rate through innovation, consistent quality, and reliable .NET solutions that exceed expectations.",          image: "/Assets/seerviceSlider/slide4.webp" },
       { count: "24/7", title: "Technical Assistance",      desc: "Round-the-clock monitoring, maintenance, and upgrade support for all your ASP.NET systems — uninterrupted service guaranteed.", image: "/Assets/seerviceSlider/slide5.webp" },
-    ]}
+    ],
 
-    faq={{
+    faq: {
       title: "ASP.NET · .NET Core · MVC",
       items: [
         { title: "What is ASP.NET development?",               description: "ASP.NET is Microsoft's open-source web framework for building secure, scalable web applications using C#. It supports both MVC and Core architectures for modern enterprise solutions." },
@@ -189,8 +189,24 @@ const Asp = () => (
         { title: "Can you migrate legacy systems to ASP.NET Core?", description: "Definitely. We specialize in upgrading legacy ASP.NET or other tech stacks to modern .NET Core for better performance, maintainability, and cloud compatibility." },
         { title: "Which industries benefit from ASP.NET solutions?", description: "ASP.NET serves finance, healthcare, eCommerce, logistics, and education — its flexibility making it ideal for enterprise and business-critical web platforms." },
       ],
-    }}
-  />
-);
+    },
+};
+
+const Asp = ({ cms } = {}) => {
+  const content = cms
+    ? {
+        banner: { ...FALLBACK_CONTENT.banner, ...cms.banner, bgImage: cms.banner.bgImage || FALLBACK_CONTENT.banner.bgImage },
+        intro: { ...FALLBACK_CONTENT.intro, ...cms.intro },
+        services: cms.services || FALLBACK_CONTENT.services,
+        process: cms.process || FALLBACK_CONTENT.process,
+        features: cms.features,
+        stack: cms.stack || FALLBACK_CONTENT.stack,
+        slider: cms.slider,
+        faq: { title: FALLBACK_CONTENT.faq.title, items: cms.faq.items },
+      }
+    : FALLBACK_CONTENT;
+
+  return <CommonTechPage {...content} />;
+};
 
 export default Asp;

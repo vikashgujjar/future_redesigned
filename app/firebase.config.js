@@ -6,14 +6,20 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+//
+// Firebase's client-side config (including apiKey) is not a secret by
+// Firebase's own design — access is controlled by Firebase Security Rules,
+// not by hiding this object. It's env-driven here for config hygiene and so
+// a different Firebase project can be used per environment without a code
+// change, not because leaking it is a security incident.
 const firebaseConfig = {
-  apiKey: "AIzaSyCthaEgApvaAqJcHen8eJgyegF2iQzl4GE",
-  authDomain: "otp-verification-255ea.firebaseapp.com",
-  projectId: "otp-verification-255ea",
-  storageBucket: "otp-verification-255ea.appspot.com",
-  messagingSenderId: "302724475628",
-  appId: "1:302724475628:web:b3c04c26c7a484676413c9",
-  measurementId: "G-3HH9X72TPR"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase

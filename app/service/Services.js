@@ -16,6 +16,7 @@ import Location from "../components/Location";
 import MutipleServices from "../components/MutipleServices";
 import useYearsExperience from "../lib/useYearsExperience";
 import { COMPANY_START_YEAR } from "../lib/companyStats";
+import { getServiceIcon } from "../lib/serviceIcons";
 
 // ── Palette ─────────────────────────────────────────────────────────────────
 const CATEGORIES = [
@@ -29,7 +30,7 @@ const CATEGORIES = [
   { key: "security", label: "Cyber Security" },
 ];
 
-const SERVICES = [
+const FALLBACK_SERVICES = [
   { cat:"app",    icon:<FaApple />,        title:"iOS App Development",          desc:"Transform your idea into a powerful iPhone/iPad app with smooth performance and beautiful UI crafted for Apple's ecosystem.",               tags:["Swift","Objective-C","Xcode"],     from:"#2dd4bf",to:"#6366f1", href:"/IOS" },
   { cat:"app",    icon:<FaAndroid />,      title:"Android App Development",       desc:"Reach 2 billion+ Android users with custom, feature-rich apps built for every screen size and OS version.",                               tags:["Kotlin","Java","Android Studio"],  from:"#6366f1",to:"#8b5cf6", href:"/android-application-development" },
   { cat:"app",    icon:<FaMobileAlt />,    title:"Cross Platform Apps",           desc:"One codebase, two platforms. Ship React Native & Flutter apps faster without sacrificing native-quality experience.",                     tags:["React Native","Flutter","Ionic"],  from:"#0ea5e9",to:"#2dd4bf", href:"/hybrid-application-development" },
@@ -81,9 +82,21 @@ const PROCESS = [
 
 const HL = "bg-[linear-gradient(125deg,#2dd4bf,#6366f1,#a855f7)] bg-[length:200%_200%] bg-clip-text text-transparent [animation:tcpGrad_5s_ease-in-out_infinite]";
 
-export default function Services() {
+export default function Services({ items: cmsItems } = {}) {
   const [active, setActive] = useState("all");
   const yearsExperience = useYearsExperience();
+  const SERVICES = cmsItems?.length
+    ? cmsItems.map((it) => ({
+        cat: it.category,
+        icon: getServiceIcon(it.icon),
+        title: it.title,
+        desc: it.description,
+        tags: it.tags,
+        from: it.accent?.from,
+        to: it.accent?.to,
+        href: it.href,
+      }))
+    : FALLBACK_SERVICES;
   const filtered = active === "all" ? SERVICES : SERVICES.filter(s => s.cat === active);
 
   return (

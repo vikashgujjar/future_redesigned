@@ -178,44 +178,52 @@ const techCategories = [
   },
 ];
 
-const MobileApp = () => {
+const FALLBACK_CONTENT = {
+  bannerImg,
+  bannerTitle: "Mobile App Development Services",
+  bannerDesc: `We are a full-stack mobile app development company in Chandigarh with all the expertise you need to build a successful, stable, and scalable mobile product. Future IT Touch Pvt. Ltd. offers comprehensive mobile app development services for iOS, Android, and cross-platform — backed by a team of 50+ designers, developers, and QA specialists serving clients across 3+ countries since ${COMPANY_START_YEAR}.`,
+  overviewImage: "/Assets/stock/photo-1607746882042-944635dfe10e.webp",
+  overviewImageAlt: "Mobile App Development",
+  overviewBadge: "Custom Mobile App Solutions",
+  overviewHeading: "Crafting Powerful, Scalable &",
+  overviewHighlight: "Custom App Solutions",
+  overviewParagraphs: [
+    "At Future IT Touch Pvt. Ltd. we have a decade-long experience in custom mobile application development spanning multiple industries from retail to healthcare and enterprise.",
+    "We dive into your business ecosystem, explore the market, and understand your requirements to build a truly custom strategy that unlocks the full potential of mobile technology for your company.",
+    { boldPrefix: "For Businesses:", text: "Custom solutions for eCommerce, enterprise management, and service-based industries with robust integrations, analytics, and smooth performance." },
+    { boldPrefix: "For Users:", text: "Intuitive UI/UX design, fast loading times, offline functionality, and secure data handling to ensure a delightful experience on every device." },
+  ],
+  overviewCtaText: "Start Your App Project",
+  features,
+  bizCards,
+  sliderCards,
+  platforms,
+  techCategories,
+  faqData,
+};
+
+const MobileApp = ({ cms } = {}) => {
+  const content = cms
+    ? { ...cms, bannerImg: cms.bannerImg || bannerImg, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    : FALLBACK_CONTENT;
+
   return (
     <CommonServicePage
-      bannerImg={bannerImg}
-      bannerTitle="Mobile App Development Services"
-      bannerDesc={`We are a full-stack mobile app development company in Chandigarh with all the expertise you need to build a successful, stable, and scalable mobile product. Future IT Touch Pvt. Ltd. offers comprehensive mobile app development services for iOS, Android, and cross-platform — backed by a team of 50+ designers, developers, and QA specialists serving clients across 3+ countries since ${COMPANY_START_YEAR}.`}
-      overviewImage="/Assets/stock/photo-1607746882042-944635dfe10e.webp"
-      overviewImageAlt="Mobile App Development"
-      overviewBadge="Custom Mobile App Solutions"
-      overviewHeading="Crafting Powerful, Scalable &"
-      overviewHighlight="Custom App Solutions"
-      overviewParagraphs={[
-        "At Future IT Touch Pvt. Ltd. we have a decade-long experience in custom mobile application development spanning multiple industries from retail to healthcare and enterprise.",
-        "We dive into your business ecosystem, explore the market, and understand your requirements to build a truly custom strategy that unlocks the full potential of mobile technology for your company.",
-        { boldPrefix: "For Businesses:", text: "Custom solutions for eCommerce, enterprise management, and service-based industries with robust integrations, analytics, and smooth performance." },
-        { boldPrefix: "For Users:", text: "Intuitive UI/UX design, fast loading times, offline functionality, and secure data handling to ensure a delightful experience on every device." },
-      ]}
-      overviewCtaText="Start Your App Project"
+      {...content}
       featuresBadge="Our App Development Services"
       featuresTitle="Building Solutions for"
       featuresTitleHighlight="Every Platform"
       featuresStickyImg="/Assets/stock/photo-1556742049-0cfed4f6a45d.webp"
-      features={features}
       bizBadge="Why Choose Us"
       bizHeading="Partner with Experts for"
       bizHighlight="Mobile App Success"
-      bizCards={bizCards}
       sliderTitle="Delivering Innovative Mobile App Experiences That Drive Growth"
-      sliderCards={sliderCards}
       platformsTitle="Mobile App Technologies We Work With"
-      platforms={platforms}
       techBadge="Our Mobile Tech Stack"
       techHeading="Technologies"
       techHeadingHighlight="We Build With"
       techDescription="We leverage the latest mobile development frameworks, cloud platforms, and DevOps tools to build apps that are fast, secure, and ready to scale."
-      techCategories={techCategories}
       faqTitle="Frequently Asked Questions — Mobile App Development"
-      faqData={faqData}
     />
   );
 };

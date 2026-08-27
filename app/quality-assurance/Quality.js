@@ -10,7 +10,7 @@ import {
 } from "react-icons/fa";
 import useYearsExperience from "../lib/useYearsExperience";
 
-const Quality = () => {
+const Quality = ({ cms } = {}) => {
   const yearsExperience = useYearsExperience();
   const features = [
     {
@@ -198,58 +198,68 @@ const Quality = () => {
     },
   ];
 
+  const techCategories = [
+    { title:"Testing Frameworks", techs:[
+      {name:"Selenium",icon:"https://cdn.simpleicons.org/selenium"},
+      {name:"Cypress",icon:"https://cdn.simpleicons.org/cypress"},
+      {name:"Jest",icon:"https://cdn.simpleicons.org/jest"},
+      {name:"Appium",icon:"https://cdn.simpleicons.org/appium"},
+      {name:"Postman",icon:"https://cdn.simpleicons.org/postman"},
+    ]},
+    { title:"Project Management", techs:[
+      {name:"Jira",icon:"https://cdn.simpleicons.org/jira"},
+      {name:"Confluence",icon:"https://cdn.simpleicons.org/confluence"},
+      {name:"GitHub",icon:"https://cdn.simpleicons.org/github/white"},
+    ]},
+    { title:"CI/CD", techs:[
+      {name:"GitHub Actions",icon:"https://cdn.simpleicons.org/githubactions"},
+      {name:"Jenkins",icon:"https://cdn.simpleicons.org/jenkins"},
+      {name:"Docker",icon:"https://cdn.simpleicons.org/docker"},
+    ]},
+  ];
+
+  const FALLBACK_CONTENT = {
+    bannerImg: gm,
+    bannerTitle: "Quality Assurance",
+    bannerDesc: "Our services are of assured quality so drop us an email. Clients expect their interactive agency to guard the reputation of their products and company. Quality assurance testing protects a client's brand reputation by verifying that their customers' experiences with their product, website, app, and campaign are consistently positive.",
+    overviewImage: gm,
+    overviewImageAlt: "Quality Assurance Services",
+    overviewBadge: "Reliable Software Quality Assurance Services",
+    overviewHeading: "Ensuring Excellence Through",
+    overviewHighlight: "Comprehensive QA and Testing",
+    overviewParagraphs: [
+      "At Future IT Touch Pvt. Ltd. we deliver end-to-end Quality Assurance and software testing services to ensure your applications run flawlessly, perform seamlessly, and meet the highest standards of reliability and security.",
+      "Our QA experts use advanced testing frameworks and automation tools to identify issues before they impact users. We focus on ensuring every product release is stable, scalable, and aligned with your business objectives through continuous testing and monitoring.",
+      { boldPrefix: "For Developers:", text: "Early bug detection, CI/CD testing integration, API validation, and automated regression testing for faster and more efficient development cycles." },
+      { boldPrefix: "For Businesses:", text: "Comprehensive functional, performance, security, and usability testing that ensures consistent user experiences and protects your brand's reputation." },
+      `With over ${yearsExperience} years of experience in delivering top-notch digital solutions, our Quality Assurance services help organizations reduce risks, optimize performance, and achieve reliable, high-quality software products that users trust.`,
+    ],
+    overviewCtaText: "Start Your QA and Testing Project",
+    features,
+    bizCards: businessData,
+    sliderCards: cards,
+    platforms,
+    techCategories,
+    faqData,
+  };
+
+  const content = cms
+    ? { ...cms, bannerImg: cms.bannerImg || gm, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    : FALLBACK_CONTENT;
+
   return (
     <CommonServicePage
-      bannerImg={gm}
-      bannerTitle="Quality Assurance"
-      bannerDesc="Our services are of assured quality so drop us an email. Clients expect their interactive agency to guard the reputation of their products and company. Quality assurance testing protects a client's brand reputation by verifying that their customers' experiences with their product, website, app, and campaign are consistently positive."
-      overviewImage={gm}
-      overviewImageAlt="Quality Assurance Services"
-      overviewBadge="Reliable Software Quality Assurance Services"
-      overviewHeading="Ensuring Excellence Through"
-      overviewHighlight="Comprehensive QA and Testing"
-      overviewParagraphs={[
-        "At Future IT Touch Pvt. Ltd. we deliver end-to-end Quality Assurance and software testing services to ensure your applications run flawlessly, perform seamlessly, and meet the highest standards of reliability and security.",
-        "Our QA experts use advanced testing frameworks and automation tools to identify issues before they impact users. We focus on ensuring every product release is stable, scalable, and aligned with your business objectives through continuous testing and monitoring.",
-        { boldPrefix: "For Developers:", text: "Early bug detection, CI/CD testing integration, API validation, and automated regression testing for faster and more efficient development cycles." },
-        { boldPrefix: "For Businesses:", text: "Comprehensive functional, performance, security, and usability testing that ensures consistent user experiences and protects your brand's reputation." },
-        `With over ${yearsExperience} years of experience in delivering top-notch digital solutions, our Quality Assurance services help organizations reduce risks, optimize performance, and achieve reliable, high-quality software products that users trust.`,
-      ]}
-      overviewCtaText="Start Your QA and Testing Project"
+      {...content}
       featuresBadge="Trusted Quality Assurance Services"
       featuresTitle="Creating Flawless Digital Experiences Through"
       featuresTitleHighlight="Rigorous Testing"
       featuresStickyImg={d1}
-      features={features}
       bizBadge="Leading Quality Assurance & Testing Company in India"
       bizHeading="Partner with Us for"
       bizHighlight="Flawless Digital Performance"
-      bizCards={businessData}
       sliderTitle="Delivering Excellence Through Comprehensive QA with"
-      sliderCards={cards}
       platformsTitle="Our Quality Assurance & Testing Services"
-      platforms={platforms}
       faqTitle="About QA & Software Testing"
-      faqData={faqData}
-      techCategories={[
-        { title:"Testing Frameworks", techs:[
-          {name:"Selenium",icon:"https://cdn.simpleicons.org/selenium"},
-          {name:"Cypress",icon:"https://cdn.simpleicons.org/cypress"},
-          {name:"Jest",icon:"https://cdn.simpleicons.org/jest"},
-          {name:"Appium",icon:"https://cdn.simpleicons.org/appium"},
-          {name:"Postman",icon:"https://cdn.simpleicons.org/postman"},
-        ]},
-        { title:"Project Management", techs:[
-          {name:"Jira",icon:"https://cdn.simpleicons.org/jira"},
-          {name:"Confluence",icon:"https://cdn.simpleicons.org/confluence"},
-          {name:"GitHub",icon:"https://cdn.simpleicons.org/github/white"},
-        ]},
-        { title:"CI/CD", techs:[
-          {name:"GitHub Actions",icon:"https://cdn.simpleicons.org/githubactions"},
-          {name:"Jenkins",icon:"https://cdn.simpleicons.org/jenkins"},
-          {name:"Docker",icon:"https://cdn.simpleicons.org/docker"},
-        ]},
-      ]}
     />
   );
 };

@@ -192,50 +192,60 @@ const faqData = [
   },
 ];
 
-const IncidentResponse = () => (
-  <CommonServicePage
-    bannerImg={securityImg}
-    bannerTitle="Incident Response Services"
-    bannerDesc="24/7 incident response, digital forensics, ransomware recovery, and post-incident hardening for Indian businesses — with 15-minute response activation, DPDPA 2023 breach notification support, and root cause elimination. When every minute counts, we are ready."
+const FALLBACK_CONTENT = {
+  bannerImg: securityImg,
+  bannerTitle: "Incident Response Services",
+  bannerDesc: "24/7 incident response, digital forensics, ransomware recovery, and post-incident hardening for Indian businesses — with 15-minute response activation, DPDPA 2023 breach notification support, and root cause elimination. When every minute counts, we are ready.",
 
-    overviewImage="/Assets/stock/photo-1563986768609-322da13575f3.webp"
-    overviewImageAlt="Incident Response Services"
-    overviewBadge="Cyber Security · Incident Response"
-    overviewHeading="Rapid Incident Response When"
-    overviewHighlight="Every Minute Counts"
-    overviewParagraphs={[
-      "A security incident is not an if — it is a when. Ransomware, data breaches, account compromise, and insider threats are hitting Indian SMEs at an accelerating rate. The difference between a contained incident and a business-destroying catastrophe is how fast and how well you respond.",
-      "Our 24/7 incident response service provides immediate containment, digital forensic investigation, root cause identification, and post-incident hardening — with DPDPA 2023 breach notification support built in from day one. We target incident responder activation within 15 minutes of a confirmed incident declaration.",
-      "We have managed 50+ security incidents for Indian businesses — ransomware encryption, cloud credential compromise, BEC (Business Email Compromise), insider data theft, and web application breaches. Every engagement ends with a post-incident report and hardening roadmap to prevent recurrence.",
-    ]}
-    overviewCtaText="Speak to Our Incident Response Team"
+  overviewImage: "/Assets/stock/photo-1563986768609-322da13575f3.webp",
+  overviewImageAlt: "Incident Response Services",
+  overviewBadge: "Cyber Security · Incident Response",
+  overviewHeading: "Rapid Incident Response When",
+  overviewHighlight: "Every Minute Counts",
+  overviewParagraphs: [
+    "A security incident is not an if — it is a when. Ransomware, data breaches, account compromise, and insider threats are hitting Indian SMEs at an accelerating rate. The difference between a contained incident and a business-destroying catastrophe is how fast and how well you respond.",
+    "Our 24/7 incident response service provides immediate containment, digital forensic investigation, root cause identification, and post-incident hardening — with DPDPA 2023 breach notification support built in from day one. We target incident responder activation within 15 minutes of a confirmed incident declaration.",
+    "We have managed 50+ security incidents for Indian businesses — ransomware encryption, cloud credential compromise, BEC (Business Email Compromise), insider data theft, and web application breaches. Every engagement ends with a post-incident report and hardening roadmap to prevent recurrence.",
+  ],
+  overviewCtaText: "Speak to Our Incident Response Team",
 
-    featuresBadge="Our Incident Response Services"
-    featuresTitle="Rapid, Forensic-Grade Response"
-    featuresTitleHighlight="From Containment to Closure"
-    featuresStickyImg="/Assets/stock/photo-1614064641938-3bbee52942c7.webp"
-    features={features}
+  features,
+  bizCards,
+  sliderCards,
+  platforms,
+  techCategories,
+  faqData,
+};
 
-    bizBadge="Why Choose Us"
-    bizHeading="Incident Response Built for"
-    bizHighlight="Indian Business Reality"
-    bizCards={bizCards}
+const IncidentResponse = ({ cms } = {}) => {
+  const content = cms
+    ? { ...cms, bannerImg: cms.bannerImg || securityImg, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    : FALLBACK_CONTENT;
 
-    sliderTitle="Incident Response Outcomes That Minimise Damage"
-    sliderCards={sliderCards}
+  return (
+    <CommonServicePage
+      {...content}
+      featuresBadge="Our Incident Response Services"
+      featuresTitle="Rapid, Forensic-Grade Response"
+      featuresTitleHighlight="From Containment to Closure"
+      featuresStickyImg="/Assets/stock/photo-1614064641938-3bbee52942c7.webp"
 
-    platformsTitle="Forensic Tools Our IR Team Uses"
-    platforms={platforms}
+      bizBadge="Why Choose Us"
+      bizHeading="Incident Response Built for"
+      bizHighlight="Indian Business Reality"
 
-    techBadge="Our Incident Response Stack"
-    techHeading="Forensic Tools & Technologies"
-    techHeadingHighlight="We Investigate With"
-    techDescription="Our incident responders use industry-standard forensic tools, SIEM platforms, and cloud audit log analysis to reconstruct attacker timelines and identify root causes rapidly."
-    techCategories={techCategories}
+      sliderTitle="Incident Response Outcomes That Minimise Damage"
 
-    faqTitle="Frequently Asked Questions — Incident Response"
-    faqData={faqData}
-  />
-);
+      platformsTitle="Forensic Tools Our IR Team Uses"
+
+      techBadge="Our Incident Response Stack"
+      techHeading="Forensic Tools & Technologies"
+      techHeadingHighlight="We Investigate With"
+      techDescription="Our incident responders use industry-standard forensic tools, SIEM platforms, and cloud audit log analysis to reconstruct attacker timelines and identify root causes rapidly."
+
+      faqTitle="Frequently Asked Questions — Incident Response"
+    />
+  );
+};
 
 export default IncidentResponse;

@@ -11,30 +11,51 @@ import Faq from "./components/Faq";
 import DigitalMarketingService from "./components/DigitalMarketingService";
 import Portfolio from "./components/Portfolio";
 import Heromatterjs from "./components/Heromatterjs";
+import { getHomePageContent, getWhyChooseContent, getFaqGroups, buildPageMetadata } from "./lib/cms";
 
-export const metadata = {
+const DEFAULT_METADATA = {
   title: "Future IT Touch Private Limited | Website Design, App Development & Digital Marketing",
   description:
     "Full-service IT company offering website design, mobile app development, digital marketing, cyber security, and software development. Get a free consultation today.",
-  alternates: {
-    canonical: "/",
-  },
 };
 
-export default function page() {
+export async function generateMetadata() {
+  return buildPageMetadata("home", DEFAULT_METADATA, { alternates: { canonical: "/" } });
+}
+
+export default async function page() {
+  const [home, whyChoose, faqGroups] = await Promise.all([
+    getHomePageContent(),
+    getWhyChooseContent(),
+    getFaqGroups(),
+  ]);
+  const homepageFaq = faqGroups?.find((g) => g.key === "homepage");
+
   return (
     <div>
       <BreadcrumbSchema items={[{ name: "Home", path: "/" }]} />
-      <HeroSection />
+      <HeroSection slides={home?.hero_slides} marqueeItems={home?.marquee_items} />
       <About />
-      <Service />
+      <Service services={home?.services_teaser} />
       <Portfolio />
-      <WhyChoose />
-      <HelpingBusiness />
+      <WhyChoose
+        heading={whyChoose?.heading}
+        description={whyChoose?.description}
+        description2={whyChoose?.description_2}
+        features={whyChoose?.features}
+        ctaHeading={whyChoose?.cta?.heading}
+        ctaDescription={whyChoose?.cta?.description}
+      />
+      <HelpingBusiness
+        heading={home?.helping_business?.heading}
+        paragraphs={home?.helping_business?.paragraphs}
+        stats={home?.helping_business?.stats}
+        cards={home?.helping_business?.cards}
+      />
       <Heromatterjs />
       <Testimonial />
-      <DigitalMarketingService />
-      <Faq />
+      <DigitalMarketingService services={home?.digital_marketing_teaser} />
+      <Faq items={homepageFaq?.items} />
       <Forms />
     </div>
   );

@@ -1,11 +1,18 @@
 import CyberSecurity from "./CyberSecurity";
+import { getServicePageCms, mapServicePageProps, loadServicePageSeo } from "../lib/loadServicePage";
 
-export const metadata = {
+const DEFAULT_METADATA = {
   title: "Cyber Security Services | Future IT Touch",
   description:
     "Protect your business with enterprise-grade cyber security services — vulnerability assessment, penetration testing, network security, cloud security, data protection, and incident response.",
 };
 
-export default function Page() {
-  return <CyberSecurity />;
+export async function generateMetadata() {
+  return loadServicePageSeo("cyber-security-service", DEFAULT_METADATA);
+}
+
+export default async function Page() {
+  const cmsRaw = await getServicePageCms("cyber-security-service");
+  const cms = cmsRaw ? mapServicePageProps(cmsRaw) : null;
+  return <CyberSecurity cms={cms} />;
 }

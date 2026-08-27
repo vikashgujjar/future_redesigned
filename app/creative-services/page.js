@@ -1,7 +1,8 @@
 import React from 'react'
 import Creative from './Creative'
+import { getServicePageCms, mapServicePageProps, loadServicePageSeo } from '../lib/loadServicePage'
 
-export const metadata = {
+const DEFAULT_METADATA = {
   title: "Creative Agency Services | Branding & Design Studio",
   description:
     "Creative agency services covering branding, visual identity, and design strategy — we help businesses build a distinctive brand presence across every touchpoint.",
@@ -11,12 +12,18 @@ export const metadata = {
   ],
 };
 
-export default function page() {
-  
+export async function generateMetadata() {
+  return loadServicePageSeo("creative-services", DEFAULT_METADATA);
+}
+
+export default async function page() {
+  const cmsRaw = await getServicePageCms("creative-services");
+  const cms = cmsRaw ? mapServicePageProps(cmsRaw) : null;
+
   return (
     <>
-      <Creative/>
-      
+      <Creative cms={cms}/>
+
     </>
   )
 }

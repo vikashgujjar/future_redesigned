@@ -12,8 +12,9 @@ import dynamic from "next/dynamic";
 // fetched only once someone actually clicks "Request A Quote".
 const Login = dynamic(() => import("./Login"));
 
-/* ─── Mega menu data ─────────────────────────────── */
-const serviceColumns = [
+/* ─── Mega menu data (fallback — used if the CMS is unreachable or a menu
+   hasn't been configured yet; see getNavigationMenu() in app/lib/cms.js) ─── */
+const FALLBACK_SERVICE_COLUMNS = [
   {
     heading: "Website Design",
     icon: "/Assets/web-development.webp",
@@ -77,7 +78,7 @@ const serviceColumns = [
   },
 ];
 
-const techColumns = [
+const FALLBACK_TECH_COLUMNS = [
   {
     heading: "Web Technology",
     icon: "/Assets/web-development.webp",
@@ -132,7 +133,7 @@ const techColumns = [
   },
 ];
 
-const aboutDropdown = [
+const FALLBACK_ABOUT_DROPDOWN = [
   { label: "Why Us", href: "/why-us" },
   { label: "Our Team", href: "/our-team" },
   { label: "Mission & Vision", href: "/mission" },
@@ -226,7 +227,11 @@ function PromoPanel({ tag, title, desc, href, linkLabel, reverse = false }) {
 }
 
 /* ─── Main Header ───────────────────────────────── */
-export default function Header() {
+export default function Header({ serviceColumns, techColumns, aboutDropdown } = {}) {
+  serviceColumns = serviceColumns?.length ? serviceColumns : FALLBACK_SERVICE_COLUMNS;
+  techColumns = techColumns?.length ? techColumns : FALLBACK_TECH_COLUMNS;
+  aboutDropdown = aboutDropdown?.length ? aboutDropdown : FALLBACK_ABOUT_DROPDOWN;
+
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);

@@ -17,35 +17,42 @@ import WebPageSchema from "../components/schema/WebPageSchema";
 import BreadcrumbSchema from "../components/schema/BreadcrumbSchema";
 import useYearsExperience from "../lib/useYearsExperience";
 
-const infoCards = [
-  {
-    icon: FaPhoneAlt,
-    label: "Phone",
-    detail: "Mon – Fri, 9 am to 5 pm",
-    value: "(+91) 7056937000",
-    href: "tel:+91-7056937000",
-    from: "#2dd4bf", to: "#06b6d4",
-    bg: "rgba(45,212,191,.08)", border: "rgba(45,212,191,.22)",
-  },
-  {
-    icon: FaEnvelope,
-    label: "Email",
-    detail: "We reply within 24 hours",
-    value: "info@futuretouch.in",
-    href: "mailto:info@futuretouch.in",
-    from: "#6366f1", to: "#4f46e5",
-    bg: "rgba(99,102,241,.08)", border: "rgba(99,102,241,.22)",
-  },
-  {
-    icon: FaSkype,
-    label: "Skype",
-    detail: "Mon – Fri, 9 am to 5 pm",
-    value: "Futuretouch",
-    href: "skype:futuretouch",
-    from: "#a855f7", to: "#7c3aed",
-    bg: "rgba(168,85,247,.08)", border: "rgba(168,85,247,.22)",
-  },
-];
+const DEFAULT_MAP_EMBED = "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d27444.62041181375!2d76.683024!3d30.702160000000003!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a838963fb5049%3A0x4188b8c6dd4c764a!2sFuture%20IT%20Touch%20Private%20Limited%20%7C%20Website%20Design%20and%20Development%20Company!5e0!3m2!1sen!2sin!4v1716290401199!5m2!1sen!2sin";
+
+function buildInfoCards(settings) {
+  const phone = settings?.contact?.phone_primary || "(+91) 7056937000";
+  const email = settings?.contact?.email || "info@futuretouch.in";
+  const skypeId = settings?.contact?.skype_id || "futuretouch";
+  return [
+    {
+      icon: FaPhoneAlt,
+      label: "Phone",
+      detail: "Mon – Fri, 9 am to 5 pm",
+      value: phone,
+      href: `tel:${phone.replace(/[^\d+]/g, "")}`,
+      from: "#2dd4bf", to: "#06b6d4",
+      bg: "rgba(45,212,191,.08)", border: "rgba(45,212,191,.22)",
+    },
+    {
+      icon: FaEnvelope,
+      label: "Email",
+      detail: "We reply within 24 hours",
+      value: email,
+      href: `mailto:${email}`,
+      from: "#6366f1", to: "#4f46e5",
+      bg: "rgba(99,102,241,.08)", border: "rgba(99,102,241,.22)",
+    },
+    {
+      icon: FaSkype,
+      label: "Skype",
+      detail: "Mon – Fri, 9 am to 5 pm",
+      value: "Futuretouch",
+      href: `skype:${skypeId}`,
+      from: "#a855f7", to: "#7c3aed",
+      bg: "rgba(168,85,247,.08)", border: "rgba(168,85,247,.22)",
+    },
+  ];
+}
 
 const getWhyItems = (yearsExperience) => [
   `Expert team with ${yearsExperience} years experience`,
@@ -54,9 +61,14 @@ const getWhyItems = (yearsExperience) => [
   "24/7 dedicated support",
 ];
 
-export default function Page() {
+export default function Page({ settings } = {}) {
   const yearsExperience = useYearsExperience();
   const whyItems = getWhyItems(yearsExperience);
+  const infoCards = buildInfoCards(settings);
+  const officeAddress = settings?.address?.line
+    ? `${settings.address.line}${settings.address.city ? `, ${settings.address.city}` : ""}${settings.address.country ? `, ${settings.address.country}` : ""}`
+    : "Sector 17, Chandigarh, India";
+  const mapEmbedSrc = settings?.address?.map_embed_url || DEFAULT_MAP_EMBED;
   const { showOTP, setShowOTP, otp, setOtp: setOTP, loading, sendOtp, resendOtp, verifyOtp } = useOtpFlow();
   const [formData, setFormData] = useState({
     S_name: "",
@@ -323,7 +335,7 @@ export default function Page() {
                   </p>
                   <p style={{ fontSize:"13px", color:"#475569", lineHeight:1.7 }}>
                     Future IT Touch Pvt. Ltd.<br />
-                    Sector 17, Chandigarh, India
+                    {officeAddress}
                   </p>
                 </div>
               </div>
@@ -455,7 +467,7 @@ export default function Page() {
         <div style={{ borderRadius:20, overflow:"hidden",
           boxShadow:"0 8px 40px rgba(99,102,241,.10)", border:"1px solid rgba(99,102,241,.10)" }}>
           <MapEmbed
-            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d27444.62041181375!2d76.683024!3d30.702160000000003!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a838963fb5049%3A0x4188b8c6dd4c764a!2sFuture%20IT%20Touch%20Private%20Limited%20%7C%20Website%20Design%20and%20Development%20Company!5e0!3m2!1sen!2sin!4v1716290401199!5m2!1sen!2sin"
+            src={mapEmbedSrc}
             height={440}
             title="Future IT Touch Private Limited - Location"
           />

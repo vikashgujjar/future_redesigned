@@ -2,39 +2,44 @@
 import { useState } from "react";
 import FaqSchema from "./schema/FaqSchema";
 
-const faqData = [
+const PALETTE = [
+  { fi: "#2dd4bf", ti: "#06b6d4" },
+  { fi: "#6366f1", ti: "#8b5cf6" },
+  { fi: "#0ea5e9", ti: "#2dd4bf" },
+  { fi: "#a855f7", ti: "#6366f1" },
+];
+
+const FALLBACK_FAQ_DATA = [
   {
-    id: "01",
     question: "What is a digital platform?",
     answer:
       "A digital platform is an online space that enables users to connect, communicate, or conduct business effectively using various digital tools and resources.",
-    fi: "#2dd4bf", ti: "#06b6d4",
   },
   {
-    id: "02",
     question: "How can a digital platform help your business grow?",
     answer:
       "Digital platforms expand your business reach, increase customer engagement, streamline operations, and provide valuable data insights to boost growth and efficiency.",
-    fi: "#6366f1", ti: "#8b5cf6",
   },
   {
-    id: "03",
     question: "How do I book my slot to meet with your technical team?",
     answer:
       "You can schedule a meeting with our technical team by visiting our website, selecting your preferred time, and completing the booking form.",
-    fi: "#0ea5e9", ti: "#2dd4bf",
   },
   {
-    id: "04",
     question: "How many projects have you completed so far?",
     answer:
       "We have successfully completed numerous projects, each tailored to our clients' unique requirements, ensuring quality and timely delivery across various industries.",
-    fi: "#a855f7", ti: "#6366f1",
   },
 ];
 
-export default function Faq() {
+export default function Faq({ items: cmsItems } = {}) {
   const [active, setActive] = useState(0);
+  const faqData = (cmsItems?.length ? cmsItems : FALLBACK_FAQ_DATA).map((item, i) => ({
+    id: String(i + 1).padStart(2, "0"),
+    question: item.question,
+    answer: item.answer,
+    ...PALETTE[i % PALETTE.length],
+  }));
   const cur = faqData[active];
 
   return (

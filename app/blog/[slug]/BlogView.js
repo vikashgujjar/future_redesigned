@@ -5,11 +5,6 @@ import Link from "next/link";
 import { FaSearch, FaUser, FaClock, FaTag, FaArrowRight, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { BLOG_POSTS } from "../blogPosts";
-
-const BlogContent = BLOG_POSTS.map((post) => ({ ...post, blogImg: post.image }));
-
-
 const categories = [
   { name: "Technology", num: 2 },
   { name: "Health", num: 3 },
@@ -17,22 +12,18 @@ const categories = [
   { name: "Business", num: 3 },
   { name: "Web Design", num: 5 },
 ];
-
-export default function BlogView({ slug }) {
+export default function BlogView({ slug, posts }) {
   const [search, setSearch] = useState("");
   const relatedSwiperRef = useRef(null);
+  const BlogContent = posts.map((post) => ({ ...post, blogImg: post.image }));
   const post = BlogContent.find(p => p.slug === slug);
   const related = BlogContent.filter(p => p.slug !== slug);
-  const filtered = search
-    ? BlogContent.filter(p => p.title.toLowerCase().includes(search.toLowerCase()))
-    : BlogContent;
-
+  const filtered = search ? BlogContent.filter(p => p.title.toLowerCase().includes(search.toLowerCase())) : BlogContent;
   if (!post) return (
     <div className="min-h-screen flex items-center justify-center">
       <p className="text-gray-500">Post not found.</p>
     </div>
   );
-
   return (
     <>
       <style>{`
@@ -294,6 +285,7 @@ export default function BlogView({ slug }) {
                   Back to Blog
                 </Link>
               </div>
+
             </article>
 
             {/* ══════════════ SIDEBAR ══════════════ */}

@@ -218,50 +218,53 @@ const faqData = [
   },
 ];
 
-const CyberSecurity = () => (
-  <CommonServicePage
-    bannerImg={securityImg}
-    bannerTitle="Cyber Security Services for Indian SMEs"
-    bannerDesc="A Tricity-based Managed Security Service Provider (MSSP) delivering enterprise-grade security, simplified compliance, and remote-first delivery — built specifically for Indian small and medium enterprises at 40% lower cost than metro-based providers. DPDPA 2023 & CERT-In compliance built into every package."
+const FALLBACK_CONTENT = {
+  bannerImg: securityImg,
+  bannerTitle: "Cyber Security Services for Indian SMEs",
+  bannerDesc: "A Tricity-based Managed Security Service Provider (MSSP) delivering enterprise-grade security, simplified compliance, and remote-first delivery — built specifically for Indian small and medium enterprises at 40% lower cost than metro-based providers. DPDPA 2023 & CERT-In compliance built into every package.",
+  overviewImage: "/Assets/stock/photo-1544197150-b99a580bb7a8.webp",
+  overviewImageAlt: "Cyber Security Services for Indian SMEs",
+  overviewBadge: "Tricity-Based MSSP · Serving SMEs Pan-India",
+  overviewHeading: "Enterprise Cyber Security, Built for",
+  overviewHighlight: "Indian Small & Medium Enterprises",
+  overviewParagraphs: [
+    "At Future IT Touch, we operate as a Tricity-based MSSP — delivering enterprise-grade cyber security services at SME-friendly pricing. Our Chandigarh hub gives us a 40% cost advantage over metro cities, and we pass every rupee of that saving directly to our clients.",
+    "We offer three productized packages — Compliance First (₹25K–50K/month), Security Plus (₹50K–1.5L/month), and Enterprise Shield (₹1.5L+/month) — designed to match your current stage and scale as your business grows.",
+    "Every package is built around Indian regulations: DPDPA 2023, CERT-In controls, ISO 27001, and sector-specific frameworks like RBI and PCI-DSS. Compliance-as-a-Service is not a bolt-on — it is baked into the foundation of everything we deliver.",
+  ],
+  overviewCtaText: "Get Free Security Assessment",
+  features,
+  bizCards,
+  sliderCards,
+  platforms,
+  techCategories,
+  faqData,
+};
 
-    overviewImage="/Assets/stock/photo-1544197150-b99a580bb7a8.webp"
-    overviewImageAlt="Cyber Security Services for Indian SMEs"
-    overviewBadge="Tricity-Based MSSP · Serving SMEs Pan-India"
-    overviewHeading="Enterprise Cyber Security, Built for"
-    overviewHighlight="Indian Small & Medium Enterprises"
-    overviewParagraphs={[
-      "At Future IT Touch, we operate as a Tricity-based MSSP — delivering enterprise-grade cyber security services at SME-friendly pricing. Our Chandigarh hub gives us a 40% cost advantage over metro cities, and we pass every rupee of that saving directly to our clients.",
-      "We offer three productized packages — Compliance First (₹25K–50K/month), Security Plus (₹50K–1.5L/month), and Enterprise Shield (₹1.5L+/month) — designed to match your current stage and scale as your business grows.",
-      "Every package is built around Indian regulations: DPDPA 2023, CERT-In controls, ISO 27001, and sector-specific frameworks like RBI and PCI-DSS. Compliance-as-a-Service is not a bolt-on — it is baked into the foundation of everything we deliver.",
-    ]}
-    overviewCtaText="Get Free Security Assessment"
+const CyberSecurity = ({ cms } = {}) => {
+  const content = cms
+    ? { ...cms, bannerImg: cms.bannerImg || securityImg, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    : FALLBACK_CONTENT;
 
-    featuresBadge="Our Security Packages & Services"
-    featuresTitle="Three Simple Packages — Priced for"
-    featuresTitleHighlight="Indian SMEs"
-    featuresStickyImg="/Assets/stock/photo-1563986768609-322da13575f3.webp"
-    features={features}
-
-    bizBadge="Why Choose Us"
-    bizHeading="Built for the"
-    bizHighlight="Indian Context"
-    bizCards={bizCards}
-
-    sliderTitle="Protecting Indian Businesses with Enterprise-Grade Security"
-    sliderCards={sliderCards}
-
-    platformsTitle="Security Tools & Platforms We Use"
-    platforms={platforms}
-
-    techBadge="Our Security Tech Stack"
-    techHeading="Tools & Technologies"
-    techHeadingHighlight="We Operate With"
-    techDescription="We use industry-standard security tools and platforms — from offensive security and SIEM to cloud posture management and EDR — to deliver comprehensive protection for Indian SMEs."
-    techCategories={techCategories}
-
-    faqTitle="Frequently Asked Questions — Cyber Security"
-    faqData={faqData}
-  />
-);
+  return (
+    <CommonServicePage
+      {...content}
+      featuresBadge="Our Security Packages & Services"
+      featuresTitle="Three Simple Packages — Priced for"
+      featuresTitleHighlight="Indian SMEs"
+      featuresStickyImg="/Assets/stock/photo-1563986768609-322da13575f3.webp"
+      bizBadge="Why Choose Us"
+      bizHeading="Built for the"
+      bizHighlight="Indian Context"
+      sliderTitle="Protecting Indian Businesses with Enterprise-Grade Security"
+      platformsTitle="Security Tools & Platforms We Use"
+      techBadge="Our Security Tech Stack"
+      techHeading="Tools & Technologies"
+      techHeadingHighlight="We Operate With"
+      techDescription="We use industry-standard security tools and platforms — from offensive security and SIEM to cloud posture management and EDR — to deliver comprehensive protection for Indian SMEs."
+      faqTitle="Frequently Asked Questions — Cyber Security"
+    />
+  );
+};
 
 export default CyberSecurity;

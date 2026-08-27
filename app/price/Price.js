@@ -9,7 +9,7 @@ import GetNewInsight from "../components/GetNewInsight";
 const toPrice = (usd, currency) =>
   currency === "INR" ? (usd * 83).toFixed(0) : usd.toFixed(2);
 
-const PLANS = [
+const FALLBACK_PLANS = [
   {
     category: "SEO Services",
     badge: "Search Engine Optimization",
@@ -141,9 +141,23 @@ const PLANS = [
   },
 ];
 
-export default function PricePackage() {
+export default function PricePackage({ categories: cmsCategories } = {}) {
   const [currency, setCurrency]       = useState("USD");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const PLANS = (cmsCategories?.length ? cmsCategories : FALLBACK_PLANS).map((cat) => ({
+    category: cat.category ?? cat.name,
+    badge: cat.badge,
+    desc: cat.desc ?? cat.description,
+    plans: cat.plans.map((p) => ({
+      name: p.name,
+      tag: p.tag,
+      price: p.price ?? p.price_usd,
+      popular: p.popular ?? p.is_popular,
+      color: p.color ?? p.accent,
+      features: (p.features ?? []).map((f) => ({ text: f.text, yes: f.yes ?? f.included })),
+    })),
+  }));
 
   useEffect(() => {
     document.body.style.overflow = isPopupOpen ? "hidden" : "auto";

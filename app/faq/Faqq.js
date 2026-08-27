@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
 
-const faqGroups = [
+const FALLBACK_FAQ_GROUPS = [
   {
     badge: "General",
     title: "General FAQ",
@@ -211,8 +211,9 @@ function AccordionItem({ question, answer, points, accent, isOpen, onToggle }) {
   );
 }
 
-export default function Faqq() {
+export default function Faqq({ groups: cmsGroups } = {}) {
   const [openMap, setOpenMap] = useState({});
+  const faqGroups = cmsGroups?.length ? cmsGroups : FALLBACK_FAQ_GROUPS;
   const toggle = (gIdx, iIdx) => {
     const key = `${gIdx}-${iIdx}`;
     setOpenMap(prev => ({ ...prev, [key]: !prev[key] }));
