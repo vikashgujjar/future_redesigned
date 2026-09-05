@@ -26,11 +26,25 @@ export async function loadMergedLocations() {
   return [...merged, ...cmsByKey.values()];
 }
 
+/* Same override-on-match precedence as loadMergedLocations() above. The
+   original 31 services are also seeded into Location Services
+   (LocationServiceCatalogSeeder) with identical values, so by default this
+   changes nothing — but once an admin edits one of those seeded rows (name,
+   description, keywords, image, SEO defaults, enabled sections), that edit
+   now reaches every city that service is combined with. A CMS row with no
+   static match is a brand-new service, appended as-is. */
 export async function loadMergedServices() {
   const cmsServices = await getLocationServicesCatalog();
-  const existingSlugs = new Set(SERVICES.map((s) => s.slug));
-  const merged = cmsServices.filter((s) => !existingSlugs.has(s.slug));
-  return [...SERVICES, ...merged];
+  const cmsBySlug = new Map(cmsServices.map((s) => [s.slug, s]));
+
+  const merged = SERVICES.map((service) => {
+    const cms = cmsBySlug.get(service.slug);
+    if (!cms) return service;
+    cmsBySlug.delete(service.slug);
+    return { ...service, ...cms };
+  });
+
+  return [...merged, ...cmsBySlug.values()];
 }
 
 /* { "in/chandigarh/website-design": {...override} } for O(1) lookup. */

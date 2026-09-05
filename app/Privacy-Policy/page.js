@@ -1,12 +1,16 @@
 import React from 'react'
 import Privacy from './Privacy'
+import { buildPageMetadata } from '../lib/cms'
 
-
-export const metadata = {
+const DEFAULT_METADATA = {
   title: "Privacy Policy - Future IT Touch Private Limited",
   description: "Future IT Touch's privacy policy explaining what personal and non-personal information we collect, how it's used, our cookie practices, and how we protect your data.",
-  keywords: "IT, Technology, Solutions, Future IT Touch",
+  keywords: ["IT", "Technology", "Solutions", "Future IT Touch"],
 };
+
+export async function generateMetadata() {
+  return buildPageMetadata("privacy-policy", DEFAULT_METADATA);
+}
 
 export default function page() {
   return (
