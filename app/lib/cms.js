@@ -1,9 +1,18 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-/* This site builds with `output: "export"` (next.config.mjs) — there is no
-   server at runtime, so every fetch here runs once, at `next build` time,
-   not per-request. Publishing a CMS edit means rebuilding/redeploying the
-   Next.js site, same as any other statically-generated content on this site.
+// How often (in seconds) a page is allowed to serve a cached CMS response
+// before Next.js fetches a fresh one in the background — this is what makes
+// an admin save show up on the live site on its own, with no rebuild or
+// deploy-hook needed. Tunable via env without a code change; defaults to a
+// minute, which is frequent enough to feel live without re-fetching on every
+// single request. See NEXT_PUBLIC_CMS_REVALIDATE_SECONDS in .env.example.
+const REVALIDATE_SECONDS = Number(process.env.NEXT_PUBLIC_CMS_REVALIDATE_SECONDS) || 60;
+
+/* Runs on Next.js's server (this is no longer a static export — see
+   next.config.mjs) with Incremental Static Regeneration: a request within
+   REVALIDATE_SECONDS of the last fetch gets the cached response instantly;
+   once that window passes, the next request triggers a background refetch
+   and the page updates itself, no rebuild/redeploy required.
 
    Every call is wrapped so a CMS outage (or no NEXT_PUBLIC_API_URL configured
    at all, e.g. a fresh local checkout) can never fail the build — callers
@@ -11,7 +20,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 async function fetchCms(path) {
   if (!API_URL) return null;
   try {
-    const res = await fetch(`${API_URL}${path}`);
+    const res = await fetch(`${API_URL}${path}`, { next: { revalidate: REVALIDATE_SECONDS } });
     if (!res.ok) {
       if (res.status !== 404) {
         console.error(`[cms] ${path} returned ${res.status} — falling back to local content.`);
