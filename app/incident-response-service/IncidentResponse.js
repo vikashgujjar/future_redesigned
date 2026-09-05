@@ -1,6 +1,7 @@
 "use client";
 const securityImg = "/Assets/stock/photo-1526374965328-7f61d4dc18c5.webp";
 import CommonServicePage from "../components/CommonServicePage";
+import { isSectionDisabled } from "../lib/loadServicePage";
 import {
   FaExclamationTriangle, FaShieldAlt, FaSearch, FaLock,
   FaDatabase, FaHeadset, FaSyncAlt, FaFileAlt, FaCheckCircle,
@@ -215,37 +216,50 @@ const FALLBACK_CONTENT = {
   platforms,
   techCategories,
   faqData,
+  featuresBadge: "Our Incident Response Services",
+  featuresTitle: "Rapid, Forensic-Grade Response",
+  featuresTitleHighlight: "From Containment to Closure",
+  bizBadge: "Why Choose Us",
+  bizHeading: "Incident Response Built for",
+  bizHighlight: "Indian Business Reality",
+  sliderTitle: "Incident Response Outcomes That Minimise Damage",
+  platformsTitle: "Forensic Tools Our IR Team Uses",
+  techBadge: "Our Incident Response Stack",
+  techHeading: "Forensic Tools & Technologies",
+  techHeadingHighlight: "We Investigate With",
+  techDescription: "Our incident responders use industry-standard forensic tools, SIEM platforms, and cloud audit log analysis to reconstruct attacker timelines and identify root causes rapidly.",
+  faqTitle: "Frequently Asked Questions — Incident Response",
 };
 
 const IncidentResponse = ({ cms } = {}) => {
   const content = cms
-    ? { ...cms, bannerImg: cms.bannerImg || securityImg, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    ? {
+        ...cms,
+        bannerImg: cms.bannerImg || securityImg,
+        overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage,
+        featuresBadge: cms.featuresBadge || FALLBACK_CONTENT.featuresBadge,
+        featuresTitle: cms.featuresTitle || FALLBACK_CONTENT.featuresTitle,
+        featuresTitleHighlight: cms.featuresTitleHighlight || FALLBACK_CONTENT.featuresTitleHighlight,
+        bizBadge: cms.bizBadge || FALLBACK_CONTENT.bizBadge,
+        bizHeading: cms.bizHeading || FALLBACK_CONTENT.bizHeading,
+        bizHighlight: cms.bizHighlight || FALLBACK_CONTENT.bizHighlight,
+        sliderTitle: cms.sliderTitle || FALLBACK_CONTENT.sliderTitle,
+        platformsTitle: cms.platformsTitle || FALLBACK_CONTENT.platformsTitle,
+        techBadge: cms.techBadge || FALLBACK_CONTENT.techBadge,
+        techHeading: cms.techHeading || FALLBACK_CONTENT.techHeading,
+        techHeadingHighlight: cms.techHeadingHighlight || FALLBACK_CONTENT.techHeadingHighlight,
+        techDescription: cms.techDescription || FALLBACK_CONTENT.techDescription,
+        faqTitle: cms.faqTitle || FALLBACK_CONTENT.faqTitle,
+        features: isSectionDisabled(cms.enabledSections, "features") ? [] : (cms.features?.length ? cms.features : FALLBACK_CONTENT.features),
+        bizCards: isSectionDisabled(cms.enabledSections, "biz") ? [] : (cms.bizCards?.length ? cms.bizCards : FALLBACK_CONTENT.bizCards),
+        sliderCards: isSectionDisabled(cms.enabledSections, "slider") ? [] : (cms.sliderCards?.length ? cms.sliderCards : FALLBACK_CONTENT.sliderCards),
+        platforms: isSectionDisabled(cms.enabledSections, "platforms") ? [] : (cms.platforms?.length ? cms.platforms : FALLBACK_CONTENT.platforms),
+        techCategories: isSectionDisabled(cms.enabledSections, "techstack") ? [] : (cms.techCategories?.length ? cms.techCategories : FALLBACK_CONTENT.techCategories),
+        faqData: isSectionDisabled(cms.enabledSections, "faq") ? [] : (cms.faqData?.length ? cms.faqData : FALLBACK_CONTENT.faqData),
+      }
     : FALLBACK_CONTENT;
 
-  return (
-    <CommonServicePage
-      {...content}
-      featuresBadge="Our Incident Response Services"
-      featuresTitle="Rapid, Forensic-Grade Response"
-      featuresTitleHighlight="From Containment to Closure"
-      featuresStickyImg="/Assets/stock/photo-1614064641938-3bbee52942c7.webp"
-
-      bizBadge="Why Choose Us"
-      bizHeading="Incident Response Built for"
-      bizHighlight="Indian Business Reality"
-
-      sliderTitle="Incident Response Outcomes That Minimise Damage"
-
-      platformsTitle="Forensic Tools Our IR Team Uses"
-
-      techBadge="Our Incident Response Stack"
-      techHeading="Forensic Tools & Technologies"
-      techHeadingHighlight="We Investigate With"
-      techDescription="Our incident responders use industry-standard forensic tools, SIEM platforms, and cloud audit log analysis to reconstruct attacker timelines and identify root causes rapidly."
-
-      faqTitle="Frequently Asked Questions — Incident Response"
-    />
-  );
+  return <CommonServicePage {...content} featuresStickyImg="/Assets/stock/photo-1614064641938-3bbee52942c7.webp" />;
 };
 
 export default IncidentResponse;

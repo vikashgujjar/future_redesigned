@@ -1,6 +1,6 @@
 import React from 'react'
 import Contact from './Contact'
-import { getSiteSettings, buildPageMetadata } from '../lib/cms'
+import { getSiteSettings, getOfficeLocations, getContactPageContent, buildPageMetadata } from '../lib/cms'
 
 const DEFAULT_METADATA = {
   title: "Contact - Future IT Touch Private Limited",
@@ -12,10 +12,14 @@ export async function generateMetadata() {
 }
 
 export default async function page() {
-  const settings = await getSiteSettings();
+  const [settings, officeLocations, contactPage] = await Promise.all([
+    getSiteSettings(),
+    getOfficeLocations(),
+    getContactPageContent(),
+  ]);
   return (
     <>
-      <Contact settings={settings} />
+      <Contact settings={settings} officeLocations={officeLocations} contactPage={contactPage} />
     </>
   )
 }

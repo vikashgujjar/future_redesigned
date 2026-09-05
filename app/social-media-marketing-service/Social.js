@@ -3,6 +3,7 @@ const cwd = "/Assets/stock/photo-1611162617474-5b21e879e113.webp";
 import soe from "../Assets/soe.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
+import { isSectionDisabled } from "../lib/loadServicePage";
 import {
   FaUsers, FaChartLine, FaBullhorn, FaCameraRetro, FaHashtag, FaEnvelopeOpenText,
   FaLaptop, FaLightbulb, FaHandshake, FaPalette, FaGlobe, FaCommentDots,
@@ -261,28 +262,42 @@ const FALLBACK_CONTENT = {
   platforms,
   techCategories,
   faqData,
+  featuresBadge: "Comprehensive Social Media Marketing Services",
+  featuresTitle: "Building Engagement &",
+  featuresTitleHighlight: "Driving Conversions Across Platforms",
+  bizBadge: "Top Social Media Marketing Company in India",
+  bizHeading: "Engaging, Growing &",
+  bizHighlight: "Converting Audiences Organically",
+  sliderTitle: "Empowering Brands Through Engaging Social Media Strategies",
+  platformsTitle: "Our Social Media Marketing Process",
+  faqTitle: "About Our Social Media Marketing Services",
 };
 
 const Social = ({ cms } = {}) => {
   const content = cms
-    ? { ...cms, bannerImg: cms.bannerImg || cwd, overviewImage: cms.overviewImage || cwd }
+    ? {
+        ...cms,
+        bannerImg: cms.bannerImg || cwd,
+        overviewImage: cms.overviewImage || cwd,
+        featuresBadge: cms.featuresBadge || FALLBACK_CONTENT.featuresBadge,
+        featuresTitle: cms.featuresTitle || FALLBACK_CONTENT.featuresTitle,
+        featuresTitleHighlight: cms.featuresTitleHighlight || FALLBACK_CONTENT.featuresTitleHighlight,
+        bizBadge: cms.bizBadge || FALLBACK_CONTENT.bizBadge,
+        bizHeading: cms.bizHeading || FALLBACK_CONTENT.bizHeading,
+        bizHighlight: cms.bizHighlight || FALLBACK_CONTENT.bizHighlight,
+        sliderTitle: cms.sliderTitle || FALLBACK_CONTENT.sliderTitle,
+        platformsTitle: cms.platformsTitle || FALLBACK_CONTENT.platformsTitle,
+        faqTitle: cms.faqTitle || FALLBACK_CONTENT.faqTitle,
+        features: isSectionDisabled(cms.enabledSections, "features") ? [] : (cms.features?.length ? cms.features : FALLBACK_CONTENT.features),
+        bizCards: isSectionDisabled(cms.enabledSections, "biz") ? [] : (cms.bizCards?.length ? cms.bizCards : FALLBACK_CONTENT.bizCards),
+        sliderCards: isSectionDisabled(cms.enabledSections, "slider") ? [] : (cms.sliderCards?.length ? cms.sliderCards : FALLBACK_CONTENT.sliderCards),
+        platforms: isSectionDisabled(cms.enabledSections, "platforms") ? [] : (cms.platforms?.length ? cms.platforms : FALLBACK_CONTENT.platforms),
+        techCategories: isSectionDisabled(cms.enabledSections, "techstack") ? [] : (cms.techCategories?.length ? cms.techCategories : FALLBACK_CONTENT.techCategories),
+        faqData: isSectionDisabled(cms.enabledSections, "faq") ? [] : (cms.faqData?.length ? cms.faqData : FALLBACK_CONTENT.faqData),
+      }
     : FALLBACK_CONTENT;
 
-  return (
-    <CommonServicePage
-      {...content}
-      featuresBadge="Comprehensive Social Media Marketing Services"
-      featuresTitle="Building Engagement &"
-      featuresTitleHighlight="Driving Conversions Across Platforms"
-      featuresStickyImg={soe}
-      bizBadge="Top Social Media Marketing Company in India"
-      bizHeading="Engaging, Growing &"
-      bizHighlight="Converting Audiences Organically"
-      sliderTitle="Empowering Brands Through Engaging Social Media Strategies"
-      platformsTitle="Our Social Media Marketing Process"
-      faqTitle="About Our Social Media Marketing Services"
-    />
-  );
+  return <CommonServicePage {...content} featuresStickyImg={soe} />;
 };
 
 export default Social;

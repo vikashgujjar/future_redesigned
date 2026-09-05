@@ -22,6 +22,10 @@ const FALLBACK_SLIDES = [
     image: "/images/HeroSection/slider-img-1.webp",
     stat1: { v: "12+", l: "Years Expertise" },
     stat2: { v: "5000+", l: "Projects Done" },
+    button1Text: "Get Started",
+    button1Url: "#scroll-down",
+    button2Text: "View Portfolio",
+    button2Url: "/our-portfolio",
   },
   {
     tag: "Digital Marketing",
@@ -36,6 +40,10 @@ const FALLBACK_SLIDES = [
     image: "/images/HeroSection/newimg.webp",
     stat1: { v: "3×", l: "Average ROI" },
     stat2: { v: "Top 3", l: "SERP Rankings" },
+    button1Text: "Get Started",
+    button1Url: "#scroll-down",
+    button2Text: "View Portfolio",
+    button2Url: "/our-portfolio",
   },
 ];
 
@@ -55,8 +63,13 @@ function normalizeSlide(slide) {
   return {
     ...slide,
     image: slide.image || "/images/HeroSection/slider-img-1.webp",
+    imageAlt: slide.imageAlt || slide.tag,
     stat1: splitStat(slide.stat1),
     stat2: splitStat(slide.stat2),
+    button1Text: slide.button1Text || "Get Started",
+    button1Url: slide.button1Url || "#scroll-down",
+    button2Text: slide.button2Text || "View Portfolio",
+    button2Url: slide.button2Url || "/our-portfolio",
   };
 }
 
@@ -504,7 +517,7 @@ export default function HeroSection({ slides: cmsSlides, marqueeItems: cmsMarque
         className="hs-bg-in absolute inset-0 z-0"
         style={{ transform:`scale(${imgScale})`, transformOrigin:"center", transition:"transform .06s linear" }}
       >
-        <img src={slide.image} alt={slide.tag} aria-hidden="true" className="w-full h-full object-cover object-center block" />
+        <img src={slide.image} alt={slide.imageAlt} aria-hidden="true" className="w-full h-full object-cover object-center block" />
       </div>
 
       {/* ── Overlays ── */}
@@ -624,22 +637,22 @@ export default function HeroSection({ slides: cmsSlides, marqueeItems: cmsMarque
           {/* CTAs */}
           <div className={`hs-e6${ex} flex flex-wrap items-center gap-3 mb-8`}>
             <a
-              href="#scroll-down"
+              href={slide.button1Url}
               className="hs-btn-grad hs-sbtn inline-flex items-center gap-2 font-bold text-[11px] tracking-[.12em] uppercase px-6 py-3 rounded-lg text-white no-underline"
             >
-              Get Started
+              {slide.button1Text}
               <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
                 <path d="M1.5 5.5h8M5.5 1.5l4 4-4 4" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </a>
             <Link
-              href="/our-portfolio"
+              href={slide.button2Url}
               className="hs-btn-outline inline-flex items-center gap-2 text-[11px] font-semibold tracking-[.10em] uppercase px-5 py-3 rounded-lg no-underline"
             >
               <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
                 <path d="M1 4.5h7M4.5 1l3.5 3.5L4.5 8" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              View Portfolio
+              {slide.button2Text}
             </Link>
           </div>
 
@@ -685,7 +698,7 @@ export default function HeroSection({ slides: cmsSlides, marqueeItems: cmsMarque
               <div className="hs-float absolute -top-11 -right-5 w-[120px] h-[120px] sm:w-[132px] sm:h-[132px] rounded-full z-10">
                 <div className="hs-spin-ring hs-img-ring absolute -inset-[3px] rounded-full z-0" />
                 <div className="absolute inset-[3px] rounded-full overflow-hidden z-10 bg-[#07091A]">
-                  <img key={`ci-${tick}`} className="hs-img-in w-full h-full object-cover object-center" src={slide.image} alt={slide.tag} />
+                  <img key={`ci-${tick}`} className="hs-img-in w-full h-full object-cover object-center" src={slide.image} alt={slide.imageAlt} />
                   <div className="hs-img-overlay absolute inset-0" />
                 </div>
               </div>

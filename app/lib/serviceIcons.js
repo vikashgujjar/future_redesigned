@@ -1,22 +1,26 @@
 import {
-  FaAd, FaAndroid, FaAngular, FaApple, FaBars, FaBell, FaBluetooth, FaBolt, FaBookOpen, FaBoxes,
-  FaBoxOpen, FaBriefcase, FaBug, FaBuilding, FaBullhorn, FaCameraRetro, FaChartBar, FaChartLine,
+  FaAd, FaAndroid, FaAngular, FaApple, FaAward, FaBars, FaBell, FaBluetooth, FaBolt, FaBookOpen, FaBoxes,
+  FaBoxOpen, FaBrain, FaBriefcase, FaBug, FaBuilding, FaBullhorn, FaCameraRetro, FaChartBar, FaChartLine,
   FaChartPie, FaCheckCircle, FaClipboardCheck, FaClipboardList, FaClock, FaCloud, FaCloudUploadAlt,
   FaCode, FaCogs, FaCommentDots, FaComments, FaCreditCard, FaCube, FaDatabase, FaDesktop,
   FaDraftingCompass, FaDrupal, FaEdit, FaEnvelope, FaEnvelopeOpenText, FaEthereum, FaExchangeAlt,
   FaExclamationTriangle, FaEye, FaFacebookF, FaFileAlt, FaFileInvoice, FaFilePdf, FaFilter, FaFlask,
   FaFolderOpen, FaGamepad, FaGlobe, FaGoogle, FaGooglePlay, FaHandshake, FaHashtag, FaHeadset,
   FaIdCard, FaImage, FaImages, FaIndustry, FaInstagram, FaJava, FaLaptop, FaLaptopCode,
-  FaLayerGroup, FaLeaf, FaLifeRing, FaLightbulb, FaLinkedin, FaListUl, FaLock, FaMagento,
+  FaLayerGroup, FaLeaf, FaLifeRing, FaLightbulb, FaLink, FaLinkedin, FaListUl, FaLock, FaMagento,
   FaMapMarkedAlt, FaMapMarkerAlt, FaMobile, FaMobileAlt, FaMoneyBillWave, FaMousePointer,
   FaNetworkWired, FaOpencart, FaPaintBrush, FaPalette, FaPencilRuler, FaPenFancy, FaPeopleArrows,
   FaPhp, FaPinterest, FaPlay, FaPoll, FaProjectDiagram, FaPuzzlePiece, FaPython, FaReact,
   FaRegIdBadge, FaRobot, FaRocket, FaRupeeSign, FaSearch, FaServer, FaShareAlt, FaShieldAlt,
   FaShippingFast, FaShopify, FaShoppingBag, FaShoppingCart, FaSitemap, FaSms, FaSwift, FaSync,
-  FaSyncAlt, FaTabletAlt, FaTachometerAlt, FaTools, FaTwitter, FaUserCheck, FaUsers, FaUserShield,
+  FaSyncAlt, FaTabletAlt, FaTachometerAlt, FaThumbsUp, FaTools, FaTwitter, FaUserCheck, FaUsers, FaUserShield,
   FaUserTie, FaVectorSquare, FaVial, FaVideo, FaWordpress, FaCircle,
 } from "react-icons/fa";
-import { SiCplusplus, SiFlutter, SiGooglecloud, SiHaskell, SiIonic, SiNumpy, SiUnity } from "react-icons/si";
+import {
+  SiAndroid, SiAngular, SiCplusplus, SiEthereum, SiFlutter, SiGooglecloud, SiHaskell, SiIonic,
+  SiJulia, SiNextdotjs, SiNodedotjs, SiNumpy, SiPhp, SiPython, SiReact, SiTensorflow, SiUnity,
+  SiVuedotjs, SiWordpress,
+} from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
 
 /* CMS records store icons as plain kebab-case names (e.g. "paint-brush",
@@ -70,7 +74,15 @@ const ICONS = {
   "tachometer-alt": FaTachometerAlt, tools: FaTools, twitter: FaTwitter, unity: SiUnity,
   "user-check": FaUserCheck, users: FaUsers, "user-shield": FaUserShield, "user-tie": FaUserTie,
   "vector-square": FaVectorSquare, vial: FaVial, video: FaVideo, wordpress: FaWordpress,
-  "x-twitter": FaXTwitter,
+  "x-twitter": FaXTwitter, award: FaAward, brain: FaBrain, link: FaLink, "thumbs-up": FaThumbsUp,
+  /* "-si" suffixed keys are the Simple Icons brand-mark variant of a name
+     that already means a different (Font Awesome) glyph above — used only
+     by the /trending-technology tech-icon bubbles, which render the actual
+     brand logos rather than a generic Font Awesome equivalent. */
+  "android-si": SiAndroid, "react-si": SiReact, "php-si": SiPhp, "wordpress-si": SiWordpress,
+  "angular-si": SiAngular, "ethereum-si": SiEthereum, "python-si": SiPython,
+  nextdotjs: SiNextdotjs, vuedotjs: SiVuedotjs, nodedotjs: SiNodedotjs,
+  tensorflow: SiTensorflow, julia: SiJulia,
 };
 
 export function getServiceIcon(name) {

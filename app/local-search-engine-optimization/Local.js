@@ -3,6 +3,7 @@ import image2 from "../Assets/lss.webp";
 const cwd = "/Assets/stock/photo-1533750349088-cd871a92f312.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
+import { isSectionDisabled } from "../lib/loadServicePage";
 import {
   FaBuilding, FaBoxOpen, FaLayerGroup, FaFileAlt, FaFolderOpen, FaBookOpen,
   FaLightbulb, FaHandshake, FaPalette, FaChartLine,
@@ -217,28 +218,42 @@ const FALLBACK_CONTENT = {
   platforms,
   techCategories,
   faqData,
+  featuresBadge: "Result-Oriented Local SEO Services",
+  featuresTitle: "Boosting Your Online Presence to",
+  featuresTitleHighlight: "Drive Local Customers",
+  bizBadge: "Professional Local SEO Company in India",
+  bizHeading: "Boosting Local Visibility to",
+  bizHighlight: "Attract Nearby Customers",
+  sliderTitle: "Improving Local Search Rankings & Customer Visibility",
+  platformsTitle: "Local SEO Solutions We Deliver",
+  faqTitle: "About Our Local SEO Services",
 };
 
 const Local = ({ cms } = {}) => {
   const content = cms
-    ? { ...cms, bannerImg: cms.bannerImg || cwd, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    ? {
+        ...cms,
+        bannerImg: cms.bannerImg || cwd,
+        overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage,
+        featuresBadge: cms.featuresBadge || FALLBACK_CONTENT.featuresBadge,
+        featuresTitle: cms.featuresTitle || FALLBACK_CONTENT.featuresTitle,
+        featuresTitleHighlight: cms.featuresTitleHighlight || FALLBACK_CONTENT.featuresTitleHighlight,
+        bizBadge: cms.bizBadge || FALLBACK_CONTENT.bizBadge,
+        bizHeading: cms.bizHeading || FALLBACK_CONTENT.bizHeading,
+        bizHighlight: cms.bizHighlight || FALLBACK_CONTENT.bizHighlight,
+        sliderTitle: cms.sliderTitle || FALLBACK_CONTENT.sliderTitle,
+        platformsTitle: cms.platformsTitle || FALLBACK_CONTENT.platformsTitle,
+        faqTitle: cms.faqTitle || FALLBACK_CONTENT.faqTitle,
+        features: isSectionDisabled(cms.enabledSections, "features") ? [] : (cms.features?.length ? cms.features : FALLBACK_CONTENT.features),
+        bizCards: isSectionDisabled(cms.enabledSections, "biz") ? [] : (cms.bizCards?.length ? cms.bizCards : FALLBACK_CONTENT.bizCards),
+        sliderCards: isSectionDisabled(cms.enabledSections, "slider") ? [] : (cms.sliderCards?.length ? cms.sliderCards : FALLBACK_CONTENT.sliderCards),
+        platforms: isSectionDisabled(cms.enabledSections, "platforms") ? [] : (cms.platforms?.length ? cms.platforms : FALLBACK_CONTENT.platforms),
+        techCategories: isSectionDisabled(cms.enabledSections, "techstack") ? [] : (cms.techCategories?.length ? cms.techCategories : FALLBACK_CONTENT.techCategories),
+        faqData: isSectionDisabled(cms.enabledSections, "faq") ? [] : (cms.faqData?.length ? cms.faqData : FALLBACK_CONTENT.faqData),
+      }
     : FALLBACK_CONTENT;
 
-  return (
-    <CommonServicePage
-      {...content}
-      featuresBadge="Result-Oriented Local SEO Services"
-      featuresTitle="Boosting Your Online Presence to"
-      featuresTitleHighlight="Drive Local Customers"
-      featuresStickyImg={image2}
-      bizBadge="Professional Local SEO Company in India"
-      bizHeading="Boosting Local Visibility to"
-      bizHighlight="Attract Nearby Customers"
-      sliderTitle="Improving Local Search Rankings & Customer Visibility"
-      platformsTitle="Local SEO Solutions We Deliver"
-      faqTitle="About Our Local SEO Services"
-    />
-  );
+  return <CommonServicePage {...content} featuresStickyImg={image2} />;
 };
 
 export default Local;

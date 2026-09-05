@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Services from './Services'
-import { getServiceListingItems, buildPageMetadata } from '../lib/cms'
+import { getServiceListingItems, getServiceIndexContent, getOfficeLocations, getIndustries, buildPageMetadata } from '../lib/cms'
 
 const DEFAULT_METADATA = {
   title: "Service - Future IT Touch Private Limited",
@@ -14,10 +14,15 @@ export async function generateMetadata() {
 }
 
 export default async function page() {
-  const items = await getServiceListingItems();
+  const [items, serviceIndex, officeLocations, industries] = await Promise.all([
+    getServiceListingItems(),
+    getServiceIndexContent(),
+    getOfficeLocations(),
+    getIndustries(),
+  ]);
   return (
     <div>
-      <Services items={items} />
+      <Services items={items} serviceIndex={serviceIndex} officeLocations={officeLocations} industries={industries} />
     </div>
   )
 }

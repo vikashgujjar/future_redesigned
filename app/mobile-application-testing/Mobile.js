@@ -1,6 +1,7 @@
 "use client";
 import bannerImg from "../Assets/and.webp";
 import CommonServicePage from "../components/CommonServicePage";
+import { isSectionDisabled } from "../lib/loadServicePage";
 import {
   FaMobileAlt, FaBug, FaVial, FaCheckCircle, FaCogs, FaShieldAlt, FaServer,
 } from "react-icons/fa";
@@ -187,32 +188,50 @@ const FALLBACK_CONTENT = {
   platforms,
   techCategories,
   faqData,
+  featuresBadge: "Our Testing Services",
+  featuresTitle: "Comprehensive Testing That",
+  featuresTitleHighlight: "Ensures Quality",
+  bizBadge: "Why Choose FTS for Testing",
+  bizHeading: "Partner with Experts for",
+  bizHighlight: "Bug-Free Mobile Apps",
+  sliderTitle: "Delivering Quality Assurance Excellence Across Platforms",
+  platformsTitle: "Testing Tools & Platforms We Use",
+  techBadge: "Our QA Tech Stack",
+  techHeading: "Technologies",
+  techHeadingHighlight: "We Test With",
+  techDescription: "We use industry-leading testing frameworks, automation tools, and CI/CD integrations to deliver thorough, efficient, and reliable mobile app quality assurance.",
+  faqTitle: "Frequently Asked Questions — Mobile App Testing",
 };
 
 const Mobile = ({ cms } = {}) => {
   const content = cms
-    ? { ...cms, bannerImg: cms.bannerImg || bannerImg, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    ? {
+        ...cms,
+        bannerImg: cms.bannerImg || bannerImg,
+        overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage,
+        featuresBadge: cms.featuresBadge || FALLBACK_CONTENT.featuresBadge,
+        featuresTitle: cms.featuresTitle || FALLBACK_CONTENT.featuresTitle,
+        featuresTitleHighlight: cms.featuresTitleHighlight || FALLBACK_CONTENT.featuresTitleHighlight,
+        bizBadge: cms.bizBadge || FALLBACK_CONTENT.bizBadge,
+        bizHeading: cms.bizHeading || FALLBACK_CONTENT.bizHeading,
+        bizHighlight: cms.bizHighlight || FALLBACK_CONTENT.bizHighlight,
+        sliderTitle: cms.sliderTitle || FALLBACK_CONTENT.sliderTitle,
+        platformsTitle: cms.platformsTitle || FALLBACK_CONTENT.platformsTitle,
+        techBadge: cms.techBadge || FALLBACK_CONTENT.techBadge,
+        techHeading: cms.techHeading || FALLBACK_CONTENT.techHeading,
+        techHeadingHighlight: cms.techHeadingHighlight || FALLBACK_CONTENT.techHeadingHighlight,
+        techDescription: cms.techDescription || FALLBACK_CONTENT.techDescription,
+        faqTitle: cms.faqTitle || FALLBACK_CONTENT.faqTitle,
+        features: isSectionDisabled(cms.enabledSections, "features") ? [] : (cms.features?.length ? cms.features : FALLBACK_CONTENT.features),
+        bizCards: isSectionDisabled(cms.enabledSections, "biz") ? [] : (cms.bizCards?.length ? cms.bizCards : FALLBACK_CONTENT.bizCards),
+        sliderCards: isSectionDisabled(cms.enabledSections, "slider") ? [] : (cms.sliderCards?.length ? cms.sliderCards : FALLBACK_CONTENT.sliderCards),
+        platforms: isSectionDisabled(cms.enabledSections, "platforms") ? [] : (cms.platforms?.length ? cms.platforms : FALLBACK_CONTENT.platforms),
+        techCategories: isSectionDisabled(cms.enabledSections, "techstack") ? [] : (cms.techCategories?.length ? cms.techCategories : FALLBACK_CONTENT.techCategories),
+        faqData: isSectionDisabled(cms.enabledSections, "faq") ? [] : (cms.faqData?.length ? cms.faqData : FALLBACK_CONTENT.faqData),
+      }
     : FALLBACK_CONTENT;
 
-  return (
-    <CommonServicePage
-      {...content}
-      featuresBadge="Our Testing Services"
-      featuresTitle="Comprehensive Testing That"
-      featuresTitleHighlight="Ensures Quality"
-      featuresStickyImg="/Assets/stock/photo-1551650975-87deedd944c3.webp"
-      bizBadge="Why Choose FTS for Testing"
-      bizHeading="Partner with Experts for"
-      bizHighlight="Bug-Free Mobile Apps"
-      sliderTitle="Delivering Quality Assurance Excellence Across Platforms"
-      platformsTitle="Testing Tools & Platforms We Use"
-      techBadge="Our QA Tech Stack"
-      techHeading="Technologies"
-      techHeadingHighlight="We Test With"
-      techDescription="We use industry-leading testing frameworks, automation tools, and CI/CD integrations to deliver thorough, efficient, and reliable mobile app quality assurance."
-      faqTitle="Frequently Asked Questions — Mobile App Testing"
-    />
-  );
+  return <CommonServicePage {...content} featuresStickyImg="/Assets/stock/photo-1551650975-87deedd944c3.webp" />;
 };
 
 export default Mobile;

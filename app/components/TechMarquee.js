@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import {
   FaShoppingCart, FaLaptopCode, FaWordpress, FaStore, FaBuilding,
   FaMobileAlt, FaAndroid, FaApple, FaReact, FaVial,
@@ -6,8 +7,11 @@ import {
   FaMapMarkerAlt, FaFileAlt, FaPaintBrush, FaRegIdBadge, FaIdCard,
   FaFilePdf, FaVideo, FaLightbulb,
 } from "react-icons/fa";
+import { getServiceIcon } from "../lib/serviceIcons";
 
-const SERVICES = [
+// Local fallback — used only if the CMS's /service-listing has nothing yet
+// or is unreachable (client-side fetch, so no build-time fallback exists).
+const FALLBACK_SERVICES = [
   { name: "eCommerce Website",           icon: FaShoppingCart,   from: "#2dd4bf", to: "#6366f1", cat: "Web" },
   { name: "Web Application",             icon: FaLaptopCode,     from: "#6366f1", to: "#8b5cf6", cat: "Web" },
   { name: "CMS Web Development",         icon: FaWordpress,      from: "#0ea5e9", to: "#2dd4bf", cat: "Web" },
@@ -31,19 +35,30 @@ const SERVICES = [
   { name: "Brochure Design",             icon: FaFilePdf,        from: "#0ea5e9", to: "#2dd4bf", cat: "Design" },
   { name: "Animated Videos",             icon: FaVideo,          from: "#8b5cf6", to: "#6366f1", cat: "Design" },
   { name: "Creative Agency",             icon: FaLightbulb,      from: "#2dd4bf", to: "#0ea5e9", cat: "Creative" },
-];
+].map((s) => ({ ...s, iconEl: <s.icon /> }));
 
-const CAT_COLORS = {
-  Web:       { pill: "rgba(14,165,233,.14)", text: "#38bdf8" },
-  App:       { pill: "rgba(99,102,241,.14)", text: "#818cf8" },
-  QA:        { pill: "rgba(168,85,247,.14)", text: "#c084fc" },
-  Marketing: { pill: "rgba(45,212,191,.14)", text: "#2dd4bf" },
-  Design:    { pill: "rgba(251,113,133,.14)", text:"#fb7185" },
-  Creative:  { pill: "rgba(251,191,36,.14)",  text:"#fbbf24" },
+// Maps the CMS's /service-listing `category` (a different, lowercase
+// taxonomy than the fallback's) onto the same visual palette above.
+const CAT_STYLE = {
+  web:      { label: "Web",        pill: "rgba(14,165,233,.14)",  text: "#38bdf8" },
+  app:      { label: "App",        pill: "rgba(99,102,241,.14)",  text: "#818cf8" },
+  ecom:     { label: "eCommerce",  pill: "rgba(168,85,247,.14)",  text: "#c084fc" },
+  tech:     { label: "Tech",       pill: "rgba(45,212,191,.14)",  text: "#2dd4bf" },
+  dm:       { label: "Marketing",  pill: "rgba(45,212,191,.14)",  text: "#2dd4bf" },
+  design:   { label: "Design",     pill: "rgba(251,113,133,.14)", text: "#fb7185" },
+  security: { label: "Security",   pill: "rgba(251,191,36,.14)",  text: "#fbbf24" },
+};
+const FALLBACK_CAT_STYLE = {
+  Web:       { label: "Web",        pill: "rgba(14,165,233,.14)",  text: "#38bdf8" },
+  App:       { label: "App",        pill: "rgba(99,102,241,.14)",  text: "#818cf8" },
+  QA:        { label: "QA",         pill: "rgba(168,85,247,.14)",  text: "#c084fc" },
+  Marketing: { label: "Marketing",  pill: "rgba(45,212,191,.14)",  text: "#2dd4bf" },
+  Design:    { label: "Design",     pill: "rgba(251,113,133,.14)", text: "#fb7185" },
+  Creative:  { label: "Creative",   pill: "rgba(251,191,36,.14)",  text: "#fbbf24" },
 };
 
-function Card({ s }) {
-  const cc = CAT_COLORS[s.cat] || CAT_COLORS.Web;
+function Card({ s, catStyle }) {
+  const cc = catStyle[s.cat] || Object.values(catStyle)[0];
   return (
     <div className="tm-card group flex items-center gap-3.5 px-5 py-3.5 mx-2.5 flex-shrink-0 rounded-2xl cursor-default select-none"
       style={{
@@ -56,7 +71,7 @@ function Card({ s }) {
       {/* Icon */}
       <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
         style={{ background: `linear-gradient(135deg,${s.from},${s.to})`, boxShadow: `0 4px 14px ${s.from}50` }}>
-        <s.icon color="white" size={15} />
+        {s.iconEl}
       </div>
 
       {/* Text */}
@@ -67,7 +82,7 @@ function Card({ s }) {
         </span>
         <span className="text-[9px] font-bold uppercase tracking-[.14em] px-1.5 py-0.5 rounded-full self-start"
           style={{ background: cc.pill, color: cc.text }}>
-          {s.cat}
+          {cc.label}
         </span>
       </div>
 
@@ -81,8 +96,33 @@ function Card({ s }) {
 }
 
 export default function TechMarquee() {
-  const row1 = SERVICES.slice(0, 12);
-  const row2 = SERVICES.slice(12).concat(SERVICES.slice(0, 1));
+  const [cmsServices, setCmsServices] = useState(null);
+
+  useEffect(() => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    if (!apiUrl) return;
+    fetch(`${apiUrl}/service-listing`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((json) => {
+        const items = json?.data;
+        if (!Array.isArray(items) || !items.length) return;
+        setCmsServices(
+          items.map((it) => ({
+            name: it.title,
+            iconEl: getServiceIcon(it.icon),
+            from: it.accent?.from || "#2dd4bf",
+            to: it.accent?.to || "#6366f1",
+            cat: it.category,
+          }))
+        );
+      })
+      .catch(() => {});
+  }, []);
+
+  const services = cmsServices || FALLBACK_SERVICES;
+  const catStyle = cmsServices ? CAT_STYLE : FALLBACK_CAT_STYLE;
+  const row1 = services.slice(0, Math.ceil(services.length / 2));
+  const row2 = services.slice(Math.ceil(services.length / 2)).concat(services.slice(0, 1));
 
   return (
     <>
@@ -130,7 +170,7 @@ export default function TechMarquee() {
             </span>
             <span className="text-[11px] font-bold uppercase tracking-[.22em]"
               style={{ background:"linear-gradient(135deg,#2dd4bf,#6366f1)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundClip:"text",fontFamily:"'Poppins',sans-serif" }}>
-              23+ Services &nbsp;·&nbsp; All Under One Roof
+              {services.length}+ Services &nbsp;·&nbsp; All Under One Roof
             </span>
           </div>
 
@@ -150,12 +190,12 @@ export default function TechMarquee() {
 
           {/* Row 1 — scrolls left */}
           <div className="tm-row-left">
-            {[...row1, ...row1, ...row1, ...row1].map((s, i) => <Card key={i} s={s} />)}
+            {[...row1, ...row1, ...row1, ...row1].map((s, i) => <Card key={i} s={s} catStyle={catStyle} />)}
           </div>
 
           {/* Row 2 — scrolls right */}
           <div className="tm-row-right">
-            {[...row2, ...row2, ...row2, ...row2].map((s, i) => <Card key={i} s={s} />)}
+            {[...row2, ...row2, ...row2, ...row2].map((s, i) => <Card key={i} s={s} catStyle={catStyle} />)}
           </div>
         </div>
 

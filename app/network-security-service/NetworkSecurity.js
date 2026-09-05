@@ -1,6 +1,7 @@
 "use client";
 const securityImg = "/Assets/stock/photo-1614064641938-3bbee52942c7.webp";
 import CommonServicePage from "../components/CommonServicePage";
+import { isSectionDisabled } from "../lib/loadServicePage";
 import {
   FaNetworkWired, FaShieldAlt, FaLock, FaCloud, FaDatabase,
   FaEye, FaUserShield, FaExclamationTriangle, FaCheckCircle,
@@ -205,37 +206,50 @@ const FALLBACK_CONTENT = {
   platforms,
   techCategories,
   faqData,
+  featuresBadge: "Our Network Security Services",
+  featuresTitle: "Layered Network Protection from",
+  featuresTitleHighlight: "Perimeter to Core",
+  bizBadge: "Why Choose Us",
+  bizHeading: "Network Security Sized for",
+  bizHighlight: "SME Scale & Budget",
+  sliderTitle: "Network Security Outcomes That Protect What Matters",
+  platformsTitle: "Network Security Platforms We Deploy",
+  techBadge: "Our Network Security Stack",
+  techHeading: "Tools & Technologies",
+  techHeadingHighlight: "We Secure Networks With",
+  techDescription: "We deploy and manage industry-standard network security tools — from open-source IDS/IPS to commercial NGFW and cloud-native network controls — right-sized for your environment.",
+  faqTitle: "Frequently Asked Questions — Network Security",
 };
 
 const NetworkSecurity = ({ cms } = {}) => {
   const content = cms
-    ? { ...cms, bannerImg: cms.bannerImg || securityImg, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    ? {
+        ...cms,
+        bannerImg: cms.bannerImg || securityImg,
+        overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage,
+        featuresBadge: cms.featuresBadge || FALLBACK_CONTENT.featuresBadge,
+        featuresTitle: cms.featuresTitle || FALLBACK_CONTENT.featuresTitle,
+        featuresTitleHighlight: cms.featuresTitleHighlight || FALLBACK_CONTENT.featuresTitleHighlight,
+        bizBadge: cms.bizBadge || FALLBACK_CONTENT.bizBadge,
+        bizHeading: cms.bizHeading || FALLBACK_CONTENT.bizHeading,
+        bizHighlight: cms.bizHighlight || FALLBACK_CONTENT.bizHighlight,
+        sliderTitle: cms.sliderTitle || FALLBACK_CONTENT.sliderTitle,
+        platformsTitle: cms.platformsTitle || FALLBACK_CONTENT.platformsTitle,
+        techBadge: cms.techBadge || FALLBACK_CONTENT.techBadge,
+        techHeading: cms.techHeading || FALLBACK_CONTENT.techHeading,
+        techHeadingHighlight: cms.techHeadingHighlight || FALLBACK_CONTENT.techHeadingHighlight,
+        techDescription: cms.techDescription || FALLBACK_CONTENT.techDescription,
+        faqTitle: cms.faqTitle || FALLBACK_CONTENT.faqTitle,
+        features: isSectionDisabled(cms.enabledSections, "features") ? [] : (cms.features?.length ? cms.features : FALLBACK_CONTENT.features),
+        bizCards: isSectionDisabled(cms.enabledSections, "biz") ? [] : (cms.bizCards?.length ? cms.bizCards : FALLBACK_CONTENT.bizCards),
+        sliderCards: isSectionDisabled(cms.enabledSections, "slider") ? [] : (cms.sliderCards?.length ? cms.sliderCards : FALLBACK_CONTENT.sliderCards),
+        platforms: isSectionDisabled(cms.enabledSections, "platforms") ? [] : (cms.platforms?.length ? cms.platforms : FALLBACK_CONTENT.platforms),
+        techCategories: isSectionDisabled(cms.enabledSections, "techstack") ? [] : (cms.techCategories?.length ? cms.techCategories : FALLBACK_CONTENT.techCategories),
+        faqData: isSectionDisabled(cms.enabledSections, "faq") ? [] : (cms.faqData?.length ? cms.faqData : FALLBACK_CONTENT.faqData),
+      }
     : FALLBACK_CONTENT;
 
-  return (
-    <CommonServicePage
-      {...content}
-      featuresBadge="Our Network Security Services"
-      featuresTitle="Layered Network Protection from"
-      featuresTitleHighlight="Perimeter to Core"
-      featuresStickyImg="/Assets/stock/photo-1614064641938-3bbee52942c7.webp"
-
-      bizBadge="Why Choose Us"
-      bizHeading="Network Security Sized for"
-      bizHighlight="SME Scale & Budget"
-
-      sliderTitle="Network Security Outcomes That Protect What Matters"
-
-      platformsTitle="Network Security Platforms We Deploy"
-
-      techBadge="Our Network Security Stack"
-      techHeading="Tools & Technologies"
-      techHeadingHighlight="We Secure Networks With"
-      techDescription="We deploy and manage industry-standard network security tools — from open-source IDS/IPS to commercial NGFW and cloud-native network controls — right-sized for your environment."
-
-      faqTitle="Frequently Asked Questions — Network Security"
-    />
-  );
+  return <CommonServicePage {...content} featuresStickyImg="/Assets/stock/photo-1614064641938-3bbee52942c7.webp" />;
 };
 
 export default NetworkSecurity;

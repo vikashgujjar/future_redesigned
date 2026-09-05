@@ -2,6 +2,7 @@
 const gm = "/Assets/stock/photo-1497366216548-37526070297c.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
+import { isSectionDisabled } from "../lib/loadServicePage";
 import {
   FaDesktop, FaMobileAlt, FaSearch, FaShoppingCart, FaLock, FaChartLine,
   FaPaintBrush, FaRocket, FaHeadset, FaRegClock, FaTools, FaGlobe,
@@ -226,32 +227,50 @@ const FALLBACK_CONTENT = {
   platforms,
   techCategories,
   faqData,
+  featuresBadge: "Small Business Website Development",
+  featuresTitle: "Building Websites That Help Your Business",
+  featuresTitleHighlight: "Grow Online",
+  bizBadge: "Why Choose Future IT Touch",
+  bizHeading: "We Build Websites That",
+  bizHighlight: "Work for Your Business",
+  sliderTitle: "Delivering Professional Websites That Drive Small Business Growth",
+  platformsTitle: "Small Business Website Solutions We Deliver",
+  techBadge: "Our Web Tech Stack",
+  techHeading: "Technologies",
+  techHeadingHighlight: "We Build With",
+  techDescription: "We use modern, proven technologies to deliver fast, secure, and easy-to-manage websites that help small businesses compete online effectively.",
+  faqTitle: "About Small Business Website Design",
 };
 
 const Business = ({ cms } = {}) => {
   const content = cms
-    ? { ...cms, bannerImg: cms.bannerImg || gm, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    ? {
+        ...cms,
+        bannerImg: cms.bannerImg || gm,
+        overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage,
+        featuresBadge: cms.featuresBadge || FALLBACK_CONTENT.featuresBadge,
+        featuresTitle: cms.featuresTitle || FALLBACK_CONTENT.featuresTitle,
+        featuresTitleHighlight: cms.featuresTitleHighlight || FALLBACK_CONTENT.featuresTitleHighlight,
+        bizBadge: cms.bizBadge || FALLBACK_CONTENT.bizBadge,
+        bizHeading: cms.bizHeading || FALLBACK_CONTENT.bizHeading,
+        bizHighlight: cms.bizHighlight || FALLBACK_CONTENT.bizHighlight,
+        sliderTitle: cms.sliderTitle || FALLBACK_CONTENT.sliderTitle,
+        platformsTitle: cms.platformsTitle || FALLBACK_CONTENT.platformsTitle,
+        techBadge: cms.techBadge || FALLBACK_CONTENT.techBadge,
+        techHeading: cms.techHeading || FALLBACK_CONTENT.techHeading,
+        techHeadingHighlight: cms.techHeadingHighlight || FALLBACK_CONTENT.techHeadingHighlight,
+        techDescription: cms.techDescription || FALLBACK_CONTENT.techDescription,
+        faqTitle: cms.faqTitle || FALLBACK_CONTENT.faqTitle,
+        features: isSectionDisabled(cms.enabledSections, "features") ? [] : (cms.features?.length ? cms.features : FALLBACK_CONTENT.features),
+        bizCards: isSectionDisabled(cms.enabledSections, "biz") ? [] : (cms.bizCards?.length ? cms.bizCards : FALLBACK_CONTENT.bizCards),
+        sliderCards: isSectionDisabled(cms.enabledSections, "slider") ? [] : (cms.sliderCards?.length ? cms.sliderCards : FALLBACK_CONTENT.sliderCards),
+        platforms: isSectionDisabled(cms.enabledSections, "platforms") ? [] : (cms.platforms?.length ? cms.platforms : FALLBACK_CONTENT.platforms),
+        techCategories: isSectionDisabled(cms.enabledSections, "techstack") ? [] : (cms.techCategories?.length ? cms.techCategories : FALLBACK_CONTENT.techCategories),
+        faqData: isSectionDisabled(cms.enabledSections, "faq") ? [] : (cms.faqData?.length ? cms.faqData : FALLBACK_CONTENT.faqData),
+      }
     : FALLBACK_CONTENT;
 
-  return (
-    <CommonServicePage
-      {...content}
-      featuresBadge="Small Business Website Development"
-      featuresTitle="Building Websites That Help Your Business"
-      featuresTitleHighlight="Grow Online"
-      featuresStickyImg="/Assets/stock/photo-1497366216548-37526070297c.webp"
-      bizBadge="Why Choose Future IT Touch"
-      bizHeading="We Build Websites That"
-      bizHighlight="Work for Your Business"
-      sliderTitle="Delivering Professional Websites That Drive Small Business Growth"
-      platformsTitle="Small Business Website Solutions We Deliver"
-      techBadge="Our Web Tech Stack"
-      techHeading="Technologies"
-      techHeadingHighlight="We Build With"
-      techDescription="We use modern, proven technologies to deliver fast, secure, and easy-to-manage websites that help small businesses compete online effectively."
-      faqTitle="About Small Business Website Design"
-    />
-  );
+  return <CommonServicePage {...content} featuresStickyImg="/Assets/stock/photo-1497366216548-37526070297c.webp" />;
 };
 
 export default Business;

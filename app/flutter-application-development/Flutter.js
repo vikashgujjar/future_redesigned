@@ -8,6 +8,7 @@ import {
 import flutterImg from "../Assets/Flutter.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
+import { isSectionDisabled } from "../lib/loadServicePage";
 
 const FALLBACK_CONTENT = {
     banner: {
@@ -177,14 +178,25 @@ const FALLBACK_CONTENT = {
 const Flutter = ({ cms } = {}) => {
   const content = cms
     ? {
-        banner: { ...FALLBACK_CONTENT.banner, ...cms.banner, bgImage: cms.banner.bgImage || FALLBACK_CONTENT.banner.bgImage },
+        banner: { ...FALLBACK_CONTENT.banner, ...cms.banner, bgImage: cms.banner.bgImage || FALLBACK_CONTENT.banner.bgImage, breadcrumb: undefined },
         intro: { ...FALLBACK_CONTENT.intro, ...cms.intro },
-        services: cms.services || FALLBACK_CONTENT.services,
-        process: cms.process || FALLBACK_CONTENT.process,
-        features: cms.features,
-        stack: cms.stack || FALLBACK_CONTENT.stack,
+        // Merge with local fallback first, THEN apply the admin's
+        // enable/disable choice as the final word — a disabled section
+        // must stay hidden even though it has perfectly good local content
+        // to fall back to for everything else.
+        services: isSectionDisabled(cms.enabledSections, "services") ? [] : (cms.services || FALLBACK_CONTENT.services),
+        process: isSectionDisabled(cms.enabledSections, "process") ? [] : (cms.process || FALLBACK_CONTENT.process),
+        features: isSectionDisabled(cms.enabledSections, "why") ? [] : cms.features,
+        stack: isSectionDisabled(cms.enabledSections, "stack") ? [] : (cms.stack || FALLBACK_CONTENT.stack),
         slider: cms.slider,
         faq: { title: FALLBACK_CONTENT.faq.title, items: cms.faq.items },
+        // No page-specific local text for these — CommonTechPage.js's own
+        // built-in defaults are the fallback when the CMS hasn't set them.
+        servicesBadge: cms.servicesBadge, servicesHeading: cms.servicesHeading, servicesHighlight: cms.servicesHighlight,
+        processBadge: cms.processBadge, processHeading: cms.processHeading, processHighlight: cms.processHighlight, processDescription: cms.processDescription,
+        whyBadge: cms.whyBadge, whyHeading: cms.whyHeading, whyHighlight: cms.whyHighlight,
+        stackBadge: cms.stackBadge, stackHeading: cms.stackHeading, stackHighlight: cms.stackHighlight, stackDescription: cms.stackDescription,
+        faqBadge: cms.faqBadge,
       }
     : FALLBACK_CONTENT;
 

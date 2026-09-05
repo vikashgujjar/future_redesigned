@@ -33,7 +33,7 @@ const BIZ_COLORS = [
 ];
 
 export default function CommonServicePage({
-  bannerImg, bannerTitle, bannerDesc,
+  bannerImg, bannerTitle, bannerDesc, bannerImgAlt, bannerBadge, bannerCtaText, bannerCtaUrl,
   overviewImage, overviewImageAlt = "Service illustration",
   overviewBadge, overviewHeading, overviewHighlight,
   overviewParagraphs = [], overviewCtaText = "Get In Touch",
@@ -83,7 +83,12 @@ export default function CommonServicePage({
       )} */}
 
       {/* ── 1. Banner ── */}
-      <CommonBannerService imgSrc={bannerImg} title={bannerTitle} desc={bannerDesc} />
+      <CommonBannerService
+        imgSrc={bannerImg} title={bannerTitle} desc={bannerDesc} imgAlt={bannerImgAlt}
+        {...(bannerBadge ? { badge: bannerBadge } : {})}
+        {...(bannerCtaText ? { ctaText: bannerCtaText } : {})}
+        {...(bannerCtaUrl ? { ctaUrl: bannerCtaUrl } : {})}
+      />
 
       {/* ── 2. Tech Marquee ── */}
       <TechMarquee />

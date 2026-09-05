@@ -2,6 +2,7 @@
 const gm = "/Assets/stock/photo-1611162616305-c69b3fa7fbe0.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
+import { isSectionDisabled } from "../lib/loadServicePage";
 import {
   FaBuilding, FaBoxOpen, FaLayerGroup, FaFileAlt, FaFolderOpen, FaBookOpen,
   FaLightbulb, FaHandshake, FaPalette, FaChartLine,
@@ -211,27 +212,42 @@ const FALLBACK_CONTENT = {
   platforms,
   techCategories,
   faqData,
+  featuresBadge: "Creative Brochure Design Services",
+  featuresTitle: "Transforming Brand Messages into",
+  featuresTitleHighlight: "Visually Stunning Print Designs",
+  bizBadge: "Professional Brochure Design Company in India",
+  bizHeading: "Crafting Brochures That Attract, Inform &",
+  bizHighlight: "Inspire Customers",
+  sliderTitle: "Designing Impactful Brochures That Inspire, Inform & Impress",
+  platformsTitle: "Brochure Design Solutions We Deliver",
+  faqTitle: "About Our Brochure Design Services",
 };
 
 const Brochure = ({ cms } = {}) => {
   const content = cms
-    ? { ...cms, bannerImg: cms.bannerImg || gm, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    ? {
+        ...cms,
+        bannerImg: cms.bannerImg || gm,
+        overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage,
+        featuresBadge: cms.featuresBadge || FALLBACK_CONTENT.featuresBadge,
+        featuresTitle: cms.featuresTitle || FALLBACK_CONTENT.featuresTitle,
+        featuresTitleHighlight: cms.featuresTitleHighlight || FALLBACK_CONTENT.featuresTitleHighlight,
+        bizBadge: cms.bizBadge || FALLBACK_CONTENT.bizBadge,
+        bizHeading: cms.bizHeading || FALLBACK_CONTENT.bizHeading,
+        bizHighlight: cms.bizHighlight || FALLBACK_CONTENT.bizHighlight,
+        sliderTitle: cms.sliderTitle || FALLBACK_CONTENT.sliderTitle,
+        platformsTitle: cms.platformsTitle || FALLBACK_CONTENT.platformsTitle,
+        faqTitle: cms.faqTitle || FALLBACK_CONTENT.faqTitle,
+        features: isSectionDisabled(cms.enabledSections, "features") ? [] : (cms.features?.length ? cms.features : FALLBACK_CONTENT.features),
+        bizCards: isSectionDisabled(cms.enabledSections, "biz") ? [] : (cms.bizCards?.length ? cms.bizCards : FALLBACK_CONTENT.bizCards),
+        sliderCards: isSectionDisabled(cms.enabledSections, "slider") ? [] : (cms.sliderCards?.length ? cms.sliderCards : FALLBACK_CONTENT.sliderCards),
+        platforms: isSectionDisabled(cms.enabledSections, "platforms") ? [] : (cms.platforms?.length ? cms.platforms : FALLBACK_CONTENT.platforms),
+        techCategories: isSectionDisabled(cms.enabledSections, "techstack") ? [] : (cms.techCategories?.length ? cms.techCategories : FALLBACK_CONTENT.techCategories),
+        faqData: isSectionDisabled(cms.enabledSections, "faq") ? [] : (cms.faqData?.length ? cms.faqData : FALLBACK_CONTENT.faqData),
+      }
     : FALLBACK_CONTENT;
 
-  return (
-    <CommonServicePage
-      {...content}
-      featuresBadge="Creative Brochure Design Services"
-      featuresTitle="Transforming Brand Messages into"
-      featuresTitleHighlight="Visually Stunning Print Designs"
-      bizBadge="Professional Brochure Design Company in India"
-      bizHeading="Crafting Brochures That Attract, Inform &"
-      bizHighlight="Inspire Customers"
-      sliderTitle="Designing Impactful Brochures That Inspire, Inform & Impress"
-      platformsTitle="Brochure Design Solutions We Deliver"
-      faqTitle="About Our Brochure Design Services"
-    />
-  );
+  return <CommonServicePage {...content} />;
 };
 
 export default Brochure;

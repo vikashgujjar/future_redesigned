@@ -32,7 +32,7 @@ const FALLBACK_FAQ_DATA = [
   },
 ];
 
-export default function Faq({ items: cmsItems } = {}) {
+export default function Faq({ badge, heading, description, items: cmsItems } = {}) {
   const [active, setActive] = useState(0);
   const faqData = (cmsItems?.length ? cmsItems : FALLBACK_FAQ_DATA).map((item, i) => ({
     id: String(i + 1).padStart(2, "0"),
@@ -41,6 +41,10 @@ export default function Faq({ items: cmsItems } = {}) {
     ...PALETTE[i % PALETTE.length],
   }));
   const cur = faqData[active];
+  const badgeText = badge || "FAQ";
+  const headingHighlight = "Answers";
+  const headingText = heading || "Our Expert Answers";
+  const descriptionText = description || "Our team continuously engages in professional development and industry events to stay abreast of the latest IT trends and technologies. This ensures we can provide innovative solutions that keep you ahead of the competition.";
 
   return (
     <section
@@ -98,7 +102,7 @@ export default function Faq({ items: cmsItems } = {}) {
               <span
                 className="text-[11px] font-bold uppercase tracking-widest bg-gradient-to-r from-teal-500 to-indigo-600 bg-clip-text text-transparent"
                 style={{ fontFamily: "'Inter',sans-serif" }}>
-                FAQ
+                {badgeText}
               </span>
             </div>
 
@@ -107,10 +111,18 @@ export default function Faq({ items: cmsItems } = {}) {
             <h2
               className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight"
               style={{ fontFamily: "'Poppins',sans-serif" }}>
-              Our Expert{" "}
-              <span className="bg-gradient-to-r from-teal-400 to-indigo-700 bg-clip-text text-transparent">
-                Answers
-              </span>
+              {headingText.includes(headingHighlight)
+                ? headingText.split(headingHighlight).map((part, i, arr) => (
+                    <span key={i}>
+                      {part}
+                      {i < arr.length - 1 && (
+                        <span className="bg-gradient-to-r from-teal-400 to-indigo-700 bg-clip-text text-transparent">
+                          {headingHighlight}
+                        </span>
+                      )}
+                    </span>
+                  ))
+                : headingText}
             </h2>
 
             {/* divider */}
@@ -122,10 +134,7 @@ export default function Faq({ items: cmsItems } = {}) {
           <p
             className="text-sm sm:text-base leading-7 text-gray-500"
             style={{ fontFamily: "'Inter',sans-serif" }}>
-            Our team continuously engages in professional development and industry
-            events to stay abreast of the latest IT trends and technologies. This
-            ensures we can provide innovative solutions that keep you ahead of the
-            competition.
+            {descriptionText}
           </p>
         </div>
 

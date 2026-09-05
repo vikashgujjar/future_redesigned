@@ -2,6 +2,7 @@
 const cwd = "/Assets/stock/photo-1499750310107-5fef28a66643.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
+import { isSectionDisabled } from "../lib/loadServicePage";
 import {
   FaBuilding, FaBoxOpen, FaLayerGroup, FaFileAlt, FaFolderOpen, FaBookOpen,
   FaLightbulb, FaHandshake, FaPalette, FaChartLine,
@@ -216,27 +217,42 @@ const FALLBACK_CONTENT = {
   platforms,
   techCategories,
   faqData,
+  featuresBadge: "Strategic Content Marketing Services",
+  featuresTitle: "Creating Engaging Content That Educates,",
+  featuresTitleHighlight: "Inspires & Converts",
+  bizBadge: "Professional Content Marketing Company in India",
+  bizHeading: "Crafting Content That Engages, Educates &",
+  bizHighlight: "Converts Your Audience",
+  sliderTitle: "Creating Impactful Content That Engages, Educates & Converts",
+  platformsTitle: "Content Marketing Solutions We Deliver",
+  faqTitle: "About Our Content Marketing Services",
 };
 
 const Logo = ({ cms } = {}) => {
   const content = cms
-    ? { ...cms, bannerImg: cms.bannerImg || cwd, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    ? {
+        ...cms,
+        bannerImg: cms.bannerImg || cwd,
+        overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage,
+        featuresBadge: cms.featuresBadge || FALLBACK_CONTENT.featuresBadge,
+        featuresTitle: cms.featuresTitle || FALLBACK_CONTENT.featuresTitle,
+        featuresTitleHighlight: cms.featuresTitleHighlight || FALLBACK_CONTENT.featuresTitleHighlight,
+        bizBadge: cms.bizBadge || FALLBACK_CONTENT.bizBadge,
+        bizHeading: cms.bizHeading || FALLBACK_CONTENT.bizHeading,
+        bizHighlight: cms.bizHighlight || FALLBACK_CONTENT.bizHighlight,
+        sliderTitle: cms.sliderTitle || FALLBACK_CONTENT.sliderTitle,
+        platformsTitle: cms.platformsTitle || FALLBACK_CONTENT.platformsTitle,
+        faqTitle: cms.faqTitle || FALLBACK_CONTENT.faqTitle,
+        features: isSectionDisabled(cms.enabledSections, "features") ? [] : (cms.features?.length ? cms.features : FALLBACK_CONTENT.features),
+        bizCards: isSectionDisabled(cms.enabledSections, "biz") ? [] : (cms.bizCards?.length ? cms.bizCards : FALLBACK_CONTENT.bizCards),
+        sliderCards: isSectionDisabled(cms.enabledSections, "slider") ? [] : (cms.sliderCards?.length ? cms.sliderCards : FALLBACK_CONTENT.sliderCards),
+        platforms: isSectionDisabled(cms.enabledSections, "platforms") ? [] : (cms.platforms?.length ? cms.platforms : FALLBACK_CONTENT.platforms),
+        techCategories: isSectionDisabled(cms.enabledSections, "techstack") ? [] : (cms.techCategories?.length ? cms.techCategories : FALLBACK_CONTENT.techCategories),
+        faqData: isSectionDisabled(cms.enabledSections, "faq") ? [] : (cms.faqData?.length ? cms.faqData : FALLBACK_CONTENT.faqData),
+      }
     : FALLBACK_CONTENT;
 
-  return (
-    <CommonServicePage
-      {...content}
-      featuresBadge="Strategic Content Marketing Services"
-      featuresTitle="Creating Engaging Content That Educates,"
-      featuresTitleHighlight="Inspires & Converts"
-      bizBadge="Professional Content Marketing Company in India"
-      bizHeading="Crafting Content That Engages, Educates &"
-      bizHighlight="Converts Your Audience"
-      sliderTitle="Creating Impactful Content That Engages, Educates & Converts"
-      platformsTitle="Content Marketing Solutions We Deliver"
-      faqTitle="About Our Content Marketing Services"
-    />
-  );
+  return <CommonServicePage {...content} />;
 };
 
 export default Logo;

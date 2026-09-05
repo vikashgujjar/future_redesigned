@@ -1,7 +1,7 @@
 import React from 'react'
 import OurPortfolio from './OurPortfolio'
 import loadPortfolio from './loadPortfolio'
-import { buildPageMetadata } from '../lib/cms'
+import { buildPageMetadata, getPortfolioPageContent } from '../lib/cms'
 
 const DEFAULT_METADATA = {
   title: "Our Portfolio - Future IT Touch Private Limited",
@@ -14,10 +14,10 @@ export async function generateMetadata() {
 }
 
 export default async function page() {
-  const items = await loadPortfolio();
+  const [items, cms] = await Promise.all([loadPortfolio(), getPortfolioPageContent()]);
   return (
     <div>
-      <OurPortfolio items={items} />
+      <OurPortfolio items={items} cms={cms} />
     </div>
   )
 }

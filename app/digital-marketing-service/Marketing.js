@@ -1,6 +1,7 @@
 "use client";
 import devops from "../Assets/digitalmarketing.webp";
 import CommonServicePage from "../components/CommonServicePage";
+import { isSectionDisabled } from "../lib/loadServicePage";
 import {
   FaBullhorn, FaSearch, FaChartLine, FaEnvelope, FaShareAlt, FaGoogle, FaMousePointer,
 } from "react-icons/fa";
@@ -195,32 +196,50 @@ const FALLBACK_CONTENT = {
   platforms,
   techCategories,
   faqData,
+  featuresBadge: "Our Digital Marketing Services",
+  featuresTitle: "Data-Driven Strategies That",
+  featuresTitleHighlight: "Deliver Real Results",
+  bizBadge: "Our Advantages",
+  bizHeading: "Why Choose Us for",
+  bizHighlight: "Digital Marketing",
+  sliderTitle: "Delivering Impactful Digital Marketing Campaigns",
+  platformsTitle: "Marketing Platforms We Use",
+  techBadge: "Our Marketing Tech Stack",
+  techHeading: "Technologies",
+  techHeadingHighlight: "We Market With",
+  techDescription: "We leverage the most powerful marketing tools and platforms to plan, execute, and measure campaigns that drive measurable business growth.",
+  faqTitle: "Frequently Asked Questions — Digital Marketing",
 };
 
 const Marketing = ({ cms } = {}) => {
   const content = cms
-    ? { ...cms, bannerImg: cms.bannerImg || devops, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    ? {
+        ...cms,
+        bannerImg: cms.bannerImg || devops,
+        overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage,
+        featuresBadge: cms.featuresBadge || FALLBACK_CONTENT.featuresBadge,
+        featuresTitle: cms.featuresTitle || FALLBACK_CONTENT.featuresTitle,
+        featuresTitleHighlight: cms.featuresTitleHighlight || FALLBACK_CONTENT.featuresTitleHighlight,
+        bizBadge: cms.bizBadge || FALLBACK_CONTENT.bizBadge,
+        bizHeading: cms.bizHeading || FALLBACK_CONTENT.bizHeading,
+        bizHighlight: cms.bizHighlight || FALLBACK_CONTENT.bizHighlight,
+        sliderTitle: cms.sliderTitle || FALLBACK_CONTENT.sliderTitle,
+        platformsTitle: cms.platformsTitle || FALLBACK_CONTENT.platformsTitle,
+        techBadge: cms.techBadge || FALLBACK_CONTENT.techBadge,
+        techHeading: cms.techHeading || FALLBACK_CONTENT.techHeading,
+        techHeadingHighlight: cms.techHeadingHighlight || FALLBACK_CONTENT.techHeadingHighlight,
+        techDescription: cms.techDescription || FALLBACK_CONTENT.techDescription,
+        faqTitle: cms.faqTitle || FALLBACK_CONTENT.faqTitle,
+        features: isSectionDisabled(cms.enabledSections, "features") ? [] : (cms.features?.length ? cms.features : FALLBACK_CONTENT.features),
+        bizCards: isSectionDisabled(cms.enabledSections, "biz") ? [] : (cms.bizCards?.length ? cms.bizCards : FALLBACK_CONTENT.bizCards),
+        sliderCards: isSectionDisabled(cms.enabledSections, "slider") ? [] : (cms.sliderCards?.length ? cms.sliderCards : FALLBACK_CONTENT.sliderCards),
+        platforms: isSectionDisabled(cms.enabledSections, "platforms") ? [] : (cms.platforms?.length ? cms.platforms : FALLBACK_CONTENT.platforms),
+        techCategories: isSectionDisabled(cms.enabledSections, "techstack") ? [] : (cms.techCategories?.length ? cms.techCategories : FALLBACK_CONTENT.techCategories),
+        faqData: isSectionDisabled(cms.enabledSections, "faq") ? [] : (cms.faqData?.length ? cms.faqData : FALLBACK_CONTENT.faqData),
+      }
     : FALLBACK_CONTENT;
 
-  return (
-    <CommonServicePage
-      {...content}
-      featuresBadge="Our Digital Marketing Services"
-      featuresTitle="Data-Driven Strategies That"
-      featuresTitleHighlight="Deliver Real Results"
-      featuresStickyImg="/Assets/stock/photo-1432888498266-38ffec3eaf0a.webp"
-      bizBadge="Our Advantages"
-      bizHeading="Why Choose Us for"
-      bizHighlight="Digital Marketing"
-      sliderTitle="Delivering Impactful Digital Marketing Campaigns"
-      platformsTitle="Marketing Platforms We Use"
-      techBadge="Our Marketing Tech Stack"
-      techHeading="Technologies"
-      techHeadingHighlight="We Market With"
-      techDescription="We leverage the most powerful marketing tools and platforms to plan, execute, and measure campaigns that drive measurable business growth."
-      faqTitle="Frequently Asked Questions — Digital Marketing"
-    />
-  );
+  return <CommonServicePage {...content} featuresStickyImg="/Assets/stock/photo-1432888498266-38ffec3eaf0a.webp" />;
 };
 
 export default Marketing;

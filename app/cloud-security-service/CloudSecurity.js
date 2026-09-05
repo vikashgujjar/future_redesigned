@@ -1,6 +1,7 @@
 "use client";
 const securityImg = "/Assets/stock/photo-1451187580459-43490279c0fa.webp";
 import CommonServicePage from "../components/CommonServicePage";
+import { isSectionDisabled } from "../lib/loadServicePage";
 import {
   FaCloud, FaShieldAlt, FaLock, FaDatabase, FaUserShield,
   FaSearch, FaExclamationTriangle, FaCheckCircle, FaFileAlt,
@@ -208,32 +209,50 @@ const FALLBACK_CONTENT = {
   platforms,
   techCategories,
   faqData,
+  featuresBadge: "Our Cloud Security Services",
+  featuresTitle: "Comprehensive Cloud Security Across",
+  featuresTitleHighlight: "AWS, Azure & GCP",
+  bizBadge: "Why Choose Us",
+  bizHeading: "Cloud Security by",
+  bizHighlight: "Indian Compliance Experts",
+  sliderTitle: "Cloud Security Outcomes for Indian Businesses",
+  platformsTitle: "Cloud Security Platforms We Use",
+  techBadge: "Our Cloud Security Stack",
+  techHeading: "Tools & Platforms",
+  techHeadingHighlight: "We Secure Clouds With",
+  techDescription: "We use native cloud security services combined with best-in-class third-party CSPM, SIEM, and secrets management tools to deliver continuous cloud security without complexity.",
+  faqTitle: "Frequently Asked Questions — Cloud Security",
 };
 
 const CloudSecurity = ({ cms } = {}) => {
   const content = cms
-    ? { ...cms, bannerImg: cms.bannerImg || securityImg, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    ? {
+        ...cms,
+        bannerImg: cms.bannerImg || securityImg,
+        overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage,
+        featuresBadge: cms.featuresBadge || FALLBACK_CONTENT.featuresBadge,
+        featuresTitle: cms.featuresTitle || FALLBACK_CONTENT.featuresTitle,
+        featuresTitleHighlight: cms.featuresTitleHighlight || FALLBACK_CONTENT.featuresTitleHighlight,
+        bizBadge: cms.bizBadge || FALLBACK_CONTENT.bizBadge,
+        bizHeading: cms.bizHeading || FALLBACK_CONTENT.bizHeading,
+        bizHighlight: cms.bizHighlight || FALLBACK_CONTENT.bizHighlight,
+        sliderTitle: cms.sliderTitle || FALLBACK_CONTENT.sliderTitle,
+        platformsTitle: cms.platformsTitle || FALLBACK_CONTENT.platformsTitle,
+        techBadge: cms.techBadge || FALLBACK_CONTENT.techBadge,
+        techHeading: cms.techHeading || FALLBACK_CONTENT.techHeading,
+        techHeadingHighlight: cms.techHeadingHighlight || FALLBACK_CONTENT.techHeadingHighlight,
+        techDescription: cms.techDescription || FALLBACK_CONTENT.techDescription,
+        faqTitle: cms.faqTitle || FALLBACK_CONTENT.faqTitle,
+        features: isSectionDisabled(cms.enabledSections, "features") ? [] : (cms.features?.length ? cms.features : FALLBACK_CONTENT.features),
+        bizCards: isSectionDisabled(cms.enabledSections, "biz") ? [] : (cms.bizCards?.length ? cms.bizCards : FALLBACK_CONTENT.bizCards),
+        sliderCards: isSectionDisabled(cms.enabledSections, "slider") ? [] : (cms.sliderCards?.length ? cms.sliderCards : FALLBACK_CONTENT.sliderCards),
+        platforms: isSectionDisabled(cms.enabledSections, "platforms") ? [] : (cms.platforms?.length ? cms.platforms : FALLBACK_CONTENT.platforms),
+        techCategories: isSectionDisabled(cms.enabledSections, "techstack") ? [] : (cms.techCategories?.length ? cms.techCategories : FALLBACK_CONTENT.techCategories),
+        faqData: isSectionDisabled(cms.enabledSections, "faq") ? [] : (cms.faqData?.length ? cms.faqData : FALLBACK_CONTENT.faqData),
+      }
     : FALLBACK_CONTENT;
 
-  return (
-    <CommonServicePage
-      {...content}
-      featuresBadge="Our Cloud Security Services"
-      featuresTitle="Comprehensive Cloud Security Across"
-      featuresTitleHighlight="AWS, Azure & GCP"
-      featuresStickyImg="/Assets/stock/photo-1614064641938-3bbee52942c7.webp"
-      bizBadge="Why Choose Us"
-      bizHeading="Cloud Security by"
-      bizHighlight="Indian Compliance Experts"
-      sliderTitle="Cloud Security Outcomes for Indian Businesses"
-      platformsTitle="Cloud Security Platforms We Use"
-      techBadge="Our Cloud Security Stack"
-      techHeading="Tools & Platforms"
-      techHeadingHighlight="We Secure Clouds With"
-      techDescription="We use native cloud security services combined with best-in-class third-party CSPM, SIEM, and secrets management tools to deliver continuous cloud security without complexity."
-      faqTitle="Frequently Asked Questions — Cloud Security"
-    />
-  );
+  return <CommonServicePage {...content} featuresStickyImg="/Assets/stock/photo-1614064641938-3bbee52942c7.webp" />;
 };
 
 export default CloudSecurity;

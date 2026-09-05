@@ -17,7 +17,7 @@ import restaurant from "../Assets/baker.svg";
 import ondemand   from "../Assets/mobile-app.svg";
 import grocery    from "../Assets/groceries.svg";
 
-const INDUSTRIES = [
+const FALLBACK_INDUSTRIES = [
   { icon: realestate, title: "Real Estate",    from: "#2dd4bf", to: "#06b6d4",  bg: "#f0fdfa", border: "#99f6e4" },
   { icon: tour,       title: "Tour & Travels", from: "#6366f1", to: "#4f46e5",  bg: "#eef2ff", border: "#c7d2fe" },
   { icon: education,  title: "Education",      from: "#a855f7", to: "#7c3aed",  bg: "#faf5ff", border: "#e9d5ff" },
@@ -32,7 +32,17 @@ const INDUSTRIES = [
   { icon: grocery,    title: "Grocery",        from: "#84cc16", to: "#65a30d",  bg: "#f7fee7", border: "#d9f99d" },
 ];
 
-export default function MutipleServices() {
+export default function MutipleServices({ industries: cmsIndustries } = {}) {
+  const INDUSTRIES = cmsIndustries?.length
+    ? cmsIndustries.map((ind) => ({
+        icon: ind.icon,
+        title: ind.title,
+        url: ind.url,
+        from: ind.color?.from || "#2dd4bf",
+        to: ind.color?.to || "#6366f1",
+        border: `${ind.color?.from || "#2dd4bf"}40`,
+      }))
+    : FALLBACK_INDUSTRIES;
   return (
     <section className="relative overflow-hidden bg-[linear-gradient(160deg,#f8f9ff_0%,#ffffff_50%,#f5f0ff_100%)] py-24 px-5 sm:px-10 xl:px-16 font-['Inter',sans-serif]">
 
@@ -67,9 +77,11 @@ export default function MutipleServices() {
 
         {/* ── Industry cards grid ── */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {INDUSTRIES.map((item, i) => (
-            <div key={i}
-              className="group relative bg-white rounded-2xl border overflow-hidden hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-default"
+          {INDUSTRIES.map((item, i) => {
+            const CardTag = item.url ? Link : "div";
+            return (
+            <CardTag key={i} {...(item.url ? { href: item.url } : {})}
+              className={`group relative bg-white rounded-2xl border overflow-hidden hover:-translate-y-2 hover:shadow-xl transition-all duration-300 block no-underline${item.url ? "" : " cursor-default"}`}
               style={{ borderColor: item.border, boxShadow: "0 2px 10px rgba(0,0,0,.05)" }}>
 
               {/* Top gradient bar */}
@@ -97,8 +109,9 @@ export default function MutipleServices() {
                 <div className="h-[2px] w-6 rounded-full group-hover:w-10 transition-all duration-500"
                   style={{ background: `linear-gradient(90deg,${item.from},${item.to})` }} />
               </div>
-            </div>
-          ))}
+            </CardTag>
+            );
+          })}
         </div>
 
         {/* ── Bottom CTA strip ── */}

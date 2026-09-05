@@ -82,7 +82,7 @@ const PROCESS = [
 
 const HL = "bg-[linear-gradient(125deg,#2dd4bf,#6366f1,#a855f7)] bg-[length:200%_200%] bg-clip-text text-transparent [animation:tcpGrad_5s_ease-in-out_infinite]";
 
-export default function Services({ items: cmsItems } = {}) {
+export default function Services({ items: cmsItems, serviceIndex, officeLocations, industries } = {}) {
   const [active, setActive] = useState("all");
   const yearsExperience = useYearsExperience();
   const SERVICES = cmsItems?.length
@@ -98,6 +98,26 @@ export default function Services({ items: cmsItems } = {}) {
       }))
     : FALLBACK_SERVICES;
   const filtered = active === "all" ? SERVICES : SERVICES.filter(s => s.cat === active);
+
+  const whyBadge = serviceIndex?.why?.badge || "Why Choose Us";
+  const whyHeading = serviceIndex?.why?.heading || "A Partner That Delivers, Not Just Promises";
+  const whyItems = serviceIndex?.why?.items?.length
+    ? serviceIndex.why.items.map((w) => ({ icon: getServiceIcon(w.icon), title: w.title, desc: w.desc }))
+    : WHY;
+
+  const processBadge = serviceIndex?.process?.badge || "How We Work";
+  const processHeading = serviceIndex?.process?.heading || "Our Proven Process";
+  const processItems = serviceIndex?.process?.items?.length
+    ? serviceIndex.process.items.map((p) => ({ step: p.step, title: p.title, desc: p.desc, from: p.from, to: p.to }))
+    : PROCESS;
+
+  const stats = serviceIndex?.stats?.length
+    ? serviceIndex.stats.map((s) => ({
+        num: s.use_live_years ? yearsExperience : s.num,
+        label: s.label,
+        icon: getServiceIcon(s.icon),
+      }))
+    : getStats(yearsExperience);
 
   return (
     <div className="font-['Inter',sans-serif] overflow-x-clip">
@@ -216,7 +236,7 @@ export default function Services({ items: cmsItems } = {}) {
       <section className="bg-[linear-gradient(135deg,#050b20,#0a0f2e)] border-b border-white/[.06]">
         <div className="max-w-[1280px] mx-auto px-5 sm:px-10 xl:px-16 py-10">
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {getStats(yearsExperience).map((s,i) => (
+            {stats.map((s,i) => (
               <div key={i} className="group flex flex-col items-center text-center rounded-2xl p-5 border border-white/[.06] bg-white/[.03] hover:bg-white/[.06] hover:-translate-y-1 transition-all duration-300">
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white text-base mb-3 bg-[linear-gradient(135deg,#2dd4bf,#6366f1)]">
                   {s.icon}
@@ -362,11 +382,12 @@ export default function Services({ items: cmsItems } = {}) {
           <div>
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-indigo-200 bg-indigo-50 mb-6 text-[10px] font-bold tracking-[.22em] uppercase text-indigo-500 font-['Poppins',sans-serif]">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
-              Why Choose Us
+              {whyBadge}
             </div>
             <h2 className="font-['Poppins',sans-serif] font-extrabold text-[#050748] [font-size:clamp(1.6rem,3vw,2.45rem)] leading-tight mb-4">
-              A Partner That Delivers,<br />
-              <span className={HL}>Not Just Promises</span>
+              {whyHeading === "A Partner That Delivers, Not Just Promises" ? (
+                <>A Partner That Delivers,<br /><span className={HL}>Not Just Promises</span></>
+              ) : whyHeading}
             </h2>
             <div className="h-[3px] w-14 rounded-full mb-6 bg-[linear-gradient(90deg,#2dd4bf,#6366f1)]" />
             <p className="text-[#6a6a8e] text-base leading-relaxed mb-8 max-w-lg">
@@ -380,7 +401,7 @@ export default function Services({ items: cmsItems } = {}) {
 
           {/* Right — why cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {WHY.map((w,i) => {
+            {whyItems.map((w,i) => {
               const colours = [
                 { from:"#2dd4bf", to:"#6366f1", light:"#f0fdfb", border:"#99f6e4", text:"#0d9488" },
                 { from:"#6366f1", to:"#a855f7", light:"#eef2ff", border:"#c7d2fe", text:"#4f46e5" },
@@ -421,10 +442,12 @@ export default function Services({ items: cmsItems } = {}) {
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#2dd4bf]/30 bg-[#2dd4bf]/10 mb-5 text-[10px] font-bold tracking-[.22em] uppercase text-[#2dd4bf] font-['Poppins',sans-serif]">
               <span className="w-1.5 h-1.5 rounded-full animate-ping bg-[#2dd4bf]" />
-              How We Work
+              {processBadge}
             </div>
             <h2 className="font-['Poppins',sans-serif] font-extrabold text-white [font-size:clamp(1.65rem,3.2vw,2.55rem)] leading-tight mb-4">
-              Our <span className={HL}>Proven Process</span>
+              {processHeading === "Our Proven Process" ? (
+                <>Our <span className={HL}>Proven Process</span></>
+              ) : processHeading}
             </h2>
             <div className="h-[3px] w-14 rounded-full mx-auto bg-[linear-gradient(90deg,#2dd4bf,#6366f1)]" />
           </div>
@@ -433,7 +456,7 @@ export default function Services({ items: cmsItems } = {}) {
             {/* Connector line — desktop */}
             <div className="hidden lg:block absolute top-[3.4rem] left-[12.5%] right-[12.5%] h-px bg-[linear-gradient(90deg,rgba(45,212,191,.25),rgba(99,102,241,.25),rgba(168,85,247,.25),transparent)]" />
 
-            {PROCESS.map((p,i) => (
+            {processItems.map((p,i) => (
               <div key={i}
                 className="group relative rounded-2xl overflow-hidden border border-white/[.07] bg-white/[.035] hover:bg-white/[.06] hover:-translate-y-2 transition-all duration-300"
                 style={{ boxShadow:"0 4px 28px rgba(0,0,0,.32)" }}>
@@ -460,8 +483,8 @@ export default function Services({ items: cmsItems } = {}) {
       </section>
 
       {/* ══ BOTTOM SECTIONS ══ */}
-      <MutipleServices />
-      <Location />
+      <MutipleServices industries={industries} />
+      <Location locations={officeLocations} />
       <Testimonial />
     </div>
   );

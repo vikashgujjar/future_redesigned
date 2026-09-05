@@ -4,7 +4,14 @@ import Link from "next/link";
 import WhyChoose from "../components/WhyChoose";
 import GetNewInsight from "../components/GetNewInsight";
 
+const FALLBACK_INTRO_BADGE = "We Are a Creative Agency";
+const FALLBACK_INTRO_HEADING = "Why Choose Future IT Touch Pvt. Ltd.";
+const FALLBACK_INTRO_TEXT = "Here are some of the reasons we think you should consider working with Future IT Touch Pvt. Ltd. — your full-service web development, online marketing, and web hosting company. We create experiences that are attractive, simple to use, and drive results for your company. We are not your typical web development agency. Sure, we're strong on corporate branding and web design, but we're really focused on making things work for your audience — and your business.";
+
 export default function WhyusChild({ whyChoose } = {}) {
+  const introBadge = whyChoose?.intro?.badge || FALLBACK_INTRO_BADGE;
+  const introHeading = whyChoose?.intro?.heading || FALLBACK_INTRO_HEADING;
+  const introText = whyChoose?.intro?.text || FALLBACK_INTRO_TEXT;
   return (
     <>
       {/* ── Page Banner ── */}
@@ -97,29 +104,37 @@ export default function WhyusChild({ whyChoose } = {}) {
               style={{ background:"linear-gradient(135deg,#2dd4bf,#6366f1)",
                 WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text",
                 fontFamily:"'Poppins',sans-serif" }}>
-              We Are a Creative Agency
+              {introBadge}
             </span>
           </div>
 
           <h2 className="font-extrabold leading-[1.12] mb-5"
             style={{ fontFamily:"'Poppins',sans-serif", fontSize:"clamp(1.6rem,3.5vw,2.6rem)", color:"#0c1230" }}>
-            Why Choose{" "}
-            <span style={{ background:"linear-gradient(135deg,#2dd4bf,#6366f1)",
-              WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
-              Future IT Touch Pvt. Ltd.
-            </span>
+            {introHeading === FALLBACK_INTRO_HEADING ? (
+              <>
+                Why Choose{" "}
+                <span style={{ background:"linear-gradient(135deg,#2dd4bf,#6366f1)",
+                  WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
+                  Future IT Touch Pvt. Ltd.
+                </span>
+              </>
+            ) : introHeading}
           </h2>
 
           <div className="mx-auto mb-6 h-[3px] w-14 rounded-full"
             style={{ background:"linear-gradient(90deg,#2dd4bf,#6366f1,#a855f7)" }} />
 
           <p className="text-[15px] leading-[1.90]" style={{ color:"#4a5070" }}>
-            Here are some of the reasons we think you should consider working with{" "}
-            <span className="font-semibold" style={{ color:"#4f46e5" }}>Future IT Touch Pvt. Ltd.</span>{" "}
-            — your full-service web development, online marketing, and web hosting company. We create
-            experiences that are attractive, simple to use, and drive results for your company. We are
-            not your typical web development agency. Sure, we're strong on corporate branding and web
-            design, but we're really focused on making things work for your audience — and your business.
+            {introText === FALLBACK_INTRO_TEXT ? (
+              <>
+                Here are some of the reasons we think you should consider working with{" "}
+                <span className="font-semibold" style={{ color:"#4f46e5" }}>Future IT Touch Pvt. Ltd.</span>{" "}
+                — your full-service web development, online marketing, and web hosting company. We create
+                experiences that are attractive, simple to use, and drive results for your company. We are
+                not your typical web development agency. Sure, we're strong on corporate branding and web
+                design, but we're really focused on making things work for your audience — and your business.
+              </>
+            ) : introText}
           </p>
         </div>
       </section>
@@ -132,6 +147,7 @@ export default function WhyusChild({ whyChoose } = {}) {
         features={whyChoose?.features}
         ctaHeading={whyChoose?.cta?.heading}
         ctaDescription={whyChoose?.cta?.description}
+        image={whyChoose?.image}
       />
 
       <GetNewInsight />

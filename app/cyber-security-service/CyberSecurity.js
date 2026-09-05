@@ -1,6 +1,7 @@
 "use client";
 const securityImg = "/Assets/stock/photo-1550751827-4bd374c3f58b.webp";
 import CommonServicePage from "../components/CommonServicePage";
+import { isSectionDisabled } from "../lib/loadServicePage";
 import {
   FaShieldAlt, FaBug, FaLock, FaCloud, FaDatabase,
   FaHeadset, FaSyncAlt, FaSearch, FaExclamationTriangle,
@@ -239,32 +240,50 @@ const FALLBACK_CONTENT = {
   platforms,
   techCategories,
   faqData,
+  featuresBadge: "Our Security Packages & Services",
+  featuresTitle: "Three Simple Packages — Priced for",
+  featuresTitleHighlight: "Indian SMEs",
+  bizBadge: "Why Choose Us",
+  bizHeading: "Built for the",
+  bizHighlight: "Indian Context",
+  sliderTitle: "Protecting Indian Businesses with Enterprise-Grade Security",
+  platformsTitle: "Security Tools & Platforms We Use",
+  techBadge: "Our Security Tech Stack",
+  techHeading: "Tools & Technologies",
+  techHeadingHighlight: "We Operate With",
+  techDescription: "We use industry-standard security tools and platforms — from offensive security and SIEM to cloud posture management and EDR — to deliver comprehensive protection for Indian SMEs.",
+  faqTitle: "Frequently Asked Questions — Cyber Security",
 };
 
 const CyberSecurity = ({ cms } = {}) => {
   const content = cms
-    ? { ...cms, bannerImg: cms.bannerImg || securityImg, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    ? {
+        ...cms,
+        bannerImg: cms.bannerImg || securityImg,
+        overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage,
+        featuresBadge: cms.featuresBadge || FALLBACK_CONTENT.featuresBadge,
+        featuresTitle: cms.featuresTitle || FALLBACK_CONTENT.featuresTitle,
+        featuresTitleHighlight: cms.featuresTitleHighlight || FALLBACK_CONTENT.featuresTitleHighlight,
+        bizBadge: cms.bizBadge || FALLBACK_CONTENT.bizBadge,
+        bizHeading: cms.bizHeading || FALLBACK_CONTENT.bizHeading,
+        bizHighlight: cms.bizHighlight || FALLBACK_CONTENT.bizHighlight,
+        sliderTitle: cms.sliderTitle || FALLBACK_CONTENT.sliderTitle,
+        platformsTitle: cms.platformsTitle || FALLBACK_CONTENT.platformsTitle,
+        techBadge: cms.techBadge || FALLBACK_CONTENT.techBadge,
+        techHeading: cms.techHeading || FALLBACK_CONTENT.techHeading,
+        techHeadingHighlight: cms.techHeadingHighlight || FALLBACK_CONTENT.techHeadingHighlight,
+        techDescription: cms.techDescription || FALLBACK_CONTENT.techDescription,
+        faqTitle: cms.faqTitle || FALLBACK_CONTENT.faqTitle,
+        features: isSectionDisabled(cms.enabledSections, "features") ? [] : (cms.features?.length ? cms.features : FALLBACK_CONTENT.features),
+        bizCards: isSectionDisabled(cms.enabledSections, "biz") ? [] : (cms.bizCards?.length ? cms.bizCards : FALLBACK_CONTENT.bizCards),
+        sliderCards: isSectionDisabled(cms.enabledSections, "slider") ? [] : (cms.sliderCards?.length ? cms.sliderCards : FALLBACK_CONTENT.sliderCards),
+        platforms: isSectionDisabled(cms.enabledSections, "platforms") ? [] : (cms.platforms?.length ? cms.platforms : FALLBACK_CONTENT.platforms),
+        techCategories: isSectionDisabled(cms.enabledSections, "techstack") ? [] : (cms.techCategories?.length ? cms.techCategories : FALLBACK_CONTENT.techCategories),
+        faqData: isSectionDisabled(cms.enabledSections, "faq") ? [] : (cms.faqData?.length ? cms.faqData : FALLBACK_CONTENT.faqData),
+      }
     : FALLBACK_CONTENT;
 
-  return (
-    <CommonServicePage
-      {...content}
-      featuresBadge="Our Security Packages & Services"
-      featuresTitle="Three Simple Packages — Priced for"
-      featuresTitleHighlight="Indian SMEs"
-      featuresStickyImg="/Assets/stock/photo-1563986768609-322da13575f3.webp"
-      bizBadge="Why Choose Us"
-      bizHeading="Built for the"
-      bizHighlight="Indian Context"
-      sliderTitle="Protecting Indian Businesses with Enterprise-Grade Security"
-      platformsTitle="Security Tools & Platforms We Use"
-      techBadge="Our Security Tech Stack"
-      techHeading="Tools & Technologies"
-      techHeadingHighlight="We Operate With"
-      techDescription="We use industry-standard security tools and platforms — from offensive security and SIEM to cloud posture management and EDR — to deliver comprehensive protection for Indian SMEs."
-      faqTitle="Frequently Asked Questions — Cyber Security"
-    />
-  );
+  return <CommonServicePage {...content} featuresStickyImg="/Assets/stock/photo-1563986768609-322da13575f3.webp" />;
 };
 
 export default CyberSecurity;

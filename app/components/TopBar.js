@@ -16,28 +16,38 @@ import {
 } from "./icons";
 import useYearsExperience from "../lib/useYearsExperience";
 
-const socials = [
-  { href: "https://www.facebook.com/Futureittouch", Icon: FaFacebookF, label: "Facebook" },
-  { href: "https://x.com/futureittouch", Icon: FaXTwitter, label: "X (Twitter)" },
-  { href: "https://in.linkedin.com/company/future-it-touch", Icon: FaLinkedinIn, label: "LinkedIn" },
-  { href: "https://www.instagram.com/future_it_touch/", Icon: FaInstagram, label: "Instagram" },
-  { href: "https://www.youtube.com/channel/UCirWettrTWfsFRzdGRIc6BQ/about", Icon: FaYoutube, label: "YouTube" },
-  { href: "https://github.com/Future-IT-Touch-Private-Limited", Icon: FaGithub, label: "GitHub" },
+const FALLBACK_SOCIALS = [
+  { key: "facebook", href: "https://www.facebook.com/Futureittouch", Icon: FaFacebookF, label: "Facebook" },
+  { key: "x", href: "https://x.com/futureittouch", Icon: FaXTwitter, label: "X (Twitter)" },
+  { key: "linkedin", href: "https://in.linkedin.com/company/future-it-touch", Icon: FaLinkedinIn, label: "LinkedIn" },
+  { key: "instagram", href: "https://www.instagram.com/future_it_touch/", Icon: FaInstagram, label: "Instagram" },
+  { key: "youtube", href: "https://www.youtube.com/channel/UCirWettrTWfsFRzdGRIc6BQ/about", Icon: FaYoutube, label: "YouTube" },
+  { key: "github", href: "https://github.com/Future-IT-Touch-Private-Limited", Icon: FaGithub, label: "GitHub" },
 ];
 
-const getTickerItems = (yearsExperience) => [
+const FALLBACK_TICKER = [
   "🚀  Trusted by 1000+ Businesses Worldwide",
   "🌍  Serving 50 Cities Across 5 Countries",
   "💻  Custom Web & Mobile App Development",
   "📈  Result-Driven Digital Marketing",
-  `⭐  ${yearsExperience} Years of IT Excellence`,
+  "⭐  {years} Years of IT Excellence",
   "📞  24/7 Dedicated Support Available",
 ];
+const FALLBACK_CRM_URL = "https://crm.futuretouch.in/authentication/login";
 
-export default function TopBar() {
+export default function TopBar({ settings } = {}) {
   const [isOpen, setIsOpen] = useState(false);
   const yearsExperience = useYearsExperience();
-  const tickerItems = getTickerItems(yearsExperience);
+  const tickerItems = (settings?.ticker_items?.length ? settings.ticker_items : FALLBACK_TICKER)
+    .map((t) => t.replace("{years}", yearsExperience));
+
+  const email = settings?.contact?.email || "info@futuretouch.in";
+  const skypeId = settings?.contact?.skype_id || "live:.cid.313b26920df66baf";
+  const phoneHr = settings?.contact?.phone_hr || "+91-7056937000";
+  const phoneSales = settings?.contact?.phone_sales || "+91-7056997000";
+  const phonePrimary = settings?.contact?.phone_primary || "+91-7056937000";
+  const crmUrl = settings?.crm_login_url || FALLBACK_CRM_URL;
+  const socials = FALLBACK_SOCIALS.map((s) => ({ ...s, href: settings?.social?.[s.key] || s.href }));
 
   return (
     <div
@@ -136,15 +146,15 @@ export default function TopBar() {
           {/* LEFT — email + skype */}
           <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
             <a
-              href="mailto:info@futuretouch.in"
+              href={`mailto:${email}`}
               className="flex items-center gap-1.5 text-[11px] font-medium text-white/50 hover:text-teal-400 transition-colors"
             >
               <FaEnvelope size={9} />
-              info@futuretouch.in
+              {email}
             </a>
             <span className="text-white/12 select-none">·</span>
             <a
-              href="skype:live:.cid.313b26920df66baf"
+              href={`skype:${skypeId}`}
               className="flex items-center gap-1.5 text-[11px] font-medium text-white/50 hover:text-teal-400 transition-colors"
             >
               <FaSkype size={10} />
@@ -218,14 +228,14 @@ export default function TopBar() {
                     >
                       For HR Department
                     </p>
-                    <a href="tel:+91-7056937000" className="tb-drop-row">
+                    <a href={`tel:${phoneHr}`} className="tb-drop-row">
                       <Image
                         src="/Assets/country.webp"
                         width={22} height={22}
                         alt="India"
                         className="rounded-sm object-cover flex-shrink-0"
                       />
-                      +91-7056937000
+                      {phoneHr}
                     </a>
                   </div>
 
@@ -238,31 +248,31 @@ export default function TopBar() {
                       For Sales Department
                     </p>
                     <div className="flex flex-col gap-2.5">
-                      <a href="tel:+91-7056997000" className="tb-drop-row">
+                      <a href={`tel:${phoneSales}`} className="tb-drop-row">
                         <Image
                           src="/Assets/country.webp"
                           width={22} height={22}
                           alt="India"
                           className="rounded-sm object-cover flex-shrink-0"
                         />
-                        +91-7056997000
+                        {phoneSales}
                       </a>
-                      <a href="tel:+91-7056937000" className="tb-drop-row">
+                      <a href={`tel:${phonePrimary}`} className="tb-drop-row">
                         <Image
                           src="/Assets/flag.webp"
                           width={22} height={16}
                           alt="flag"
                           className="rounded-sm object-cover flex-shrink-0"
                         />
-                        +91-7056937000
+                        {phonePrimary}
                       </a>
-                      <a href="skype:live:.cid.313b26920df66baf" className="tb-drop-row">
+                      <a href={`skype:${skypeId}`} className="tb-drop-row">
                         <FaSkype className="w-5 h-5 text-blue-400 flex-shrink-0" />
                         Futuretouch
                       </a>
-                      <a href="mailto:info@futuretouch.in" className="tb-drop-row">
+                      <a href={`mailto:${email}`} className="tb-drop-row">
                         <FaEnvelope className="w-5 h-5 text-indigo-400 flex-shrink-0" />
-                        info@futuretouch.in
+                        {email}
                       </a>
                     </div>
                   </div>
@@ -274,7 +284,7 @@ export default function TopBar() {
 
             {/* Login */}
             <Link target="_blank"
-              href="https://crm.futuretouch.in/authentication/login"
+              href={crmUrl}
               className="hidden lg:block text-[11px] font-semibold text-white/50 hover:text-teal-400 transition-colors"
             >
               Login

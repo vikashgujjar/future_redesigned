@@ -103,7 +103,9 @@ const palette = [
 ];
 
 /* ─── main ─────────────────────────────────────────────── */
-export default function Service({ services: cmsServices } = {}) {
+export default function Service({
+  services: cmsServices, badge, heading, headingHighlight, learnMoreText, ctaText, ctaUrl,
+} = {}) {
   const [active, setActive] = useState(0);
 
   const servicesData = (cmsServices?.length ? cmsServices : FALLBACK_SERVICES).map((s, i) => ({
@@ -114,6 +116,13 @@ export default function Service({ services: cmsServices } = {}) {
     description: s.description,
     tags: s.tags ?? [],
   }));
+
+  const badgeText = badge || "Our Services";
+  const headingText = heading || "We Empower Clients To";
+  const headingHighlightText = headingHighlight || "Be Loved";
+  const learnMoreLabel = learnMoreText || "Learn More";
+  const viewAllText = ctaText || "View All Services";
+  const viewAllUrl = ctaUrl || "/service";
 
   return (
     <section
@@ -259,15 +268,15 @@ export default function Service({ services: cmsServices } = {}) {
           <span className="w-2 h-2 rounded-full bg-gradient-to-r from-teal-400 to-cyan-400 animate-pulse" />
           <span className="text-[11px] font-bold uppercase tracking-widest bg-gradient-to-r from-teal-500 to-indigo-600 bg-clip-text text-transparent"
             style={{ fontFamily:"'Inter',sans-serif" }}>
-            Our Services
+            {badgeText}
           </span>
         </div>
 
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-gray-900"
           style={{ fontFamily:"'Poppins',sans-serif" }}>
-          We Empower Clients To{" "}
+          {headingText}{" "}
           <span className="bg-gradient-to-r from-teal-400 to-indigo-700 bg-clip-text text-transparent">
-            Be Loved
+            {headingHighlightText}
           </span>
         </h2>
 
@@ -431,7 +440,7 @@ export default function Service({ services: cmsServices } = {}) {
                       fontFamily:"'Poppins',sans-serif",
                     }}
                   >
-                    Learn More <FaArrowRight size={11} />
+                    {learnMoreLabel} <FaArrowRight size={11} />
                   </Link>
 
                 </div>
@@ -542,7 +551,7 @@ export default function Service({ services: cmsServices } = {}) {
                       boxShadow: `0 4px 16px ${pal.to}45`,
                       fontFamily:"'Poppins',sans-serif",
                     }}>
-                    Learn More <FaArrowRight size={10} />
+                    {learnMoreLabel} <FaArrowRight size={10} />
                   </Link>
                 </div>
               </div>
@@ -554,7 +563,7 @@ export default function Service({ services: cmsServices } = {}) {
       {/* ── View All CTA ─────────────────────────── */}
       <div className="relative z-10 text-center mt-12">
         <Link
-          href="/service"
+          href={viewAllUrl}
           className="inline-flex items-center gap-2 px-8 py-3 rounded-full text-sm font-semibold text-white hover:-translate-y-0.5 transition-all duration-300"
           style={{
             fontFamily:"'Poppins',sans-serif",
@@ -562,7 +571,7 @@ export default function Service({ services: cmsServices } = {}) {
             boxShadow:"0 8px 30px rgba(99,102,241,.40)",
           }}
         >
-          View All Services <FaArrowRight size={11} />
+          {viewAllText} <FaArrowRight size={11} />
         </Link>
       </div>
     </section>

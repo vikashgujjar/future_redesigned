@@ -2,6 +2,7 @@
 const bannerImg = "/Assets/stock/photo-1547658719-da2b51169166.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
+import { isSectionDisabled } from "../lib/loadServicePage";
 import {
   FaPaintBrush, FaMobileAlt, FaSearch, FaShoppingCart, FaCode, FaLayerGroup,
   FaRocket, FaHeadset, FaChartLine, FaDesktop, FaWordpress, FaTools,
@@ -232,34 +233,59 @@ const FALLBACK_CONTENT = {
   platforms,
   techCategories,
   faqData,
+  featuresBadge: "Website Design & Development Services",
+  featuresTitle: "Building Websites That",
+  featuresTitleHighlight: "Drive Business Growth",
+  bizBadge: "Why Choose Future IT Touch",
+  bizHeading: "We Build Websites That",
+  bizHighlight: "Deliver Real Results",
+  sliderTitle: "Delivering Website Experiences That Grow Businesses Online",
+  platformsTitle: "Website Solutions We Deliver",
+  techBadge: "Our Web Tech Stack",
+  techHeading: "Technologies",
+  techHeadingHighlight: "We Build With",
+  techDescription: "We use modern, proven web technologies to deliver fast, secure, scalable, and beautifully designed websites that help businesses compete and win online.",
+  faqTitle: "Frequently Asked Questions — Website Design",
 };
 
 const WebDesign = ({ cms } = {}) => {
   // Images aren't uploaded to the CMS yet, so keep the local ones even when
   // CMS text content is used — same merge pattern as blog/team/portfolio.
+  // Section-chrome fields (badge/heading/highlight per section) fall back
+  // individually since a page can have some filled in from the CMS and
+  // others still using the local default.
   const content = cms
-    ? { ...cms, bannerImg: cms.bannerImg || bannerImg, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    ? {
+        ...cms,
+        bannerImg: cms.bannerImg || bannerImg,
+        overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage,
+        featuresBadge: cms.featuresBadge || FALLBACK_CONTENT.featuresBadge,
+        featuresTitle: cms.featuresTitle || FALLBACK_CONTENT.featuresTitle,
+        featuresTitleHighlight: cms.featuresTitleHighlight || FALLBACK_CONTENT.featuresTitleHighlight,
+        bizBadge: cms.bizBadge || FALLBACK_CONTENT.bizBadge,
+        bizHeading: cms.bizHeading || FALLBACK_CONTENT.bizHeading,
+        bizHighlight: cms.bizHighlight || FALLBACK_CONTENT.bizHighlight,
+        sliderTitle: cms.sliderTitle || FALLBACK_CONTENT.sliderTitle,
+        platformsTitle: cms.platformsTitle || FALLBACK_CONTENT.platformsTitle,
+        techBadge: cms.techBadge || FALLBACK_CONTENT.techBadge,
+        techHeading: cms.techHeading || FALLBACK_CONTENT.techHeading,
+        techHeadingHighlight: cms.techHeadingHighlight || FALLBACK_CONTENT.techHeadingHighlight,
+        techDescription: cms.techDescription || FALLBACK_CONTENT.techDescription,
+        faqTitle: cms.faqTitle || FALLBACK_CONTENT.faqTitle,
+        // Merge with local fallback first, THEN apply the admin's
+        // enable/disable choice as the final word — a disabled section
+        // must stay hidden even though it has perfectly good local content
+        // to fall back to for everything else.
+        features: isSectionDisabled(cms.enabledSections, "features") ? [] : (cms.features?.length ? cms.features : FALLBACK_CONTENT.features),
+        bizCards: isSectionDisabled(cms.enabledSections, "biz") ? [] : (cms.bizCards?.length ? cms.bizCards : FALLBACK_CONTENT.bizCards),
+        sliderCards: isSectionDisabled(cms.enabledSections, "slider") ? [] : (cms.sliderCards?.length ? cms.sliderCards : FALLBACK_CONTENT.sliderCards),
+        platforms: isSectionDisabled(cms.enabledSections, "platforms") ? [] : (cms.platforms?.length ? cms.platforms : FALLBACK_CONTENT.platforms),
+        techCategories: isSectionDisabled(cms.enabledSections, "techstack") ? [] : (cms.techCategories?.length ? cms.techCategories : FALLBACK_CONTENT.techCategories),
+        faqData: isSectionDisabled(cms.enabledSections, "faq") ? [] : (cms.faqData?.length ? cms.faqData : FALLBACK_CONTENT.faqData),
+      }
     : FALLBACK_CONTENT;
 
-  return (
-    <CommonServicePage
-      {...content}
-      featuresBadge="Website Design & Development Services"
-      featuresTitle="Building Websites That"
-      featuresTitleHighlight="Drive Business Growth"
-      featuresStickyImg="/Assets/stock/photo-1551650975-87deedd944c3.webp"
-      bizBadge="Why Choose Future IT Touch"
-      bizHeading="We Build Websites That"
-      bizHighlight="Deliver Real Results"
-      sliderTitle="Delivering Website Experiences That Grow Businesses Online"
-      platformsTitle="Website Solutions We Deliver"
-      techBadge="Our Web Tech Stack"
-      techHeading="Technologies"
-      techHeadingHighlight="We Build With"
-      techDescription="We use modern, proven web technologies to deliver fast, secure, scalable, and beautifully designed websites that help businesses compete and win online."
-      faqTitle="Frequently Asked Questions — Website Design"
-    />
-  );
+  return <CommonServicePage {...content} featuresStickyImg="/Assets/stock/photo-1551650975-87deedd944c3.webp" />;
 };
 
 export default WebDesign;

@@ -1,20 +1,48 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { swalFire } from "../lib/swal";
 import { sendLeadNotification } from "../lib/useOtpFlow";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const BENEFITS = [
-  { icon:"✦", label:"Weekly Insights" },
-  { icon:"⬡", label:"No Spam, Ever"   },
-  { icon:"◈", label:"Free Forever"    },
-];
+// Local fallback — used only if the CMS's SiteSetting.newsletter fields are
+// unset or unreachable (client-side fetch, so no build-time fallback exists).
+const FALLBACK = {
+  badge: "Newsletter · Stay Updated",
+  heading: "Stay Ahead of the Digital Curve",
+  highlight: "Digital Curve",
+  description: "Get weekly insights on web development, digital marketing, and design trends — straight to your inbox. No noise, just value.",
+  benefits: [
+    { icon: "✦", label: "Weekly Insights" },
+    { icon: "⬡", label: "No Spam, Ever" },
+    { icon: "◈", label: "Free Forever" },
+  ],
+};
 
 export default function GetNewInsight() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const [cms, setCms] = useState(null);
+
+  useEffect(() => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    if (!apiUrl) return;
+    fetch(`${apiUrl}/settings`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((json) => {
+        const n = json?.data?.newsletter;
+        if (n?.heading) setCms(n);
+      })
+      .catch(() => {});
+  }, []);
+
+  const badge = cms?.badge || FALLBACK.badge;
+  const heading = cms?.heading || FALLBACK.heading;
+  const highlight = cms?.highlight || FALLBACK.highlight;
+  const description = cms?.description || FALLBACK.description;
+  const BENEFITS = cms?.benefits?.length ? cms.benefits : FALLBACK.benefits;
+  const headingParts = highlight && heading.includes(highlight) ? heading.split(highlight) : [heading];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -156,15 +184,22 @@ export default function GetNewInsight() {
             style={{ background:"linear-gradient(135deg,#22d3ee,#0ea5e9)" }} />
           <span className="text-[10px] font-bold uppercase tracking-[.22em]"
             style={{ color:"#67e8f9", fontFamily:"'Poppins',sans-serif" }}>
-            Newsletter · Stay Updated
+            {badge}
           </span>
         </div>
 
         {/* Heading */}
         <h2 className="font-extrabold leading-[1.10] text-white mb-4"
           style={{ fontFamily:"'Poppins',sans-serif", fontSize:"clamp(1.9rem,4.5vw,3.4rem)" }}>
-          Stay Ahead of the{" "}
-          <span className="gni-hl">Digital Curve</span>
+          {headingParts.length > 1 ? (
+            <>
+              {headingParts[0]}
+              <span className="gni-hl">{highlight}</span>
+              {headingParts[1]}
+            </>
+          ) : (
+            heading
+          )}
         </h2>
 
         {/* Accent bar */}
@@ -174,7 +209,7 @@ export default function GetNewInsight() {
         {/* Subtitle */}
         <p className="text-[14.5px] leading-[1.86] mb-8 max-w-[560px] mx-auto"
           style={{ color:"rgba(180,210,240,.62)" }}>
-          Get weekly insights on web development, digital marketing, and design trends — straight to your inbox. No noise, just value.
+          {description}
         </p>
 
         {/* Benefit pills */}

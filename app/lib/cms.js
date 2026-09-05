@@ -65,6 +65,16 @@ export async function getMissionPageContent() {
   return json?.data ?? null;
 }
 
+export async function getContactPageContent() {
+  const json = await fetchCms("/contact-page");
+  return json?.data ?? null;
+}
+
+export async function getPortfolioPageContent() {
+  const json = await fetchCms("/portfolio-page");
+  return json?.data ?? null;
+}
+
 export async function getPageSeo(pageKey) {
   const json = await fetchCms(`/page-seo/${pageKey}`);
   return json?.data ?? null;
@@ -141,6 +151,11 @@ export async function getOfficeLocations() {
   return json?.data ?? null;
 }
 
+export async function getIndustries() {
+  const json = await fetchCms("/industries");
+  return json?.data ?? null;
+}
+
 export async function getServicePages() {
   const json = await fetchCms("/service-pages");
   return json?.data ?? null;
@@ -154,6 +169,53 @@ export async function getServicePage(slug) {
 export async function getServiceListingItems() {
   const json = await fetchCms("/service-listing");
   return json?.data ?? null;
+}
+
+export async function getServiceIndexContent() {
+  const json = await fetchCms("/service-index");
+  return json?.data ?? null;
+}
+
+export async function getTechnologyCategories() {
+  const json = await fetchCms("/technology-categories");
+  return json?.data ?? null;
+}
+
+/* CMS-created pages — see app/[slug]/page.js. Unlike every other fetcher
+   here, an unreachable CMS during a real production build is NOT safe to
+   silently ignore for these: there is no local fallback content for a
+   page that only exists in the CMS, so `generateStaticParams` failing
+   quietly would just mean that page's URL silently vanishes from the
+   site. Both callers surface the failure instead of swallowing it. */
+export async function getPages() {
+  const json = await fetchCms("/pages");
+  return json ?? [];
+}
+
+export async function getPageBySlug(slug) {
+  const json = await fetchCms(`/pages/${slug}`);
+  return json?.data ?? null;
+}
+
+/* Additional countries/cities/services for the /[country]/[serviceLocation]
+   programmatic pages, layered on top of the site's original built-in
+   dataset (app/data/location-seo/*.js) — see loadCmsLocations.js. Each
+   fails soft to an empty list, same as everything else here: a CMS outage
+   simply means no CMS-added location pages get built that run, the
+   original ~1,900 pages are entirely unaffected either way. */
+export async function getLocationCities() {
+  const json = await fetchCms("/location-cities");
+  return json?.data ?? [];
+}
+
+export async function getLocationServicesCatalog() {
+  const json = await fetchCms("/location-services");
+  return json?.data ?? [];
+}
+
+export async function getLocationOverrides() {
+  const json = await fetchCms("/location-overrides");
+  return json?.data ?? [];
 }
 
 /* Shape a mega-menu NavigationMenu (parent items with children) into the

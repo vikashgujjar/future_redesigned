@@ -39,9 +39,22 @@ const FALLBACK_REVIEWS = [
   },
 ];
 
-const Testimonial = () => {
+const FALLBACK_STATS = [
+  { v: "1200+", l: "Happy Clients" },
+  { v: "4.9/5", l: "Avg. Rating" },
+  { v: "100%", l: "Satisfaction" },
+];
+
+const Testimonial = ({ cms } = {}) => {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const badge = cms?.badge || "Client Reviews";
+  const subLabel = cms?.sub_label || "What our clients say about Future IT Touch Pvt. Ltd.";
+  const heading = cms?.heading || "Over 1200+ Satisfied Clients and Growing";
+  const headingHighlight = "Satisfied Clients";
+  const readMoreLabel = cms?.read_more_label || "Read More Reviews";
+  const statsList = cms?.stats?.length ? cms.stats : FALLBACK_STATS;
 
   useEffect(() => {
     /* CMS testimonials (Laravel) are the fallback tier if Google reviews are
@@ -230,24 +243,31 @@ const Testimonial = () => {
               <span className="w-2 h-2 rounded-full bg-gradient-to-r from-teal-400 to-cyan-400 animate-pulse flex-shrink-0" />
               <span className="text-[11px] font-bold uppercase tracking-widest bg-gradient-to-r from-teal-500 to-indigo-600 bg-clip-text text-transparent"
                 style={{ fontFamily: "'Inter',sans-serif" }}>
-                Client Reviews
+                {badge}
               </span>
             </div>
 
             {/* sub-label */}
             <p className="text-sm font-semibold"
               style={{ fontFamily: "'Inter',sans-serif", color: "rgba(99,102,241,.80)" }}>
-              What our clients say about Future IT Touch Pvt. Ltd.
+              {subLabel}
             </p>
 
             {/* heading */}
             <h2 className="text-3xl sm:text-4xl lg:text-4xl xl:text-5xl font-bold leading-tight text-gray-900"
               style={{ fontFamily: "'Poppins',sans-serif" }}>
-              Over 1200+{" "}
-              <span className="bg-gradient-to-r from-teal-400 to-indigo-700 bg-clip-text text-transparent">
-                Satisfied Clients
-              </span>{" "}
-              and Growing
+              {heading.includes(headingHighlight)
+                ? heading.split(headingHighlight).map((part, i, arr) => (
+                    <span key={i}>
+                      {part}
+                      {i < arr.length - 1 && (
+                        <span className="bg-gradient-to-r from-teal-400 to-indigo-700 bg-clip-text text-transparent">
+                          {headingHighlight}
+                        </span>
+                      )}
+                    </span>
+                  ))
+                : heading}
             </h2>
 
             {/* divider */}
@@ -257,11 +277,7 @@ const Testimonial = () => {
             {/* stats row */}
             <div className="flex gap-8 py-4"
               style={{ borderTop: "1px solid rgba(99,102,241,.08)", borderBottom: "1px solid rgba(99,102,241,.08)" }}>
-              {[
-                { v: "1200+", l: "Happy Clients" },
-                { v: "4.9/5", l: "Avg. Rating" },
-                { v: "100%", l: "Satisfaction" },
-              ].map((s, i) => (
+              {statsList.map((s, i) => (
                 <div key={i}>
                   <p className="text-xl font-black bg-gradient-to-br from-teal-400 to-indigo-500 bg-clip-text text-transparent"
                     style={{ fontFamily: "'Poppins',sans-serif" }}>
@@ -278,7 +294,7 @@ const Testimonial = () => {
             {/* read more reviews */}
             <div>
               <h4 className="text-sm font-bold text-gray-700 mb-3" style={{ fontFamily: "'Poppins',sans-serif" }}>
-                Read More Reviews
+                {readMoreLabel}
               </h4>
               <div className="flex items-center gap-4">
                 <Link href="https://g.co/kgs/Xpqu7J" target="_blank" rel="noopener noreferrer"

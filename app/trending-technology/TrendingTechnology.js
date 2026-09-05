@@ -18,6 +18,7 @@ import {
 import trendtechImg from "../Assets/trendtech.webp";
 import Location from "../components/Location";
 import useYearsExperience from "../lib/useYearsExperience";
+import { getServiceIcon } from "../lib/serviceIcons";
 
 // ── gradient animated text class (matches global keyframe tcpGrad) ──
 const HL = "bg-[linear-gradient(125deg,#2dd4bf,#6366f1,#a855f7)] bg-[length:200%_200%] bg-clip-text text-transparent [animation:tcpGrad_5s_ease-in-out_infinite]";
@@ -135,8 +136,20 @@ const getStats = (yearsExperience) => [
   { num: "30+",  label: "Technologies Mastered" },
 ];
 
-export default function TrendingTechnology() {
+export default function TrendingTechnology({ categories: cmsCategories, officeLocations } = {}) {
   const yearsExperience = useYearsExperience();
+  const CATS = cmsCategories?.length
+    ? cmsCategories.map((c) => ({
+        icon: getServiceIcon(c.icon),
+        color: c.color,
+        title: c.title,
+        subtitle: c.subtitle,
+        desc: c.description,
+        tags: c.tags ?? [],
+        links: c.links ?? [],
+        icons: (c.techIcons ?? []).map((name) => getServiceIcon(name)),
+      }))
+    : CATEGORIES;
   return (
     <div className="font-['Inter',sans-serif] overflow-x-clip">
 
@@ -416,7 +429,7 @@ export default function TrendingTechnology() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7">
-            {CATEGORIES.map((cat, i) => (
+            {CATS.map((cat, i) => (
               <div key={i} className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col">
 
                 {/* Card header gradient bar */}
@@ -476,7 +489,7 @@ export default function TrendingTechnology() {
 
 
       {/* ════════════ 7. LOCATION ════════════ */}
-      <Location />
+      <Location locations={officeLocations} />
     </div>
   );
 }

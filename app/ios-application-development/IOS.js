@@ -5,6 +5,7 @@ import { FaShoppingCart, FaPaintBrush, FaClock, FaUsers, FaCogs, FaApple, FaClou
 import { SiSwift } from "react-icons/si";
 import CommonServicePage from "../components/CommonServicePage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
+import { isSectionDisabled } from "../lib/loadServicePage";
 
 const features = [
   { icon: <FaApple />,    title: "Expertise in iOS Development",      description: "iPhone app development is our core strength. We create high-performing, scalable, and feature-rich iOS applications that deliver seamless user experiences across iPhones and iPads." },
@@ -100,28 +101,42 @@ const FALLBACK_CONTENT = {
   platforms,
   techCategories,
   faqData,
+  featuresBadge: "Our iPhone App Development Process",
+  featuresTitle: "We're a trusted iOS app development company in",
+  featuresTitleHighlight: "India",
+  bizBadge: "Leading iOS App Development Company in India",
+  bizHeading: "Partner with Us for",
+  bizHighlight: "Growth & Innovation",
+  sliderTitle: "Delivering Innovative iOS App Experiences with",
+  platformsTitle: "iOS App Development Technologies We Use",
+  faqTitle: "About iOS Application Development",
 };
 
 const IOS = ({ cms } = {}) => {
   const content = cms
-    ? { ...cms, bannerImg: cms.bannerImg || ec, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    ? {
+        ...cms,
+        bannerImg: cms.bannerImg || ec,
+        overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage,
+        featuresBadge: cms.featuresBadge || FALLBACK_CONTENT.featuresBadge,
+        featuresTitle: cms.featuresTitle || FALLBACK_CONTENT.featuresTitle,
+        featuresTitleHighlight: cms.featuresTitleHighlight || FALLBACK_CONTENT.featuresTitleHighlight,
+        bizBadge: cms.bizBadge || FALLBACK_CONTENT.bizBadge,
+        bizHeading: cms.bizHeading || FALLBACK_CONTENT.bizHeading,
+        bizHighlight: cms.bizHighlight || FALLBACK_CONTENT.bizHighlight,
+        sliderTitle: cms.sliderTitle || FALLBACK_CONTENT.sliderTitle,
+        platformsTitle: cms.platformsTitle || FALLBACK_CONTENT.platformsTitle,
+        faqTitle: cms.faqTitle || FALLBACK_CONTENT.faqTitle,
+        features: isSectionDisabled(cms.enabledSections, "features") ? [] : (cms.features?.length ? cms.features : FALLBACK_CONTENT.features),
+        bizCards: isSectionDisabled(cms.enabledSections, "biz") ? [] : (cms.bizCards?.length ? cms.bizCards : FALLBACK_CONTENT.bizCards),
+        sliderCards: isSectionDisabled(cms.enabledSections, "slider") ? [] : (cms.sliderCards?.length ? cms.sliderCards : FALLBACK_CONTENT.sliderCards),
+        platforms: isSectionDisabled(cms.enabledSections, "platforms") ? [] : (cms.platforms?.length ? cms.platforms : FALLBACK_CONTENT.platforms),
+        techCategories: isSectionDisabled(cms.enabledSections, "techstack") ? [] : (cms.techCategories?.length ? cms.techCategories : FALLBACK_CONTENT.techCategories),
+        faqData: isSectionDisabled(cms.enabledSections, "faq") ? [] : (cms.faqData?.length ? cms.faqData : FALLBACK_CONTENT.faqData),
+      }
     : FALLBACK_CONTENT;
 
-  return (
-    <CommonServicePage
-      {...content}
-      featuresBadge="Our iPhone App Development Process"
-      featuresTitle="We're a trusted iOS app development company in"
-      featuresTitleHighlight="India"
-      featuresStickyImg={ec}
-      bizBadge="Leading iOS App Development Company in India"
-      bizHeading="Partner with Us for"
-      bizHighlight="Growth & Innovation"
-      sliderTitle="Delivering Innovative iOS App Experiences with"
-      platformsTitle="iOS App Development Technologies We Use"
-      faqTitle="About iOS Application Development"
-    />
-  );
+  return <CommonServicePage {...content} featuresStickyImg={ec} />;
 };
 
 export default IOS;

@@ -7,6 +7,7 @@ import {
   FaMoneyBillWave, FaEdit, FaFileAlt, FaGlobe, FaShareAlt, FaSearch,
 } from "react-icons/fa";
 import useYearsExperience from "../lib/useYearsExperience";
+import { isSectionDisabled } from "../lib/loadServicePage";
 
 const features = [
   {
@@ -215,26 +216,41 @@ const Ecommerce = ({ cms } = {}) => {
     platforms,
     techCategories,
     faqData,
+    featuresBadge: "Trusted CMS Development Company",
+    featuresTitle: "Building Flexible &",
+    featuresTitleHighlight: "Easy-to-Manage CMS Websites",
+    bizBadge: "Custom CMS Website Development Services",
+    bizHeading: "We would be happy to discuss",
+    bizHighlight: "the project with you in person",
+    sliderTitle: "Building Powerful & Scalable CMS Solutions for Your Business",
+    platformsTitle: "Our Comprehensive CMS Development Services",
+    faqTitle: "About CMS & eCommerce Website Development",
   };
 
   const content = cms
-    ? { ...cms, bannerImg: cms.bannerImg || gm, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    ? {
+        ...cms,
+        bannerImg: cms.bannerImg || gm,
+        overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage,
+        featuresBadge: cms.featuresBadge || FALLBACK_CONTENT.featuresBadge,
+        featuresTitle: cms.featuresTitle || FALLBACK_CONTENT.featuresTitle,
+        featuresTitleHighlight: cms.featuresTitleHighlight || FALLBACK_CONTENT.featuresTitleHighlight,
+        bizBadge: cms.bizBadge || FALLBACK_CONTENT.bizBadge,
+        bizHeading: cms.bizHeading || FALLBACK_CONTENT.bizHeading,
+        bizHighlight: cms.bizHighlight || FALLBACK_CONTENT.bizHighlight,
+        sliderTitle: cms.sliderTitle || FALLBACK_CONTENT.sliderTitle,
+        platformsTitle: cms.platformsTitle || FALLBACK_CONTENT.platformsTitle,
+        faqTitle: cms.faqTitle || FALLBACK_CONTENT.faqTitle,
+        features: isSectionDisabled(cms.enabledSections, "features") ? [] : (cms.features?.length ? cms.features : FALLBACK_CONTENT.features),
+        bizCards: isSectionDisabled(cms.enabledSections, "biz") ? [] : (cms.bizCards?.length ? cms.bizCards : FALLBACK_CONTENT.bizCards),
+        sliderCards: isSectionDisabled(cms.enabledSections, "slider") ? [] : (cms.sliderCards?.length ? cms.sliderCards : FALLBACK_CONTENT.sliderCards),
+        platforms: isSectionDisabled(cms.enabledSections, "platforms") ? [] : (cms.platforms?.length ? cms.platforms : FALLBACK_CONTENT.platforms),
+        techCategories: isSectionDisabled(cms.enabledSections, "techstack") ? [] : (cms.techCategories?.length ? cms.techCategories : FALLBACK_CONTENT.techCategories),
+        faqData: isSectionDisabled(cms.enabledSections, "faq") ? [] : (cms.faqData?.length ? cms.faqData : FALLBACK_CONTENT.faqData),
+      }
     : FALLBACK_CONTENT;
 
-  return (
-    <CommonServicePage
-      {...content}
-      featuresBadge="Trusted CMS Development Company"
-      featuresTitle="Building Flexible &"
-      featuresTitleHighlight="Easy-to-Manage CMS Websites"
-      bizBadge="Custom CMS Website Development Services"
-      bizHeading="We would be happy to discuss"
-      bizHighlight="the project with you in person"
-      sliderTitle="Building Powerful & Scalable CMS Solutions for Your Business"
-      platformsTitle="Our Comprehensive CMS Development Services"
-      faqTitle="About CMS & eCommerce Website Development"
-    />
-  );
+  return <CommonServicePage {...content} />;
 };
 
 export default Ecommerce;

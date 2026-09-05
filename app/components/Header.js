@@ -227,7 +227,9 @@ function PromoPanel({ tag, title, desc, href, linkLabel, reverse = false }) {
 }
 
 /* ─── Main Header ───────────────────────────────── */
-export default function Header({ serviceColumns, techColumns, aboutDropdown } = {}) {
+export default function Header({ serviceColumns, techColumns, aboutDropdown, settings } = {}) {
+  const phonePrimary = settings?.contact?.phone_primary || "+91-7056937000";
+  const contactEmail = settings?.contact?.email || "info@futuretouch.in";
   serviceColumns = serviceColumns?.length ? serviceColumns : FALLBACK_SERVICE_COLUMNS;
   techColumns = techColumns?.length ? techColumns : FALLBACK_TECH_COLUMNS;
   aboutDropdown = aboutDropdown?.length ? aboutDropdown : FALLBACK_ABOUT_DROPDOWN;
@@ -853,23 +855,23 @@ export default function Header({ serviceColumns, techColumns, aboutDropdown } = 
               className="flex-shrink-0 px-4 py-5 space-y-3"
               style={{ borderTop: "1px solid rgba(255,255,255,.07)" }}
             >
-              <a href="tel:+91-7056937000"
+              <a href={`tel:${phonePrimary}`}
                 className="flex items-center gap-3 text-[13px] transition-colors hover:text-teal-400"
                 style={{ color: "rgba(255,255,255,.50)" }}>
                 <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
                   style={{ background: "rgba(45,212,191,.12)", border: "1px solid rgba(45,212,191,.25)" }}>
                   <FaPhoneAlt className="w-3 h-3 text-teal-400" />
                 </div>
-                +91-7056937000
+                {phonePrimary}
               </a>
-              <a href="mailto:info@futuretouch.in"
+              <a href={`mailto:${contactEmail}`}
                 className="flex items-center gap-3 text-[13px] transition-colors hover:text-indigo-400"
                 style={{ color: "rgba(255,255,255,.50)" }}>
                 <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
                   style={{ background: "rgba(99,102,241,.12)", border: "1px solid rgba(99,102,241,.25)" }}>
                   <FaEnvelope className="w-3 h-3 text-indigo-400" />
                 </div>
-                info@futuretouch.in
+                {contactEmail}
               </a>
               <a href="skype:live:.cid.313b26920df66baf"
                 className="flex items-center gap-3 text-[13px] transition-colors hover:text-sky-400"

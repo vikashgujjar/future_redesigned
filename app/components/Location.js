@@ -3,7 +3,7 @@ import React from "react";
 import useYearsExperience from "../lib/useYearsExperience";
 import LocationOfficesCarousel from "./LocationOfficesCarousel";
 
-const locations = [
+const FALLBACK_LOCATIONS = [
   {
     country: "India",
     office: "Chandigarh Head Office",
@@ -66,8 +66,23 @@ const locations = [
   },
 ];
 
-function Location() {
+function Location({ locations: cmsLocations } = {}) {
   const yearsExperience = useYearsExperience();
+  const locations = cmsLocations?.length
+    ? cmsLocations.map((l) => ({
+        country: l.country,
+        office: l.office,
+        address: l.address,
+        image: l.image || FALLBACK_LOCATIONS.find((f) => f.office === l.office)?.image || "/chandigarh.webp",
+        alt: `${l.office} Office`,
+        email: l.email,
+        phone: l.phone,
+        phoneHref: l.phone_href,
+        flag: l.flag,
+        accent: l.accent?.from ? l.accent : { from: "#2dd4bf", to: "#06b6d4" },
+      }))
+    : FALLBACK_LOCATIONS;
+  const countryCount = new Set(locations.map((l) => l.country)).size;
   return (
     <section className="relative overflow-hidden py-16 sm:py-20 lg:py-24"
       style={{ background:"linear-gradient(150deg,#04071a 0%,#080e28 55%,#050b20 100%)",
@@ -200,8 +215,8 @@ function Location() {
         {/* ── Stats strip ── */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
           {[
-            { num:"5", label:"Global Offices" },
-            { num:"3", label:"Countries" },
+            { num: String(locations.length), label:"Global Offices" },
+            { num: String(countryCount), label:"Countries" },
             { num: yearsExperience, label:"Years Active" },
             { num:"5000+", label:"Projects Done" },
           ].map((s, i) => (

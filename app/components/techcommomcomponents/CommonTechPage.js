@@ -26,6 +26,46 @@ const PALETTE = [
   { from: "#ec4899", to: "#db2777" },
 ];
 
+// The marquee's colored square badge originally only ever held a single
+// monogram letter (no stack item had an `icon` at all pre-CMS). Now that the
+// admin's Tech Stack form accepts a real icon URL, a value that looks like
+// one must render as an <img>, not as raw text — otherwise the URL string
+// itself shows up in the pill. Falls back to the monogram on load failure,
+// same pattern as TechnologiesSection.js's TechIcon.
+function StackIcon({ icon, name }) {
+  const [failed, setFailed] = useState(false);
+  const isUrl = icon && (icon.startsWith("http://") || icon.startsWith("https://") || icon.startsWith("/"));
+
+  if (isUrl && !failed) {
+    return (
+      <img
+        src={icon}
+        alt={name}
+        width={18}
+        height={18}
+        loading="lazy"
+        className="h-[18px] w-[18px] object-contain"
+        onError={() => setFailed(true)}
+      />
+    );
+  }
+
+  return icon && !isUrl ? icon : name[0]?.toUpperCase() || "?";
+}
+
+// Splits `text` around the `highlight` substring (wherever it occurs — start,
+// middle, or end) and wraps just that part in the gradient style, matching
+// the highlight patterns already used elsewhere on the site.
+function renderHeading(text, highlight, highlightClass) {
+  if (!highlight || !text?.includes(highlight)) return text;
+  return text.split(highlight).map((part, i, arr) => (
+    <span key={i}>
+      {part}
+      {i < arr.length - 1 && <span className={highlightClass}>{highlight}</span>}
+    </span>
+  ));
+}
+
 export default function CommonTechPage({
   banner   = {},
   intro    = {},
@@ -37,6 +77,13 @@ export default function CommonTechPage({
   faq      = {},
   areaServed = "Worldwide",
   breadcrumbs,
+  servicesBadge = "Our Services", servicesHeading = "What We Deliver", servicesHighlight = "Deliver",
+  processBadge = "Our Process", processHeading = "How We Work", processHighlight = "Work",
+  processDescription = "A proven, repeatable workflow refined over a decade of delivering successful projects.",
+  whyBadge = "Why Choose Us", whyHeading = "The Future IT Touch Advantage", whyHighlight = "Future IT Touch",
+  stackBadge = "Tech Stack", stackHeading = "Technologies We Master", stackHighlight = "Master",
+  stackDescription = "A battle-tested toolkit spanning frontend, backend, cloud, and DevOps — every tool chosen for performance and reliability.",
+  faqBadge = "FAQ",
 }) {
   const pathname = usePathname();
   const [openFaq,  setOpenFaq]  = useState(null);
@@ -529,10 +576,10 @@ export default function CommonTechPage({
             <div className="text-center mb-12">
               <div className="inline-flex items-center gap-2.5 px-[18px] py-1.5 rounded-full border border-[#2dd4bf]/28 bg-[#2dd4bf]/10 mb-5 font-['Poppins',sans-serif] text-[10px] font-bold tracking-[.22em] uppercase text-[#2dd4bf]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#2dd4bf] animate-ping inline-block flex-shrink-0" />
-                Our Services
+                {servicesBadge}
               </div>
               <h2 className="font-['Poppins',sans-serif] font-extrabold [font-size:clamp(1.4rem,3vw,2.2rem)] leading-[1.15] text-white mb-4">
-                What We <span className={HL}>Deliver</span>
+                {renderHeading(servicesHeading, servicesHighlight, HL)}
               </h2>
               <div className="h-[3px] w-12 rounded-full bg-[linear-gradient(90deg,#2dd4bf,#6366f1,#a855f7)] mx-auto" />
             </div>
@@ -590,14 +637,14 @@ export default function CommonTechPage({
             <div className="text-center mb-14 lg:mb-20">
               <div className="inline-flex items-center gap-2.5 px-[18px] py-1.5 rounded-full border border-[#6366f1]/26 bg-[#6366f1]/[.09] mb-5 font-['Poppins',sans-serif] text-[10px] font-bold tracking-[.22em] uppercase text-[#4f46e5]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#6366f1] animate-ping inline-block flex-shrink-0" />
-                Our Process
+                {processBadge}
               </div>
               <h2 className="font-['Poppins',sans-serif] font-extrabold [font-size:clamp(1.4rem,3vw,2.2rem)] leading-[1.15] text-[#0f172a] mb-4">
-                How We <span className={HL}>Work</span>
+                {renderHeading(processHeading, processHighlight, HL)}
               </h2>
               <div className="h-[3px] w-12 rounded-full bg-[linear-gradient(90deg,#2dd4bf,#6366f1,#a855f7)] mx-auto mb-4" />
               <p className="text-[#64748b] text-[.9rem] max-w-md mx-auto">
-                A proven, repeatable workflow refined over a decade of delivering successful projects.
+                {processDescription}
               </p>
             </div>
 
@@ -717,10 +764,10 @@ export default function CommonTechPage({
             <div className="text-center mb-12">
               <div className="inline-flex items-center gap-2.5 px-[18px] py-1.5 rounded-full border border-[#a855f7]/28 bg-[#a855f7]/10 mb-5 font-['Poppins',sans-serif] text-[10px] font-bold tracking-[.22em] uppercase text-[#c084fc]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#a855f7] animate-ping inline-block flex-shrink-0" />
-                Why Choose Us
+                {whyBadge}
               </div>
               <h2 className="font-['Poppins',sans-serif] font-extrabold [font-size:clamp(1.4rem,3vw,2.2rem)] leading-[1.15] text-white mb-4">
-                The <span className={HL}>Future IT Touch</span> Advantage
+                {renderHeading(whyHeading, whyHighlight, HL)}
               </h2>
               <div className="h-[3px] w-12 rounded-full bg-[linear-gradient(90deg,#2dd4bf,#6366f1,#a855f7)] mx-auto" />
             </div>
@@ -767,13 +814,13 @@ export default function CommonTechPage({
           <div className="relative z-10 max-w-[1280px] mx-auto px-5 sm:px-10 xl:px-16 text-center mb-14">
             <div className="inline-flex items-center gap-2.5 px-[18px] py-1.5 rounded-full border border-[#2dd4bf]/26 bg-[#2dd4bf]/[.09] mb-5 font-['Poppins',sans-serif] text-[10px] font-bold tracking-[.22em] uppercase text-[#2dd4bf]">
               <span className="w-1.5 h-1.5 rounded-full bg-[#2dd4bf] animate-ping inline-block flex-shrink-0" />
-              Tech Stack
+              {stackBadge}
             </div>
             <h2 className="font-['Poppins',sans-serif] font-extrabold [font-size:clamp(1.4rem,3vw,2.2rem)] leading-[1.15] text-white mb-3">
-              Technologies We <span className={HL}>Master</span>
+              {renderHeading(stackHeading, stackHighlight, HL)}
             </h2>
             <p className="text-white/45 max-w-lg mx-auto text-[.9rem] mb-7">
-              A battle-tested toolkit spanning frontend, backend, cloud, and DevOps — every tool chosen for performance and reliability.
+              {stackDescription}
             </p>
             {/* Count chip */}
             <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-white/[.06] border border-white/[.10]">
@@ -794,7 +841,7 @@ export default function CommonTechPage({
                     style={{ minWidth: 168 }}>
                     <div className="w-9 h-9 rounded-xl flex items-center justify-center text-white text-[13px] font-bold font-['Poppins',sans-serif] flex-shrink-0 shadow-[0_0_14px_rgba(0,0,0,.4)]"
                       style={{ background: grad(a) }}>
-                      {tech.icon || name[0]?.toUpperCase() || "?"}
+                      <StackIcon icon={tech.icon} name={name} />
                     </div>
                     <div>
                       <div className="text-white/80 font-['Poppins',sans-serif] font-semibold text-sm whitespace-nowrap group-hover/chip:text-white transition-colors duration-150">
@@ -821,7 +868,7 @@ export default function CommonTechPage({
                     style={{ minWidth: 168 }}>
                     <div className="w-9 h-9 rounded-xl flex items-center justify-center text-white text-[13px] font-bold font-['Poppins',sans-serif] flex-shrink-0 shadow-[0_0_14px_rgba(0,0,0,.4)]"
                       style={{ background: grad(a) }}>
-                      {tech.icon || name[0]?.toUpperCase() || "?"}
+                      <StackIcon icon={tech.icon} name={name} />
                     </div>
                     <div>
                       <div className="text-white/80 font-['Poppins',sans-serif] font-semibold text-sm whitespace-nowrap group-hover/chip:text-white transition-colors duration-150">
@@ -854,7 +901,7 @@ export default function CommonTechPage({
             <div className="text-center mb-10">
               <div className="inline-flex items-center gap-2.5 px-[18px] py-1.5 rounded-full border border-[#6366f1]/26 bg-[#6366f1]/[.09] mb-5 font-['Poppins',sans-serif] text-[10px] font-bold tracking-[.22em] uppercase text-[#4f46e5]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#6366f1] animate-ping inline-block flex-shrink-0" />
-                FAQ
+                {faqBadge}
               </div>
               <h2 className="font-['Poppins',sans-serif] font-extrabold [font-size:clamp(1.4rem,3vw,2.2rem)] leading-[1.15] text-[#0f172a] mb-2">
                 Questions About <span className={HL}>{faq.title || "Our Services"}</span>
@@ -883,7 +930,8 @@ export default function CommonTechPage({
                       </span>
                     </button>
                     <div className={`overflow-hidden transition-[max-height] duration-300 ease-in-out ${isOpen ? "max-h-[400px]" : "max-h-0"}`}>
-                      <p className="px-6 pb-5 text-[#475569] text-[.9rem] leading-relaxed">{item.description}</p>
+                      <p className="px-6 pb-5 text-[#475569] text-[.9rem] leading-relaxed [&_a]:text-[#4f46e5] [&_a]:font-semibold"
+                        dangerouslySetInnerHTML={{ __html: item.description }} />
                     </div>
                   </div>
                 );

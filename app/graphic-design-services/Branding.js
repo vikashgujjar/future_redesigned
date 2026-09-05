@@ -1,6 +1,7 @@
 "use client";
 import devops from "../Assets/graphic-design.webp";
 import CommonServicePage from "../components/CommonServicePage";
+import { isSectionDisabled } from "../lib/loadServicePage";
 import {
   FaPaintBrush, FaLayerGroup, FaPalette, FaRegIdBadge, FaImage, FaVectorSquare, FaFilePdf,
 } from "react-icons/fa";
@@ -187,32 +188,50 @@ const FALLBACK_CONTENT = {
   platforms,
   techCategories,
   faqData,
+  featuresBadge: "Our Design Services",
+  featuresTitle: "Creative Designs That",
+  featuresTitleHighlight: "Build Memorable Brands",
+  bizBadge: "Our Advantages",
+  bizHeading: "Why Choose Us for",
+  bizHighlight: "Design & Branding",
+  sliderTitle: "Delivering Creative Design Solutions That Drive Business Growth",
+  platformsTitle: "Design Tools & Platforms We Use",
+  techBadge: "Our Design Tech Stack",
+  techHeading: "Tools",
+  techHeadingHighlight: "We Design With",
+  techDescription: "We use the industry's most powerful design tools to create stunning visuals, from initial concepts to final production-ready assets.",
+  faqTitle: "Frequently Asked Questions — Graphic Design",
 };
 
 const Branding = ({ cms } = {}) => {
   const content = cms
-    ? { ...cms, bannerImg: cms.bannerImg || devops, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    ? {
+        ...cms,
+        bannerImg: cms.bannerImg || devops,
+        overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage,
+        featuresBadge: cms.featuresBadge || FALLBACK_CONTENT.featuresBadge,
+        featuresTitle: cms.featuresTitle || FALLBACK_CONTENT.featuresTitle,
+        featuresTitleHighlight: cms.featuresTitleHighlight || FALLBACK_CONTENT.featuresTitleHighlight,
+        bizBadge: cms.bizBadge || FALLBACK_CONTENT.bizBadge,
+        bizHeading: cms.bizHeading || FALLBACK_CONTENT.bizHeading,
+        bizHighlight: cms.bizHighlight || FALLBACK_CONTENT.bizHighlight,
+        sliderTitle: cms.sliderTitle || FALLBACK_CONTENT.sliderTitle,
+        platformsTitle: cms.platformsTitle || FALLBACK_CONTENT.platformsTitle,
+        techBadge: cms.techBadge || FALLBACK_CONTENT.techBadge,
+        techHeading: cms.techHeading || FALLBACK_CONTENT.techHeading,
+        techHeadingHighlight: cms.techHeadingHighlight || FALLBACK_CONTENT.techHeadingHighlight,
+        techDescription: cms.techDescription || FALLBACK_CONTENT.techDescription,
+        faqTitle: cms.faqTitle || FALLBACK_CONTENT.faqTitle,
+        features: isSectionDisabled(cms.enabledSections, "features") ? [] : (cms.features?.length ? cms.features : FALLBACK_CONTENT.features),
+        bizCards: isSectionDisabled(cms.enabledSections, "biz") ? [] : (cms.bizCards?.length ? cms.bizCards : FALLBACK_CONTENT.bizCards),
+        sliderCards: isSectionDisabled(cms.enabledSections, "slider") ? [] : (cms.sliderCards?.length ? cms.sliderCards : FALLBACK_CONTENT.sliderCards),
+        platforms: isSectionDisabled(cms.enabledSections, "platforms") ? [] : (cms.platforms?.length ? cms.platforms : FALLBACK_CONTENT.platforms),
+        techCategories: isSectionDisabled(cms.enabledSections, "techstack") ? [] : (cms.techCategories?.length ? cms.techCategories : FALLBACK_CONTENT.techCategories),
+        faqData: isSectionDisabled(cms.enabledSections, "faq") ? [] : (cms.faqData?.length ? cms.faqData : FALLBACK_CONTENT.faqData),
+      }
     : FALLBACK_CONTENT;
 
-  return (
-    <CommonServicePage
-      {...content}
-      featuresBadge="Our Design Services"
-      featuresTitle="Creative Designs That"
-      featuresTitleHighlight="Build Memorable Brands"
-      featuresStickyImg="/Assets/stock/photo-1600857544200-b2f666a9a2ec.webp"
-      bizBadge="Our Advantages"
-      bizHeading="Why Choose Us for"
-      bizHighlight="Design & Branding"
-      sliderTitle="Delivering Creative Design Solutions That Drive Business Growth"
-      platformsTitle="Design Tools & Platforms We Use"
-      techBadge="Our Design Tech Stack"
-      techHeading="Tools"
-      techHeadingHighlight="We Design With"
-      techDescription="We use the industry's most powerful design tools to create stunning visuals, from initial concepts to final production-ready assets."
-      faqTitle="Frequently Asked Questions — Graphic Design"
-    />
-  );
+  return <CommonServicePage {...content} featuresStickyImg="/Assets/stock/photo-1600857544200-b2f666a9a2ec.webp" />;
 };
 
 export default Branding;

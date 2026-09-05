@@ -31,7 +31,32 @@ const features = [
   },
 ];
 
-export default function About() {
+const FALLBACK = {
+  badge: "About Us",
+  heading: "Creative Problem Solving",
+  headingHighlight: "Innovation",
+  description: `Founded in ${COMPANY_START_YEAR}, Future IT Touch is a leading website designing and development company in India. We specialize in creating innovative and user-friendly digital solutions that help businesses thrive in the online world. Our dedicated team combines creativity and technical expertise to deliver exceptional results tailored to your needs.`,
+  features,
+  image1: "/Assets/hero-about-1.webp",
+  image1Alt: "Team working together",
+  image2: "/Assets/h2-about-img-right.webp",
+  image2Alt: "Creative digital solutions",
+  ctaText: "Read More",
+  ctaUrl: "/contact",
+};
+
+export default function About({ cms } = {}) {
+  const badge = cms?.badge || FALLBACK.badge;
+  const heading = cms?.heading || FALLBACK.heading;
+  const headingHighlight = cms?.heading_highlight || FALLBACK.headingHighlight;
+  const description = cms?.description || FALLBACK.description;
+  const displayFeatures = cms?.features?.length ? cms.features : FALLBACK.features;
+  const image1 = cms?.image_1 || FALLBACK.image1;
+  const image1Alt = cms?.image_1_alt || FALLBACK.image1Alt;
+  const image2 = cms?.image_2 || FALLBACK.image2;
+  const image2Alt = cms?.image_2_alt || FALLBACK.image2Alt;
+  const ctaText = cms?.cta_text || FALLBACK.ctaText;
+  const ctaUrl = cms?.cta_url || FALLBACK.ctaUrl;
   return (
     <section className="relative overflow-hidden py-20 sm:py-24 sm:pb-44 px-5 sm:px-8 md:px-12 xl:px-24 bg-white">
 
@@ -167,10 +192,10 @@ export default function About() {
             style={{ animation: "aboutImgFloat1 8s ease-in-out infinite" }}>
             <div className="absolute inset-0 bg-gradient-to-br from-teal-400/10 to-indigo-600/10 z-10 pointer-events-none rounded-2xl" />
             <Image
-              src="/Assets/hero-about-1.webp"
+              src={image1}
               width={420}
               height={520}
-              alt="Team working together"
+              alt={image1Alt}
               className="w-full h-auto object-cover block"
             />
           </div>
@@ -179,10 +204,10 @@ export default function About() {
           <div className="absolute bottom-0 right-0 w-[54%] z-20 rounded-2xl overflow-hidden border-[5px] border-white shadow-xl shadow-teal-100/50"
             style={{ animation: "aboutImgFloat2 10s ease-in-out infinite 1.8s" }}>
             <Image
-              src="/Assets/h2-about-img-right.webp"
+              src={image2}
               width={300}
               height={360}
-              alt="Creative digital solutions"
+              alt={image2Alt}
               className="w-full h-auto object-cover block"
             />
           </div>
@@ -228,19 +253,25 @@ export default function About() {
             <span className="w-2 h-2 rounded-full bg-gradient-to-r from-teal-400 to-indigo-600 animate-pulse flex-shrink-0" />
             <span className="text-[11px] font-bold text-indigo-600 uppercase tracking-widest"
               style={{ fontFamily: "'Inter', sans-serif" }}>
-              About Us
+              {badge}
             </span>
           </div>
 
           {/* Heading */}
           <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] xl:text-5xl font-bold leading-tight mb-5"
             style={{ fontFamily: "'Poppins', sans-serif" }}>
-            Creative Problem{" "}
-            <br className="hidden sm:block" />
-            Solving{" "}
-            <span className="bg-gradient-to-r from-teal-400 to-indigo-700 text-transparent bg-clip-text">
-              Innovation
-            </span>
+            {headingHighlight && heading.includes(headingHighlight)
+              ? heading.split(headingHighlight).map((part, i, arr) => (
+                  <span key={i}>
+                    {part}
+                    {i < arr.length - 1 && (
+                      <span className="bg-gradient-to-r from-teal-400 to-indigo-700 text-transparent bg-clip-text">
+                        {headingHighlight}
+                      </span>
+                    )}
+                  </span>
+                ))
+              : heading}
           </h2>
 
           {/* Decorative gradient divider */}
@@ -250,15 +281,12 @@ export default function About() {
           {/* Description */}
           <p className="text-gray-500 text-base lg:text-[15px] leading-relaxed mb-8 max-w-[520px]"
             style={{ fontFamily: "'Inter', sans-serif" }}>
-            Founded in {COMPANY_START_YEAR}, Future IT Touch is a leading website designing and development company
-            in India. We specialize in creating innovative and user-friendly digital solutions that
-            help businesses thrive in the online world. Our dedicated team combines creativity and
-            technical expertise to deliver exceptional results tailored to your needs.
+            {description}
           </p>
 
           {/* Feature cards — 2 × 2 grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-8">
-            {features.map((feat, i) => (
+            {displayFeatures.map((feat, i) => (
               <div
                 key={i}
                 className="group relative flex items-center gap-3.5 p-4 rounded-2xl
@@ -303,14 +331,14 @@ export default function About() {
 
           {/* CTA button */}
           <Link
-            href="/contact"
+            href={ctaUrl}
             className="relative overflow-hidden group inline-flex items-center gap-2
               bg-gradient-to-r from-teal-400 to-indigo-700 text-white font-semibold
               px-8 py-3.5 rounded-full shadow-lg shadow-indigo-200/50
               hover:shadow-indigo-300/60 hover:-translate-y-0.5 transition-all duration-200"
             style={{ fontFamily: "'Poppins', sans-serif" }}
           >
-            <span className="relative z-10">Read More</span>
+            <span className="relative z-10">{ctaText}</span>
             <svg className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none"
               stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>

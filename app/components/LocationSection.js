@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { MapPin, Globe, Building2, Heart } from "lucide-react";
 import { SERVICES } from "../data/location-seo/services";
 import { TECHNOLOGIES, getTechnologyLocationPath } from "../data/location-seo/technologies";
-import { COUNTRIES, ALL_LOCATIONS, slugify } from "../data/location-seo/locations";
+import { ALL_LOCATIONS } from "../data/location-seo/locations";
 import useYearsExperience from "../lib/useYearsExperience";
 
 // Canonical service pages (unchanged, existing routes) → their matching
@@ -72,6 +72,9 @@ function detectActiveTechnology(pathname) {
 
 // Visual-only accent colors + HQ/featured flags, keyed by country code.
 // Kept local to this component since they're presentation, not SEO data.
+// A country code with no entry here (any brand-new one an admin adds via
+// Location Cities/Countries) falls back to DEFAULT_STYLE below — a new
+// country's card renders immediately, just without a bespoke color pairing.
 const COUNTRY_STYLE = {
   us: { fi: "#2dd4bf", ti: "#06b6d4" },
   ca: { fi: "#6366f1", ti: "#8b5cf6" },
@@ -83,17 +86,33 @@ const COUNTRY_STYLE = {
   qa: { fi: "#8b5cf6", ti: "#6366f1" },
   eg: { fi: "#8b5cf6", ti: "#6366f1" },
 };
+const DEFAULT_STYLE = { fi: "#64748b", ti: "#334155" };
 
-const locations = COUNTRIES.map((c) => ({
-  code: c.code,
-  country: c.country,
-  region: c.region,
-  cities: c.cities.map((city) => city.name),
-  ...COUNTRY_STYLE[c.code],
-}));
+// ALL_LOCATIONS regrouped back into per-country shape, for the rare case
+// layout.js's loadMergedCountries() fetch didn't happen or came back empty —
+// same site content as always, just without any CMS-added country/city.
+const FALLBACK_COUNTRIES = Object.values(
+  ALL_LOCATIONS.reduce((acc, l) => {
+    (acc[l.countryCode] ??= { code: l.countryCode, country: l.country, region: l.region, cities: [] })
+      .cities.push({ name: l.cityName, slug: l.citySlug });
+    return acc;
+  }, {})
+);
 
-export default function LocationSection() {
+// `locations` is the site's original static country/city list — used only
+// when the CMS is unreachable at build time, same fail-soft pattern as
+// every other CMS-backed component. `countries` (from layout.js, sourced via
+// loadMergedCountries()) is what actually renders whenever it's available,
+// so a country/city an admin adds shows up here without any code change.
+export default function LocationSection({ countries }) {
   const pathname = usePathname();
+  const locations = (countries?.length ? countries : FALLBACK_COUNTRIES).map((c) => ({
+    code: c.code,
+    country: c.country,
+    region: c.region || "Worldwide",
+    cities: c.cities,
+    ...(COUNTRY_STYLE[c.code] || DEFAULT_STYLE),
+  }));
   const activeService = detectActiveService(pathname);
   const activeTechnology = !activeService ? detectActiveTechnology(pathname) : null;
   const activeName = activeService?.name || activeTechnology?.name || null;
@@ -295,11 +314,11 @@ export default function LocationSection() {
                 {/* city grid */}
                 <div className="grid grid-cols-2 max-h-[120px] overflow-auto gap-1.5 mt-0 scrollbar-hide">
                   {loc.cities.map((city, ci) => {
-                    const isFeatured = city === loc.featuredCity;
+                    const isFeatured = city.name === loc.featuredCity;
                     const href = activeService
-                      ? `/${loc.code}/${activeService.slug}${SERVICE_LOCATION_MARKER}${slugify(city)}`
+                      ? `/${loc.code}/${activeService.slug}${SERVICE_LOCATION_MARKER}${city.slug}`
                       : activeTechnology
-                      ? getTechnologyLocationPath(activeTechnology, loc.code, slugify(city))
+                      ? getTechnologyLocationPath(activeTechnology, loc.code, city.slug)
                       : null;
 
                     const cityTile = (
@@ -316,7 +335,7 @@ export default function LocationSection() {
                             color: isFeatured ? "#ffffff" : "rgba(255,255,255,.60)",
                             fontWeight: isFeatured ? 700 : 500,
                           }}>
-                          {city}
+                          {city.name}
                         </span>
                       </>
                     );
@@ -335,7 +354,7 @@ export default function LocationSection() {
                       <Link
                         key={ci}
                         href={href}
-                        title={`${activeName} in ${city}`}
+                        title={`${activeName} in ${city.name}`}
                         className="loc-city-link flex items-center gap-1.5 px-2.5 py-2 rounded-xl transition-colors duration-200"
                         style={tileStyle}
                       >
@@ -344,7 +363,7 @@ export default function LocationSection() {
                     ) : (
                       <div
                         key={ci}
-                        title={city}
+                        title={city.name}
                         className="flex items-center gap-1.5 px-2.5 py-2 rounded-xl"
                         style={tileStyle}
                       >

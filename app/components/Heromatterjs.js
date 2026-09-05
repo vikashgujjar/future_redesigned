@@ -66,19 +66,48 @@ function resolveCollisions(positions, dragIdx) {
   return next;
 }
 
-const STATS = [
-  { v: "14+",  l: "Core Capabilities", from: "#2dd4bf", to: "#06b6d4" },
-  { v: '8+',   l: "Years Experience", from: "#6366f1", to: "#8b5cf6" },
-  { v: "5000+", l: "Projects Done",    from: "#0ea5e9", to: "#2dd4bf" },
-  { v: "98%",  l: "Client Retention", from: "#a855f7", to: "#6366f1" },
+const STAT_PALETTE = [
+  { from: "#2dd4bf", to: "#06b6d4" },
+  { from: "#6366f1", to: "#8b5cf6" },
+  { from: "#0ea5e9", to: "#2dd4bf" },
+  { from: "#a855f7", to: "#6366f1" },
 ];
 
-export default function SkillsSection() {
+const FALLBACK_STATS = [
+  { v: "14+",  l: "Core Capabilities" },
+  { v: '8+',   l: "Years Experience" },
+  { v: "5000+", l: "Projects Done" },
+  { v: "98%",  l: "Client Retention" },
+];
+
+const FALLBACK = {
+  badge: "Skills & Technologies",
+  eyebrow: "Grow Your Business",
+  heading: "With Our Expertise",
+  headingHighlight: "Expertise",
+  description:
+    "Our team masters a wide spectrum of modern technologies — from blazing-fast frontend frameworks to robust backend architectures. Drag the skill chips to explore what we build.",
+  hintTitle: "Interactive Skill Arena",
+  hintDescription: "Drag any chip — they collide and push each other. Try it!",
+};
+
+export default function SkillsSection({ cms } = {}) {
   const arenaRef      = useRef(null);
   const [arena, setArena]         = useState({ w: 0, h: 0 });
   const [positions, setPositions] = useState([]);
   const [topIdx, setTopIdx]       = useState(0);
   const yearsExperience = useYearsExperience();
+
+  const badge = cms?.badge || FALLBACK.badge;
+  const eyebrow = cms?.eyebrow || FALLBACK.eyebrow;
+  const heading = cms?.heading || FALLBACK.heading;
+  const headingHighlight = cms?.heading_highlight || FALLBACK.headingHighlight;
+  const description = cms?.description || FALLBACK.description;
+  const hintTitle = cms?.hint_title || FALLBACK.hintTitle;
+  const hintDescription = cms?.hint_description || FALLBACK.hintDescription;
+  const STATS = (cms?.stats?.length ? cms.stats : FALLBACK_STATS).map((s, i) => ({
+    v: s.v, l: s.l, ...STAT_PALETTE[i % STAT_PALETTE.length],
+  }));
 
   useEffect(() => {
     if (!arenaRef.current) return;
@@ -258,24 +287,32 @@ export default function SkillsSection() {
                 style={{ background:"linear-gradient(135deg,#2dd4bf,#06b6d4)" }} />
               <span className="sk-grad text-[10px] font-bold uppercase tracking-[.24em]"
                 style={{ fontFamily:"'Poppins',sans-serif" }}>
-                Skills &amp; Technologies
+                {badge}
               </span>
             </div>
 
             {/* Heading */}
             <div className="sk-up sk-up-1">
               <p className="text-[14px] text-gray-400 font-light italic mb-1.5 tracking-[.02em]">
-                Grow Your Business
+                {eyebrow}
               </p>
               <h2 className="font-extrabold leading-[1.06] text-gray-900 m-0"
                 style={{ fontFamily:"'Poppins',sans-serif", fontSize:"clamp(2.1rem,3.8vw,3.4rem)" }}>
-                With Our{" "}
-                <span style={{
-                  background:"linear-gradient(135deg,#2dd4bf,#6366f1)",
-                  WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text"
-                }}>
-                  Expertise
-                </span>
+                {headingHighlight && heading.includes(headingHighlight)
+                  ? heading.split(headingHighlight).map((part, i, arr) => (
+                      <span key={i}>
+                        {part}
+                        {i < arr.length - 1 && (
+                          <span style={{
+                            background:"linear-gradient(135deg,#2dd4bf,#6366f1)",
+                            WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text"
+                          }}>
+                            {headingHighlight}
+                          </span>
+                        )}
+                      </span>
+                    ))
+                  : heading}
               </h2>
             </div>
 
@@ -285,10 +322,7 @@ export default function SkillsSection() {
 
             {/* Description */}
             <p className="sk-up sk-up-2 text-[13.5px] text-gray-500 leading-[1.88] max-w-[400px]">
-              Our team masters a wide spectrum of modern technologies — from blazing-fast frontend
-              frameworks to robust backend architectures.{" "}
-              <span className="font-medium" style={{ color:"#6366f1" }}>Drag the skill chips</span>{" "}
-              to explore what we build.
+              {description}
             </p>
 
             {/* Hint card */}
@@ -308,10 +342,10 @@ export default function SkillsSection() {
               <div>
                 <p className="text-[12.5px] font-bold text-gray-800 mb-0.5"
                   style={{ fontFamily:"'Poppins',sans-serif" }}>
-                  Interactive Skill Arena
+                  {hintTitle}
                 </p>
                 <p className="text-[11.5px] text-gray-500 leading-relaxed m-0">
-                  Drag any chip — they collide and push each other. Try it!
+                  {hintDescription}
                 </p>
               </div>
             </div>

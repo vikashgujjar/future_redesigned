@@ -1,5 +1,5 @@
 import TrendingTechnology from "./TrendingTechnology";
-import { buildPageMetadata } from "../lib/cms";
+import { buildPageMetadata, getTechnologyCategories, getOfficeLocations } from "../lib/cms";
 
 const DEFAULT_METADATA = {
   title: "Trending Technology - Future IT Touch Private Limited",
@@ -13,5 +13,9 @@ export async function generateMetadata() {
 }
 
 export default async function Page() {
-  return <TrendingTechnology/>
+  const [categories, officeLocations] = await Promise.all([
+    getTechnologyCategories(),
+    getOfficeLocations(),
+  ]);
+  return <TrendingTechnology categories={categories} officeLocations={officeLocations} />
 }

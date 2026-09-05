@@ -7,6 +7,7 @@ import { SiReact, SiFlutter, SiGooglecloud } from "react-icons/si";
 import { MdOutlineApi, MdOutlineSecurity } from "react-icons/md";
 import { RiTestTubeLine } from "react-icons/ri";
 import useYearsExperience from "../lib/useYearsExperience";
+import { isSectionDisabled } from "../lib/loadServicePage";
 
 const Hybrid = ({ cms } = {}) => {
   const yearsExperience = useYearsExperience();
@@ -223,27 +224,41 @@ const Hybrid = ({ cms } = {}) => {
     platforms,
     techCategories,
     faqData,
+    featuresBadge: "Our iPhone App Development Process",
+    featuresTitle: "Trusted iOS app developers in India,",
+    featuresTitleHighlight: "delivering seamless and innovative apps",
+    bizBadge: "Leading Hybrid App Development Company in India",
+    bizHeading: "Build Powerful Apps That Work on",
+    bizHighlight: "Every Platform",
+    sliderTitle: "Delivering Powerful Hybrid App Experiences with",
+    platformsTitle: "Hybrid App Development Technologies We Use",
+    faqTitle: "About Hybrid Application Development",
   };
 
   const content = cms
-    ? { ...cms, bannerImg: cms.bannerImg || app, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    ? {
+        ...cms,
+        bannerImg: cms.bannerImg || app,
+        overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage,
+        featuresBadge: cms.featuresBadge || FALLBACK_CONTENT.featuresBadge,
+        featuresTitle: cms.featuresTitle || FALLBACK_CONTENT.featuresTitle,
+        featuresTitleHighlight: cms.featuresTitleHighlight || FALLBACK_CONTENT.featuresTitleHighlight,
+        bizBadge: cms.bizBadge || FALLBACK_CONTENT.bizBadge,
+        bizHeading: cms.bizHeading || FALLBACK_CONTENT.bizHeading,
+        bizHighlight: cms.bizHighlight || FALLBACK_CONTENT.bizHighlight,
+        sliderTitle: cms.sliderTitle || FALLBACK_CONTENT.sliderTitle,
+        platformsTitle: cms.platformsTitle || FALLBACK_CONTENT.platformsTitle,
+        faqTitle: cms.faqTitle || FALLBACK_CONTENT.faqTitle,
+        features: isSectionDisabled(cms.enabledSections, "features") ? [] : (cms.features?.length ? cms.features : FALLBACK_CONTENT.features),
+        bizCards: isSectionDisabled(cms.enabledSections, "biz") ? [] : (cms.bizCards?.length ? cms.bizCards : FALLBACK_CONTENT.bizCards),
+        sliderCards: isSectionDisabled(cms.enabledSections, "slider") ? [] : (cms.sliderCards?.length ? cms.sliderCards : FALLBACK_CONTENT.sliderCards),
+        platforms: isSectionDisabled(cms.enabledSections, "platforms") ? [] : (cms.platforms?.length ? cms.platforms : FALLBACK_CONTENT.platforms),
+        techCategories: isSectionDisabled(cms.enabledSections, "techstack") ? [] : (cms.techCategories?.length ? cms.techCategories : FALLBACK_CONTENT.techCategories),
+        faqData: isSectionDisabled(cms.enabledSections, "faq") ? [] : (cms.faqData?.length ? cms.faqData : FALLBACK_CONTENT.faqData),
+      }
     : FALLBACK_CONTENT;
 
-  return (
-    <CommonServicePage
-      {...content}
-      featuresBadge="Our iPhone App Development Process"
-      featuresTitle="Trusted iOS app developers in India,"
-      featuresTitleHighlight="delivering seamless and innovative apps"
-      featuresStickyImg={app}
-      bizBadge="Leading Hybrid App Development Company in India"
-      bizHeading="Build Powerful Apps That Work on"
-      bizHighlight="Every Platform"
-      sliderTitle="Delivering Powerful Hybrid App Experiences with"
-      platformsTitle="Hybrid App Development Technologies We Use"
-      faqTitle="About Hybrid Application Development"
-    />
-  );
+  return <CommonServicePage {...content} featuresStickyImg={app} />;
 };
 
 export default Hybrid;

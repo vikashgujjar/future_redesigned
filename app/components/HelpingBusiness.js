@@ -37,10 +37,11 @@ const FALLBACK_STATS = [
   { value:"100%",  label:"Satisfaction"},
 ];
 
-export default function HelpingBusiness({ heading, paragraphs, stats, cards } = {}) {
+export default function HelpingBusiness({ badge, heading, paragraphs, stats, cards } = {}) {
   const cardsData = (cards?.length ? cards : FALLBACK_CARDS).map((c, i) => ({
     id: i + 1, src: c.src, text: c.text, ...PALETTE[i % PALETTE.length],
   }));
+  const badgeText = badge || "Industries We Work For";
   const headingText = heading || "Helping Businesses in All Domains";
   const paragraphList = paragraphs?.length ? paragraphs : FALLBACK_PARAGRAPHS;
   const statsList = stats?.length ? stats : FALLBACK_STATS;
@@ -160,7 +161,7 @@ export default function HelpingBusiness({ heading, paragraphs, stats, cards } = 
             <span
               className="text-[11px] font-bold uppercase tracking-widest bg-gradient-to-r from-teal-400 to-cyan-300 bg-clip-text text-transparent"
               style={{ fontFamily:"'Inter',sans-serif" }}>
-              Industries We Work For
+              {badgeText}
             </span>
           </div>
 

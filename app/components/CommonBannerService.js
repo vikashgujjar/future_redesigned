@@ -2,7 +2,11 @@
 import Image from 'next/image';
 import useYearsExperience from '../lib/useYearsExperience';
 
-export default function CommonBannerService({ imgSrc, title, desc }) {
+export default function CommonBannerService({
+  imgSrc, title, desc, imgAlt,
+  badge = "Future IT Touch · Professional Services",
+  ctaText = "Quick Enquiry", ctaUrl = "/contact",
+}) {
   const yearsExperience = useYearsExperience();
   return (
     <section className="relative overflow-hidden bg-[#3a2b80] font-[Inter,sans-serif]">
@@ -42,7 +46,7 @@ export default function CommonBannerService({ imgSrc, title, desc }) {
               <span className="relative inline-flex h-2 w-2 rounded-full bg-gradient-to-br from-orange-400 to-red-500" />
             </span>
             <span className="font-[Poppins,sans-serif] text-[10px] font-bold uppercase tracking-[0.22em] text-orange-300">
-              Future IT Touch · Professional Services
+              {badge}
             </span>
           </div>
 
@@ -62,10 +66,10 @@ export default function CommonBannerService({ imgSrc, title, desc }) {
           {/* CTAs */}
           <div className="mb-9 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4 lg:justify-start">
             <a
-              href="/contact"
+              href={ctaUrl}
               className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-teal-400 to-indigo-700 px-8 py-3.5 font-[Poppins,sans-serif] text-sm font-semibold text-white no-underline shadow-[0_10px_30px_teal-400] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_42px_teal-400] sm:w-auto"
             >
-              Quick Enquiry
+              {ctaText}
               <svg width="13" height="13" viewBox="0 0 12 12" fill="none" className="transition-transform duration-200 group-hover:translate-x-1">
                 <path d="M1.5 6h9M6.5 1.5l4 4.5-4 4.5" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -110,7 +114,7 @@ export default function CommonBannerService({ imgSrc, title, desc }) {
             <div className="relative aspect-[4/3] overflow-hidden rounded-[calc(2rem-2px)] bg-[#2c1f66]">
               <Image
                 src={imgSrc}
-                alt={title}
+                alt={imgAlt || title}
                 fill
                 priority
                 className="object-cover object-center transition-transform duration-700 group-hover:scale-105"

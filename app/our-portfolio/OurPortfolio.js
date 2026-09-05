@@ -8,7 +8,19 @@ import useYearsExperience from "../lib/useYearsExperience";
 
 const TABS = ["All", "Website", "Mobile App", "Graphic"];
 
-export default function OurPortfolio({ items } = {}) {
+// Local fallback — used whenever the CMS's PortfolioPageContent has nothing
+// set yet (fresh install) or a given field is blank.
+const FALLBACK = {
+  hero: { title: "Our Portfolio", highlight: "Portfolio" },
+  section: { badge: "Our Work", heading: "Work We Are Proud Of", heading_highlight: "Proud Of" },
+  stats: [
+    { number: "5000+", label: "Projects Delivered" },
+    { number: "50+", label: "Industries" },
+    { number: "98%", label: "Client Satisfaction" },
+  ],
+};
+
+export default function OurPortfolio({ items, cms } = {}) {
   const [active, setActive] = useState("All");
   const yearsExperience = useYearsExperience();
   const data = items || [];
@@ -16,6 +28,15 @@ export default function OurPortfolio({ items } = {}) {
   const filtered = active === "All"
     ? data
     : data.filter(d => d.category.includes(active));
+
+  const heroTitle = cms?.hero?.title || FALLBACK.hero.title;
+  const heroHighlight = cms?.hero?.highlight || FALLBACK.hero.highlight;
+  const sectionBadge = cms?.section?.badge || FALLBACK.section.badge;
+  const sectionHeading = cms?.section?.heading || FALLBACK.section.heading;
+  const sectionHighlight = cms?.section?.heading_highlight || FALLBACK.section.heading_highlight;
+  const stats = cms?.stats?.length ? cms.stats : FALLBACK.stats;
+  const heroParts = heroTitle.includes(heroHighlight) ? heroTitle.split(heroHighlight) : [heroTitle];
+  const sectionParts = sectionHeading.includes(sectionHighlight) ? sectionHeading.split(sectionHighlight) : [sectionHeading];
 
   return (
     <>
@@ -151,18 +172,25 @@ export default function OurPortfolio({ items } = {}) {
             </svg>
             <span className="text-[11px] font-semibold uppercase tracking-[.18em]"
               style={{ color: "#2dd4bf", fontFamily: "'Poppins',sans-serif" }}>
-              Our Portfolio
+              {heroTitle}
             </span>
           </nav>
           <h1 className="font-extrabold leading-[1.08] text-white mb-4"
             style={{ fontFamily: "'Poppins',sans-serif", fontSize: "clamp(2rem,5vw,3.6rem)" }}>
-            Our{" "}
-            <span style={{
-              background: "linear-gradient(120deg,#2dd4bf,#6366f1,#a855f7)",
-              WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text"
-            }}>
-              Portfolio
-            </span>
+            {heroParts.length > 1 ? (
+              <>
+                {heroParts[0]}
+                <span style={{
+                  background: "linear-gradient(120deg,#2dd4bf,#6366f1,#a855f7)",
+                  WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text"
+                }}>
+                  {heroHighlight}
+                </span>
+                {heroParts[1]}
+              </>
+            ) : (
+              heroTitle
+            )}
           </h1>
           <div className="mx-auto h-[3px] w-16 rounded-full"
             style={{ background: "linear-gradient(90deg,#2dd4bf,#6366f1,#a855f7)" }} />
@@ -191,13 +219,20 @@ export default function OurPortfolio({ items } = {}) {
                   style={{ background: "linear-gradient(135deg,#2dd4bf,#06b6d4)" }} />
                 <span className="text-[10px] font-bold uppercase tracking-[.22em]"
                   style={{ color: "#0d9488", fontFamily: "'Poppins',sans-serif" }}>
-                  Our Work
+                  {sectionBadge}
                 </span>
               </div>
               <h2 className="font-extrabold leading-[1.10]"
                 style={{ fontFamily: "'Poppins',sans-serif", fontSize: "clamp(1.65rem,3.5vw,2.8rem)", color: "#0c1230" }}>
-                Work We Are{" "}
-                <span className="pf-hl">Proud Of</span>
+                {sectionParts.length > 1 ? (
+                  <>
+                    {sectionParts[0]}
+                    <span className="pf-hl">{sectionHighlight}</span>
+                    {sectionParts[1]}
+                  </>
+                ) : (
+                  sectionHeading
+                )}
               </h2>
               <div className="mt-3 h-[3px] w-14 rounded-full"
                 style={{ background: "linear-gradient(90deg,#2dd4bf,#6366f1,#a855f7)" }} />
@@ -292,7 +327,11 @@ export default function OurPortfolio({ items } = {}) {
               background: "linear-gradient(135deg,rgba(45,212,191,.06),rgba(99,102,241,.06))",
               border: "1px solid rgba(99,102,241,.10)"
             }}>
-            {[["5000+", "Projects Delivered"], [yearsExperience, "Years Experience"], ["50+", "Industries"], ["98%", "Client Satisfaction"]].map(([n, l]) => (
+            {[
+              stats[0] && [stats[0].number, stats[0].label],
+              [yearsExperience, "Years Experience"],
+              ...stats.slice(1).map((s) => [s.number, s.label]),
+            ].filter(Boolean).map(([n, l]) => (
               <div key={l} className="text-center">
                 <p className="font-extrabold leading-none mb-1"
                   style={{

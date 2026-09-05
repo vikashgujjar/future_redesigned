@@ -2,6 +2,7 @@
 const bannerImg = "/Assets/stock/photo-1512428813834-c702c7702b78.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import { COMPANY_START_YEAR } from "../lib/companyStats";
+import { isSectionDisabled } from "../lib/loadServicePage";
 import {
   FaMobileAlt, FaAndroid, FaApple, FaReact, FaCode, FaCloud, FaSync,
 } from "react-icons/fa";
@@ -200,32 +201,50 @@ const FALLBACK_CONTENT = {
   platforms,
   techCategories,
   faqData,
+  featuresBadge: "Our App Development Services",
+  featuresTitle: "Building Solutions for",
+  featuresTitleHighlight: "Every Platform",
+  bizBadge: "Why Choose Us",
+  bizHeading: "Partner with Experts for",
+  bizHighlight: "Mobile App Success",
+  sliderTitle: "Delivering Innovative Mobile App Experiences That Drive Growth",
+  platformsTitle: "Mobile App Technologies We Work With",
+  techBadge: "Our Mobile Tech Stack",
+  techHeading: "Technologies",
+  techHeadingHighlight: "We Build With",
+  techDescription: "We leverage the latest mobile development frameworks, cloud platforms, and DevOps tools to build apps that are fast, secure, and ready to scale.",
+  faqTitle: "Frequently Asked Questions — Mobile App Development",
 };
 
 const MobileApp = ({ cms } = {}) => {
   const content = cms
-    ? { ...cms, bannerImg: cms.bannerImg || bannerImg, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    ? {
+        ...cms,
+        bannerImg: cms.bannerImg || bannerImg,
+        overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage,
+        featuresBadge: cms.featuresBadge || FALLBACK_CONTENT.featuresBadge,
+        featuresTitle: cms.featuresTitle || FALLBACK_CONTENT.featuresTitle,
+        featuresTitleHighlight: cms.featuresTitleHighlight || FALLBACK_CONTENT.featuresTitleHighlight,
+        bizBadge: cms.bizBadge || FALLBACK_CONTENT.bizBadge,
+        bizHeading: cms.bizHeading || FALLBACK_CONTENT.bizHeading,
+        bizHighlight: cms.bizHighlight || FALLBACK_CONTENT.bizHighlight,
+        sliderTitle: cms.sliderTitle || FALLBACK_CONTENT.sliderTitle,
+        platformsTitle: cms.platformsTitle || FALLBACK_CONTENT.platformsTitle,
+        techBadge: cms.techBadge || FALLBACK_CONTENT.techBadge,
+        techHeading: cms.techHeading || FALLBACK_CONTENT.techHeading,
+        techHeadingHighlight: cms.techHeadingHighlight || FALLBACK_CONTENT.techHeadingHighlight,
+        techDescription: cms.techDescription || FALLBACK_CONTENT.techDescription,
+        faqTitle: cms.faqTitle || FALLBACK_CONTENT.faqTitle,
+        features: isSectionDisabled(cms.enabledSections, "features") ? [] : (cms.features?.length ? cms.features : FALLBACK_CONTENT.features),
+        bizCards: isSectionDisabled(cms.enabledSections, "biz") ? [] : (cms.bizCards?.length ? cms.bizCards : FALLBACK_CONTENT.bizCards),
+        sliderCards: isSectionDisabled(cms.enabledSections, "slider") ? [] : (cms.sliderCards?.length ? cms.sliderCards : FALLBACK_CONTENT.sliderCards),
+        platforms: isSectionDisabled(cms.enabledSections, "platforms") ? [] : (cms.platforms?.length ? cms.platforms : FALLBACK_CONTENT.platforms),
+        techCategories: isSectionDisabled(cms.enabledSections, "techstack") ? [] : (cms.techCategories?.length ? cms.techCategories : FALLBACK_CONTENT.techCategories),
+        faqData: isSectionDisabled(cms.enabledSections, "faq") ? [] : (cms.faqData?.length ? cms.faqData : FALLBACK_CONTENT.faqData),
+      }
     : FALLBACK_CONTENT;
 
-  return (
-    <CommonServicePage
-      {...content}
-      featuresBadge="Our App Development Services"
-      featuresTitle="Building Solutions for"
-      featuresTitleHighlight="Every Platform"
-      featuresStickyImg="/Assets/stock/photo-1556742049-0cfed4f6a45d.webp"
-      bizBadge="Why Choose Us"
-      bizHeading="Partner with Experts for"
-      bizHighlight="Mobile App Success"
-      sliderTitle="Delivering Innovative Mobile App Experiences That Drive Growth"
-      platformsTitle="Mobile App Technologies We Work With"
-      techBadge="Our Mobile Tech Stack"
-      techHeading="Technologies"
-      techHeadingHighlight="We Build With"
-      techDescription="We leverage the latest mobile development frameworks, cloud platforms, and DevOps tools to build apps that are fast, secure, and ready to scale."
-      faqTitle="Frequently Asked Questions — Mobile App Development"
-    />
-  );
+  return <CommonServicePage {...content} featuresStickyImg="/Assets/stock/photo-1556742049-0cfed4f6a45d.webp" />;
 };
 
 export default MobileApp;

@@ -2,6 +2,7 @@
 const ecc = "/Assets/stock/photo-1498050108023-c5249f4df085.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
+import { isSectionDisabled } from "../lib/loadServicePage";
 import {
   FaShoppingCart, FaPaintBrush, FaClock,
   FaMagento, FaWordpress, FaShopify, FaOpencart, FaCogs, FaServer,
@@ -222,32 +223,50 @@ const Ecommerce = ({ cms } = {}) => {
     platforms,
     techCategories,
     faqData,
+    featuresBadge: "Trusted eCommerce Website Development Company",
+    featuresTitle: "Creating Online Stores That",
+    featuresTitleHighlight: "Engage & Convert",
+    bizBadge: "Leading eCommerce Website Design Company in India",
+    bizHeading: "Partner with Us for",
+    bizHighlight: "Growth & Innovation",
+    sliderTitle: " Delivering Engaging eCommerce Experiences with",
+    platformsTitle: `Ecommerce Website Development Platforms We Use
+`,
+    faqTitle: "About eCommerce Website Developmen",
+    techBadge: "eCommerce Tech Stack",
+    techHeading: "Technologies",
+    techHeadingHighlight: "We Build With",
+    techDescription: "From storefronts to payment gateways, we use the right combination of modern technologies to deliver fast, secure, and scalable eCommerce experiences.",
   };
 
   const content = cms
-    ? { ...cms, bannerImg: cms.bannerImg || ecc, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    ? {
+        ...cms,
+        bannerImg: cms.bannerImg || ecc,
+        overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage,
+        featuresBadge: cms.featuresBadge || FALLBACK_CONTENT.featuresBadge,
+        featuresTitle: cms.featuresTitle || FALLBACK_CONTENT.featuresTitle,
+        featuresTitleHighlight: cms.featuresTitleHighlight || FALLBACK_CONTENT.featuresTitleHighlight,
+        bizBadge: cms.bizBadge || FALLBACK_CONTENT.bizBadge,
+        bizHeading: cms.bizHeading || FALLBACK_CONTENT.bizHeading,
+        bizHighlight: cms.bizHighlight || FALLBACK_CONTENT.bizHighlight,
+        sliderTitle: cms.sliderTitle || FALLBACK_CONTENT.sliderTitle,
+        platformsTitle: cms.platformsTitle || FALLBACK_CONTENT.platformsTitle,
+        faqTitle: cms.faqTitle || FALLBACK_CONTENT.faqTitle,
+        techBadge: cms.techBadge || FALLBACK_CONTENT.techBadge,
+        techHeading: cms.techHeading || FALLBACK_CONTENT.techHeading,
+        techHeadingHighlight: cms.techHeadingHighlight || FALLBACK_CONTENT.techHeadingHighlight,
+        techDescription: cms.techDescription || FALLBACK_CONTENT.techDescription,
+        features: isSectionDisabled(cms.enabledSections, "features") ? [] : (cms.features?.length ? cms.features : FALLBACK_CONTENT.features),
+        bizCards: isSectionDisabled(cms.enabledSections, "biz") ? [] : (cms.bizCards?.length ? cms.bizCards : FALLBACK_CONTENT.bizCards),
+        sliderCards: isSectionDisabled(cms.enabledSections, "slider") ? [] : (cms.sliderCards?.length ? cms.sliderCards : FALLBACK_CONTENT.sliderCards),
+        platforms: isSectionDisabled(cms.enabledSections, "platforms") ? [] : (cms.platforms?.length ? cms.platforms : FALLBACK_CONTENT.platforms),
+        techCategories: isSectionDisabled(cms.enabledSections, "techstack") ? [] : (cms.techCategories?.length ? cms.techCategories : FALLBACK_CONTENT.techCategories),
+        faqData: isSectionDisabled(cms.enabledSections, "faq") ? [] : (cms.faqData?.length ? cms.faqData : FALLBACK_CONTENT.faqData),
+      }
     : FALLBACK_CONTENT;
 
-  return (
-    <CommonServicePage
-      {...content}
-      featuresBadge="Trusted eCommerce Website Development Company"
-      featuresTitle="Creating Online Stores That"
-      featuresTitleHighlight="Engage & Convert"
-      featuresStickyImg="/Assets/stock/photo-1563013544-824ae1b704d3.webp"
-      bizBadge="Leading eCommerce Website Design Company in India"
-      bizHeading="Partner with Us for"
-      bizHighlight="Growth & Innovation"
-      sliderTitle=" Delivering Engaging eCommerce Experiences with"
-      platformsTitle={`Ecommerce Website Development Platforms We Use
-`}
-      faqTitle="About eCommerce Website Developmen"
-      techBadge="eCommerce Tech Stack"
-      techHeading="Technologies"
-      techHeadingHighlight="We Build With"
-      techDescription="From storefronts to payment gateways, we use the right combination of modern technologies to deliver fast, secure, and scalable eCommerce experiences."
-    />
-  );
+  return <CommonServicePage {...content} featuresStickyImg="/Assets/stock/photo-1563013544-824ae1b704d3.webp" />;
 };
 
 export default Ecommerce;

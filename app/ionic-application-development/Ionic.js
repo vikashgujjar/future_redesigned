@@ -8,6 +8,7 @@ import { SiIonic } from "react-icons/si";
 import ionicImg from "../Assets/ionic.webp";
 import CommonTechPage from "../components/techcommomcomponents/CommonTechPage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
+import { isSectionDisabled } from "../lib/loadServicePage";
 
 const FALLBACK_CONTENT = {
   banner: {
@@ -177,14 +178,19 @@ const FALLBACK_CONTENT = {
 const Ionic = ({ cms } = {}) => {
   const content = cms
     ? {
-        banner: { ...FALLBACK_CONTENT.banner, ...cms.banner, bgImage: cms.banner.bgImage || FALLBACK_CONTENT.banner.bgImage },
+        banner: { ...FALLBACK_CONTENT.banner, ...cms.banner, bgImage: cms.banner.bgImage || FALLBACK_CONTENT.banner.bgImage, breadcrumb: undefined },
         intro: { ...FALLBACK_CONTENT.intro, ...cms.intro },
-        services: cms.services || FALLBACK_CONTENT.services,
-        process: cms.process || FALLBACK_CONTENT.process,
-        features: cms.features,
-        stack: cms.stack || FALLBACK_CONTENT.stack,
+        services: isSectionDisabled(cms.enabledSections, "services") ? [] : (cms.services || FALLBACK_CONTENT.services),
+        process: isSectionDisabled(cms.enabledSections, "process") ? [] : (cms.process || FALLBACK_CONTENT.process),
+        features: isSectionDisabled(cms.enabledSections, "why") ? [] : cms.features,
+        stack: isSectionDisabled(cms.enabledSections, "stack") ? [] : (cms.stack || FALLBACK_CONTENT.stack),
         slider: cms.slider,
         faq: { title: FALLBACK_CONTENT.faq.title, items: cms.faq.items },
+        servicesBadge: cms.servicesBadge, servicesHeading: cms.servicesHeading, servicesHighlight: cms.servicesHighlight,
+        processBadge: cms.processBadge, processHeading: cms.processHeading, processHighlight: cms.processHighlight, processDescription: cms.processDescription,
+        whyBadge: cms.whyBadge, whyHeading: cms.whyHeading, whyHighlight: cms.whyHighlight,
+        stackBadge: cms.stackBadge, stackHeading: cms.stackHeading, stackHighlight: cms.stackHighlight, stackDescription: cms.stackDescription,
+        faqBadge: cms.faqBadge,
       }
     : FALLBACK_CONTENT;
 

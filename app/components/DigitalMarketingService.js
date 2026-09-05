@@ -26,7 +26,10 @@ const FALLBACK_SERVICES = [
   },
 ];
 
-export default function DigitalMarketingService({ services: cmsServices } = {}) {
+export default function DigitalMarketingService({ services: cmsServices, badge, heading, headingHighlight } = {}) {
+  const badgeText = badge || "Digital Marketing Services";
+  const headingText = heading || "We Make Finest Marketing With";
+  const headingHighlightText = headingHighlight || "Great Passion";
   const services = (cmsServices?.length ? cmsServices : FALLBACK_SERVICES).map((s, i) => ({
     src: s.icon ?? s.src,
     alt: s.title,
@@ -102,16 +105,15 @@ export default function DigitalMarketingService({ services: cmsServices } = {}) 
             <span
               className="text-xl sm:text-2xl tracking-widest block mb-4"
               style={{ fontFamily: "cursive", color: "rgba(255,255,255,.75)" }}>
-              Digital Marketing Services
+              {badgeText}
             </span>
 
             {/* h2 */}
             <h2
               className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight"
               style={{ fontFamily: "'Poppins',sans-serif" }}>
-              We Make Finest<br />
-              Marketing With{" "}
-              <span style={{ color: "#7dd3fa" }}>Great Passion</span>
+              {headingText}{" "}
+              <span style={{ color: "#7dd3fa" }}>{headingHighlightText}</span>
             </h2>
 
             {/* divider */}

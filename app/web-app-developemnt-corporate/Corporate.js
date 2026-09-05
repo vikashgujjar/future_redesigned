@@ -7,6 +7,7 @@ import {
   FaPalette, FaChartBar, FaSearch, FaLaptopCode, FaUserCheck,
 } from "react-icons/fa";
 import useYearsExperience from "../lib/useYearsExperience";
+import { isSectionDisabled } from "../lib/loadServicePage";
 
 const Corporate = ({ cms } = {}) => {
   const yearsExperience = useYearsExperience();
@@ -221,26 +222,41 @@ const Corporate = ({ cms } = {}) => {
     platforms,
     techCategories,
     faqData,
+    featuresBadge: "Trusted Business Web App Development Service",
+    featuresTitle: "Delivering Innovative &",
+    featuresTitleHighlight: "Scalable Web Solutions for Corporates",
+    bizBadge: "Leading Corporate Web Application Development Company in India",
+    bizHeading: "Partner with Us for",
+    bizHighlight: "Excellence & Innovation",
+    sliderTitle: "Delivering Innovative Corporate Web Solutions with",
+    platformsTitle: "Cutting-Edge Web Application Development for Corporates – End-to-End Robust Web Solutions for Your Business",
+    faqTitle: "About eCommerce Website Developmen",
   };
 
   const content = cms
-    ? { ...cms, bannerImg: cms.bannerImg || cwd, overviewImage: cms.overviewImage || cwd }
+    ? {
+        ...cms,
+        bannerImg: cms.bannerImg || cwd,
+        overviewImage: cms.overviewImage || cwd,
+        featuresBadge: cms.featuresBadge || FALLBACK_CONTENT.featuresBadge,
+        featuresTitle: cms.featuresTitle || FALLBACK_CONTENT.featuresTitle,
+        featuresTitleHighlight: cms.featuresTitleHighlight || FALLBACK_CONTENT.featuresTitleHighlight,
+        bizBadge: cms.bizBadge || FALLBACK_CONTENT.bizBadge,
+        bizHeading: cms.bizHeading || FALLBACK_CONTENT.bizHeading,
+        bizHighlight: cms.bizHighlight || FALLBACK_CONTENT.bizHighlight,
+        sliderTitle: cms.sliderTitle || FALLBACK_CONTENT.sliderTitle,
+        platformsTitle: cms.platformsTitle || FALLBACK_CONTENT.platformsTitle,
+        faqTitle: cms.faqTitle || FALLBACK_CONTENT.faqTitle,
+        features: isSectionDisabled(cms.enabledSections, "features") ? [] : (cms.features?.length ? cms.features : FALLBACK_CONTENT.features),
+        bizCards: isSectionDisabled(cms.enabledSections, "biz") ? [] : (cms.bizCards?.length ? cms.bizCards : FALLBACK_CONTENT.bizCards),
+        sliderCards: isSectionDisabled(cms.enabledSections, "slider") ? [] : (cms.sliderCards?.length ? cms.sliderCards : FALLBACK_CONTENT.sliderCards),
+        platforms: isSectionDisabled(cms.enabledSections, "platforms") ? [] : (cms.platforms?.length ? cms.platforms : FALLBACK_CONTENT.platforms),
+        techCategories: isSectionDisabled(cms.enabledSections, "techstack") ? [] : (cms.techCategories?.length ? cms.techCategories : FALLBACK_CONTENT.techCategories),
+        faqData: isSectionDisabled(cms.enabledSections, "faq") ? [] : (cms.faqData?.length ? cms.faqData : FALLBACK_CONTENT.faqData),
+      }
     : FALLBACK_CONTENT;
 
-  return (
-    <CommonServicePage
-      {...content}
-      featuresBadge="Trusted Business Web App Development Service"
-      featuresTitle="Delivering Innovative &"
-      featuresTitleHighlight="Scalable Web Solutions for Corporates"
-      bizBadge="Leading Corporate Web Application Development Company in India"
-      bizHeading="Partner with Us for"
-      bizHighlight="Excellence & Innovation"
-      sliderTitle="Delivering Innovative Corporate Web Solutions with"
-      platformsTitle="Cutting-Edge Web Application Development for Corporates – End-to-End Robust Web Solutions for Your Business"
-      faqTitle="About eCommerce Website Developmen"
-    />
-  );
+  return <CommonServicePage {...content} />;
 };
 
 export default Corporate;

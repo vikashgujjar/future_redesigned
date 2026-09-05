@@ -4,7 +4,7 @@ import Marquee from "react-fast-marquee";
 import { ArrowUpRight } from "lucide-react";
 import PortfolioCarousel from "./PortfolioCarousel";
 
-const portfolioItems = [
+const FALLBACK_ITEMS = [
   { link: "https://moveitsolution.com/",          image: "/portfolio/1.webp",  title: "Transport Website", category: "Moving Company"    },
   { link: "https://nextlegal.in/",                image: "/portfolio/2.webp",  title: "Law Website",       category: "Law Company"       },
   { link: "https://social-scholars.com/",         image: "/portfolio/3.webp",  title: "Article Website",   category: "News Company"      },
@@ -17,7 +17,13 @@ const portfolioItems = [
   { link: "https://karpetkare.in/",               image: "/portfolio/10.webp", title: "Cleaning Website",  category: "Cleaning Services" },
 ];
 
-export default function Portfolio() {
+export default function Portfolio({ items, badge, heading, description, ctaText, ctaUrl } = {}) {
+  const portfolioItems = items?.length ? items : FALLBACK_ITEMS;
+  const badgeText = badge || "Our Work";
+  const headingText = heading || "Digital Portfolio";
+  const descriptionText = description || "A glimpse of the digital experiences we've crafted — from startups to enterprises, across industries worldwide.";
+  const ctaLabel = ctaText || "View All Projects";
+  const ctaHref = ctaUrl || "/our-portfolio";
   return (
     <section
       className="relative overflow-hidden py-16 sm:py-20 lg:py-24"
@@ -99,19 +105,19 @@ export default function Portfolio() {
             color: "#2dd4bf",
           }}
         >
-          Our Work
+          {badgeText}
         </span>
       </div>
 
       {/* ── marquee heading ── */}
       <div className="overflow-hidden">
         <Marquee speed={130} pauseOnHover={false} gradient={false}>
-          <span className="pf-solid">Digital Portfolio</span>
-          <span className="pf-outline">Digital Portfolio</span>
-          <span className="pf-solid">Digital Portfolio</span>
-          <span className="pf-outline">Digital Portfolio</span>
-          <span className="pf-solid">Digital Portfolio</span>
-          <span className="pf-outline">Digital Portfolio</span>
+          <span className="pf-solid">{headingText}</span>
+          <span className="pf-outline">{headingText}</span>
+          <span className="pf-solid">{headingText}</span>
+          <span className="pf-outline">{headingText}</span>
+          <span className="pf-solid">{headingText}</span>
+          <span className="pf-outline">{headingText}</span>
         </Marquee>
       </div>
 
@@ -121,7 +127,7 @@ export default function Portfolio() {
           className="text-sm sm:text-base leading-7"
           style={{ fontFamily: "'Inter',sans-serif", color: "rgba(255,255,255,.42)" }}
         >
-          A glimpse of the digital experiences we've crafted — from startups to enterprises, across industries worldwide.
+          {descriptionText}
         </p>
       </div>
 
@@ -133,7 +139,7 @@ export default function Portfolio() {
       {/* ── CTA ── */}
       <div className="relative z-10 flex justify-center mt-12">
         <Link
-          href="/our-portfolio"
+          href={ctaHref}
           className="inline-flex items-center gap-2 px-7 py-3 rounded-full text-sm font-semibold text-white"
           style={{
             background: "linear-gradient(135deg,#2dd4bf,#6366f1)",
@@ -141,7 +147,7 @@ export default function Portfolio() {
             fontFamily: "'Poppins',sans-serif",
           }}
         >
-          View All Projects <ArrowUpRight size={15} />
+          {ctaLabel} <ArrowUpRight size={15} />
         </Link>
       </div>
     </section>

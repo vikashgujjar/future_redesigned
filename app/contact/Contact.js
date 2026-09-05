@@ -54,16 +54,29 @@ function buildInfoCards(settings) {
   ];
 }
 
-const getWhyItems = (yearsExperience) => [
-  `Expert team with ${yearsExperience} years experience`,
+const FALLBACK_WHY_ITEMS = [
+  "Expert team with {years} years experience",
   "5000+ successful projects delivered",
   "98% client satisfaction rate",
   "24/7 dedicated support",
 ];
+const FALLBACK_BANNER_HEADING = "Get In Touch";
+const FALLBACK_BANNER_DESCRIPTION = "Have a project in mind? We'd love to hear from you.";
+const FALLBACK_FORM_HEADING = "Have a Question? Write a Message";
+const FALLBACK_FORM_HEADING_HIGHLIGHT = "Write a Message";
+const FALLBACK_FORM_DESCRIPTION = "We will get back to you as soon as we receive your message.";
 
-export default function Page({ settings } = {}) {
+const getWhyItems = (yearsExperience, items) =>
+  (items?.length ? items : FALLBACK_WHY_ITEMS).map((t) => t.replace("{years}", yearsExperience));
+
+export default function Page({ settings, officeLocations, contactPage } = {}) {
   const yearsExperience = useYearsExperience();
-  const whyItems = getWhyItems(yearsExperience);
+  const whyItems = getWhyItems(yearsExperience, contactPage?.why_items);
+  const bannerHeading = contactPage?.banner?.heading || FALLBACK_BANNER_HEADING;
+  const bannerDescription = contactPage?.banner?.description || FALLBACK_BANNER_DESCRIPTION;
+  const formHeading = contactPage?.form?.heading || FALLBACK_FORM_HEADING;
+  const formHeadingHighlight = contactPage?.form?.heading_highlight || FALLBACK_FORM_HEADING_HIGHLIGHT;
+  const formDescription = contactPage?.form?.description || FALLBACK_FORM_DESCRIPTION;
   const infoCards = buildInfoCards(settings);
   const officeAddress = settings?.address?.line
     ? `${settings.address.line}${settings.address.city ? `, ${settings.address.city}` : ""}${settings.address.country ? `, ${settings.address.country}` : ""}`
@@ -219,15 +232,18 @@ export default function Page({ settings } = {}) {
           </nav>
           <h1 className="font-extrabold text-white mb-4"
             style={{ fontFamily:"'Poppins',sans-serif", fontSize:"clamp(2rem,5vw,3.6rem)", lineHeight:1.08 }}>
-            Get In{" "}
-            <span style={{ background:"linear-gradient(120deg,#2dd4bf,#6366f1,#a855f7)",
-              WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
-              Touch
-            </span>
+            {bannerHeading === FALLBACK_BANNER_HEADING ? (
+              <>Get In{" "}
+                <span style={{ background:"linear-gradient(120deg,#2dd4bf,#6366f1,#a855f7)",
+                  WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
+                  Touch
+                </span>
+              </>
+            ) : bannerHeading}
           </h1>
           <p style={{ color:"rgba(255,255,255,.65)", fontFamily:"'Inter',sans-serif",
             fontSize:"clamp(.9rem,1.8vw,1.05rem)", maxWidth:480, margin:"0 auto 18px" }}>
-            Have a project in mind? We'd love to hear from you.
+            {bannerDescription}
           </p>
           <div className="mx-auto h-[3px] w-16 rounded-full"
             style={{ background:"linear-gradient(90deg,#2dd4bf,#6366f1,#a855f7)" }} />
@@ -263,12 +279,19 @@ export default function Page({ settings } = {}) {
             <h2 className="font-extrabold mb-4"
               style={{ fontFamily:"'Poppins',sans-serif", fontSize:"clamp(1.65rem,3.5vw,2.6rem)",
                 color:"#0c1230", lineHeight:1.10 }}>
-              Have a Question? <span className="ct-hl">Write a Message</span>
+              {formHeadingHighlight && formHeading.includes(formHeadingHighlight)
+                ? formHeading.split(formHeadingHighlight).map((part, i, arr) => (
+                    <span key={i}>
+                      {part}
+                      {i < arr.length - 1 && <span className="ct-hl">{formHeadingHighlight}</span>}
+                    </span>
+                  ))
+                : formHeading}
             </h2>
             <div className="mx-auto h-[3px] w-14 rounded-full mb-5"
               style={{ background:"linear-gradient(90deg,#2dd4bf,#6366f1,#a855f7)" }} />
             <p style={{ fontSize:"13.5px", color:"#64748b", maxWidth:480, margin:"0 auto", lineHeight:1.85 }}>
-              We will get back to you as soon as we receive your message.
+              {formDescription}
             </p>
           </div>
 
@@ -462,7 +485,7 @@ export default function Page({ settings } = {}) {
       />
 
       {/* ── Map ── */}
-      <Location />
+      <Location locations={officeLocations} />
       <div style={{ padding:"0 0vw 0px" }}>
         <div style={{ borderRadius:20, overflow:"hidden",
           boxShadow:"0 8px 40px rgba(99,102,241,.10)", border:"1px solid rgba(99,102,241,.10)" }}>

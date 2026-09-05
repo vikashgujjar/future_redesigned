@@ -307,9 +307,8 @@ export default function FAQSection({ faqData = [], title }) {
                       <div className="px-4 pb-5 sm:px-6 sm:pl-[4.5rem]">
                         <div className="h-px mb-3.5 rounded-full"
                           style={{ background:`linear-gradient(90deg,${c.from}40,${c.to}25,transparent)` }} />
-                        <p className="text-[13.5px] leading-[1.88] m-0" style={{ color:"#64748b" }}>
-                          {faq.description}
-                        </p>
+                        <p className="text-[13.5px] leading-[1.88] m-0 [&_a]:text-[#4f46e5] [&_a]:font-semibold" style={{ color:"#64748b" }}
+                          dangerouslySetInnerHTML={{ __html: faq.description }} />
                       </div>
                     </div>
                   </div>

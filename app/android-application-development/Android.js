@@ -2,6 +2,7 @@
 const app = "/Assets/stock/photo-1607252650355-f7fd0460ccdb.webp";
 import CommonServicePage from "../components/CommonServicePage";
 import { YEARS_EXPERIENCE_DISPLAY } from "../lib/companyStats";
+import { isSectionDisabled } from "../lib/loadServicePage";
 import {
   FaProjectDiagram, FaMapMarkerAlt, FaBell, FaShareAlt, FaCreditCard, FaBluetooth,
   FaLightbulb, FaMobileAlt, FaSyncAlt, FaPalette, FaCogs, FaGooglePlay,
@@ -215,27 +216,42 @@ const FALLBACK_CONTENT = {
   platforms,
   techCategories,
   faqData,
+  featuresBadge: "Trusted Android Application Development Service",
+  featuresTitle: "Building Innovative, Scalable & High-Performance",
+  featuresTitleHighlight: "Android Apps",
+  bizBadge: "Benefits of Our Android App Development Services",
+  bizHeading: "Leverage the Power of Android to",
+  bizHighlight: "Reach a Global Audience",
+  sliderTitle: "Delivering Innovative Android Application Solutions",
+  platformsTitle: "Cutting-Edge Android Application Development – End-to-End Robust Mobile Solutions for Your Business",
+  faqTitle: "About eCommerce Website Developmen",
 };
 
 const Android = ({ cms } = {}) => {
   const content = cms
-    ? { ...cms, bannerImg: cms.bannerImg || app, overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage }
+    ? {
+        ...cms,
+        bannerImg: cms.bannerImg || app,
+        overviewImage: cms.overviewImage || FALLBACK_CONTENT.overviewImage,
+        featuresBadge: cms.featuresBadge || FALLBACK_CONTENT.featuresBadge,
+        featuresTitle: cms.featuresTitle || FALLBACK_CONTENT.featuresTitle,
+        featuresTitleHighlight: cms.featuresTitleHighlight || FALLBACK_CONTENT.featuresTitleHighlight,
+        bizBadge: cms.bizBadge || FALLBACK_CONTENT.bizBadge,
+        bizHeading: cms.bizHeading || FALLBACK_CONTENT.bizHeading,
+        bizHighlight: cms.bizHighlight || FALLBACK_CONTENT.bizHighlight,
+        sliderTitle: cms.sliderTitle || FALLBACK_CONTENT.sliderTitle,
+        platformsTitle: cms.platformsTitle || FALLBACK_CONTENT.platformsTitle,
+        faqTitle: cms.faqTitle || FALLBACK_CONTENT.faqTitle,
+        features: isSectionDisabled(cms.enabledSections, "features") ? [] : (cms.features?.length ? cms.features : FALLBACK_CONTENT.features),
+        bizCards: isSectionDisabled(cms.enabledSections, "biz") ? [] : (cms.bizCards?.length ? cms.bizCards : FALLBACK_CONTENT.bizCards),
+        sliderCards: isSectionDisabled(cms.enabledSections, "slider") ? [] : (cms.sliderCards?.length ? cms.sliderCards : FALLBACK_CONTENT.sliderCards),
+        platforms: isSectionDisabled(cms.enabledSections, "platforms") ? [] : (cms.platforms?.length ? cms.platforms : FALLBACK_CONTENT.platforms),
+        techCategories: isSectionDisabled(cms.enabledSections, "techstack") ? [] : (cms.techCategories?.length ? cms.techCategories : FALLBACK_CONTENT.techCategories),
+        faqData: isSectionDisabled(cms.enabledSections, "faq") ? [] : (cms.faqData?.length ? cms.faqData : FALLBACK_CONTENT.faqData),
+      }
     : FALLBACK_CONTENT;
 
-  return (
-    <CommonServicePage
-      {...content}
-      featuresBadge="Trusted Android Application Development Service"
-      featuresTitle="Building Innovative, Scalable & High-Performance"
-      featuresTitleHighlight="Android Apps"
-      bizBadge="Benefits of Our Android App Development Services"
-      bizHeading="Leverage the Power of Android to"
-      bizHighlight="Reach a Global Audience"
-      sliderTitle="Delivering Innovative Android Application Solutions"
-      platformsTitle="Cutting-Edge Android Application Development – End-to-End Robust Mobile Solutions for Your Business"
-      faqTitle="About eCommerce Website Developmen"
-    />
-  );
+  return <CommonServicePage {...content} />;
 };
 
 export default Android;

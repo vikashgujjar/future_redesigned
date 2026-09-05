@@ -1,9 +1,11 @@
 export const dynamic = "force-static";
 
-import { SERVICES } from "./data/location-seo/services";
 import { ALL_LOCATIONS } from "./data/location-seo/locations";
 import { TECHNOLOGIES, getTechnologyLocationPath } from "./data/location-seo/technologies";
 import loadPosts from "./blog/loadPosts";
+import { getPages, getServicePages } from "./lib/cms";
+import reservedSlugs from "./lib/reservedSlugs";
+import { loadMergedLocations, loadMergedServices, loadOverridesMap } from "./data/location-seo/loadCmsLocations";
 
 const SITE_URL = "https://futuretouch.in";
 
@@ -117,15 +119,24 @@ export default async function sitemap() {
     priority: 0.6,
   }));
 
-  // Service × Location landing pages — computed directly from the same
-  // data used by generateStaticParams in app/[country]/[serviceLocation],
-  // so this list can never drift out of sync with what's actually built.
+  // Service × Location landing pages — computed from the same merged
+  // (static + CMS-added) data used by generateStaticParams in
+  // app/[country]/[serviceLocation], so this list can never drift out of
+  // sync with what's actually built, and respects per-combination
+  // publish/unpublish overrides the same way.
   const SERVICE_LOCATION_MARKER = "-company-in-";
+  const [mergedServices, mergedLocations, overridesMap] = await Promise.all([
+    loadMergedServices(),
+    loadMergedLocations(),
+    loadOverridesMap(),
+  ]);
   const locationEntries = [];
   const serviceLocationPaths = new Set();
-  for (const service of SERVICES) {
-    for (const location of ALL_LOCATIONS) {
+  for (const service of mergedServices) {
+    for (const location of mergedLocations) {
       const path = `/${location.countryCode}/${service.slug}${SERVICE_LOCATION_MARKER}${location.citySlug}`;
+      const override = overridesMap.get(`${location.countryCode}/${location.citySlug}/${service.slug}`);
+      if (override?.is_published === false) continue;
       serviceLocationPaths.add(path);
       locationEntries.push({
         url: `${SITE_URL}${path}`,
@@ -156,5 +167,31 @@ export default async function sitemap() {
     }
   }
 
-  return [...staticEntries, ...blogEntries, ...locationEntries, ...technologyLocationEntries];
+  // CMS-created pages (app/[country]/page.js) — same published-only,
+  // no-route-collision filtering generateStaticParams uses there, so a
+  // sitemap entry only ever exists for a page that's actually reachable.
+  const reserved = reservedSlugs();
+  const [cmsPages, cmsServicePages] = await Promise.all([getPages(), getServicePages()]);
+  const pageSlugs = new Set(cmsPages.filter((p) => !reserved.has(p.slug)).map((p) => p.slug));
+  const pageEntries = [...pageSlugs].map((slug) => ({
+    url: `${SITE_URL}/${slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
+  // New Service/Technology pages created directly in the admin with no
+  // bespoke Next.js directory — same slug resolution app/[country]/page.js
+  // uses (a Page Builder page wins any collision), so this can't drift out
+  // of sync with what's actually reachable.
+  const newServicePageEntries = (cmsServicePages || [])
+    .filter((p) => !reserved.has(p.slug) && !pageSlugs.has(p.slug))
+    .map((p) => ({
+      url: `${SITE_URL}/${p.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    }));
+
+  return [...staticEntries, ...blogEntries, ...pageEntries, ...newServicePageEntries, ...locationEntries, ...technologyLocationEntries];
 }

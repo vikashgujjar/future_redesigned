@@ -89,7 +89,7 @@ export const BLOG_POSTS = [
     sections: [
       {
         heading: "Create a Uniform Email Naming Style",
-        body: "A first step would be to build a scalable email architecture that would establish the standard naming pattern for all headcounts. Businesses use formats like firstname@company.com,<br/> firstname.lastname@company.com or firstinitial.lastname@company.com.<br/>The chosen structure of <a href=\"https://www.milesweb.in/professional-email\" target=\"_blank\" rel=\"noopener noreferrer\">professional email service</a> enhances understanding, professionalism, and future recruitment support without hassle. Consistency will boost your brand identity and help your customers and employees remember your contact details.",
+        body: "A first step would be to build a scalable email architecture that would establish the standard naming pattern for all headcounts. Businesses use formats like firstname@company.com,<br/> firstname.lastname@company.com or firstinitial.lastname@company.com.<br/><br/>The chosen structure of <a href=\"https://www.milesweb.in/professional-email\" target=\"_blank\" rel=\"noopener noreferrer\">professional email service</a> enhances understanding, professionalism, and future recruitment support without hassle. Consistency will boost your brand identity and help your customers and employees remember your contact details.",
       },
       {
         heading: "Create Department-Based E-Mail Addresses",
@@ -97,7 +97,7 @@ export const BLOG_POSTS = [
       },
       {
         heading: "Plan for Organizational Growth",
-        body: "Several businesses create email systems or approach business email service providers, resonating with their current team size. As new employees join, the approach quickly becomes challenging to manage.<br/><br/>When designing your email structure, you must think about expansion so that the future needs of the business, new departments, new office locations, and new functions will be catered to accordingly. Planning ahead mitigates the need for massive changes later on. Planning for growth keeps the organization on track over time.",
+        body: "Several businesses create email systems or approach <a href=\"https://www.milesweb.in/business-email\" target=\"_blank\" rel=\"noopener noreferrer\">business email service providers</a>, resonating with their current team size. As new employees join, the approach quickly becomes challenging to manage.<br/><br/>When designing your email structure, you must think about expansion so that the future needs of the business, new departments, new office locations, and new functions will be catered to accordingly. Planning ahead mitigates the need for massive changes later on. Planning for growth keeps the organization on track over time.",
       },
       {
         heading: "Wherever Possible, Use Role-Based Email Accounts",

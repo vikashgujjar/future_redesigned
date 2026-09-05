@@ -36,16 +36,22 @@ const FALLBACK_DESCRIPTION_2 = "As a top web development company, we create robu
 const FALLBACK_CTA_HEADING = "Let's Start A New Project Together";
 const FALLBACK_CTA_DESCRIPTION = "You already have a project in mind and want to work with us? Fill out the form and let us know in which direction it should go.";
 
+const FALLBACK_IMAGE = "/Assets/company.webp";
+
 const WhyChoose = ({
-  heading, description, description2, features: cmsFeatures, ctaHeading, ctaDescription,
+  badge, heading, description, description2, features: cmsFeatures,
+  ctaHeading, ctaDescription, ctaButtonText, image, imageAlt,
 } = {}) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
+  const badgeText = badge || "Why Choose Us";
   const headingText = heading || FALLBACK_HEADING;
   const descriptionText = description || FALLBACK_DESCRIPTION;
   const description2Text = description2 || FALLBACK_DESCRIPTION_2;
   const ctaHeadingText = ctaHeading || FALLBACK_CTA_HEADING;
   const ctaDescriptionText = ctaDescription || FALLBACK_CTA_DESCRIPTION;
+  const ctaButtonLabel = ctaButtonText || "Request A Quote";
+  const imageAltText = imageAlt || "Future IT Touch office";
   const features = (cmsFeatures?.length ? cmsFeatures : FALLBACK_FEATURES).map((f, i) => ({
     number: String(i + 1).padStart(2, "0"),
     icon: FEATURE_ICONS[i % FEATURE_ICONS.length],
@@ -159,7 +165,7 @@ const WhyChoose = ({
               style={{ fontFamily:"'Inter',sans-serif",
                 background:"linear-gradient(to right,#2dd4bf,#6366f1)",
                 WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>
-              Why Choose Us
+              {badgeText}
             </span>
           </div>
 
@@ -254,8 +260,8 @@ const WhyChoose = ({
 
           {/* image */}
           <div className="relative w-full h-full min-h-[320px] rounded-3xl overflow-hidden shadow-xl" style={{ zIndex:1 }}>
-            <Image src="/Assets/company.webp" fill
-              alt="Future IT Touch office" className="object-cover"/>
+            <Image src={image || FALLBACK_IMAGE} fill
+              alt={imageAltText} className="object-cover"/>
             {/* sheen */}
             <div className="absolute inset-0"
               style={{ background:"linear-gradient(160deg,rgba(45,212,191,.08) 0%,transparent 50%,rgba(99,102,241,.10) 100%)" }}/>
@@ -374,7 +380,7 @@ const WhyChoose = ({
               style={{ fontFamily:"'Poppins',sans-serif",
                 background:"linear-gradient(135deg,rgba(255,255,255,.95),rgba(255,255,255,.85))",
                 color:"#0d9488", boxShadow:"0 8px 24px rgba(0,0,0,.20)" }}>
-              Request A Quote
+              {ctaButtonLabel}
               <FaAngleRight />
             </button>
           </div>
